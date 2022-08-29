@@ -2,6 +2,8 @@ import React, { FunctionComponent, ComponentProps } from 'react';
 import { styled } from '../../stitches.config';
 
 const StyledText = styled('p', {
+  fontWeight: '$4',
+  color: '$text',
   variants: {
     size: {
       xxs: {

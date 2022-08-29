@@ -10,7 +10,7 @@ export const Link: FunctionComponent<LinkProps> = React.forwardRef(
         ref={ref}
         as="a"
         css={{
-          color: 'inherit',
+          color: '$link',
           fontWeight: 'inherit',
           textDecoration: 'none',
           display: 'inline-block',

@@ -3,6 +3,7 @@ import { styled } from '../../stitches.config';
 
 const StyledHeading = styled('h1', {
   fontWeight: '$7',
+  color: '$text',
   variants: {
     size: {
       h6: {

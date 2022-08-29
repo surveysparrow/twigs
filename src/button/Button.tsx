@@ -29,11 +29,11 @@ const StyledButton = styled('button', {
     variant: {
       primary: {
         backgroundColor: '$primary',
-        color: '#FFFFFF',
+        color: '$white900',
         border: '1px solid $primary',
       },
       secondary: {
-        backgroundColor: '#FFFFFF',
+        backgroundColor: '$white900',
         color: '$text',
         border: '1px solid $gray500',
       },

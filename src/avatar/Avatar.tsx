@@ -10,7 +10,7 @@ const StyledAvatar = styled(AvatarPrimitive.Root, {
   overflow: 'hidden',
   userSelect: 'none',
   borderRadius: '100%',
-  backgroundColor: 'black',
+  backgroundColor: '$black900',
   variants: {
     size: {
       xxxl: {
@@ -74,7 +74,7 @@ const StyledFallback = styled(AvatarPrimitive.Fallback, {
   alignItems: 'center',
   justifyContent: 'center',
   backgroundColor: 'white',
-  color: '$purple500',
+  color: '$violet700',
   fontSize: 15,
   lineHeight: 1,
   fontWeight: 500,

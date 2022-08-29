@@ -19,7 +19,7 @@ const StyledContainer = styled(Box, {
     height: 10,
     marginRight: 8,
     display: 'inline-block',
-    backgroundColor: '#ffffff',
+    backgroundColor: '$white900',
     borderRadius: '100%',
     WebkitAnimation: `${bounceDelay} 1.4s infinite ease-in-out both`,
     animation: `${bounceDelay} 1s infinite ease-in-out both`,
