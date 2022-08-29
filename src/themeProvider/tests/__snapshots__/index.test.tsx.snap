@@ -6,14 +6,14 @@ Object {
   "baseElement": <body>
     <div>
       <div
-        class="c-PJLV"
+        class="twigs-c-PJLV"
         data-testid="box"
       />
     </div>
   </body>,
   "container": <div>
     <div
-      class="c-PJLV"
+      class="twigs-c-PJLV"
       data-testid="box"
     />
   </div>,

@@ -1,3 +1,1 @@
-import { DotLoader } from './DotLoader';
-
-export { DotLoader };
+export * from './DotLoader';

@@ -13,20 +13,45 @@ const StyledAvatar = styled(AvatarPrimitive.Root, {
   backgroundColor: 'black',
   variants: {
     size: {
-      sm: {
-        width: 30,
-        height: 30,
-        borderRadius: 6,
+      xxxl: {
+        width: 120,
+        height: 120,
+        borderRadius: 30,
       },
-      md: {
-        width: 40,
-        height: 40,
-        borderRadius: 8,
+      xxl: {
+        width: 72,
+        height: 72,
+        borderRadius: 20,
       },
       xl: {
-        width: 104,
-        height: 104,
-        borderRadius: 32,
+        width: 48,
+        height: 48,
+        borderRadius: 15,
+      },
+      lg: {
+        width: 40,
+        height: 40,
+        borderRadius: 10,
+      },
+      md: {
+        width: 32,
+        height: 32,
+        borderRadius: 8,
+      },
+      sm: {
+        width: 24,
+        height: 24,
+        borderRadius: 8,
+      },
+      xs: {
+        width: 20,
+        height: 20,
+        borderRadius: 10,
+      },
+      xxs: {
+        width: 16,
+        height: 16,
+        borderRadius: 15,
       },
     },
   },

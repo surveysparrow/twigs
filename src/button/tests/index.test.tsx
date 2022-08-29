@@ -17,7 +17,7 @@ describe('Button', () => {
     const div = document.createElement('div');
     const root = createRoot(div!);
     act(() => {
-      root.render(<Button text="Button">Button</Button>);
+      root.render(<Button>Button</Button>);
       root.unmount();
     });
   });

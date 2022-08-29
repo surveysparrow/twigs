@@ -87,11 +87,6 @@ const StyledButton = styled('button', {
         lineHeight: '12px',
       },
     },
-    rounded: {
-      true: {
-        borderRadius: '20px',
-      },
-    },
     loading: {
       true: {
         pointerEvents: 'none',
@@ -129,8 +124,6 @@ export const Button:FunctionComponent<ButtonProps> = React.forwardRef(
     return (
       <StyledButton
         ref={ref}
-        role="button"
-        tabIndex={0}
         type={type}
         disabled={disabled}
         data-testid="button"

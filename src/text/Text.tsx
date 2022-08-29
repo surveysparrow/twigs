@@ -3,39 +3,43 @@ import { styled } from '../../stitches.config';
 
 const StyledText = styled('p', {
   variants: {
-    fontSize: {
+    size: {
+      xxs: {
+        fontSize: '$p-xxs',
+      },
       xs: {
-        fontSize: '$1',
+        fontSize: '$p-xs',
       },
       sm: {
-        fontSize: '$2',
+        fontSize: '$p-sm',
       },
       md: {
-        fontSize: '$3',
+        fontSize: '$p-md',
       },
       lg: {
-        fontSize: '$4',
-      },
-      xl: {
-        fontSize: '$5',
-      },
-      '2xl': {
-        fontSize: '$6',
-      },
-      '3xl': {
-        fontSize: '$7',
-      },
-      '4xl': {
-        fontSize: '$8',
+        fontSize: '$p-lg',
       },
     },
+    weight: {
+      regular: {
+        fontWeight: '400',
+      },
+      medium: {
+        fontWeight: '500',
+      },
+      bold: {
+        fontWeight: '700',
+      },
+    },
+  },
+  defaultVariants: {
+    size: 'md',
+    weight: '400',
   },
 });
 
 export type TextProps = ComponentProps<typeof StyledText> &
-  React.HTMLAttributes<HTMLParagraphElement> & {
-    as?: React.ElementType
- };
+  React.HTMLAttributes<HTMLParagraphElement>
 
 export const Text: FunctionComponent<TextProps> = ({
   children,

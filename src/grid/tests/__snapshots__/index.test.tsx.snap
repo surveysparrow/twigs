@@ -2,42 +2,42 @@
 
 exports[`Grid matches snapshot: renders with templatearea and templateColumns props 1`] = `
 <div
-  className="c-PJLV c-PJLV-idPnhof-css"
+  className="twigs-c-PJLV twigs-c-PJLV-idPnhof-css"
   data-testid="grid"
 />
 `;
 
 exports[`Grid matches snapshot: renders with templatearea and templateRows props 1`] = `
 <div
-  className="c-PJLV c-PJLV-ijqqdFk-css"
+  className="twigs-c-PJLV twigs-c-PJLV-ijqqdFk-css"
   data-testid="grid"
 />
 `;
 
 exports[`Grid matches snapshot: renders with templatearea props 1`] = `
 <div
-  className="c-PJLV c-PJLV-icMpRbk-css"
+  className="twigs-c-PJLV twigs-c-PJLV-icMpRbk-css"
   data-testid="grid"
 />
 `;
 
 exports[`Grid matches snapshot: renders with templatearea, templateColumns props and repeat props 1`] = `
 <div
-  className="c-PJLV c-PJLV-idPnhof-css"
+  className="twigs-c-PJLV twigs-c-PJLV-idPnhof-css"
   data-testid="grid"
 />
 `;
 
 exports[`Grid matches snapshot: renders with templatearea, templateRows and templateColumns props 1`] = `
 <div
-  className="c-PJLV c-PJLV-icoXYID-css"
+  className="twigs-c-PJLV twigs-c-PJLV-icoXYID-css"
   data-testid="grid"
 />
 `;
 
 exports[`Grid matches snapshot: renders with templatearea, templateRows, templateColumns, gap and custom styles 1`] = `
 <div
-  className="c-PJLV c-PJLV-ijwHXIl-css"
+  className="twigs-c-PJLV twigs-c-PJLV-ijwHXIl-css"
   data-testid="grid"
 />
 `;

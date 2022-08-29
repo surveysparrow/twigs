@@ -1,3 +1,1 @@
-import { ThemeProvider } from './ThemeProvider';
-
-export { ThemeProvider };
+export * from './ThemeProvider';
