@@ -7,41 +7,48 @@ const StyledText = styled('p', {
   variants: {
     size: {
       xxs: {
-        fontSize: '$p-xxs',
+        fontSize: '$xxs',
+        ineHeight: '$xxs',
       },
       xs: {
-        fontSize: '$p-xs',
+        fontSize: '$xs',
+        ineHeight: '$xs',
       },
       sm: {
-        fontSize: '$p-sm',
+        fontSize: '$sm',
+        ineHeight: '$sm',
       },
       md: {
-        fontSize: '$p-md',
+        fontSize: '$md',
+        lineHeight: '$md',
       },
       lg: {
-        fontSize: '$p-lg',
+        fontSize: '$lg',
+        lineHeight: '$lg',
       },
     },
     weight: {
       regular: {
-        fontWeight: '400',
+        fontWeight: '$4',
       },
       medium: {
-        fontWeight: '500',
+        fontWeight: '$5',
       },
       bold: {
-        fontWeight: '700',
+        fontWeight: '$7',
       },
     },
   },
   defaultVariants: {
     size: 'md',
-    weight: '400',
+    weight: 'regular',
   },
 });
 
 export type TextProps = ComponentProps<typeof StyledText> &
-  React.HTMLAttributes<HTMLParagraphElement>
+  React.HTMLAttributes<HTMLParagraphElement> & {
+    as?: React.ElementType
+ };
 
 export const Text: FunctionComponent<TextProps> = ({
   children,

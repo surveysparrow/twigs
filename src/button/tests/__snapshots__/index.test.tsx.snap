@@ -2,7 +2,7 @@
 
 exports[`Button matches snapshot: primary with icon on left 1`] = `
 <button
-  className="twigs-c-jpLhoH twigs-c-jpLhoH-gSdUEK-variant-primary twigs-c-jpLhoH-ieKJE-size-lg"
+  className="twigs-c-ckayRM twigs-c-ckayRM-kLqyYD-variant-primary twigs-c-ckayRM-kKdcJP-size-lg"
   data-testid="button"
 >
   <span
@@ -30,7 +30,7 @@ exports[`Button matches snapshot: primary with icon on left 1`] = `
 
 exports[`Button matches snapshot: secondary with icon on right 1`] = `
 <button
-  className="twigs-c-jpLhoH twigs-c-jpLhoH-fpBJKz-variant-secondary twigs-c-jpLhoH-ieKJE-size-lg"
+  className="twigs-c-ckayRM twigs-c-ckayRM-PMJDm-variant-secondary twigs-c-ckayRM-kKdcJP-size-lg"
   data-testid="button"
 >
   Secondary Button
@@ -58,12 +58,12 @@ exports[`Button matches snapshot: secondary with icon on right 1`] = `
 
 exports[`Button matches snapshot: text - disabled and loading 1`] = `
 <button
-  className="twigs-c-jpLhoH twigs-c-jpLhoH-hFiUAt-variant-text twigs-c-jpLhoH-ieKJE-size-lg"
+  className="twigs-c-ckayRM twigs-c-ckayRM-hFiUAt-variant-text twigs-c-ckayRM-kKdcJP-size-lg"
   data-testid="button"
   disabled={true}
 >
   <div
-    className="twigs-c-PJLV twigs-c-cwgdBb"
+    className="twigs-c-PJLV twigs-c-dMQBBi"
     data-testid="dot-loader"
   >
     <div
@@ -84,7 +84,7 @@ exports[`Button matches snapshot: text - disabled and loading 1`] = `
 
 exports[`Button matches snapshot: text and custom styles 1`] = `
 <button
-  className="twigs-c-jpLhoH twigs-c-jpLhoH-hFiUAt-variant-text twigs-c-jpLhoH-ieKJE-size-lg twigs-c-jpLhoH-ihBcVkj-css"
+  className="twigs-c-ckayRM twigs-c-ckayRM-hFiUAt-variant-text twigs-c-ckayRM-kKdcJP-size-lg twigs-c-ckayRM-ihBcVkj-css"
   data-testid="button"
 >
   Link text
@@ -93,7 +93,7 @@ exports[`Button matches snapshot: text and custom styles 1`] = `
 
 exports[`Button matches snapshot: text with icon on both sides 1`] = `
 <button
-  className="twigs-c-jpLhoH twigs-c-jpLhoH-hFiUAt-variant-text twigs-c-jpLhoH-ieKJE-size-lg"
+  className="twigs-c-ckayRM twigs-c-ckayRM-hFiUAt-variant-text twigs-c-ckayRM-kKdcJP-size-lg"
   data-testid="button"
 >
   <span

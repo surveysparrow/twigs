@@ -6,13 +6,13 @@ const StyledButton = styled('button', {
   appearance: 'none',
   border: 'none',
   backgroundColor: 'transparent',
-  fontSize: '19.2px',
-  lineHeight: '24px',
-  borderRadius: '10px',
-  padding: '8px 16px',
+  fontSize: '$lg',
+  lineHeight: '$md',
+  borderRadius: '$lg',
+  padding: '$3 $4',
   display: 'flex',
   alignItems: 'center',
-  fontWeight: '700',
+  fontWeight: '$7',
   cursor: 'pointer',
   '&:disabled': {
     opacity: 0.4,
@@ -22,7 +22,7 @@ const StyledButton = styled('button', {
     outline: 'none',
   },
   '&:focus': {
-    $$shadowColor: '$colors$primary',
+    $$shadowColor: '$colors$blue300',
     boxShadow: 'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px',
   },
   variants: {
@@ -45,46 +45,46 @@ const StyledButton = styled('button', {
     },
     size: {
       xxl: {
-        padding: '18px 24px',
-        borderRadius: '15px',
-        fontSize: '19.2px',
-        lineHeight: '28px',
+        padding: '18px $4',
+        borderRadius: '$xl',
+        fontSize: '$lg',
+        lineHeight: '$lg',
       },
       xl: {
         padding: '10px 20px',
-        borderRadius: '15px',
-        fontSize: '19.2px',
-        lineHeight: '28px',
+        borderRadius: '$xl',
+        fontSize: '$lg',
+        lineHeight: '$lg',
       },
       lg: {
-        padding: '8px 16px',
-        borderRadius: '10px',
-        fontSize: '16px',
-        lineHeight: '24px',
+        padding: '$3 $4',
+        borderRadius: '$lg',
+        fontSize: '$md',
+        lineHeight: '$md',
       },
       md: {
         padding: '6px 10px',
-        borderRadius: '8px',
-        fontSize: '13.33px',
-        lineHeight: '20px',
+        borderRadius: '$md',
+        fontSize: '$sm',
+        lineHeight: '$md',
       },
       sm: {
-        padding: '2px 8px',
-        borderRadius: '15px',
-        fontSize: '13.33px',
-        lineHeight: '28px',
+        padding: '$1 $3',
+        borderRadius: '$sm',
+        fontSize: '$sm',
+        lineHeight: '$sm',
       },
       xs: {
-        padding: '2px 6px',
-        borderRadius: '15px',
-        fontSize: '11.11px',
-        lineHeight: '16px',
+        padding: '$1 6px',
+        borderRadius: '$sm',
+        fontSize: '$xs',
+        lineHeight: '$xs',
       },
       xxs: {
-        padding: '2px 4px',
-        borderRadius: '5px',
-        fontSize: '9.26px',
-        lineHeight: '12px',
+        padding: '$1 $2',
+        borderRadius: '$sm',
+        fontSize: '$xxs',
+        lineHeight: '$xxs',
       },
     },
     loading: {
@@ -104,7 +104,7 @@ const StyledSpan = styled('span', {});
 export interface ButtonBaseProps {
   iconLeft?: ReactElement;
   iconRight?: ReactElement;
-  onClick?: (e: React.MouseEvent<HTMLAnchorElement, HTMLButtonElement>) => void;
+  onClick?: () => void;
   type?: React.ButtonHTMLAttributes<HTMLButtonElement>['type'];
 }
 

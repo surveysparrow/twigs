@@ -7,39 +7,45 @@ const StyledHeading = styled('h1', {
   variants: {
     size: {
       h6: {
-        fontSize: '$h6',
+        fontSize: '$lg',
+        lineHeight: '$lg',
       },
       h5: {
-        fontSize: '$h5',
+        fontSize: '$xl',
+        lineHeight: '$xl',
       },
       h4: {
-        fontSize: '$h4',
+        fontSize: '$2xl',
+        lineHeight: '$2xl',
       },
       h3: {
-        fontSize: '$h3',
+        fontSize: '$3xl',
+        lineHeight: '$2xl',
       },
       h2: {
-        fontSize: '$h2',
+        fontSize: '$4xl',
+        lineHeight: '$3xl',
       },
       h1: {
-        fontSize: '$h1',
+        fontSize: '$5xl',
+        lineHeight: '$4xl',
       },
     },
     weight: {
       regular: {
-        fontWeight: '400',
+        fontWeight: '$4',
       },
       medium: {
-        fontWeight: '500',
+        fontWeight: '$5',
       },
       bold: {
-        fontWeight: '700',
+        fontWeight: '$7',
       },
     },
   },
   defaultVariants: {
     size: 'h1',
-    weight: '700',
+    weight: 'bold',
   },
 });
 
