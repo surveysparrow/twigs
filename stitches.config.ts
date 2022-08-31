@@ -308,7 +308,9 @@ export const defaultTheme = {
     '2xl': '20px',
     '3xl': '30px',
   },
-  shadows: {},
+  shadows: {
+    sm: 'box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.04)',
+  },
   zIndices: {},
   transitions: {},
 };
@@ -378,6 +380,6 @@ export const {
 
 export const globalStyles = globalCss({
   ...resetStyles,
-  '*': { margin: 0, padding: 0 },
+  '*': { margin: 0, padding: 0, fontFamily: '$body' },
   '*, :before, :after': { boxSizing: 'border-box' },
 });

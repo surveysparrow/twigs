@@ -2,12 +2,6 @@ import React, { ReactElement, FunctionComponent, ComponentProps } from 'react';
 import { Box } from '../box';
 import { styled } from '../../stitches.config';
 
-const inputPadding = {
-  xl: '$10',
-  lg: '$9',
-  md: '$7',
-};
-
 const StyledInput = styled('input', {
   width: '100%',
   color: '$neutral900',
@@ -124,6 +118,14 @@ export const Input: FunctionComponent<InputProps> = ({
   css,
   ...rest
 }: InputProps) => {
+  let inputPaddingValue = '$10';
+  if (size === 'xl') {
+    inputPaddingValue = '$10';
+  } else if (size === 'lg') {
+    inputPaddingValue = '$9';
+  } else if (size === 'md') {
+    inputPaddingValue = '$7';
+  }
   if (iconLeft || iconRight) {
     return (
       <Box css={{
@@ -140,7 +142,7 @@ export const Input: FunctionComponent<InputProps> = ({
           {React.cloneElement(iconLeft)}
         </IconContainer>
         )}
-        <StyledInput size={size} data-testid="input" css={{ ...(iconLeft && { paddingInlineStart: inputPadding[size!] }), ...(iconRight && { paddingInlineEnd: inputPadding[size!] }) }} {...rest} />
+        <StyledInput size={size} data-testid="input" css={{ ...(iconLeft && { paddingInlineStart: inputPaddingValue }), ...(iconRight && { paddingInlineEnd: inputPaddingValue }) }} {...rest} />
         {iconRight && (
         <IconContainer
           size={size}
@@ -155,6 +157,6 @@ export const Input: FunctionComponent<InputProps> = ({
     );
   }
   return (
-    <StyledInput data-testid="input" {...rest} />
+    <StyledInput data-testid="input" {...rest} css={css} />
   );
 };

@@ -117,13 +117,14 @@ type ButtonProps = ButtonBaseProps &
 export const Button:FunctionComponent<ButtonProps> = React.forwardRef(
   (
     {
-      children, iconLeft, iconRight, loading, disabled, type, onClick, ...rest
+      children, variant = 'primary', iconLeft, iconRight, loading, disabled, type, onClick, ...rest
     }: ButtonProps,
     ref,
   ) => {
     return (
       <StyledButton
         ref={ref}
+        variant={variant}
         type={type}
         disabled={disabled}
         data-testid="button"
