@@ -38,6 +38,9 @@ const StyledHeading = styled('h1', {
       medium: {
         fontWeight: '$5',
       },
+      semibold: {
+        fontWeight: '$6',
+      },
       bold: {
         fontWeight: '$7',
       },

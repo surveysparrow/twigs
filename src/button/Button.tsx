@@ -38,7 +38,7 @@ const StyledButton = styled('button', {
         border: '1px solid $gray500',
       },
       text: {
-        fontWeight: '400',
+        fontWeight: '$4',
         color: '$text',
         padding: 0,
       },
