@@ -1,16 +1,16 @@
 import React from 'react';
-import { globalStyles } from '../stitches.config';
-import { ThemeProvider } from './themeProvider';
-import { FormLabel } from './formLabel';
-import { FormHelperText } from './formHelperText';
-import { Input } from './input';
-import { Box } from './box';
-import { Grid } from './grid';
-import { Text } from './text';
-import { Link } from './link';
-import { Button } from './button';
-import { Heading } from './heading';
-import { Avatar, AvatarImage, AvatarFallback } from './avatar';
+import { globalStyles } from '../../stitches.config';
+import { ThemeProvider } from '../themeProvider';
+import { FormLabel } from '../formLabel';
+import { FormHelperText } from '../formHelperText';
+import { Input } from '../input';
+import { Box } from '../box';
+import { Grid } from '../grid';
+import { Text } from '../text';
+import { Link } from '../link';
+import { Button } from '../button';
+import { Heading } from '../heading';
+import { Avatar, AvatarImage, AvatarFallback } from '../avatar';
 
 const KeyIcon = () => (
   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -94,12 +94,10 @@ const App = () => {
             >
               HR Manager
             </Text>
-            <Button size="xxs" css={{ marginTop: '$5', marginBottom: '$5' }}>Primary</Button>
-            <Button size="xs" css={{ marginTop: '$5', marginBottom: '$5' }}>Primary</Button>
-            <Button size="sm" css={{ marginTop: '$5', marginBottom: '$5' }}>Primary</Button>
-            <Button size="md" css={{ marginTop: '$5', marginBottom: '$5' }}>Primary</Button>
-            <Button size="lg" css={{ marginTop: '$5', marginBottom: '$5' }}>Primary</Button>
-            <Button size="xl" css={{ marginTop: '$5', marginBottom: '$5' }}>Primary</Button>
+            <Button variant="default" isIcon isTransparent icon={<KeyIcon />} />
+            <Button variant="primary" isIcon icon={<KeyIcon />} css={{ borderRadius: '$round' }} />
+            <Button size="xl" variant="primary" css={{ marginTop: '$5', marginBottom: '$5' }}>Primary</Button>
+            <Button size="xl" variant="accent" css={{ marginTop: '$5', marginBottom: '$5' }}>Primary</Button>
 
             <Box css={{ display: 'flex', flexDirection: 'column' }}>
               <FormLabel htmlFor="email" css={{ marginTop: '$6', marginBottom: '$3' }}>Label</FormLabel>

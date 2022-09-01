@@ -19,6 +19,6 @@
       "declaration": true,
       "declarationDir": "."
     },
-    "include": ["src", "serve.js"],
+    "include": ["src", "src/example/serve.js"],
     "exclude": ["node_modules", "dist"]
   }

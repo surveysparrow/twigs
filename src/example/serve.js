@@ -12,7 +12,7 @@ import liveServer from 'live-server';
         process.env.NODE_ENV || 'development',
       ),
     },
-    entryPoints: ['src/index.tsx'],
+    entryPoints: ['src/example/index.tsx'],
     // Uses incremental compilation (see `chokidar.on`).
     incremental: true,
     // Removes whitespace, etc. depending on `NODE_ENV=...`.

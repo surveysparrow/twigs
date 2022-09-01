@@ -58,7 +58,7 @@ export const defaultTheme = {
     red500: '#F9998E',
     red600: '#E5857A',
     red700: '#C57369',
-    red800: '#C57369',
+    red800: '#9B5A53',
     red900: '#5B3531',
     orange50: '#FEF9F0',
     orange100: '#FDEBD1',
@@ -307,6 +307,7 @@ export const defaultTheme = {
     xl: '15px',
     '2xl': '20px',
     '3xl': '30px',
+    round: '50%',
   },
   shadows: {
     sm: 'box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.04)',
