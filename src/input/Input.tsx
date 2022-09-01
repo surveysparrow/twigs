@@ -59,7 +59,7 @@ const StyledInput = styled('input', {
     },
   },
   defaultVariants: {
-    size: 'xl',
+    size: 'sm',
   },
 });
 

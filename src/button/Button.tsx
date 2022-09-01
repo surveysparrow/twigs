@@ -332,7 +332,7 @@ const StyledButton = styled('button', {
   ],
   defaultVariants: {
     variant: 'default',
-    size: 'lg',
+    size: 'sm',
   },
 });
 

@@ -1,1 +1,1 @@
-export * from './DotLoader';
+export * from './dot-loader';

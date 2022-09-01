@@ -5,7 +5,7 @@ import type { RenderResult } from '@testing-library/react';
 import { createRoot } from 'react-dom/client';
 import { act } from 'react-test-renderer';
 import { render } from '@testing-library/react';
-import { Avatar, AvatarImage, AvatarFallback } from '../Avatar';
+import { Avatar, AvatarImage, AvatarFallback } from '../avatar';
 
 const ROOT_TEST_ID = 'avatar-root';
 const FALLBACK_TEXT = 'AB';

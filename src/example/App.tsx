@@ -1,8 +1,8 @@
 import React from 'react';
 import { globalStyles } from '../../stitches.config';
-import { ThemeProvider } from '../themeProvider';
-import { FormLabel } from '../formLabel';
-import { FormHelperText } from '../formHelperText';
+import { ThemeProvider } from '../theme-provider';
+import { FormLabel } from '../form-label';
+import { FormHelperText } from '../form-helper-text';
 import { Input } from '../input';
 import { Box } from '../box';
 import { Grid } from '../grid';

@@ -40,7 +40,7 @@ const StyledText = styled('p', {
     },
   },
   defaultVariants: {
-    size: 'md',
+    size: 'sm',
     weight: 'regular',
   },
 });

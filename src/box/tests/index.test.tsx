@@ -20,8 +20,8 @@ describe('Box', () => {
     const { getByTestId } = render(
       <Box>Simple Box</Box>,
     );
-    const button = getByTestId('box');
+    const box = getByTestId('box');
 
-    expect(button).toHaveTextContent('Simple Box');
+    expect(box).toHaveTextContent('Simple Box');
   });
 });

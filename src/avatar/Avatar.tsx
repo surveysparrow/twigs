@@ -56,7 +56,7 @@ const StyledAvatar = styled(AvatarPrimitive.Root, {
     },
   },
   defaultVariants: {
-    size: 'md',
+    size: 'sm',
   },
 });
 
@@ -73,7 +73,7 @@ const StyledFallback = styled(AvatarPrimitive.Fallback, {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  backgroundColor: 'white',
+  backgroundColor: '$white900',
   color: '$violet700',
   fontSize: '$md',
   lineHeight: '$xs',
