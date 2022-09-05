@@ -310,7 +310,7 @@ export const defaultTheme = {
     round: '50%',
   },
   shadows: {
-    sm: 'box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.04)',
+    sm: '0px 5px 15px rgba(0, 0, 0, 0.04)',
   },
   zIndices: {},
   transitions: {},
