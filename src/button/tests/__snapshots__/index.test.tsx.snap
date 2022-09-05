@@ -1,0 +1,139 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button matches snapshot: primary with icon on left 1`] = `
+<button
+  className="twigs-c-ckayRM twigs-c-ckayRM-kLqyYD-variant-primary twigs-c-ckayRM-kKdcJP-size-lg"
+  data-testid="button"
+>
+  <span
+    className="twigs-c-PJLV twigs-c-PJLV-ijxSBfJ-css"
+  >
+    <svg
+      fill="none"
+      height="12"
+      viewBox="0 0 6 10"
+      width="12"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M1 9L5 5L1 1"
+        stroke="white"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.5"
+      />
+    </svg>
+  </span>
+  Primary Button
+</button>
+`;
+
+exports[`Button matches snapshot: secondary with icon on right 1`] = `
+<button
+  className="twigs-c-ckayRM twigs-c-ckayRM-PMJDm-variant-secondary twigs-c-ckayRM-kKdcJP-size-lg"
+  data-testid="button"
+>
+  Secondary Button
+  <span
+    className="twigs-c-PJLV twigs-c-PJLV-ieSlpoK-css"
+  >
+    <svg
+      fill="none"
+      height="12"
+      viewBox="0 0 6 10"
+      width="12"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M1 9L5 5L1 1"
+        stroke="white"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.5"
+      />
+    </svg>
+  </span>
+</button>
+`;
+
+exports[`Button matches snapshot: text - disabled and loading 1`] = `
+<button
+  className="twigs-c-ckayRM twigs-c-ckayRM-hFiUAt-variant-text twigs-c-ckayRM-kKdcJP-size-lg"
+  data-testid="button"
+  disabled={true}
+>
+  <div
+    className="twigs-c-PJLV twigs-c-dMQBBi"
+    data-testid="dot-loader"
+  >
+    <div
+      className="twigs-c-PJLV"
+      data-testid="box"
+    />
+    <div
+      className="twigs-c-PJLV"
+      data-testid="box"
+    />
+    <div
+      className="twigs-c-PJLV"
+      data-testid="box"
+    />
+  </div>
+</button>
+`;
+
+exports[`Button matches snapshot: text and custom styles 1`] = `
+<button
+  className="twigs-c-ckayRM twigs-c-ckayRM-hFiUAt-variant-text twigs-c-ckayRM-kKdcJP-size-lg twigs-c-ckayRM-ihBcVkj-css"
+  data-testid="button"
+>
+  Link text
+</button>
+`;
+
+exports[`Button matches snapshot: text with icon on both sides 1`] = `
+<button
+  className="twigs-c-ckayRM twigs-c-ckayRM-hFiUAt-variant-text twigs-c-ckayRM-kKdcJP-size-lg"
+  data-testid="button"
+>
+  <span
+    className="twigs-c-PJLV twigs-c-PJLV-ijxSBfJ-css"
+  >
+    <svg
+      fill="none"
+      height="12"
+      viewBox="0 0 6 10"
+      width="12"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M1 9L5 5L1 1"
+        stroke="white"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.5"
+      />
+    </svg>
+  </span>
+  Text Button
+  <span
+    className="twigs-c-PJLV twigs-c-PJLV-ieSlpoK-css"
+  >
+    <svg
+      fill="none"
+      height="12"
+      viewBox="0 0 6 10"
+      width="12"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M1 9L5 5L1 1"
+        stroke="white"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.5"
+      />
+    </svg>
+  </span>
+</button>
+`;
