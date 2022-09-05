@@ -63,13 +63,13 @@ const StyledInput = styled('input', {
   },
 });
 
-export interface ButtonBaseProps {
+export interface InputBaseProps {
   iconLeft?: ReactElement;
   iconRight?: ReactElement;
   onChange?: () => void;
 }
 
-export type InputProps = ButtonBaseProps & ComponentProps<typeof StyledInput> &
+export type InputProps = InputBaseProps & ComponentProps<typeof StyledInput> &
   React.HTMLAttributes<HTMLInputElement> & {
     as?: React.ElementType
  };
