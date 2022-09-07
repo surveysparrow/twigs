@@ -1,16 +1,16 @@
 import React from 'react';
-import { globalStyles } from '../../stitches.config';
-import { ThemeProvider } from '../theme-provider';
-import { FormLabel } from '../form-label';
-import { FormHelperText } from '../form-helper-text';
-import { Input } from '../input';
-import { Box } from '../box';
-import { Grid } from '../grid';
-import { Text } from '../text';
-import { Link } from '../link';
-import { Button } from '../button';
-import { Heading } from '../heading';
-import { Avatar, AvatarImage, AvatarFallback } from '../avatar';
+import { globalStyles } from '../stitches.config';
+import { ThemeProvider } from '../src/theme-provider';
+import { FormLabel } from '../src/form-label';
+import { FormHelperText } from '../src/form-helper-text';
+import { Input } from '../src/input';
+import { Box } from '../src/box';
+import { Grid } from '../src/grid';
+import { Text } from '../src/text';
+import { Link } from '../src/link';
+import { Button } from '../src/button';
+import { Heading } from '../src/heading';
+import { Avatar, AvatarImage, AvatarFallback } from '../src/avatar';
 
 const KeyIcon = () => (
   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -78,7 +78,7 @@ const App = () => {
             paddingTop: '32px',
           }}
           >
-            <Avatar size="xxxl" css={{ marginBottom: '20px' }}>
+            <Avatar size="3xl" css={{ marginBottom: '20px' }}>
               <AvatarImage
                 src="https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80"
                 alt="Colm Tuite"

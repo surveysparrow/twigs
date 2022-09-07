@@ -59,14 +59,15 @@ const StyledInput = styled('input', {
     },
   },
   defaultVariants: {
-    size: 'sm',
+    size: 'md',
   },
 });
 
 export interface InputBaseProps {
   iconLeft?: ReactElement;
   iconRight?: ReactElement;
-  onChange?: () => void;
+  // eslint-disable-next-line no-unused-vars
+  onChange?: (e: React.ChangeEvent<HTMLInputElement> | React.FormEvent<HTMLInputElement>) => void
 }
 
 export type InputProps = InputBaseProps & ComponentProps<typeof StyledInput> &
@@ -157,6 +158,6 @@ export const Input: FunctionComponent<InputProps> = ({
     );
   }
   return (
-    <StyledInput data-testid="input" {...rest} css={css} />
+    <StyledInput size={size} data-testid="input" {...rest} css={css} />
   );
 };
