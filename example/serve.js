@@ -1,9 +1,9 @@
-import { build } from 'esbuild';
-import chokidar from 'chokidar';
-import liveServer from 'live-server';
+const esbuild = require('esbuild');
+const chokidar = require('chokidar');
+const liveServer = require('live-server');
 
 (async () => {
-  const builder = await build({
+  const builder = await esbuild.build({
     bundle: true,
     define: {
       'process.env.NODE_ENV': JSON.stringify(

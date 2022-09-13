@@ -95,7 +95,7 @@ const App = () => {
               HR Manager
             </Text>
             <Button variant="default" isIcon isTransparent icon={<KeyIcon />} />
-            <Button variant="primary" isIcon icon={<KeyIcon />} css={{ borderRadius: '$round' }} />
+            <Button size="xxl" isTransparent isIcon icon={<KeyIcon />} css={{ borderRadius: '$round' }} />
             <Button size="xl" variant="primary" css={{ marginTop: '$5', marginBottom: '$5' }}>Primary</Button>
             <Button size="xl" variant="accent" css={{ marginTop: '$5', marginBottom: '$5' }}>Primary</Button>
 
