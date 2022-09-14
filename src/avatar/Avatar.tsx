@@ -13,12 +13,12 @@ const StyledAvatar = styled(AvatarPrimitive.Root, {
   backgroundColor: '$black900',
   variants: {
     size: {
-      xxxl: {
+      '3xl': {
         width: '$30',
         height: '$30',
         borderRadius: '$3xl',
       },
-      xxl: {
+      '2xl': {
         width: '$18',
         height: '$18',
         borderRadius: '$2xl',

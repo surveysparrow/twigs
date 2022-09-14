@@ -12,3 +12,5 @@ export * from './loader';
 export * from './tabs';
 export * from './text';
 export * from './theme-provider';
+export * from './text';
+export * from './theme-provider';
