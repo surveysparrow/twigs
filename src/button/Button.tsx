@@ -25,6 +25,10 @@ const StyledButton = styled('button', {
     $$shadowColor: '$colors$blue300',
     boxShadow: 'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px',
   },
+  '& svg, & path': {
+    stroke: 'CurrentColor',
+    fill: 'CurrentColor',
+  },
   variants: {
     size: {
       xxl: {
@@ -336,7 +340,7 @@ const StyledButton = styled('button', {
   },
 });
 
-const StyledSpan = styled('span', {});
+const StyledSpan = styled('span', { display: 'flex', alignItems: 'center' });
 
 export interface ButtonBaseProps {
   iconLeft?: ReactElement;
@@ -354,7 +358,7 @@ type ButtonProps = ButtonBaseProps &
 export const Button:FunctionComponent<ButtonProps> = React.forwardRef(
   (
     {
-      children, variant = 'primary', isIcon = false, icon, iconLeft, iconRight, isLoading, disabled, type, onClick, ...rest
+      children, variant = 'primary', isIcon = false, icon, iconLeft, iconRight, isLoading, disabled, onClick, ...rest
     }: ButtonProps,
     ref,
   ) => {

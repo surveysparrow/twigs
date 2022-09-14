@@ -12,7 +12,13 @@ export const FormLabel: FunctionComponent<FormLabelProps> = ({
   ...rest
 }: FormLabelProps) => {
   return (
-    <Text as="label" css={{ color: '$neutral700', fontWeight: '$4', ...css }} data-testid="form-label" {...rest}>
+    <Text
+      css={{
+        color: '$neutral700', fontWeight: '$4', userSelect: 'none', ...css,
+      }}
+      data-testid="form-label"
+      {...rest}
+    >
       {children}
     </Text>
   );

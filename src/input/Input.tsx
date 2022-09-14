@@ -59,17 +59,17 @@ const StyledInput = styled('input', {
     },
   },
   defaultVariants: {
-    size: 'sm',
+    size: 'md',
   },
 });
 
-export interface ButtonBaseProps {
+export interface InputBaseProps {
   iconLeft?: ReactElement;
   iconRight?: ReactElement;
   onChange?: () => void;
 }
 
-export type InputProps = ButtonBaseProps & ComponentProps<typeof StyledInput> &
+export type InputProps = InputBaseProps & ComponentProps<typeof StyledInput> &
   React.HTMLAttributes<HTMLInputElement> & {
     as?: React.ElementType
  };
@@ -112,7 +112,7 @@ const IconContainer = styled(Box, {
 });
 
 export const Input: FunctionComponent<InputProps> = ({
-  size = 'xl',
+  size = 'md',
   iconLeft,
   iconRight,
   css,
@@ -157,6 +157,6 @@ export const Input: FunctionComponent<InputProps> = ({
     );
   }
   return (
-    <StyledInput data-testid="input" {...rest} css={css} />
+    <StyledInput size={size} data-testid="input" {...rest} css={css} />
   );
 };

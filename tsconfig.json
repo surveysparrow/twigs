@@ -17,7 +17,7 @@
       "jsx": "react-jsx",
       "baseUrl": "src",
       "declaration": true,
-      "declarationDir": "."
+      "declarationDir": ".",
     },
     "include": ["src", "src/example/serve.js"],
     "exclude": ["node_modules", "dist"]

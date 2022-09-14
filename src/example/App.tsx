@@ -1,4 +1,5 @@
 import React from 'react';
+import { Flex } from '../flex';
 import { globalStyles } from '../../stitches.config';
 import { ThemeProvider } from '../theme-provider';
 import { FormLabel } from '../form-label';
@@ -11,6 +12,13 @@ import { Link } from '../link';
 import { Button } from '../button';
 import { Heading } from '../heading';
 import { Avatar, AvatarImage, AvatarFallback } from '../avatar';
+import {
+  Tabs, TabsList, TabsTrigger, TabsContent,
+} from '../tabs';
+import { Checkbox } from '../checkbox';
+import {
+  DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSub, DropdownMenuSubTrigger, DropdownMenuItemIndicator, DropdownMenuCheckboxItem, DropdownMenuLabel, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuSubContent,
+} from '../dropdown';
 
 const KeyIcon = () => (
   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -18,10 +26,25 @@ const KeyIcon = () => (
   </svg>
 );
 
+const MoreIcon = () => {
+  return (
+    <svg width="4" height="16" viewBox="0 0 4 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M1.99703 0.75C1.31078 0.75 0.744692 1.3088 0.750038 2.00409C0.752248 2.69143 1.31218 3.25 2.00003 3.25C2.68924 3.25 3.25003 2.68921 3.25003 2C3.25003 1.30787 2.68632 0.75 1.99703 0.75Z" fill="#6C6C6C" />
+      <path d="M1.99703 6.75C1.31078 6.75 0.744692 7.3088 0.750038 8.00409C0.752248 8.69143 1.31218 9.25 2.00003 9.25C2.68924 9.25 3.25003 8.68921 3.25003 8C3.25003 7.30787 2.68632 6.75 1.99703 6.75Z" fill="#6C6C6C" />
+      <path d="M1.99703 12.75C1.31078 12.75 0.744692 13.3088 0.750038 14.0041C0.752248 14.6914 1.31218 15.25 2.00003 15.25C2.68924 15.25 3.25003 14.6892 3.25003 14C3.25003 13.3079 2.68632 12.75 1.99703 12.75Z" fill="#6C6C6C" />
+    </svg>
+  );
+};
+
 const App = () => {
   globalStyles();
   return (
-    <ThemeProvider theme={{}}>
+    <ThemeProvider theme={{
+      fonts: {
+        body: "'DM sans', sans-serif",
+      },
+    }}
+    >
       <Grid
         templateAreas={`"navbar navbar"
                          "sidebar main"`}
@@ -109,7 +132,92 @@ const App = () => {
         <Box css={{
           gridArea: 'main', fontWeight: '600', padding: '12px 24px', alignItems: 'center', justifyContent: 'center',
         }}
-        />
+        >
+          <Tabs defaultValue="tab1">
+            <TabsList aria-label="tabs example">
+              <TabsTrigger value="tab1">One</TabsTrigger>
+              <TabsTrigger value="tab2">Two</TabsTrigger>
+              <TabsTrigger value="tab3">Three</TabsTrigger>
+              <Box css={{ display: 'flex', width: '100%', justifyContent: 'flex-end' }}>
+                <Button>Button Text</Button>
+              </Box>
+            </TabsList>
+            <TabsContent css={{ p: '$4' }} value="tab1">
+              {/* Tab one content */}
+              <Flex css={{ alignItems: 'center' }}>
+                <Checkbox defaultChecked onCheckedChange={() => {}} size="sm" id="c1" />
+                <FormLabel css={{ paddingLeft: 15 }} htmlFor="c1">
+                  Accept terms and conditions.
+                </FormLabel>
+              </Flex>
+            </TabsContent>
+            <TabsContent css={{ p: '$4' }} value="tab2">Tab two content</TabsContent>
+            <TabsContent css={{ p: '$4' }} value="tab3">Tab three content</TabsContent>
+          </Tabs>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button size="lg" variant="primary" iconRight={<MoreIcon />} aria-label="Customise options">More Options</Button>
+            </DropdownMenuTrigger>
+
+            <DropdownMenuContent sideOffset={5}>
+              <DropdownMenuItem>
+                New Tab
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                New Window
+              </DropdownMenuItem>
+              <DropdownMenuItem disabled>
+                New Private Window
+              </DropdownMenuItem>
+              <DropdownMenuSub>
+                <DropdownMenuSubTrigger>
+                  More Tools
+                </DropdownMenuSubTrigger>
+                <DropdownMenuSubContent sideOffset={2} alignOffset={-5}>
+                  <DropdownMenuItem>
+                    Save Page As…
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>Create Shortcut…</DropdownMenuItem>
+                  <DropdownMenuItem>Name Window…</DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>Developer Tools</DropdownMenuItem>
+                </DropdownMenuSubContent>
+              </DropdownMenuSub>
+              <DropdownMenuSeparator />
+              <DropdownMenuCheckboxItem
+                checked
+                onCheckedChange={() => {}}
+              >
+                {/* <DropdownMenuItemIndicator>
+                  <CheckIcon />
+                </DropdownMenuItemIndicator> */}
+                Show Bookmarks
+              </DropdownMenuCheckboxItem>
+              <DropdownMenuCheckboxItem checked onCheckedChange={() => {}}>
+                {/* <DropdownMenuItemIndicator>
+                  <CheckIcon />
+                </DropdownMenuItemIndicator> */}
+                Show Full URLs
+              </DropdownMenuCheckboxItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuLabel>People</DropdownMenuLabel>
+              <DropdownMenuRadioGroup value="Maneesh" onValueChange={() => {}}>
+                <DropdownMenuRadioItem value="pedro">
+                  {/* <DropdownMenuItemIndicator>
+                    <DotFilledIcon />
+                  </DropdownMenuItemIndicator> */}
+                  Pedro Duarte
+                </DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="colm">
+                  {/* <DropdownMenuItemIndicator>
+                    <DotFilledIcon />
+                  </DropdownMenuItemIndicator> */}
+                  Colm Tuite
+                </DropdownMenuRadioItem>
+              </DropdownMenuRadioGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </Box>
       </Grid>
     </ThemeProvider>
   );
