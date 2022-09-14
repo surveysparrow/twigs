@@ -9,7 +9,7 @@
     "eslint": "eslint . --fix",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "dev": "node src/example/serve.js"
+    "dev": "node example/serve.js"
   },
   "repository": {
     "type": "git",
