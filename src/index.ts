@@ -1,6 +1,8 @@
 export * from './avatar';
 export * from './box';
 export * from './button';
+export * from './checkbox';
+export * from './dropdown';
 export * from './flex';
 export * from './form-helper-text';
 export * from './form-label';
@@ -10,7 +12,5 @@ export * from './input';
 export * from './link';
 export * from './loader';
 export * from './tabs';
-export * from './text';
-export * from './theme-provider';
 export * from './text';
 export * from './theme-provider';

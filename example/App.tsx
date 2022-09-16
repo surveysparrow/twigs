@@ -1,24 +1,24 @@
 import React from 'react';
-import { Flex } from '../flex';
-import { globalStyles } from '../../stitches.config';
-import { ThemeProvider } from '../theme-provider';
-import { FormLabel } from '../form-label';
-import { FormHelperText } from '../form-helper-text';
-import { Input } from '../input';
-import { Box } from '../box';
-import { Grid } from '../grid';
-import { Text } from '../text';
-import { Link } from '../link';
-import { Button } from '../button';
-import { Heading } from '../heading';
-import { Avatar, AvatarImage, AvatarFallback } from '../avatar';
+import { globalStyles } from '../stitches.config';
+import { ThemeProvider } from '../src/theme-provider';
+import { Flex } from '../src/flex';
+import { FormLabel } from '../src/form-label';
+import { FormHelperText } from '../src/form-helper-text';
+import { Input } from '../src/input';
+import { Box } from '../src/box';
+import { Grid } from '../src/grid';
+import { Text } from '../src/text';
+import { Link } from '../src/link';
+import { Button } from '../src/button';
+import { Heading } from '../src/heading';
+import { Avatar, AvatarImage, AvatarFallback } from '../src/avatar';
 import {
   Tabs, TabsList, TabsTrigger, TabsContent,
-} from '../tabs';
-import { Checkbox } from '../checkbox';
+} from '../src/tabs';
+import { Checkbox } from '../src/checkbox';
 import {
   DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSub, DropdownMenuSubTrigger, DropdownMenuItemIndicator, DropdownMenuCheckboxItem, DropdownMenuLabel, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuSubContent,
-} from '../dropdown';
+} from '../src/dropdown';
 
 const KeyIcon = () => (
   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -101,7 +101,7 @@ const App = () => {
             paddingTop: '32px',
           }}
           >
-            <Avatar size="xxxl" css={{ marginBottom: '20px' }}>
+            <Avatar size="3xl" css={{ marginBottom: '20px' }}>
               <AvatarImage
                 src="https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80"
                 alt="Colm Tuite"
@@ -112,20 +112,20 @@ const App = () => {
             <Text
               size="sm"
               css={{
-                color: '$grey500', fontWeight: '$4', mt: '$3', mb: '$5',
+                color: '$tertiary500', fontWeight: '$4', mt: '$3', mb: '$5',
               }}
             >
               HR Manager
             </Text>
             <Button variant="default" isIcon isTransparent icon={<KeyIcon />} />
-            <Button variant="primary" isIcon icon={<KeyIcon />} css={{ borderRadius: '$round' }} />
-            <Button size="xl" variant="primary" css={{ marginTop: '$5', marginBottom: '$5' }}>Primary</Button>
-            <Button size="xl" variant="accent" css={{ marginTop: '$5', marginBottom: '$5' }}>Primary</Button>
+            <Button size="xxl" isTransparent isIcon icon={<KeyIcon />} css={{ borderRadius: '$round' }} />
+            <Button size="xl" variant="primary" css={{ marginTop: '$16', marginBottom: '$16' }}>Primary</Button>
+            <Button size="xl" variant="accent" css={{ marginTop: '$16', marginBottom: '$16' }}>Primary</Button>
 
             <Box css={{ display: 'flex', flexDirection: 'column' }}>
-              <FormLabel htmlFor="email" css={{ marginTop: '$6', marginBottom: '$3' }}>Label</FormLabel>
+              <FormLabel htmlFor="email" css={{ marginTop: '$24', marginBottom: '$8' }}>Label</FormLabel>
               <Input id="email" type="text" placeholder="Placeholder" iconLeft={<KeyIcon />} />
-              <FormHelperText css={{ marginTop: '$2' }}>Helper text</FormHelperText>
+              <FormHelperText css={{ marginTop: '$4' }}>Helper text</FormHelperText>
             </Box>
           </Box>
         </Box>

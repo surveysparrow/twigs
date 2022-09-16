@@ -58,7 +58,7 @@ describe('Button', () => {
   it('matches snapshot: text with icon on both sides', () => {
     const tree = renderer.create(
       <Button
-        variant="text"
+        isText
         iconRight={<RightArrow />}
         iconLeft={<RightArrow />}
       >
@@ -71,9 +71,9 @@ describe('Button', () => {
   it('matches snapshot: text - disabled and loading', () => {
     const tree = renderer.create(
       <Button
-        variant="text"
+        isText
         disabled
-        loading
+        isLoading
       >
         Text only Button
       </Button>,
@@ -84,7 +84,7 @@ describe('Button', () => {
   it('matches snapshot: text and custom styles', () => {
     const tree = renderer.create(
       <Button
-        variant="text"
+        isText
         css={{
           padding: '10px',
         }}
