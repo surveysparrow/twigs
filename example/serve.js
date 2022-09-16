@@ -17,7 +17,7 @@ const liveServer = require('live-server');
     sourcemap: true,
   });
   chokidar
-    .watch('src/**/*.{ts,tsx}', {
+    .watch(['src/**/*.{ts,tsx}', 'example/'], {
       interval: 0,
     })
     .on('all', () => {

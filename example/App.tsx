@@ -21,7 +21,12 @@ const KeyIcon = () => (
 const App = () => {
   globalStyles();
   return (
-    <ThemeProvider theme={{}}>
+    <ThemeProvider theme={{
+      fonts: {
+        body: "'DM sans', sans-serif",
+      },
+    }}
+    >
       <Grid
         templateAreas={`"navbar navbar"
                          "sidebar main"`}
@@ -89,20 +94,20 @@ const App = () => {
             <Text
               size="sm"
               css={{
-                color: '$grey500', fontWeight: '$4', mt: '$3', mb: '$5',
+                color: '$tertiary500', fontWeight: '$4', mt: '$3', mb: '$5',
               }}
             >
               HR Manager
             </Text>
             <Button variant="default" isIcon isTransparent icon={<KeyIcon />} />
             <Button size="xxl" isTransparent isIcon icon={<KeyIcon />} css={{ borderRadius: '$round' }} />
-            <Button size="xl" variant="primary" css={{ marginTop: '$5', marginBottom: '$5' }}>Primary</Button>
-            <Button size="xl" variant="accent" css={{ marginTop: '$5', marginBottom: '$5' }}>Primary</Button>
+            <Button size="xl" variant="primary" css={{ marginTop: '$16', marginBottom: '$16' }}>Primary</Button>
+            <Button size="xl" variant="accent" css={{ marginTop: '$16', marginBottom: '$16' }}>Primary</Button>
 
             <Box css={{ display: 'flex', flexDirection: 'column' }}>
-              <FormLabel htmlFor="email" css={{ marginTop: '$6', marginBottom: '$3' }}>Label</FormLabel>
+              <FormLabel htmlFor="email" css={{ marginTop: '$24', marginBottom: '$8' }}>Label</FormLabel>
               <Input id="email" type="text" placeholder="Placeholder" iconLeft={<KeyIcon />} />
-              <FormHelperText css={{ marginTop: '$2' }}>Helper text</FormHelperText>
+              <FormHelperText css={{ marginTop: '$4' }}>Helper text</FormHelperText>
             </Box>
           </Box>
         </Box>
