@@ -19,7 +19,13 @@
     "type": "git",
     "url": "git+ssh://git@bitbucket.org/surveysparrow/twigs-react.git"
   },
-  "keywords": ["react", "component-library", "ui", "design-system", "accessible"],
+  "keywords": [
+    "react",
+    "component-library",
+    "ui",
+    "design-system",
+    "accessible"
+  ],
   "author": "",
   "license": "ISC",
   "homepage": "https://bitbucket.org/surveysparrow/twigs-react#readme",

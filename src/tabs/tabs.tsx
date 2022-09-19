@@ -18,10 +18,9 @@ const StyledTrigger = styled(TabsPrimitive.Trigger, {
   cursor: 'pointer',
   fontFamily: 'inherit',
   backgroundColor: '$white900',
-  paddingInlineStart: '$4',
-  paddingInlineEnd: '$4',
-  paddingTop: '$3',
-  paddingBottom: '$3',
+  paddingInlineStart: '$16',
+  paddingInlineEnd: '$16',
+  height: 'calc(100% - 3px)',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -33,7 +32,7 @@ const StyledTrigger = styled(TabsPrimitive.Trigger, {
   borderBottom: '3px solid transparent',
   '&:hover': { color: '$neutral800' },
   '&[data-state="active"]': {
-    color: '$cyan700',
+    color: '$secondary700',
     borderBottom: '3px solid currentColor',
   },
   '&:focus': {

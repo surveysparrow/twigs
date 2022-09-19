@@ -1,6 +1,6 @@
-import { build } from 'esbuild';
-import chokidar from 'chokidar';
-import liveServer from 'live-server';
+const { build } = require('esbuild');
+const chokidar = require('chokidar');
+const liveServer = require('live-server');
 
 (async () => {
   const builder = await build({
@@ -12,7 +12,7 @@ import liveServer from 'live-server';
         process.env.NODE_ENV || 'development',
       ),
     },
-    entryPoints: ['src/example/index.tsx'],
+    entryPoints: ['example/index.tsx'],
     // Uses incremental compilation (see `chokidar.on`).
     incremental: true,
     // Removes whitespace, etc. depending on `NODE_ENV=...`.
@@ -23,7 +23,7 @@ import liveServer from 'live-server';
   // `chokidar` watcher source changes.
   chokidar
     // Watches TypeScript and React TypeScript.
-    .watch('src/**/*.{ts,tsx}', {
+    .watch(['src/**/*.{ts,tsx}', 'example'], {
       interval: 0, // No delay
     })
     // Rebuilds esbuild (incrementally -- see `build.incremental`).
