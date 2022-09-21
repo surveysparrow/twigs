@@ -10,7 +10,7 @@ const liveServer = require('live-server');
         process.env.NODE_ENV || 'development',
       ),
     },
-    entryPoints: ['example/index.tsx'],
+    entryPoints: ['index.tsx'],
     incremental: true,
     minify: process.env.NODE_ENV === 'production',
     outfile: 'public/script.js',

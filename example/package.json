@@ -1,0 +1,12 @@
+{
+  "name": "example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "serve.js",
+  "scripts": {
+    "start": "node serve.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
