@@ -83,7 +83,7 @@ const StyledButton = styled('button', {
         '&:active': {
           color: '$neutral900',
           background: '$black300',
-          borderColor: '$black300',
+          borderColor: 'transparent',
         },
       },
       primary: {
@@ -249,18 +249,6 @@ const StyledButton = styled('button', {
       isIcon: true,
       size: 'xl',
       css: {
-        width: '$16',
-        height: '$16',
-        '& svg': {
-          width: '$4',
-          height: '$4',
-        },
-      },
-    },
-    {
-      isIcon: true,
-      size: 'lg',
-      css: {
         width: '$12',
         height: '$12',
         '& svg': {
@@ -354,7 +342,7 @@ type ButtonProps = ButtonBaseProps &
 export const Button:FunctionComponent<ButtonProps> = React.forwardRef(
   (
     {
-      children, variant = 'primary', isIcon = false, icon, iconLeft, iconRight, isLoading, disabled, type, onClick, ...rest
+      children, variant = 'primary', isIcon = false, icon, iconLeft, iconRight, isLoading, disabled, onClick, ...rest
     }: ButtonProps,
     ref,
   ) => {

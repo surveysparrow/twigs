@@ -1,21 +1,24 @@
 {
-  "name": "twigs-react",
-  "type": "module",
-  "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
+  "name": "@sparrowengg/twigs-react",
+  "version": "0.0.3",
+  "description": "In house component library for SurveySparrow",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "/dist"
+  ],
   "scripts": {
     "test": "jest test",
     "eslint": "eslint . --fix",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "dev": "node src/example/serve.js"
+    "build": "rimraf dist && node ./esbuild.js && tsc"
   },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@bitbucket.org/surveysparrow/twigs-react.git"
   },
-  "keywords": [],
+  "keywords": ["react", "component-library", "ui", "design-system", "accessible"],
   "author": "",
   "license": "ISC",
   "homepage": "https://bitbucket.org/surveysparrow/twigs-react#readme",
@@ -63,6 +66,7 @@
     "live-server": "^1.2.2",
     "prettier": "^2.7.1",
     "react-test-renderer": "^18.2.0",
+    "rimraf": "^3.0.2",
     "ts-jest": "^28.0.8",
     "typescript": "^4.7.4"
   },
