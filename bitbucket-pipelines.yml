@@ -18,7 +18,7 @@ pipelines:
               - node
             script:
               - npm install
-              #- npm test: Commenting test temporarily
+              #- npm test: Commenting test temporarily, will be added back
         - step:
             name: Lint the node package
             script:
@@ -35,7 +35,7 @@ pipelines:
                 - node
               script:
                 - npm install
-                #- npm test: Commenting test temporarily
+              #- npm test: Commenting test temporarily, will be added back
           - step:
               name: Security Scan
               script:
