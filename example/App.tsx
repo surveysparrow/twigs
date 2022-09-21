@@ -251,12 +251,7 @@ const App = () => {
             >
               HR Manager
             </Text>
-            <Button
-              size="sm"
-              variant="default"
-              isIcon
-              icon={<EmailIcon />}
-            />
+            <Button size="sm" variant="default" isIcon icon={<EmailIcon />} />
             <Button
               size="lg"
               variant="primary"
@@ -447,7 +442,11 @@ const App = () => {
               Tab two content
             </TabsContent>
             <TabsContent css={{ p: '$16' }} value="tab3">
-              Tab three content
+              <Checkbox
+                defaultChecked
+                size="md"
+                id="c2"
+              />
             </TabsContent>
           </Tabs>
           <DropdownMenu>
