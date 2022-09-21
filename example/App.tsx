@@ -21,7 +21,13 @@ const KeyIcon = () => (
 const App = () => {
   globalStyles();
   return (
-    <ThemeProvider theme={{}}>
+    <ThemeProvider
+      theme={{
+        fonts: {
+          body: "'DM sans', sans-serif",
+        },
+      }}
+    >
       <Grid
         templateAreas={`"navbar navbar"
                          "sidebar main"`}
@@ -37,26 +43,57 @@ const App = () => {
         <Grid
           templateColumns="1fr 1fr 1fr"
           css={{
-            gridArea: 'navbar', boxShadow: 'inset 0px -1px 0px rgba(0, 0, 0, 0.15)', fontWeight: '600', padding: '12px 24px',
+            gridArea: 'navbar',
+            boxShadow: 'inset 0px -1px 0px rgba(0, 0, 0, 0.15)',
+            fontWeight: '600',
+            padding: '12px 24px',
           }}
         >
           <Box css={{ display: 'flex', alignItems: 'center' }}>
-            <Box css={{
-              width: '40px', height: '40px', backgroundColor: '$primary', marginRight: '12px', borderRadius: '6px',
-            }}
+            <Box
+              css={{
+                width: '40px',
+                height: '40px',
+                backgroundColor: '$primary',
+                marginRight: '12px',
+                borderRadius: '6px',
+              }}
             />
-            <Text size="lg">
-              Navbar
-            </Text>
+            <Text size="lg">Navbar</Text>
           </Box>
-          <Box css={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Link href="/" css={{ margin: '0 16px', fontWeight: '400' }}>Home</Link>
-            <Link href="/team" css={{ margin: '0 16px', fontWeight: '400' }}>Team</Link>
-            <Link href="/goals" css={{ margin: '0 16px', fontWeight: '400' }}>Goals</Link>
-            <Link href="/one-one-ones" css={{ margin: '0 16px', fontWeight: '400' }}>One on Ones</Link>
-            <Link href="/reports" css={{ margin: '0 16px', fontWeight: '400' }}>Reports</Link>
+          <Box
+            css={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Link href="/" css={{ margin: '0 16px', fontWeight: '400' }}>
+              Home
+            </Link>
+            <Link href="/team" css={{ margin: '0 16px', fontWeight: '400' }}>
+              Team
+            </Link>
+            <Link href="/goals" css={{ margin: '0 16px', fontWeight: '400' }}>
+              Goals
+            </Link>
+            <Link
+              href="/one-one-ones"
+              css={{ margin: '0 16px', fontWeight: '400' }}
+            >
+              One on Ones
+            </Link>
+            <Link href="/reports" css={{ margin: '0 16px', fontWeight: '400' }}>
+              Reports
+            </Link>
           </Box>
-          <Box css={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
+          <Box
+            css={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'flex-end',
+            }}
+          >
             <Avatar size="lg">
               <AvatarImage
                 src="https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&w=128&h=128&dpr=2&q=80"
@@ -66,17 +103,24 @@ const App = () => {
             </Avatar>
           </Box>
         </Grid>
-        <Box css={{
-          gridArea: 'sidebar', backgroundColor: '#F6F6F6', fontWeight: '600', padding: '12px 24px', display: 'flex', justifyContent: 'center',
-        }}
-        >
-          <Box css={{
+        <Box
+          css={{
+            gridArea: 'sidebar',
+            backgroundColor: '#F6F6F6',
+            fontWeight: '600',
+            padding: '12px 24px',
             display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            width: '100%',
-            paddingTop: '32px',
+            justifyContent: 'center',
           }}
+        >
+          <Box
+            css={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              width: '100%',
+              paddingTop: '32px',
+            }}
           >
             <Avatar size="3xl" css={{ marginBottom: '20px' }}>
               <AvatarImage
@@ -89,26 +133,64 @@ const App = () => {
             <Text
               size="sm"
               css={{
-                color: '$grey500', fontWeight: '$4', mt: '$3', mb: '$5',
+                color: '$grey500',
+                fontWeight: '$4',
+                mt: '$3',
+                mb: '$5',
               }}
             >
               HR Manager
             </Text>
             <Button variant="default" isIcon isTransparent icon={<KeyIcon />} />
-            <Button size="xxl" isTransparent isIcon icon={<KeyIcon />} css={{ borderRadius: '$round' }} />
-            <Button size="xl" variant="primary" css={{ marginTop: '$5', marginBottom: '$5' }}>Primary</Button>
-            <Button size="xl" variant="accent" css={{ marginTop: '$5', marginBottom: '$5' }}>Primary</Button>
+            <Button
+              size="2xl"
+              isTransparent
+              isIcon
+              icon={<KeyIcon />}
+              css={{ borderRadius: '$round' }}
+            />
+            <Button
+              size="xl"
+              variant="primary"
+              css={{ marginTop: '$5', marginBottom: '$5' }}
+            >
+              Primary
+            </Button>
+            <Button
+              size="xl"
+              variant="accent"
+              css={{ marginTop: '$5', marginBottom: '$5' }}
+            >
+              Primary
+            </Button>
 
             <Box css={{ display: 'flex', flexDirection: 'column' }}>
-              <FormLabel htmlFor="email" css={{ marginTop: '$6', marginBottom: '$3' }}>Label</FormLabel>
-              <Input id="email" type="text" placeholder="Placeholder" iconLeft={<KeyIcon />} />
-              <FormHelperText css={{ marginTop: '$2' }}>Helper text</FormHelperText>
+              <FormLabel
+                htmlFor="email"
+                css={{ marginTop: '$6', marginBottom: '$3' }}
+              >
+                Label
+              </FormLabel>
+              <Input
+                id="email"
+                type="text"
+                placeholder="Placeholder"
+                iconLeft={<KeyIcon />}
+              />
+              <FormHelperText css={{ marginTop: '$2' }}>
+                Helper text
+              </FormHelperText>
             </Box>
           </Box>
         </Box>
-        <Box css={{
-          gridArea: 'main', fontWeight: '600', padding: '12px 24px', alignItems: 'center', justifyContent: 'center',
-        }}
+        <Box
+          css={{
+            gridArea: 'main',
+            fontWeight: '600',
+            padding: '12px 24px',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
         />
       </Grid>
     </ThemeProvider>

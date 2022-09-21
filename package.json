@@ -12,7 +12,6 @@
     "eslint": "eslint . --fix",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "dev": "node example/serve.js",
     "build": "rimraf dist && node ./esbuild.js && tsc"
   },
   "repository": {
