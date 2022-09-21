@@ -63,6 +63,14 @@ const StyledCheckbox = styled(CheckboxPrimitive.Root, {
     background: '$secondary700',
     border: '$borderWidths$xs solid transparent',
   },
+  '& .check-icon': {
+    display: 'none',
+  },
+  '&[data-state="checked"]': {
+    '.check-icon': {
+      display: 'flex',
+    },
+  },
   variants: {
     size: {
       sm: {
@@ -78,6 +86,11 @@ const StyledCheckbox = styled(CheckboxPrimitive.Root, {
   defaultVariants: {
     size: 'sm',
   },
+});
+
+const StyledCheckIconContainer = styled('span', {
+  display: 'flex',
+  alignItems: 'center',
 });
 
 const StyledIndicator = styled(CheckboxPrimitive.Indicator, {
@@ -112,9 +125,17 @@ export const Checkbox: FunctionComponent<CheckboxProps> = ({
   if (children) {
     return (
       <FormLabel as="label" css={{ display: 'flex', alignItems: 'center' }}>
-        <StyledCheckbox checked={isChecked} {...rest}>
-          <StyledIndicator>
-            {isChecked === true && <TickIcon />}
+        <StyledCheckbox
+          checked={isChecked}
+          {...(isIndeterminate && { 'data-state': 'indeterminate' })}
+          {...rest}
+        >
+          <StyledIndicator
+            {...(isIndeterminate && { 'data-state': 'indeterminate' })}
+          >
+            <StyledCheckIconContainer className="check-icon">
+              <TickIcon />
+            </StyledCheckIconContainer>
             {isIndeterminate && <HorizontalLineIcon />}
           </StyledIndicator>
         </StyledCheckbox>
@@ -131,7 +152,9 @@ export const Checkbox: FunctionComponent<CheckboxProps> = ({
       <StyledIndicator
         {...(isIndeterminate && { 'data-state': 'indeterminate' })}
       >
-        {isChecked === true && <TickIcon />}
+        <StyledCheckIconContainer className="check-icon">
+          <TickIcon />
+        </StyledCheckIconContainer>
         {isIndeterminate && <HorizontalLineIcon />}
       </StyledIndicator>
     </StyledCheckbox>
