@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 const esbuild = require('esbuild');
 const chokidar = require('chokidar');
 const liveServer = require('live-server');
