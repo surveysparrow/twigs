@@ -2,22 +2,26 @@ import React from 'react';
 import 'jest';
 import '@testing-library/jest-dom';
 import { createRoot } from 'react-dom/client';
-import renderer from 'react-test-renderer';
+import renderer, { act } from 'react-test-renderer';
 import { Grid } from '../index';
 
 describe('Grid', () => {
   it('renders without crashing', () => {
     const div = document.createElement('div');
     const root = createRoot(div!);
-    root.render(<Grid templateColumns="1fr 1fr 1fr" />);
-    root.unmount();
+    act(() => {
+      root.render(<Grid templateColumns="1fr 1fr 1fr" />);
+      root.unmount();
+    });
   });
 
   it('renders with width prop', () => {
     const div = document.createElement('div');
     const root = createRoot(div!);
-    root.render(<Grid width={350} templateColumns="1fr 1fr 1fr" />);
-    root.unmount();
+    act(() => {
+      root.render(<Grid width={350} templateColumns="1fr 1fr 1fr" />);
+      root.unmount();
+    });
   });
 
   it('matches snapshot: renders with templatearea props', () => {

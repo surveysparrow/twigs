@@ -9,6 +9,7 @@ const StyledInput = styled('input', {
   borderWidth: '$xs',
   borderStyle: 'solid',
   borderColor: 'transparent',
+  transition: 'all $transitions$2',
   '&:hover, &:focus, &:active': {
     background: '$white900',
     borderWidth: '$xs',
@@ -16,7 +17,7 @@ const StyledInput = styled('input', {
     borderColor: '$neutral200',
   },
   '&:focus, &:active': {
-    $$shadowColor: '$colors$blue300',
+    $$shadowColor: '$colors$system300',
     outline: 'none',
     background: '$white900',
     boxShadow: 'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px',
@@ -41,19 +42,19 @@ const StyledInput = styled('input', {
       xl: {
         height: '$12',
         borderRadius: '$lg',
-        padding: '$4',
+        padding: '$6',
         fontSize: '$md',
       },
       lg: {
         height: '$10',
         borderRadius: '$lg',
-        padding: '$3 $4',
+        padding: '$5 $6',
         fontSize: '$sm',
       },
       md: {
         height: '$8',
         borderRadius: '$md',
-        padding: '6px $3',
+        padding: '$3 $4',
         fontSize: '$sm',
       },
     },
@@ -113,19 +114,19 @@ const IconContainer = styled(Box, {
 });
 
 export const Input: FunctionComponent<InputProps> = ({
-  size = 'xl',
+  size = 'md',
   iconLeft,
   iconRight,
   css,
   ...rest
 }: InputProps) => {
-  let inputPaddingValue = '$10';
+  let inputPaddingValue = '$22';
   if (size === 'xl') {
-    inputPaddingValue = '$10';
+    inputPaddingValue = '$22';
   } else if (size === 'lg') {
-    inputPaddingValue = '$9';
+    inputPaddingValue = '$20';
   } else if (size === 'md') {
-    inputPaddingValue = '$7';
+    inputPaddingValue = '$14';
   }
   if (iconLeft || iconRight) {
     return (
