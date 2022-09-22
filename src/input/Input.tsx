@@ -42,19 +42,19 @@ const StyledInput = styled('input', {
       xl: {
         height: '$12',
         borderRadius: '$lg',
-        padding: '$12',
+        padding: '$6',
         fontSize: '$md',
       },
       lg: {
         height: '$10',
         borderRadius: '$lg',
-        padding: '$10 $12',
+        padding: '$5 $6',
         fontSize: '$sm',
       },
       md: {
         height: '$8',
         borderRadius: '$md',
-        padding: '$6 $8',
+        padding: '$3 $4',
         fontSize: '$sm',
       },
     },
@@ -120,13 +120,13 @@ export const Input: FunctionComponent<InputProps> = ({
   css,
   ...rest
 }: InputProps) => {
-  let inputPaddingValue = '$44';
+  let inputPaddingValue = '$22';
   if (size === 'xl') {
-    inputPaddingValue = '$44';
+    inputPaddingValue = '$22';
   } else if (size === 'lg') {
-    inputPaddingValue = '$40';
+    inputPaddingValue = '$20';
   } else if (size === 'md') {
-    inputPaddingValue = '$28';
+    inputPaddingValue = '$14';
   }
   if (iconLeft || iconRight) {
     return (
