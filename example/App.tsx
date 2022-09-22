@@ -34,11 +34,11 @@ import {
 } from '../src/dropdown';
 import {
   Table,
-  TableBody,
-  TableHeader,
-  TableHeaderCell,
-  TableRow,
-  TableRowCell,
+  Tbody,
+  Thead,
+  Th,
+  Tr,
+  Td,
 } from '../src/table';
 import {
   Dialog, DialogTitle, DialogDescription, DialogClose, DialogTrigger, DialogContent,
@@ -671,43 +671,43 @@ const App = () => {
             </DropdownMenuContent>
           </DropdownMenu>
           <Table {...getTableProps()} css={{ marginTop: '$16' }}>
-            <TableHeader>
+            <Thead>
               {headerGroups.map((headerGroup) => (
-                <TableRow {...headerGroup.getHeaderGroupProps()}>
+                <Tr {...headerGroup.getHeaderGroupProps()}>
                   {headerGroup.headers.map((column) => (
-                    <TableHeaderCell {...column.getHeaderProps()}>
+                    <Th {...column.getHeaderProps()}>
                       {column.render('Header')}
-                    </TableHeaderCell>
+                    </Th>
                   ))}
-                </TableRow>
+                </Tr>
               ))}
-            </TableHeader>
-            <TableBody {...getTableBodyProps()}>
+            </Thead>
+            <Tbody {...getTableBodyProps()}>
               {rows.map((row) => {
                 prepareRow(row);
                 return (
-                  <TableRow
+                  <Tr
                     {...row.getRowProps()}
                     css={{ height: '$16' }}
                   >
                     {row.cells.map((cell, i) => {
                       if (i === 0) {
                         return (
-                          <TableRowCell>
+                          <Td>
                             <Checkbox />
-                          </TableRowCell>
+                          </Td>
                         );
                       }
                       return (
-                        <TableRowCell {...cell.getCellProps()}>
+                        <Td {...cell.getCellProps()}>
                           <Text size="sm">{cell.render('Cell')}</Text>
-                        </TableRowCell>
+                        </Td>
                       );
                     })}
-                  </TableRow>
+                  </Tr>
                 );
               })}
-            </TableBody>
+            </Tbody>
           </Table>
         </Box>
       </Grid>

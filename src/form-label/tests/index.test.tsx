@@ -1,5 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
+import { act } from 'react-test-renderer';
 import { render } from '@testing-library/react';
 import { FormLabel } from '../index';
 import 'jest';
@@ -9,8 +10,10 @@ describe('Form Label', () => {
   it('renders without crashing', () => {
     const div = document.createElement('div');
     const root = createRoot(div!);
-    root.render(<FormLabel>FormLabel</FormLabel>);
-    root.unmount();
+    act(() => {
+      root.render(<FormLabel>FormLabel</FormLabel>);
+      root.unmount();
+    });
   });
 
   it('renders Form Label correctly', () => {

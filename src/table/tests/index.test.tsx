@@ -3,12 +3,12 @@ import { createRoot } from 'react-dom/client';
 import { act } from 'react-test-renderer';
 import { useTable } from 'react-table';
 import {
-  StyledTable,
-  StyledTableBody,
-  StyledTableHeader,
-  StyledTableHeaderCell,
-  StyledTableRow,
-  StyledTableRowCell,
+  Table,
+  Tbody,
+  Thead,
+  Th,
+  Tr,
+  Td,
 } from '../index';
 import 'jest';
 import '@testing-library/jest-dom';
@@ -84,51 +84,57 @@ const data = [
   },
 ];
 
+const TableComponent = () => {
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+  } = useTable({
+    columns,
+    data,
+  });
+  return (
+    <Table {...getTableProps()} css={{ marginTop: '$16' }}>
+      <Thead>
+        {headerGroups.map((headerGroup) => (
+          <Tr {...headerGroup.getHeaderGroupProps()}>
+            {headerGroup.headers.map((column) => (
+              <Th {...column.getHeaderProps()}>
+                {column.render('Header')}
+              </Th>
+            ))}
+          </Tr>
+        ))}
+      </Thead>
+      <Tbody {...getTableBodyProps()}>
+        {rows.map((row) => {
+          prepareRow(row);
+          return (
+            <Tr {...row.getRowProps()}>
+              {row.cells.map((cell) => {
+                return (
+                  <Td {...cell.getCellProps()}>
+                    {cell.render('Cell')}
+                  </Td>
+                );
+              })}
+            </Tr>
+          );
+        })}
+      </Tbody>
+    </Table>
+  );
+};
+
 describe('Input', () => {
   it('renders without crashing', () => {
     const div = document.createElement('div');
     const root = createRoot(div!);
     act(() => {
-      const {
-        getTableProps,
-        getTableBodyProps,
-        headerGroups,
-        rows,
-        prepareRow,
-      } = useTable({
-        columns,
-        data,
-      });
       root.render(
-        <StyledTable {...getTableProps()} css={{ marginTop: '$16' }}>
-          <StyledTableHeader>
-            {headerGroups.map((headerGroup) => (
-              <StyledTableRow {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column) => (
-                  <StyledTableHeaderCell {...column.getHeaderProps()}>
-                    {column.render('Header')}
-                  </StyledTableHeaderCell>
-                ))}
-              </StyledTableRow>
-            ))}
-          </StyledTableHeader>
-          <StyledTableBody {...getTableBodyProps()}>
-            {rows.map((row) => {
-              prepareRow(row);
-              return (
-                <StyledTableRow {...row.getRowProps()}>
-                  {row.cells.map((cell) => {
-                    return (
-                      <StyledTableRowCell {...cell.getCellProps()}>
-                        {cell.render('Cell')}
-                      </StyledTableRowCell>
-                    );
-                  })}
-                </StyledTableRow>
-              );
-            })}
-          </StyledTableBody>
-        </StyledTable>,
+        <TableComponent />,
       );
       root.unmount();
     });

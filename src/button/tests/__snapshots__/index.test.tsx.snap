@@ -2,11 +2,11 @@
 
 exports[`Button matches snapshot: primary with icon on left 1`] = `
 <button
-  className="twigs-c-iDeRKF twigs-c-iDeRKF-fDDWWg-size-sm twigs-c-iDeRKF-jgyhUs-variant-primary"
+  className="twigs-c-sxxv twigs-c-sxxv-dtVeYa-size-sm twigs-c-sxxv-jgyhUs-variant-primary"
   data-testid="button"
 >
   <span
-    className="twigs-c-UazGY twigs-c-UazGY-ijxSBfJ-css"
+    className="twigs-c-khZXrc twigs-c-khZXrc-idwaUpl-css"
   >
     <svg
       fill="none"
@@ -30,12 +30,12 @@ exports[`Button matches snapshot: primary with icon on left 1`] = `
 
 exports[`Button matches snapshot: secondary with icon on right 1`] = `
 <button
-  className="twigs-c-iDeRKF twigs-c-iDeRKF-fDDWWg-size-sm twigs-c-iDeRKF-fyuIIR-variant-secondary"
+  className="twigs-c-sxxv twigs-c-sxxv-dtVeYa-size-sm twigs-c-sxxv-fyuIIR-variant-secondary"
   data-testid="button"
 >
   Secondary Button
   <span
-    className="twigs-c-UazGY twigs-c-UazGY-ieSlpoK-css"
+    className="twigs-c-khZXrc twigs-c-khZXrc-iftrFFq-css"
   >
     <svg
       fill="none"
@@ -58,12 +58,12 @@ exports[`Button matches snapshot: secondary with icon on right 1`] = `
 
 exports[`Button matches snapshot: text - disabled and loading 1`] = `
 <button
-  className="twigs-c-iDeRKF twigs-c-iDeRKF-fDDWWg-size-sm twigs-c-iDeRKF-jgyhUs-variant-primary twigs-c-iDeRKF-hlDObG-isText-true twigs-c-iDeRKF-feQjQZ-cv"
+  className="twigs-c-sxxv twigs-c-sxxv-dtVeYa-size-sm twigs-c-sxxv-jgyhUs-variant-primary twigs-c-sxxv-hlDObG-isText-true twigs-c-sxxv-feQjQZ-cv"
   data-testid="button"
   disabled={true}
 >
   <div
-    className="twigs-c-PJLV twigs-c-dMQBBi"
+    className="twigs-c-PJLV twigs-c-rnWFq"
     data-testid="dot-loader"
   >
     <div
@@ -84,7 +84,7 @@ exports[`Button matches snapshot: text - disabled and loading 1`] = `
 
 exports[`Button matches snapshot: text and custom styles 1`] = `
 <button
-  className="twigs-c-iDeRKF twigs-c-iDeRKF-fDDWWg-size-sm twigs-c-iDeRKF-jgyhUs-variant-primary twigs-c-iDeRKF-hlDObG-isText-true twigs-c-iDeRKF-feQjQZ-cv twigs-c-iDeRKF-ihBcVkj-css"
+  className="twigs-c-sxxv twigs-c-sxxv-dtVeYa-size-sm twigs-c-sxxv-jgyhUs-variant-primary twigs-c-sxxv-hlDObG-isText-true twigs-c-sxxv-feQjQZ-cv twigs-c-sxxv-ihBcVkj-css"
   data-testid="button"
 >
   Link text
@@ -93,11 +93,11 @@ exports[`Button matches snapshot: text and custom styles 1`] = `
 
 exports[`Button matches snapshot: text with icon on both sides 1`] = `
 <button
-  className="twigs-c-iDeRKF twigs-c-iDeRKF-fDDWWg-size-sm twigs-c-iDeRKF-jgyhUs-variant-primary twigs-c-iDeRKF-hlDObG-isText-true twigs-c-iDeRKF-feQjQZ-cv"
+  className="twigs-c-sxxv twigs-c-sxxv-dtVeYa-size-sm twigs-c-sxxv-jgyhUs-variant-primary twigs-c-sxxv-hlDObG-isText-true twigs-c-sxxv-feQjQZ-cv"
   data-testid="button"
 >
   <span
-    className="twigs-c-UazGY twigs-c-UazGY-ijxSBfJ-css"
+    className="twigs-c-khZXrc twigs-c-khZXrc-idwaUpl-css"
   >
     <svg
       fill="none"
@@ -117,7 +117,7 @@ exports[`Button matches snapshot: text with icon on both sides 1`] = `
   </span>
   Text Button
   <span
-    className="twigs-c-UazGY twigs-c-UazGY-ieSlpoK-css"
+    className="twigs-c-khZXrc twigs-c-khZXrc-iftrFFq-css"
   >
     <svg
       fill="none"
