@@ -42,7 +42,7 @@ import {
 } from '../src/table';
 import {
   Dialog, DialogTitle, DialogDescription, DialogClose, DialogTrigger, DialogContent,
-} from '../src/modal';
+} from '../src/dialog';
 
 const CloseIcon = () => {
   return (

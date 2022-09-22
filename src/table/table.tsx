@@ -3,9 +3,9 @@ import { styled } from '../../stitches.config';
 
 export const Table = styled('table', {});
 
-export const TableBody = styled('tbody', {});
+export const Tbody = styled('tbody', {});
 
-export const TableHeader = styled('thead', {
+export const Thead = styled('thead', {
   padding: '$6',
   background: '$neutral100',
   '& > tr': {
@@ -15,7 +15,7 @@ export const TableHeader = styled('thead', {
   },
 });
 
-export const TableHeaderCell = styled('th', {
+export const Th = styled('th', {
   padding: '$6',
   margin: '0',
   borderRight: '$borderWidths$xs solid $colors$neutral200',
@@ -26,13 +26,13 @@ export const TableHeaderCell = styled('th', {
   },
 });
 
-export const TableRow = styled('tr', {
+export const Tr = styled('tr', {
   '&:hover': {
     background: '$neutral50',
   },
 });
 
-export const TableRowCell = styled('td', {
+export const Td = styled('td', {
   padding: '$6',
   margin: '0',
   borderRight: '$borderWidths$xs solid $colors$neutral200',
