@@ -1,11 +1,11 @@
 import React from 'react';
 import { styled } from '../../stitches.config';
 
-export const StyledTable = styled('table', {});
+export const Table = styled('table', {});
 
-export const StyledTableBody = styled('tbody', {});
+export const TableBody = styled('tbody', {});
 
-export const StyledTableHeader = styled('thead', {
+export const TableHeader = styled('thead', {
   padding: '$6',
   background: '$neutral100',
   '& > tr': {
@@ -15,7 +15,7 @@ export const StyledTableHeader = styled('thead', {
   },
 });
 
-export const StyledTableHeaderCell = styled('th', {
+export const TableHeaderCell = styled('th', {
   padding: '$6',
   margin: '0',
   borderRight: '$borderWidths$xs solid $colors$neutral200',
@@ -26,13 +26,13 @@ export const StyledTableHeaderCell = styled('th', {
   },
 });
 
-export const StyledTableRow = styled('tr', {
+export const TableRow = styled('tr', {
   '&:hover': {
     background: '$neutral50',
   },
 });
 
-export const StyledTableRowCell = styled('td', {
+export const TableRowCell = styled('td', {
   padding: '$6',
   margin: '0',
   borderRight: '$borderWidths$xs solid $colors$neutral200',
