@@ -100,7 +100,7 @@ const StyledIndicator = styled(CheckboxPrimitive.Indicator, {
 
 const StyledLabelContainer = styled('span', {
   display: 'inline-flex',
-  paddingInlineStart: '$16',
+  paddingInlineStart: '$8',
 });
 
 export interface CheckboxBaseProps {
