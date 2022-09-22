@@ -41,8 +41,7 @@
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-table": "^7.8.0"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.18.10",
@@ -79,6 +78,7 @@
     "lint-staged": "^13.0.3",
     "live-server": "^1.2.2",
     "prettier": "^2.7.1",
+    "react-table": "^7.8.0",
     "react-test-renderer": "^18.2.0",
     "rimraf": "^3.0.2",
     "ts-jest": "^28.0.8",
