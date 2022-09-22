@@ -2,8 +2,8 @@ import React from 'react';
 import 'jest';
 import '@testing-library/jest-dom';
 import { createRoot } from 'react-dom/client';
-import { act } from 'react-test-renderer';
 import { render } from '@testing-library/react';
+import { act } from 'react-test-renderer';
 import { FormHelperText } from '../index';
 
 describe('Form Helper Text', () => {

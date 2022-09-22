@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTable } from 'react-table';
 import { globalStyles } from '../stitches.config';
 import { ThemeProvider } from '../src/theme-provider';
 import { Flex } from '../src/flex';
@@ -31,6 +32,44 @@ import {
   DropdownMenuSeparator,
   DropdownMenuSubContent,
 } from '../src/dropdown';
+import {
+  Table,
+  Tbody,
+  Thead,
+  Th,
+  Tr,
+  Td,
+} from '../src/table';
+import {
+  Dialog, DialogTitle, DialogDescription, DialogClose, DialogTrigger, DialogContent,
+} from '../src/dialog';
+
+const CloseIcon = () => {
+  return (
+    <svg
+      width="10"
+      height="10"
+      viewBox="0 0 10 10"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M1 1L9 9"
+        stroke="#6C6C6C"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M9 1L1 9"
+        stroke="#6C6C6C"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
 
 const EmailIcon = () => (
   <svg
@@ -134,7 +173,87 @@ const App = () => {
   const allChecked = checkedItems.every(Boolean);
   const isIndeterminate = checkedItems.some(Boolean) && !allChecked;
 
-  console.log({ checkedItems, isIndeterminate });
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: 'First Name',
+        accessor: 'firstName',
+      },
+      {
+        Header: 'Last Name',
+        accessor: 'lastName',
+      },
+      {
+        Header: 'Age',
+        accessor: 'age',
+      },
+      {
+        Header: 'Visits',
+        accessor: 'visits',
+      },
+      {
+        Header: 'Progress',
+        accessor: 'progress',
+      },
+    ],
+    [],
+  );
+
+  const data = [
+    {
+      firstName: 'jam',
+      lastName: 'child',
+      age: 11,
+      visits: 47,
+      progress: 66,
+      status: 'relationship',
+      subRows: undefined,
+    },
+    {
+      firstName: 'jam',
+      lastName: 'child',
+      age: 11,
+      visits: 47,
+      progress: 66,
+      status: 'relationship',
+      subRows: undefined,
+    },
+    {
+      firstName: 'jam',
+      lastName: 'child',
+      age: 11,
+      visits: 47,
+      progress: 66,
+      status: 'relationship',
+      subRows: undefined,
+    },
+    {
+      firstName: 'jam',
+      lastName: 'child',
+      age: 11,
+      visits: 47,
+      progress: 66,
+      status: 'relationship',
+      subRows: undefined,
+    },
+    {
+      firstName: 'jam',
+      lastName: 'child',
+      age: 11,
+      visits: 47,
+      progress: 66,
+      status: 'relationship',
+      subRows: undefined,
+    },
+  ];
+
+  const {
+    getTableProps, getTableBodyProps, headerGroups, rows, prepareRow,
+  } = useTable({
+    columns,
+    data,
+  });
+
   return (
     <ThemeProvider
       theme={{
@@ -258,7 +377,6 @@ const App = () => {
             </Text>
             <Button size="sm" variant="default" isIcon icon={<EmailIcon />} />
             <Button
-              size="lg"
               variant="primary"
               isIcon
               icon={<EmailIcon />}
@@ -419,7 +537,6 @@ const App = () => {
               </Checkbox>
               <Flex css={{ alignItems: 'center' }}>
                 <Checkbox
-                  defaultChecked
                   isChecked={checkedItems[0]}
                   size="md"
                   id="c1"
@@ -431,7 +548,6 @@ const App = () => {
                   Accept terms and conditions.
                 </FormLabel>
                 <Checkbox
-                  defaultChecked
                   isChecked={checkedItems[1]}
                   size="md"
                   id="c2"
@@ -443,7 +559,51 @@ const App = () => {
               </Flex>
             </TabsContent>
             <TabsContent css={{ p: '$16' }} value="tab2">
-              Tab two content
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button size="lg">Edit profile</Button>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogTitle>Edit profile</DialogTitle>
+                  <DialogDescription
+                    css={{ color: '$neutral600', fontSize: '$sm' }}
+                  >
+                    Make changes to your profile here. Click save when you're
+                    done.
+                  </DialogDescription>
+                  <Box css={{ marginBottom: '$24' }}>
+                    <FormLabel css={{ marginBottom: '$8' }} htmlFor="name">
+                      Name
+                    </FormLabel>
+                    <Input size="lg" id="name" defaultValue="Pedro Duarte" />
+                  </Box>
+                  <Box css={{ marginBottom: '$24' }}>
+                    <FormLabel css={{ marginBottom: '$8' }} htmlFor="username">
+                      Username
+                    </FormLabel>
+                    <Input size="lg" id="username" defaultValue="@peduarte" />
+                  </Box>
+                  <Flex css={{ marginTop: 25, justifyContent: 'flex-end' }}>
+                    <DialogClose asChild>
+                      <Button size="lg" variant="default">
+                        Save changes
+                      </Button>
+                    </DialogClose>
+                  </Flex>
+                  <Box
+                    css={{ position: 'absolute', top: '10px', right: '10px' }}
+                  >
+                    <DialogClose asChild>
+                      <Button
+                        isIcon
+                        icon={<CloseIcon />}
+                        isTransparent
+                        aria-label="Close"
+                      />
+                    </DialogClose>
+                  </Box>
+                </DialogContent>
+              </Dialog>
             </TabsContent>
             <TabsContent css={{ p: '$16' }} value="tab3">
               <Checkbox
@@ -510,6 +670,45 @@ const App = () => {
               </DropdownMenuRadioGroup>
             </DropdownMenuContent>
           </DropdownMenu>
+          <Table {...getTableProps()} css={{ marginTop: '$16' }}>
+            <Thead>
+              {headerGroups.map((headerGroup) => (
+                <Tr {...headerGroup.getHeaderGroupProps()}>
+                  {headerGroup.headers.map((column) => (
+                    <Th {...column.getHeaderProps()}>
+                      {column.render('Header')}
+                    </Th>
+                  ))}
+                </Tr>
+              ))}
+            </Thead>
+            <Tbody {...getTableBodyProps()}>
+              {rows.map((row) => {
+                prepareRow(row);
+                return (
+                  <Tr
+                    {...row.getRowProps()}
+                    css={{ height: '$16' }}
+                  >
+                    {row.cells.map((cell, i) => {
+                      if (i === 0) {
+                        return (
+                          <Td>
+                            <Checkbox />
+                          </Td>
+                        );
+                      }
+                      return (
+                        <Td {...cell.getCellProps()}>
+                          <Text size="sm">{cell.render('Cell')}</Text>
+                        </Td>
+                      );
+                    })}
+                  </Tr>
+                );
+              })}
+            </Tbody>
+          </Table>
         </Box>
       </Grid>
     </ThemeProvider>
