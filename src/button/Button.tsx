@@ -9,7 +9,6 @@ const StyledButton = styled('button', {
   fontSize: '$lg',
   lineHeight: '$md',
   borderRadius: '$lg',
-  padding: '$2 $8',
   display: 'flex',
   alignItems: 'center',
   fontWeight: '$7',
@@ -29,7 +28,7 @@ const StyledButton = styled('button', {
   variants: {
     size: {
       '2xl': {
-        padding: '$18 $24',
+        padding: '$9 $12',
         borderRadius: '$xl',
         fontSize: '$lg',
         lineHeight: '$lg',
@@ -40,7 +39,7 @@ const StyledButton = styled('button', {
         },
       },
       xl: {
-        padding: '$10 $20',
+        padding: '$5 $10',
         borderRadius: '$xl',
         fontSize: '$lg',
         lineHeight: '$lg',
@@ -51,7 +50,7 @@ const StyledButton = styled('button', {
         },
       },
       lg: {
-        padding: '$8 $16',
+        padding: '$4 $8',
         borderRadius: '$lg',
         fontSize: '$md',
         lineHeight: '$md',
@@ -62,7 +61,7 @@ const StyledButton = styled('button', {
         },
       },
       md: {
-        padding: '$6 $10',
+        padding: '$3 $5',
         borderRadius: '$md',
         fontSize: '$sm',
         lineHeight: '$md',
@@ -73,7 +72,7 @@ const StyledButton = styled('button', {
         },
       },
       sm: {
-        padding: '$2 $8',
+        padding: '$1 $4',
         borderRadius: '$sm',
         fontSize: '$sm',
         lineHeight: '$sm',
@@ -84,7 +83,7 @@ const StyledButton = styled('button', {
         },
       },
       xs: {
-        padding: '$1 $6',
+        padding: '$1 $3',
         borderRadius: '$sm',
         fontSize: '$xs',
         lineHeight: '$xs',
@@ -95,7 +94,7 @@ const StyledButton = styled('button', {
         },
       },
       xxs: {
-        padding: '$2 $4',
+        padding: '$1 $2',
         borderRadius: '$sm',
         fontSize: '$xxs',
         lineHeight: '$xxs',
@@ -355,7 +354,10 @@ const StyledButton = styled('button', {
   },
 });
 
-const StyledSpan = styled('span', { display: 'flex', alignItems: 'center' });
+const StyledSpan = styled('span', {
+  display: 'inline-flex',
+  alignItems: 'center',
+});
 
 export interface ButtonBaseProps {
   iconLeft?: ReactElement;
@@ -401,13 +403,13 @@ export const Button:FunctionComponent<ButtonProps> = React.forwardRef(
                 : (
                   <>
                     {iconLeft && (
-                    <StyledSpan css={{ marginRight: '8px' }}>
+                    <StyledSpan css={{ marginRight: '$4' }}>
                       {React.cloneElement(iconLeft)}
                     </StyledSpan>
                     )}
                     {children}
                     {iconRight && (
-                    <StyledSpan css={{ marginLeft: '8px' }}>
+                    <StyledSpan css={{ marginLeft: '$4' }}>
                       {React.cloneElement(iconRight)}
                     </StyledSpan>
                     )}

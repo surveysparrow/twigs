@@ -2,7 +2,7 @@
 
 exports[`Button matches snapshot: primary with icon on left 1`] = `
 <button
-  className="twigs-c-kZaMBa twigs-c-kZaMBa-kyEbhl-size-sm twigs-c-kZaMBa-jgyhUs-variant-primary"
+  className="twigs-c-iDeRKF twigs-c-iDeRKF-fDDWWg-size-sm twigs-c-iDeRKF-jgyhUs-variant-primary"
   data-testid="button"
 >
   <span
@@ -30,7 +30,7 @@ exports[`Button matches snapshot: primary with icon on left 1`] = `
 
 exports[`Button matches snapshot: secondary with icon on right 1`] = `
 <button
-  className="twigs-c-kZaMBa twigs-c-kZaMBa-kyEbhl-size-sm twigs-c-kZaMBa-fyuIIR-variant-secondary"
+  className="twigs-c-iDeRKF twigs-c-iDeRKF-fDDWWg-size-sm twigs-c-iDeRKF-fyuIIR-variant-secondary"
   data-testid="button"
 >
   Secondary Button
@@ -58,7 +58,7 @@ exports[`Button matches snapshot: secondary with icon on right 1`] = `
 
 exports[`Button matches snapshot: text - disabled and loading 1`] = `
 <button
-  className="twigs-c-kZaMBa twigs-c-kZaMBa-kyEbhl-size-sm twigs-c-kZaMBa-jgyhUs-variant-primary twigs-c-kZaMBa-hlDObG-isText-true twigs-c-kZaMBa-feQjQZ-cv"
+  className="twigs-c-iDeRKF twigs-c-iDeRKF-fDDWWg-size-sm twigs-c-iDeRKF-jgyhUs-variant-primary twigs-c-iDeRKF-hlDObG-isText-true twigs-c-iDeRKF-feQjQZ-cv"
   data-testid="button"
   disabled={true}
 >
@@ -84,7 +84,7 @@ exports[`Button matches snapshot: text - disabled and loading 1`] = `
 
 exports[`Button matches snapshot: text and custom styles 1`] = `
 <button
-  className="twigs-c-kZaMBa twigs-c-kZaMBa-kyEbhl-size-sm twigs-c-kZaMBa-jgyhUs-variant-primary twigs-c-kZaMBa-hlDObG-isText-true twigs-c-kZaMBa-feQjQZ-cv twigs-c-kZaMBa-ihBcVkj-css"
+  className="twigs-c-iDeRKF twigs-c-iDeRKF-fDDWWg-size-sm twigs-c-iDeRKF-jgyhUs-variant-primary twigs-c-iDeRKF-hlDObG-isText-true twigs-c-iDeRKF-feQjQZ-cv twigs-c-iDeRKF-ihBcVkj-css"
   data-testid="button"
 >
   Link text
@@ -93,7 +93,7 @@ exports[`Button matches snapshot: text and custom styles 1`] = `
 
 exports[`Button matches snapshot: text with icon on both sides 1`] = `
 <button
-  className="twigs-c-kZaMBa twigs-c-kZaMBa-kyEbhl-size-sm twigs-c-kZaMBa-jgyhUs-variant-primary twigs-c-kZaMBa-hlDObG-isText-true twigs-c-kZaMBa-feQjQZ-cv"
+  className="twigs-c-iDeRKF twigs-c-iDeRKF-fDDWWg-size-sm twigs-c-iDeRKF-jgyhUs-variant-primary twigs-c-iDeRKF-hlDObG-isText-true twigs-c-iDeRKF-feQjQZ-cv"
   data-testid="button"
 >
   <span
