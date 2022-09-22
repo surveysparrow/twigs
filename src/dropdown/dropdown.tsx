@@ -25,7 +25,7 @@ const slideLeftAndFade = keyframes({
 const contentStyles = {
   minWidth: 234,
   backgroundColor: 'white',
-  padding: '$12 0',
+  padding: '$6 0',
   borderRadius: '$lg',
   boxShadow: '$sm',
   border: '$borderWidths$xs solid $colors$neutral300',
@@ -85,7 +85,7 @@ const itemStyles = {
   color: '$neutral900',
   display: 'flex',
   alignItems: 'center',
-  padding: '$8 $12',
+  padding: '$4 $6',
   position: 'relative',
   userSelect: 'none',
 
@@ -118,7 +118,7 @@ const StyledSubTrigger = styled(DropdownMenuPrimitive.SubTrigger, {
 });
 
 const StyledLabel = styled(DropdownMenuPrimitive.Label, {
-  padding: '$8 $12',
+  padding: '$4 $6',
   fontSize: '$xs',
   fontWeight: '$7',
   lineHeight: '$xs',
@@ -129,7 +129,7 @@ const StyledLabel = styled(DropdownMenuPrimitive.Label, {
 const StyledSeparator = styled(DropdownMenuPrimitive.Separator, {
   height: 1,
   backgroundColor: '$neutral100',
-  margin: '$3 0',
+  margin: '$2 0',
 });
 
 const StyledItemIndicator = styled(DropdownMenuPrimitive.ItemIndicator, {

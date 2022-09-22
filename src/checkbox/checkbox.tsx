@@ -68,7 +68,7 @@ const StyledCheckbox = styled(CheckboxPrimitive.Root, {
   },
   '&[data-state="checked"]': {
     '.check-icon': {
-      display: 'inline',
+      display: 'flex',
     },
   },
   variants: {
@@ -100,7 +100,7 @@ const StyledIndicator = styled(CheckboxPrimitive.Indicator, {
 
 const StyledLabelContainer = styled('span', {
   display: 'inline-flex',
-  paddingInlineStart: '$16',
+  paddingInlineStart: '$8',
 });
 
 export interface CheckboxBaseProps {
