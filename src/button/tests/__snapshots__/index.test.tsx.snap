@@ -6,7 +6,7 @@ exports[`Button matches snapshot: primary with icon on left 1`] = `
   data-testid="button"
 >
   <span
-    className="twigs-c-PJLV twigs-c-PJLV-ijxSBfJ-css"
+    className="twigs-c-UazGY twigs-c-UazGY-ijxSBfJ-css"
   >
     <svg
       fill="none"
@@ -35,7 +35,7 @@ exports[`Button matches snapshot: secondary with icon on right 1`] = `
 >
   Secondary Button
   <span
-    className="twigs-c-PJLV twigs-c-PJLV-ieSlpoK-css"
+    className="twigs-c-UazGY twigs-c-UazGY-ieSlpoK-css"
   >
     <svg
       fill="none"
@@ -97,7 +97,7 @@ exports[`Button matches snapshot: text with icon on both sides 1`] = `
   data-testid="button"
 >
   <span
-    className="twigs-c-PJLV twigs-c-PJLV-ijxSBfJ-css"
+    className="twigs-c-UazGY twigs-c-UazGY-ijxSBfJ-css"
   >
     <svg
       fill="none"
@@ -117,7 +117,7 @@ exports[`Button matches snapshot: text with icon on both sides 1`] = `
   </span>
   Text Button
   <span
-    className="twigs-c-PJLV twigs-c-PJLV-ieSlpoK-css"
+    className="twigs-c-UazGY twigs-c-UazGY-ieSlpoK-css"
   >
     <svg
       fill="none"
