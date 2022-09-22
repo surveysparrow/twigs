@@ -17,7 +17,7 @@ const StyledContainer = styled(Box, {
   '& div': {
     width: 10,
     height: 10,
-    marginRight: 8,
+    marginRight: '$4',
     display: 'inline-block',
     backgroundColor: '$white900',
     borderRadius: '100%',
