@@ -33,12 +33,12 @@ import {
   DropdownMenuSubContent,
 } from '../src/dropdown';
 import {
-  StyledTable,
-  StyledTableBody,
-  StyledTableHeader,
-  StyledTableHeaderCell,
-  StyledTableRow,
-  StyledTableRowCell,
+  Table,
+  TableBody,
+  TableHeader,
+  TableHeaderCell,
+  TableRow,
+  TableRowCell,
 } from '../src/table';
 import {
   Dialog, DialogTitle, DialogDescription, DialogClose, DialogTrigger, DialogContent,
@@ -670,45 +670,45 @@ const App = () => {
               </DropdownMenuRadioGroup>
             </DropdownMenuContent>
           </DropdownMenu>
-          <StyledTable {...getTableProps()} css={{ marginTop: '$16' }}>
-            <StyledTableHeader>
+          <Table {...getTableProps()} css={{ marginTop: '$16' }}>
+            <TableHeader>
               {headerGroups.map((headerGroup) => (
-                <StyledTableRow {...headerGroup.getHeaderGroupProps()}>
+                <TableRow {...headerGroup.getHeaderGroupProps()}>
                   {headerGroup.headers.map((column) => (
-                    <StyledTableHeaderCell {...column.getHeaderProps()}>
+                    <TableHeaderCell {...column.getHeaderProps()}>
                       {column.render('Header')}
-                    </StyledTableHeaderCell>
+                    </TableHeaderCell>
                   ))}
-                </StyledTableRow>
+                </TableRow>
               ))}
-            </StyledTableHeader>
-            <StyledTableBody {...getTableBodyProps()}>
+            </TableHeader>
+            <TableBody {...getTableBodyProps()}>
               {rows.map((row) => {
                 prepareRow(row);
                 return (
-                  <StyledTableRow
+                  <TableRow
                     {...row.getRowProps()}
                     css={{ height: '$16' }}
                   >
                     {row.cells.map((cell, i) => {
                       if (i === 0) {
                         return (
-                          <StyledTableRowCell>
+                          <TableRowCell>
                             <Checkbox />
-                          </StyledTableRowCell>
+                          </TableRowCell>
                         );
                       }
                       return (
-                        <StyledTableRowCell {...cell.getCellProps()}>
+                        <TableRowCell {...cell.getCellProps()}>
                           <Text size="sm">{cell.render('Cell')}</Text>
-                        </StyledTableRowCell>
+                        </TableRowCell>
                       );
                     })}
-                  </StyledTableRow>
+                  </TableRow>
                 );
               })}
-            </StyledTableBody>
-          </StyledTable>
+            </TableBody>
+          </Table>
         </Box>
       </Grid>
     </ThemeProvider>
