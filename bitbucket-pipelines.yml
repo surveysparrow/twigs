@@ -36,6 +36,7 @@ pipelines:
               script:
                 - npm install
               #- npm test: Commenting test temporarily, will be added back
+                - npm build
           - step:
               name: Security Scan
               script:
