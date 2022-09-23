@@ -30,19 +30,22 @@ pipelines:
     master:
       - parallel:
           - step:
-              name: Build and Test
+              name: Install and Test
               caches:
                 - node
               script:
                 - npm install
               #- npm test: Commenting test temporarily, will be added back
-                - npm build
           - step:
               name: Security Scan
               script:
                 # Run a security scan for sensitive data.
                 # See more security tools at https://bitbucket.org/product/features/pipelines/integrations?&category=security
                 - pipe: atlassian/git-secrets-scan:0.5.1
+      - step:
+          name: Build library
+          script:
+            - npm run build
       - step:
           name: Deploy to Production
           deployment: Production
