@@ -3,6 +3,7 @@ export * from './box';
 export * from './button';
 export * from './checkbox';
 export * from './dropdown';
+export * from './drawer';
 export * from './dialog';
 export * from './flex';
 export * from './form-helper-text';

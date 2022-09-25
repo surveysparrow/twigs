@@ -10,7 +10,6 @@ const StyledAvatar = styled(AvatarPrimitive.Root, {
   overflow: 'hidden',
   userSelect: 'none',
   borderRadius: '100%',
-  backgroundColor: '$black900',
   variants: {
     size: {
       '3xl': {
@@ -54,6 +53,17 @@ const StyledAvatar = styled(AvatarPrimitive.Root, {
         borderRadius: '$xl',
       },
     },
+    isBordered: {
+      true: {
+        border: '$borderWidths$xl solid $colors$white900',
+      },
+    },
+    isAnonymous: {
+      true: {
+        border: '$borderWidths$sm dashed $colors$neutral500',
+        background: '$neutral50',
+      },
+    },
   },
   defaultVariants: {
     size: 'sm',
@@ -64,7 +74,6 @@ const StyledImage = styled(AvatarPrimitive.Image, {
   width: '100%',
   height: '100%',
   objectFit: 'cover',
-  borderRadius: 'inherit',
 });
 
 const StyledFallback = styled(AvatarPrimitive.Fallback, {
@@ -73,11 +82,11 @@ const StyledFallback = styled(AvatarPrimitive.Fallback, {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  backgroundColor: '$white900',
+  backgroundColor: '$tertiary200',
   color: '$neutral600',
   fontSize: '$md',
   lineHeight: '$xs',
-  fontWeight: '$5',
+  fontWeight: '$7',
 });
 
 export const Avatar = StyledAvatar;
