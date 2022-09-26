@@ -28,24 +28,18 @@ pipelines:
               - node
   branches:
     master:
-      - parallel:
-          - step:
-              name: Build and Test
-              caches:
-                - node
-              script:
-                - npm install
-              #- npm test: Commenting test temporarily, will be added back
-          - step:
-              name: Security Scan
-              script:
-                # Run a security scan for sensitive data.
-                # See more security tools at https://bitbucket.org/product/features/pipelines/integrations?&category=security
-                - pipe: atlassian/git-secrets-scan:0.5.1
       - step:
-          name: Deploy to Production
+          name: Security Scan
+          script:
+            # Run a security scan for sensitive data.
+            # See more security tools at https://bitbucket.org/product/features/pipelines/integrations?&category=security
+            - pipe: atlassian/git-secrets-scan:0.5.1
+      - step:
+          name: Build and deploy
           deployment: Production
           script:
+            - npm install
+            - npm run build
             # Bump versions before publishing
             - npm --no-git-tag-version version --allow-same-version  "$(npm run version --silent)" -m "Upgrade to new version"
             # Publish package
