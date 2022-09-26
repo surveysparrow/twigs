@@ -43,6 +43,9 @@ import {
 import {
   Dialog, DialogTitle, DialogDescription, DialogClose, DialogTrigger, DialogContent,
 } from '../src/dialog';
+import {
+  Drawer, DrawerHeader, DrawerFooter, DrawerBody,
+} from '../src/drawer';
 
 const CloseIcon = () => {
   return (
@@ -169,7 +172,8 @@ const ChevronIcon = () => {
 const App = () => {
   globalStyles();
   const [checkedItems, setCheckedItems] = React.useState([false, false]);
-
+  const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
+  const [isDrawerTwoOpen, setIsDrawerTwoOpen] = React.useState(false);
   const allChecked = checkedItems.every(Boolean);
   const isIndeterminate = checkedItems.some(Boolean) && !allChecked;
 
@@ -247,6 +251,7 @@ const App = () => {
     },
   ];
 
+  const paneButtonRef = React.useRef<HTMLButtonElement>(null);
   const {
     getTableProps, getTableBodyProps, headerGroups, rows, prepareRow,
   } = useTable({
@@ -356,7 +361,7 @@ const App = () => {
               paddingTop: '32px',
             }}
           >
-            <Avatar size="3xl" css={{ marginBottom: '20px' }}>
+            <Avatar size="3xl" css={{ marginBottom: '20px' }} isAnonymous>
               <AvatarImage
                 src="https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80"
                 alt="Colm Tuite"
@@ -375,13 +380,75 @@ const App = () => {
             >
               HR Manager
             </Text>
-            <Button size="sm" variant="default" isIcon icon={<EmailIcon />} />
+            <Button onClick={() => setIsDrawerOpen(true)}>Open Drawer</Button>
+            <Drawer
+              isOpen={isDrawerOpen}
+              onClose={() => setIsDrawerOpen(false)}
+            >
+              <DrawerHeader>
+                <Heading size="h4">Drawer Header</Heading>
+              </DrawerHeader>
+              <DrawerBody>
+                <Flex css={{ gap: '$4' }}>
+                  <Input size="lg" />
+                  <Input size="lg" />
+                </Flex>
+                <Flex css={{ gap: '$4', marginTop: '$12' }}>
+                  <Input size="lg" />
+                  <Input size="lg" />
+                </Flex>
+                <Flex css={{ gap: '$4', marginTop: '$12' }}>
+                  <Input size="lg" />
+                  <Input size="lg" />
+                </Flex>
+                <Flex css={{ gap: '$4', marginTop: '$12' }}>
+                  <Input size="lg" />
+                  <Input size="lg" />
+                </Flex>
+                <Flex css={{ gap: '$4', marginTop: '$12' }}>
+                  <Input size="lg" />
+                  <Input size="lg" />
+                </Flex>
+                <Flex css={{ gap: '$4', marginTop: '$12' }}>
+                  <Input size="lg" />
+                  <Input size="lg" />
+                </Flex>
+                <Flex css={{ gap: '$4', marginTop: '$12' }}>
+                  <Input size="lg" />
+                  <Input size="lg" />
+                </Flex>
+                <Flex css={{ gap: '$4', marginTop: '$12' }}>
+                  <Input size="lg" />
+                  <Input size="lg" />
+                </Flex>
+              </DrawerBody>
+              <DrawerFooter>
+                <Heading size="h4">Drawer Footer</Heading>
+              </DrawerFooter>
+            </Drawer>
             <Button
-              variant="primary"
-              isIcon
-              icon={<EmailIcon />}
-            />
-            <Button variant="default" isIcon isTransparent icon={<KeyIcon />} />
+              ref={paneButtonRef}
+              onClick={() => setIsDrawerTwoOpen(true)}
+              css={{ marginTop: '$8' }}
+            >
+              Open Drawer
+            </Button>
+            <Drawer
+              isOpen={isDrawerTwoOpen}
+              placement="top"
+              onClose={() => setIsDrawerTwoOpen(false)}
+              finalFocusRef={paneButtonRef}
+            >
+              <DrawerHeader>
+                <Heading size="h4">Drawer Title</Heading>
+              </DrawerHeader>
+              <DrawerFooter>
+                <Heading size="h4">Drawer Title</Heading>
+              </DrawerFooter>
+            </Drawer>
+            {/* <Button size="sm" variant="default" isIcon icon={<EmailIcon />} />
+            <Button variant="primary" isIcon icon={<EmailIcon />} />
+            <Button variant="default" isIcon isTransparent icon={<KeyIcon />} /> */}
             <Button
               size="2xl"
               isTransparent
@@ -606,11 +673,7 @@ const App = () => {
               </Dialog>
             </TabsContent>
             <TabsContent css={{ p: '$16' }} value="tab3">
-              <Checkbox
-                defaultChecked
-                size="md"
-                id="c2"
-              />
+              <Checkbox defaultChecked size="md" id="c2" />
             </TabsContent>
           </Tabs>
           <DropdownMenu>
@@ -686,10 +749,7 @@ const App = () => {
               {rows.map((row) => {
                 prepareRow(row);
                 return (
-                  <Tr
-                    {...row.getRowProps()}
-                    css={{ height: '$16' }}
-                  >
+                  <Tr {...row.getRowProps()} css={{ height: '$16' }}>
                     {row.cells.map((cell, i) => {
                       if (i === 0) {
                         return (

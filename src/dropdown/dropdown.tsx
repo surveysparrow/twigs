@@ -1,6 +1,15 @@
-import React, { ReactNode, ComponentProps } from 'react';
+import React, { ReactNode, ComponentProps, ReactElement } from 'react';
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
+import { Flex } from '../flex';
 import { styled, keyframes } from '../../stitches.config';
+
+const ChevronRightIcon = () => {
+  return (
+    <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M1.33325 8.33332L4.66658 4.99999L1.33325 1.66666" stroke="#6A6A6A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+};
 
 const slideUpAndFade = keyframes({
   '0%': { opacity: 0, transform: 'translateY(2px)' },
@@ -52,7 +61,7 @@ const StyledArrow = styled(DropdownMenuPrimitive.Arrow, {
 
 type ContentProps = ComponentProps<typeof StyledContent> & {
   children: ReactNode,
-  showArrow: boolean
+  showArrow?: boolean
 }
 
 const Content = ({ children, showArrow, ...props }: ContentProps) => {
@@ -117,6 +126,30 @@ const StyledSubTrigger = styled(DropdownMenuPrimitive.SubTrigger, {
   ...itemStyles,
 });
 
+const StyledSubTriggerIcon = styled(Flex, {
+  alignItems: 'center',
+  marginLeft: 'auto',
+  paddingInlineStart: '$10',
+  color: 'CurrentColor',
+  '[data-disabled] &': { color: 'CurrentColor' },
+});
+
+type SubTriggerProps = ComponentProps<typeof StyledSubTrigger> & {
+  children: ReactNode;
+  icon?: ReactElement;
+};
+
+const SubTrigger = ({ children, icon }: SubTriggerProps) => {
+  return (
+    <StyledSubTrigger>
+      {children}
+      <StyledSubTriggerIcon>
+        {icon ? React.cloneElement(icon) : <ChevronRightIcon />}
+      </StyledSubTriggerIcon>
+    </StyledSubTrigger>
+  );
+};
+
 const StyledLabel = styled(DropdownMenuPrimitive.Label, {
   padding: '$4 $6',
   fontSize: '$xs',
@@ -152,5 +185,5 @@ export const DropdownMenuItemIndicator = StyledItemIndicator;
 export const DropdownMenuLabel = StyledLabel;
 export const DropdownMenuSeparator = StyledSeparator;
 export const DropdownMenuSub = DropdownMenuPrimitive.Sub;
-export const DropdownMenuSubTrigger = StyledSubTrigger;
+export const DropdownMenuSubTrigger = SubTrigger;
 export const DropdownMenuSubContent = SubContent;
