@@ -53,11 +53,6 @@ const StyledAvatar = styled(AvatarPrimitive.Root, {
         borderRadius: '$xl',
       },
     },
-    isBordered: {
-      true: {
-        border: '$borderWidths$xl solid $colors$white900',
-      },
-    },
     isAnonymous: {
       true: {
         border: '$borderWidths$sm dashed $colors$neutral500',
