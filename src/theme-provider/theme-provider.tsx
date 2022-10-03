@@ -1,6 +1,6 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import {
-  theme as stichesTheme, defaultTheme, createTheme,
+  theme as stichesTheme, defaultTheme, createTheme, globalStyles,
 } from '../../stitches.config';
 
 export const ThemeContext = React.createContext<any>(null);
@@ -27,6 +27,10 @@ export const ThemeProvider = ({ theme, children }: ThemeProviderProps) => {
   if (!children) {
     return null;
   }
+
+  useEffect(() => {
+    globalStyles();
+  }, []);
 
   return (
     <ThemeContext.Provider value={customTheme}>

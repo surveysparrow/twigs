@@ -1,3 +1,5 @@
+import { ThemeProvider } from '../src/theme-provider'
+
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {
@@ -7,3 +9,17 @@ export const parameters = {
     },
   },
 }
+
+export const decorators = [
+  (Story) => (
+    <ThemeProvider
+      theme={{
+        fonts: {
+          body: "'DM sans', sans-serif",
+        },
+      }}
+    >
+      <Story />
+    </ThemeProvider>
+  ),
+];
