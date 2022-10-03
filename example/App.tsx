@@ -46,6 +46,8 @@ import {
 import {
   Drawer, DrawerHeader, DrawerFooter, DrawerBody,
 } from '../src/drawer';
+import { Switch, SwitchThumb } from '../src/switch';
+import { RadioGroup, Radio, RadioIndicator } from '../src/radio';
 
 const CloseIcon = () => {
   return (
@@ -369,6 +371,34 @@ const App = () => {
               <AvatarFallback delayMs={600}>CT</AvatarFallback>
             </Avatar>
             <Heading size="h5">Aileen Chow</Heading>
+            <Flex css={{ alignItems: 'center', marginBottom: '$12' }}>
+              <FormLabel htmlFor="s1" css={{ paddingRight: 15 }}>
+                Airplane mode
+              </FormLabel>
+              <Switch defaultChecked id="s1">
+                <SwitchThumb />
+              </Switch>
+            </Flex>
+            <RadioGroup defaultValue="default" aria-label="View density">
+              <Flex css={{ margin: '10px 0', alignItems: 'center' }}>
+                <Radio size="sm" disabled value="default" id="r1">
+                  <RadioIndicator />
+                </Radio>
+                <FormLabel htmlFor="r1">Default</FormLabel>
+              </Flex>
+              <Flex css={{ margin: '10px 0', alignItems: 'center' }}>
+                <Radio size="sm" value="comfortable" id="r2">
+                  <RadioIndicator />
+                </Radio>
+                <FormLabel htmlFor="r2">Comfortable</FormLabel>
+              </Flex>
+              <Flex css={{ margin: '10px 0', alignItems: 'center' }}>
+                <Radio size="sm" value="compact" id="r3">
+                  <RadioIndicator />
+                </Radio>
+                <FormLabel htmlFor="r3">Compact</FormLabel>
+              </Flex>
+            </RadioGroup>
             <Text
               size="sm"
               css={{

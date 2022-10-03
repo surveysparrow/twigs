@@ -13,6 +13,7 @@ export const FormLabel: FunctionComponent<FormLabelProps> = ({
 }: FormLabelProps) => {
   return (
     <Text
+      as="label"
       css={{
         color: '$neutral700', fontWeight: '$4', userSelect: 'none', ...css,
       }}
