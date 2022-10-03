@@ -14,6 +14,11 @@ export default {
 } as ComponentMeta<typeof Input>;
 
 const Template = (args) => (
-  <Input {...args} />
+  <Input
+    {...args}
+    css={{
+      boxSizing: 'border-box',
+    }}
+  />
 );
 export const Default = Template.bind({});

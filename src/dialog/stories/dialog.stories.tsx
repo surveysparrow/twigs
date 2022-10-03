@@ -57,13 +57,27 @@ const Template = (args) => (
         <FormLabel css={{ marginBottom: '$8' }} htmlFor="name">
           Name
         </FormLabel>
-        <Input size="lg" id="name" defaultValue="Pedro Duarte" />
+        <Input
+          size="md"
+          id="name"
+          defaultValue="Pedro Duarte"
+          css={{
+            boxSizing: 'border-box',
+          }}
+        />
       </Box>
       <Box css={{ marginBottom: '$24' }}>
         <FormLabel css={{ marginBottom: '$8' }} htmlFor="username">
           Username
         </FormLabel>
-        <Input size="lg" id="username" defaultValue="@peduarte" />
+        <Input
+          size="md"
+          id="username"
+          defaultValue="@peduarte"
+          css={{
+            boxSizing: 'border-box',
+          }}
+        />
       </Box>
       <Flex css={{ marginTop: 25, justifyContent: 'flex-end' }}>
         <DialogClose asChild>
