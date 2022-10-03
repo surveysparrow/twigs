@@ -5,8 +5,6 @@ import { styled } from '../../stitches.config';
 const StyledSwitch = styled(SwitchPrimitive.Root, {
   all: 'unset',
   boxSizing: 'border-box',
-  width: '$10',
-  height: '$5',
   backgroundColor: '$neutral400',
   borderRadius: '$pill',
   position: 'relative',
@@ -22,6 +20,17 @@ const StyledSwitch = styled(SwitchPrimitive.Root, {
     cursor: 'not-allowed',
   },
   '&[data-state="checked"]': { backgroundColor: '$secondary700' },
+  variants: {
+    size: {
+      sm: {
+        width: '$10',
+        height: '$5',
+      },
+    },
+  },
+  defaultVariants: {
+    size: 'sm',
+  },
 });
 
 const StyledThumb = styled(SwitchPrimitive.Thumb, {
