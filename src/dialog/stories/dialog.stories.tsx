@@ -53,7 +53,7 @@ const Template = (args) => (
       >
         Make changes to your profile here. Click save when done.
       </DialogDescription>
-      <Box css={{ marginBottom: '$24' }}>
+      <Box css={{ marginBottom: '$12' }}>
         <FormLabel css={{ marginBottom: '$8' }} htmlFor="name">
           Name
         </FormLabel>
@@ -61,12 +61,9 @@ const Template = (args) => (
           size="md"
           id="name"
           defaultValue="Pedro Duarte"
-          css={{
-            boxSizing: 'border-box',
-          }}
         />
       </Box>
-      <Box css={{ marginBottom: '$24' }}>
+      <Box css={{ marginBottom: '$12' }}>
         <FormLabel css={{ marginBottom: '$8' }} htmlFor="username">
           Username
         </FormLabel>
@@ -74,9 +71,6 @@ const Template = (args) => (
           size="md"
           id="username"
           defaultValue="@peduarte"
-          css={{
-            boxSizing: 'border-box',
-          }}
         />
       </Box>
       <Flex css={{ marginTop: 25, justifyContent: 'flex-end' }}>
@@ -87,7 +81,7 @@ const Template = (args) => (
         </DialogClose>
       </Flex>
       <Box
-        css={{ position: 'absolute', top: '10px', right: '10px' }}
+        css={{ position: 'absolute', top: '$6', right: '$6' }}
       >
         <DialogClose asChild>
           <Button

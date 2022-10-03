@@ -25,7 +25,6 @@ const Template = (args) => (
   <DropdownMenu {...args}>
     <DropdownMenuTrigger asChild>
       <Button
-        css={{ marginTop: '$8' }}
         size="lg"
         variant="primary"
         aria-label="Customise options"

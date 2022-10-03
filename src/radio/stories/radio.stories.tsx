@@ -20,7 +20,7 @@ export default {
 
 const Template = (args) => (
   <RadioGroup defaultValue="default" aria-label="View density" {...args}>
-    <Flex css={{ margin: '10px 0', alignItems: 'center' }}>
+    <Flex css={{ alignItems: 'center' }}>
       <Radio size="sm" value="default" id="r1" {...args}>
         <RadioIndicator />
       </Radio>

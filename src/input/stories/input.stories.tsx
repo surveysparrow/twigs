@@ -16,9 +16,6 @@ export default {
 const Template = (args) => (
   <Input
     {...args}
-    css={{
-      boxSizing: 'border-box',
-    }}
   />
 );
 export const Default = Template.bind({});

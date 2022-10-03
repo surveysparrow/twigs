@@ -46,7 +46,6 @@ export const Default = () => {
       <Button
         ref={paneButtonRef}
         onClick={() => setIsDrawerOpen(true)}
-        css={{ marginTop: '$8' }}
       >
         Open Drawer
       </Button>
