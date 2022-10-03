@@ -10,5 +10,5 @@
     "outDir": "dist",
     "jsx": "react-jsx"
   },
-  "exclude": ["example", "src/**/tests", "node_modules"]
+  "exclude": ["src/**/tests", "node_modules"]
 }
