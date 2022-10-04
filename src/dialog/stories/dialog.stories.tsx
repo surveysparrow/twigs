@@ -54,7 +54,7 @@ const Template = (args) => (
         >
           Make changes to your profile here. Click save when done.
         </DialogDescription>
-        <Box css={{ marginBottom: '$24' }}>
+        <Box css={{ marginBottom: '$12' }}>
           <FormLabel css={{ marginBottom: '$8' }}>
             Name
           </FormLabel>
@@ -67,7 +67,7 @@ const Template = (args) => (
             }}
           />
         </Box>
-        <Box css={{ marginBottom: '$24' }}>
+        <Box css={{ marginBottom: '$12' }}>
           <FormLabel css={{ marginBottom: '$8' }}>
             Username
           </FormLabel>
