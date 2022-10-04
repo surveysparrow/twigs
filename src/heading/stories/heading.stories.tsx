@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentMeta } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Heading } from '../heading';
 
 export default {
@@ -17,7 +17,7 @@ export default {
   },
 } as ComponentMeta<typeof Heading>;
 
-const Template = (args) => (
+const Template: ComponentStory<typeof Heading> = (args) => (
   <Heading {...args}> Accept </Heading>
 );
 export const Default = Template.bind({});

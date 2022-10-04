@@ -24,13 +24,13 @@ const Template = (args) => (
       <Radio size="sm" value="default" id="r1" {...args}>
         <RadioIndicator />
       </Radio>
-      <FormLabel htmlFor="r1" css={{ marginLeft: '6px' }}>Default</FormLabel>
+      <FormLabel css={{ marginLeft: '6px' }}>Default</FormLabel>
     </Flex>
     <Flex css={{ margin: '10px 0', alignItems: 'center' }}>
       <Radio size="sm" value="comfortable" id="r2" {...args}>
         <RadioIndicator />
       </Radio>
-      <FormLabel htmlFor="r2" css={{ marginLeft: '6px' }}>Comfortable</FormLabel>
+      <FormLabel css={{ marginLeft: '6px' }}>Comfortable</FormLabel>
     </Flex>
   </RadioGroup>
 );

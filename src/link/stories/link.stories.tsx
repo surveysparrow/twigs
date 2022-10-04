@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentMeta } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Link } from '../link';
 
 export default {
@@ -13,7 +13,7 @@ export default {
   },
 } as ComponentMeta<typeof Link>;
 
-const Template = (args) => (
+const Template: ComponentStory<typeof Link> = (args) => (
   <Link {...args}> Click here </Link>
 );
 export const Default = Template.bind({});

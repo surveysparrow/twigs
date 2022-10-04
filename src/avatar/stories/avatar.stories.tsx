@@ -1,10 +1,11 @@
 import React from 'react';
-import { ComponentMeta } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Avatar, AvatarImage, AvatarFallback } from '../avatar';
 
 export default {
   component: Avatar,
   title: 'Avatar',
+  subComponents: { AvatarImage, AvatarFallback },
   argTypes: {
     size: {
       control: 'select',
@@ -21,12 +22,11 @@ export default {
   },
 } as ComponentMeta<typeof Avatar>;
 
-const Template = (args) => (
+const Template: ComponentStory<typeof Avatar> = (args) => (
   <Avatar {...args}>
-    <AvatarImage
-      {...args}
-    />
+    <AvatarImage />
     <AvatarFallback delayMs={600}>CT</AvatarFallback>
   </Avatar>
 );
 export const Default = Template.bind({});
+Default.args = { size: '3xl' };

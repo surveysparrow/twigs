@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentMeta } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Checkbox } from '../checkbox';
 
 export default {
@@ -19,7 +19,8 @@ export default {
   },
 } as ComponentMeta<typeof Checkbox>;
 
-const Template = (args) => (
+const Template: ComponentStory<typeof Checkbox> = (args) => (
   <Checkbox {...args}> Accept </Checkbox>
 );
 export const Default = Template.bind({});
+Default.args = { size: 'md' };

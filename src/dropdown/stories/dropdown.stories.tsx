@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentMeta } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -21,7 +21,7 @@ export default {
   title: 'Dropdown',
 } as ComponentMeta<typeof DropdownMenu>;
 
-const Template = (args) => (
+const Template: ComponentStory<typeof DropdownMenu> = (args) => (
   <DropdownMenu {...args}>
     <DropdownMenuTrigger asChild>
       <Button
