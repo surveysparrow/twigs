@@ -14,6 +14,8 @@ export * from './heading';
 export * from './input';
 export * from './link';
 export * from './loader';
+export * from './radio';
+export * from './switch';
 export * from './tabs';
 export * from './table';
 export * from './text';
