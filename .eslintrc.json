@@ -21,6 +21,7 @@
         "@typescript-eslint"
     ],
     "rules": {
+        "comma-dangle": ["error", "never"],
         "import/prefer-default-export": "off",
         "react/function-component-definition": [
             2,
