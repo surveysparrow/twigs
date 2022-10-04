@@ -74,16 +74,6 @@ const StyledChip = styled(Box, {
         '& .icon': {
           display: 'none'
         }
-      },
-      '2xs': {
-        height: '$3',
-        padding: '0 $2',
-        fontSize: '$xxs',
-        fontWeight: '$5',
-        lineHeight: '$xxs',
-        '& .icon': {
-          display: 'none'
-        }
       }
     },
     color: {
@@ -118,7 +108,7 @@ export const Chip = ({
   color, showCloseButton, children, handleClose, ...props
 }: ChipProps) => {
   return (
-    <StyledChip tabIndex={0} color={color} {...props}>
+    <StyledChip data-testid="chip" tabIndex={0} color={color} {...props}>
       {children}
       {showCloseButton && (
       <Button

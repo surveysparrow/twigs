@@ -3,6 +3,7 @@ import 'jest';
 import '@testing-library/jest-dom';
 import { createRoot } from 'react-dom/client';
 import { act } from 'react-test-renderer';
+import { render } from '@testing-library/react';
 import { Chip } from '../index';
 
 describe('Chip', () => {
@@ -13,5 +14,16 @@ describe('Chip', () => {
       root.render(<Chip color="info" size="md">Chip Content</Chip>);
       root.unmount();
     });
+  });
+
+  it('renders button correctly', () => {
+    const { getByTestId } = render(
+      <Chip color="info" size="md" showCloseButton>
+        Chip with close button
+      </Chip>
+    );
+    const button = getByTestId('button');
+    const chip = getByTestId('chip');
+    expect(chip).toContainElement(button);
   });
 });
