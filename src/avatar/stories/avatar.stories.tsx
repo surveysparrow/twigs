@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { ComponentMeta } from '@storybook/react';
 import { Avatar, AvatarImage, AvatarFallback } from '../avatar';
 
 export default {
@@ -22,11 +22,10 @@ export default {
   },
 } as ComponentMeta<typeof Avatar>;
 
-const Template: ComponentStory<typeof Avatar> = (args) => (
+const Template = (args) => (
   <Avatar {...args}>
-    <AvatarImage />
+    <AvatarImage {...args} />
     <AvatarFallback delayMs={600}>CT</AvatarFallback>
   </Avatar>
 );
 export const Default = Template.bind({});
-Default.args = { size: '3xl' };

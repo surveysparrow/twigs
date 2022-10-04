@@ -5,6 +5,10 @@ import {
 } from '../drawer';
 import { Button } from '../../button';
 import { Heading } from '../../heading';
+import { Input } from '../../input';
+import { Flex } from '../../flex';
+import { FormLabel } from '../../form-label';
+import { Box } from '../../box';
 
 export default {
   component: Drawer,
@@ -34,13 +38,26 @@ export const Default = () => {
         onClose={() => setIsDrawerOpen(false)}
       >
         <DrawerHeader>
-          <Heading size="h4">Drawer Header</Heading>
+          <Heading size="h4">Edit Profile</Heading>
         </DrawerHeader>
         <DrawerBody>
-          <Heading size="h4">Drawer Body</Heading>
+          <Flex css={{ flexDirection: 'column', gap: '18px' }}>
+            <Box>
+              <FormLabel> First name </FormLabel>
+              <Input size="xl" css={{ mt: 4 }} />
+            </Box>
+
+            <Box>
+              <FormLabel> Email address </FormLabel>
+              <Input size="xl" css={{ mt: 4 }} />
+            </Box>
+          </Flex>
         </DrawerBody>
         <DrawerFooter>
-          <Heading size="h4">Drawer Footer</Heading>
+          <Flex css={{ width: '100%', justifyContent: 'end', gap: '10px' }}>
+            <Button size="xl" variant="default"> Cancel </Button>
+            <Button size="xl"> Save </Button>
+          </Flex>
         </DrawerFooter>
       </Drawer>
       <Button
