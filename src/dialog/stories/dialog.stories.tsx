@@ -47,51 +47,59 @@ const Template = (args) => (
       <Button size="lg">Edit profile</Button>
     </DialogTrigger>
     <DialogContent>
-      <DialogTitle>Edit profile</DialogTitle>
-      <DialogDescription
-        css={{ color: '$neutral600', fontSize: '$sm' }}
-      >
-        Make changes to your profile here. Click save when done.
-      </DialogDescription>
-      <Box css={{ marginBottom: '$12' }}>
-        <FormLabel css={{ marginBottom: '$8' }} htmlFor="name">
-          Name
-        </FormLabel>
-        <Input
-          size="md"
-          id="name"
-          defaultValue="Pedro Duarte"
-        />
-      </Box>
-      <Box css={{ marginBottom: '$12' }}>
-        <FormLabel css={{ marginBottom: '$8' }} htmlFor="username">
-          Username
-        </FormLabel>
-        <Input
-          size="md"
-          id="username"
-          defaultValue="@peduarte"
-        />
-      </Box>
-      <Flex css={{ marginTop: 25, justifyContent: 'flex-end' }}>
-        <DialogClose asChild>
-          <Button size="lg" variant="default">
-            Save changes
-          </Button>
-        </DialogClose>
-      </Flex>
-      <Box
-        css={{ position: 'absolute', top: '$6', right: '$6' }}
-      >
-        <DialogClose asChild>
-          <Button
-            isIcon
-            icon={<CloseIcon />}
-            isTransparent
-            aria-label="Close"
+      <>
+        <DialogTitle>Edit profile</DialogTitle>
+        <DialogDescription
+          css={{ color: '$neutral600', fontSize: '$sm' }}
+        >
+          Make changes to your profile here. Click save when done.
+        </DialogDescription>
+        <Box css={{ marginBottom: '$24' }}>
+          <FormLabel css={{ marginBottom: '$8' }}>
+            Name
+          </FormLabel>
+          <Input
+            size="md"
+            id="name"
+            defaultValue="Pedro Duarte"
+            css={{
+              boxSizing: 'border-box',
+            }}
           />
-        </DialogClose>
-      </Box>
+        </Box>
+        <Box css={{ marginBottom: '$24' }}>
+          <FormLabel css={{ marginBottom: '$8' }}>
+            Username
+          </FormLabel>
+          <Input
+            size="md"
+            id="username"
+            defaultValue="@peduarte"
+            css={{
+              boxSizing: 'border-box',
+            }}
+          />
+        </Box>
+        <Flex css={{ marginTop: 25, justifyContent: 'flex-end' }}>
+          <DialogClose asChild>
+            <Button size="lg" variant="default">
+              Save changes
+            </Button>
+          </DialogClose>
+        </Flex>
+        <Box
+          css={{ position: 'absolute', top: '10px', right: '10px' }}
+        >
+          <DialogClose asChild>
+            <Button
+              isIcon
+              icon={<CloseIcon />}
+              isTransparent
+              aria-label="Close"
+            />
+          </DialogClose>
+        </Box>
+      </>
     </DialogContent>
   </Dialog>
 );

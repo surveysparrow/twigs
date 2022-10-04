@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentMeta } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Text } from '../text';
 
 export default {
@@ -18,7 +18,7 @@ export default {
   },
 } as ComponentMeta<typeof Text>;
 
-const Template = (args) => (
+const Template: ComponentStory<typeof Text> = (args) => (
   <Text {...args}>
     Sample text
   </Text>

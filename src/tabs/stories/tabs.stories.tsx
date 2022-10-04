@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentMeta } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import {
   Tabs, TabsContent, TabsList, TabsTrigger,
 } from '../tabs';
@@ -10,7 +10,7 @@ export default {
   argTypes: {},
 } as ComponentMeta<typeof Tabs>;
 
-const Template = (args) => (
+const Template: ComponentStory<typeof Tabs> = (args) => (
   <Tabs defaultValue="tab1" {...args}>
     <TabsList
       aria-label="tabs example"
