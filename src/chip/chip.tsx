@@ -40,7 +40,7 @@ const StyledChip = styled(Box, {
   '&:focus-visible': {
     $$shadowColor: '$colors$system300',
     boxShadow:
-      'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px',
+      'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
   },
   variants: {
     size: {
@@ -49,21 +49,21 @@ const StyledChip = styled(Box, {
         padding: '$3 $4',
         fontSize: '$sm',
         fontWeight: '$4',
-        lineHeight: '$sm',
+        lineHeight: '$sm'
       },
       md: {
         height: '$6',
         padding: '$2 $4',
         fontSize: '$xs',
         fontWeight: '$4',
-        lineHeight: '$xs',
+        lineHeight: '$xs'
       },
       sm: {
         height: '$5',
         padding: '$1 $3',
         fontSize: '$xs',
         fontWeight: '$4',
-        lineHeight: '$xs',
+        lineHeight: '$xs'
       },
       xs: {
         height: '$4',
@@ -72,8 +72,8 @@ const StyledChip = styled(Box, {
         fontWeight: '$5',
         lineHeight: '$xxs',
         '& .icon': {
-          display: 'none',
-        },
+          display: 'none'
+        }
       },
       '2xs': {
         height: '$3',
@@ -82,63 +82,28 @@ const StyledChip = styled(Box, {
         fontWeight: '$5',
         lineHeight: '$xxs',
         '& .icon': {
-          display: 'none',
-        },
-      },
+          display: 'none'
+        }
+      }
     },
     color: {
-      white: {
-        background: '$white900',
-        color: '$neutral900',
-        border: '$borderWidths$xs solid $colors$black300',
-      },
-      neutral: {
-        background: '$black50',
-        color: '$neutral900',
-        border: '$borderWidths$xs solid $colors$black100',
-      },
-      black: {
-        background: '$black800',
+      primary: {
+        background: '$primary',
         color: '$white900',
-        border: '$borderWidths$xs solid $colors$black300',
-      },
-      negative: {
-        background: '$negative600',
-        color: '$white900',
-        border: '$borderWidths$xs solid $colors$black300',
+        border: '$borderWidths$xs solid $colors$black300'
       },
       info: {
         background: '$info500',
         color: '$white900',
-        border: '$borderWidths$xs solid $colors$black300',
-      },
-      positive: {
-        background: '$positive500',
-        color: '$white900',
-        border: '$borderWidths$xs solid $colors$black300',
-      },
-      attention: {
-        background: '$attention500',
-        color: '$white900',
-        border: '$borderWidths$xs solid $colors$black300',
-      },
-      highlight: {
-        background: '$highlight600',
-        color: '$white900',
-        border: '$borderWidths$xs solid $colors$black300',
-      },
-      system: {
-        background: '$system600',
-        color: '$white900',
-        border: '$borderWidths$xs solid $colors$black300',
-      },
+        border: '$borderWidths$xs solid $colors$black300'
+      }
     },
     isRounded: {
       true: {
-        borderRadius: '$pill',
-      },
-    },
-  },
+        borderRadius: '$pill'
+      }
+    }
+  }
 });
 
 export interface ChipBaseProps {
@@ -156,40 +121,26 @@ export const Chip = ({
     <StyledChip tabIndex={0} color={color} {...props}>
       {children}
       {showCloseButton && (
-        <>
-          {color === 'white' || color === 'neutral' ? (
-            <Button
-              className="icon"
-              variant="default"
-              size="xxs"
-              isIcon
-              icon={<CloseIcon />}
-              css={{ borderRadius: '$round', marginInlineStart: '$2' }}
-              {...(handleClose && { onClick: handleClose })}
-            />
-          ) : (
-            <Button
-              className="icon"
-              size="xxs"
-              isTransparent
-              isIcon
-              icon={<CloseIcon />}
-              css={{
-                color: '$white900',
-                background: '$white200',
-                borderRadius: '$round',
-                marginInlineStart: '$2',
-                '&:hover, &:focus': {
-                  background: '$white300',
-                },
-                '&:active': {
-                  background: '$white200',
-                },
-              }}
-              {...(handleClose && { onClick: handleClose })}
-            />
-          )}
-        </>
+      <Button
+        className="icon"
+        size="xxs"
+        isTransparent
+        isIcon
+        icon={<CloseIcon />}
+        css={{
+          color: '$white900',
+          background: '$white200',
+          borderRadius: '$round',
+          marginInlineStart: '$2',
+          '&:hover, &:focus': {
+            background: '$white300'
+          },
+          '&:active': {
+            background: '$white200'
+          }
+        }}
+        {...(handleClose && { onClick: handleClose })}
+      />
       )}
     </StyledChip>
   );
