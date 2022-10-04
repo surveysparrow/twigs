@@ -16,7 +16,7 @@ describe('Chip', () => {
     });
   });
 
-  it('renders button correctly', () => {
+  it('renders close button based on prop', () => {
     const { getByTestId } = render(
       <Chip color="info" size="md" showCloseButton>
         Chip with close button
