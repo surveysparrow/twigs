@@ -44,7 +44,6 @@ const HorizontalLineIcon = () => {
 };
 
 const StyledCheckbox = styled(CheckboxPrimitive.Root, {
-  all: 'unset',
   backgroundColor: '$white900',
   borderRadius: '$sm',
   display: 'flex',
@@ -54,6 +53,7 @@ const StyledCheckbox = styled(CheckboxPrimitive.Root, {
   transition: 'all $transitions$2',
   '&:hover': { border: '$borderWidths$xs solid $neutral700' },
   '&:focus-visible': {
+    outline: 'none',
     $$shadowColor: '$colors$system300',
     border: '$borderWidths$xs solid $neutral700',
     boxShadow:

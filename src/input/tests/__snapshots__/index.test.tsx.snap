@@ -6,7 +6,7 @@ exports[`Input matches snapshot: primary with icon on left 1`] = `
   data-testid="box"
 >
   <div
-    className="twigs-c-PJLV twigs-c-jtoFuQ twigs-c-jtoFuQ-gRAykL-size-md twigs-c-jtoFuQ-igKkDnE-css"
+    className="twigs-c-PJLV twigs-c-fUPSfk twigs-c-fUPSfk-lbCXaN-size-md twigs-c-fUPSfk-ikCSDKs-css"
     data-testid="box"
   >
     <svg
@@ -42,7 +42,7 @@ exports[`Input matches snapshot: secondary with icon on right 1`] = `
     data-testid="input"
   />
   <div
-    className="twigs-c-PJLV twigs-c-jtoFuQ twigs-c-jtoFuQ-gRAykL-size-md twigs-c-jtoFuQ-ihNJuUr-css"
+    className="twigs-c-PJLV twigs-c-fUPSfk twigs-c-fUPSfk-lbCXaN-size-md twigs-c-fUPSfk-ikchaXv-css"
     data-testid="box"
   >
     <svg
@@ -70,7 +70,7 @@ exports[`Input matches snapshot: text with icon on both sides 1`] = `
   data-testid="box"
 >
   <div
-    className="twigs-c-PJLV twigs-c-jtoFuQ twigs-c-jtoFuQ-gRAykL-size-md twigs-c-jtoFuQ-igKkDnE-css"
+    className="twigs-c-PJLV twigs-c-fUPSfk twigs-c-fUPSfk-lbCXaN-size-md twigs-c-fUPSfk-ikCSDKs-css"
     data-testid="box"
   >
     <svg
@@ -94,7 +94,7 @@ exports[`Input matches snapshot: text with icon on both sides 1`] = `
     data-testid="input"
   />
   <div
-    className="twigs-c-PJLV twigs-c-jtoFuQ twigs-c-jtoFuQ-gRAykL-size-md twigs-c-jtoFuQ-ihNJuUr-css"
+    className="twigs-c-PJLV twigs-c-fUPSfk twigs-c-fUPSfk-lbCXaN-size-md twigs-c-fUPSfk-ikchaXv-css"
     data-testid="box"
   >
     <svg

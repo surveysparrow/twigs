@@ -78,8 +78,8 @@ export type InputProps = InputBaseProps & ComponentProps<typeof StyledInput> &
 
 const IconContainer = styled(Box, {
   position: 'absolute',
-  top: '0',
-  height: '100%',
+  top: '50%',
+  transform: 'translateY(-50%)',
   color: '$neutral800',
   display: 'flex',
   alignItems: 'center',
@@ -89,21 +89,24 @@ const IconContainer = styled(Box, {
   variants: {
     size: {
       xl: {
-        width: '$11',
+        width: '$6',
+        height: '$6',
         '& svg': {
           width: 18,
           height: 18,
         },
       },
       lg: {
-        width: '$9',
+        width: '$6',
+        height: '$6',
         '& svg': {
           width: 18,
           height: 18,
         },
       },
       md: {
-        width: '$7',
+        width: '$4',
+        height: '$4',
         '& svg': {
           width: '$4',
           height: '$4',
@@ -130,30 +133,42 @@ export const Input: FunctionComponent<InputProps> = ({
   }
   if (iconLeft || iconRight) {
     return (
-      <Box css={{
-        display: 'flex', alignItems: 'center', position: 'relative', ...css,
-      }}
+      <Box
+        css={{
+          display: 'flex',
+          alignItems: 'center',
+          position: 'relative',
+          ...css,
+        }}
       >
         {iconLeft && (
-        <IconContainer
-          size={size}
-          css={{
-            left: '0',
-          }}
-        >
-          {React.cloneElement(iconLeft)}
-        </IconContainer>
+          <IconContainer
+            size={size}
+            css={{
+              left: size === 'md' ? '$4' : '$6',
+            }}
+          >
+            {React.cloneElement(iconLeft)}
+          </IconContainer>
         )}
-        <StyledInput size={size} data-testid="input" css={{ ...(iconLeft && { paddingInlineStart: inputPaddingValue }), ...(iconRight && { paddingInlineEnd: inputPaddingValue }) }} {...rest} />
-        {iconRight && (
-        <IconContainer
+        <StyledInput
           size={size}
+          data-testid="input"
           css={{
-            right: '0',
+            ...(iconLeft && { paddingInlineStart: inputPaddingValue }),
+            ...(iconRight && { paddingInlineEnd: inputPaddingValue }),
           }}
-        >
-          {React.cloneElement(iconRight)}
-        </IconContainer>
+          {...rest}
+        />
+        {iconRight && (
+          <IconContainer
+            size={size}
+            css={{
+              right: size === 'md' ? '$4' : '$6',
+            }}
+          >
+            {React.cloneElement(iconRight)}
+          </IconContainer>
         )}
       </Box>
     );
