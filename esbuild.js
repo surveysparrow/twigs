@@ -10,5 +10,6 @@ esbuild
     splitting: true,
     format: 'esm',
     target: ['esnext'],
+    drop: ['console']
   })
   .catch(() => process.exit(1));
