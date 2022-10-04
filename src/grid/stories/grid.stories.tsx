@@ -8,8 +8,7 @@ export default {
   title: 'Grid',
   argTypes: {
     gap: {
-      control: 'text',
-      defaultValue: '20px',
+      defaultValue: [20, 20],
     },
   },
 } as ComponentMeta<typeof Grid>;
