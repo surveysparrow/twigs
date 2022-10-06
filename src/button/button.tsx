@@ -363,7 +363,6 @@ export interface ButtonBaseProps {
   iconLeft?: ReactElement;
   iconRight?: ReactElement;
   icon?: ReactElement;
-  onClick?: () => void;
 }
 
 type ButtonProps = ButtonBaseProps &

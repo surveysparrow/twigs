@@ -1,5 +1,6 @@
 import React, { FunctionComponent, ReactNode } from 'react';
 import type * as Stitches from '@stitches/react';
+import { config } from '../../stitches.config';
 import { Box, BoxProps } from '../box';
 
 export interface GridBaseProps extends BoxProps {
@@ -12,7 +13,7 @@ export interface GridBaseProps extends BoxProps {
   children?: ReactNode;
 }
 
-type GridProps = GridBaseProps & { css?: Stitches.CSS };
+type GridProps = GridBaseProps & { css?: Stitches.CSS<typeof config> };
 
 const widthToColumns = (width: GridProps['width'], repeat: 'fit' | 'fill') => `repeat(auto-${repeat}, minmax(${width}px, 1fr))`;
 
