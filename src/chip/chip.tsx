@@ -97,40 +97,40 @@ const StyledChip = styled(Box, {
 });
 
 export interface ChipBaseProps {
-  showCloseButton?: boolean;
+  closable?: boolean;
   children?: ReactNode;
-  handleClose?: () => void
+  onClose?: () => void
 }
 
 export type ChipProps = ChipBaseProps & ComponentProps<typeof StyledChip> & BoxProps
 
 export const Chip = ({
-  color, showCloseButton, children, handleClose, ...props
+  color, closable, children, onClose, ...props
 }: ChipProps) => {
   return (
     <StyledChip data-testid="chip" tabIndex={0} color={color} {...props}>
       {children}
-      {showCloseButton && (
-      <Button
-        className="icon"
-        size="xxs"
-        isTransparent
-        isIcon
-        icon={<CloseIcon />}
-        css={{
-          color: '$white900',
-          background: '$white200',
-          borderRadius: '$round',
-          marginInlineStart: '$2',
-          '&:hover, &:focus': {
-            background: '$white300'
-          },
-          '&:active': {
-            background: '$white200'
-          }
-        }}
-        {...(handleClose && { onClick: handleClose })}
-      />
+      {closable && (
+        <Button
+          className="icon"
+          size="xxs"
+          isTransparent
+          isIcon
+          icon={<CloseIcon />}
+          css={{
+            color: '$white900',
+            background: '$white200',
+            borderRadius: '$round',
+            marginInlineStart: '$2',
+            '&:hover, &:focus': {
+              background: '$white300'
+            },
+            '&:active': {
+              background: '$white200'
+            }
+          }}
+          {...(onClose && { onClick: onClose })}
+        />
       )}
     </StyledChip>
   );
