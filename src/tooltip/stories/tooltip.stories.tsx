@@ -36,6 +36,7 @@ const Template: ComponentStory<typeof Tooltip> = (args) => (
       }}
     >
       <Tooltip
+        open
         side="top"
         align="end"
         {...args}

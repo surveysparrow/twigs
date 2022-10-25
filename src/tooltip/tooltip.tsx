@@ -78,7 +78,7 @@ export const Tooltip = ({
       <TooltipPrimitive.Portal>
         <StyledContent side={side} align={align} {...props}>
           {content}
-          <StyledArrow width={20} height={12} />
+          <StyledArrow css={{ width: '$5', height: '$3' }} />
         </StyledContent>
       </TooltipPrimitive.Portal>
     </TooltipPrimitive.Root>
