@@ -13,7 +13,7 @@ export default {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['success', 'error', 'warning', 'info'],
+      options: ['default', 'success', 'error', 'warning', 'info'],
       defaultValue: 'success'
     }
   }
@@ -30,6 +30,19 @@ const Template: ComponentStory<typeof Toast> = (args) => {
   return (
     <ToastProvider position="bottom-center">
       <Flex css={{ gap: '$3' }}>
+        <Button
+          size="lg"
+          onClick={() => {
+            setOpen(false);
+            setVariant('default');
+            window.clearTimeout(timerRef.current);
+            timerRef.current = window.setTimeout(() => {
+              setOpen(true);
+            }, 100);
+          }}
+        >
+          Default Toast
+        </Button>
         <Button
           size="lg"
           onClick={() => {
@@ -84,7 +97,13 @@ const Template: ComponentStory<typeof Toast> = (args) => {
         </Button>
       </Flex>
 
-      <Toast open={open} size="md" onOpenChange={setOpen} {...args} variant={variant}>
+      <Toast
+        open={open}
+        size="md"
+        onOpenChange={setOpen}
+        {...args}
+        variant={variant}
+      >
         <ToastContent>
           <ToastDescription>Toast Message description</ToastDescription>
         </ToastContent>

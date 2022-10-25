@@ -280,6 +280,7 @@ type IconProps = IconBaseProps &
 
 const Icon = ({ children, variant = 'success', ...props }: IconProps) => {
   const iconMap = {
+    default: () => <StyledTickIcon />,
     success: () => <StyledTickIcon />,
     error: () => <StyledErrorIcon />,
     warning: () => <StyledWarningIcon />,
@@ -311,6 +312,11 @@ const StyledToast = styled(ToastPrimitive.Root, {
   },
   variants: {
     variant: {
+      default: {
+        '& .icon-container': {
+          background: '$black900'
+        }
+      },
       success: {
         '& .icon-container': {
           background: '$positive500'
@@ -363,7 +369,7 @@ const StyledToast = styled(ToastPrimitive.Root, {
   },
   defaultVariants: {
     size: 'sm',
-    variant: 'success'
+    variant: 'default'
   }
 });
 
@@ -378,7 +384,7 @@ type ToastProps = ToastBaseProps & React.ComponentProps<typeof StyledToast>;
 const ToastWrapper: FunctionComponent<ToastProps> = ({
   children,
   icon,
-  variant = 'success',
+  variant = 'default',
   ...props
 }) => {
   return (
