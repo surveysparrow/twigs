@@ -9,7 +9,7 @@ test('renders without crashing', () => {
   const tree = render(
     <ThemeProvider theme={{}}>
       <Box />
-    </ThemeProvider>,
+    </ThemeProvider>
   );
   expect(tree).toMatchSnapshot();
 });
