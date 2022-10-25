@@ -8,7 +8,7 @@ export default {
   argTypes: {
     size: {
       control: 'select',
-      options: ['xxs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl'],
+      options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl'],
       defaultValue: '3xl'
     },
     isAnonymous: {
