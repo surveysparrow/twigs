@@ -16,6 +16,11 @@ export default {
       control: 'number',
       defaultValue: 5000
     },
+    size: {
+      control: 'select',
+      options: ['sm', 'md'],
+      defaultValue: 'md'
+    },
     variant: {
       control: 'select',
       options: ['default', 'success', 'error', 'warning', 'info'],
