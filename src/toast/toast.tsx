@@ -397,13 +397,25 @@ const ToastWrapper: FunctionComponent<ToastProps> = ({
   );
 };
 
-type ProviderProps = React.ComponentProps<typeof StyledViewport>;
+type ProviderProps = React.ComponentProps<typeof StyledViewport> & ToastPrimitive.ToastProviderProps
 
-const Provider = ({ children, ...props }: ProviderProps) => {
+const Provider:FunctionComponent<ProviderProps> = ({
+  duration,
+  label,
+  swipeDirection,
+  swipeThreshold,
+  children,
+  ...rest
+}: ProviderProps) => {
   return (
-    <ToastPrimitive.Provider>
+    <ToastPrimitive.Provider
+      duration={duration}
+      label={label}
+      swipeDirection={swipeDirection}
+      swipeThreshold={swipeThreshold}
+    >
       {children}
-      <StyledViewport {...props} />
+      <StyledViewport {...rest} />
     </ToastPrimitive.Provider>
   );
 };

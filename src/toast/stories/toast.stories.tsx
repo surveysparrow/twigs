@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { ToastProps, ToastProviderProps } from '@radix-ui/react-toast';
 import { Button } from '../../button';
 import { Box } from '../../box';
 import { Flex } from '../../flex';
@@ -11,6 +12,10 @@ export default {
   component: Toast,
   title: 'Toast',
   argTypes: {
+    duration: {
+      control: 'number',
+      defaultValue: 5000
+    },
     variant: {
       control: 'select',
       options: ['default', 'success', 'error', 'warning', 'info'],
@@ -19,7 +24,9 @@ export default {
   }
 } as ComponentMeta<typeof Toast>;
 
-const Template: ComponentStory<typeof Toast> = (args) => {
+const Template: ComponentStory<typeof Toast> = (
+  { duration, ...args }: ToastProps & ToastProviderProps
+) => {
   const [open, setOpen] = useState(false);
   const [variant, setVariant] = useState<any>('success');
   const timerRef = useRef(0);
@@ -28,7 +35,7 @@ const Template: ComponentStory<typeof Toast> = (args) => {
     return () => clearTimeout(timerRef.current);
   }, []);
   return (
-    <ToastProvider position="bottom-center">
+    <ToastProvider position="bottom-center" duration={duration}>
       <Flex css={{ gap: '$3' }}>
         <Button
           size="lg"

@@ -10,6 +10,10 @@ export default {
   component: Tooltip,
   title: 'Tooltip',
   argTypes: {
+    content: {
+      control: 'text',
+      defaultValue: 'Tooltip text'
+    },
     side: {
       control: 'select',
       options: ['bottom', 'top', 'left', 'right'],
@@ -40,7 +44,6 @@ const Template: ComponentStory<typeof Tooltip> = (args) => (
         side="top"
         align="end"
         {...args}
-        content="Tooltip content is very large asfas asfasf asfasfasf asfasfasfaf asfasf"
       >
         <Button variant="default" size="lg">
           tooltip button
