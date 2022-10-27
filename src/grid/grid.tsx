@@ -28,8 +28,9 @@ export const Grid: FunctionComponent<GridProps> = React.forwardRef(
       gap = [3, 3],
       repeat = 'fit',
       css,
+      ...rest
     }: GridProps,
-    ref,
+    ref
   ) => {
     const [columnGap, rowGap] = gap;
     const gridTemplateColumns = width
@@ -47,11 +48,12 @@ export const Grid: FunctionComponent<GridProps> = React.forwardRef(
           gridTemplateColumns,
           gridTemplateRows: templateRows,
           gridTemplateAreas: templateAreas,
-          ...css,
+          ...css
         }}
+        {...rest}
       >
         {children}
       </Box>
     );
-  },
+  }
 );

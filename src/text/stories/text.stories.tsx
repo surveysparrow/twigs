@@ -9,13 +9,13 @@ export default {
     size: {
       control: 'select',
       options: ['xxs', 'xs', 'sm', 'md', 'lg'],
-      defaultValue: 'lg',
+      defaultValue: 'lg'
     },
     weight: {
       control: 'select',
-      options: ['regular', 'medium', 'bold'],
-    },
-  },
+      options: ['regular', 'medium', 'bold']
+    }
+  }
 } as ComponentMeta<typeof Text>;
 
 const Template: ComponentStory<typeof Text> = (args) => (
