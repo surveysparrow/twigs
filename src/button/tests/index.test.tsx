@@ -4,7 +4,7 @@ import 'jest';
 import renderer, { act } from 'react-test-renderer';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { Button } from '../index';
+import { Button, IconButton } from '../index';
 
 const RightArrow = () => (
   <svg width="12" height="12" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -24,7 +24,7 @@ describe('Button', () => {
 
   it('renders button correctly', () => {
     const { getByTestId } = render(
-      <Button variant="primary">Primary Button</Button>,
+      <Button variant="primary">Primary Button</Button>
     );
     const button = getByTestId('button');
 
@@ -38,7 +38,7 @@ describe('Button', () => {
         iconLeft={<RightArrow />}
       >
         Primary Button
-      </Button>,
+      </Button>
     );
     expect(tree).toMatchSnapshot();
   });
@@ -50,7 +50,7 @@ describe('Button', () => {
         iconRight={<RightArrow />}
       >
         Secondary Button
-      </Button>,
+      </Button>
     );
     expect(tree).toMatchSnapshot();
   });
@@ -63,7 +63,7 @@ describe('Button', () => {
         iconLeft={<RightArrow />}
       >
         Text Button
-      </Button>,
+      </Button>
     );
     expect(tree).toMatchSnapshot();
   });
@@ -76,7 +76,7 @@ describe('Button', () => {
         isLoading
       >
         Text only Button
-      </Button>,
+      </Button>
     );
     expect(tree).toMatchSnapshot();
   });
@@ -86,12 +86,19 @@ describe('Button', () => {
       <Button
         isText
         css={{
-          padding: '10px',
+          padding: '10px'
         }}
       >
         Link text
-      </Button>,
+      </Button>
     );
     expect(tree).toMatchSnapshot();
+  });
+});
+
+describe('IconButton', () => {
+  it('renders icon button correctly', () => {
+    const component = renderer.create(<IconButton icon={<RightArrow />} aria-label="Right arrow icon" />);
+    expect(component).toMatchSnapshot();
   });
 });
