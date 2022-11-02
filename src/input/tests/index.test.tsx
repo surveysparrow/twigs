@@ -1,8 +1,8 @@
 import React from 'react';
 import 'jest';
 import '@testing-library/jest-dom';
-import { createRoot } from 'react-dom/client';
-import renderer, { act } from 'react-test-renderer';
+import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 import { Input } from '../index';
 
 const RightArrow = () => (
@@ -13,19 +13,14 @@ const RightArrow = () => (
 
 describe('Input', () => {
   it('renders without crashing', () => {
-    const div = document.createElement('div');
-    const root = createRoot(div!);
-    act(() => {
-      root.render(<Input />);
-      root.unmount();
-    });
+    render(<Input />);
   });
 
   it('matches snapshot: primary with icon on left', () => {
     const tree = renderer.create(
       <Input
         iconLeft={<RightArrow />}
-      />,
+      />
     );
     expect(tree).toMatchSnapshot();
   });
@@ -34,7 +29,7 @@ describe('Input', () => {
     const tree = renderer.create(
       <Input
         iconRight={<RightArrow />}
-      />,
+      />
     );
     expect(tree).toMatchSnapshot();
   });
@@ -44,7 +39,7 @@ describe('Input', () => {
       <Input
         iconRight={<RightArrow />}
         iconLeft={<RightArrow />}
-      />,
+      />
     );
     expect(tree).toMatchSnapshot();
   });

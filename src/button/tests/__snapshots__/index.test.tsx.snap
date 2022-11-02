@@ -137,27 +137,3 @@ exports[`Button matches snapshot: text with icon on both sides 1`] = `
   </span>
 </button>
 `;
-
-exports[`IconButton renders icon button correctly 1`] = `
-<button
-  aria-label="Right arrow icon"
-  className="twigs-c-sxxv twigs-c-sxxv-dtVeYa-size-sm twigs-c-sxxv-jgyhUs-variant-primary"
-  data-testid="icon-button"
->
-  <svg
-    fill="none"
-    height="12"
-    viewBox="0 0 6 10"
-    width="12"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M1 9L5 5L1 1"
-      stroke="white"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="1.5"
-    />
-  </svg>
-</button>
-`;

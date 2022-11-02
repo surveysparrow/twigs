@@ -1,8 +1,7 @@
 import React from 'react';
 import 'jest';
 import '@testing-library/jest-dom';
-import { createRoot } from 'react-dom/client';
-import { act } from 'react-test-renderer';
+import { render } from '@testing-library/react';
 import { Button } from '../../button';
 import {
   DropdownMenu,
@@ -17,7 +16,7 @@ import {
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuSeparator,
-  DropdownMenuSubContent,
+  DropdownMenuSubContent
 } from '../dropdown';
 
 const TickIcon = () => {
@@ -62,70 +61,65 @@ const ChevronIcon = () => {
 
 describe('Dropdown', () => {
   it('renders without crashing', () => {
-    const div = document.createElement('div');
-    const root = createRoot(div!);
-    act(() => {
-      root.render(
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button
-              css={{ marginTop: '$8' }}
-              size="lg"
-              variant="primary"
-              iconRight={<ChevronIcon />}
-              aria-label="Customise options"
-            >
-              More Options
-            </Button>
-          </DropdownMenuTrigger>
+    render(
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button
+            css={{ marginTop: '$8' }}
+            size="lg"
+            variant="primary"
+            iconRight={<ChevronIcon />}
+            aria-label="Customise options"
+          >
+            More Options
+          </Button>
+        </DropdownMenuTrigger>
 
-          <DropdownMenuContent showArrow={false} align="end" sideOffset={5}>
-            <DropdownMenuItem>New Tab</DropdownMenuItem>
-            <DropdownMenuItem>New Window</DropdownMenuItem>
-            <DropdownMenuItem disabled>New Private Window</DropdownMenuItem>
-            <DropdownMenuSub>
-              <DropdownMenuSubTrigger>More Tools</DropdownMenuSubTrigger>
-              <DropdownMenuSubContent sideOffset={2} alignOffset={-5}>
-                <DropdownMenuItem>Save Page As…</DropdownMenuItem>
-                <DropdownMenuItem>Create Shortcut…</DropdownMenuItem>
-                <DropdownMenuItem>Name Window…</DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Developer Tools</DropdownMenuItem>
-              </DropdownMenuSubContent>
-            </DropdownMenuSub>
-            <DropdownMenuSeparator />
-            <DropdownMenuCheckboxItem checked onCheckedChange={() => {}}>
+        <DropdownMenuContent showArrow={false} align="end" sideOffset={5}>
+          <DropdownMenuItem>New Tab</DropdownMenuItem>
+          <DropdownMenuItem>New Window</DropdownMenuItem>
+          <DropdownMenuItem disabled>New Private Window</DropdownMenuItem>
+          <DropdownMenuSub>
+            <DropdownMenuSubTrigger>More Tools</DropdownMenuSubTrigger>
+            <DropdownMenuSubContent sideOffset={2} alignOffset={-5}>
+              <DropdownMenuItem>Save Page As…</DropdownMenuItem>
+              <DropdownMenuItem>Create Shortcut…</DropdownMenuItem>
+              <DropdownMenuItem>Name Window…</DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>Developer Tools</DropdownMenuItem>
+            </DropdownMenuSubContent>
+          </DropdownMenuSub>
+          <DropdownMenuSeparator />
+          <DropdownMenuCheckboxItem checked onCheckedChange={() => {}}>
+            <DropdownMenuItemIndicator>
+              <TickIcon />
+            </DropdownMenuItemIndicator>
+            Show Bookmarks
+          </DropdownMenuCheckboxItem>
+          <DropdownMenuCheckboxItem checked onCheckedChange={() => {}}>
+            <DropdownMenuItemIndicator>
+              <TickIcon />
+            </DropdownMenuItemIndicator>
+            Show Full URLs
+          </DropdownMenuCheckboxItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuLabel>People</DropdownMenuLabel>
+          <DropdownMenuRadioGroup value="Maneesh" onValueChange={() => {}}>
+            <DropdownMenuRadioItem value="pedro">
               <DropdownMenuItemIndicator>
                 <TickIcon />
               </DropdownMenuItemIndicator>
-              Show Bookmarks
-            </DropdownMenuCheckboxItem>
-            <DropdownMenuCheckboxItem checked onCheckedChange={() => {}}>
+              Pedro Duarte
+            </DropdownMenuRadioItem>
+            <DropdownMenuRadioItem value="colm">
               <DropdownMenuItemIndicator>
                 <TickIcon />
               </DropdownMenuItemIndicator>
-              Show Full URLs
-            </DropdownMenuCheckboxItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuLabel>People</DropdownMenuLabel>
-            <DropdownMenuRadioGroup value="Maneesh" onValueChange={() => {}}>
-              <DropdownMenuRadioItem value="pedro">
-                <DropdownMenuItemIndicator>
-                  <TickIcon />
-                </DropdownMenuItemIndicator>
-                Pedro Duarte
-              </DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="colm">
-                <DropdownMenuItemIndicator>
-                  <TickIcon />
-                </DropdownMenuItemIndicator>
-                Colm Tuite
-              </DropdownMenuRadioItem>
-            </DropdownMenuRadioGroup>
-          </DropdownMenuContent>
-        </DropdownMenu>,
-      );
-      root.unmount();
-    });
+              Colm Tuite
+            </DropdownMenuRadioItem>
+          </DropdownMenuRadioGroup>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    );
   });
 });

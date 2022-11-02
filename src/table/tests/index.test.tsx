@@ -1,6 +1,5 @@
 import React from 'react';
-import { createRoot } from 'react-dom/client';
-import { act } from 'react-test-renderer';
+import { render } from '@testing-library/react';
 import { useTable } from 'react-table';
 import {
   Table,
@@ -8,7 +7,7 @@ import {
   Thead,
   Th,
   Tr,
-  Td,
+  Td
 } from '../index';
 import 'jest';
 import '@testing-library/jest-dom';
@@ -16,24 +15,24 @@ import '@testing-library/jest-dom';
 const columns = [
   {
     Header: 'First Name',
-    accessor: 'firstName',
+    accessor: 'firstName'
   },
   {
     Header: 'Last Name',
-    accessor: 'lastName',
+    accessor: 'lastName'
   },
   {
     Header: 'Age',
-    accessor: 'age',
+    accessor: 'age'
   },
   {
     Header: 'Visits',
-    accessor: 'visits',
+    accessor: 'visits'
   },
   {
     Header: 'Progress',
-    accessor: 'progress',
-  },
+    accessor: 'progress'
+  }
 ];
 
 const data = [
@@ -44,7 +43,7 @@ const data = [
     visits: 47,
     progress: 66,
     status: 'relationship',
-    subRows: undefined,
+    subRows: undefined
   },
   {
     firstName: 'jam',
@@ -53,7 +52,7 @@ const data = [
     visits: 47,
     progress: 66,
     status: 'relationship',
-    subRows: undefined,
+    subRows: undefined
   },
   {
     firstName: 'jam',
@@ -62,7 +61,7 @@ const data = [
     visits: 47,
     progress: 66,
     status: 'relationship',
-    subRows: undefined,
+    subRows: undefined
   },
   {
     firstName: 'jam',
@@ -71,7 +70,7 @@ const data = [
     visits: 47,
     progress: 66,
     status: 'relationship',
-    subRows: undefined,
+    subRows: undefined
   },
   {
     firstName: 'jam',
@@ -80,8 +79,8 @@ const data = [
     visits: 47,
     progress: 66,
     status: 'relationship',
-    subRows: undefined,
-  },
+    subRows: undefined
+  }
 ];
 
 const TableComponent = () => {
@@ -90,10 +89,10 @@ const TableComponent = () => {
     getTableBodyProps,
     headerGroups,
     rows,
-    prepareRow,
+    prepareRow
   } = useTable({
     columns,
-    data,
+    data
   });
   return (
     <Table {...getTableProps()} css={{ marginTop: '$16' }}>
@@ -130,13 +129,8 @@ const TableComponent = () => {
 
 describe('Table', () => {
   it('renders without crashing', () => {
-    const div = document.createElement('div');
-    const root = createRoot(div!);
-    act(() => {
-      root.render(
-        <TableComponent />,
-      );
-      root.unmount();
-    });
+    render(
+      <TableComponent />
+    );
   });
 });
