@@ -13,11 +13,14 @@ type IconButtonProps = IconButtonBaseProps &
   BaseButtonProps &
   React.ButtonHTMLAttributes<HTMLButtonElement>;
 
+// @TODO: revisit the ref approach here
 export const IconButton: FunctionComponent<IconButtonProps> = React.forwardRef(
   (
     {
       children, icon, 'aria-label': ariaLabel, ...rest
-    }: IconButtonProps
+    }: IconButtonProps,
+    // eslint-disable-next-line
+    ref 
   ) => {
     const element = icon || children;
     const validElement = isValidElement(element) ? element : null;
