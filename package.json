@@ -1,6 +1,6 @@
 {
   "name": "@sparrowengg/twigs-react",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "In house component library for SurveySparrow",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -13,11 +13,18 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "build": "rimraf dist && node ./esbuild.js && tsc -p tsconfig.prod.json",
-    "version": "echo $npm_package_version"
+    "version": "echo $npm_package_version",
+    "changelog": "auto-changelog -p && git add CHANGELOG.md"
   },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@bitbucket.org/surveysparrow/twigs-react.git"
+  },
+  "auto-changelog": {
+    "output": "CHANGELOG.md",
+    "template": "keepachangelog",
+    "unreleased": true,
+    "commitLimit": false
   },
   "keywords": [
     "react",
@@ -91,7 +98,9 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": [
+        "lint-staged"
+      ]
     }
   },
   "lint-staged": {

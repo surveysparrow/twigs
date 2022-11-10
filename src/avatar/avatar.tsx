@@ -92,18 +92,18 @@ const getFallbackInitials = (name: string): string => {
 
 export interface AvatarBaseProps {
   src: string,
-  fallbackDelay: number,
-  name: string
+  fallbackDelay?: number,
+  name?: string
 }
 
 type AvatarProps = AvatarBaseProps & ComponentProps<typeof StyledAvatar>
 
 export const Avatar: FunctionComponent<AvatarProps> = React.forwardRef(
   ({
-    fallbackDelay, name, src, ...rest
-  }: AvatarProps) => {
+    fallbackDelay = 3000, name, src, ...rest
+  }: AvatarProps, ref) => {
     return (
-      <StyledAvatar {...rest}>
+      <StyledAvatar {...rest} ref={ref}>
         <StyledImage src={src} alt={name} />
         <StyledFallback delayMs={fallbackDelay}>
           {name ? getFallbackInitials(name) : null}

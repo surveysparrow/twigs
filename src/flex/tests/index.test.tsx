@@ -1,24 +1,17 @@
 import React from 'react';
 import 'jest';
 import '@testing-library/jest-dom';
-import { createRoot } from 'react-dom/client';
-import { act } from 'react-test-renderer';
 import { render } from '@testing-library/react';
 import { Flex } from '../index';
 
 describe('Flex', () => {
   it('renders without crashing', () => {
-    const div = document.createElement('div');
-    const root = createRoot(div!);
-    act(() => {
-      root.render(<Flex>Flex</Flex>);
-      root.unmount();
-    });
+    render(<Flex>Flex</Flex>);
   });
 
   it('renders flex correctly', () => {
     const { getByTestId } = render(
-      <Flex>Simple Flex</Flex>,
+      <Flex>Simple Flex</Flex>
     );
     const flex = getByTestId('flex');
 

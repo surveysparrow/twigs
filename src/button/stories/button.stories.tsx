@@ -8,22 +8,25 @@ export default {
   argTypes: {
     size: {
       control: 'select',
-      options: ['xxs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'],
+      options: ['xxs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl']
     },
     variant: {
       control: 'select',
-      options: ['default', 'primary', 'accent', 'secondary'],
+      options: ['default', 'primary', 'accent', 'secondary']
     },
     isLoading: {
-      control: 'boolean',
+      control: 'boolean'
     },
     isTransparent: {
-      control: 'boolean',
+      control: 'boolean'
     },
     isText: {
-      control: 'boolean',
+      control: 'boolean'
     },
-  },
+    isDisabled: {
+      control: 'boolean'
+    }
+  }
 } as ComponentMeta<typeof Button>;
 
 const Template: ComponentStory<typeof Button> = (args) => <Button {...args}>Submit</Button>;

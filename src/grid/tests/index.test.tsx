@@ -1,27 +1,17 @@
 import React from 'react';
 import 'jest';
 import '@testing-library/jest-dom';
-import { createRoot } from 'react-dom/client';
-import renderer, { act } from 'react-test-renderer';
+import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 import { Grid } from '../index';
 
 describe('Grid', () => {
   it('renders without crashing', () => {
-    const div = document.createElement('div');
-    const root = createRoot(div!);
-    act(() => {
-      root.render(<Grid templateColumns="1fr 1fr 1fr" />);
-      root.unmount();
-    });
+    render(<Grid templateColumns="1fr 1fr 1fr" />);
   });
 
   it('renders with width prop', () => {
-    const div = document.createElement('div');
-    const root = createRoot(div!);
-    act(() => {
-      root.render(<Grid width={350} templateColumns="1fr 1fr 1fr" />);
-      root.unmount();
-    });
+    render(<Grid width={350} templateColumns="1fr 1fr 1fr" />);
   });
 
   it('matches snapshot: renders with templatearea props', () => {
@@ -29,7 +19,7 @@ describe('Grid', () => {
       <Grid
         templateAreas={`"navbar navbar"
                         "sidebar main"`}
-      />,
+      />
     );
     expect(tree).toMatchSnapshot();
   });
@@ -82,9 +72,9 @@ describe('Grid', () => {
         gap={[0, 0]}
         css={{
           height: '100vh',
-          width: '100vw',
+          width: '100vw'
         }}
-      />,
+      />
     );
     expect(tree).toMatchSnapshot();
   });

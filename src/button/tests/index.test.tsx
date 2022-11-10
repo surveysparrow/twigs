@@ -1,7 +1,6 @@
 import React from 'react';
-import { createRoot } from 'react-dom/client';
 import 'jest';
-import renderer, { act } from 'react-test-renderer';
+import renderer from 'react-test-renderer';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { Button } from '../index';
@@ -14,17 +13,12 @@ const RightArrow = () => (
 
 describe('Button', () => {
   it('renders without crashing', () => {
-    const div = document.createElement('div');
-    const root = createRoot(div!);
-    act(() => {
-      root.render(<Button>Button</Button>);
-      root.unmount();
-    });
+    render(<Button>Button</Button>);
   });
 
   it('renders button correctly', () => {
     const { getByTestId } = render(
-      <Button variant="primary">Primary Button</Button>,
+      <Button variant="primary">Primary Button</Button>
     );
     const button = getByTestId('button');
 
@@ -38,7 +32,7 @@ describe('Button', () => {
         iconLeft={<RightArrow />}
       >
         Primary Button
-      </Button>,
+      </Button>
     );
     expect(tree).toMatchSnapshot();
   });
@@ -50,7 +44,7 @@ describe('Button', () => {
         iconRight={<RightArrow />}
       >
         Secondary Button
-      </Button>,
+      </Button>
     );
     expect(tree).toMatchSnapshot();
   });
@@ -63,7 +57,7 @@ describe('Button', () => {
         iconLeft={<RightArrow />}
       >
         Text Button
-      </Button>,
+      </Button>
     );
     expect(tree).toMatchSnapshot();
   });
@@ -76,7 +70,7 @@ describe('Button', () => {
         isLoading
       >
         Text only Button
-      </Button>,
+      </Button>
     );
     expect(tree).toMatchSnapshot();
   });
@@ -86,11 +80,11 @@ describe('Button', () => {
       <Button
         isText
         css={{
-          padding: '10px',
+          padding: '10px'
         }}
       >
         Link text
-      </Button>,
+      </Button>
     );
     expect(tree).toMatchSnapshot();
   });
