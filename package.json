@@ -1,6 +1,7 @@
 {
   "name": "@sparrowengg/twigs-root",
   "private": true,
+  "npmClient": "yarn",
   "workspaces": [
     "packages/*"
   ],
