@@ -362,7 +362,7 @@ const StyledSpan = styled('span', {
 export interface ButtonBaseProps {
   iconLeft?: ReactElement;
   iconRight?: ReactElement;
-  icon?: ReactElement;
+  icon?: ReactElement | null;
   isLoading?: boolean,
   isDisabled?: boolean
 }
@@ -373,10 +373,10 @@ type ButtonProps = ButtonBaseProps &
     as?: React.ElementType;
   };
 
-export const Button:FunctionComponent<ButtonProps> = React.forwardRef(
+export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
   (
     {
-      children, variant = 'primary', isIcon = false, icon, iconLeft, iconRight, isLoading, isDisabled, onClick, ...rest
+      children, variant = 'primary', icon, iconLeft, iconRight, isLoading, isDisabled, onClick, ...rest
     }: ButtonProps,
     ref
   ) => {
@@ -384,7 +384,7 @@ export const Button:FunctionComponent<ButtonProps> = React.forwardRef(
       <StyledButton
         ref={ref}
         variant={variant}
-        isIcon={isIcon}
+        isIcon={!!icon}
         disabled={isDisabled}
         data-testid="button"
         onClick={onClick}
@@ -394,29 +394,21 @@ export const Button:FunctionComponent<ButtonProps> = React.forwardRef(
           ? <DotLoader />
           : (
             <>
-              {
-              isIcon
-                ? (
-                  <>
-                    { icon && React.cloneElement(icon)}
-                  </>
-                )
-                : (
-                  <>
-                    {iconLeft && (
-                    <StyledSpan css={{ marginRight: '$4' }}>
-                      {React.cloneElement(iconLeft)}
-                    </StyledSpan>
-                    )}
-                    {children}
-                    {iconRight && (
-                    <StyledSpan css={{ marginLeft: '$4' }}>
-                      {React.cloneElement(iconRight)}
-                    </StyledSpan>
-                    )}
-                  </>
-                )
-            }
+              {icon && React.cloneElement(icon)}
+
+              {iconLeft && (
+                <StyledSpan css={{ marginRight: '$4' }}>
+                  {React.cloneElement(iconLeft)}
+                </StyledSpan>
+              )}
+
+              {children}
+
+              {iconRight && (
+                <StyledSpan css={{ marginLeft: '$4' }}>
+                  {React.cloneElement(iconRight)}
+                </StyledSpan>
+              )}
             </>
           )}
       </StyledButton>

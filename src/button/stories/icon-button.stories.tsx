@@ -22,6 +22,10 @@ export default {
     },
     isDisabled: {
       control: 'boolean'
+    },
+    size: {
+      control: 'select',
+      options: ['xxs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl']
     }
   }
 };

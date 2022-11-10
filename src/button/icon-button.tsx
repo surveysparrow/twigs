@@ -27,10 +27,9 @@ export const IconButton: FunctionComponent<IconButtonProps> = React.forwardRef(
     return (
       <Button
         aria-label={ariaLabel}
+        icon={validElement}
         {...rest}
-      >
-        {validElement}
-      </Button>
+      />
     );
   }
 );
