@@ -1,10 +1,11 @@
 import React from "react";
+import { CreateIcon } from '../create-icon';
 import { IconProps } from "../types";
 
 export const InfoIcon = React.forwardRef<SVGSVGElement, IconProps>(
   ({ color = "currentColor", ...rest }, ref) => {
     return (
-      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"
+      <CreateIcon
         {...rest}
         ref={ref}
       >
@@ -12,7 +13,7 @@ export const InfoIcon = React.forwardRef<SVGSVGElement, IconProps>(
         <path d="M14.6667 20.6667H17.7458" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         <path d="M16.212 20.6667V15H14.6786" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         <circle cx="15.65" cy="11.25" r="1.25" fill={color} />
-      </svg>
+      </CreateIcon>
     )
   }
 );

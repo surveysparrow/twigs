@@ -20,13 +20,12 @@ export default {
   title: 'Icons',
   argTypes: {
     color: {
-      control: 'text'
+      control: 'color',
+      defaultValue: "#000000"
     },
-    height: {
-      control: 'number'
-    },
-    width: {
-      control: 'number'
+    size: {
+      control: 'number',
+      defaultValue: 32
     }
   },
   parameters: {
