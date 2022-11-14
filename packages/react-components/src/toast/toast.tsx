@@ -1,112 +1,13 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import * as ToastPrimitive from '@radix-ui/react-toast';
+import {
+  TickIcon, WarningIcon, InfoIcon, AlertIcon
+} from '@sparrowengg/twigs-react-icons';
 import { styled, keyframes } from '../../stitches.config';
 import { Flex } from '../flex';
 
-const TickIcon = () => {
-  return (
-    <svg
-      width="18"
-      height="14"
-      viewBox="0 0 18 14"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M17 1.5L6 12.5L1 7.5"
-        stroke="white"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-};
-
-const ErrorIcon = () => {
-  return (
-    <svg
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M12 13.12V9.38"
-        stroke="white"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M14.029 4.139L21.688 17.543C22.578 19.101 21.453 21.04 19.659 21.04H4.34101C2.54601 21.04 1.42101 19.101 2.31201 17.543L9.97101 4.139C10.868 2.568 13.132 2.568 14.029 4.139Z"
-        stroke="white"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <circle cx="12" cy="16" r="1" fill="white" />
-    </svg>
-  );
-};
-
-const WarningIcon = () => {
-  return (
-    <svg
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M13 8L10 11L14 13L11 16"
-        stroke="white"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M6.8 19.8L4.1 17.1C3.4 16.4 3 15.4 3 14.3V9.7C3 8.6 3.4 7.6 4.2 6.9L6.9 4.2C7.6 3.4 8.6 3 9.7 3H14.4C15.5 3 16.5 3.4 17.2 4.2L19.9 6.9C20.6 7.6 21 8.6 21 9.7V14.4C21 15.5 20.6 16.5 19.8 17.2L17.1 19.9C16.3 20.7 15.3 21.1 14.3 21.1H9.7C8.6 21 7.6 20.6 6.8 19.8Z"
-        stroke="white"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-};
-
-const InfoIcon = () => {
-  return (
-    <svg
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M13 8L10 11L14 13L11 16"
-        stroke="white"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M6.8 19.8L4.1 17.1C3.4 16.4 3 15.4 3 14.3V9.7C3 8.6 3.4 7.6 4.2 6.9L6.9 4.2C7.6 3.4 8.6 3 9.7 3H14.4C15.5 3 16.5 3.4 17.2 4.2L19.9 6.9C20.6 7.6 21 8.6 21 9.7V14.4C21 15.5 20.6 16.5 19.8 17.2L17.1 19.9C16.3 20.7 15.3 21.1 14.3 21.1H9.7C8.6 21 7.6 20.6 6.8 19.8Z"
-        stroke="white"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-};
-
 const StyledTickIcon = styled(TickIcon);
-const StyledErrorIcon = styled(ErrorIcon);
+const StyledErrorIcon = styled(AlertIcon);
 const StyledWarningIcon = styled(WarningIcon);
 const StyledInfoIcon = styled(InfoIcon);
 
