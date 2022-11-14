@@ -8,8 +8,8 @@ export const PlusIcon = React.forwardRef<SVGSVGElement, IconProps>(
         {...rest}
         ref={ref}
       >
-        <path d="M24 16H8" stroke={color} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-        <path d="M16 8V24" stroke={color} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M24 16H8" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M16 8V24" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     )
   }
