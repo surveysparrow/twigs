@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import * as ReactIcons from '../index';
 
-const CustomIcon = () => {
+const IconCustomDocs = () => {
   const [search, setSearch] = useState('');
   return (
     <div>
@@ -53,4 +53,4 @@ const CustomIcon = () => {
   )
 }
 
-export default CustomIcon;
+export default IconCustomDocs;

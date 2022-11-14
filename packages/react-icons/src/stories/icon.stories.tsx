@@ -1,6 +1,6 @@
 import React from 'react';
 import * as ReactIcons from '../index';
-import CustomIcon from './icon-custom-story-docs';
+import IconCustomDocs from './icon-custom-story-docs';
 
 const AllIcons = (args) => {
   return (
@@ -30,7 +30,7 @@ export default {
   },
   parameters: {
     docs: {
-      page: CustomIcon
+      page: IconCustomDocs
     }
   }
 }
