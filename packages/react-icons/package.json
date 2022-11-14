@@ -6,6 +6,9 @@
   "types": "dist/index.d.ts",
   "author": "SurveySparrow",
   "private": true,
+  "files": [
+    "/dist"
+  ],
   "dependencies": {
     "react": "^18.2.0"
   },
