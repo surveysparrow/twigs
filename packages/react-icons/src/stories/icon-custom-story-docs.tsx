@@ -34,24 +34,24 @@ const IconCustomDocs = () => {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              padding: '10px',
+              padding: '16px 8px',
               flexDirection: 'column',
-              border: '1px solid #ececec',
+              border: '1px solid #fcf6f6',
               borderRadius: '6px',
               letterSpacing: '1.1px'
             }}
             >
               <IconComponent key={key} />
               <p style={{
-                fontSize: '14px',
+                fontSize: '12px',
                 marginBottom: 0,
+                fontWeight: 300,
                 opacity: 0.8
               }}
               >
                 {' '}
                 {key}
                 {' '}
-
               </p>
             </div>
           );
