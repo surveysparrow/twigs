@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import * as ReactIcons from '../index';
-import IconCustomDocs from './icon-custom-story-docs';
 
 const AllIcons = (args) => {
   const [search, setSearch] = useState('');
