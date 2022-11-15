@@ -1,7 +1,7 @@
 import React from 'react';
 import { IconProps } from '../types';
 
-export const AdjustIcon = React.forwardRef<SVGSVGElement, IconProps>(
+export const LightBulbIcon = React.forwardRef<SVGSVGElement, IconProps>(
   ({ color = 'currentColor', size = 32, ...rest }, ref) => {
     return (
       <svg
@@ -14,63 +14,63 @@ export const AdjustIcon = React.forwardRef<SVGSVGElement, IconProps>(
         ref={ref}
       >
         <path
-          d="M24 6.66667H28"
+          d="M20.2534 20.5067H12.2534"
           stroke={color}
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
-          d="M4 6.66667H18.6667"
+          d="M11.6413 20.1147C9.27333 18.4413 7.85333 15.52 8.35333 12.304C8.89467 8.828 11.792 6.05334 15.2867 5.644C20.1373 5.07467 24.2533 8.85067 24.2533 13.5867C24.2533 16.2867 22.912 18.6693 20.8627 20.1173C20.4947 20.3773 20.2533 20.78 20.2533 21.2307V24.92C20.2533 26.7613 18.7613 28.2533 16.92 28.2533H15.5867C13.7453 28.2533 12.2533 26.7613 12.2533 24.92V21.236C12.2533 20.7813 12.0107 20.376 11.6413 20.1147Z"
           stroke={color}
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
-          d="M13.3333 16H28"
+          d="M26.92 6.92L28.5066 5.33334"
           stroke={color}
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
-          d="M4 16H8"
+          d="M5.58667 20.2533L4 21.84"
           stroke={color}
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
-          d="M24 25.3333H28"
+          d="M6.91998 5.58667L5.33331 4"
           stroke={color}
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
-          d="M4 25.3333H18.6667"
+          d="M26.92 20.2533L28.5066 21.84"
           stroke={color}
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
-          d="M23.2189 4.78105C24.2603 5.82245 24.2603 7.51089 23.2189 8.55229C22.1775 9.59369 20.4891 9.59369 19.4477 8.55229C18.4063 7.51089 18.4063 5.82245 19.4477 4.78105C20.4891 3.73965 22.1775 3.73965 23.2189 4.78105Z"
+          d="M28.2534 13.5867H30.5067"
           stroke={color}
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
-          d="M12.5523 14.1144C13.5937 15.1558 13.5937 16.8442 12.5523 17.8856C11.5109 18.927 9.82245 18.927 8.78105 17.8856C7.73965 16.8442 7.73965 15.1558 8.78105 14.1144C9.82245 13.073 11.5109 13.073 12.5523 14.1144"
+          d="M2 13.5867H4.25333"
           stroke={color}
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
-          d="M23.2189 23.4477C24.2603 24.4891 24.2603 26.1776 23.2189 27.219C22.1775 28.2604 20.4891 28.2604 19.4477 27.219C18.4063 26.1776 18.4063 24.4891 19.4477 23.4477C20.4891 22.4063 22.1775 22.4063 23.2189 23.4477Z"
+          d="M12.2534 24.2533H20.08"
           stroke={color}
           strokeWidth="1.5"
           strokeLinecap="round"
