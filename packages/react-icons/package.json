@@ -5,7 +5,6 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "author": "SurveySparrow",
-  "private": true,
   "files": [
     "/dist"
   ],
