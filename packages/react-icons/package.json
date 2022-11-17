@@ -54,5 +54,14 @@
       "eslint --fix",
       "git add"
     ]
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.org/surveysparrow/twigs-react/src/master/packages/react-icons/"
+  },
+  "keywords": [
+    "react",
+    "icons"
+  ],
+  "license": "ISC"
 }
