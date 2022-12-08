@@ -1,6 +1,7 @@
 import React from 'react';
 import { ComponentMeta } from '@storybook/react';
 import { Avatar } from '../avatar';
+import { AvatarGroup } from '../avatar-group';
 
 export default {
   component: Avatar,
@@ -23,10 +24,22 @@ export default {
       options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', 'full'],
       defaultValue: 'full'
     },
+    spacing: {
+      control: 'select',
+      options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', 'full'],
+      defaultValue: 'full'
+    },
+    limit: {
+      control: 'number'
+    }
   }
 } as ComponentMeta<typeof Avatar>;
 
 const Template = (args) => (
-  <Avatar {...args} />
+  <AvatarGroup {...args}>
+    <Avatar {...args} key={1} />
+    <Avatar {...args} key={2} />
+    <Avatar {...args} key={3} />
+  </AvatarGroup>
 );
-export const Default = Template.bind({});
+export const AvatarGroupD = Template.bind({});
