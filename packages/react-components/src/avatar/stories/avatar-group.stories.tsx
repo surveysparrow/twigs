@@ -24,11 +24,6 @@ export default {
       options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', 'full'],
       defaultValue: 'full'
     },
-    spacing: {
-      control: 'select',
-      options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', 'full'],
-      defaultValue: 'full'
-    },
     limit: {
       control: 'number'
     }

@@ -1,29 +1,16 @@
-import React, { FunctionComponent, ComponentProps } from 'react';
+import React, { FunctionComponent } from 'react';
 import { styled } from '../../stitches.config';
 import { Avatar, AvatarBaseProps } from './avatar';
 
-const Overlay = styled(Avatar, {
+const AvatarOverlay = styled(Avatar, {
   background: "#594b4b",
   opacity: .8,
   zIndex: 9,
   position: "absolute",
-  left: 0,
-  variants: {
-    spacing: {
-      '3xl': {
-        marginLeft: '-28px'
-      },
-      '2xl': {
-        marginLeft: '-24px'
-      },
-      'xl': {
-        marginLeft: '-20px'
-      }
-    }
-  }
+  left: 0
 });
 
-const OverlayText = styled(Avatar, {
+const AvatarOverlayText = styled(Avatar, {
   display: "flex",
   zIndex: 10,
   color: "#fff",
@@ -33,7 +20,9 @@ const OverlayText = styled(Avatar, {
 
 const AvatarGroupRoot = styled('div', {
   display: 'flex'
-})
+});
+
+const AvatarWrapper = styled('span', {});
 
 export interface AvatarGroupBaseProps {
   limit?: number | null,
@@ -53,23 +42,25 @@ export const AvatarGroup: FunctionComponent<AvatarGroupProps> = React.forwardRef
   const avatarLimit = limit || avatarCount;
   const extraAvatars = avatarCount - avatarLimit;
   
+  const childAvatars = avatars.slice(0, avatarLimit).map((child: React.ReactNode, index: number) => {
+    const childProps = {
+      css: {
+        marginInlineStart: index === 0 ? '' : '-24px'
+      },
+      size,
+      rounded
+    }
+
+    return React.cloneElement(child, childProps)
+  })
+
   return (
     <AvatarGroupRoot
-      {...rest}
       ref={ref}
+      {...rest}
+      role="group"
     >
-      {
-        avatars.slice(0, avatarLimit).map((child, index) => {
-          console.log({ index });
-          return (
-            <span style={{
-              marginLeft: index === 0 ? "" : "-20px"
-            }}>
-              {child}
-            </span>
-          )
-        })
-      }
+      {childAvatars}
       {
         extraAvatars > 0 ?
           <Avatar
@@ -77,15 +68,15 @@ export const AvatarGroup: FunctionComponent<AvatarGroupProps> = React.forwardRef
             size={size}
             rounded={rounded}
             css={{
-              marginLeft: "-28px",
+              marginInlineStart: "-28px",
               position: "relative",
               display: "flex"
             }}
           >
-            <Overlay size={size} rounded={rounded} data-id="overlay-background" />
-            <OverlayText size={size} rounded={rounded} data-id="overlay-text">
+            <AvatarOverlay size={size} rounded={rounded} data-id="overlay-background" />
+            <AvatarOverlayText size={size} rounded={rounded} data-id="overlay-text">
               + {extraAvatars}
-            </OverlayText>
+            </AvatarOverlayText>
           </Avatar>
           :
           null
