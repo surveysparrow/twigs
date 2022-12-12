@@ -25,7 +25,11 @@ export default {
     },
     size: {
       control: 'select',
-      options: ['xxs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl']
+      options: ['xxs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'],
+      defaultValue: 'xl'
+    },
+    isTransparent: {
+      control: 'boolean'
     }
   }
 };

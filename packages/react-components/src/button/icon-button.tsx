@@ -1,11 +1,14 @@
 import React, { FunctionComponent, isValidElement, ReactElement } from 'react';
 import { Button, ButtonBaseProps } from './button';
 
-type OmitProps = 'iconLeft' | 'iconRight' | 'isTransparent';
+type OmitProps = 'iconLeft' | 'iconRight' | 'isText' | 'isIcon';
 
 export interface IconButtonBaseProps {
   icon: ReactElement,
-  'aria-label': string
+  'aria-label': string,
+  variant: 'default' | 'primary' | 'accent' | 'secondary',
+  size: 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl',
+  isTransparent: boolean
 }
 
 interface BaseButtonProps extends Omit<ButtonBaseProps, OmitProps> { }
