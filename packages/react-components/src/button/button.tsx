@@ -34,8 +34,8 @@ const StyledButton = styled('button', {
         lineHeight: '$lg',
         height: '$16',
         '& svg': {
-          width: '$3',
-          height: '$3'
+          width: '$6',
+          height: '$6'
         }
       },
       xl: {
@@ -45,8 +45,8 @@ const StyledButton = styled('button', {
         lineHeight: '$lg',
         height: '$12',
         '& svg': {
-          width: '$3',
-          height: '$3'
+          width: '$6',
+          height: '$6'
         }
       },
       lg: {
@@ -56,8 +56,8 @@ const StyledButton = styled('button', {
         lineHeight: '$md',
         height: '$10',
         '& svg': {
-          width: '10px',
-          height: '10px'
+          width: '$5',
+          height: '$5'
         }
       },
       md: {
@@ -67,8 +67,8 @@ const StyledButton = styled('button', {
         lineHeight: '$md',
         height: '$8',
         '& svg': {
-          width: '10px',
-          height: '10px'
+          width: '$5',
+          height: '$5'
         }
       },
       sm: {
@@ -78,8 +78,8 @@ const StyledButton = styled('button', {
         lineHeight: '$sm',
         height: '$6',
         '& svg': {
-          width: '$2',
-          height: '$2'
+          width: '$4',
+          height: '$4'
         }
       },
       xs: {
