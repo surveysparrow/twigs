@@ -191,7 +191,6 @@ const StyledButton = styled('button', {
     },
     isIcon: {
       true: {
-        padding: 0,
         justifyContent: 'center',
         width: '$10',
         height: '$10'
@@ -199,6 +198,12 @@ const StyledButton = styled('button', {
     }
   },
   compoundVariants: [
+    {
+      isIcon: true,
+      css: {
+        padding: 0
+      }
+    },
     {
       variant: 'primary',
       isText: true,
@@ -254,13 +259,6 @@ const StyledButton = styled('button', {
         '& div': {
           background: '$tertiary700'
         }
-      }
-    },
-    {
-      isIcon: true,
-      isTransparent: true,
-      css: {
-        padding: 0
       }
     },
     {
