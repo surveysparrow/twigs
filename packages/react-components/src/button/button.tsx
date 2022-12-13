@@ -328,8 +328,8 @@ const StyledButton = styled('button', {
         width: '$5',
         height: '$5',
         '& svg': {
-          width: '$4',
-          height: '$4'
+          width: '$3',
+          height: '$3'
         }
       }
     },
