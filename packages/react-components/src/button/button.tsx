@@ -258,13 +258,6 @@ const StyledButton = styled('button', {
     },
     {
       isIcon: true,
-      isTransparent: true,
-      css: {
-        padding: 0
-      }
-    },
-    {
-      isIcon: true,
       size: '2xl',
       css: {
         width: '$16',
