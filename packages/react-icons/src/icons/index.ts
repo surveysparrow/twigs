@@ -61,6 +61,7 @@ export { QuestionBankIcon } from './question-bank';
 export { QuestionCircleIcon } from './question-circle';
 export { QuestionSetIcon } from './question-set';
 export { RadarChartIcon } from './radar-chart';
+export { ResetIcon } from './reset';
 export { SaveIcon } from './save';
 export { SearchIcon } from './search';
 export { SettingsIcon } from './settings';
