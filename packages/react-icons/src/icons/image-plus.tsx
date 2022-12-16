@@ -1,7 +1,7 @@
 import React from 'react';
 import { IconProps } from '../types';
 
-export const AddSectionIcon = React.forwardRef<SVGSVGElement, IconProps>(
+export const ImagePlusIcon = React.forwardRef<SVGSVGElement, IconProps>(
   ({ color = 'currentColor', size = 32, ...rest }, ref) => {
     return (
       <svg
@@ -14,35 +14,28 @@ export const AddSectionIcon = React.forwardRef<SVGSVGElement, IconProps>(
         ref={ref}
       >
         <path
-          d="M8 6.66667H24"
+          d="M26.6667 4V9.33333"
           stroke={color}
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
-          d="M10.6667 2.66667H21.3334"
+          d="M24 6.66667H29.3333"
           stroke={color}
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
-          d="M26.4534 29.3333H5.54669C3.95602 29.3333 2.66669 28.044 2.66669 26.4533V13.5467C2.66669 11.956 3.95602 10.6667 5.54669 10.6667H26.4534C28.044 10.6667 29.3334 11.956 29.3334 13.5467V26.4533C29.3334 28.044 28.044 29.3333 26.4534 29.3333Z"
+          d="M18.6667 6.66667H6.66667C5.19333 6.66667 4 7.86001 4 9.33334V25.3333C4 26.8067 5.19333 28 6.66667 28H24C25.4733 28 26.6667 26.8067 26.6667 25.3333V14.6667"
           stroke={color}
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
-          d="M15.6667 17V22.3333"
-          stroke={color}
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M13 19.6667H18.3333"
+          d="M9.28931 19.2893L11.2946 16.108C11.76 15.3707 12.796 15.2707 13.3933 15.9053L14.8266 17.428L16.3293 14.2347C16.792 13.2507 18.176 13.2053 18.7026 14.1573L21.5746 19.3547C22.0653 20.244 21.4213 21.3333 20.4066 21.3333H10.4173C9.36665 21.3333 8.72931 20.1773 9.28931 19.2893V19.2893Z"
           stroke={color}
           strokeWidth="1.5"
           strokeLinecap="round"
