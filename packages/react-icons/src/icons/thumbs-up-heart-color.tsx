@@ -1,7 +1,7 @@
 import React from 'react';
 import { IconProps } from '../types';
 
-export const ThankyouColorIcon = React.forwardRef<
+export const ThumbsUpHeartIconColor = React.forwardRef<
   SVGSVGElement,
   IconProps
 >(({ color = 'currentColor', size = 32, ...rest }, ref) => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { IconProps } from '../types';
 
-export const AddEmojiIcon = React.forwardRef<SVGSVGElement, IconProps>(
+export const ImagePlusIcon = React.forwardRef<SVGSVGElement, IconProps>(
   ({ color = 'currentColor', size = 32, ...rest }, ref) => {
     return (
       <svg
@@ -14,42 +14,28 @@ export const AddEmojiIcon = React.forwardRef<SVGSVGElement, IconProps>(
         ref={ref}
       >
         <path
-          d="M11.3333 12V13.3333"
+          d="M26.6667 4V9.33333"
           stroke={color}
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
-          d="M20.6667 12V13.3333"
+          d="M24 6.66667H29.3333"
           stroke={color}
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
-          d="M20.6666 19.584C17.9928 21.9167 14.0072 21.9167 11.3333 19.584"
+          d="M18.6667 6.66667H6.66667C5.19333 6.66667 4 7.86001 4 9.33334V25.3333C4 26.8067 5.19333 28 6.66667 28H24C25.4733 28 26.6667 26.8067 26.6667 25.3333V14.6667"
           stroke={color}
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
-          d="M27.6837 13.2672C28.9013 18.4723 26.5289 23.855 21.8657 26.4682C17.2024 29.0814 11.373 28.2948 7.5691 24.5391C3.76524 20.7834 2.90442 14.9644 5.45797 10.2682C8.01153 5.57205 13.3636 3.13133 18.5837 4.28244"
-          stroke={color}
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M25.6667 3V8.33333"
-          stroke={color}
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M23 5.66667H28.3333"
+          d="M9.28931 19.2893L11.2946 16.108C11.76 15.3707 12.796 15.2707 13.3933 15.9053L14.8266 17.428L16.3293 14.2347C16.792 13.2507 18.176 13.2053 18.7026 14.1573L21.5746 19.3547C22.0653 20.244 21.4213 21.3333 20.4066 21.3333H10.4173C9.36665 21.3333 8.72931 20.1773 9.28931 19.2893V19.2893Z"
           stroke={color}
           strokeWidth="1.5"
           strokeLinecap="round"
