@@ -19,7 +19,7 @@ const AvatarOverlay = styled('div', {
   left: 0
 });
 
-const AvatarOverlayText = styled('div', {
+const AvatarOverlayText = styled('span', {
   height: '100%',
   width: '100%',
   display: 'flex',
@@ -84,13 +84,13 @@ export const StyledAvatarGroup = styled('div', {
 });
 
 export const AvatarGroup: FunctionComponent<AvatarGroupProps> = React.forwardRef(({
-  limit = null, size, children, ...rest
+  limit = 0, size, children, ...rest
 }: AvatarGroupProps, ref) => {
 
   const avatars = children || [];
   const avatarCount = avatars.length || 0;
   const avatarLimit = limit || avatarCount;
-  const extraAvatars = avatarCount - avatarLimit;
+  const hasMoreAvatars = avatarCount - avatarLimit;
 
   const renderAvatars = avatars.slice(0, avatarLimit).map((child: React.ReactElement, index: number): React.ReactNode => {
     const isFirstChild = index === 0;
@@ -114,10 +114,11 @@ export const AvatarGroup: FunctionComponent<AvatarGroupProps> = React.forwardRef
       {renderAvatars}
 
       {
-        extraAvatars > 0 ?
+        hasMoreAvatars > 0 ?
           <AvatarNestedItem size={size}>
             <Avatar
-              src={avatars[avatarCount! - extraAvatars].props.src}
+              src={avatars[avatarCount! - hasMoreAvatars].props.src}
+              name={avatars[avatarCount! - hasMoreAvatars].props.name}
               size={size}
               rounded={'full'}
               css={{
@@ -127,7 +128,7 @@ export const AvatarGroup: FunctionComponent<AvatarGroupProps> = React.forwardRef
             >
               <AvatarOverlay />
               <AvatarOverlayText >
-                + {extraAvatars}
+                + {hasMoreAvatars}
               </AvatarOverlayText>
             </Avatar>
           </AvatarNestedItem>
