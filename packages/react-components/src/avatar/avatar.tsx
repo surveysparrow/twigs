@@ -82,7 +82,8 @@ const StyledAvatar = styled(AvatarPrimitive.Root, {
     }
   },
   defaultVariants: {
-    size: 'sm'
+    size: 'sm',
+    rounded: 'full'
   }
 });
 
