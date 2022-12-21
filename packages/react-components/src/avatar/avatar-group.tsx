@@ -3,11 +3,11 @@ import { styled } from '../../stitches.config';
 import { Avatar } from './avatar';
 
 type OmitAvatarProps = 'isAnonymous' | 'rounded';
-interface AvatarGroupBaseProps {
+
+export type AvatarGroupProps = {
   limit?: number | null,
   children: React.ReactElement[]
-}
-export type AvatarGroupProps = AvatarGroupBaseProps & ComponentProps<typeof Avatar> & Omit<typeof Avatar, OmitAvatarProps>
+} & Omit<ComponentProps<typeof Avatar>, OmitAvatarProps>
 
 const AvatarOverlay = styled('div', {
   height: '100%',
