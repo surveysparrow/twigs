@@ -29,4 +29,4 @@ const Template = (args) => (
     <Avatar {...args} key={3} />
   </AvatarGroup>
 );
-export const AvatarGroupD = Template.bind({});
+export const AvatarGrouped = Template.bind({});
