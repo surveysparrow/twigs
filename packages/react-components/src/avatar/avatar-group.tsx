@@ -8,6 +8,9 @@ export type AvatarGroupProps = {
   limit?: number | null,
   children: React.ReactElement[]
 } & Omit<ComponentProps<typeof Avatar>, OmitAvatarProps>
+  & React.HTMLAttributes<HTMLDivElement> & {
+    as?: React.ElementType
+  };
 
 const AvatarOverlay = styled('div', {
   height: '100%',
@@ -78,7 +81,7 @@ const AvatarNestedItem = styled('div', {
   }
 });
 
-export const StyledAvatarGroup = styled('div', {
+const StyledAvatarGroup = styled('div', {
   display: 'flex',
   flexDirection: 'row'
 });
