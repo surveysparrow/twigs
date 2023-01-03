@@ -28,4 +28,4 @@ const Template: ComponentStory<typeof Chip> = (args) => (
   </Chip>
 );
 export const Default = Template.bind({});
-Default.args = { color: 'info', size: 'lg', showCloseButton: true };
+Default.args = { color: 'info', size: 'lg' };
