@@ -10,8 +10,8 @@ const StyledThumb = styled(SwitchPrimitive.Thumb, {
   transition: 'transform 150ms',
   transform: 'translateX(1px)',
   willChange: 'transform',
-  '&[data-state="checked"]': { 
-    transform: 'translateX(15px)' 
+  '&[data-state="checked"]': {
+    transform: 'translateX(15px)'
   }
 });
 
@@ -32,8 +32,12 @@ const StyledSwitch = styled(SwitchPrimitive.Root, {
     background: '$neutral200',
     cursor: 'not-allowed'
   },
-  '&[data-state="checked"]': { 
-    backgroundColor: '$secondary700' 
+  '&[data-state="checked"]': {
+    backgroundColor: '$secondary700',
+    '&[data-disabled]': {
+      background: '$secondary200',
+      cursor: 'not-allowed'
+    },
   },
   variants: {
     size: {
@@ -47,8 +51,8 @@ const StyledSwitch = styled(SwitchPrimitive.Root, {
         [`& ${StyledThumb}`]: {
           width: '18px',
           height: '18px',
-          '&[data-state="checked"]': { 
-            transform: 'translateX(21px)' 
+          '&[data-state="checked"]': {
+            transform: 'translateX(21px)'
           }
         }
       }
