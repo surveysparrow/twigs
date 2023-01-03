@@ -1,15 +1,15 @@
-import React, { FunctionComponent, isValidElement, ComponentProps, ReactElement } from 'react';
+import React, { ComponentProps, FunctionComponent, isValidElement, ReactElement } from 'react';
 import { Button, ButtonBaseProps } from './button';
 
-type OmitProps = 'iconLeft' | 'iconRight' | 'isText' | 'isIcon';
+type OmitProps = 'iconLeft' | 'iconRight' | 'isIcon' | 'isText';
 
 export interface IconButtonBaseProps {
   icon: ReactElement,
   'aria-label': string
 }
 
-interface BaseButtonProps extends ComponentProps<typeof Button> { }
-type IconButtonProps = IconButtonBaseProps & Omit<BaseButtonProps, OmitProps>;
+type IconButtonProps = IconButtonBaseProps & Omit<ComponentProps<typeof Button>, OmitProps> &
+  React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 // @TODO: revisit the ref approach here
 export const IconButton: FunctionComponent<IconButtonProps> = React.forwardRef(
@@ -23,6 +23,7 @@ export const IconButton: FunctionComponent<IconButtonProps> = React.forwardRef(
     const validElement = isValidElement(element) ? element : null;
     return (
       <Button
+        ref={ref}
         aria-label={ariaLabel}
         icon={validElement}
         ref={ref}

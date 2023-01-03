@@ -4,6 +4,7 @@ import '@testing-library/jest-dom';
 import type { RenderResult } from '@testing-library/react';
 import { render } from '@testing-library/react';
 import { Avatar } from '../avatar';
+import { AvatarGroup } from '../avatar-group';
 
 const getFallbackInitials = (name: string): string => {
   const [firstName, lastName] = name.split(' ');
@@ -70,5 +71,24 @@ describe('given an Avatar with fallback and delayed render', () => {
     expect(fallback).not.toBeInTheDocument();
     fallback = await rendered.findByText(FALLBACK_INITIALS);
     expect(fallback).toBeInTheDocument();
+  });
+});
+
+describe('AvatarGroup', () => {
+  it('renders without crashing', () => {
+    render(
+      <AvatarGroup>
+        <Avatar
+          src="https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&w=128&h=128&dpr=2&q=80"
+          name="Pedro Duarte"
+          fallbackDelay={DELAY}
+        />
+        <Avatar
+          src="https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&w=128&h=128&dpr=2&q=80"
+          name="Pedro Duarte"
+          fallbackDelay={DELAY}
+        />
+      </AvatarGroup>
+    );
   });
 });
