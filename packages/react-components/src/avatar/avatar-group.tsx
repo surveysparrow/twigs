@@ -2,7 +2,7 @@ import React, { FunctionComponent, ComponentProps } from 'react';
 import { styled } from '../../stitches.config';
 import { Avatar } from './avatar';
 
-type OmitAvatarProps = 'isAnonymous' | 'rounded';
+type OmitAvatarProps = 'isAnonymous' | 'rounded' | 'src' | 'name';
 
 export type AvatarGroupProps = {
   limit?: number | null,

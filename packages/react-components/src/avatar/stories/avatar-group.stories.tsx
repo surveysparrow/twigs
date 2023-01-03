@@ -23,7 +23,7 @@ export default {
 } as ComponentMeta<typeof Avatar>;
 
 const Template = (args) => (
-  <AvatarGroup {...args}>
+  <AvatarGroup size={args.size} limit={args.limit} fallbackDelay={args.fallbackDelay}>
     <Avatar {...args} key={1} />
     <Avatar {...args} key={2} />
     <Avatar {...args} key={3} />
