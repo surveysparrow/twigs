@@ -5,7 +5,7 @@ const AllIcons = (args) => {
   const [search, setSearch] = useState('');
   return (
     <>
-    <input
+      <input
         type="text"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
@@ -20,29 +20,29 @@ const AllIcons = (args) => {
           letterSpacing: '1.1px'
         }}
       />
-    <div style={{
-      display: 'grid',
-      gridTemplateColumns: 'repeat(8, 1fr)',
-      gap: '10px',
-      fontFamily: 'system-ui'
-    }}
-    >
-      {Object.entries(ReactIcons).filter(([key, value]) => key.toLowerCase().includes(search.toLowerCase())).map(([key, value]) => {
-        const IconComponent = value;
-        return (
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '16px 8px',
-            flexDirection: 'column',
-            border: '1px solid #fcf6f6',
-            borderRadius: '6px',
-            letterSpacing: '1.1px'
-          }}
-          >
-            <IconComponent key={key} {...args} />
-            <p style={{
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(5, 1fr)',
+        gap: '10px',
+        fontFamily: 'system-ui'
+      }}
+      >
+        {Object.entries(ReactIcons).filter(([key, value]) => key.toLowerCase().includes(search.toLowerCase())).map(([key, value]) => {
+          const IconComponent = value;
+          return (
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '16px 8px',
+              flexDirection: 'column',
+              border: '1px solid #fcf6f6',
+              borderRadius: '6px',
+              letterSpacing: '1.1px'
+            }}
+            >
+              <IconComponent key={key} {...args} />
+              <p style={{
                 fontSize: '12px',
                 marginBottom: 0,
                 fontWeight: 300,
@@ -53,13 +53,13 @@ const AllIcons = (args) => {
                 {key}
                 {' '}
               </p>
-          </div>
-        )
-      })}
-    </div>
+            </div>
+          );
+        })}
+      </div>
     </>
-  )
-}
+  );
+};
 
 export default {
   component: AllIcons,
@@ -67,14 +67,14 @@ export default {
   argTypes: {
     color: {
       control: 'color',
-      defaultValue: "#000000"
+      defaultValue: '#000000'
     },
     size: {
       control: 'number',
       defaultValue: 32
     }
   }
-}
+};
 
-const Template = (args) => <AllIcons {...args} />
+const Template = (args) => <AllIcons {...args} />;
 export const Icons = Template.bind({});

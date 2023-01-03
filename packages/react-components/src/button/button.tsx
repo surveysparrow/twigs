@@ -34,8 +34,8 @@ const StyledButton = styled('button', {
         lineHeight: '$lg',
         height: '$16',
         '& svg': {
-          width: '$3',
-          height: '$3'
+          width: '$6',
+          height: '$6'
         }
       },
       xl: {
@@ -45,8 +45,8 @@ const StyledButton = styled('button', {
         lineHeight: '$lg',
         height: '$12',
         '& svg': {
-          width: '$3',
-          height: '$3'
+          width: '$6',
+          height: '$6'
         }
       },
       lg: {
@@ -56,8 +56,8 @@ const StyledButton = styled('button', {
         lineHeight: '$md',
         height: '$10',
         '& svg': {
-          width: '10px',
-          height: '10px'
+          width: '$5',
+          height: '$5'
         }
       },
       md: {
@@ -67,8 +67,8 @@ const StyledButton = styled('button', {
         lineHeight: '$md',
         height: '$8',
         '& svg': {
-          width: '10px',
-          height: '10px'
+          width: '$5',
+          height: '$5'
         }
       },
       sm: {
@@ -78,8 +78,8 @@ const StyledButton = styled('button', {
         lineHeight: '$sm',
         height: '$6',
         '& svg': {
-          width: '$2',
-          height: '$2'
+          width: '$4',
+          height: '$4'
         }
       },
       xs: {
@@ -191,7 +191,6 @@ const StyledButton = styled('button', {
     },
     isIcon: {
       true: {
-        padding: 0,
         justifyContent: 'center',
         width: '$10',
         height: '$10'
@@ -199,6 +198,12 @@ const StyledButton = styled('button', {
     }
   },
   compoundVariants: [
+    {
+      isIcon: true,
+      css: {
+        padding: 0
+      }
+    },
     {
       variant: 'primary',
       isText: true,
@@ -258,20 +263,13 @@ const StyledButton = styled('button', {
     },
     {
       isIcon: true,
-      isTransparent: true,
-      css: {
-        padding: 0
-      }
-    },
-    {
-      isIcon: true,
       size: '2xl',
       css: {
         width: '$16',
         height: '$16',
         '& svg': {
-          width: '$4',
-          height: '$4'
+          width: '$8',
+          height: '$8'
         }
       }
     },
@@ -282,8 +280,8 @@ const StyledButton = styled('button', {
         width: '$12',
         height: '$12',
         '& svg': {
-          width: '$4',
-          height: '$4'
+          width: '$8',
+          height: '$8'
         }
       }
     },
@@ -294,8 +292,8 @@ const StyledButton = styled('button', {
         width: '$10',
         height: '$10',
         '& svg': {
-          width: '$3',
-          height: '$3'
+          width: '$6',
+          height: '$6'
         }
       }
     },
@@ -306,8 +304,8 @@ const StyledButton = styled('button', {
         width: '$8',
         height: '$8',
         '& svg': {
-          width: '$3',
-          height: '$3'
+          width: '$5',
+          height: '$5'
         }
       }
     },
@@ -318,8 +316,8 @@ const StyledButton = styled('button', {
         width: '$6',
         height: '$6',
         '& svg': {
-          width: '10px',
-          height: '10px'
+          width: '$4',
+          height: '$4'
         }
       }
     },
@@ -330,8 +328,8 @@ const StyledButton = styled('button', {
         width: '$5',
         height: '$5',
         '& svg': {
-          width: '$2',
-          height: '$2'
+          width: '$3',
+          height: '$3'
         }
       }
     },
