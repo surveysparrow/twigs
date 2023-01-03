@@ -8,6 +8,10 @@ export default {
   argTypes: {
     disabled: {
       control: 'boolean'
+    },
+    size: {
+      control: 'select',
+      options: ['sm', 'md']
     }
   }
 } as ComponentMeta<typeof Switch>;
