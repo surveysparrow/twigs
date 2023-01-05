@@ -102,7 +102,7 @@ export const AvatarGroup: FunctionComponent<AvatarGroupProps> = React.forwardRef
       rounded: 'full'
     }
     return (
-      <AvatarNestedItem size={size} isFirst={isFirstChild}>
+      <AvatarNestedItem size={size} isFirst={isFirstChild} key={child.key}>
         {React.cloneElement(child, childProps)}
       </AvatarNestedItem>
     )
