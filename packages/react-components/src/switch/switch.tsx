@@ -1,6 +1,20 @@
 import * as SwitchPrimitive from '@radix-ui/react-switch';
 import { styled } from '../../stitches.config';
 
+const StyledThumb = styled(SwitchPrimitive.Thumb, {
+  display: 'block',
+  backgroundColor: '$white900',
+  borderRadius: '$pill',
+  width: '$3',
+  height: '$3',
+  transition: 'transform 150ms',
+  transform: 'translateX(1px)',
+  willChange: 'transform',
+  '&[data-state="checked"]': {
+    transform: 'translateX(15px)'
+  }
+});
+
 const StyledSwitch = styled(SwitchPrimitive.Root, {
   all: 'unset',
   boxSizing: 'border-box',
@@ -18,30 +32,35 @@ const StyledSwitch = styled(SwitchPrimitive.Root, {
     background: '$neutral200',
     cursor: 'not-allowed'
   },
-  '&[data-state="checked"]': { backgroundColor: '$secondary700' },
+  '&[data-state="checked"]': {
+    backgroundColor: '$secondary700',
+    '&[data-disabled]': {
+      background: '$secondary200',
+      cursor: 'not-allowed'
+    },
+  },
   variants: {
     size: {
       sm: {
+        width: '$7',
+        height: '14px'
+      },
+      md: {
         width: '$10',
-        height: '$5'
+        height: '$5',
+        [`& ${StyledThumb}`]: {
+          width: '18px',
+          height: '18px',
+          '&[data-state="checked"]': {
+            transform: 'translateX(21px)'
+          }
+        }
       }
     }
   },
   defaultVariants: {
     size: 'sm'
   }
-});
-
-const StyledThumb = styled(SwitchPrimitive.Thumb, {
-  display: 'block',
-  width: '18px',
-  height: '18px',
-  backgroundColor: '$white900',
-  borderRadius: '$pill',
-  transition: 'transform 150ms',
-  transform: 'translateX(1px)',
-  willChange: 'transform',
-  '&[data-state="checked"]': { transform: 'translateX(21px)' }
 });
 
 export const Switch = StyledSwitch;
