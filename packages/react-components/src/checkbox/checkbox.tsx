@@ -103,14 +103,20 @@ const StyledLabelContainer = styled('span', {
   paddingInlineStart: '$8'
 });
 
-export interface CheckboxBaseProps {
-  isChecked?: boolean | string;
-  isIndeterminate?: boolean;
-  children?: ReactNode;
+type OmitProps = 'disabled' | 'checked' | 'onCheckedChange' | 'required';
+
+export type CheckboxBaseProps = {
+  isChecked?: boolean | string,
+  isIndeterminate?: boolean,
+  children?: ReactNode,
+  onChange: () => void,
+  isRequired: boolean,
+  isDisabled: boolean,
+  'aria-label': string
 }
 
 export type CheckboxProps = CheckboxBaseProps &
-  ComponentProps<typeof StyledCheckbox> &
+  Omit<ComponentProps<typeof StyledCheckbox>, OmitProps> &
   ComponentProps<typeof StyledIndicator> &
   React.HTMLAttributes<HTMLInputElement> & {
     as?: React.ElementType;
@@ -119,6 +125,10 @@ export type CheckboxProps = CheckboxBaseProps &
 export const Checkbox: FunctionComponent<CheckboxProps> = ({
   isChecked,
   isIndeterminate,
+  isDisabled,
+  isRequired,
+  onChange,
+  'aria-label': ariaLabel,
   children,
   ...rest
 }) => {
@@ -127,6 +137,10 @@ export const Checkbox: FunctionComponent<CheckboxProps> = ({
       <FormLabel as="label" css={{ display: 'flex', alignItems: 'center' }}>
         <StyledCheckbox
           checked={isChecked}
+          onCheckedChange={onChange}
+          disabled={isDisabled}
+          required={isRequired}
+          aria-label={ariaLabel}
           {...(isIndeterminate && { 'data-state': 'indeterminate' })}
           {...rest}
         >
