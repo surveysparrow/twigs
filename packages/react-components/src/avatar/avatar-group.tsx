@@ -19,7 +19,9 @@ const AvatarOverlay = styled('div', {
   opacity: .5,
   zIndex: 2,
   position: "absolute",
-  left: 0
+  left: 0,
+  top: 0,
+  borderRadius: '$round'
 });
 
 const AvatarOverlayText = styled('span', {
@@ -31,13 +33,40 @@ const AvatarOverlayText = styled('span', {
   zIndex: 3,
   color: "$colors$white900",
   position: "absolute",
-  left: 0
+  left: 0,
+  top: 0,
+  variants: {
+    size: {
+      '3xl': {
+        fontSize: '$3xl',
+      },
+      '2xl': {
+        fontSize: '$2xl',
+      },
+      xl: {
+        fontSize: '$md',
+      },
+      lg: {
+        fontSize: '$md',
+      },
+      md: {
+        fontSize: '$xs',
+      },
+      sm: {
+        fontSize: '$xxs',
+      },
+      xs: {
+        fontSize: '$xxs',
+      }
+    }
+  },
 });
 
 const AvatarNestedItem = styled('div', {
   borderColor: '$colors$white900',
   borderStyle: 'solid',
   borderRadius: '100%',
+  zIndex: 0,
   backgroundColor: '$tertiary200',
   variants: {
     size: {
@@ -130,7 +159,7 @@ export const AvatarGroup: FunctionComponent<AvatarGroupProps> = React.forwardRef
               }}
             >
               <AvatarOverlay />
-              <AvatarOverlayText >
+              <AvatarOverlayText size={size}>
                 + {extraAvatarsCount}
               </AvatarOverlayText>
             </Avatar>
