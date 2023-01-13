@@ -70,14 +70,13 @@ export type SwitchProps = {
   isDisabled: boolean,
   isChecked: boolean,
   onChange: () => void,
-  isRequired: boolean,
-  'aria-label': string
+  isRequired: boolean
 } & Omit<ComponentProps<typeof StyledSwitch>, OmitProps>;
 
 export const Switch: FunctionComponent<SwitchProps> = React.forwardRef(
   (
     {
-      isChecked, isDisabled, onChange, 'aria-label': ariaLabel, isRequired, ...rest
+      isChecked, isDisabled, onChange, isRequired, ...rest
     }: SwitchProps,
     ref
   ) => {
@@ -88,7 +87,6 @@ export const Switch: FunctionComponent<SwitchProps> = React.forwardRef(
         checked={isChecked}
         required={isRequired}
         onCheckedChange={onChange}
-        aria-label={ariaLabel}
         {...rest}
       >
         <SwitchThumb />
