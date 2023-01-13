@@ -111,8 +111,7 @@ export type CheckboxBaseProps = {
   children?: ReactNode,
   onChange: () => void,
   isRequired: boolean,
-  isDisabled: boolean,
-  'aria-label': string
+  isDisabled: boolean
 }
 
 export type CheckboxProps = CheckboxBaseProps &
@@ -128,7 +127,6 @@ export const Checkbox: FunctionComponent<CheckboxProps> = ({
   isDisabled,
   isRequired,
   onChange,
-  'aria-label': ariaLabel,
   children,
   ...rest
 }) => {
@@ -140,7 +138,6 @@ export const Checkbox: FunctionComponent<CheckboxProps> = ({
           onCheckedChange={onChange}
           disabled={isDisabled}
           required={isRequired}
-          aria-label={ariaLabel}
           {...(isIndeterminate && { 'data-state': 'indeterminate' })}
           {...rest}
         >
