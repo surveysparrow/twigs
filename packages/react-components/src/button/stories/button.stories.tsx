@@ -16,7 +16,7 @@ export default {
     },
     variant: {
       control: 'select',
-      options: ['default', 'primary', 'accent', 'secondary']
+      options: ['default', 'primary', 'accent', 'secondary', 'bright']
     },
     isLoading: {
       control: 'boolean'
@@ -36,7 +36,7 @@ export default {
 const Template: ComponentStory<typeof Button> = (args) => <Button {...args}>Submit</Button>;
 export const Primary = Template.bind({});
 
-const ButtonWithIconT = (args) =>  <Button {...args} iconLeft={<PlusIcon />}>Submit</Button>;
+const ButtonWithIconT = (args) => <Button {...args} iconLeft={<PlusIcon />}>Submit</Button>;
 export const ButtonWithIcon = ButtonWithIconT.bind({});
 
 Primary.args = { variant: 'primary' };
