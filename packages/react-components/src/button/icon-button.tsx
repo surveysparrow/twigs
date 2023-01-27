@@ -5,7 +5,7 @@ type OmitProps = 'iconLeft' | 'iconRight' | 'isIcon' | 'isText';
 
 export interface IconButtonBaseProps {
   icon: ReactElement,
-  'aria-label': string
+  'aria-label'?: string
 }
 
 type IconButtonProps = IconButtonBaseProps & Omit<ComponentProps<typeof Button>, OmitProps> &
