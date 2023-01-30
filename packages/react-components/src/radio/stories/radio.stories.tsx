@@ -11,9 +11,6 @@ export default {
     size: {
       control: 'select',
       options: ['sm', 'md']
-    },
-    disabled: {
-      control: 'boolean'
     }
   }
 } as ComponentMeta<typeof Radio>;
@@ -21,15 +18,11 @@ export default {
 const Template = (args) => (
   <RadioGroup defaultValue="default" aria-label="View density" {...args}>
     <Flex css={{ alignItems: 'center' }}>
-      <Radio size="sm" value="default" id="r1" {...args}>
-        <RadioIndicator />
-      </Radio>
+      <Radio size="sm" value="default" id="r1" {...args} />
       <FormLabel css={{ marginLeft: '6px' }}>Default</FormLabel>
     </Flex>
     <Flex css={{ margin: '10px 0', alignItems: 'center' }}>
-      <Radio size="sm" value="comfortable" id="r2" {...args}>
-        <RadioIndicator />
-      </Radio>
+      <Radio size="sm" value="comfortable" id="r2" {...args} />
       <FormLabel css={{ marginLeft: '6px' }}>Comfortable</FormLabel>
     </Flex>
   </RadioGroup>

@@ -13,6 +13,9 @@ export default {
     isChecked: {
       control: 'boolean'
     },
+    isDisabled: {
+      control: 'boolean'
+    },
     isIndeterminate: {
       control: 'boolean'
     }

@@ -1,4 +1,6 @@
+import React from 'react';
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
+import { ComponentProps, FunctionComponent } from 'react';
 import { styled } from '../../stitches.config';
 
 const StyledRadio = styled(RadioGroupPrimitive.Item, {
@@ -61,6 +63,57 @@ const StyledIndicator = styled(RadioGroupPrimitive.Indicator, {
   }
 });
 
-export const RadioGroup = RadioGroupPrimitive.Root;
-export const Radio = StyledRadio;
-export const RadioIndicator = StyledIndicator;
+type OmitProps = 'disabled' | 'onValueChange' | 'required';
+
+type RadioRootProps = {
+  onChange: (value: string) => void,
+  isDisabled?: boolean,
+  isRequired?: boolean,
+  children: React.ReactNode | React.ReactNode[]
+} & Omit<ComponentProps<typeof RadioGroupPrimitive.Root>, OmitProps>
+
+export const RadioGroup: FunctionComponent<RadioRootProps> = React.forwardRef(
+  (
+    {
+      onChange, isDisabled, isRequired, value, children, ...rest
+    }: RadioRootProps, ref
+  ) => {
+    return (
+      <RadioGroupPrimitive.Root
+        ref={ref}
+        onValueChange={onChange}
+        disabled={isDisabled}
+        required={isRequired}
+        {...rest}
+      >
+        {children}
+      </RadioGroupPrimitive.Root>
+    )
+  }
+)
+
+export type RadioProps = {
+  isDisabled?: boolean,
+  isRequired?: boolean
+} & Omit<ComponentProps<typeof StyledRadio>, OmitProps>;
+
+export const Radio: FunctionComponent<RadioProps> = React.forwardRef(
+  (
+    {
+      isDisabled, value, onChange, isRequired, ...rest
+    }: RadioProps,
+    ref
+  ) => {
+    return (
+      <StyledRadio
+        ref={ref}
+        disabled={isDisabled}
+        required={isRequired}
+        value={value}
+        {...rest}
+      >
+        <StyledIndicator />
+      </StyledRadio>
+    )
+  }
+)
