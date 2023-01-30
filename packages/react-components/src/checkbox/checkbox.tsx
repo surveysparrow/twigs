@@ -109,7 +109,7 @@ export type CheckboxBaseProps = {
   isChecked?: boolean | string,
   isIndeterminate?: boolean,
   children?: ReactNode,
-  onChange: () => void,
+  onChange: (checked: boolean | 'indeterminate') => void,
   isRequired: boolean,
   isDisabled: boolean
 }

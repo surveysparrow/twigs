@@ -1,5 +1,5 @@
 import React, { ComponentProps, FunctionComponent, isValidElement, ReactElement } from 'react';
-import { Button, ButtonBaseProps } from './button';
+import { Button } from './button';
 
 type OmitProps = 'iconLeft' | 'iconRight' | 'isIcon' | 'isText';
 
@@ -11,7 +11,6 @@ export interface IconButtonBaseProps {
 type IconButtonProps = IconButtonBaseProps & Omit<ComponentProps<typeof Button>, OmitProps> &
   React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-// @TODO: revisit the ref approach here
 export const IconButton: FunctionComponent<IconButtonProps> = React.forwardRef(
   (
     {

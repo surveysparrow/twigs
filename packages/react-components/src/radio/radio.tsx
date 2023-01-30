@@ -66,7 +66,7 @@ const StyledIndicator = styled(RadioGroupPrimitive.Indicator, {
 type OmitProps = 'disabled' | 'onValueChange' | 'required';
 
 type RadioRootProps = {
-  onChange: () => void,
+  onChange: (value: string) => void,
   isDisabled?: boolean,
   isRequired?: boolean,
   children: React.ReactNode | React.ReactNode[]
