@@ -69,7 +69,7 @@ type OmitProps = 'disabled' | 'checked' | 'onCheckedChange' | 'required';
 export type SwitchProps = {
   isDisabled: boolean,
   isChecked: boolean,
-  onChange: () => void,
+  onChange: (checked: boolean) => void,
   isRequired: boolean
 } & Omit<ComponentProps<typeof StyledSwitch>, OmitProps>;
 
