@@ -14,7 +14,6 @@ export const AllColors = ()=>{
                     backgroundColor: colors[key],
                     color: 'white',
                     height: '100px',
-                    p: 0,
                     width: '150px',
                     borderRadius:'5px',
                     border:'1px solid #b0b0b0'
@@ -94,7 +93,6 @@ export const AllRadii = ()=>{
                     color: 'white',
                     height: '150px',
                     borderRadius:radii[key],
-                    p: 0,
                     width: '150px',
                     display:'flex',
                     justifyContent:'center',
