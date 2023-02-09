@@ -44,7 +44,7 @@ export const AllFontSizes = () => {
 	return Object.keys(fontSizes).map((fontSize, idx) => (
 		<Box
 			key={`fontSize${idx}`}
-			css={{ borderTop: '1px solid rgba(0,0,0,.1)', padding: '30px' }}
+			css={{ borderTop: '1px solid rgba(0,0,0,.1)', padding: '30px 0' }}
 		>
 			<Text size="sm">
 				{fontSize}&emsp;&emsp;&emsp;{fontSizes[fontSize]}
@@ -70,10 +70,13 @@ export const AllFontWeights = () => {
 	return Object.keys(fontWeights).map((fontWeight, idx) => (
 		<Box
 			key={`fontWeight${idx}`}
-			css={{ borderTop: '1px solid rgba(0,0,0,.1)', padding: '30px' }}
+			css={{ borderTop: '1px solid rgba(0,0,0,.1)', padding: '30px 0' }}
 		>
 			<Text size="sm">
-				{fontWeight} {fontWeights[fontWeight]}
+				key&emsp;&emsp;value
+			</Text>
+			<Text size="md">
+				{fontWeight}&emsp;&emsp;{fontWeights[fontWeight]}
 			</Text>
 			<Text
 				css={{
