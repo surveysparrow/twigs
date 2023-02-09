@@ -7,10 +7,14 @@ export const Template = (args) => <AllIcons {...args} />;
 
 <Meta
   title="Icons"
-  parameters={{
-    viewMode: 'docs',
-    previewTabs: {
-      canvas: { hidden: true },
+  argTypes={{
+    color: {
+      control: 'color',
+      defaultValue: '#000000',
+    },
+    size: {
+      control: 'number',
+      defaultValue: 32,
     },
   }}
 />
