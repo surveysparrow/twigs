@@ -12,7 +12,7 @@ export default {
   argTypes: {
     content: {
       control: 'text',
-      defaultValue: 'Tooltip text'
+      defaultValue: 'Twigs tooltip text'
     },
     side: {
       control: 'select',
@@ -25,6 +25,11 @@ export default {
     },
     sideOffset: {
       control: 'number'
+    },
+    size: {
+      control: 'select',
+      options: ['sm', 'md'],
+      defaultValue: 'md'
     }
   }
 } as ComponentMeta<typeof Tooltip>;
