@@ -7,8 +7,12 @@ import { Switch } from '../index';
 describe('Switch', () => {
   it('renders without crashing', () => {
     render(
-      <Switch defaultChecked id="s1"
-        isDisabled={false} isChecked={false} onChange={() => { }} isRequired={false}
+      <Switch
+        defaultChecked id="s1"
+        isDisabled={false}
+        isChecked={false}
+        onChange={() => { }}
+        isRequired={false}
       />
     );
   });
