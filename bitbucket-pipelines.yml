@@ -36,7 +36,7 @@ pipelines:
             script:
               - npm install -g lerna
               - yarn install
-              - lerna run build --scope=@sparrowengg/ss-components-icons
+              - lerna run build --scope=@sparrowengg/twigs-react-icons
             condition:
               changesets:
                 includePaths:
@@ -65,7 +65,7 @@ pipelines:
             script:
               - npm install -g lerna
               - yarn install
-              - lerna run build --scope=@sparrowengg/ss-components
+              - lerna run build --scope=@sparrowengg/twigs-react
             condition:
               changesets:
                 includePaths:
@@ -99,7 +99,7 @@ pipelines:
               script:
                 - npm install -g lerna
                 - yarn install
-                - lerna run build --scope=@sparrowengg/ss-components-icons
+                - lerna run build --scope=@sparrowengg/twigs-react-icons
 
       # components
       - parallel:
@@ -123,4 +123,4 @@ pipelines:
               script:
                 - npm install -g lerna
                 - yarn install
-                - lerna run build --scope=@sparrowengg/ss-components\
+                - lerna run build --scope=@sparrowengg/twigs-react
