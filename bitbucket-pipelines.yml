@@ -30,7 +30,11 @@ pipelines:
               - lerna run build --scope=@sparrowengg/twigs-react-icons
               - cd packages/react-icons
               - npx eslint .
-
+            condition:
+              changesets:
+                includePaths:
+                  # only package json file changes
+                  - "packages/twigs-react-icons/package.json"
         # components
     - parallel:
         - step:
@@ -48,6 +52,11 @@ pipelines:
               - lerna run build --scope=@sparrowengg/twigs-react
               - cd packages/react-components
               - npx eslint .
+            condition:
+              changesets:
+                includePaths:
+                  # only package json file changes
+                  - "packages/twigs-react/package.json"
 
   branches:
     master:
