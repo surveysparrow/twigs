@@ -24,7 +24,7 @@ pipelines:
             name: Run eslint
             script:
               - cd packages/react-icons
-              - npm install eslint
+              - npm install eslint --force
               - npx eslint .
             caches:
               - node
