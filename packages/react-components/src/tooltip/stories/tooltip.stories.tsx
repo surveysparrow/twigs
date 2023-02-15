@@ -29,7 +29,7 @@ export default {
     size: {
       control: 'select',
       options: ['sm', 'md'],
-      defaultValue: 'md'
+      defaultValue: 'sm'
     }
   }
 } as ComponentMeta<typeof Tooltip>;
