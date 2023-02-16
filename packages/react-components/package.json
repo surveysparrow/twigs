@@ -1,6 +1,6 @@
 {
   "name": "@sparrowengg/twigs-react",
-  "version": "0.1.7",
+  "version": "0.3.1",
   "description": "In house component library for SurveySparrow",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -58,7 +58,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.18.10",
-    "@sparrowengg/twigs-react-icons": "^0.0.2",
+    "@sparrowengg/twigs-react-icons": "^0.0.5",
     "@storybook/addon-actions": "^6.5.10",
     "@storybook/addon-essentials": "^6.5.10",
     "@storybook/addon-interactions": "^6.5.10",

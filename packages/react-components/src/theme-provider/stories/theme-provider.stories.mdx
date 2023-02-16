@@ -1,0 +1,170 @@
+<!-- theme-provider.stories.mdx -->
+
+import { Meta, Story } from '@storybook/addon-docs';
+import { Box } from '../../box/box';
+import { defaultTheme } from '../../../stitches.config';
+import { Text } from '../../text/text';
+import { Heading } from '../../heading/heading';
+import { Flex } from '../../flex/flex';
+import {
+  AllColors,
+  AllFontSizes,
+  AllFontWeights,
+  AllBorderWidths,
+  AllRadii,
+} from './theme-blocks';
+
+export const themeData = defaultTheme;
+export const themeString = JSON.stringify(defaultTheme, undefined, 2);
+
+<Meta
+  title="Theme"
+  parameters={{
+    viewMode: 'docs',
+    previewTabs: {
+      canvas: { hidden: true },
+    },
+  }}
+/>
+
+## ThemeProvider
+
+Twigs come with a `ThemeProvider` which is completely customizable. With the help of `ThemeProvider`, you can modify attributes such as colors, font sizes, spacing, etc.
+
+<ol>
+  <li>
+    <a href="#colors">Colors</a>
+  </li>
+  <li>
+    <a href="#fontSize">Font Size</a>
+  </li>
+  <li>
+    <a href="#fontWeights">Font Weights</a>
+  </li>
+  <li>
+    <a href="#borderWidths">Border Widths</a>
+  </li>
+  <li>
+    <a href="#borderRadius">Border Radius</a>
+  </li>
+</ol>
+
+Basic usage of `ThemeProvider`
+
+```jsx
+import { ThemeProvider } from '@sparrowengg/twigs-react';
+
+const Index = () => (
+  <ThemeProvider>
+    <App /> //your app entry point
+  </ThemeProvider>
+);
+```
+
+Optionally you can pass a `theme` object to `ThemeProvider` to modify the default theme.
+
+```jsx
+<ThemeProvider
+  theme={{
+    fonts: {
+      body: "'DM sans', sans-serif",
+    },
+  }}
+>
+  <App /> //your app entry point
+</ThemeProvider>
+```
+
+Below is the complete theme object which you can modify further.
+
+<Box css={{ maxHeight: '500px', overflowY: 'scroll' }}>
+  <code>{themeString}</code>
+</Box>
+
+<Story name="Default">
+  <Heading size="h2" css={{ margin: '120px 0 30px' }} id="colors">
+    Colors
+  </Heading>
+  <Flex
+    css={{
+      alignItems: 'center',
+      backgroundColor: 'none',
+      color: 'white',
+      height: 'auto',
+      justifyContent: 'space-between',
+      width: 'auto',
+      gap: '40px',
+      flexWrap: 'wrap',
+    }}
+  >
+    <AllColors />
+  </Flex>
+  <Heading size="h2" css={{ margin: '120px 0 30px' }} id="fontSize">
+    Font Sizes
+  </Heading>
+  <Flex
+    css={{
+      alignItems: 'center',
+      backgroundColor: 'none',
+      color: 'white',
+      height: 'auto',
+      justifyContent: 'space-between',
+      width: 'auto',
+      flexWrap: 'wrap',
+    }}
+  >
+    <AllFontSizes />
+  </Flex>
+  <hr />
+  <Heading size="h2" css={{ margin: '120px 0 30px' }} id="fontWeights">
+    Font Weights
+  </Heading>
+  <Flex
+    css={{
+      alignItems: 'center',
+      backgroundColor: 'none',
+      color: 'white',
+      height: 'auto',
+      justifyContent: 'stretch',
+      width: 'auto',
+      flexWrap: 'wrap',
+    }}
+  >
+    <AllFontWeights />
+  </Flex>
+  <hr />
+  <Heading size="h2" css={{ margin: '120px 0 30px' }} id="borderWidths">
+    Border Widths
+  </Heading>
+  <Flex
+    css={{
+      alignItems: 'center',
+      backgroundColor: 'none',
+      color: 'white',
+      height: 'auto',
+      justifyContent: 'space-between',
+      width: 'auto',
+      gap: '25px',
+      flexWrap: 'wrap',
+    }}
+  >
+    <AllBorderWidths />
+  </Flex>
+  <Heading size="h2" css={{ margin: '120px 0 30px' }} id="borderRadius">
+    Border Radius
+  </Heading>
+  <Flex
+    css={{
+      alignItems: 'center',
+      backgroundColor: 'none',
+      color: 'white',
+      height: 'auto',
+      justifyContent: 'flex-start',
+      width: 'auto',
+      gap: '50px 60px ',
+      flexWrap: 'wrap',
+    }}
+  >
+    <AllRadii />
+  </Flex>
+</Story>
