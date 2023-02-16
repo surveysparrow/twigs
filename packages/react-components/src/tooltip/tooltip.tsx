@@ -23,9 +23,6 @@ const slideLeftAndFade = keyframes({
 });
 
 const StyledContent = styled(TooltipPrimitive.Content, {
-  borderRadius: '$md',
-  padding: '$6 $8',
-  fontSize: '$sm',
   lineHeight: '$sm',
   color: '$white900',
   backgroundColor: '$black900',
@@ -42,11 +39,43 @@ const StyledContent = styled(TooltipPrimitive.Content, {
       '&[data-side="bottom"]': { animationName: slideUpAndFade },
       '&[data-side="left"]': { animationName: slideRightAndFade }
     }
+  },
+  variants: {
+    size: {
+      sm: {
+        padding: '$2 $4',
+        fontSize: '$xs',
+        borderRadius: '$sm',
+      },
+      md: {
+        padding: '$6 $8',
+        fontSize: '$sm',
+        borderRadius: '$md',
+      }
+    }
+  },
+  defaultVariants: {
+    size: 'sm'
   }
 });
 
 const StyledArrow = styled(TooltipPrimitive.Arrow, {
-  fill: '$black900'
+  fill: '$black900',
+  variants: {
+    size: {
+      sm: {
+        width: '10px',
+        height: '6px'
+      },
+      md: {
+        width: '$5',
+        height: '$3'
+      }
+    }
+  },
+  defaultVariants: {
+    size: 'sm'
+  }
 });
 
 export const { Provider } = TooltipPrimitive;
@@ -63,11 +92,12 @@ export const Tooltip = ({
   content,
   side,
   align,
+  size,
   open,
   defaultOpen,
   onOpenChange,
   ...props
-} :TooltipProps) => {
+}: TooltipProps) => {
   return (
     <TooltipPrimitive.Root
       open={open}
@@ -77,9 +107,9 @@ export const Tooltip = ({
       <TooltipPrimitive.Trigger asChild>{children}</TooltipPrimitive.Trigger>
       {content && (
         <TooltipPrimitive.Portal>
-          <StyledContent side={side} align={align} {...props}>
+          <StyledContent side={side} align={align} size={size} {...props}>
             {content}
-            <StyledArrow css={{ width: '$5', height: '$3' }} />
+            <StyledArrow size={size} />
           </StyledContent>
         </TooltipPrimitive.Portal>
       )}

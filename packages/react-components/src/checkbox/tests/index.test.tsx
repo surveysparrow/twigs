@@ -6,6 +6,6 @@ import { Checkbox } from '../index';
 
 describe('Checkbox', () => {
   it('renders without crashing', () => {
-    render(<Checkbox />);
+    render(<Checkbox onChange={() => { }} isRequired={false} isDisabled={false} />);
   });
 });
