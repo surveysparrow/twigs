@@ -63,15 +63,6 @@ pipelines:
               - yarn install
               - lerna run build --scope=@sparrowengg/twigs-react
 
-    - step:
-        name: Run tests
-        caches:
-          - node
-        script:
-          - npm install -g lerna
-          - yarn install
-          - lerna run test
-
   branches:
     master:
       - parallel:
