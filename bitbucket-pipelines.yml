@@ -55,15 +55,6 @@ pipelines:
               - node
 
         - step:
-            name: Test Components
-            caches:
-              - node
-            script:
-              - npm install -g lerna
-              - yarn install
-              - lerna run test --scope=@sparrowengg/twigs-react
-
-        - step:
             name: Build Components
             caches:
               - node
@@ -71,6 +62,15 @@ pipelines:
               - npm install -g lerna
               - yarn install
               - lerna run build --scope=@sparrowengg/twigs-react
+
+    - step:
+        name: Run tests
+        caches:
+          - node
+        script:
+          - npm install -g lerna
+          - yarn install
+          - lerna run test
 
   branches:
     master:
