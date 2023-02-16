@@ -3221,13 +3221,6 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@sparrowengg/twigs-react-icons@^0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@sparrowengg/twigs-react-icons/-/twigs-react-icons-0.0.2.tgz#9fdb8f3f788ac9ea34c2185007ca05ea4a2f1cc3"
-  integrity sha512-1vUIAuYCTaM38upXw/afO7qNwnBm7XHFjaW9ao2XctkjsMKwQXOsVcZVQY1FjvQJyz44zSUIOq03e08rGEq6iA==
-  dependencies:
-    react "^18.2.0"
-
 "@stitches/react@^1.2.8":
   version "1.2.8"
   resolved "https://registry.yarnpkg.com/@stitches/react/-/react-1.2.8.tgz#954f8008be8d9c65c4e58efa0937f32388ce3a38"
