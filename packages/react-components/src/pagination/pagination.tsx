@@ -58,7 +58,7 @@ export const Pagination: FunctionComponent<PaginationProps> = React.forwardRef(
             <IconButton
               as='a'
               icon={<ChevronLeftIcon />}
-              disabled={page === 1}
+              isDisabled={page === 1}
               aria-disabled={page === 1}
               aria-label='Previous'
               variant={'bright'}
@@ -106,7 +106,7 @@ export const Pagination: FunctionComponent<PaginationProps> = React.forwardRef(
               aria-label='Next'
               variant={'bright'}
               role='link'
-              disabled={page === paginationRange?.[paginationRange?.length - 1]}
+              isDisabled={page === paginationRange?.[paginationRange?.length - 1]}
               aria-disabled={page === paginationRange?.[paginationRange?.length - 1]}
               onClick={(event: SyntheticEvent) => changeActivePage(event, page + 1)}
             />
