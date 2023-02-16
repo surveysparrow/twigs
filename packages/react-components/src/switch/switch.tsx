@@ -67,10 +67,10 @@ const StyledSwitch = styled(SwitchPrimitive.Root, {
 type OmitProps = 'disabled' | 'checked' | 'onCheckedChange' | 'required';
 
 export type SwitchProps = {
-  isDisabled: boolean,
-  isChecked: boolean,
-  onChange: (checked: boolean) => void,
-  isRequired: boolean
+  isDisabled?: boolean,
+  isChecked?: boolean,
+  onChange?: (checked: boolean) => void,
+  isRequired?: boolean
 } & Omit<ComponentProps<typeof StyledSwitch>, OmitProps>;
 
 export const Switch: FunctionComponent<SwitchProps> = React.forwardRef(
