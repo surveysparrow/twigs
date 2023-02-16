@@ -75,10 +75,11 @@ export const Pagination: FunctionComponent<PaginationProps> = React.forwardRef(
             />
           </li>
           {
-            paginationRange?.map((pageNumber) => {
+            paginationRange?.map((pageNumber, index) => {
               if (pageNumber === DOTS) {
                 return (
-                  <li key={`pagination-dots-${keyId}-${pageNumber}`}>
+                  // eslint-disable-next-line react/no-array-index-key
+                  <li key={`pagination-dots-${keyId}-${index}`}>
                     <IconButton
                       as="a"
                       icon={<EllipsisHorizontalIcon />}
