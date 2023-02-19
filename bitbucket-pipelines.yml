@@ -21,6 +21,15 @@ pipelines:
               - pipe: atlassian/git-secrets-scan:0.5.1
 
         - step:
+            name: Run eslint
+            script:
+              - cd packages/react-icons
+              - npm install eslint
+              - npx eslint .
+            caches:
+              - node
+
+        - step:
             name: Build Icons
             caches:
               - node
@@ -28,13 +37,7 @@ pipelines:
               - npm install -g lerna
               - yarn install
               - lerna run build --scope=@sparrowengg/twigs-react-icons
-              - cd packages/react-icons
-              - npx eslint .
-            condition:
-              changesets:
-                includePaths:
-                  # only package json file changes
-                  - "packages/twigs-react-icons/package.json"
+
         # components
     - parallel:
         - step:
@@ -43,6 +46,15 @@ pipelines:
               - cd packages/react-components
               - pipe: atlassian/git-secrets-scan:0.5.1
         - step:
+            name: Run eslint
+            script:
+              - cd packages/react-components
+              - npm install eslint
+              - npx eslint .
+            caches:
+              - node
+
+        - step:
             name: Build Components
             caches:
               - node
@@ -50,13 +62,6 @@ pipelines:
               - npm install -g lerna
               - yarn install
               - lerna run build --scope=@sparrowengg/twigs-react
-              - cd packages/react-components
-              - npx eslint .
-            condition:
-              changesets:
-                includePaths:
-                  # only package json file changes
-                  - "packages/twigs-react/package.json"
 
   branches:
     master:
@@ -102,6 +107,7 @@ pipelines:
                 - npx eslint .
               caches:
                 - node
+
           - step:
               name: Build Components
               caches:

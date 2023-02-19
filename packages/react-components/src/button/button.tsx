@@ -159,7 +159,19 @@ const StyledButton = styled('button', {
           background: '$tertiary100',
           border: '$borderWidths$sm solid $tertiary700'
         }
-      }
+      },
+      bright: {
+        background: '$white900',
+        color: '$neutral800',
+        '&:hover, &:focus': {
+          color: '$neutral900',
+          background: '$black300',
+        },
+        '&:active': {
+          color: '$neutral900',
+          background: '$black300'
+        }
+      },
     },
     isText: {
       true: {

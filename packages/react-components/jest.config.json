@@ -1,4 +1,14 @@
 {
   "preset": "ts-jest",
-  "testEnvironment": "jsdom"
+  "testEnvironment": "jsdom",
+  "globals": {
+    "ts-jest": {
+      "tsconfig": {
+        "allowJs": true
+      }
+    }
+  },
+  "transform": {
+    "^.+\\.[tj]s$": "ts-jest"
+  }
 }
