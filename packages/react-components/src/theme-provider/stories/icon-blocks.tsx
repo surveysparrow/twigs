@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import * as ReactIcons from '../index';
+import * as ReactIcons from '@sparrowengg/twigs-react-icons';
 
 const AllIcons = (args) => {
   const [search, setSearch] = useState('');
   return (
-    <>
+    <div style={{ border: '1px solid rgba(0,0,0,.1)', padding: '20px 15px' }}>
       <input
         type="text"
         value={search}
@@ -24,10 +24,13 @@ const AllIcons = (args) => {
         display: 'grid',
         gridTemplateColumns: 'repeat(5, 1fr)',
         gap: '10px',
-        fontFamily: 'system-ui'
+        fontFamily: 'system-ui',
+        border: '1px solid rgba(0,0,0,.1)',
+        padding: '10px'
       }}
       >
-        {Object.entries(ReactIcons).filter(([key, value]) => key.toLowerCase().includes(search.toLowerCase())).map(([key, value]) => {
+        {Object.entries(ReactIcons).filter(([key]) => key.toLowerCase()
+          .includes(search.toLowerCase())).map(([key, value]) => {
           const IconComponent = value;
           return (
             <div style={{
@@ -57,24 +60,8 @@ const AllIcons = (args) => {
           );
         })}
       </div>
-    </>
+    </div>
   );
 };
 
-export default {
-  component: AllIcons,
-  title: 'Icons',
-  argTypes: {
-    color: {
-      control: 'color',
-      defaultValue: '#000000'
-    },
-    size: {
-      control: 'number',
-      defaultValue: 32
-    }
-  }
-};
-
-const Template = (args) => <AllIcons {...args} />;
-export const Icons = Template.bind({});
+export default AllIcons;

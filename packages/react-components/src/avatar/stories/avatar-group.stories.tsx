@@ -23,10 +23,11 @@ export default {
 } as ComponentMeta<typeof Avatar>;
 
 const Template = (args) => (
-  <AvatarGroup size={args.size} limit={args.limit} fallbackDelay={args.fallbackDelay}>
-    <Avatar {...args} key={1} />
-    <Avatar {...args} key={2} />
-    <Avatar {...args} key={3} />
+  // eslint-disable-next-line react/destructuring-assignment
+  <AvatarGroup size={args.size} limit={args.limit}>
+    <Avatar {...args} key="my-avatar-1" />
+    <Avatar {...args} key="my-avatar-2" />
+    <Avatar {...args} key="my-avatar-3" />
   </AvatarGroup>
 );
 export const AvatarGrouped = Template.bind({});

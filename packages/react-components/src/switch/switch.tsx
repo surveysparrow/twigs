@@ -1,3 +1,4 @@
+import React, { ComponentProps, FunctionComponent } from 'react';
 import * as SwitchPrimitive from '@radix-ui/react-switch';
 import { styled } from '../../stitches.config';
 
@@ -37,7 +38,7 @@ const StyledSwitch = styled(SwitchPrimitive.Root, {
     '&[data-disabled]': {
       background: '$secondary200',
       cursor: 'not-allowed'
-    },
+    }
   },
   variants: {
     size: {
@@ -63,5 +64,35 @@ const StyledSwitch = styled(SwitchPrimitive.Root, {
   }
 });
 
-export const Switch = StyledSwitch;
+type OmitProps = 'disabled' | 'checked' | 'onCheckedChange' | 'required';
+
+export type SwitchProps = {
+  isDisabled?: boolean,
+  isChecked?: boolean,
+  // eslint-disable-next-line no-unused-vars
+  onChange?: (checked: boolean) => void,
+  isRequired?: boolean
+} & Omit<ComponentProps<typeof StyledSwitch>, OmitProps>;
+
+export const Switch: FunctionComponent<SwitchProps> = React.forwardRef(
+  (
+    {
+      isChecked, isDisabled, onChange, isRequired, ...rest
+    }: SwitchProps,
+    ref
+  ) => {
+    return (
+      <StyledSwitch
+        ref={ref}
+        disabled={isDisabled}
+        checked={isChecked}
+        required={isRequired}
+        onCheckedChange={onChange}
+        {...rest}
+      >
+        <StyledThumb />
+      </StyledSwitch>
+    );
+  }
+);
 export const SwitchThumb = StyledThumb;

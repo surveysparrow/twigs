@@ -1,12 +1,15 @@
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { Switch, SwitchThumb } from '../switch';
+import { Switch } from '../switch';
 
 export default {
   component: Switch,
   title: 'Switch',
   argTypes: {
-    disabled: {
+    isDisabled: {
+      control: 'boolean'
+    },
+    isRequired: {
       control: 'boolean'
     },
     size: {
@@ -17,8 +20,10 @@ export default {
 } as ComponentMeta<typeof Switch>;
 
 const Template: ComponentStory<typeof Switch> = (args) => (
-  <Switch defaultChecked id="s1" {...args}>
-    <SwitchThumb />
-  </Switch>
+  <Switch
+    defaultChecked
+    id="s1"
+    {...args}
+  />
 );
 export const Default = Template.bind({});

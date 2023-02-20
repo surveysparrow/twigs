@@ -5,6 +5,7 @@ import type { RenderResult } from '@testing-library/react';
 import { render } from '@testing-library/react';
 import { Avatar } from '../avatar';
 import { AvatarGroup } from '../avatar-group';
+import { AvatarBadge } from '../avatar-badge';
 
 const getFallbackInitials = (name: string): string => {
   const [firstName, lastName] = name.split(' ');
@@ -82,13 +83,29 @@ describe('AvatarGroup', () => {
           src="https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&w=128&h=128&dpr=2&q=80"
           name="Pedro Duarte"
           fallbackDelay={DELAY}
+          key="my-avatar-1"
         />
         <Avatar
           src="https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&w=128&h=128&dpr=2&q=80"
           name="Pedro Duarte"
           fallbackDelay={DELAY}
+          key="my-avatar-2"
         />
       </AvatarGroup>
+    );
+  });
+});
+
+describe('Avatar with Badge', () => {
+  it('renders without crashing', () => {
+    render(
+      <Avatar
+        src="https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&w=128&h=128&dpr=2&q=80"
+        name="Pedro Duarte"
+        fallbackDelay={DELAY}
+      >
+        <AvatarBadge />
+      </Avatar>
     );
   });
 });

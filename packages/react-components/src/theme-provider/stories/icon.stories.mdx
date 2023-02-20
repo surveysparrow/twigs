@@ -1,0 +1,35 @@
+<!-- theme-provider.stories.mdx -->
+
+import { Meta, Story } from '@storybook/addon-docs';
+import AllIcons from './icon-blocks';
+
+export const Template = (args) => <AllIcons {...args} />;
+
+<Meta
+  title="Icons"
+  argTypes={{
+    color: {
+      control: 'color',
+      defaultValue: '#000000',
+    },
+    size: {
+      control: 'number',
+      defaultValue: 32,
+    },
+  }}
+/>
+
+## Icons
+
+To install the `icons` package,
+
+`yarn add @sparrowengg/twigs-react-icons`
+
+or
+
+`npm install @sparrowengg/twigs-react-icons`
+
+To use the icon,
+`import { TickIcon } from '@sparrowengg/twigs-react-icons';`
+
+<Story name="Default">{Template.bind({})}</Story>

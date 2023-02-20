@@ -15,11 +15,13 @@ export type AvatarGroupProps = {
 const AvatarOverlay = styled('div', {
   height: '100%',
   width: '100%',
-  background: "$colors$black900",
-  opacity: .5,
+  background: '$colors$black900',
+  opacity: 0.5,
   zIndex: 2,
-  position: "absolute",
-  left: 0
+  position: 'absolute',
+  left: 0,
+  top: 0,
+  borderRadius: '$round'
 });
 
 const AvatarOverlayText = styled('span', {
@@ -29,50 +31,77 @@ const AvatarOverlayText = styled('span', {
   alignItems: 'center',
   justifyContent: 'center',
   zIndex: 3,
-  color: "$colors$white900",
-  position: "absolute",
-  left: 0
+  color: '$colors$white900',
+  position: 'absolute',
+  left: 0,
+  top: 0,
+  variants: {
+    size: {
+      '3xl': {
+        fontSize: '$3xl'
+      },
+      '2xl': {
+        fontSize: '$2xl'
+      },
+      xl: {
+        fontSize: '$md'
+      },
+      lg: {
+        fontSize: '$md'
+      },
+      md: {
+        fontSize: '$xs'
+      },
+      sm: {
+        fontSize: '$xxs'
+      },
+      xs: {
+        fontSize: '$xxs'
+      }
+    }
+  }
 });
 
 const AvatarNestedItem = styled('div', {
   borderColor: '$colors$white900',
   borderStyle: 'solid',
   borderRadius: '100%',
+  zIndex: 0,
   backgroundColor: '$tertiary200',
   variants: {
     size: {
       '3xl': {
         borderWidth: '2px',
-        marginLeft: '-$sizes$6',
+        marginLeft: '-$sizes$6'
       },
       '2xl': {
         borderWidth: '2px',
-        marginLeft: '-$sizes$6',
+        marginLeft: '-$sizes$6'
       },
       xl: {
         borderWidth: '2px',
-        marginLeft: '-$sizes$6',
+        marginLeft: '-$sizes$6'
       },
       lg: {
         borderWidth: '2px',
-        marginLeft: '-$sizes$5',
+        marginLeft: '-$sizes$5'
       },
       md: {
         borderWidth: '2px',
-        marginLeft: '-$sizes$4',
+        marginLeft: '-$sizes$4'
       },
       sm: {
         borderWidth: '1px',
-        marginLeft: '-$sizes$4',
+        marginLeft: '-$sizes$4'
       },
       xs: {
-        borderWidth: "1px",
-        marginLeft: '-$sizes$3',
+        borderWidth: '1px',
+        marginLeft: '-$sizes$3'
       }
     },
     isFirst: {
       true: {
-        marginLeft: '0 !important',
+        marginLeft: '0 !important'
       }
     }
   },
@@ -89,24 +118,24 @@ const StyledAvatarGroup = styled('div', {
 export const AvatarGroup: FunctionComponent<AvatarGroupProps> = React.forwardRef(({
   limit = 0, size, children, ...rest
 }: AvatarGroupProps, ref) => {
-
   const avatars = children || [];
   const avatarCount = avatars.length || 0;
   const avatarLimit = limit || avatarCount;
   const extraAvatarsCount = avatarCount - avatarLimit;
 
-  const renderAvatars = avatars.slice(0, avatarLimit).map((child: React.ReactElement, index: number): React.ReactNode => {
-    const isFirstChild = index === 0;
-    const childProps = {
-      ...child.props,
-      rounded: 'full'
-    }
-    return (
-      <AvatarNestedItem size={size} isFirst={isFirstChild}>
-        {React.cloneElement(child, childProps)}
-      </AvatarNestedItem>
-    )
-  })
+  const renderAvatars = avatars.slice(0, avatarLimit)
+    .map((child: React.ReactElement, index: number): React.ReactNode => {
+      const isFirstChild = index === 0;
+      const childProps = {
+        ...child.props,
+        rounded: 'full'
+      };
+      return (
+        <AvatarNestedItem size={size} isFirst={isFirstChild} key={child.key}>
+          {React.cloneElement(child, childProps)}
+        </AvatarNestedItem>
+      );
+    });
 
   return (
     <StyledAvatarGroup
@@ -117,27 +146,30 @@ export const AvatarGroup: FunctionComponent<AvatarGroupProps> = React.forwardRef
       {renderAvatars}
 
       {
-        extraAvatarsCount > 0 ?
-          <AvatarNestedItem size={size}>
-            <Avatar
-              src={avatars[avatarCount! - extraAvatarsCount].props.src}
-              name={avatars[avatarCount! - extraAvatarsCount].props.name}
-              size={size}
-              rounded={'full'}
-              css={{
-                position: "relative",
-                display: "flex"
-              }}
-            >
-              <AvatarOverlay />
-              <AvatarOverlayText >
-                + {extraAvatarsCount}
-              </AvatarOverlayText>
-            </Avatar>
-          </AvatarNestedItem>
-          :
-          null
+        extraAvatarsCount > 0
+          ? (
+            <AvatarNestedItem size={size}>
+              <Avatar
+                src={avatars[avatarCount! - extraAvatarsCount].props.src}
+                name={avatars[avatarCount! - extraAvatarsCount].props.name}
+                size={size}
+                rounded="full"
+                css={{
+                  position: 'relative',
+                  display: 'flex'
+                }}
+              >
+                <AvatarOverlay />
+                <AvatarOverlayText size={size}>
+                  +
+                  {' '}
+                  {extraAvatarsCount}
+                </AvatarOverlayText>
+              </Avatar>
+            </AvatarNestedItem>
+          )
+          : null
       }
     </StyledAvatarGroup>
-  )
-})
+  );
+});
