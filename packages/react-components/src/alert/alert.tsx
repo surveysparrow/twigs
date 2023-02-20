@@ -1,15 +1,17 @@
 import React, { ComponentProps, FunctionComponent } from 'react';
-import { AlertIcon, CloseIcon, InfoIcon, TickCircleIcon, WarningIcon } from "@sparrowengg/twigs-react-icons"
-import { styled } from "../../stitches.config"
-import { Box } from "../box"
-import { IconButton } from "../button";
+import {
+  AlertIcon, CloseIcon, InfoIcon, TickCircleIcon, WarningIcon
+} from '@sparrowengg/twigs-react-icons';
+import { styled } from '../../stitches.config';
+import { Box } from '../box';
+import { IconButton } from '../button';
 
 const STATUSES = {
   info: { name: 'info', icon: InfoIcon },
   warning: { name: 'warning', icon: WarningIcon },
   success: { name: 'success', icon: TickCircleIcon },
   error: { name: 'error', icon: AlertIcon }
-}
+};
 
 const StyledCloseButton = styled(IconButton, {
   marginLeft: 'auto'
@@ -34,13 +36,13 @@ const StyledAlert = styled(Box, {
   },
   variants: {
     size: {
-      'sm': {
-        padding: '6px 10px',
+      sm: {
+        padding: '$3 $5',
         [`${StyledAlertIcon}`]: {
           marginInlineEnd: '$2'
         },
         [`${StyledAlertDescription}`]: {
-          fontSize: '$sm',
+          fontSize: '$sm'
         },
         [`${IconButton}`]: {
           height: '$5',
@@ -48,13 +50,13 @@ const StyledAlert = styled(Box, {
           marginInlineStart: '$2'
         }
       },
-      'md': {
-        padding: '$4 18px',
+      md: {
+        padding: '$4',
         [`${StyledAlertIcon}`]: {
-          marginInlineEnd: '6.5px'
+          marginInlineEnd: '$4'
         },
         [`${StyledAlertDescription}`]: {
-          fontSize: '$md',
+          fontSize: '$md'
         },
         [`${IconButton}`]: {
           height: '$6',
@@ -65,8 +67,8 @@ const StyledAlert = styled(Box, {
     },
     status: {
       [STATUSES.success.name]: {
-        backgroundColor: '$positive100',
-        borderColor: '$positive200',
+        backgroundColor: '$positive50',
+        borderColor: '$positive100',
         [`${StyledAlertIcon} svg`]: {
           color: '$positive500'
         }
@@ -116,37 +118,40 @@ export const Alert: FunctionComponent<AlertProps> = React.forwardRef(
     children,
     ...rest
   }: AlertProps, ref) => {
-    const AlertIcon = STATUSES[status].icon;
+    const ValidAlertIcon = STATUSES[status].icon;
     return (
       <StyledAlert
-        role={'alert'}
+        role="alert"
         ref={ref}
+        size={size}
         status={status}
         {...rest}
       >
         <StyledAlertIcon
-          role={'img'}
+          role="img"
           aria-label={`${status}-icon`}
         >
-          <AlertIcon
-            size={size === 'sm' ? 20 : 32}
-            aria-hidden={true}
+          <ValidAlertIcon
+            size={size === 'sm' ? 20 : 24}
+            aria-hidden
           />
         </StyledAlertIcon>
         {children}
         {
-          closable ?
-            <StyledCloseButton
-              icon={<CloseIcon />}
-              aria-label='close'
-              variant={'default'}
-              {...(onClose && { onClick: onClose })}
-            />
-            :
-            null
+          closable
+            ? (
+              <StyledCloseButton
+                icon={<CloseIcon />}
+                aria-label="close"
+                variant="default"
+                {...(onClose && { onClick: onClose })}
+              />
+            )
+            : null
         }
       </StyledAlert>
-    )
-  })
+    );
+  }
+);
 
 export const AlertDescription = StyledAlertDescription;
