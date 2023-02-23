@@ -158,6 +158,9 @@ export const Checkbox: FunctionComponent<CheckboxProps> = ({
   return (
     <StyledCheckbox
       checked={isChecked}
+      onCheckedChange={onChange}
+      disabled={isDisabled}
+      required={isRequired}
       {...(isIndeterminate && { 'data-state': 'indeterminate' })}
       {...rest}
     >
