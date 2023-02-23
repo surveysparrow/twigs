@@ -10,6 +10,18 @@ const StyledImage = styled(AvatarPrimitive.Image, {
   objectFit: 'cover'
 });
 
+const StyledFallback = styled(AvatarPrimitive.Fallback, {
+  width: '100%',
+  height: '100%',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  backgroundColor: '$tertiary200',
+  color: '$neutral600',
+  lineHeight: '$xs',
+  fontWeight: '$7'
+});
+
 const StyledAvatar = styled(AvatarPrimitive.Root, {
   display: 'inline-flex',
   alignItems: 'center',
@@ -96,42 +108,42 @@ const StyledAvatar = styled(AvatarPrimitive.Root, {
     },
     rounded: {
       full: {
-        [`& ${StyledImage}`]: {
-          borderRadius: "100%"
+        [`& ${StyledImage}, & ${StyledFallback}`]: {
+          borderRadius: '100%'
         }
       },
       '3xl': {
-        [`& ${StyledImage}`]: {
+        [`& ${StyledImage}, & ${StyledFallback}`]: {
           borderRadius: '$3xl'
-        },
+        }
       },
       '2xl': {
-        [`& ${StyledImage}`]: {
+        [`& ${StyledImage}, & ${StyledFallback}`]: {
           borderRadius: '$2xl'
-        },
+        }
       },
       xl: {
-        [`& ${StyledImage}`]: {
+        [`& ${StyledImage}, & ${StyledFallback}`]: {
           borderRadius: '$xl'
         }
       },
       lg: {
-        [`& ${StyledImage}`]: {
+        [`& ${StyledImage}, & ${StyledFallback}`]: {
           borderRadius: '$lg'
         }
       },
       md: {
-        [`& ${StyledImage}`]: {
+        [`& ${StyledImage}, & ${StyledFallback}`]: {
           borderRadius: '$md'
         }
       },
       sm: {
-        [`& ${StyledImage}`]: {
+        [`& ${StyledImage}, & ${StyledFallback}`]: {
           borderRadius: '$md'
         }
       },
       xs: {
-        [`& ${StyledImage}`]: {
+        [`& ${StyledImage}, & ${StyledFallback}`]: {
           borderRadius: '$lg'
         }
       }
@@ -152,18 +164,6 @@ const StyledAvatar = styled(AvatarPrimitive.Root, {
     size: 'sm',
     rounded: 'full'
   }
-});
-
-const StyledFallback = styled(AvatarPrimitive.Fallback, {
-  width: '100%',
-  height: '100%',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  backgroundColor: '$tertiary200',
-  color: '$neutral600',
-  lineHeight: '$xs',
-  fontWeight: '$7'
 });
 
 const getFallbackInitials = (name: string): string => {
