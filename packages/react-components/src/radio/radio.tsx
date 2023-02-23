@@ -62,7 +62,7 @@ const StyledIndicator = styled(RadioGroupPrimitive.Indicator, {
   }
 });
 
-type OmitProps = 'disabled' | 'onValueChange' | 'required';
+type OmitProps = 'disabled' | 'onValueChange' | 'required' | 'onChange';
 
 type RadioRootProps = {
   // eslint-disable-next-line no-unused-vars
@@ -100,7 +100,7 @@ export type RadioProps = {
 export const Radio: FunctionComponent<RadioProps> = React.forwardRef(
   (
     {
-      isDisabled, value, onChange, isRequired, ...rest
+      isDisabled, value, isRequired, ...rest
     }: RadioProps,
     ref
   ) => {

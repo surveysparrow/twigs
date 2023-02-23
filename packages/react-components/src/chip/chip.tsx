@@ -1,4 +1,4 @@
-import React, { ComponentProps, ReactNode } from 'react';
+import React, { ComponentProps, FunctionComponent, ReactNode } from 'react';
 import { styled } from '../../stitches.config';
 import { Box, BoxProps } from '../box';
 import { Button } from '../button';
@@ -104,7 +104,7 @@ export interface ChipBaseProps {
 
 export type ChipProps = ChipBaseProps & ComponentProps<typeof StyledChip> & BoxProps
 
-export const Chip = React.forwardRef(
+export const Chip: FunctionComponent<ChipProps> = React.forwardRef(
   ({
     color, closable, children, onClose, ...props
   }: ChipProps, ref) => {
