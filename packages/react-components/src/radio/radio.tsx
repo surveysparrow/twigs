@@ -100,7 +100,7 @@ export type RadioProps = {
 export const Radio: FunctionComponent<RadioProps> = React.forwardRef(
   (
     {
-      isDisabled, value, onChange, isRequired, ...rest
+      isDisabled, value, isRequired, ...rest
     }: RadioProps,
     ref
   ) => {
