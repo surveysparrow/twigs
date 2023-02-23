@@ -1,4 +1,6 @@
-import React, { ComponentProps, FunctionComponent, isValidElement, ReactElement } from 'react';
+import React, {
+  ComponentProps, FunctionComponent, isValidElement, ReactElement
+} from 'react';
 import { Button } from './button';
 
 type OmitProps = 'iconLeft' | 'iconRight' | 'isIcon' | 'isText';

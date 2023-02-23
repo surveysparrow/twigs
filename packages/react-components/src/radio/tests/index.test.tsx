@@ -7,7 +7,7 @@ import { RadioGroup, Radio } from '../index';
 describe('Radio', () => {
   it('renders without crashing', () => {
     render(
-      <RadioGroup defaultValue="default" aria-label="View density" onChange={(e) => console.log(e)}>
+      <RadioGroup defaultValue="default" aria-label="View density" onChange={() => { }}>
         <Radio isDisabled value="default" id="r1" />
         <Radio value="comfortable" id="r2" />
         <Radio value="compact" id="r3" />

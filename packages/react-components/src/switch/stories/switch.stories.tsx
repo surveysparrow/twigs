@@ -20,9 +20,9 @@ export default {
 } as ComponentMeta<typeof Switch>;
 
 const Template: ComponentStory<typeof Switch> = (args) => (
-  <Switch 
-    defaultChecked 
-    id="s1" 
+  <Switch
+    defaultChecked
+    id="s1"
     {...args}
   />
 );

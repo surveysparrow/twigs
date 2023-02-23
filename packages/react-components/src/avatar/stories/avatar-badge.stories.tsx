@@ -23,13 +23,13 @@ export default {
       control: 'select',
       options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', 'full'],
       defaultValue: 'full'
-    },
+    }
   }
 } as ComponentMeta<typeof Avatar>;
 
 const Template = (args) => (
-    <Avatar {...args}>
-      <AB />
-    </Avatar>
+  <Avatar {...args}>
+    <AB />
+  </Avatar>
 );
 export const AvatarBadge = Template.bind({});
