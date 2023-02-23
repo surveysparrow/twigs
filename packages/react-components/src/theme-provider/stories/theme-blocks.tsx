@@ -1,13 +1,16 @@
+import React from 'react';
 import { Box } from '../../box/box';
 import { Text } from '../../text/text';
 import { Flex } from '../../flex/flex';
 import { defaultTheme } from '../../../stitches.config';
 
-const { colors, fontSizes, fontWeights, borderWidths, radii } = defaultTheme;
+const {
+  colors, fontSizes, fontWeights, borderWidths, radii
+} = defaultTheme;
 
 export const AllColors = () => {
-  return Object.keys(colors).map((color, idx) => (
-    <div key={`color${idx}`}>
+  return Object.keys(colors).map((color) => (
+    <div key={`color-${color}`}>
       <Box
         css={{
           backgroundColor: colors[color],
@@ -15,14 +18,14 @@ export const AllColors = () => {
           height: '100px',
           width: '160px',
           borderRadius: '5px',
-          border: '1px solid #b0b0b0',
+          border: '1px solid #b0b0b0'
         }}
-      ></Box>
+      />
       <Flex css={{ justifyContent: 'space-between' }}>
         <Text
           size="sm"
           css={{
-            marginTop: '5px',
+            marginTop: '5px'
           }}
         >
           {color}
@@ -30,7 +33,7 @@ export const AllColors = () => {
         <Text
           size="sm"
           css={{
-            marginTop: '5px',
+            marginTop: '5px'
           }}
         >
           {Object.values(colors[color])}
@@ -41,20 +44,22 @@ export const AllColors = () => {
 };
 
 export const AllFontSizes = () => {
-  return Object.keys(fontSizes).map((fontSize, idx) => (
+  return Object.keys(fontSizes).map((fontSize) => (
     <Box
-      key={`fontSize${idx}`}
+      key={`fontSize-${fontSize}`}
       css={{ borderTop: '1px solid rgba(0,0,0,.1)', padding: '30px 0' }}
     >
       <Text size="sm">
-        {fontSize}&emsp;&emsp;&emsp;{fontSizes[fontSize]}
+        {fontSize}
+&emsp;&emsp;&emsp;
+        {fontSizes[fontSize]}
       </Text>
       <Text
         size="sm"
         css={{
           fontSize: fontSizes[fontSize],
           marginTop: '10px',
-          fontWeight: '500',
+          fontWeight: '500'
         }}
       >
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum vitae
@@ -67,20 +72,22 @@ export const AllFontSizes = () => {
 };
 
 export const AllFontWeights = () => {
-  return Object.keys(fontWeights).map((fontWeight, idx) => (
+  return Object.keys(fontWeights).map((fontWeight) => (
     <Box
-      key={`fontWeight${idx}`}
+      key={`fontWeight${fontWeight}`}
       css={{ borderTop: '1px solid rgba(0,0,0,.1)', padding: '30px 0' }}
     >
       <Text size="sm">key&emsp;&emsp;value</Text>
       <Text size="md">
-        {fontWeight}&emsp;&emsp;{fontWeights[fontWeight]}
+        {fontWeight}
+&emsp;&emsp;
+        {fontWeights[fontWeight]}
       </Text>
       <Text
         css={{
           fontWeight: fontWeights[fontWeight],
           marginTop: '10px',
-          fontSize: '2rem',
+          fontSize: '2rem'
         }}
       >
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum vitae
@@ -91,18 +98,19 @@ export const AllFontWeights = () => {
 };
 
 export const AllBorderWidths = () => {
-  return Object.keys(borderWidths).map((borderWidth, idx) => (
-    <div key={`borderWidth${idx}`}>
+  return Object.keys(borderWidths).map((borderWidth) => (
+    <div key={`borderWidth${borderWidth}`}>
       <Text size="sm">
-        {borderWidth}&emsp;{borderWidths[borderWidth]}
+        {borderWidth}
+&emsp;
+        {borderWidths[borderWidth]}
       </Text>
       <Box
-        size="lg"
         css={{
           border: `${borderWidths[borderWidth]} solid black`,
           marginTop: '10px',
           padding: '10px',
-          color: 'black',
+          color: 'black'
         }}
       >
         SurveySparrow
@@ -112,8 +120,8 @@ export const AllBorderWidths = () => {
 };
 
 export const AllRadii = () => {
-  return Object.keys(radii).map((rad, idx) => (
-    <div key={`rad${idx}`}>
+  return Object.keys(radii).map((rad) => (
+    <div key={`rad-${rad}`}>
       <Box
         css={{
           backgroundColor: '#56B0BB',
@@ -124,7 +132,7 @@ export const AllRadii = () => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          flexDirection: 'column',
+          flexDirection: 'column'
         }}
       >
         <Text size="lg" css={{ color: 'white', margin: '0' }}>

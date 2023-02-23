@@ -165,13 +165,13 @@ const StyledButton = styled('button', {
         color: '$neutral800',
         '&:hover, &:focus': {
           color: '$neutral900',
-          background: '$black300',
+          background: '$black300'
         },
         '&:active': {
           color: '$neutral900',
           background: '$black300'
         }
-      },
+      }
     },
     isText: {
       true: {

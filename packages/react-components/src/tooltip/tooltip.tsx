@@ -45,12 +45,12 @@ const StyledContent = styled(TooltipPrimitive.Content, {
       sm: {
         padding: '$2 $4',
         fontSize: '$xs',
-        borderRadius: '$sm',
+        borderRadius: '$sm'
       },
       md: {
         padding: '$6 $8',
         fontSize: '$sm',
-        borderRadius: '$md',
+        borderRadius: '$md'
       }
     }
   },

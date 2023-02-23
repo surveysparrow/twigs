@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { ComponentProps, FunctionComponent } from 'react';
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
-import { ComponentProps, FunctionComponent } from 'react';
 import { styled } from '../../stitches.config';
 
 const StyledRadio = styled(RadioGroupPrimitive.Item, {
@@ -66,6 +65,7 @@ const StyledIndicator = styled(RadioGroupPrimitive.Indicator, {
 type OmitProps = 'disabled' | 'onValueChange' | 'required';
 
 type RadioRootProps = {
+  // eslint-disable-next-line no-unused-vars
   onChange?: (value: string) => void,
   isDisabled?: boolean,
   isRequired?: boolean,
@@ -88,9 +88,9 @@ export const RadioGroup: FunctionComponent<RadioRootProps> = React.forwardRef(
       >
         {children}
       </RadioGroupPrimitive.Root>
-    )
+    );
   }
-)
+);
 
 export type RadioProps = {
   isDisabled?: boolean,
@@ -114,6 +114,6 @@ export const Radio: FunctionComponent<RadioProps> = React.forwardRef(
       >
         <StyledIndicator />
       </StyledRadio>
-    )
+    );
   }
-)
+);

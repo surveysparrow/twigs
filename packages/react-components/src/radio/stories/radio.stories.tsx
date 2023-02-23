@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComponentMeta } from '@storybook/react';
-import { Radio, RadioGroup, RadioIndicator } from '../radio';
+import { Radio, RadioGroup } from '../radio';
 import { Flex } from '../../flex';
 import { FormLabel } from '../../form-label';
 

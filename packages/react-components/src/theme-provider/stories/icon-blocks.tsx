@@ -29,7 +29,8 @@ const AllIcons = (args) => {
         padding: '10px'
       }}
       >
-        {Object.entries(ReactIcons).filter(([key, value]) => key.toLowerCase().includes(search.toLowerCase())).map(([key, value]) => {
+        {Object.entries(ReactIcons).filter(([key]) => key.toLowerCase()
+          .includes(search.toLowerCase())).map(([key, value]) => {
           const IconComponent = value;
           return (
             <div style={{

@@ -8,7 +8,8 @@ describe('Switch', () => {
   it('renders without crashing', () => {
     render(
       <Switch
-        defaultChecked id="s1"
+        defaultChecked
+        id="s1"
         isDisabled={false}
         isChecked={false}
         onChange={() => { }}

@@ -97,18 +97,18 @@ const StyledAvatar = styled(AvatarPrimitive.Root, {
     rounded: {
       full: {
         [`& ${StyledImage}`]: {
-          borderRadius: "100%"
+          borderRadius: '100%'
         }
       },
       '3xl': {
         [`& ${StyledImage}`]: {
           borderRadius: '$3xl'
-        },
+        }
       },
       '2xl': {
         [`& ${StyledImage}`]: {
           borderRadius: '$2xl'
-        },
+        }
       },
       xl: {
         [`& ${StyledImage}`]: {
