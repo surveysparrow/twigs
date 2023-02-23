@@ -63,7 +63,7 @@ const StyledIndicator = styled(RadioGroupPrimitive.Indicator, {
   }
 });
 
-type OmitProps = 'disabled' | 'onValueChange' | 'required';
+type OmitProps = 'disabled' | 'onValueChange' | 'required' | 'onChange';
 
 type RadioRootProps = {
   onChange?: (value: string) => void,
