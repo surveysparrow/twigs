@@ -15,6 +15,7 @@ export * from './input';
 export * from './link';
 export * from './loader';
 export * from './pagination';
+export * from './popover';
 export * from './radio';
 export * from './switch';
 export * from './table';
