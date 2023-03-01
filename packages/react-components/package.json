@@ -1,6 +1,6 @@
 {
   "name": "@sparrowengg/twigs-react",
-  "version": "0.5.2",
+  "version": "0.6.2",
   "description": "In house component library for SurveySparrow",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

@@ -108,41 +108,49 @@ const StyledAvatar = styled(AvatarPrimitive.Root, {
     },
     rounded: {
       full: {
+        borderRadius: '100%',
         [`& ${StyledImage}, & ${StyledFallback}`]: {
           borderRadius: '100%'
         }
       },
       '3xl': {
+        borderRadius: '$3xl',
         [`& ${StyledImage}, & ${StyledFallback}`]: {
           borderRadius: '$3xl'
         }
       },
       '2xl': {
+        borderRadius: '$2xl',
         [`& ${StyledImage}, & ${StyledFallback}`]: {
           borderRadius: '$2xl'
         }
       },
       xl: {
+        borderRadius: '$xl',
         [`& ${StyledImage}, & ${StyledFallback}`]: {
           borderRadius: '$xl'
         }
       },
       lg: {
+        borderRadius: '$lg',
         [`& ${StyledImage}, & ${StyledFallback}`]: {
           borderRadius: '$lg'
         }
       },
       md: {
+        borderRadius: '$md',
         [`& ${StyledImage}, & ${StyledFallback}`]: {
           borderRadius: '$md'
         }
       },
       sm: {
+        borderRadius: '$md',
         [`& ${StyledImage}, & ${StyledFallback}`]: {
           borderRadius: '$md'
         }
       },
       xs: {
+        borderRadius: '$lg',
         [`& ${StyledImage}, & ${StyledFallback}`]: {
           borderRadius: '$lg'
         }
