@@ -22,6 +22,11 @@ pipelines:
 
         - step:
             name: Run eslint
+            condition:
+              changesets:
+                includePaths:
+                  # any changes in given directory
+                  - "packages/react-icons/**"
             script:
               - cd packages/react-icons
               - npm install eslint
@@ -33,6 +38,12 @@ pipelines:
             name: Build Icons
             caches:
               - node
+            condition:
+              changesets:
+                includePaths:
+                  # any changes in given directory
+                  - "packages/react-icons/**"
+
             script:
               - npm install -g lerna
               - yarn install
@@ -47,6 +58,11 @@ pipelines:
               - pipe: atlassian/git-secrets-scan:0.5.1
         - step:
             name: Run eslint
+            condition:
+              changesets:
+                includePaths:
+                  # any changes in given directory
+                  - "packages/react-components/**"
             script:
               - cd packages/react-components
               - npm install eslint
@@ -56,6 +72,10 @@ pipelines:
 
         - step:
             name: Build Components
+            condition:
+              changesets:
+                includePaths:
+                  - "packages/react-components/**"
             caches:
               - node
             script:
