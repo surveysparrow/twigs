@@ -24,12 +24,10 @@ const slideLeftAndFade = keyframes({
 export const PopoverContent = styled(PopoverPrimitive.Content, {
   padding: '$2',
   width: 260,
-  borderWidth: '$xs',
-  borderStyle: 'solid',
-  borderColor: '$neutral300',
   borderRadius: '$md',
   backgroundColor: '$white900',
   animationDuration: '400ms',
+  boxShadow: 'hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px',
   animationTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
   willChange: 'transform, opacity',
   '&[data-state="open"]': {
@@ -41,8 +39,7 @@ export const PopoverContent = styled(PopoverPrimitive.Content, {
 });
 
 export const PopoverArrow = styled(PopoverPrimitive.Arrow, {
-  fill: 'white',
-  stroke: '$neutral300'
+  fill: 'white'
 });
 
 export const PopoverClose = styled(PopoverPrimitive.Close, {
