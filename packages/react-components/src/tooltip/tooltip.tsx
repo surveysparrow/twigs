@@ -78,7 +78,6 @@ const StyledArrow = styled(TooltipPrimitive.Arrow, {
   }
 });
 
-export const { Provider } = TooltipPrimitive;
 interface TooltipBaseProps {
   content: ReactNode;
 }
@@ -116,3 +115,5 @@ export const Tooltip = ({
     </TooltipPrimitive.Root>
   );
 };
+
+export const TooltipProvider = TooltipPrimitive.Provider;

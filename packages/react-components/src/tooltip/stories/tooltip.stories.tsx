@@ -2,7 +2,7 @@ import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Button } from '../../button';
 import {
-  Provider, Tooltip
+  TooltipProvider, Tooltip
 } from '../tooltip';
 import { Flex } from '../../flex';
 
@@ -35,7 +35,7 @@ export default {
 } as ComponentMeta<typeof Tooltip>;
 
 const Template: ComponentStory<typeof Tooltip> = (args) => (
-  <Provider delayDuration={0}>
+  <TooltipProvider delayDuration={0}>
     <Flex
       css={{
         height: '100vh',
@@ -55,6 +55,6 @@ const Template: ComponentStory<typeof Tooltip> = (args) => (
         </Button>
       </Tooltip>
     </Flex>
-  </Provider>
+  </TooltipProvider>
 );
 export const Default = Template.bind({});
