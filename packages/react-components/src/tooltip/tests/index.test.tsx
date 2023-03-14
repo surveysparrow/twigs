@@ -6,7 +6,7 @@ import 'jest';
 import '@testing-library/jest-dom';
 import { Button } from '../../button';
 import { Flex } from '../../flex';
-import { Provider, Tooltip } from '../tooltip';
+import { TooltipProvider, Tooltip } from '../tooltip';
 
 global.ResizeObserver = jest.fn().mockImplementation(() => ({
   observe: jest.fn(),
@@ -16,7 +16,7 @@ global.ResizeObserver = jest.fn().mockImplementation(() => ({
 
 const Component = () => {
   return (
-    <Provider delayDuration={0}>
+    <TooltipProvider delayDuration={0}>
       <Flex
         css={{
           height: '100vh',
@@ -36,7 +36,7 @@ const Component = () => {
           </Button>
         </Tooltip>
       </Flex>
-    </Provider>
+    </TooltipProvider>
   );
 };
 
