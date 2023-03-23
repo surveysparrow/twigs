@@ -168,17 +168,24 @@ export const Select = ({
   showSeparator, isAsync, isCreatable, components, dropdownIndicatorIcon, styles, dropdownIndicatorPosition = 'right', ...props
 }: SelectProps) => {
   const customStyles = useMemo(() => {
+    const isLIconLeftPositioned = dropdownIndicatorPosition === 'left';
     return {
       ...styles,
       control: (base: any) => ({
         ...base,
-        ...(dropdownIndicatorPosition === 'left' && {
+        ...(isLIconLeftPositioned && {
+          flexDirection: 'row-reverse'
+        })
+      }),
+      indicatorsContainer: (base: any) => ({
+        ...base,
+        ...(isLIconLeftPositioned && {
           flexDirection: 'row-reverse'
         })
       }),
       clearIndicator: (base: any) => ({
         ...base,
-        ...(dropdownIndicatorPosition === 'left' && {
+        ...(isLIconLeftPositioned && {
           position: 'absolute',
           right: 0
         })
