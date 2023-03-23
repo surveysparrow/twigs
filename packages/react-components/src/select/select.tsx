@@ -30,7 +30,6 @@ const selectStyles = {
   },
   '& .twigs-select__value-container, & .twigs-select__placeholder, &.twigs-select__single-value, &.twigs-select__input':
   {
-    fontSize: '$sm',
     fontWeight: '$4'
   },
   '& .twigs-select__placeholder': {
@@ -103,6 +102,10 @@ const selectStyles = {
         '& .twigs-select__multi-value__label': {
           fontSize: '100%',
           padding: '$4'
+        },
+        '& .twigs-select__value-container, & .twigs-select__placeholder, &.twigs-select__single-value, &.twigs-select__input':
+        {
+          fontSize: '$md'
         }
       },
       md: {
