@@ -1,6 +1,6 @@
 {
   "name": "@sparrowengg/twigs-react",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "description": "In house component library for SurveySparrow",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -55,7 +55,8 @@
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-select": "^5.7.2"
   },
   "devDependencies": {
     "@babel/core": "^7.18.10",

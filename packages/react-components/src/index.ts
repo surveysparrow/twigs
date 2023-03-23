@@ -16,6 +16,7 @@ export * from './link';
 export * from './loader';
 export * from './pagination';
 export * from './popover';
+export * from './select';
 export * from './radio';
 export * from './switch';
 export * from './table';
