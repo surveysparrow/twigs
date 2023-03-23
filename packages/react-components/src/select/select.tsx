@@ -145,7 +145,7 @@ type SelectBaseProps = {
   isAsync?: boolean;
   isCreatable?: boolean,
   dropdownIndicatorIcon?: ReactElement;
-  dropdownIndicatorPosition: 'left' | 'right'
+  dropdownIndicatorPosition?: 'left' | 'right'
 };
 
 const DropdownIndicator = (
