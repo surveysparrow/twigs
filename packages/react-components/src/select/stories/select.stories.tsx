@@ -1,5 +1,6 @@
 import React from 'react';
 import { ComponentMeta } from '@storybook/react';
+import { SearchIcon } from '@sparrowengg/twigs-react-icons';
 import { Select } from '../select';
 
 export default {
@@ -18,6 +19,10 @@ export default {
     isDisabled: {
       control: 'boolean',
       defaultValue: false
+    },
+    showAnotherIcon: {
+      control: 'boolean',
+      defaultvalue: false
     }
   }
 } as ComponentMeta<typeof Select>;
@@ -29,6 +34,10 @@ const options = [
 ];
 
 const Template = (args) => (
-  <Select {...args} options={options} placeholder="custom select box" />
+  <Select
+    {...args}
+    options={options}
+    dropdownIndicatorIcon={<SearchIcon />}
+  />
 );
 export const Default = Template.bind({});

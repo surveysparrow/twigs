@@ -1,5 +1,5 @@
-import React, { ComponentProps } from 'react';
-import ReactSelect from 'react-select';
+import React, { ComponentProps, ReactElement, useMemo } from 'react';
+import ReactSelect, { components as ReactSelectComponent } from 'react-select';
 import AsyncSelect from 'react-select/async';
 import CreatableSelect from 'react-select/creatable';
 import AsyncCreatableSelect from 'react-select/async-creatable';
@@ -143,7 +143,19 @@ const StyledCreatableAsyncSelect = styled(AsyncCreatableSelect, selectStyles);
 type SelectBaseProps = {
   showSeparator?: boolean;
   isAsync?: boolean;
-  isCreatable?: boolean
+  isCreatable?: boolean,
+  dropdownIndicatorIcon?: ReactElement;
+  dropdownIndicatorPosition: 'left' | 'right'
+};
+
+const DropdownIndicator = (
+  props, dropdownIndicatorIcon
+) => {
+  return (
+    <ReactSelectComponent.DropdownIndicator {...props}>
+      {React.cloneElement(dropdownIndicatorIcon)}
+    </ReactSelectComponent.DropdownIndicator>
+  );
 };
 
 export type SelectProps = SelectBaseProps &
@@ -153,16 +165,39 @@ export type SelectProps = SelectBaseProps &
   ComponentProps<typeof StyledCreatableAsyncSelect>;
 
 export const Select = ({
-  showSeparator, isAsync, isCreatable, components, ...props
+  showSeparator, isAsync, isCreatable, components, dropdownIndicatorIcon, styles, dropdownIndicatorPosition = 'right', ...props
 }: SelectProps) => {
+  const customStyles = useMemo(() => {
+    return {
+      ...styles,
+      control: (base: any) => ({
+        ...base,
+        ...(dropdownIndicatorPosition === 'left' && {
+          flexDirection: 'row-reverse'
+        })
+      }),
+      clearIndicator: (base: any) => ({
+        ...base,
+        ...(dropdownIndicatorPosition === 'left' && {
+          position: 'absolute',
+          right: 0
+        })
+      })
+    };
+  }, [dropdownIndicatorPosition, styles]);
+
   // eslint-disable-next-line no-nested-ternary
   const SelectComponent = isCreatable ? (isAsync ? StyledCreatableAsyncSelect : StyledCreatableSelect) : (isAsync ? StyledAsyncSelect : StyledSelect);
   return (
     <SelectComponent
+      styles={customStyles}
       {...props}
       components={{
         ...(!showSeparator && {
           IndicatorSeparator: null
+        }),
+        ...(dropdownIndicatorIcon && {
+          DropdownIndicator: (dropdownProps) => DropdownIndicator(dropdownProps, dropdownIndicatorIcon)
         }),
         ...components
       }}
