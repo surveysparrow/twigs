@@ -19,10 +19,6 @@ export default {
     isDisabled: {
       control: 'boolean',
       defaultValue: false
-    },
-    showAnotherIcon: {
-      control: 'boolean',
-      defaultvalue: false
     }
   }
 } as ComponentMeta<typeof Select>;
