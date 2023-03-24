@@ -59,16 +59,11 @@ export const Pagination: FunctionComponent<PaginationProps> = ({
       <StyledList>
         <li>
           <IconButton
-            as="a"
             icon={<ChevronLeftIcon />}
-            css={{
-              cursor: isPrevDisabled ? 'not-allowed' : 'pointer',
-              opacity: isPrevDisabled ? 0.4 : 1
-            }}
             aria-disabled={isPrevDisabled}
             aria-label="Previous"
             variant="bright"
-            role="link"
+            isDisabled={isPrevDisabled}
             onClick={(event: SyntheticEvent) => changeActivePage(event, page - 1)}
           />
         </li>
@@ -108,15 +103,9 @@ export const Pagination: FunctionComponent<PaginationProps> = ({
         }
         <li>
           <IconButton
-            as="a"
             icon={<ChevronRightIcon />}
             aria-label="Next"
             variant="bright"
-            role="link"
-            css={{
-              cursor: isNextDisabled ? 'not-allowed' : 'pointer',
-              opacity: isNextDisabled ? 0.4 : 1
-            }}
             isDisabled={isNextDisabled}
             aria-disabled={isNextDisabled}
             onClick={(event: SyntheticEvent) => changeActivePage(event, page + 1)}
