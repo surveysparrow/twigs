@@ -3,7 +3,7 @@ import React, {
   FunctionComponent, SyntheticEvent, useId, useState
 } from 'react';
 import { styled } from '../../stitches.config';
-import { Box, BoxProps } from '../box';
+import { Box } from '../box';
 import { Button, IconButton } from '../button';
 import { usePagination } from './use-pagination';
 
@@ -20,7 +20,7 @@ export type PaginationProps = {
   siblingCount?: number,
   // eslint-disable-next-line no-unused-vars
   onChange?: (event: SyntheticEvent, page: number) => void
-} & BoxProps;
+}
 
 const DOTS = 'DOTS';
 
