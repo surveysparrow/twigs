@@ -1,5 +1,6 @@
 import { ChevronLeftIcon, ChevronRightIcon, EllipsisHorizontalIcon } from '@sparrowengg/twigs-react-icons';
 import React, {
+  ComponentProps,
   FunctionComponent, SyntheticEvent, useId, useState
 } from 'react';
 import { styled } from '../../stitches.config';
@@ -13,6 +14,8 @@ const StyledList = styled('ul', {
   gap: '$2'
 });
 
+type ButtonSizeType = Pick<ComponentProps<typeof Button>, 'size'>
+
 export type PaginationProps = {
   total: number,
   itemsPerPage: number,
@@ -20,7 +23,7 @@ export type PaginationProps = {
   siblingCount?: number,
   // eslint-disable-next-line no-unused-vars
   onChange?: (event: SyntheticEvent, page: number) => void
-}
+} & ButtonSizeType
 
 const DOTS = 'DOTS';
 
@@ -31,7 +34,7 @@ const DOTS = 'DOTS';
  * @param onChange returns click event and active page number
  */
 export const Pagination: FunctionComponent<PaginationProps> = ({
-  total, itemsPerPage, activePage, siblingCount, onChange, ...rest
+  total, itemsPerPage, activePage, siblingCount, onChange, size, ...rest
 }: PaginationProps) => {
   const keyId = useId();
   const [page, setPage] = useState<number>(activePage);
@@ -63,6 +66,7 @@ export const Pagination: FunctionComponent<PaginationProps> = ({
             aria-disabled={isPrevDisabled}
             aria-label="Previous"
             variant="bright"
+            size={size}
             isDisabled={isPrevDisabled}
             onClick={(event: SyntheticEvent) => changeActivePage(event, page - 1)}
           />
@@ -78,6 +82,7 @@ export const Pagination: FunctionComponent<PaginationProps> = ({
                     icon={<EllipsisHorizontalIcon />}
                     role="presentation"
                     variant="bright"
+                    size={size}
                     css={{
                       cursor: 'default'
                     }}
@@ -94,6 +99,7 @@ export const Pagination: FunctionComponent<PaginationProps> = ({
                   variant={page === pageNumber ? 'default' : 'bright'}
                   aria-current={page === pageNumber}
                   role="link"
+                  size={size}
                 >
                   {pageNumber}
                 </Button>
@@ -106,6 +112,7 @@ export const Pagination: FunctionComponent<PaginationProps> = ({
             icon={<ChevronRightIcon />}
             aria-label="Next"
             variant="bright"
+            size={size}
             isDisabled={isNextDisabled}
             aria-disabled={isNextDisabled}
             onClick={(event: SyntheticEvent) => changeActivePage(event, page + 1)}
