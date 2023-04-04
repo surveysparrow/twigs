@@ -1,3 +1,4 @@
+export * from './alert';
 export * from './avatar';
 export * from './box';
 export * from './button';
