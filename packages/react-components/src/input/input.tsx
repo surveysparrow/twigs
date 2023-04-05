@@ -74,7 +74,7 @@ export interface InputBaseProps {
 export type InputProps = InputBaseProps & ComponentProps<typeof StyledInput> &
   React.HTMLAttributes<HTMLInputElement> & {
     as?: React.ElementType
- };
+  };
 
 const IconContainer = styled(Box, {
   position: 'absolute',
@@ -116,13 +116,13 @@ const IconContainer = styled(Box, {
   }
 });
 
-export const Input: FunctionComponent<InputProps> = ({
+export const Input: FunctionComponent<InputProps> = React.forwardRef(({
   size = 'md',
   iconLeft,
   iconRight,
   css,
   ...rest
-}: InputProps) => {
+}: InputProps, ref) => {
   let inputPaddingValue = '$22';
   if (size === 'xl') {
     inputPaddingValue = '$22';
@@ -174,6 +174,6 @@ export const Input: FunctionComponent<InputProps> = ({
     );
   }
   return (
-    <StyledInput size={size} data-testid="input" {...rest} css={css} />
+    <StyledInput ref={ref} size={size} data-testid="input" {...rest} css={css} />
   );
-};
+});
