@@ -1,7 +1,7 @@
 import { ChevronLeftIcon, ChevronRightIcon, EllipsisHorizontalIcon } from '@sparrowengg/twigs-react-icons';
 import React, {
   ComponentProps,
-  FunctionComponent, SyntheticEvent, useId, useState
+  FunctionComponent, SyntheticEvent, useEffect, useId, useState
 } from 'react';
 import { styled } from '../../stitches.config';
 import { Box } from '../box';
@@ -49,6 +49,10 @@ export const Pagination: FunctionComponent<PaginationProps> = ({
       onChange(event, newPage);
     }
   };
+
+  useEffect(() => {
+    setPage(activePage);
+  }, [activePage]);
 
   const isPrevDisabled = page === 1;
   const isNextDisabled = page === paginationRange?.[paginationRange?.length - 1];
