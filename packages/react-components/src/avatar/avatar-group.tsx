@@ -2,7 +2,7 @@ import React, { FunctionComponent, ComponentProps } from 'react';
 import { styled } from '../../stitches.config';
 import { Avatar } from './avatar';
 
-type OmitAvatarProps = 'isAnonymous' | 'rounded' | 'src' | 'name';
+type OmitAvatarProps = 'isAnonymous' | 'src' | 'name';
 
 export type AvatarGroupProps = {
   limit?: number | null,
@@ -20,8 +20,7 @@ const AvatarOverlay = styled('div', {
   zIndex: 2,
   position: 'absolute',
   left: 0,
-  top: 0,
-  borderRadius: '$round'
+  top: 0
 });
 
 const AvatarOverlayText = styled('span', {
@@ -35,6 +34,7 @@ const AvatarOverlayText = styled('span', {
   position: 'absolute',
   left: 0,
   top: 0,
+  letterSpacing: '.1px',
   variants: {
     size: {
       '3xl': {
@@ -112,11 +112,55 @@ const AvatarNestedItem = styled('div', {
 
 const StyledAvatarGroup = styled('div', {
   display: 'flex',
-  flexDirection: 'row'
+  flexDirection: 'row',
+  variants: {
+    rounded: {
+      full: {
+        '*': {
+          borderRadius: '100%'
+        }
+      },
+      '3xl': {
+        '*': {
+          borderRadius: '$3xl'
+        }
+      },
+      '2xl': {
+        '*': {
+          borderRadius: '$2xl'
+        }
+      },
+      xl: {
+        '*': {
+          borderRadius: '$xl'
+        }
+      },
+      lg: {
+        '*': {
+          borderRadius: '$lg'
+        }
+      },
+      md: {
+        '*': {
+          borderRadius: '$md'
+        }
+      },
+      sm: {
+        '*': {
+          borderRadius: '$md'
+        }
+      },
+      xs: {
+        '*': {
+          borderRadius: '$lg'
+        }
+      }
+    }
+  }
 });
 
 export const AvatarGroup: FunctionComponent<AvatarGroupProps> = React.forwardRef(({
-  limit = 0, size, children, ...rest
+  limit = 0, size, children, rounded, ...rest
 }: AvatarGroupProps, ref) => {
   const avatars = children || [];
   const avatarCount = avatars.length || 0;
@@ -127,8 +171,7 @@ export const AvatarGroup: FunctionComponent<AvatarGroupProps> = React.forwardRef
     .map((child: React.ReactElement, index: number): React.ReactNode => {
       const isFirstChild = index === 0;
       const childProps = {
-        ...child.props,
-        rounded: 'full'
+        ...child.props
       };
       return (
         <AvatarNestedItem size={size} isFirst={isFirstChild} key={child.key}>
@@ -142,6 +185,7 @@ export const AvatarGroup: FunctionComponent<AvatarGroupProps> = React.forwardRef
       ref={ref}
       {...rest}
       role="group"
+      rounded={rounded}
     >
       {renderAvatars}
 
@@ -153,17 +197,11 @@ export const AvatarGroup: FunctionComponent<AvatarGroupProps> = React.forwardRef
                 src={avatars[avatarCount! - extraAvatarsCount].props.src}
                 name={avatars[avatarCount! - extraAvatarsCount].props.name}
                 size={size}
-                rounded="full"
-                css={{
-                  position: 'relative',
-                  display: 'flex'
-                }}
+                rounded={rounded}
               >
                 <AvatarOverlay />
                 <AvatarOverlayText size={size}>
-                  +
-                  {' '}
-                  {extraAvatarsCount}
+                  {`+${extraAvatarsCount}`}
                 </AvatarOverlayText>
               </Avatar>
             </AvatarNestedItem>
