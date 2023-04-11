@@ -54,9 +54,11 @@
     "@storybook/addon-a11y": "^6.5.15",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
+    "dayjs": "^1.11.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-select": "^5.7.2"
+    "react-select": "^5.7.2",
+    "use-lilius": "^2.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.18.10",
