@@ -21,7 +21,6 @@ const Template = (args) => {
   return (
     <Calendar
       {...args}
-    // defaultValue={new Date('2023-12-12')}
     />
   );
 };
@@ -32,6 +31,8 @@ const WithPopOverTemplate = (args) => {
     const formattedDate = dayjs(date).format('MM/D/YYYY');
     return formattedDate;
   };
+
+  const [open, setOpen] = useState(false);
   const [date, setDate] = useState(formatDate(new Date()));
 
   const onDateChange = (val) => {
@@ -39,8 +40,11 @@ const WithPopOverTemplate = (args) => {
   };
 
   return (
-    <Popover>
-      <PopoverTrigger style={{ all: 'unset' }}>
+    <Popover open={open}>
+      <PopoverTrigger
+        style={{ all: 'unset' }}
+        onClick={() => setOpen(true)}
+      >
         <Input
           value={date}
           onChange={() => { }}
@@ -78,7 +82,7 @@ const WithPopOverTemplate = (args) => {
               {dayjs(new Date(date)).format('MMM DD, YYYY')}
             </Text>
           </Box>
-          <Button size="lg">
+          <Button size="lg" onClick={() => setOpen(false)}>
             Schedule
           </Button>
         </Flex>

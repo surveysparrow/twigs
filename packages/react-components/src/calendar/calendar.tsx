@@ -20,21 +20,22 @@ const StyledContainer = styled(Box, {
 
 export const Calendar = ({
   disablePastDays = false,
-  onChange = undefined,
-  defaultValue = undefined
+  onChange,
+  value,
+  format
 }: CalendarBaseProps) => {
   const {
     calendar, isSelected, toggle, viewing, viewNextMonth, viewPreviousMonth, selected, setViewing
-  } = useLilius({ selected: defaultValue ? [new Date(defaultValue!)] : [new Date()] });
+  } = useLilius({ selected: value ? [new Date(value!)] : [new Date()] });
 
   useEffect(() => {
     if (onChange) {
-      onChange(selected);
+      onChange(dayjs(selected[0]).format(format));
     }
   }, [selected]);
 
   useEffect(() => {
-    setViewing(selected.length > 0 ? selected[0] : new Date(defaultValue!));
+    setViewing(selected.length > 0 ? selected[0] : new Date(value!));
   }, [selected, setViewing]);
 
   return (
