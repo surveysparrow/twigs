@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { ComponentMeta } from '@storybook/react';
 import { DatePicker } from '../datepicker';
 
@@ -9,18 +9,13 @@ export default {
 } as ComponentMeta<typeof DatePicker>;
 
 const WithPopOverTemplate = (args) => {
-  const [date, setDate] = useState(new Date());
-
-  useEffect(() => {
-  }, [date]);
 
   return (
     <DatePicker
       {...args}
-      onChange={setDate}
-      value={date}
+      label='Enter date of birth'
     />
   );
 };
 
-export const WithPopOver = WithPopOverTemplate.bind({});
+export const Default = WithPopOverTemplate.bind({});

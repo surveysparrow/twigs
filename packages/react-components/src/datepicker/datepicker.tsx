@@ -1,61 +1,83 @@
-import React, { useEffect, useState } from 'react';
-import { CalendarIcon } from '@sparrowengg/twigs-react-icons';
-import dayjs from 'dayjs';
-import { Calendar } from '../calendar';
-import { CalendarBaseProps } from '../calendar/interface';
-import { Input } from '../input';
-import { Popover, PopoverContent, PopoverTrigger } from '../popover';
+import React, { useRef } from "react";
+import { useDatePickerState } from "react-stately";
+import { useDatePicker } from "react-aria";
+import { Box } from "../box";
+import { CalendarIcon } from "@sparrowengg/twigs-react-icons";
+import { Popover, PopoverContent, PopoverTrigger } from "../popover";
+import { Calendar } from "../calendar";
+import { DateField } from "./date-field";
+import { FormLabel } from "../form-label";
+import { IconButton } from "../button";
 
-export const DatePicker = ({
-  disablePastDays = false,
-  onChange = undefined,
-  value = undefined
-}: CalendarBaseProps) => {
-  const [open, setOpen] = useState(false);
-
-  const formatDate = (date) => {
-    const formattedDate = dayjs(date).format('MM/D/YYYY');
-    return formattedDate;
-  };
-  const [date, setDate] = useState(formatDate(new Date(value)));
-
-  const onDateChange = (val) => {
-    setDate(formatDate(val[0]));
-    if (onChange) {
-      onChange([new Date(val)]);
-    }
-  };
-
-  useEffect(() => {
-    setOpen(false);
-  }, [date]);
+export function DatePicker(props) {
+  let state = useDatePickerState({
+    ...props,
+    shouldCloseOnSelect: false
+  });
+  let ref = useRef(null);
+  let {
+    groupProps,
+    labelProps,
+    fieldProps,
+    buttonProps,
+    dialogProps,
+    calendarProps
+  } = useDatePicker(props, state, ref);
 
   return (
-    <Popover open={open}>
-      <PopoverTrigger style={{ all: 'unset' }} onClick={() => setOpen(true)}>
-        <Input
-          value={date}
-          onChange={() => { }}
-          size="lg"
-          css={{
-            width: 200,
-            textAlign: 'left'
-          }}
-          iconRight={<CalendarIcon />}
-        />
-      </PopoverTrigger>
-      <PopoverContent css={{
-        width: 340,
-        p: 0
-      }}
-      >
-        <Calendar
-          onChange={onDateChange}
-          disablePastDays={disablePastDays}
-          value={new Date(date)}
-        />
+    <Box
+      css={{
+        position: 'relative',
+        display: 'inline-flex',
+        flexDirection: 'column'
+      }}>
+      {
+        props.label &&
+        <FormLabel {...labelProps} css={{ mb: '3px' }}>{props.label}</FormLabel>
+      }
 
-      </PopoverContent>
-    </Popover>
+      <Popover open={state.isOpen} ref={ref} onOpenChange={state.toggle}>
+        <PopoverTrigger asChild>
+          <Box {...groupProps} ref={ref}
+            css={{
+              display: 'inline-flex',
+              width: 'auto',
+              background: '$black50',
+              border: 'none',
+              padding: '$4 $6',
+              borderRadius: '$lg'
+            }}
+          >
+            <Box css={{
+              position: "relative",
+              transition: "all 200ms",
+              display: "flex",
+              alignItems: "center",
+            }}
+              ref={ref}
+            >
+              <DateField {...fieldProps} />
+            </Box>
+            <IconButton {...buttonProps}
+              onClick={state.open}
+              variant='bright'
+              size={'md'}
+              css={{
+                background: 'none',
+                color: '$black900'
+              }}
+              icon={<CalendarIcon />}
+            />
+          </Box>
+        </PopoverTrigger>
+        <PopoverContent {...dialogProps} css={{
+          width: 'auto',
+          maxWidth: 340
+        }}>
+          <Calendar {...calendarProps} />
+        </PopoverContent>
+      </Popover>
+
+    </Box>
   );
-};
+}

@@ -1,8 +1,8 @@
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import { ComponentMeta } from '@storybook/react';
-
 import { CalendarRange } from '../calendar-range';
+import { parseDate } from '@internationalized/date';
 
 export default {
   component: CalendarRange,
@@ -14,8 +14,10 @@ const Template = (args) => {
   return (
     <CalendarRange
       {...args}
-    // defaultValue={new Date('2023-12-12')}
-    // disablePastDays={args.disablePastDays}
+      defaultValue={{
+        start: parseDate('2023-04-12'),
+        end: parseDate('2023-05-12')
+      }}
     />
   );
 };

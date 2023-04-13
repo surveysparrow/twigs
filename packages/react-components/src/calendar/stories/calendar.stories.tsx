@@ -1,5 +1,5 @@
 /* eslint-disable react/destructuring-assignment */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ComponentMeta } from '@storybook/react';
 import { CalendarIcon } from '@sparrowengg/twigs-react-icons';
 import dayjs from 'dayjs';
@@ -10,6 +10,7 @@ import { Box } from '../../box';
 import { Flex } from '../../flex';
 import { Button } from '../../button';
 import { Text } from '../../text';
+import { parseDate } from '@internationalized/date';
 
 export default {
   component: Calendar,
@@ -18,9 +19,13 @@ export default {
 } as ComponentMeta<typeof Calendar>;
 
 const Template = (args) => {
+  let [value, setValue] = React.useState(parseDate('2020-02-03'));
+  useEffect(() => {
+  }, [value])
   return (
     <Calendar
       {...args}
+      onChange={setValue}
     />
   );
 };

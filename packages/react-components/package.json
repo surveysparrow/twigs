@@ -37,6 +37,7 @@
   "license": "ISC",
   "homepage": "https://bitbucket.org/surveysparrow/twigs-react#readme",
   "dependencies": {
+    "@internationalized/date": "^3.2.0",
     "@radix-ui/react-alert-dialog": "^1.0.0",
     "@radix-ui/react-avatar": "^1.0.0",
     "@radix-ui/react-checkbox": "^1.0.0",
@@ -56,8 +57,10 @@
     "@types/react-dom": "^18.0.6",
     "dayjs": "^1.11.7",
     "react": "^18.2.0",
+    "react-aria": "^3.24.0",
     "react-dom": "^18.2.0",
     "react-select": "^5.7.2",
+    "react-stately": "^3.22.0",
     "use-lilius": "^2.0.3"
   },
   "devDependencies": {

@@ -1,90 +1,50 @@
-import React, { useEffect } from 'react';
+import React, { useRef } from 'react';
 import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
-import { useLilius } from 'use-lilius';
+import { createCalendar } from "@internationalized/date";
 import { styled } from '../../stitches.config';
 import { Box } from '../box';
-import { CalendarDay, CalendarDaysContainer, CalendarDaysRow } from './day';
-import { CalendarWeek, StyledWeekContainer } from './week';
 import {
-  CalendarActionsContainer, CalendarMonthYear, NextButton, PreviousButton
-} from './actions';
-import { CalendarBaseProps } from './interface';
+  CalendarMonthYear, Header
+} from './calendar-header';
+import { useCalendar, useLocale } from 'react-aria';
+import { useCalendarState } from 'react-stately';
+import { CalendarGrid } from './calendar-grid';
+import { ChevronLeftIcon, ChevronRightIcon } from '@sparrowengg/twigs-react-icons';
+import { CalendarButton } from './calendar-button';
 
 dayjs.extend(isBetween);
 
-const StyledContainer = styled(Box, {
-  padding: '$10',
-  width: '340px'
-});
+export const Calendar = (props) => {
+  let { locale } = useLocale();
+  let state = useCalendarState({
+    ...props,
+    locale,
+    createCalendar
+  });
 
-export const Calendar = ({
-  disablePastDays = false,
-  onChange,
-  value,
-  format
-}: CalendarBaseProps) => {
-  const {
-    calendar, isSelected, toggle, viewing, viewNextMonth, viewPreviousMonth, selected, setViewing
-  } = useLilius({ selected: value ? [new Date(value!)] : [new Date()] });
-
-  useEffect(() => {
-    if (onChange) {
-      onChange(dayjs(selected[0]).format(format));
-    }
-  }, [selected]);
-
-  useEffect(() => {
-    setViewing(selected.length > 0 ? selected[0] : new Date(value!));
-  }, [selected, setViewing]);
+  let ref = useRef(null);
+  let { calendarProps, prevButtonProps, nextButtonProps, title } = useCalendar(
+    props,
+    state
+  );
 
   return (
-    <StyledContainer>
-      <CalendarActionsContainer>
-        <PreviousButton
-          viewPreviousMonth={viewPreviousMonth}
+    <Box {...calendarProps} ref={ref} css={{
+      maxWidth: 340
+    }}>
+      <Header>
+        <CalendarButton
+          {...prevButtonProps}
+          icon={<ChevronLeftIcon />}
         />
-        <CalendarMonthYear weight="bold">{dayjs(viewing).format('MMMM YYYY')}</CalendarMonthYear>
-        <NextButton
-          viewNextMonth={viewNextMonth}
+        <CalendarMonthYear> {title} </CalendarMonthYear>
+        <CalendarButton
+          {...nextButtonProps}
+          icon={<ChevronRightIcon />}
         />
-      </CalendarActionsContainer>
-
-      <StyledWeekContainer>
-        {calendar[0][0].map((day) => {
-          const weekName = dayjs(day).format('ddd');
-          return (
-            <CalendarWeek key={`${day}`}>
-              {weekName}
-            </CalendarWeek>
-          );
-        })}
-      </StyledWeekContainer>
-
-      <CalendarDaysContainer>
-        {calendar[0].map((week) => (
-          <CalendarDaysRow
-            key={`week-${week[0]}`}
-          >
-            {week.map((day) => {
-              const isPastDay = (disablePastDays && dayjs(day).isBefore(new Date(), 'day')) || false;
-              return (
-                <CalendarDay
-                  key={`${day}`}
-                  isActive={dayjs(day).isBetween(dayjs(viewing).startOf('month'), dayjs(viewing).endOf('month'))}
-                  isSelected={isSelected(day)}
-                  isToday={dayjs().isSame(day, 'day')}
-                  onClick={() => toggle(day, true)}
-                  isDisabled={isPastDay}
-                  tabIndex={isPastDay ? -1 : 0}
-                >
-                  {dayjs(day).format('D')}
-                </CalendarDay>
-              );
-            })}
-          </CalendarDaysRow>
-        ))}
-      </CalendarDaysContainer>
-    </StyledContainer>
+      </Header>
+      <CalendarGrid state={state} />
+    </Box>
   );
 };
