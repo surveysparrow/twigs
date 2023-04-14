@@ -48,6 +48,7 @@ export { ImagePlusIcon } from './image-plus';
 export { ImageIcon } from './image';
 export { ImportIcon } from './import';
 export { InfoIcon } from './info';
+export { InfoPlusIcon } from './info-plus';
 export { KeyIcon } from './key';
 export { LightBulbIcon } from './light-bulb';
 export { LinkIcon } from './link';
