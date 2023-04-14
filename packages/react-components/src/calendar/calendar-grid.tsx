@@ -1,15 +1,22 @@
-import { endOfMonth, getWeeksInMonth } from "@internationalized/date";
-import { useCalendarGrid, useLocale } from "react-aria";
-import { Box } from "../box";
-import { CalendarCell } from "./calendar-cell";
-import { DaysContainer } from "./day";
-import { Week, WeekContainer } from "./week";
+import { DateDuration, endOfMonth, getWeeksInMonth } from '@internationalized/date';
+import React from 'react';
+import { useCalendarGrid, useLocale } from 'react-aria';
+import { CalendarState, RangeCalendarState } from 'react-stately';
+import { Box } from '../box';
+import { CalendarCell } from './calendar-cell';
+import { DaysContainer } from './day';
+import { Week, WeekContainer } from './week';
 
-export const CalendarGrid = ({ state, offset = {} }) => {
-  let { locale } = useLocale();
-  let startDate = state.visibleRange.start.add(offset);
-  let endDate = endOfMonth(startDate);
-  let { gridProps, headerProps, weekDays } = useCalendarGrid(
+type CalendarGridType = {
+  state: RangeCalendarState | CalendarState,
+  offset?: DateDuration
+}
+
+export const CalendarGrid = ({ state, offset = {} }: CalendarGridType) => {
+  const { locale } = useLocale();
+  const startDate = state.visibleRange.start.add(offset);
+  const endDate = endOfMonth(startDate);
+  const { gridProps, headerProps, weekDays } = useCalendarGrid(
     {
       startDate,
       endDate
@@ -18,13 +25,13 @@ export const CalendarGrid = ({ state, offset = {} }) => {
   );
 
   // Get the number of weeks in the month so we can render the proper number of rows.
-  let weeksInMonth = getWeeksInMonth(state.visibleRange.start, locale);
+  const weeksInMonth = getWeeksInMonth(state.visibleRange.start, locale);
 
   return (
     <Box {...gridProps}>
       <WeekContainer {...headerProps}>
-        {weekDays.map((day, index) => (
-          <Week key={index}>{day}</Week>
+        {weekDays.map((day) => (
+          <Week key={`twigs-caledar-grid-${day}`}>{day}</Week>
         ))}
       </WeekContainer>
       <Box>
@@ -32,21 +39,19 @@ export const CalendarGrid = ({ state, offset = {} }) => {
           <DaysContainer key={weekIndex}>
             {state
               .getDatesInWeek(weekIndex, startDate)
-              .map((date, i) =>
-                date ? (
-                  <CalendarCell
-                    key={i}
-                    state={state}
-                    date={date}
-                    currentMonth={startDate}
-                  />
-                ) : (
-                  <Box key={i} />
-                )
-              )}
+              .map((date) => (date ? (
+                <CalendarCell
+                  key={`twigs-calendar-cell-${date}`}
+                  state={state}
+                  date={date}
+                  currentMonth={startDate}
+                />
+              ) : (
+                <Box key="twigs-calendar-cell-box" />
+              )))}
           </DaysContainer>
         ))}
       </Box>
     </Box>
   );
-}
+};

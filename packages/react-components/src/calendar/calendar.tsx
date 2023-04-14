@@ -1,44 +1,55 @@
 import React, { useRef } from 'react';
 import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
-import { createCalendar } from "@internationalized/date";
-import { styled } from '../../stitches.config';
+import { createCalendar } from '@internationalized/date';
+import {
+  AriaCalendarProps, DateValue, useCalendar, useLocale
+} from 'react-aria';
+import { useCalendarState } from 'react-stately';
+import { ChevronLeftIcon, ChevronRightIcon } from '@sparrowengg/twigs-react-icons';
 import { Box } from '../box';
 import {
   CalendarMonthYear, Header
 } from './calendar-header';
-import { useCalendar, useLocale } from 'react-aria';
-import { useCalendarState } from 'react-stately';
 import { CalendarGrid } from './calendar-grid';
-import { ChevronLeftIcon, ChevronRightIcon } from '@sparrowengg/twigs-react-icons';
 import { CalendarButton } from './calendar-button';
 
 dayjs.extend(isBetween);
 
-export const Calendar = (props) => {
-  let { locale } = useLocale();
-  let state = useCalendarState({
+export const Calendar = (props: AriaCalendarProps<DateValue>) => {
+  const { locale } = useLocale();
+  const state = useCalendarState({
     ...props,
     locale,
     createCalendar
   });
 
-  let ref = useRef(null);
-  let { calendarProps, prevButtonProps, nextButtonProps, title } = useCalendar(
+  const ref = useRef(null);
+  const {
+    calendarProps, prevButtonProps, nextButtonProps, title
+  } = useCalendar(
     props,
     state
   );
 
   return (
-    <Box {...calendarProps} ref={ref} css={{
-      maxWidth: 340
-    }}>
+    <Box
+      {...calendarProps}
+      ref={ref}
+      css={{
+        maxWidth: 340
+      }}
+    >
       <Header>
         <CalendarButton
           {...prevButtonProps}
           icon={<ChevronLeftIcon />}
         />
-        <CalendarMonthYear> {title} </CalendarMonthYear>
+        <CalendarMonthYear>
+          {' '}
+          {title}
+          {' '}
+        </CalendarMonthYear>
         <CalendarButton
           {...nextButtonProps}
           icon={<ChevronRightIcon />}

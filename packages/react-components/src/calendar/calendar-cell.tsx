@@ -1,15 +1,21 @@
-import React, { isSameDay, isSameMonth } from "@internationalized/date";
-import { useRef } from "react";
-import { useCalendarCell } from "react-aria";
-import { Day, DayContainer } from "./day";
+import React, { CalendarDate, isSameDay, isSameMonth } from '@internationalized/date';
+import { useRef } from 'react';
+import { useCalendarCell } from 'react-aria';
+import { CalendarState, RangeCalendarState } from 'react-stately';
+import { Day, DayContainer } from './day';
 
-export const CalendarCell = ({ state, date, currentMonth }) => {
-  let ref = useRef(null);
-  let {
+type CalendarCellType = {
+  state: RangeCalendarState | CalendarState,
+  date: CalendarDate,
+  currentMonth: CalendarDate
+}
+
+export const CalendarCell = ({ state, date, currentMonth }: CalendarCellType) => {
+  const ref = useRef(null);
+  const {
     cellProps,
     buttonProps,
     isSelected,
-    isInvalid,
     formattedDate
   } = useCalendarCell({ date }, state, ref);
 
@@ -17,7 +23,8 @@ export const CalendarCell = ({ state, date, currentMonth }) => {
   const isFirstDayInRange = state?.value?.start && isSameDay(date, state.value.start);
   const isLastDayInRange = state?.value?.end && isSameDay(date, state.value.end);
   return (
-    <DayContainer {...cellProps}
+    <DayContainer
+      {...cellProps}
       data-is-start={isFirstDayInRange}
       data-is-end={isLastDayInRange}
     >
@@ -31,4 +38,4 @@ export const CalendarCell = ({ state, date, currentMonth }) => {
       </Day>
     </DayContainer>
   );
-}
+};

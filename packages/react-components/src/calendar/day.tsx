@@ -73,7 +73,7 @@ export const DayContainer = styled(Box, {
   '&[aria-selected="true"]': {
     background: '$secondary100'
   },
-  //start date of the selected range
+  // start date of the selected range
   '&[data-is-start="true"]': {
     borderTopLeftRadius: '100%',
     borderBottomLeftRadius: '100%',
@@ -103,15 +103,14 @@ export const DayContainer = styled(Box, {
   // first item in a week row of the selected range
   '&[aria-selected="true"]:first-of-type': {
     borderTopLeftRadius: '100%',
-    borderBottomLeftRadius: '100%',
+    borderBottomLeftRadius: '100%'
   },
   // last item in a week row of the selected range
   '&[aria-selected="true"]:last-of-type': {
     borderTopRightRadius: '100%',
-    borderBottomRightRadius: '100%',
+    borderBottomRightRadius: '100%'
   }
 });
-
 
 export const DaysContainer = styled(Box, {
   padding: '$2 0',

@@ -1,24 +1,26 @@
-import React, { useRef } from "react";
-import { useRangeCalendarState } from "react-stately";
-import { useRangeCalendar, useLocale } from "react-aria";
-import { createCalendar } from "@internationalized/date";
-import { Box } from "../box";
-import { CalendarButton, CalendarMonthYear, Header } from "./calendar-header";
-import { ChevronLeftIcon, ChevronRightIcon } from "@sparrowengg/twigs-react-icons";
-import { Flex } from "../flex";
-import { CalendarGrid } from "./calendar-grid";
+import React, { useRef } from 'react';
+import { useRangeCalendarState } from 'react-stately';
+import {
+  useRangeCalendar, useLocale, AriaRangeCalendarProps, DateValue
+} from 'react-aria';
+import { createCalendar } from '@internationalized/date';
+import { ChevronLeftIcon, ChevronRightIcon } from '@sparrowengg/twigs-react-icons';
+import { Box } from '../box';
+import { CalendarButton, CalendarMonthYear, Header } from './calendar-header';
+import { Flex } from '../flex';
+import { CalendarGrid } from './calendar-grid';
 
-export function CalendarRange(props) {
-  let { locale } = useLocale();
-  let state = useRangeCalendarState({
+export const CalendarRange = (props: AriaRangeCalendarProps<DateValue>) => {
+  const { locale } = useLocale();
+  const state = useRangeCalendarState({
     ...props,
     visibleDuration: { months: 2 },
     locale,
     createCalendar
   });
 
-  let ref = useRef(null);
-  let {
+  const ref = useRef(null);
+  const {
     calendarProps,
     prevButtonProps,
     nextButtonProps,
@@ -26,20 +28,29 @@ export function CalendarRange(props) {
   } = useRangeCalendar(props, state, ref);
 
   return (
-    <Box {...calendarProps} ref={ref} css={{
-      maxWidth: 600
-    }}>
+    <Box
+      {...calendarProps}
+      css={{
+        maxWidth: 600
+      }}
+      ref={ref}
+    >
       <Header>
         <CalendarButton {...prevButtonProps} icon={<ChevronLeftIcon />} />
-        <CalendarMonthYear> {title} </CalendarMonthYear>
+        <CalendarMonthYear>
+          {' '}
+          {title}
+          {' '}
+        </CalendarMonthYear>
         <CalendarButton {...nextButtonProps} icon={<ChevronRightIcon />} />
       </Header>
       <Flex css={{
         gap: '48px'
-      }}>
+      }}
+      >
         <CalendarGrid state={state} />
         <CalendarGrid state={state} offset={{ months: 1 }} />
       </Flex>
     </Box>
   );
-}
+};
