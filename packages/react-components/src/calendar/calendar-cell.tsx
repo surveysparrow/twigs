@@ -4,13 +4,13 @@ import { useCalendarCell } from 'react-aria';
 import { CalendarState, RangeCalendarState } from 'react-stately';
 import { Day, DayContainer } from './day';
 
-type CalendarCellType = {
+type CalendarCell = {
   state: RangeCalendarState | CalendarState,
   date: CalendarDate,
   currentMonth: CalendarDate
 }
 
-export const CalendarCell = ({ state, date, currentMonth }: CalendarCellType) => {
+export const CalendarCell = ({ state, date, currentMonth }: CalendarCell) => {
   const ref = useRef(null);
   const {
     cellProps,
