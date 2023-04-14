@@ -1,5 +1,5 @@
-import React from "react";
-import { IconProps } from "../types";
+import React from 'react';
+import { IconProps } from '../types';
 
 export const InfoPlusIcon = React.forwardRef<SVGSVGElement, IconProps>(
   ({ color = 'currentColor', size = 32, ...rest }, ref) => {
@@ -27,8 +27,6 @@ export const InfoPlusIcon = React.forwardRef<SVGSVGElement, IconProps>(
           </clipPath>
         </defs>
       </svg>
-
-
-    )
+    );
   }
 );
