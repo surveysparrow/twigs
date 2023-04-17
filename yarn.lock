@@ -8261,11 +8261,6 @@ data-urls@^3.0.1:
     whatwg-mimetype "^3.0.0"
     whatwg-url "^11.0.0"
 
-date-fns@^2.29.2:
-  version "2.29.3"
-  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.29.3.tgz#27402d2fc67eb442b511b70bbdf98e6411cd68a8"
-  integrity sha512-dDCnyH2WnnKusqvZZ6+jA1O51Ibt8ZMRNkDZdyAyK4YfbDwa/cEmuztzG5pk6hqlp9aSBPYcjOlktquahGwGeA==
-
 dateformat@^3.0.0:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-3.0.3.tgz#a6e37499a4d9a9cf85ef5872044d62901c9889ae"
@@ -16600,13 +16595,6 @@ use-isomorphic-layout-effect@^1.1.1, use-isomorphic-layout-effect@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/use-isomorphic-layout-effect/-/use-isomorphic-layout-effect-1.1.2.tgz#497cefb13d863d687b08477d9e5a164ad8c1a6fb"
   integrity sha512-49L8yCO3iGT/ZF9QttjwLF/ZD9Iwto5LnH5LmEdk/6cFmXddqi2ulF0edxTwjj+7mqvpVVGQWvbXZdn32wRSHA==
-
-use-lilius@^2.0.3:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/use-lilius/-/use-lilius-2.0.3.tgz#07cdf1dea72da6f0c72d9234c16516fbbd396e2d"
-  integrity sha512-+Q7nspdv+QGnyHGVMd6yAdLrqv5EGB4n3ix4GJH0JEE27weKCLCLmZSuAr5Nw+yPBCZn/iZ+KjL5+UykLCWXrw==
-  dependencies:
-    date-fns "^2.29.2"
 
 use-sidecar@^1.1.2:
   version "1.1.2"

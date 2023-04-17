@@ -59,8 +59,7 @@
     "react-aria": "^3.24.0",
     "react-dom": "^18.2.0",
     "react-select": "^5.7.2",
-    "react-stately": "^3.22.0",
-    "use-lilius": "^2.0.3"
+    "react-stately": "^3.22.0"
   },
   "devDependencies": {
     "@babel/core": "^7.18.10",
