@@ -13,6 +13,7 @@ export const Day = styled('button', {
   height: '$10',
   width: '$10',
   cursor: 'pointer',
+  borderRadius: '$round',
   '&:hover': {
     backgroundColor: '$black100'
   },
@@ -25,35 +26,9 @@ export const Day = styled('button', {
     color: '$neutral900'
   },
   variants: {
-    rounded: {
-      none: {
-        borderRadius: '0'
-      },
-      full: {
-        borderRadius: '$round'
-      }
-    },
-    isDisabled: {
-      true: {
-        color: '$neutral500',
-        pointerEvents: 'none'
-      }
-    },
-    isActive: {
-      false: {
-        color: '$neutral500'
-      }
-    },
-    isToday: {
-      true: {
-        borderWidth: '$sm',
-        borderStyle: 'solid',
-        borderColor: '$secondary500'
-      }
-    },
     isHidden: {
       true: {
-        visibility: 'none'
+        visibility: 'hidden'
       }
     },
     isSelected: {
@@ -62,21 +37,19 @@ export const Day = styled('button', {
         color: '$white900'
       }
     }
-  },
-  defaultVariants: {
-    rounded: 'full'
   }
 });
 
 export const DayContainer = styled(Box, {
   // all of the selected dates in calendar range
+  borderRadius: '$round',
   '&[aria-selected="true"]': {
     background: '$secondary100'
   },
   // start date of the selected range
   '&[data-is-start="true"]': {
-    borderTopLeftRadius: '100%',
-    borderBottomLeftRadius: '100%',
+    borderTopLeftRadius: '$round !important',
+    borderBottomLeftRadius: '$round !important',
     background: '$secondary100',
     [`& ${Day}`]: {
       background: '$secondary500 !important',
@@ -85,8 +58,8 @@ export const DayContainer = styled(Box, {
   },
   // end date of the selected range
   '&[data-is-end="true"]': {
-    borderTopRightRadius: '100%',
-    borderBottomRightRadius: '100%',
+    borderTopRightRadius: '$round !important',
+    borderBottomRightRadius: '$round !important',
     background: '$secondary100',
     [`& ${Day}`]: {
       background: '$secondary500 !important',
@@ -95,6 +68,7 @@ export const DayContainer = styled(Box, {
   },
   // selected dates between the first and last date
   '&[aria-selected="true"][data-is-start="false"], &[aria-selected="true"][data-is-end="false"]': {
+    borderRadius: '0',
     [`& ${Day}`]: {
       background: '$secondary100',
       color: '$neutral900'
@@ -102,13 +76,13 @@ export const DayContainer = styled(Box, {
   },
   // first item in a week row of the selected range
   '&[aria-selected="true"]:first-of-type': {
-    borderTopLeftRadius: '100%',
-    borderBottomLeftRadius: '100%'
+    borderTopLeftRadius: '$round',
+    borderBottomLeftRadius: '$round'
   },
   // last item in a week row of the selected range
   '&[aria-selected="true"]:last-of-type': {
-    borderTopRightRadius: '100%',
-    borderBottomRightRadius: '100%'
+    borderTopRightRadius: '$round',
+    borderBottomRightRadius: '$round'
   }
 });
 

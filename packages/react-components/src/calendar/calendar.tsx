@@ -1,6 +1,4 @@
 import React, { useRef } from 'react';
-import dayjs from 'dayjs';
-import isBetween from 'dayjs/plugin/isBetween';
 import { createCalendar } from '@internationalized/date';
 import {
   AriaCalendarProps, DateValue, useCalendar, useLocale
@@ -13,8 +11,6 @@ import {
 } from './calendar-header';
 import { CalendarGrid } from './calendar-grid';
 import { CalendarButton } from './calendar-button';
-
-dayjs.extend(isBetween);
 
 export const Calendar = (props: AriaCalendarProps<DateValue>) => {
   const { locale } = useLocale();

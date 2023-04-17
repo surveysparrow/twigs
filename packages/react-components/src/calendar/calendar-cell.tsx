@@ -4,13 +4,13 @@ import { useCalendarCell } from 'react-aria';
 import { CalendarState, RangeCalendarState } from 'react-stately';
 import { Day, DayContainer } from './day';
 
-type CalendarCell = {
-  state: RangeCalendarState | CalendarState,
+type CalendarCellProps = {
+  state: RangeCalendarState & CalendarState,
   date: CalendarDate,
   currentMonth: CalendarDate
 }
 
-export const CalendarCell = ({ state, date, currentMonth }: CalendarCell) => {
+export const CalendarCell = ({ state, date, currentMonth }: CalendarCellProps) => {
   const ref = useRef(null);
   const {
     cellProps,
@@ -20,7 +20,7 @@ export const CalendarCell = ({ state, date, currentMonth }: CalendarCell) => {
   } = useCalendarCell({ date }, state, ref);
 
   const isOutsideMonth = !isSameMonth(currentMonth, date);
-  const isFirstDayInRange = state?.value?.start && isSameDay(date, state.value.start);
+  const isFirstDayInRange = state?.value?.start! && isSameDay(date, state.value.start);
   const isLastDayInRange = state?.value?.end && isSameDay(date, state.value.end);
   return (
     <DayContainer
@@ -32,6 +32,7 @@ export const CalendarCell = ({ state, date, currentMonth }: CalendarCell) => {
         {...buttonProps}
         ref={ref}
         isHidden={isOutsideMonth}
+        data-is-hidden={isOutsideMonth}
         isSelected={isSelected}
       >
         {formattedDate}

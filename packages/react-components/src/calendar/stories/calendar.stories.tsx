@@ -1,16 +1,7 @@
-/* eslint-disable react/destructuring-assignment */
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { ComponentMeta } from '@storybook/react';
-import { CalendarIcon } from '@sparrowengg/twigs-react-icons';
-import dayjs from 'dayjs';
-import { Calendar } from '../calendar';
-import { Input } from '../../input';
-import { Popover, PopoverContent, PopoverTrigger } from '../../popover';
-import { Box } from '../../box';
-import { Flex } from '../../flex';
-import { Button } from '../../button';
-import { Text } from '../../text';
 import { parseDate } from '@internationalized/date';
+import { Calendar } from '../calendar';
 
 export default {
   component: Calendar,
@@ -19,82 +10,13 @@ export default {
 } as ComponentMeta<typeof Calendar>;
 
 const Template = (args) => {
-  let [value, setValue] = React.useState(parseDate('2020-02-03'));
-  useEffect(() => {
-  }, [value])
+  const [value, setValue] = React.useState(parseDate('2023-01-01'));
   return (
     <Calendar
       {...args}
       onChange={setValue}
+      value={value}
     />
   );
 };
 export const Default = Template.bind({});
-
-const WithPopOverTemplate = (args) => {
-  const formatDate = (date) => {
-    const formattedDate = dayjs(date).format('MM/D/YYYY');
-    return formattedDate;
-  };
-
-  const [open, setOpen] = useState(false);
-  const [date, setDate] = useState(formatDate(new Date()));
-
-  const onDateChange = (val) => {
-    setDate(formatDate(val[0]));
-  };
-
-  return (
-    <Popover open={open}>
-      <PopoverTrigger
-        style={{ all: 'unset' }}
-        onClick={() => setOpen(true)}
-      >
-        <Input
-          value={date}
-          onChange={() => { }}
-          size="lg"
-          css={{
-            width: 200,
-            textAlign: 'left'
-          }}
-          iconRight={<CalendarIcon />}
-        />
-      </PopoverTrigger>
-      <PopoverContent css={{
-        width: 340,
-        p: 0
-      }}
-      >
-        <Calendar
-          {...args}
-          onChange={onDateChange}
-          defaultValue={new Date(date)}
-        />
-
-        <Flex
-          css={{
-            px: '$14',
-            py: '$6',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            borderTop: '1px solid $neutral100'
-          }}
-        >
-          <Box>
-            <Text weight="bold">
-              {' '}
-              {dayjs(new Date(date)).format('MMM DD, YYYY')}
-            </Text>
-          </Box>
-          <Button size="lg" onClick={() => setOpen(false)}>
-            Schedule
-          </Button>
-        </Flex>
-
-      </PopoverContent>
-    </Popover>
-  );
-};
-
-export const WithPopOver = WithPopOverTemplate.bind({});
