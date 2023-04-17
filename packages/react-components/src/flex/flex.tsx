@@ -6,7 +6,7 @@ const StyledBox = styled(Box, {});
 
 export type FlexProps = BoxProps
 
-export const Flex: FunctionComponent<FlexProps> = ({
+export const Flex: FunctionComponent<FlexProps> = React.forwardRef(({
   children,
   css,
   ...rest
@@ -16,4 +16,4 @@ export const Flex: FunctionComponent<FlexProps> = ({
       {children}
     </StyledBox>
   );
-};
+});

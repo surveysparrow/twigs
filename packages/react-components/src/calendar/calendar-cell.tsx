@@ -5,7 +5,7 @@ import { CalendarState, RangeCalendarState } from 'react-stately';
 import { Day, DayContainer } from './day';
 
 type CalendarCellProps = {
-  state: RangeCalendarState & CalendarState,
+  state: RangeCalendarState | CalendarState,
   date: CalendarDate,
   currentMonth: CalendarDate
 }
@@ -20,7 +20,9 @@ export const CalendarCell = ({ state, date, currentMonth }: CalendarCellProps) =
   } = useCalendarCell({ date }, state, ref);
 
   const isOutsideMonth = !isSameMonth(currentMonth, date);
+  // @ts-ignore - adding this temporarily
   const isFirstDayInRange = state?.value?.start! && isSameDay(date, state.value.start);
+  // @ts-ignore - adding this temporarily
   const isLastDayInRange = state?.value?.end && isSameDay(date, state.value.end);
   return (
     <DayContainer

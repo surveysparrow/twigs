@@ -1,24 +1,24 @@
-import React, { forwardRef, useRef } from "react";
-import { useDateFieldState } from "react-stately";
+import React, { useRef } from 'react';
+import { useDateFieldState } from 'react-stately';
 import {
   useDateField,
   useLocale
-} from "react-aria";
-import { createCalendar } from "@internationalized/date";
-import { Box } from "../box";
-import { Flex } from "../flex";
-import { DateTimeSegment } from "./date-time-segment";
+} from 'react-aria';
+import { createCalendar } from '@internationalized/date';
+import { Box } from '../box';
+import { Flex } from '../flex';
+import { DateTimeSegment } from './date-time-segment';
 
-export function DateField(props) {
-  let { locale } = useLocale();
-  let state = useDateFieldState({
+export const DateField = (props) => {
+  const { locale } = useLocale();
+  const state = useDateFieldState({
     ...props,
     locale,
     createCalendar
   });
 
-  let ref = useRef(null);
-  let { fieldProps } = useDateField(props, state, ref);
+  const ref = useRef(null);
+  const { fieldProps } = useDateField(props, state, ref);
 
   return (
     <Flex {...fieldProps} ref={ref}>
@@ -28,25 +28,24 @@ export function DateField(props) {
       ))}
     </Flex>
   );
-}
+};
 
 type StyledFieldT = {
   children: React.ReactElement
 }
 
-export const StyledField = forwardRef(({ children, ...otherProps }: StyledFieldT, ref) => {
+export const StyledField = ({ children, ...otherProps }: StyledFieldT) => {
   return (
     <Box
       {...otherProps}
       css={{
-        transition: "all 200ms",
-        display: "flex",
-        alignItems: "center",
+        transition: 'all 200ms',
+        display: 'flex',
+        alignItems: 'center',
         p: 0
       }}
-      ref={ref}
     >
       {children}
     </Box>
   );
-});
+};

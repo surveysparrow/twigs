@@ -1,21 +1,21 @@
-import React, { useRef } from "react";
-import { useDatePickerState } from "react-stately";
-import { useDatePicker } from "react-aria";
-import { Box } from "../box";
-import { CalendarIcon } from "@sparrowengg/twigs-react-icons";
-import { Popover, PopoverContent, PopoverTrigger } from "../popover";
-import { Calendar } from "../calendar";
-import { DateField } from "./date-field";
-import { FormLabel } from "../form-label";
-import { IconButton } from "../button";
+import React, { useRef } from 'react';
+import { useDatePickerState } from 'react-stately';
+import { AriaDatePickerProps, DateValue, useDatePicker } from 'react-aria';
+import { CalendarIcon } from '@sparrowengg/twigs-react-icons';
+import { Box } from '../box';
+import { Popover, PopoverContent, PopoverTrigger } from '../popover';
+import { Calendar } from '../calendar';
+import { DateField } from './date-field';
+import { FormLabel } from '../form-label';
+import { IconButton } from '../button';
 
-export function DatePicker(props) {
-  let state = useDatePickerState({
+export const DatePicker = (props: AriaDatePickerProps<DateValue>) => {
+  const state = useDatePickerState({
     ...props,
     shouldCloseOnSelect: false
   });
-  let ref = useRef(null);
-  let {
+  const ref = useRef(null);
+  const {
     groupProps,
     labelProps,
     fieldProps,
@@ -30,15 +30,18 @@ export function DatePicker(props) {
         position: 'relative',
         display: 'inline-flex',
         flexDirection: 'column'
-      }}>
+      }}
+    >
       {
-        props.label &&
-        <FormLabel {...labelProps} css={{ mb: '3px' }}>{props.label}</FormLabel>
+        props.label
+        && <FormLabel {...labelProps} css={{ mb: '3px' }}>{props.label}</FormLabel>
       }
 
-      <Popover open={state.isOpen} ref={ref} onOpenChange={state.toggle}>
+      <Popover open={state.isOpen} onOpenChange={state.toggle}>
         <PopoverTrigger asChild>
-          <Box {...groupProps} ref={ref}
+          <Box
+            {...groupProps}
+            ref={ref}
             css={{
               display: 'inline-flex',
               width: 'auto',
@@ -48,20 +51,22 @@ export function DatePicker(props) {
               borderRadius: '$lg'
             }}
           >
-            <Box css={{
-              position: "relative",
-              transition: "all 200ms",
-              display: "flex",
-              alignItems: "center",
-            }}
+            <Box
+              css={{
+                position: 'relative',
+                transition: 'all 200ms',
+                display: 'flex',
+                alignItems: 'center'
+              }}
               ref={ref}
             >
               <DateField {...fieldProps} />
             </Box>
-            <IconButton {...buttonProps}
+            <IconButton
+              {...buttonProps}
               onClick={state.open}
-              variant='bright'
-              size={'md'}
+              variant="bright"
+              size="md"
               css={{
                 background: 'none',
                 color: '$black900'
@@ -70,14 +75,17 @@ export function DatePicker(props) {
             />
           </Box>
         </PopoverTrigger>
-        <PopoverContent {...dialogProps} css={{
-          width: 'auto',
-          maxWidth: 340
-        }}>
+        <PopoverContent
+          {...dialogProps}
+          css={{
+            width: 'auto',
+            maxWidth: 340
+          }}
+        >
           <Calendar {...calendarProps} />
         </PopoverContent>
       </Popover>
 
     </Box>
   );
-}
+};
