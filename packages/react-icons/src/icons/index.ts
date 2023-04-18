@@ -10,6 +10,8 @@ export { AttachmentIcon } from './attachment';
 export { ArrowLeftIcon } from './arrow-left';
 export { ArrowUpIcon } from './arrow-up';
 export { ArrowDownIcon } from './arrow-down';
+export { ArrowEnterIcon } from './arrow-enter';
+export { AuditLogIcon } from './audit-log';
 export { BackspaceIcon } from './backspace';
 export { BellIcon } from './bell';
 export { BlockIcon } from './block';

@@ -1,6 +1,6 @@
 {
   "name": "@sparrowengg/twigs-react-icons",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "React icon package from SurveySparrow",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
