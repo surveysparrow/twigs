@@ -88,6 +88,7 @@ export { TickIcon } from './tick';
 export { TypographyIcon } from './typography';
 export { UndoIcon } from './undo';
 export { UploadIcon } from './upload';
+export { UploadSecondaryIcon } from './upload-secondary';
 export { UserCirclePlusIcon } from './user-circle-plus';
 export { UserCircleIcon } from './user-circle';
 export { WarningIcon } from './warning';
