@@ -20,7 +20,7 @@ export { ChevronDownIcon } from './chevron-down';
 export { ChevronLeftIcon } from './chevron-left';
 export { ChevronRightIcon } from './chevron-right';
 export { ClapIcon } from './clap';
-export { Clock } from './clock';
+export { ClockIcon } from './clock';
 export { CloseCircleIcon } from './close-circle';
 export { CloseIcon } from './close';
 export { CogIcon } from './cog';
