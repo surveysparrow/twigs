@@ -1,7 +1,7 @@
 import React from 'react';
 import { IconProps } from '../types';
 
-export const ImportIcon = React.forwardRef<SVGSVGElement, IconProps>(
+export const ExportIcon = React.forwardRef<SVGSVGElement, IconProps>(
   ({ color = 'currentColor', size = 32, ...rest }, ref) => {
     return (
       <svg
@@ -14,25 +14,25 @@ export const ImportIcon = React.forwardRef<SVGSVGElement, IconProps>(
         ref={ref}
       >
         <path
-          d="M16 22.6667V4"
+          d="M16.6673 16.25H3.33398"
           stroke={color}
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
         />
         <path
-          d="M26.6666 28H5.33331"
+          d="M10 3.1263V11.668"
           stroke={color}
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
         />
         <path
-          d="M22.6666 16L15.9986 22.668L9.33197 16"
+          d="M14.1662 7.29297L9.9987 3.12547L5.83203 7.29297"
           stroke={color}
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
         />
       </svg>
     );
