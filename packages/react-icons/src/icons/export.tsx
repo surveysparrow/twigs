@@ -5,30 +5,28 @@ export const ExportIcon = React.forwardRef<SVGSVGElement, IconProps>(
   ({ color = 'currentColor', size = 32, ...rest }, ref) => {
     return (
       <svg
+        width={size}
+        height={size}
         viewBox="0 0 32 32"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        {...rest}
-        width={size}
-        height={size}
-        ref={ref}
       >
         <path
-          d="M16.6673 16.25H3.33398"
+          d="M26.6666 26H5.33331"
           stroke={color}
           stroke-width="1.5"
           stroke-linecap="round"
           stroke-linejoin="round"
         />
         <path
-          d="M10 3.1263V11.668"
+          d="M16 5.0013V18.668"
           stroke={color}
           stroke-width="1.5"
           stroke-linecap="round"
           stroke-linejoin="round"
         />
         <path
-          d="M14.1662 7.29297L9.9987 3.12547L5.83203 7.29297"
+          d="M22.6666 11.668L15.9986 4.99997L9.33197 11.668"
           stroke={color}
           stroke-width="1.5"
           stroke-linecap="round"
