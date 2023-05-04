@@ -81,19 +81,14 @@ const StyledInput = styled('input', {
 });
 
 function getInputPadding(size: string | ({ "@initial"?: "md" | "lg" | "xl" })) {
-  let inputPaddingValue: string;
   switch (size) {
     case 'lg':
-      inputPaddingValue = '$20';
-      break;
+      return '$20';
     case 'md':
-      inputPaddingValue = '$14';
-      break;
+      return '$14';
     default:
-      inputPaddingValue = '$22';
-      break;
+      return '$22';
   }
-  return inputPaddingValue;
 }
 
 export interface InputBaseProps {
