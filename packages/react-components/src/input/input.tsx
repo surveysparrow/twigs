@@ -83,9 +83,6 @@ const StyledInput = styled('input', {
 function getInputPadding(size: string | ({ "@initial"?: "md" | "lg" | "xl" })) {
   let inputPaddingValue: string;
   switch (size) {
-    case 'xl':
-      inputPaddingValue = '$22';
-      break;
     case 'lg':
       inputPaddingValue = '$20';
       break;
