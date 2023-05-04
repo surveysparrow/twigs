@@ -5,7 +5,6 @@ import { styled } from '../../stitches.config';
 const StyledInput = styled('input', {
   width: '100%',
   color: '$neutral900',
-  background: '$black50',
   borderWidth: '$xs',
   borderStyle: 'solid',
   borderColor: 'transparent',
@@ -57,12 +56,47 @@ const StyledInput = styled('input', {
         padding: '$3 $4',
         fontSize: '$sm'
       }
+    },
+    variant: {
+      outlined: {
+        background: '$white900',
+        borderWidth: '$xs',
+        borderStyle: 'solid',
+        borderColor: '$neutral200',
+        '&:hover, &:focus, &:active': {
+          borderWidth: '$xs',
+          borderStyle: 'solid',
+          borderColor: '$neutral300'
+        },
+      },
+      filled: {
+        background: '$black50',
+      }
     }
   },
   defaultVariants: {
-    size: 'md'
+    size: 'md',
+    variant: 'outlined'
   }
 });
+
+function getInputPadding(size: string | ({ "@initial"?: "md" | "lg" | "xl" })) {
+  let inputPaddingValue: string;
+  switch (size) {
+    case 'xl':
+      inputPaddingValue = '$22';
+      break;
+    case 'lg':
+      inputPaddingValue = '$20';
+      break;
+    case 'md':
+      inputPaddingValue = '$14';
+    default:
+      inputPaddingValue = '$22';
+      break;
+  }
+  return inputPaddingValue;
+}
 
 export interface InputBaseProps {
   iconLeft?: ReactElement;
@@ -123,14 +157,9 @@ export const Input: FunctionComponent<InputProps> = React.forwardRef(({
   css,
   ...rest
 }: InputProps, ref) => {
-  let inputPaddingValue = '$22';
-  if (size === 'xl') {
-    inputPaddingValue = '$22';
-  } else if (size === 'lg') {
-    inputPaddingValue = '$20';
-  } else if (size === 'md') {
-    inputPaddingValue = '$14';
-  }
+
+  const inputPaddingValue = getInputPadding(size);
+
   if (iconLeft || iconRight) {
     return (
       <Box
