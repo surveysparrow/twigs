@@ -25,7 +25,7 @@ export { ChevronUpFillIcon } from './chevron-up-fill';
 export { ClapIcon } from './clap';
 export { ClockIcon } from './clock';
 export { CloseCircleIcon } from './close-circle';
-export { CloseFillIcon } from './close-fill';
+export { CloseCircleFillIcon } from './close-circle-fill';
 export { CloseIcon } from './close';
 export { CogIcon } from './cog';
 export { ColorPaletteIcon } from './color-palette';

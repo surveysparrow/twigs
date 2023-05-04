@@ -1,7 +1,7 @@
 import React from 'react';
 import { IconProps } from '../types';
 
-export const CloseFillIcon = React.forwardRef<SVGSVGElement, IconProps>(
+export const CloseCircleFillIcon = React.forwardRef<SVGSVGElement, IconProps>(
   ({ color = 'currentColor', size = 32, ...rest }, ref) => {
     return (
       <svg
