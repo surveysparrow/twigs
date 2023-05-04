@@ -1,7 +1,7 @@
 import React from 'react';
 import { IconProps } from '../types';
 
-export const ExportIcon = React.forwardRef<SVGSVGElement, IconProps>(
+export const AlarmClockIcon = React.forwardRef<SVGSVGElement, IconProps>(
   ({ color = 'currentColor', size = 32, ...rest }, ref) => {
     return (
       <svg
@@ -14,35 +14,28 @@ export const ExportIcon = React.forwardRef<SVGSVGElement, IconProps>(
         ref={ref}
       >
         <path
-          d="M22.2745 16.3137H9.72548C6.9534 16.3137 4.70587 18.5613 4.70587 21.3333C4.70587 24.1054 6.9534 26.3529 9.72548 26.3529H22.2745C25.0466 26.3529 27.2941 24.1054 27.2941 21.3333C27.2941 18.5613 25.0466 16.3137 22.2745 16.3137Z"
+          d="M11.9192 7.4809C17.3613 5.22677 23.6003 7.81111 25.8544 13.2532C28.1086 18.6953 25.5242 24.9343 20.0821 27.1884C14.6401 29.4426 8.40104 26.8582 6.1469 21.4162C3.89276 15.9741 6.4771 9.73505 11.9192 7.4809"
+          stroke={color}
+          strokeWidth="1.50004"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M4.59998 7.74666L8.59998 4.38666"
           stroke={color}
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
-          d="M14.7451 21.3333H22.2745"
+          d="M27.4133 7.75996L23.4133 4.39996"
           stroke={color}
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
-          d="M9.76939 21.2894C9.79449 21.3145 9.79449 21.3534 9.76939 21.3785C9.74429 21.4036 9.70539 21.4036 9.68029 21.3785C9.65519 21.3534 9.65519 21.3145 9.68029 21.2894C9.70539 21.2643 9.74555 21.2643 9.76939 21.2894Z"
-          stroke={color}
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M12.2353 7.52942L16 3.76471L19.7647 7.52942"
-          stroke={color}
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M16 12.549V3.76471"
+          d="M15.6667 12.576V18.0893L20 20.732"
           stroke={color}
           strokeWidth="1.5"
           strokeLinecap="round"

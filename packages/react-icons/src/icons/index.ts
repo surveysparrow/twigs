@@ -1,5 +1,6 @@
 export { AddColumnIcon } from './add-column';
 export { AdjustHorizontalIcon } from './adjust-horizontal';
+export { AlarmClockIcon } from './alarm-clock';
 export { AlertFillIcon } from './alert-fill';
 export { AlertIcon } from './alert';
 export { AlignCenterIcon } from './align-center';
