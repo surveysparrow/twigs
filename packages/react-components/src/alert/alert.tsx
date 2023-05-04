@@ -118,7 +118,10 @@ export const Alert: FunctionComponent<AlertProps> = React.forwardRef(
     children,
     ...rest
   }: AlertProps, ref) => {
-    const ValidAlertIcon = STATUSES[status].icon;
+    const ValidAlertIcon = STATUSES[status]?.icon;
+    if (!ValidAlertIcon) {
+      throw new Error(`Invalid status: ${status}`);
+    }
     return (
       <StyledAlert
         role="alert"
