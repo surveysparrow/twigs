@@ -91,6 +91,7 @@ function getInputPadding(size: string | ({ "@initial"?: "md" | "lg" | "xl" })) {
       break;
     case 'md':
       inputPaddingValue = '$14';
+      break;
     default:
       inputPaddingValue = '$22';
       break;
