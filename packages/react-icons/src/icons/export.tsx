@@ -14,23 +14,23 @@ export const ExportIcon = React.forwardRef<SVGSVGElement, IconProps>(
         <path
           d="M26.6666 26H5.33331"
           stroke={color}
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M16 5.0013V18.668"
           stroke={color}
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M22.6666 11.668L15.9986 4.99997L9.33197 11.668"
           stroke={color}
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </svg>
     );
