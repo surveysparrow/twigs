@@ -102,6 +102,7 @@ export { TextInputColorIcon } from './text-input-color';
 export { ThumbsUpHeartIconColor } from './thumbs-up-heart-color';
 export { TickCircleIcon } from './tick-circle';
 export { TickIcon } from './tick';
+export { TickCircleFillIcon } from './tick-circle-fill';
 export { TypographyIcon } from './typography';
 export { UndoIcon } from './undo';
 export { UploadIcon } from './upload';
