@@ -18,7 +18,7 @@ const Template: ComponentStory<typeof Tabs> = (args) => (
     >
       <TabsTrigger value="tab1">One</TabsTrigger>
       <TabsTrigger value="tab2">Two</TabsTrigger>
-      <TabsTrigger value="tab3">Three</TabsTrigger>
+      <TabsTrigger value="tab3" disabled>Three</TabsTrigger>
     </TabsList>
     <TabsContent css={{ py: '$16' }} value="tab1">
       Tab 1

@@ -39,7 +39,7 @@ const Template: ComponentStory<typeof IconButton> = (args) => (
     gap: "20px",
     flexDirection: "row"
   }}>
-    <IconButton {...args} icon={<PencilIcon />}/>
+    <IconButton {...args} icon={<PencilIcon />} />
     <IconButton {...args} icon={<PlusIcon />} />
   </Flex>
 );

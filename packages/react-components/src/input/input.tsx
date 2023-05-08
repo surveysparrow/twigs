@@ -5,11 +5,14 @@ import { styled } from '../../stitches.config';
 const StyledInput = styled('input', {
   width: '100%',
   color: '$neutral900',
-  background: '$black50',
+  background: '#65758B0F',
   borderWidth: '$xs',
   borderStyle: 'solid',
   borderColor: 'transparent',
   transition: 'all $transitions$2',
+  '&::placeholder': {
+    color: '$neutral500'
+  },
   '&:hover, &:focus, &:active': {
     background: '$white900',
     borderWidth: '$xs',
@@ -24,18 +27,15 @@ const StyledInput = styled('input', {
   },
   '&:disabled': {
     color: '$neutral700',
-    background: '$black100',
+    background: '#65758B0F',
     cursor: 'not-allowed',
     borderWidth: '$xs',
     borderStyle: 'solid',
     borderColor: '$neutral200',
     '&:hover': {
-      background: '$black100',
+      background: '$white900',
       boxShadow: 'none'
     }
-  },
-  '&::placeholder': {
-    color: '$neutral600'
   },
   variants: {
     size: {

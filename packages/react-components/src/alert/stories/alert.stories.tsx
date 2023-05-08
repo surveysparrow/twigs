@@ -8,14 +8,16 @@ export default {
   argTypes: {
     status: {
       control: 'select',
-      options: ['success', 'info', 'error', 'warning'],
-      defaultValue: 'info'
+      options: ['success', 'info', 'error', 'warning']
     },
     size: {
       control: 'select',
-      options: ['sm', 'md'],
-      defaultValue: 'sm'
+      options: ['sm', 'md']
     }
+  },
+  args: {
+    status: 'info',
+    size: 'sm'
   }
 } as ComponentMeta<typeof Alert>;
 

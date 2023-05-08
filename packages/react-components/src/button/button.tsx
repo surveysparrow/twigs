@@ -107,69 +107,50 @@ const StyledButton = styled('button', {
     },
     variant: {
       default: {
-        background: '$black50',
-        color: '$neutral800',
-        '&:hover, &:focus': {
-          color: '$neutral900',
-          background: '$black100'
+        background: '$secondary100',
+        color: '$secondary500',
+        '&:hover, &:active': {
+          color: '$secondary600',
+          background: '$secondary300'
         },
-        '&:active': {
-          color: '$neutral900',
-          background: '$black200'
+        '&:focus': {
+          color: '$secondary600',
+          background: '$secondary200'
         }
       },
       primary: {
         background: '$primary400',
         color: '$white900',
-        '&:hover': {
-          background: '$primary500'
-        },
-        '&:focus': {
-          background: '$primary500'
-        },
-        '&:active': {
-          background: '$primary600'
-        }
-      },
-      accent: {
-        background: '$tertiary600',
-        color: '$white900',
         '&:hover, &:focus': {
-          background: '$tertiary700'
+          background: '$primary500'
         },
         '&:active': {
-          background: '$tertiary800'
+          background: '$primary700'
         }
       },
       secondary: {
-        background: 'transparent',
-        color: '$tertiary500',
-        border: '$borderWidths$sm solid $colors$tertiary600',
-        '&:hover, &:focus': {
-          color: '$tertiary600'
-        },
+        background: '$secondary500',
+        color: '$white900',
         '&:hover': {
-          border: '$borderWidths$sm solid $tertiary500'
+          background: '$secondary600',
         },
         '&:focus': {
-          border: '$borderWidths$sm solid $tertiary600'
+          background: '$secondary600',
         },
         '&:active': {
-          color: '$tertiary700',
-          background: '$tertiary100',
-          border: '$borderWidths$sm solid $tertiary700'
+          background: '$secondary800',
         }
       },
       bright: {
         background: '$white900',
-        color: '$neutral800',
+        color: '$secondary500',
         '&:hover, &:focus': {
-          color: '$neutral900',
-          background: '$black300'
+          color: '$secondary600',
+          background: '$neutral50'
         },
         '&:active': {
-          color: '$neutral900',
-          background: '$black300'
+          color: '$secondary600',
+          background: '$neutral100'
         }
       }
     },
@@ -237,9 +218,9 @@ const StyledButton = styled('button', {
       variant: 'accent',
       isText: true,
       css: {
-        color: '$tertiary600',
+        color: '$accent600',
         '&:hover, &:focus, &:active': {
-          color: '$tertiary700'
+          color: '$accent700'
         }
       }
     },
@@ -267,9 +248,9 @@ const StyledButton = styled('button', {
       variant: 'secondary',
       isLoading: true,
       css: {
-        background: '$tertiary100',
+        background: '$accent100',
         '& div': {
-          background: '$tertiary700'
+          background: '$accent700'
         }
       }
     },

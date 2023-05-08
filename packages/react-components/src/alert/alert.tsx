@@ -25,7 +25,6 @@ const StyledAlertIcon = styled('span', {
 const StyledAlert = styled(Box, {
   display: 'flex',
   alignItems: 'center',
-  padding: '$4',
   width: '100%',
   borderWidth: '$xs',
   borderStyle: 'solid',
@@ -37,7 +36,7 @@ const StyledAlert = styled(Box, {
   variants: {
     size: {
       sm: {
-        padding: '$3 $5',
+        padding: '6px $2',
         [`${StyledAlertIcon}`]: {
           marginInlineEnd: '$2'
         },
@@ -74,10 +73,10 @@ const StyledAlert = styled(Box, {
         }
       },
       [STATUSES.info.name]: {
-        backgroundColor: '$system100',
-        borderColor: '$system200',
+        backgroundColor: '$accent50',
+        borderColor: '$accent100',
         [`${StyledAlertIcon} svg`]: {
-          color: '$system500'
+          color: '$accent500'
         }
       },
       [STATUSES.error.name]: {

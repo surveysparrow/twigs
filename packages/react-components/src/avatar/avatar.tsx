@@ -16,7 +16,7 @@ const StyledFallback = styled(AvatarPrimitive.Fallback, {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  backgroundColor: '$tertiary200',
+  backgroundColor: '$accent200',
   color: '$neutral600',
   lineHeight: '$xs',
   fontWeight: '$7'
@@ -32,7 +32,7 @@ const StyledAvatar = styled(AvatarPrimitive.Root, {
   position: 'relative',
   variants: {
     size: {
-      '3xl': {
+      '5xl': {
         width: '$30',
         height: '$30',
         fontSize: '$4xl',
@@ -42,7 +42,7 @@ const StyledAvatar = styled(AvatarPrimitive.Root, {
           width: '$5'
         }
       },
-      '2xl': {
+      '4xl': {
         width: '$18',
         height: '$18',
         fontSize: '$xl',
@@ -50,6 +50,26 @@ const StyledAvatar = styled(AvatarPrimitive.Root, {
           borderWidth: '$borderWidths$sm',
           height: '$5',
           width: '$5'
+        }
+      },
+      '3xl': {
+        width: '$16',
+        height: '$16',
+        fontSize: '$lg',
+        [`~ ${AvatarBadge}`]: {
+          borderWidth: '$borderWidths$sm',
+          height: '$4',
+          width: '$4'
+        }
+      },
+      '2xl': {
+        width: '$14',
+        height: '$14',
+        fontSize: '$lg',
+        [`~ ${AvatarBadge}`]: {
+          borderWidth: '$borderWidths$sm',
+          height: '$4',
+          width: '$4'
         }
       },
       xl: {
@@ -110,7 +130,7 @@ const StyledAvatar = styled(AvatarPrimitive.Root, {
       full: {
         borderRadius: '100%',
         [`& ${StyledImage}, & ${StyledFallback}`]: {
-          borderRadius: '100%'
+          borderRadius: '$round'
         }
       },
       '3xl': {

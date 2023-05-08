@@ -1,5 +1,4 @@
 import React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Button } from '../button';
 
 const PlusIcon = () => (
@@ -19,7 +18,7 @@ export default {
     },
     variant: {
       control: 'select',
-      options: ['default', 'primary', 'accent', 'secondary', 'bright']
+      options: ['default', 'primary', 'secondary', 'bright']
     },
     isLoading: {
       control: 'boolean'

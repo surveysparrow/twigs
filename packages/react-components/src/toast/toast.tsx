@@ -1,15 +1,14 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import * as ToastPrimitive from '@radix-ui/react-toast';
 import {
-  TickIcon, WarningIcon, InfoIcon, AlertIcon
+  WarningIcon, AlertFillIcon, TickCircleIcon
 } from '@sparrowengg/twigs-react-icons';
 import { styled, keyframes } from '../../stitches.config';
 import { Flex } from '../flex';
 
-const StyledTickIcon = styled(TickIcon);
-const StyledErrorIcon = styled(AlertIcon);
+const StyledTickIcon = styled(TickCircleIcon);
+const StyledErrorIcon = styled(AlertFillIcon);
 const StyledWarningIcon = styled(WarningIcon);
-const StyledInfoIcon = styled(InfoIcon);
 
 const hide = keyframes({
   '0%': { opacity: 1 },
@@ -184,20 +183,36 @@ const Icon = ({ children, variant = 'success', ...props }: IconProps) => {
     default: () => <StyledTickIcon />,
     success: () => <StyledTickIcon />,
     error: () => <StyledErrorIcon />,
-    warning: () => <StyledWarningIcon />,
-    info: () => <StyledInfoIcon />
+    warning: () => <StyledWarningIcon />
   };
   return (
-    <StyledIcon className="icon-container" {...props}>
+    <StyledIcon {...props}>
       {children || <>{iconMap[variant]()}</>}
     </StyledIcon>
   );
 };
 
+
+
+const StyledTitle = styled(ToastPrimitive.Title, {
+  gridArea: 'title',
+  fontWeight: '$5',
+  color: '$white900',
+  fontSize: '$sm'
+});
+
+const StyledDescription = styled(ToastPrimitive.Description, {
+  gridArea: 'description',
+  margin: 0,
+  color: '$white900',
+  fontSize: '$sm'
+});
+
 const StyledToast = styled(ToastPrimitive.Root, {
   backgroundColor: '$neutral900',
   borderRadius: '$xl',
   display: 'grid',
+  padding: '10px $3',
   gridTemplateAreas: '"icon content action" "icon content action"',
   gridTemplateColumns: 'max-content auto max-content',
   columnGap: '$8',
@@ -214,34 +229,56 @@ const StyledToast = styled(ToastPrimitive.Root, {
   variants: {
     variant: {
       default: {
-        '& .icon-container': {
-          background: '$black900'
+        background: '$accent100',
+        [`& ${StyledIcon} svg`]: {
+          color: '$accent500'
+        },
+        [`& ${StyledTitle}`]: {
+          color: '$black900'
+        },
+        [`& ${StyledDescription}`]: {
+          color: '$black800'
         }
       },
       success: {
-        '& .icon-container': {
-          background: '$positive500'
+        background: '$accent700',
+        [`& ${StyledIcon} svg`]: {
+          color: '$primary400'
+        },
+        [`& ${StyledTitle}`]: {
+          color: '$white900'
+        },
+        [`& ${StyledDescription}`]: {
+          color: '$white800'
         }
       },
       error: {
-        '& .icon-container': {
-          background: '$negative500'
+        background: '$negative600',
+        [`& ${StyledIcon} svg`]: {
+          color: '$white900'
+        },
+        [`& ${StyledTitle}`]: {
+          color: '$white900'
+        },
+        [`& ${StyledDescription}`]: {
+          color: '$white800'
         }
       },
       warning: {
-        '& .icon-container': {
-          background: '$attention400'
-        }
-      },
-      info: {
-        '& .icon-container': {
-          background: '$system500'
+        background: '$attention500',
+        [`& ${StyledIcon} svg`]: {
+          color: '$black700'
+        },
+        [`& ${StyledTitle}`]: {
+          color: '$black900'
+        },
+        [`& ${StyledDescription}`]: {
+          color: '$black800'
         }
       }
     },
     size: {
       sm: {
-        height: '$13',
         '& .toast-actions': {
           '&:before': {
             display: 'none'
@@ -250,9 +287,6 @@ const StyledToast = styled(ToastPrimitive.Root, {
             display: 'none'
           }
         }
-      },
-      md: {
-        height: '$20'
       }
     }
   },
@@ -300,7 +334,7 @@ const ToastWrapper: FunctionComponent<ToastProps> = ({
 
 type ProviderProps = React.ComponentProps<typeof StyledViewport> & ToastPrimitive.ToastProviderProps
 
-const Provider:FunctionComponent<ProviderProps> = ({
+const Provider: FunctionComponent<ProviderProps> = ({
   duration,
   label,
   swipeDirection,
@@ -327,6 +361,7 @@ const StyledContent = styled(Flex, {
   flexDirection: 'column',
   justifyContent: 'center',
   padding: '$8 0',
+  gap: '$4',
   overflow: 'hidden'
 });
 
@@ -344,41 +379,14 @@ const Content = ({ children, ...props }: ContentProps) => {
   );
 };
 
-const StyledTitle = styled(ToastPrimitive.Title, {
-  gridArea: 'title',
-  marginBottom: '$4',
-  fontWeight: '$5',
-  color: '$white900',
-  fontSize: '$md'
-});
-
-const StyledDescription = styled(ToastPrimitive.Description, {
-  gridArea: 'description',
-  margin: 0,
-  color: '$white900',
-  fontSize: '$sm'
-});
-
 const StyledAction = styled(ToastPrimitive.Action, {
   gridArea: 'action',
   padding: '0 $6',
-  borderLeft: '$borderWidths$xs solid $colors$black500',
   display: 'flex',
-  flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
   position: 'relative',
-  height: '100%',
-  '&:before': {
-    content: '',
-    position: 'absolute',
-    left: 0,
-    top: '50%',
-    transform: 'translateY(-50%)',
-    width: '100%',
-    height: '$borderWidths$xs',
-    background: '$black500'
-  }
+  gap: '$2'
 });
 
 type ActionBaseProps = {

@@ -49,7 +49,7 @@ const StyledCheckbox = styled(CheckboxPrimitive.Root, {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  border: '$borderWidths$xs solid $neutral400',
+  border: '$borderWidths$xs solid $neutral700',
   transition: 'all $transitions$2',
   '&:hover': { border: '$borderWidths$xs solid $neutral700' },
   '&:focus-visible': {
@@ -60,7 +60,7 @@ const StyledCheckbox = styled(CheckboxPrimitive.Root, {
       'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
   },
   '&:active, &[data-state="checked"], &[data-state="indeterminate"]': {
-    background: '$secondary700',
+    background: '$secondary500',
     border: '$borderWidths$xs solid transparent'
   },
   '& .check-icon': {
@@ -100,7 +100,7 @@ const StyledIndicator = styled(CheckboxPrimitive.Indicator, {
 
 const StyledLabelContainer = styled('span', {
   display: 'inline-flex',
-  paddingInlineStart: '$8'
+  paddingInlineStart: '$4'
 });
 
 type OmitProps = 'disabled' | 'checked' | 'onCheckedChange' | 'required' | 'onChange';
@@ -133,7 +133,7 @@ export const Checkbox: FunctionComponent<CheckboxProps> = ({
 }) => {
   if (children) {
     return (
-      <FormLabel as="label" css={{ display: 'flex', alignItems: 'center' }}>
+      <FormLabel css={{ display: 'flex', alignItems: 'center' }}>
         <StyledCheckbox
           checked={isChecked}
           onCheckedChange={onChange}
