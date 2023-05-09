@@ -1,5 +1,4 @@
 import React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Alert, AlertDescription } from '../alert';
 
 export default {
@@ -19,16 +18,17 @@ export default {
     status: 'info',
     size: 'sm'
   }
-} as ComponentMeta<typeof Alert>;
+};
 
-const Template: ComponentStory<typeof Alert> = (args) => (
+const Template = (args) => (
   <Alert
-    {...args}
     css={{
       maxWidth: 400
     }}
+    {...args}
   >
     <AlertDescription>
+      {/* eslint-disable-next-line react/destructuring-assignment */}
       {`A ${args.status} message here`}
     </AlertDescription>
   </Alert>

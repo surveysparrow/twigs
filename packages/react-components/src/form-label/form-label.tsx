@@ -10,5 +10,5 @@ export const FormLabel = styled(LabelPrimitive.Root, {
   display: 'inline-block',
   color: '$neutral700',
   fontWeight: '$4',
-  userSelect: 'none',
+  userSelect: 'none'
 });
