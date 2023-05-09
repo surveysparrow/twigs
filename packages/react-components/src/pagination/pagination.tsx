@@ -69,7 +69,7 @@ export const Pagination: FunctionComponent<PaginationProps> = ({
             icon={<ChevronLeftIcon />}
             aria-disabled={isPrevDisabled}
             aria-label="Previous"
-            variant="bright"
+            color="bright"
             size={size}
             isDisabled={isPrevDisabled}
             onClick={(event: SyntheticEvent) => changeActivePage(event, page - 1)}
@@ -85,7 +85,7 @@ export const Pagination: FunctionComponent<PaginationProps> = ({
                     as="a"
                     icon={<EllipsisHorizontalIcon />}
                     role="presentation"
-                    variant="bright"
+                    color="bright"
                     size={size}
                     css={{
                       cursor: 'default'
@@ -100,7 +100,7 @@ export const Pagination: FunctionComponent<PaginationProps> = ({
                   as="a"
                   onClick={(event: SyntheticEvent) => changeActivePage(event, Number(pageNumber))}
                   aria-label={`Page ${pageNumber}`}
-                  variant={page === pageNumber ? 'default' : 'bright'}
+                  color={page === pageNumber ? 'default' : 'bright'}
                   aria-current={page === pageNumber}
                   role="link"
                   size={size}
@@ -115,7 +115,7 @@ export const Pagination: FunctionComponent<PaginationProps> = ({
           <IconButton
             icon={<ChevronRightIcon />}
             aria-label="Next"
-            variant="bright"
+            color="bright"
             size={size}
             isDisabled={isNextDisabled}
             aria-disabled={isNextDisabled}

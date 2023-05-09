@@ -1,12 +1,12 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import * as ToastPrimitive from '@radix-ui/react-toast';
 import {
-  WarningIcon, AlertFillIcon, TickCircleIcon
+  WarningIcon, AlertFillIcon, TickCircleFillIcon
 } from '@sparrowengg/twigs-react-icons';
 import { styled, keyframes } from '../../stitches.config';
 import { Flex } from '../flex';
 
-const StyledTickIcon = styled(TickCircleIcon);
+const StyledTickIcon = styled(TickCircleFillIcon);
 const StyledErrorIcon = styled(AlertFillIcon);
 const StyledWarningIcon = styled(WarningIcon);
 
@@ -59,7 +59,7 @@ const StyledViewport = styled(ToastPrimitive.Viewport, {
   position: 'fixed',
   display: 'flex',
   flexDirection: 'column',
-  padding: '$12',
+  paddingBottom: '$12',
   gap: '$space$5',
   width: 406,
   maxWidth: '100vw',
@@ -192,8 +192,6 @@ const Icon = ({ children, variant = 'success', ...props }: IconProps) => {
   );
 };
 
-
-
 const StyledTitle = styled(ToastPrimitive.Title, {
   gridArea: 'title',
   fontWeight: '$5',
@@ -212,7 +210,7 @@ const StyledToast = styled(ToastPrimitive.Root, {
   backgroundColor: '$neutral900',
   borderRadius: '$xl',
   display: 'grid',
-  padding: '10px $3',
+  padding: '$8 $6',
   gridTemplateAreas: '"icon content action" "icon content action"',
   gridTemplateColumns: 'max-content auto max-content',
   columnGap: '$8',
@@ -276,18 +274,6 @@ const StyledToast = styled(ToastPrimitive.Root, {
           color: '$black800'
         }
       }
-    },
-    size: {
-      sm: {
-        '& .toast-actions': {
-          '&:before': {
-            display: 'none'
-          },
-          '& :last-child': {
-            display: 'none'
-          }
-        }
-      }
     }
   },
   '@media (prefers-reduced-motion: no-preference)': {
@@ -303,7 +289,6 @@ const StyledToast = styled(ToastPrimitive.Root, {
     }
   },
   defaultVariants: {
-    size: 'sm',
     variant: 'default'
   }
 });
@@ -314,7 +299,7 @@ interface ToastBaseProps {
   icon?: ReactElement;
 }
 
-type ToastProps = ToastBaseProps & React.ComponentProps<typeof StyledToast>;
+export type ToastProps = ToastBaseProps & React.ComponentProps<typeof StyledToast>;
 
 const ToastWrapper: FunctionComponent<ToastProps> = ({
   children,
@@ -360,7 +345,7 @@ const StyledContent = styled(Flex, {
   height: '100%',
   flexDirection: 'column',
   justifyContent: 'center',
-  padding: '$8 0',
+  // padding: '$8 0',
   gap: '$4',
   overflow: 'hidden'
 });

@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { Button } from './button';
 
-type OmitProps = 'iconLeft' | 'iconRight' | 'isIcon' | 'isText';
+type OmitProps = 'iconLeft' | 'iconRight' | 'isIcon';
 
 export interface IconButtonBaseProps {
   icon: ReactElement,

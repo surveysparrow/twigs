@@ -1,5 +1,4 @@
 import React from 'react';
-import { ComponentMeta } from '@storybook/react';
 import { Avatar } from '../avatar';
 import { AvatarGroup } from '../avatar-group';
 
@@ -9,23 +8,25 @@ export default {
   argTypes: {
     size: {
       control: 'select',
-      options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl'],
-      defaultValue: '3xl'
+      options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl']
     },
     src: {
-      control: 'text',
-      defaultValue: 'https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&w=512&h=512&dpr=2'
+      control: 'text'
     },
     limit: {
       control: 'number'
     },
     rounded: {
       control: 'select',
-      options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', 'full'],
-      defaultValue: 'full'
+      options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', 'full']
     }
+  },
+  args: {
+    src: 'https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&w=512&h=512&dpr=2&q=80',
+    size: '3xl',
+    rounded: 'full'
   }
-} as ComponentMeta<typeof Avatar>;
+};
 
 const Template = (args) => (
   // eslint-disable-next-line react/destructuring-assignment

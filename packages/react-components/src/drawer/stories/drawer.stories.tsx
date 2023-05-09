@@ -55,7 +55,7 @@ export const Default = () => {
         </DrawerBody>
         <DrawerFooter>
           <Flex css={{ width: '100%', justifyContent: 'end', gap: '10px' }}>
-            <Button size="xl" variant="default"> Cancel </Button>
+            <Button size="xl" color="default"> Cancel </Button>
             <Button size="xl"> Save </Button>
           </Flex>
         </DrawerFooter>

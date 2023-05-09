@@ -105,17 +105,16 @@ const StyledButton = styled('button', {
         }
       }
     },
-    variant: {
+    color: {
       default: {
-        background: '$secondary100',
+        backgroundColorOpacity: ['$secondary500', 0.08],
         color: '$secondary500',
         '&:hover, &:active': {
           color: '$secondary600',
-          background: '$secondary300'
+          backgroundColorOpacity: ['$secondary500', 0.08]
         },
         '&:focus': {
-          color: '$secondary600',
-          background: '$secondary200'
+          color: '$secondary600'
         }
       },
       primary: {
@@ -131,14 +130,11 @@ const StyledButton = styled('button', {
       secondary: {
         background: '$secondary500',
         color: '$white900',
-        '&:hover': {
-          background: '$secondary600',
-        },
-        '&:focus': {
-          background: '$secondary600',
+        '&:hover, &:focus': {
+          background: '$secondary600'
         },
         '&:active': {
-          background: '$secondary800',
+          background: '$secondary800'
         }
       },
       bright: {
@@ -154,27 +150,18 @@ const StyledButton = styled('button', {
         }
       }
     },
-    isText: {
-      true: {
+    variant: {
+      solid: {
+        unset: 'none'
+      },
+      text: {
         background: 'transparent',
-        border: 'none',
-        color: '$neutral700',
-        fontWeight: '$7',
-        padding: 0,
-        '&:hover, &:active, &:focus': {
-          background: 'transparent',
-          borderColor: 'transparent'
-        }
-      }
-    },
-    isTransparent: {
-      true: {
-        border: 'none',
-        background: 'transparent',
-        '&:active, &:focus, &:hover': {
-          borderColor: 'transparent',
+        '&:hover, &:focus, &:active': {
           background: 'transparent'
         }
+      },
+      outline: {
+        background: '$white900'
       }
     },
     isLoading: {
@@ -198,59 +185,58 @@ const StyledButton = styled('button', {
       }
     },
     {
-      variant: 'primary',
-      isText: true,
+      color: 'primary',
+      variant: 'text',
+      css: {
+        color: '$primary500',
+        '&:hover, &:focus': {
+          color: '$primary700'
+        },
+        '&:active': {
+          color: '$primary800'
+        }
+      }
+    },
+    {
+      color: 'primary',
+      variant: 'outline',
+      css: {
+        color: '$primary500',
+        borderColorOpacity: ['$primary500', 0.4],
+        borderWidth: '$xs',
+        borderStyle: 'solid',
+        '&:hover, &:focus': {
+          borderColorOpacity: ['$primary500', 0.8],
+          color: '$primary600',
+          background: '$white900'
+        },
+        '&:active': {
+          borderColorOpacity: ['$primary500', 0.9],
+          color: '$primary700',
+          background: '$white900'
+        }
+      }
+    },
+    {
+      color: 'secondary',
+      variant: 'text',
       css: {
         color: '$secondary500',
-        '&:hover, &:focus, &:active': {
-          color: '$secondary700'
+        '&:hover, &:focus, ': {
+          color: '$secondary600'
+        },
+        '&:active': {
+          color: '$secondary800'
         }
       }
     },
     {
-      variant: 'primary',
-      isLoading: true,
+      color: 'default',
+      variant: 'text',
       css: {
-        background: '$primary700'
-      }
-    },
-    {
-      variant: 'accent',
-      isText: true,
-      css: {
-        color: '$accent600',
-        '&:hover, &:focus, &:active': {
-          color: '$accent700'
-        }
-      }
-    },
-    {
-      variant: 'default',
-      isText: true,
-      css: {
-        color: '$neutral700',
+        color: '$neutral800',
         '&:hover, &:focus, &:active': {
           color: '$neutral900'
-        }
-      }
-    },
-    {
-      variant: 'default',
-      isLoading: true,
-      css: {
-        background: '$black100',
-        '& div': {
-          background: '$neutral800'
-        }
-      }
-    },
-    {
-      variant: 'secondary',
-      isLoading: true,
-      css: {
-        background: '$accent100',
-        '& div': {
-          background: '$accent700'
         }
       }
     },
@@ -340,8 +326,9 @@ const StyledButton = styled('button', {
     }
   ],
   defaultVariants: {
-    variant: 'default',
-    size: 'sm'
+    color: 'default',
+    size: 'sm',
+    variant: 'solid'
   }
 });
 
@@ -367,14 +354,14 @@ type ButtonProps = ButtonBaseProps &
 export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
   (
     {
-      children, variant = 'primary', icon, iconLeft, iconRight, isLoading, isDisabled, onClick, ...rest
+      children, color = 'primary', icon, iconLeft, iconRight, isLoading, isDisabled, onClick, ...rest
     }: ButtonProps,
     ref
   ) => {
     return (
       <StyledButton
         ref={ref}
-        variant={variant}
+        color={color}
         isIcon={!!icon}
         disabled={isDisabled}
         data-testid="button"

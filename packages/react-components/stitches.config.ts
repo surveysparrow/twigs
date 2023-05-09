@@ -320,52 +320,14 @@ export const {
   prefix: 'twigs',
   theme: defaultTheme,
   utils: {
-    p: (value: Stitches.PropertyValue<'padding'>) => ({
-      padding: value,
+    backgroundColorOpacity: ([value, opacity]: [string, number]) => ({
+      backgroundColor: hexToRgba(value, opacity),
     }),
-    pt: (value: Stitches.PropertyValue<'paddingTop'>) => ({
-      paddingTop: value,
+    colorOpacity: ([value, opacity]: [string, number]) => ({
+      color: hexToRgba(value, opacity),
     }),
-    pr: (value: Stitches.PropertyValue<'paddingRight'>) => ({
-      paddingRight: value,
-    }),
-    pb: (value: Stitches.PropertyValue<'paddingBottom'>) => ({
-      paddingBottom: value,
-    }),
-    pl: (value: Stitches.PropertyValue<'paddingLeft'>) => ({
-      paddingLeft: value,
-    }),
-    px: (value: Stitches.PropertyValue<'paddingLeft'>) => ({
-      paddingLeft: value,
-      paddingRight: value,
-    }),
-    py: (value: Stitches.PropertyValue<'paddingTop'>) => ({
-      paddingTop: value,
-      paddingBottom: value,
-    }),
-
-    m: (value: Stitches.PropertyValue<'margin'>) => ({
-      margin: value,
-    }),
-    mt: (value: Stitches.PropertyValue<'marginTop'>) => ({
-      marginTop: value,
-    }),
-    mr: (value: Stitches.PropertyValue<'marginRight'>) => ({
-      marginRight: value,
-    }),
-    mb: (value: Stitches.PropertyValue<'marginBottom'>) => ({
-      marginBottom: value,
-    }),
-    ml: (value: Stitches.PropertyValue<'marginLeft'>) => ({
-      marginLeft: value,
-    }),
-    mx: (value: Stitches.PropertyValue<'marginLeft'>) => ({
-      marginLeft: value,
-      marginRight: value,
-    }),
-    my: (value: Stitches.PropertyValue<'marginTop'>) => ({
-      marginTop: value,
-      marginBottom: value,
+    borderColorOpacity: ([value, opacity]: [string, number]) => ({
+      borderColor: hexToRgba(value, opacity),
     }),
   },
 });
@@ -375,3 +337,14 @@ export const globalStyles = globalCss({
   '*': { margin: 0, padding: 0, fontFamily: '$body' },
   '*, :before, :after': { boxSizing: 'border-box' },
 });
+
+function hexToRgba(hex: string, opacity: number) {
+  const color = theme.colors[hex.replace('$', '')];
+  if (!color) return hex;
+  const r = parseInt(color.value.substring(1, 3), 16);
+  const g = parseInt(color.value.substring(3, 5), 16);
+  const b = parseInt(color.value.substring(5, 7), 16);
+
+  // return the new hex color code with opacity
+  return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}${Math.round(opacity * 255).toString(16).padStart(2, '0')}`;
+}

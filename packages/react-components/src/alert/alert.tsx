@@ -73,8 +73,8 @@ const StyledAlert = styled(Box, {
         }
       },
       [STATUSES.info.name]: {
-        backgroundColor: '$accent50',
-        borderColor: '$accent100',
+        backgroundColorOpacity: ['$accent50', 0.04],
+        borderColorOpacity: ['$accent400', 0.2],
         [`${StyledAlertIcon} svg`]: {
           color: '$accent500'
         }
@@ -145,7 +145,7 @@ export const Alert: FunctionComponent<AlertProps> = React.forwardRef(
               <StyledCloseButton
                 icon={<CloseIcon />}
                 aria-label="close"
-                variant="default"
+                color="default"
                 {...(onClose && { onClick: onClose })}
               />
             )
