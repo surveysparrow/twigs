@@ -9,11 +9,14 @@ const StyledInput = styled('input', {
   borderStyle: 'solid',
   borderColor: 'transparent',
   transition: 'all $transitions$2',
+  '&::placeholder': {
+    color: '$neutral500'
+  },
   '&:hover, &:focus, &:active': {
     background: '$white900',
     borderWidth: '$xs',
     borderStyle: 'solid',
-    borderColor: '$neutral200'
+    borderColorOpacity: ['$secondary500', 0.4]
   },
   '&:focus, &:active': {
     $$shadowColor: '$colors$system300',
@@ -23,18 +26,15 @@ const StyledInput = styled('input', {
   },
   '&:disabled': {
     color: '$neutral700',
-    background: '$black100',
+    backgroundColorOpacity: ['$neutral500', 0.06],
     cursor: 'not-allowed',
     borderWidth: '$xs',
     borderStyle: 'solid',
-    borderColor: '$neutral200',
+    borderColorOpacity: ['$neutral500', 0.25],
     '&:hover': {
-      background: '$black100',
+      background: '$white900',
       boxShadow: 'none'
     }
-  },
-  '&::placeholder': {
-    color: '$neutral600'
   },
   variants: {
     size: {
@@ -58,7 +58,7 @@ const StyledInput = styled('input', {
       }
     },
     variant: {
-      outlined: {
+      default: {
         background: '$white900',
         borderWidth: '$xs',
         borderStyle: 'solid',
@@ -67,10 +67,10 @@ const StyledInput = styled('input', {
           borderWidth: '$xs',
           borderStyle: 'solid',
           borderColor: '$neutral300'
-        },
+        }
       },
       filled: {
-        background: '$black50',
+        background: '$black50'
       }
     }
   },
@@ -80,7 +80,7 @@ const StyledInput = styled('input', {
   }
 });
 
-function getInputPadding(size: string | ({ "@initial"?: "md" | "lg" | "xl" })) {
+function getInputPadding(size: string | ({ '@initial'?: 'md' | 'lg' | 'xl' })) {
   switch (size) {
     case 'lg':
       return '$20';
@@ -150,7 +150,6 @@ export const Input: FunctionComponent<InputProps> = React.forwardRef(({
   css,
   ...rest
 }: InputProps, ref) => {
-
   const inputPaddingValue = getInputPadding(size);
 
   if (iconLeft || iconRight) {

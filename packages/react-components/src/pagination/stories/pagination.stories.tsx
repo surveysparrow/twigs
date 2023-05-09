@@ -17,6 +17,11 @@ export default {
       control: 'number',
       defaultValue: 1
     }
+  },
+  args: {
+    total: 1000,
+    itemsPerPage: 10,
+    activePage: 1
   }
 };
 

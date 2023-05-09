@@ -26,13 +26,17 @@ const StyledTrigger = styled(TabsPrimitive.Trigger, {
   fontSize: '$md',
   fontWeight: '$7',
   lineHeight: '$md',
-  color: '$neutral700',
+  color: '$neutral900',
   userSelect: 'none',
   borderBottom: '3px solid transparent',
   '&:hover': { color: '$neutral800' },
   '&[data-state="active"]': {
-    color: '$secondary700',
+    color: '$primary500',
     borderBottom: '3px solid currentColor'
+  },
+  '&:disabled': {
+    color: '$neutral700',
+    cursor: 'not-allowed'
   },
   '&:focus': {
     position: 'relative'

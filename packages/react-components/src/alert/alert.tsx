@@ -25,7 +25,6 @@ const StyledAlertIcon = styled('span', {
 const StyledAlert = styled(Box, {
   display: 'flex',
   alignItems: 'center',
-  padding: '$4',
   width: '100%',
   borderWidth: '$xs',
   borderStyle: 'solid',
@@ -37,7 +36,7 @@ const StyledAlert = styled(Box, {
   variants: {
     size: {
       sm: {
-        padding: '$3 $5',
+        padding: '6px $2',
         [`${StyledAlertIcon}`]: {
           marginInlineEnd: '$2'
         },
@@ -74,10 +73,10 @@ const StyledAlert = styled(Box, {
         }
       },
       [STATUSES.info.name]: {
-        backgroundColor: '$system100',
-        borderColor: '$system200',
+        backgroundColorOpacity: ['$accent50', 0.04],
+        borderColorOpacity: ['$accent400', 0.2],
         [`${StyledAlertIcon} svg`]: {
-          color: '$system500'
+          color: '$accent500'
         }
       },
       [STATUSES.error.name]: {
@@ -118,7 +117,10 @@ export const Alert: FunctionComponent<AlertProps> = React.forwardRef(
     children,
     ...rest
   }: AlertProps, ref) => {
-    const ValidAlertIcon = STATUSES[status].icon;
+    const ValidAlertIcon = STATUSES[status]?.icon;
+    if (!ValidAlertIcon) {
+      throw new Error(`Invalid status: ${status}`);
+    }
     return (
       <StyledAlert
         role="alert"
@@ -143,7 +145,7 @@ export const Alert: FunctionComponent<AlertProps> = React.forwardRef(
               <StyledCloseButton
                 icon={<CloseIcon />}
                 aria-label="close"
-                variant="default"
+                color="default"
                 {...(onClose && { onClick: onClose })}
               />
             )

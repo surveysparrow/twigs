@@ -1,7 +1,6 @@
 import React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { Input } from '../input';
 import { UserCircleIcon } from '@sparrowengg/twigs-react-icons';
+import { Input } from '../input';
 
 export default {
   component: Input,
@@ -13,25 +12,29 @@ export default {
     },
     variant: {
       control: 'select',
-      options: ['outlined', 'filled']
+      options: ['default', 'filled']
+    },
+    disabled: {
+      control: 'boolean'
     }
   }
-} as ComponentMeta<typeof Input>;
+};
 
-const Template: ComponentStory<typeof Input> = (args) => (
+const Template = (args) => (
   <Input
     {...args}
+    placeholder="Placeholder"
   />
 );
 
-const TemplateWithLeftIcon: ComponentStory<typeof Input> = (args) => (
+const TemplateWithLeftIcon = (args) => (
   <Input
     iconLeft={<UserCircleIcon />}
     {...args}
   />
 );
 
-const TemplateWithRightIcon: ComponentStory<typeof Input> = (args) => (
+const TemplateWithRightIcon = (args) => (
   <Input
     iconRight={<UserCircleIcon />}
     {...args}
