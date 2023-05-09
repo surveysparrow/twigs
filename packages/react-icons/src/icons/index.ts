@@ -100,6 +100,7 @@ export { TableIcon } from './table';
 export { TeamsColorIcon } from './teams-color';
 export { TextInputColorIcon } from './text-input-color';
 export { ThumbsUpHeartIconColor } from './thumbs-up-heart-color';
+export { TickCircleFillIcon } from './tick-circle-fill';
 export { TickCircleIcon } from './tick-circle';
 export { TickIcon } from './tick';
 export { TypographyIcon } from './typography';
