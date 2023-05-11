@@ -251,7 +251,7 @@ const StyledToast = styled(ToastPrimitive.Root, {
         }
       },
       error: {
-        background: '$negative600',
+        background: '$error600',
         [`& ${StyledIcon} svg`]: {
           color: '$white900'
         },
@@ -263,7 +263,7 @@ const StyledToast = styled(ToastPrimitive.Root, {
         }
       },
       warning: {
-        background: '$attention500',
+        background: '$warning500',
         [`& ${StyledIcon} svg`]: {
           color: '$black700'
         },
