@@ -54,7 +54,7 @@ const StyledCheckbox = styled(CheckboxPrimitive.Root, {
   '&:hover': { border: '$borderWidths$xs solid $neutral700' },
   '&:focus-visible': {
     outline: 'none',
-    $$shadowColor: '$colors$system300',
+    $$shadowColor: '$colors$primary300',
     border: '$borderWidths$xs solid $neutral700',
     boxShadow:
       'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'

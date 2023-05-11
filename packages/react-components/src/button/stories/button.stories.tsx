@@ -16,7 +16,7 @@ export default {
     },
     variant: {
       control: 'select',
-      options: ['solid', 'text', 'outline']
+      options: ['solid', 'ghost', 'outline']
     },
     isLoading: {
       control: 'boolean'

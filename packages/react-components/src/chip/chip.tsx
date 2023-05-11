@@ -38,7 +38,7 @@ const StyledChip = styled(Box, {
   gap: '$2',
   outline: 'none',
   '&:focus-visible': {
-    $$shadowColor: '$colors$system300',
+    $$shadowColor: '$colors$primary300',
     boxShadow:
       'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
   },

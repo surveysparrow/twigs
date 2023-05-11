@@ -5,6 +5,9 @@ import { Input } from '../input';
 export default {
   component: Input,
   title: 'Input',
+  args: {
+    variant: 'default'
+  },
   argTypes: {
     size: {
       control: 'select',
