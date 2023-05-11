@@ -37,11 +37,11 @@ export default {
 const Template = (args) => (
   <TooltipProvider delayDuration={0}>
     <Flex
+      justifyContent="center"
+      alignItems="center"
       css={{
         height: '100vh',
-        width: '100vw',
-        justifyContent: 'center',
-        alignItems: 'center'
+        width: '100vw'
       }}
     >
       <Tooltip

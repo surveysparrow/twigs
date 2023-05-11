@@ -28,11 +28,7 @@ export default {
 };
 
 const Template = (args) => (
-  <Flex css={{
-    gap: '20px',
-    flexDirection: 'row'
-  }}
-  >
+  <Flex flexDirection="row" gap="20px">
     <IconButton {...args} icon={<PencilIcon />} />
     <IconButton {...args} icon={<PlusIcon />} />
   </Flex>

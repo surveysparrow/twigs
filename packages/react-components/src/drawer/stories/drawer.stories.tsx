@@ -1,5 +1,4 @@
 import React from 'react';
-import { ComponentMeta } from '@storybook/react';
 import {
   Drawer, DrawerHeader, DrawerFooter, DrawerBody
 } from '../drawer';
@@ -26,7 +25,7 @@ export default {
       control: 'text'
     }
   }
-} as ComponentMeta<typeof Drawer>;
+};
 
 export const Default = () => {
   const paneButtonRef = React.useRef<HTMLButtonElement>(null);
@@ -41,7 +40,7 @@ export const Default = () => {
           <Heading size="h4">Edit Profile</Heading>
         </DrawerHeader>
         <DrawerBody>
-          <Flex css={{ flexDirection: 'column', gap: '18px' }}>
+          <Flex flexDirection="column" gap="18px">
             <Box>
               <FormLabel> First name </FormLabel>
               <Input size="xl" css={{ mt: 4 }} />
@@ -54,7 +53,7 @@ export const Default = () => {
           </Flex>
         </DrawerBody>
         <DrawerFooter>
-          <Flex css={{ width: '100%', justifyContent: 'end', gap: '10px' }}>
+          <Flex justifyContent="flex-end" gap="10px" css={{ width: '100%' }}>
             <Button size="xl" color="default"> Cancel </Button>
             <Button size="xl"> Save </Button>
           </Flex>

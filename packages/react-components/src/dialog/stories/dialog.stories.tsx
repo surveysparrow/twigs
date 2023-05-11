@@ -80,7 +80,7 @@ const Template = (args) => (
             }}
           />
         </Box>
-        <Flex css={{ marginTop: 25, justifyContent: 'flex-end' }}>
+        <Flex justifyContent="flex-end" css={{ justifyContent: 'flex-end' }}>
           <DialogClose asChild>
             <Button size="lg" color="primary">
               Save changes
