@@ -18,7 +18,7 @@ export type FlexProps = {
   basis?: React.CSSProperties['flexBasis'];
 } & BoxProps;
 
-export const Flex: FunctionComponent<FlexProps> = ({
+export const Flex: FunctionComponent<FlexProps> = React.forwardRef(({
   children,
   flexDirection,
   justifyContent,
@@ -33,7 +33,7 @@ export const Flex: FunctionComponent<FlexProps> = ({
   flow,
   basis,
   ...rest
-}: FlexProps) => {
+}: FlexProps, ref) => {
   return (
     <StyledBox
       css={{
@@ -53,8 +53,9 @@ export const Flex: FunctionComponent<FlexProps> = ({
       }}
       data-testid="flex"
       {...rest}
+      ref={ref}
     >
       {children}
     </StyledBox>
   );
-};
+});
