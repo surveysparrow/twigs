@@ -340,7 +340,7 @@ const StyledSpan = styled('span', {
 export interface ButtonBaseProps {
   iconLeft?: ReactElement;
   iconRight?: ReactElement;
-  icon?: ReactElement | null;
+  icon?: ReactElement;
   isLoading?: boolean,
   isDisabled?: boolean
 }

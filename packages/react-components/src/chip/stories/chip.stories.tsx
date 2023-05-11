@@ -1,10 +1,15 @@
 import React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Chip } from '../chip';
 
 export default {
   component: Chip,
   title: 'Chip',
+  args: {
+    variant: 'solid',
+    color: 'primary',
+    size: 'lg',
+    rounded: 'sm'
+  },
   argTypes: {
     size: {
       control: 'select',
@@ -12,15 +17,20 @@ export default {
     },
     color: {
       control: 'select',
-      options: ['primary', 'info']
+      options: ['primary', 'default', 'error', 'warning', 'success']
     },
-    isRounded: {
-      control: 'boolean'
+    rounded: {
+      control: 'select',
+      options: ['sm', 'full']
+    },
+    variant: {
+      control: 'select',
+      options: ['outline', 'solid']
     }
   }
-} as ComponentMeta<typeof Chip>;
+};
 
-const Template: ComponentStory<typeof Chip> = (args) => (
+const Template = (args) => (
   <Chip
     {...args}
   >
@@ -28,4 +38,3 @@ const Template: ComponentStory<typeof Chip> = (args) => (
   </Chip>
 );
 export const Default = Template.bind({});
-Default.args = { color: 'info', size: 'lg' };
