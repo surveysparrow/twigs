@@ -13,27 +13,20 @@ export const ResetIcon = React.forwardRef<SVGSVGElement, IconProps>(
         height={size}
         ref={ref}
       >
-        <g clipPath="url(#clip0_2809_2031)">
-          <path
-            d="M6.25 4.375L3.75 6.875L6.25 9.375"
-            stroke={color}
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M3.75 6.875H11.25C14.0117 6.875 16.25 8.92667 16.25 11.4583V11.4583C16.25 13.99 14.0117 16.0417 11.25 16.0417H4.58333"
-            stroke={color}
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </g>
-        <defs>
-          <clipPath id="clip0_2809_2031">
-            <rect width="20" height="20" fill="white" />
-          </clipPath>
-        </defs>
+        <path
+          d="M6.01604 6.18533V10.9H10.7294"
+          stroke={color}
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M6.63069 10.9C8.44002 7.58401 11.9574 5.33334 16 5.33334C21.8907 5.33334 26.6667 10.1093 26.6667 16C26.6667 21.8907 21.8907 26.6667 16 26.6667C11.2734 26.6667 7.26446 23.5917 5.86461 19.3333"
+          stroke={color}
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
       </svg>
     );
   }
