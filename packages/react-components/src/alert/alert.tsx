@@ -24,7 +24,7 @@ const StyledAlertIcon = styled('span', {
 
 const StyledAlert = styled(Box, {
   display: 'flex',
-  alignItems: 'center',
+  alignItems: 'start',
   width: '100%',
   borderWidth: '$xs',
   borderStyle: 'solid',
