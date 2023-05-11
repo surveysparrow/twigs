@@ -330,6 +330,14 @@ export const {
       borderColor: hexToRgba(value, opacity),
     }),
   },
+  media: {
+    'screen-xs': '(min-width: 480px)',
+    'screen-sm': '(min-width: 640px)',
+    'screen-md': '(min-width: 768px)',
+    'screen-lg': '(min-width: 1024px)',
+    'screen-xl': '(min-width: 1280px)',
+    'screen-2xl': '(min-width: 1536px)'
+  },
 });
 
 export const globalStyles = globalCss({
