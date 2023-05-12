@@ -67,23 +67,23 @@ type OmitProps = 'disabled' | 'onValueChange' | 'required' | 'onChange';
 type RadioRootProps = {
   // eslint-disable-next-line no-unused-vars
   onChange?: (value: string) => void,
-  isDisabled?: boolean,
-  isRequired?: boolean,
+  disabled?: boolean,
+  required?: boolean,
   children: React.ReactNode | React.ReactNode[]
 } & Omit<ComponentProps<typeof RadioGroupPrimitive.Root>, OmitProps>
 
 export const RadioGroup: FunctionComponent<RadioRootProps> = React.forwardRef(
   (
     {
-      onChange, isDisabled, isRequired, value, children, ...rest
+      onChange, disabled, required, value, children, ...rest
     }: RadioRootProps, ref
   ) => {
     return (
       <RadioGroupPrimitive.Root
         ref={ref}
         onValueChange={onChange}
-        disabled={isDisabled}
-        required={isRequired}
+        disabled={disabled}
+        required={required}
         {...rest}
       >
         {children}
@@ -93,22 +93,22 @@ export const RadioGroup: FunctionComponent<RadioRootProps> = React.forwardRef(
 );
 
 export type RadioProps = {
-  isDisabled?: boolean,
-  isRequired?: boolean
+  disabled?: boolean,
+  required?: boolean
 } & Omit<ComponentProps<typeof StyledRadio>, OmitProps>;
 
 export const Radio: FunctionComponent<RadioProps> = React.forwardRef(
   (
     {
-      isDisabled, value, isRequired, ...rest
+      disabled, value, required, ...rest
     }: RadioProps,
     ref
   ) => {
     return (
       <StyledRadio
         ref={ref}
-        disabled={isDisabled}
-        required={isRequired}
+        disabled={disabled}
+        required={required}
         value={value}
         {...rest}
       >

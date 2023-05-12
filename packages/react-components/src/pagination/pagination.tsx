@@ -71,7 +71,7 @@ export const Pagination: FunctionComponent<PaginationProps> = ({
             aria-label="Previous"
             color="bright"
             size={size}
-            isDisabled={isPrevDisabled}
+            disabled={isPrevDisabled}
             onClick={(event: SyntheticEvent) => changeActivePage(event, page - 1)}
           />
         </li>
@@ -117,7 +117,7 @@ export const Pagination: FunctionComponent<PaginationProps> = ({
             aria-label="Next"
             color="bright"
             size={size}
-            isDisabled={isNextDisabled}
+            disabled={isNextDisabled}
             aria-disabled={isNextDisabled}
             onClick={(event: SyntheticEvent) => changeActivePage(event, page + 1)}
           />

@@ -18,10 +18,10 @@ export default {
       control: 'select',
       options: ['solid', 'ghost', 'outline']
     },
-    isLoading: {
+    loading: {
       control: 'boolean'
     },
-    isDisabled: {
+    disabled: {
       control: 'boolean'
     }
   }

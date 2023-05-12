@@ -164,7 +164,7 @@ const StyledButton = styled('button', {
         background: '$white900'
       }
     },
-    isLoading: {
+    loading: {
       true: {
         pointerEvents: 'none'
       }
@@ -341,8 +341,8 @@ export interface ButtonBaseProps {
   iconLeft?: ReactElement;
   iconRight?: ReactElement;
   icon?: ReactElement;
-  isLoading?: boolean,
-  isDisabled?: boolean
+  loading?: boolean,
+  disabled?: boolean
 }
 
 type ButtonProps = ButtonBaseProps &
@@ -354,7 +354,7 @@ type ButtonProps = ButtonBaseProps &
 export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
   (
     {
-      children, color = 'primary', icon, iconLeft, iconRight, isLoading, isDisabled, onClick, ...rest
+      children, color = 'primary', icon, iconLeft, iconRight, loading, disabled, onClick, ...rest
     }: ButtonProps,
     ref
   ) => {
@@ -363,12 +363,12 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
         ref={ref}
         color={color}
         isIcon={!!icon}
-        disabled={isDisabled}
+        disabled={disabled}
         data-testid="button"
         onClick={onClick}
         {...rest}
       >
-        {isLoading
+        {loading
           ? <DotLoader />
           : (
             <>

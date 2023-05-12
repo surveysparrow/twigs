@@ -10,10 +10,10 @@ export default {
       control: 'select',
       options: ['sm', 'md']
     },
-    isChecked: {
+    checked: {
       control: 'boolean'
     },
-    isDisabled: {
+    disabled: {
       control: 'boolean'
     },
     isIndeterminate: {

@@ -106,13 +106,13 @@ const StyledLabelContainer = styled('span', {
 type OmitProps = 'disabled' | 'checked' | 'onCheckedChange' | 'required' | 'onChange';
 
 export type CheckboxBaseProps = {
-  isChecked?: boolean | string,
+  checked?: boolean | string,
   isIndeterminate?: boolean,
   children?: ReactNode,
   // eslint-disable-next-line no-unused-vars
   onChange?: (checked: boolean | 'indeterminate') => void,
-  isRequired?: boolean,
-  isDisabled?: boolean
+  required?: boolean,
+  disabled?: boolean
 }
 
 export type CheckboxProps = CheckboxBaseProps &
@@ -123,10 +123,10 @@ export type CheckboxProps = CheckboxBaseProps &
   };
 
 export const Checkbox: FunctionComponent<CheckboxProps> = ({
-  isChecked,
+  checked,
   isIndeterminate,
-  isDisabled,
-  isRequired,
+  disabled,
+  required,
   onChange,
   children,
   ...rest
@@ -135,10 +135,10 @@ export const Checkbox: FunctionComponent<CheckboxProps> = ({
     return (
       <FormLabel css={{ display: 'flex', alignItems: 'center' }}>
         <StyledCheckbox
-          checked={isChecked}
+          checked={checked}
           onCheckedChange={onChange}
-          disabled={isDisabled}
-          required={isRequired}
+          disabled={disabled}
+          required={required}
           {...(isIndeterminate && { 'data-state': 'indeterminate' })}
           {...rest}
         >
@@ -157,10 +157,10 @@ export const Checkbox: FunctionComponent<CheckboxProps> = ({
   }
   return (
     <StyledCheckbox
-      checked={isChecked}
+      checked={checked}
       onCheckedChange={onChange}
-      disabled={isDisabled}
-      required={isRequired}
+      disabled={disabled}
+      required={required}
       {...(isIndeterminate && { 'data-state': 'indeterminate' })}
       {...rest}
     >

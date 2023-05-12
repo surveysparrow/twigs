@@ -12,7 +12,7 @@ export default {
       options: ['default', 'primary', 'accent', 'secondary'],
       defaultValue: 'primary'
     },
-    isDisabled: {
+    disabled: {
       control: 'boolean'
     },
     variant: {

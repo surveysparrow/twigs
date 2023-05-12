@@ -6,10 +6,10 @@ export default {
   component: Switch,
   title: 'Switch',
   argTypes: {
-    isDisabled: {
+    disabled: {
       control: 'boolean'
     },
-    isRequired: {
+    required: {
       control: 'boolean'
     },
     size: {
