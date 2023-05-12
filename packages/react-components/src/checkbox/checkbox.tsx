@@ -106,8 +106,7 @@ const StyledLabelContainer = styled('span', {
 type OmitProps = 'disabled' | 'checked' | 'onCheckedChange' | 'required' | 'onChange';
 
 export type CheckboxBaseProps = {
-  checked?: boolean | string,
-  isIndeterminate?: boolean,
+  checked?: boolean | string
   children?: ReactNode,
   // eslint-disable-next-line no-unused-vars
   onChange?: (checked: boolean | 'indeterminate') => void,
@@ -124,13 +123,13 @@ export type CheckboxProps = CheckboxBaseProps &
 
 export const Checkbox: FunctionComponent<CheckboxProps> = ({
   checked,
-  isIndeterminate,
   disabled,
   required,
   onChange,
   children,
   ...rest
 }) => {
+  const isIndeterminate = checked === 'indeterminate';
   if (children) {
     return (
       <FormLabel css={{ display: 'flex', alignItems: 'center' }}>
