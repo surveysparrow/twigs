@@ -37,6 +37,12 @@ const AvatarOverlayText = styled('span', {
   letterSpacing: '.1px',
   variants: {
     size: {
+      '5xl': {
+        fontSize: '$3xl'
+      },
+      '4xl': {
+        fontSize: '$3xl'
+      },
       '3xl': {
         fontSize: '$3xl'
       },
@@ -70,6 +76,14 @@ const AvatarNestedItem = styled('div', {
   backgroundColor: '$accent200',
   variants: {
     size: {
+      '5xl': {
+        borderWidth: '2px',
+        marginLeft: '-$sizes$6'
+      },
+      '4xl': {
+        borderWidth: '2px',
+        marginLeft: '-$sizes$6'
+      },
       '3xl': {
         borderWidth: '2px',
         marginLeft: '-$sizes$6'
