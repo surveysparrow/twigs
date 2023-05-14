@@ -17,7 +17,9 @@ const StyledCloseButton = styled(IconButton, {
   marginLeft: 'auto'
 });
 
-const StyledAlertDescription = styled(Box, {});
+const StyledAlertDescription = styled(Box, {
+  lineHeight: '24px'
+});
 const StyledAlertIcon = styled('span', {
   display: 'flex'
 });
@@ -36,7 +38,7 @@ const StyledAlert = styled(Box, {
   variants: {
     size: {
       sm: {
-        padding: '6px $2',
+        padding: '6px $4',
         [`${StyledAlertIcon}`]: {
           marginInlineEnd: '$2'
         },
@@ -45,12 +47,11 @@ const StyledAlert = styled(Box, {
         },
         [`${IconButton}`]: {
           height: '$5',
-          width: '$5',
-          marginInlineStart: '$2'
+          width: '$5'
         }
       },
       md: {
-        padding: '$4',
+        padding: '$8',
         [`${StyledAlertIcon}`]: {
           marginInlineEnd: '$4'
         },
@@ -59,8 +60,7 @@ const StyledAlert = styled(Box, {
         },
         [`${IconButton}`]: {
           height: '$6',
-          width: '$6',
-          marginInlineStart: '$1'
+          width: '$6'
         }
       }
     },
