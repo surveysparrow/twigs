@@ -1,14 +1,14 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import * as ToastPrimitive from '@radix-ui/react-toast';
 import {
-  WarningIcon, AlertFillIcon, TickCircleFillIcon
+  AlertFillIcon, TickCircleFillIcon, InfoIcon
 } from '@sparrowengg/twigs-react-icons';
 import { styled, keyframes } from '../../stitches.config';
 import { Flex } from '../flex';
 
 const StyledTickIcon = styled(TickCircleFillIcon);
 const StyledErrorIcon = styled(AlertFillIcon);
-const StyledWarningIcon = styled(WarningIcon);
+const StyledWarningIcon = styled(InfoIcon);
 
 const hide = keyframes({
   '0%': { opacity: 1 },
@@ -209,6 +209,7 @@ const StyledDescription = styled(ToastPrimitive.Description, {
 const StyledToast = styled(ToastPrimitive.Root, {
   backgroundColor: '$neutral900',
   borderRadius: '$xl',
+  border: '$borderWidths$xs solid $black300',
   display: 'grid',
   padding: '$8 $6',
   gridTemplateAreas: '"icon content action" "icon content action"',
@@ -263,7 +264,7 @@ const StyledToast = styled(ToastPrimitive.Root, {
         }
       },
       warning: {
-        background: '$warning500',
+        background: '$warning200',
         [`& ${StyledIcon} svg`]: {
           color: '$black700'
         },
