@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { Button } from './button';
 
-type OmitProps = 'iconLeft' | 'iconRight' | 'isIcon' | 'isText';
+type OmitProps = 'iconLeft' | 'iconRight' | 'isIcon';
 
 export interface IconButtonBaseProps {
   icon: ReactElement,
@@ -26,7 +26,7 @@ export const IconButton: FunctionComponent<IconButtonProps> = React.forwardRef(
       <Button
         ref={ref}
         aria-label={ariaLabel}
-        icon={validElement}
+        icon={validElement as ReactElement}
         {...rest}
       />
     );

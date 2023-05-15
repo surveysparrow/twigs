@@ -1,5 +1,4 @@
 import React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Checkbox } from '../checkbox';
 
 export default {
@@ -10,20 +9,16 @@ export default {
       control: 'select',
       options: ['sm', 'md']
     },
-    isChecked: {
+    checked: {
       control: 'boolean'
     },
-    isDisabled: {
-      control: 'boolean'
-    },
-    isIndeterminate: {
+    disabled: {
       control: 'boolean'
     }
   }
-} as ComponentMeta<typeof Checkbox>;
+};
 
-const Template: ComponentStory<typeof Checkbox> = (args) => (
+const Template = (args) => (
   <Checkbox {...args}> Accept </Checkbox>
 );
 export const Default = Template.bind({});
-Default.args = { size: 'md' };

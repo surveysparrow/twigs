@@ -1,5 +1,4 @@
 import React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Button } from '../../button';
 import {
   TooltipProvider, Tooltip
@@ -9,15 +8,17 @@ import { Flex } from '../../flex';
 export default {
   component: Tooltip,
   title: 'Tooltip',
+  args: {
+    content: 'Twigs tooltip text',
+    side: 'top'
+  },
   argTypes: {
     content: {
-      control: 'text',
-      defaultValue: 'Twigs tooltip text'
+      control: 'text'
     },
     side: {
       control: 'select',
-      options: ['bottom', 'top', 'left', 'right'],
-      defaultValue: 'top'
+      options: ['bottom', 'top', 'left', 'right']
     },
     align: {
       control: 'select',
@@ -28,20 +29,19 @@ export default {
     },
     size: {
       control: 'select',
-      options: ['sm', 'md'],
-      defaultValue: 'sm'
+      options: ['sm', 'md']
     }
   }
-} as ComponentMeta<typeof Tooltip>;
+};
 
-const Template: ComponentStory<typeof Tooltip> = (args) => (
+const Template = (args) => (
   <TooltipProvider delayDuration={0}>
     <Flex
+      justifyContent="center"
+      alignItems="center"
       css={{
         height: '100vh',
-        width: '100vw',
-        justifyContent: 'center',
-        alignItems: 'center'
+        width: '100vw'
       }}
     >
       <Tooltip
@@ -50,7 +50,7 @@ const Template: ComponentStory<typeof Tooltip> = (args) => (
         align="end"
         {...args}
       >
-        <Button variant="default" size="lg">
+        <Button color="default" size="lg">
           tooltip button
         </Button>
       </Tooltip>

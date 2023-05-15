@@ -5,37 +5,36 @@ import { styled } from '../../stitches.config';
 const StyledInput = styled('input', {
   width: '100%',
   color: '$neutral900',
-  background: '$black50',
   borderWidth: '$xs',
   borderStyle: 'solid',
   borderColor: 'transparent',
   transition: 'all $transitions$2',
+  '&::placeholder': {
+    color: '$neutral500'
+  },
   '&:hover, &:focus, &:active': {
     background: '$white900',
     borderWidth: '$xs',
     borderStyle: 'solid',
-    borderColor: '$neutral200'
+    borderColorOpacity: ['$secondary500', 0.4]
   },
   '&:focus, &:active': {
-    $$shadowColor: '$colors$system300',
+    $$shadowColor: '$colors$primary300',
     outline: 'none',
     background: '$white900',
     boxShadow: 'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
   },
   '&:disabled': {
     color: '$neutral700',
-    background: '$black100',
+    backgroundColorOpacity: ['$neutral500', 0.06],
     cursor: 'not-allowed',
     borderWidth: '$xs',
     borderStyle: 'solid',
-    borderColor: '$neutral200',
+    borderColorOpacity: ['$neutral500', 0.25],
     '&:hover': {
-      background: '$black100',
+      background: '$white900',
       boxShadow: 'none'
     }
-  },
-  '&::placeholder': {
-    color: '$neutral600'
   },
   variants: {
     size: {
@@ -57,12 +56,40 @@ const StyledInput = styled('input', {
         padding: '$3 $4',
         fontSize: '$sm'
       }
+    },
+    variant: {
+      default: {
+        background: '$white900',
+        borderWidth: '$xs',
+        borderStyle: 'solid',
+        borderColor: '$neutral200',
+        '&:hover, &:focus, &:active': {
+          borderWidth: '$xs',
+          borderStyle: 'solid',
+          borderColor: '$neutral300'
+        }
+      },
+      filled: {
+        background: '$black50'
+      }
     }
   },
   defaultVariants: {
-    size: 'md'
+    size: 'md',
+    variant: 'outlined'
   }
 });
+
+function getInputPadding(size: string | ({ '@initial'?: 'md' | 'lg' | 'xl' })) {
+  switch (size) {
+    case 'lg':
+      return '$20';
+    case 'md':
+      return '$14';
+    default:
+      return '$22';
+  }
+}
 
 export interface InputBaseProps {
   iconLeft?: ReactElement;
@@ -123,14 +150,8 @@ export const Input: FunctionComponent<InputProps> = React.forwardRef(({
   css,
   ...rest
 }: InputProps, ref) => {
-  let inputPaddingValue = '$22';
-  if (size === 'xl') {
-    inputPaddingValue = '$22';
-  } else if (size === 'lg') {
-    inputPaddingValue = '$20';
-  } else if (size === 'md') {
-    inputPaddingValue = '$14';
-  }
+  const inputPaddingValue = getInputPadding(size);
+
   if (iconLeft || iconRight) {
     return (
       <Box

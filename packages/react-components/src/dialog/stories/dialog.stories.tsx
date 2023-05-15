@@ -4,7 +4,7 @@ import {
   Dialog, DialogTitle, DialogDescription, DialogClose, DialogTrigger, DialogContent
 } from '../dialog';
 import { Box } from '../../box';
-import { Button } from '../../button';
+import { Button, IconButton } from '../../button';
 import { FormLabel } from '../../form-label';
 import { Flex } from '../../flex';
 import { Input } from '../../input';
@@ -80,9 +80,9 @@ const Template = (args) => (
             }}
           />
         </Box>
-        <Flex css={{ marginTop: 25, justifyContent: 'flex-end' }}>
+        <Flex justifyContent="flex-end" css={{ justifyContent: 'flex-end' }}>
           <DialogClose asChild>
-            <Button size="lg" variant="default">
+            <Button size="lg" color="primary">
               Save changes
             </Button>
           </DialogClose>
@@ -91,11 +91,10 @@ const Template = (args) => (
           css={{ position: 'absolute', top: '10px', right: '10px' }}
         >
           <DialogClose asChild>
-            <Button
-              isIcon
+            <IconButton
               icon={<CloseIcon />}
-              isTransparent
               aria-label="Close"
+              color="default"
             />
           </DialogClose>
         </Box>

@@ -71,19 +71,6 @@ pipelines:
               - node
 
         - step:
-            name: Test Components
-            condition:
-              changesets:
-                includePaths:
-                  - "packages/react-components/**"
-            caches:
-              - node
-            script:
-              - npm install -g lerna
-              - yarn install
-              - lerna run build --scope=@sparrowengg/twigs-react
-
-        - step:
             name: Build Components
             condition:
               changesets:

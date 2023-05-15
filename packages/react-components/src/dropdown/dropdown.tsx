@@ -155,7 +155,7 @@ const StyledLabel = styled(DropdownMenuPrimitive.Label, {
   fontSize: '$xs',
   fontWeight: '$7',
   lineHeight: '$xs',
-  color: '$tertiary700',
+  color: '$accent700',
   textTransform: 'uppercase'
 });
 
