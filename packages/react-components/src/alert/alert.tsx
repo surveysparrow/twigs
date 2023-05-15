@@ -18,7 +18,7 @@ const StyledCloseButton = styled(IconButton, {
 });
 
 const StyledAlertDescription = styled(Box, {
-  lineHeight: '24px'
+  lineHeight: '$md'
 });
 const StyledAlertIcon = styled('span', {
   display: 'flex'
@@ -38,7 +38,7 @@ const StyledAlert = styled(Box, {
   variants: {
     size: {
       sm: {
-        padding: '6px $4',
+        padding: '$3 $4',
         [`${StyledAlertIcon}`]: {
           marginInlineEnd: '$2'
         },
