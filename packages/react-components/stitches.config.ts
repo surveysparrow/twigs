@@ -51,7 +51,7 @@ export const defaultTheme = {
     primary50: '#F3F9FA',
     primary100: '#E6F3F4',
     primary200: '#CEE7EA',
-    primary300: '#CEE7EA',
+    primary300: '#9CCFD6',
     primary400: '#56B0BB',
     primary500: '#4A9CA6',
     primary600: '#448E97',
