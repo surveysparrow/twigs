@@ -1,34 +1,27 @@
 import React from 'react';
 import { IconProps } from '../types';
 
-export const ExportIcon = React.forwardRef<SVGSVGElement, IconProps>(
+export const SendMessageIcon = React.forwardRef<SVGSVGElement, IconProps>(
   ({ color = 'currentColor', size = 32, ...rest }, ref) => {
     return (
       <svg
         viewBox="0 0 32 32"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        {...rest}
         width={size}
         height={size}
-        {...rest}
         ref={ref}
       >
         <path
-          d="M26.6666 26H5.33331"
+          d="M11.672 16.1987L14.0333 26.824C14.328 28.148 16.0867 28.4334 16.784 27.2707L27.7826 8.93869C28.384 7.93869 27.664 6.66669 26.4973 6.66669H5.76265C4.42532 6.66669 3.75599 8.28269 4.70132 9.22802L11.672 16.1987Z"
           stroke={color}
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
-          d="M16 5.0013V18.668"
-          stroke={color}
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M22.6666 11.668L15.9986 4.99997L9.33197 11.668"
+          d="M27.7867 7.41333L11.6667 16.2"
           stroke={color}
           strokeWidth="1.5"
           strokeLinecap="round"

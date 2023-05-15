@@ -1,34 +1,41 @@
 import React from 'react';
 import { IconProps } from '../types';
 
-export const ExportIcon = React.forwardRef<SVGSVGElement, IconProps>(
+export const ShrinkIcon = React.forwardRef<SVGSVGElement, IconProps>(
   ({ color = 'currentColor', size = 32, ...rest }, ref) => {
     return (
       <svg
         viewBox="0 0 32 32"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        {...rest}
         width={size}
         height={size}
-        {...rest}
         ref={ref}
       >
         <path
-          d="M26.6666 26H5.33331"
+          d="M23.9999 14H17.9999V8"
           stroke={color}
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
-          d="M16 5.0013V18.668"
+          d="M8 18H14V24"
           stroke={color}
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
-          d="M22.6666 11.668L15.9986 4.99997L9.33197 11.668"
+          d="M26 6L18.5 13.5"
+          stroke={color}
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M6 26L13.5 18.5"
           stroke={color}
           strokeWidth="1.5"
           strokeLinecap="round"
