@@ -1,6 +1,6 @@
 import React from 'react';
 import * as LabelPrimitive from '@radix-ui/react-label';
-import { styled } from '@stitches/react';
+import { styled } from '../../stitches.config';
 
 export type FormLabelProps = React.HTMLAttributes<HTMLLabelElement> & {
   as?: React.ElementType
