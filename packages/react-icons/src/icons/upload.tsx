@@ -14,35 +14,21 @@ export const UploadIcon = React.forwardRef<SVGSVGElement, IconProps>(
         ref={ref}
       >
         <path
-          d="M25.3333 12H6.66667C5.19391 12 4 13.1939 4 14.6667V25.3333C4 26.8061 5.19391 28 6.66667 28H25.3333C26.8061 28 28 26.8061 28 25.3333V14.6667C28 13.1939 26.8061 12 25.3333 12Z"
+          d="M26.6666 26H5.33331"
           stroke={color}
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
-          d="M7.33331 8H24.6666"
+          d="M16 5.0013V18.668"
           stroke={color}
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
-          d="M10 4H23.3333"
-          stroke={color}
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M16 22.6667V17.3333"
-          stroke={color}
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M18.6666 20L16 17.3333L13.3333 20"
+          d="M22.6666 11.668L15.9986 4.99997L9.33197 11.668"
           stroke={color}
           strokeWidth="1.5"
           strokeLinecap="round"
