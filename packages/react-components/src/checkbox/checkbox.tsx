@@ -103,7 +103,7 @@ const StyledLabelContainer = styled('span', {
   paddingInlineStart: '$4'
 });
 
-type OmitProps = 'onCheckedChange';
+type OmitProps = 'onCheckedChange' | 'onChange';
 
 export type CheckboxBaseProps = {
   checked?: boolean | 'indeterminate'

@@ -148,6 +148,16 @@ const StyledButton = styled('button', {
           color: '$secondary600',
           background: '$neutral100'
         }
+      },
+      light: {
+        background: '$white200',
+        color: '$white900',
+        '&:hover, &:focus': {
+          background: '$white300'
+        },
+        '&:active': {
+          background: '$white400'
+        }
       }
     },
     variant: {

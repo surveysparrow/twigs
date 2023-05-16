@@ -27,7 +27,7 @@ export const Th = styled('th', {
 
 export const Tr = styled('tr', {
   '&:hover': {
-    background: '$neutral50'
+    backgroundColorOpacity: ['$primary500', 0.04]
   }
 });
 
