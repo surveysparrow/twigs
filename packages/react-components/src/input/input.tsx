@@ -32,7 +32,6 @@ const StyledInput = styled('input', {
     borderStyle: 'solid',
     borderColorOpacity: ['$neutral500', 0.25],
     '&:hover': {
-      background: '$white900',
       boxShadow: 'none'
     }
   },
