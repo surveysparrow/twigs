@@ -62,7 +62,7 @@ const StyledIndicator = styled(RadioGroupPrimitive.Indicator, {
   }
 });
 
-type OmitProps = 'onValueChange';
+type OmitProps = 'onValueChange' | 'onChange';
 
 type RadioRootProps = {
   // eslint-disable-next-line no-unused-vars
