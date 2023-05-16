@@ -64,7 +64,7 @@ const StyledSwitch = styled(SwitchPrimitive.Root, {
   }
 });
 
-type OmitProps = 'disabled' | 'checked' | 'onCheckedChange' | 'required' | 'onChange';
+type OmitProps = 'onCheckedChange';
 
 export type SwitchProps = {
   disabled?: boolean,

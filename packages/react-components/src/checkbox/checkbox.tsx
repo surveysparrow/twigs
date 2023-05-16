@@ -103,10 +103,10 @@ const StyledLabelContainer = styled('span', {
   paddingInlineStart: '$4'
 });
 
-type OmitProps = 'disabled' | 'checked' | 'onCheckedChange' | 'required' | 'onChange';
+type OmitProps = 'onCheckedChange';
 
 export type CheckboxBaseProps = {
-  checked?: boolean | string
+  checked?: boolean | 'indeterminate'
   children?: ReactNode,
   // eslint-disable-next-line no-unused-vars
   onChange?: (checked: boolean | 'indeterminate') => void,

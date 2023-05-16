@@ -10,7 +10,8 @@ export default {
       options: ['sm', 'md']
     },
     checked: {
-      control: 'boolean'
+      control: 'radio',
+      options: [true, false, 'indeterminate']
     },
     disabled: {
       control: 'boolean'
