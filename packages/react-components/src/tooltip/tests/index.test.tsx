@@ -31,7 +31,7 @@ const Component = () => {
           align="end"
           content="Tooltip content"
         >
-          <Button variant="default" size="lg">
+          <Button color="default" size="lg">
             tooltip button
           </Button>
         </Tooltip>

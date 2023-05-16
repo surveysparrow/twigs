@@ -41,16 +41,16 @@ const Component = () => {
         </Button>
       </Flex>
 
-      <Toast open={open} size="md" onOpenChange={setOpen} variant={variant}>
+      <Toast open={open} onOpenChange={setOpen} variant={variant}>
         <ToastContent>
           <ToastDescription>Toast Message description</ToastDescription>
         </ToastContent>
         <ToastAction asChild altText="Goto schedule to undo">
           <Box>
-            <Button variant="primary" isText size="md">
+            <Button color="primary" size="md">
               Ok
             </Button>
-            <Button variant="accent" isText isTransparent size="md">
+            <Button color="bright" size="md">
               Cancel
             </Button>
           </Box>

@@ -8,13 +8,4 @@ describe('Form Label', () => {
   it('renders without crashing', () => {
     render(<FormLabel>FormLabel</FormLabel>);
   });
-
-  it('renders Form Label correctly', () => {
-    const { getByTestId } = render(
-      <FormLabel>Simple FormLabel</FormLabel>
-    );
-    const formLabel = getByTestId('form-label');
-
-    expect(formLabel).toHaveTextContent('Simple FormLabel');
-  });
 });

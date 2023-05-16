@@ -6,13 +6,13 @@ import { Chip } from '../index';
 
 describe('Chip', () => {
   it('renders without crashing', () => {
-    render(<Chip color="info" size="md">Chip Content</Chip>);
+    render(<Chip color="default" size="md">Chip Content</Chip>);
   });
 });
 
 it('renders close button based on prop', () => {
   const { getByTestId } = render(
-    <Chip color="info" size="md" closable>
+    <Chip color="success" size="md" closable>
       Chip with close button
     </Chip>
   );
