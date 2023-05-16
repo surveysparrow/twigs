@@ -7,7 +7,7 @@ export type FormLabelProps = React.HTMLAttributes<HTMLLabelElement> & {
 };
 
 export const FormLabel = styled(LabelPrimitive.Root, {
-  display: 'inline-block',
+  display: 'block',
   color: '$neutral800',
   fontWeight: '$4',
   userSelect: 'none',
