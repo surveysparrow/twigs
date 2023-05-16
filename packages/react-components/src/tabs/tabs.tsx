@@ -26,10 +26,10 @@ const StyledTrigger = styled(TabsPrimitive.Trigger, {
   fontSize: '$md',
   fontWeight: '$7',
   lineHeight: '$md',
-  color: '$neutral900',
+  color: '$neutral800',
   userSelect: 'none',
   borderBottom: '3px solid transparent',
-  '&:hover': { color: '$neutral800' },
+  '&:hover': { color: '$neutral900' },
   '&[data-state="active"]': {
     color: '$primary500',
     borderBottom: '3px solid currentColor'
