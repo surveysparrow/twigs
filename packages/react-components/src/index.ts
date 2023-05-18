@@ -28,3 +28,4 @@ export * from './text';
 export * from './theme-provider';
 export * from './toast';
 export * from './tooltip';
+export * from './hooks';
