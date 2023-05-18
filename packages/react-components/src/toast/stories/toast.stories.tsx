@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ComponentStory } from '@storybook/react';
+import { UserCircleIcon } from '@sparrowengg/twigs-react-icons';
 import { ToastProviderProps } from '@radix-ui/react-toast';
 import { Button } from '../../button';
-import { Box } from '../../box';
 import {
-  ToastProvider, Toast, ToastDescription, ToastAction, ToastContent, ToastTitle, ToastProps
+  Toast, ToastAction, ToastProps
 } from '../toast';
+import { toast } from '../../hooks/use-toast';
+import { Toaster } from '../toastr';
 
 export default {
   component: Toast,
@@ -23,12 +24,15 @@ export default {
   }
 };
 
-const Template: ComponentStory<typeof Toast> = (
-  { duration, variant: storyVariant, ...args }: ToastProps & ToastProviderProps
+const Template = (
+  { variant: storyVariant }: ToastProps & ToastProviderProps
 ) => {
-  const [open, setOpen] = useState(false);
   const [variant, setVariant] = useState<typeof storyVariant>(storyVariant);
   const timerRef = useRef(0);
+
+  useEffect(() => {
+    setVariant(storyVariant);
+  }, [storyVariant]);
 
   const messages = {
     success: 'Record saved successfully',
@@ -41,53 +45,23 @@ const Template: ComponentStory<typeof Toast> = (
     return () => clearTimeout(timerRef.current);
   }, []);
   return (
-    <ToastProvider position="bottom-center" duration={1000}>
+    <>
+      <Toaster />
       <Button
-        size="lg"
+        variant="outline"
         onClick={() => {
-          setOpen(false);
-          setVariant(storyVariant);
-          window.clearTimeout(timerRef.current);
-          timerRef.current = window.setTimeout(() => {
-            setOpen(true);
-          }, 100);
+          toast({
+            icon: <UserCircleIcon />,
+            variant: (storyVariant || 'default' as any),
+            title: messages[variant!] || 'Default message',
+            description: 'There was a problem with your request.',
+            action: <ToastAction altText="Try again" asChild><Button color="light"> Close </Button></ToastAction>
+          });
         }}
       >
-        Trigger
-        {' '}
-        {variant}
-        {' '}
-        toast
+        Show Toast
       </Button>
-
-      <Toast
-        open={open}
-        onOpenChange={setOpen}
-        {...args}
-        variant={variant}
-      >
-        <ToastContent>
-          <ToastTitle>
-            {' '}
-            <>
-              {messages[variant]}
-              {' '}
-            </>
-          </ToastTitle>
-          <ToastDescription>Optional Text</ToastDescription>
-        </ToastContent>
-        <ToastAction asChild altText="Goto schedule to undo">
-          <Box>
-            <Button variant="default" size="md">
-              Cancel
-            </Button>
-            <Button variant="bright" size="md">
-              Ok
-            </Button>
-          </Box>
-        </ToastAction>
-      </Toast>
-    </ToastProvider>
+    </>
   );
 };
 export const Default = Template.bind({});
