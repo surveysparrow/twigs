@@ -6,7 +6,7 @@ import React, {
 import { styled } from '../../stitches.config';
 import { Box } from '../box';
 import { Button, IconButton } from '../button';
-import { usePagination } from './use-pagination';
+import { usePagination } from '../hooks';
 
 const StyledList = styled('ul', {
   display: 'flex',

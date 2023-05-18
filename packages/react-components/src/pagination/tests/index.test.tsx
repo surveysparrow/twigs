@@ -3,7 +3,7 @@ import { render, renderHook, screen } from '@testing-library/react';
 import { Pagination } from '../index';
 import 'jest';
 import '@testing-library/jest-dom';
-import { usePagination } from '../use-pagination';
+import { usePagination } from '../../hooks';
 
 describe('Pagination', () => {
   it('renders without crashing', () => {
