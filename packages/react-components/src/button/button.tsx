@@ -11,6 +11,7 @@ const StyledButton = styled('button', {
   borderRadius: '$lg',
   display: 'flex',
   alignItems: 'center',
+  justifyContent: 'center',
   fontWeight: '$7',
   cursor: 'pointer',
   transition: 'all $transitions$2',
@@ -157,6 +158,16 @@ const StyledButton = styled('button', {
         },
         '&:active': {
           background: '$white400'
+        }
+      },
+      error: {
+        background: '$error100',
+        color: '$error600',
+        '&:hover': {
+          background: '$error200'
+        },
+        '&:active': {
+          background: '$error300'
         }
       }
     },

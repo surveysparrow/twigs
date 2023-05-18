@@ -295,8 +295,8 @@ const StyledToast = styled(ToastPrimitive.Root, {
 });
 
 interface ToastBaseProps {
-  children: React.ReactNode;
-  variant: string,
+  children?: React.ReactNode;
+  variant?: string,
   icon?: ReactElement;
 }
 

@@ -12,7 +12,7 @@ export default {
     },
     color: {
       control: 'select',
-      options: ['default', 'primary', 'secondary', 'bright', 'light']
+      options: ['default', 'primary', 'secondary', 'bright', 'light', 'error']
     },
     variant: {
       control: 'select',
