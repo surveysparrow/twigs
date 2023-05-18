@@ -73,8 +73,8 @@ const StyledAlert = styled(Box, {
         }
       },
       [STATUSES.info.name]: {
-        backgroundColorOpacity: ['$accent50', 0.04],
-        borderColorOpacity: ['$accent400', 0.2],
+        backgroundColorOpacity: ['$accent500', 0.04],
+        borderColorOpacity: ['$accent500', 0.2],
         [`${StyledAlertIcon} svg`]: {
           color: '$accent500'
         }
