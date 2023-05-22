@@ -209,7 +209,7 @@ type AvatarProps = AvatarBaseProps & ComponentProps<typeof StyledAvatar>
 
 export const Avatar: FunctionComponent<AvatarProps> = React.forwardRef(
   ({
-    fallbackDelay = 3000, name, src, children, ...rest
+    fallbackDelay = 0, name, src, children, ...rest
   }: AvatarProps, ref) => {
     return (
       <Box
