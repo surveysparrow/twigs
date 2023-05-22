@@ -6,9 +6,15 @@ import {
 import { createCalendar } from '@internationalized/date';
 import { ChevronLeftIcon, ChevronRightIcon } from '@sparrowengg/twigs-react-icons';
 import { Box } from '../box';
-import { CalendarButton, CalendarMonthYear, Header } from './calendar-header';
+import { CalendarButton, CalendarMonthYear } from './calendar-header';
 import { Flex } from '../flex';
 import { CalendarGrid } from './calendar-grid';
+
+function getMonthName(monthIndex: number, timeZone: string): string {
+  const date = new Date();
+  date.setMonth(monthIndex - 1);
+  return date.toLocaleString(timeZone, { month: 'long' });
+}
 
 export const CalendarRange = (props: AriaRangeCalendarProps<DateValue>) => {
   const { locale } = useLocale();
@@ -23,34 +29,48 @@ export const CalendarRange = (props: AriaRangeCalendarProps<DateValue>) => {
   const {
     calendarProps,
     prevButtonProps,
-    nextButtonProps,
-    title
+    nextButtonProps
   } = useRangeCalendar(props, state, ref);
-
+  const startMonth = getMonthName(state.visibleRange.start.month, state.timeZone);
+  const endMonth = getMonthName(state.visibleRange.end.month, state.timeZone);
   return (
-    <Box
+    <Flex
       {...calendarProps}
+      gap="$26"
       css={{
         maxWidth: 600
       }}
       ref={ref}
     >
-      <Header>
-        <CalendarButton {...prevButtonProps} icon={<ChevronLeftIcon />} />
-        <CalendarMonthYear>
-          {' '}
-          {title}
-          {' '}
-        </CalendarMonthYear>
-        <CalendarButton {...nextButtonProps} icon={<ChevronRightIcon />} />
-      </Header>
-      <Flex css={{
-        gap: '48px'
-      }}
-      >
+      <Box>
+        <Flex
+          alignItems="center"
+          justifyContent="space-between"
+          css={{
+            marginBottom: '$12'
+          }}
+        >
+          <CalendarButton {...prevButtonProps} icon={<ChevronLeftIcon />} />
+          <CalendarMonthYear>{`${startMonth} ${state.visibleRange.start.year}`}</CalendarMonthYear>
+          <Box />
+        </Flex>
         <CalendarGrid state={state} />
+      </Box>
+
+      <Box>
+        <Flex
+          alignItems="center"
+          justifyContent="space-between"
+          css={{
+            marginBottom: '$12'
+          }}
+        >
+          <Box />
+          <CalendarMonthYear>{`${endMonth} ${state.visibleRange.end.year}`}</CalendarMonthYear>
+          <CalendarButton {...nextButtonProps} icon={<ChevronRightIcon />} />
+        </Flex>
         <CalendarGrid state={state} offset={{ months: 1 }} />
-      </Flex>
-    </Box>
+      </Box>
+    </Flex>
   );
 };

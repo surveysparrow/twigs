@@ -9,7 +9,7 @@ type Button = {
 export const CalendarButton = ({ icon, onPress, ...rest }: Button) => {
   return (
     <IconButton
-      variant="bright"
+      color="default"
       {...rest}
       onClick={(onPress as any)}
       icon={icon}

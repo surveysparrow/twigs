@@ -1,19 +1,24 @@
 import React from 'react';
+import { AriaButtonProps } from 'react-aria';
 import { styled } from '../../stitches.config';
 import { IconButton } from '../button';
 import { Flex } from '../flex';
 
-export const CalendarButton = (props) => {
-  const { icon, onPress, ...rest } = props;
+type Button = {
+  icon: React.ReactElement,
+} & AriaButtonProps
+
+export const CalendarButton = ({ icon, onPress, ...rest }: Button) => {
   return (
     <IconButton
-      variant="bright"
-      {...rest} onClick={onPress}
+      color="default"
+      {...rest}
+      onClick={onPress as any}
       icon={icon}
-      size='lg'
+      size="lg"
     />
-  )
-}
+  );
+};
 
 export const Header = styled(Flex, {
   alignItems: 'center',

@@ -43,46 +43,50 @@ export const Day = styled('button', {
 export const DayContainer = styled(Box, {
   // all of the selected dates in calendar range
   borderRadius: '$round',
-  '&[aria-selected="true"]': {
-    background: '$secondary100'
-  },
   // start date of the selected range
   '&[data-is-start="true"]': {
-    borderTopLeftRadius: '$round !important',
-    borderBottomLeftRadius: '$round !important',
-    background: '$secondary100',
+    backgroundColorOpacity: ['$secondary500', '0.08'],
+    borderTopRightRadius: '0',
+    borderBottomRightRadius: '0',
     [`& ${Day}`]: {
+      borderRadius: '$round !important',
       background: '$secondary500 !important',
       color: '$white900 !important'
     }
   },
   // end date of the selected range
   '&[data-is-end="true"]': {
-    borderTopRightRadius: '$round !important',
-    borderBottomRightRadius: '$round !important',
-    background: '$secondary100',
+    backgroundColorOpacity: ['$secondary500', '0.08'],
+    borderTopLeftRadius: '0',
+    borderBottomLeftRadius: '0',
     [`& ${Day}`]: {
+      borderRadius: '$round !important',
       background: '$secondary500 !important',
       color: '$white900 !important'
     }
   },
   // selected dates between the first and last date
   '&[aria-selected="true"][data-is-start="false"], &[aria-selected="true"][data-is-end="false"]': {
-    borderRadius: '0',
+    borderRadius: 'none',
     [`& ${Day}`]: {
-      background: '$secondary100',
+      borderRadius: '0',
+      backgroundColorOpacity: ['$secondary500', '0.08'],
       color: '$neutral900'
     }
   },
   // first item in a week row of the selected range
   '&[aria-selected="true"]:first-of-type': {
-    borderTopLeftRadius: '$round',
-    borderBottomLeftRadius: '$round'
+    [`& ${Day}`]: {
+      borderTopLeftRadius: '$round',
+      borderBottomLeftRadius: '$round'
+    }
   },
   // last item in a week row of the selected range
   '&[aria-selected="true"]:last-of-type': {
-    borderTopRightRadius: '$round',
-    borderBottomRightRadius: '$round'
+    [`& ${Day}`]: {
+      borderTopRightRadius: '$round',
+      borderBottomRightRadius: '$round'
+    }
   }
 });
 

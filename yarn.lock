@@ -1577,6 +1577,45 @@
     "@floating-ui/dom" "^0.5.3"
     use-isomorphic-layout-effect "^1.1.1"
 
+"@formatjs/ecma402-abstract@1.14.3":
+  version "1.14.3"
+  resolved "https://registry.yarnpkg.com/@formatjs/ecma402-abstract/-/ecma402-abstract-1.14.3.tgz#6428f243538a11126180d121ce8d4b2f17465738"
+  integrity sha512-SlsbRC/RX+/zg4AApWIFNDdkLtFbkq3LNoZWXZCE/nHVKqoIJyaoQyge/I0Y38vLxowUn9KTtXgusLD91+orbg==
+  dependencies:
+    "@formatjs/intl-localematcher" "0.2.32"
+    tslib "^2.4.0"
+
+"@formatjs/fast-memoize@2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@formatjs/fast-memoize/-/fast-memoize-2.0.1.tgz#f15aaa73caad5562899c69bdcad8db82adcd3b0b"
+  integrity sha512-M2GgV+qJn5WJQAYewz7q2Cdl6fobQa69S1AzSM2y0P68ZDbK5cWrJIcPCO395Of1ksftGZoOt4LYCO/j9BKBSA==
+  dependencies:
+    tslib "^2.4.0"
+
+"@formatjs/icu-messageformat-parser@2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@formatjs/icu-messageformat-parser/-/icu-messageformat-parser-2.3.0.tgz#8e8fd577c3e39454ef14bba4963f2e1d5f2cc46c"
+  integrity sha512-xqtlqYAbfJDF4b6e4O828LBNOWXrFcuYadqAbYORlDRwhyJ2bH+xpUBPldZbzRGUN2mxlZ4Ykhm7jvERtmI8NQ==
+  dependencies:
+    "@formatjs/ecma402-abstract" "1.14.3"
+    "@formatjs/icu-skeleton-parser" "1.3.18"
+    tslib "^2.4.0"
+
+"@formatjs/icu-skeleton-parser@1.3.18":
+  version "1.3.18"
+  resolved "https://registry.yarnpkg.com/@formatjs/icu-skeleton-parser/-/icu-skeleton-parser-1.3.18.tgz#7aed3d60e718c8ad6b0e64820be44daa1e29eeeb"
+  integrity sha512-ND1ZkZfmLPcHjAH1sVpkpQxA+QYfOX3py3SjKWMUVGDow18gZ0WPqz3F+pJLYQMpS2LnnQ5zYR2jPVYTbRwMpg==
+  dependencies:
+    "@formatjs/ecma402-abstract" "1.14.3"
+    tslib "^2.4.0"
+
+"@formatjs/intl-localematcher@0.2.32":
+  version "0.2.32"
+  resolved "https://registry.yarnpkg.com/@formatjs/intl-localematcher/-/intl-localematcher-0.2.32.tgz#00d4d307cd7d514b298e15a11a369b86c8933ec1"
+  integrity sha512-k/MEBstff4sttohyEpXxCmC3MqbUn9VvHGlZ8fauLzkbwXmVrEeyzS+4uhrvAk9DWU9/7otYWxyDox4nT/KVLQ==
+  dependencies:
+    tslib "^2.4.0"
+
 "@gar/promisify@^1.1.3":
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/@gar/promisify/-/promisify-1.1.3.tgz#555193ab2e3bb3b6adc3d551c9c030d9e860daf6"
@@ -7278,6 +7317,11 @@ clone@^1.0.2:
   resolved "https://registry.yarnpkg.com/clone/-/clone-1.0.4.tgz#da309cc263df15994c688ca902179ca3c7cd7c7e"
   integrity sha512-JQHZ2QMW6l3aH/j6xCqQThY/9OH4D/9ls34cgkUBiEeocRTU04tHfKPBsUK1PqZCUQM7GiA0IIXJSuXHI64Kbg==
 
+clsx@^1.1.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/clsx/-/clsx-1.2.1.tgz#0ddc4a20a549b59c93a4116bb26f5294ca17dc12"
+  integrity sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==
+
 cmd-shim@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/cmd-shim/-/cmd-shim-5.0.0.tgz#8d0aaa1a6b0708630694c4dbde070ed94c707724"
@@ -12773,6 +12817,47 @@ raw-body@2.5.1:
     iconv-lite "0.4.24"
     unpipe "1.0.0"
 
+react-aria@^3.24.0:
+  version "3.24.0"
+  resolved "https://registry.yarnpkg.com/react-aria/-/react-aria-3.24.0.tgz#3d7f89c6c4809b20007137dca4242ac8f24d2097"
+  integrity sha512-uqqUOTlRVbOTsbCMr2+SVgRg4345LYBnpBXpLZnYwhlDwDK+w7qXf+AO0cUty6fD3jYw0FmCp0PhyF1bfk1MGg==
+  dependencies:
+    "@react-aria/breadcrumbs" "^3.5.1"
+    "@react-aria/button" "^3.7.1"
+    "@react-aria/calendar" "^3.2.0"
+    "@react-aria/checkbox" "^3.9.0"
+    "@react-aria/combobox" "^3.6.0"
+    "@react-aria/datepicker" "^3.4.0"
+    "@react-aria/dialog" "^3.5.1"
+    "@react-aria/dnd" "^3.2.0"
+    "@react-aria/focus" "^3.12.0"
+    "@react-aria/gridlist" "^3.3.0"
+    "@react-aria/i18n" "^3.7.1"
+    "@react-aria/interactions" "^3.15.0"
+    "@react-aria/label" "^3.5.1"
+    "@react-aria/link" "^3.5.0"
+    "@react-aria/listbox" "^3.9.0"
+    "@react-aria/menu" "^3.9.0"
+    "@react-aria/meter" "^3.4.1"
+    "@react-aria/numberfield" "^3.5.0"
+    "@react-aria/overlays" "^3.14.0"
+    "@react-aria/progress" "^3.4.1"
+    "@react-aria/radio" "^3.6.0"
+    "@react-aria/searchfield" "^3.5.1"
+    "@react-aria/select" "^3.10.0"
+    "@react-aria/selection" "^3.14.0"
+    "@react-aria/separator" "^3.3.1"
+    "@react-aria/slider" "^3.4.0"
+    "@react-aria/ssr" "^3.6.0"
+    "@react-aria/switch" "^3.5.0"
+    "@react-aria/table" "^3.9.0"
+    "@react-aria/tabs" "^3.5.0"
+    "@react-aria/textfield" "^3.9.1"
+    "@react-aria/tooltip" "^3.5.0"
+    "@react-aria/utils" "^3.16.0"
+    "@react-aria/visually-hidden" "^3.8.0"
+    "@react-types/shared" "^3.18.0"
+
 react-colorful@^5.1.2:
   version "5.6.1"
   resolved "https://registry.yarnpkg.com/react-colorful/-/react-colorful-5.6.1.tgz#7dc2aed2d7c72fac89694e834d179e32f3da563b"
@@ -12897,6 +12982,34 @@ react-select@^5.7.2:
     prop-types "^15.6.0"
     react-transition-group "^4.3.0"
     use-isomorphic-layout-effect "^1.1.2"
+
+react-stately@^3.22.0:
+  version "3.22.0"
+  resolved "https://registry.yarnpkg.com/react-stately/-/react-stately-3.22.0.tgz#c72c82401b7db5815f9906a742a0883839a65363"
+  integrity sha512-w5itlPtjfUpxy+195LxRbaCNaGN1NVfPHelhYXuoPoKNgUvmy54uKXvP1Ek1ETZ9e55BaXuMs83yXv94wIMdpQ==
+  dependencies:
+    "@react-stately/calendar" "^3.2.0"
+    "@react-stately/checkbox" "^3.4.1"
+    "@react-stately/collections" "^3.7.0"
+    "@react-stately/combobox" "^3.5.0"
+    "@react-stately/data" "^3.9.1"
+    "@react-stately/datepicker" "^3.4.0"
+    "@react-stately/dnd" "^3.2.0"
+    "@react-stately/list" "^3.8.0"
+    "@react-stately/menu" "^3.5.1"
+    "@react-stately/numberfield" "^3.4.1"
+    "@react-stately/overlays" "^3.5.1"
+    "@react-stately/radio" "^3.8.0"
+    "@react-stately/searchfield" "^3.4.1"
+    "@react-stately/select" "^3.5.0"
+    "@react-stately/selection" "^3.13.0"
+    "@react-stately/slider" "^3.3.1"
+    "@react-stately/table" "^3.9.0"
+    "@react-stately/tabs" "^3.4.0"
+    "@react-stately/toggle" "^3.5.1"
+    "@react-stately/tooltip" "^3.4.0"
+    "@react-stately/tree" "^3.6.0"
+    "@react-types/shared" "^3.18.0"
 
 react-style-singleton@^2.2.1:
   version "2.2.1"
