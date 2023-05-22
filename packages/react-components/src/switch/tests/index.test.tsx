@@ -10,10 +10,10 @@ describe('Switch', () => {
       <Switch
         defaultChecked
         id="s1"
-        isDisabled={false}
-        isChecked={false}
+        disabled={false}
+        checked={false}
         onChange={() => { }}
-        isRequired={false}
+        required={false}
       />
     );
   });

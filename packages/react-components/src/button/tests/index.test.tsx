@@ -11,7 +11,7 @@ describe('Button', () => {
 
   it('renders button correctly', () => {
     const { getByTestId } = render(
-      <Button variant="primary">Primary Button</Button>
+      <Button color="primary">Primary Button</Button>
     );
     const button = getByTestId('button');
 

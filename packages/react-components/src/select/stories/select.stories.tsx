@@ -16,7 +16,7 @@ export default {
       control: 'boolean',
       defaultValue: false
     },
-    isDisabled: {
+    disabled: {
       control: 'boolean',
       defaultValue: false
     }

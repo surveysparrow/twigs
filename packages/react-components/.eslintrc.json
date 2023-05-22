@@ -40,6 +40,7 @@
             }
         ],
         "react/require-default-props": "off",
+        "react/react-in-jsx-scope": "off",
         "arrow-body-style": 0,
         "react/jsx-filename-extension": [
             "warn",

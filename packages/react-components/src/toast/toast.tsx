@@ -1,15 +1,14 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import * as ToastPrimitive from '@radix-ui/react-toast';
 import {
-  TickIcon, WarningIcon, InfoIcon, AlertIcon
+  AlertFillIcon, TickCircleFillIcon, InfoIcon
 } from '@sparrowengg/twigs-react-icons';
 import { styled, keyframes } from '../../stitches.config';
 import { Flex } from '../flex';
 
-const StyledTickIcon = styled(TickIcon);
-const StyledErrorIcon = styled(AlertIcon);
-const StyledWarningIcon = styled(WarningIcon);
-const StyledInfoIcon = styled(InfoIcon);
+const StyledTickIcon = styled(TickCircleFillIcon);
+const StyledErrorIcon = styled(AlertFillIcon);
+const StyledWarningIcon = styled(InfoIcon);
 
 const hide = keyframes({
   '0%': { opacity: 1 },
@@ -60,7 +59,7 @@ const StyledViewport = styled(ToastPrimitive.Viewport, {
   position: 'fixed',
   display: 'flex',
   flexDirection: 'column',
-  padding: '$12',
+  paddingBottom: '$12',
   gap: '$space$5',
   width: 406,
   maxWidth: '100vw',
@@ -184,20 +183,35 @@ const Icon = ({ children, variant = 'success', ...props }: IconProps) => {
     default: () => <StyledTickIcon />,
     success: () => <StyledTickIcon />,
     error: () => <StyledErrorIcon />,
-    warning: () => <StyledWarningIcon />,
-    info: () => <StyledInfoIcon />
+    warning: () => <StyledWarningIcon />
   };
   return (
-    <StyledIcon className="icon-container" {...props}>
+    <StyledIcon {...props}>
       {children || <>{iconMap[variant]()}</>}
     </StyledIcon>
   );
 };
 
+const StyledTitle = styled(ToastPrimitive.Title, {
+  gridArea: 'title',
+  fontWeight: '$5',
+  color: '$white900',
+  fontSize: '$sm'
+});
+
+const StyledDescription = styled(ToastPrimitive.Description, {
+  gridArea: 'description',
+  margin: 0,
+  color: '$white900',
+  fontSize: '$sm'
+});
+
 const StyledToast = styled(ToastPrimitive.Root, {
   backgroundColor: '$neutral900',
   borderRadius: '$xl',
+  border: '$borderWidths$xs solid $black300',
   display: 'grid',
+  padding: '$8 $6',
   gridTemplateAreas: '"icon content action" "icon content action"',
   gridTemplateColumns: 'max-content auto max-content',
   columnGap: '$8',
@@ -207,52 +221,59 @@ const StyledToast = styled(ToastPrimitive.Root, {
     outline: 'none'
   },
   '&:focus-visible': {
-    $$shadowColor: '$colors$system300',
+    $$shadowColor: '$colors$primary300',
     boxShadow:
       'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
   },
   variants: {
     variant: {
       default: {
-        '& .icon-container': {
-          background: '$black900'
+        background: '$accent100',
+        [`& ${StyledIcon} svg`]: {
+          color: '$accent500'
+        },
+        [`& ${StyledTitle}`]: {
+          color: '$black900'
+        },
+        [`& ${StyledDescription}`]: {
+          color: '$black800'
         }
       },
       success: {
-        '& .icon-container': {
-          background: '$positive500'
+        background: '$accent700',
+        [`& ${StyledIcon} svg`]: {
+          color: '$primary400'
+        },
+        [`& ${StyledTitle}`]: {
+          color: '$white900'
+        },
+        [`& ${StyledDescription}`]: {
+          color: '$white800'
         }
       },
       error: {
-        '& .icon-container': {
-          background: '$negative500'
+        background: '$error600',
+        [`& ${StyledIcon} svg`]: {
+          color: '$white900'
+        },
+        [`& ${StyledTitle}`]: {
+          color: '$white900'
+        },
+        [`& ${StyledDescription}`]: {
+          color: '$white800'
         }
       },
       warning: {
-        '& .icon-container': {
-          background: '$attention400'
+        background: '$warning200',
+        [`& ${StyledIcon} svg`]: {
+          color: '$black700'
+        },
+        [`& ${StyledTitle}`]: {
+          color: '$black900'
+        },
+        [`& ${StyledDescription}`]: {
+          color: '$black800'
         }
-      },
-      info: {
-        '& .icon-container': {
-          background: '$system500'
-        }
-      }
-    },
-    size: {
-      sm: {
-        height: '$13',
-        '& .toast-actions': {
-          '&:before': {
-            display: 'none'
-          },
-          '& :last-child': {
-            display: 'none'
-          }
-        }
-      },
-      md: {
-        height: '$20'
       }
     }
   },
@@ -269,18 +290,17 @@ const StyledToast = styled(ToastPrimitive.Root, {
     }
   },
   defaultVariants: {
-    size: 'sm',
     variant: 'default'
   }
 });
 
 interface ToastBaseProps {
-  children: React.ReactNode;
-  variant: string,
+  children?: React.ReactNode;
+  variant?: string,
   icon?: ReactElement;
 }
 
-type ToastProps = ToastBaseProps & React.ComponentProps<typeof StyledToast>;
+export type ToastProps = ToastBaseProps & React.ComponentProps<typeof StyledToast>;
 
 const ToastWrapper: FunctionComponent<ToastProps> = ({
   children,
@@ -300,7 +320,7 @@ const ToastWrapper: FunctionComponent<ToastProps> = ({
 
 type ProviderProps = React.ComponentProps<typeof StyledViewport> & ToastPrimitive.ToastProviderProps
 
-const Provider:FunctionComponent<ProviderProps> = ({
+const Provider: FunctionComponent<ProviderProps> = ({
   duration,
   label,
   swipeDirection,
@@ -326,7 +346,8 @@ const StyledContent = styled(Flex, {
   height: '100%',
   flexDirection: 'column',
   justifyContent: 'center',
-  padding: '$8 0',
+  // padding: '$8 0',
+  gap: '$4',
   overflow: 'hidden'
 });
 
@@ -344,41 +365,14 @@ const Content = ({ children, ...props }: ContentProps) => {
   );
 };
 
-const StyledTitle = styled(ToastPrimitive.Title, {
-  gridArea: 'title',
-  marginBottom: '$4',
-  fontWeight: '$5',
-  color: '$white900',
-  fontSize: '$md'
-});
-
-const StyledDescription = styled(ToastPrimitive.Description, {
-  gridArea: 'description',
-  margin: 0,
-  color: '$white900',
-  fontSize: '$sm'
-});
-
 const StyledAction = styled(ToastPrimitive.Action, {
   gridArea: 'action',
   padding: '0 $6',
-  borderLeft: '$borderWidths$xs solid $colors$black500',
   display: 'flex',
-  flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
   position: 'relative',
-  height: '100%',
-  '&:before': {
-    content: '',
-    position: 'absolute',
-    left: 0,
-    top: '50%',
-    transform: 'translateY(-50%)',
-    width: '100%',
-    height: '$borderWidths$xs',
-    background: '$black500'
-  }
+  gap: '$2'
 });
 
 type ActionBaseProps = {

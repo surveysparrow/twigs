@@ -1,30 +1,29 @@
-import React, { FunctionComponent } from 'react';
-import { Text, TextProps } from '../text';
+import React from 'react';
+import * as LabelPrimitive from '@radix-ui/react-label';
+import { styled } from '../../stitches.config';
 
-export type FormLabelProps = TextProps &
-  React.HTMLAttributes<HTMLLabelElement> & {
-    as?: React.ElementType
- };
-
-export const FormLabel: FunctionComponent<FormLabelProps> = ({
-  css,
-  children,
-  ...rest
-}: FormLabelProps) => {
-  return (
-    <Text
-      as="label"
-      css={{
-        display: 'inline-block',
-        color: '$neutral700',
-        fontWeight: '$4',
-        userSelect: 'none',
-        ...css
-      }}
-      data-testid="form-label"
-      {...rest}
-    >
-      {children}
-    </Text>
-  );
+export type FormLabelProps = React.HTMLAttributes<HTMLLabelElement> & {
+  as?: React.ElementType
 };
+
+export const FormLabel = styled(LabelPrimitive.Root, {
+  display: 'block',
+  color: '$neutral800',
+  fontWeight: '$4',
+  userSelect: 'none',
+  variants: {
+    size: {
+      xs: {
+        fontSize: '$xs',
+        lineHeight: '$xs'
+      },
+      sm: {
+        fontSize: '$sm',
+        lineHeight: '$sm'
+      }
+    }
+  },
+  defaultVariants: {
+    size: 'sm'
+  }
+});

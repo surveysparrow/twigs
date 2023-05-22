@@ -2,7 +2,7 @@ import React, { useEffect, useRef, ComponentProps } from 'react';
 import * as Portal from '@radix-ui/react-portal';
 import { styled } from '../../stitches.config';
 import { Box } from '../box';
-import useMountTransition from '../hooks/useMountTransition';
+import { useMountTransition } from '../hooks';
 
 const StyledDrawerBackdrop = styled(Box, {
   position: 'fixed',
@@ -195,8 +195,7 @@ export const Drawer = ({
     <Portal.Root className="drawer-portal">
       <StyledDrawerContainer>
         <StyledDrawerBackdrop
-          className={`${isOpen ? 'open' : ''} ${
-            isTransitioning ? 'transitioning' : ''
+          className={`${isOpen ? 'open' : ''} ${isTransitioning ? 'transitioning' : ''
           }`}
           onClick={handleClose}
         />
@@ -205,8 +204,7 @@ export const Drawer = ({
           size={size}
           isOpen={isOpen}
           data-testid="drawer"
-          className={`${isOpen ? 'open' : ''} ${
-            isTransitioning ? 'transitioning' : ''
+          className={`${isOpen ? 'open' : ''} ${isTransitioning ? 'transitioning' : ''
           }`}
         >
           {children}

@@ -3,7 +3,7 @@ import { styled } from '../../stitches.config';
 export const AvatarBadge = styled('div', {
   borderRadius: '$round',
   position: 'absolute',
-  background: '$negative500',
+  background: '$error500',
   border: '$borderWidths$xs',
   borderStyle: 'solid',
   borderColor: '$white900',

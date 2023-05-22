@@ -25,7 +25,7 @@ const StyledSwitch = styled(SwitchPrimitive.Root, {
   WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
   transition: 'all $transitions$2',
   '&:focus-visible': {
-    $$shadowColor: '$colors$system300',
+    $$shadowColor: '$colors$primary300',
     boxShadow:
       'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
   },
@@ -34,9 +34,9 @@ const StyledSwitch = styled(SwitchPrimitive.Root, {
     cursor: 'not-allowed'
   },
   '&[data-state="checked"]': {
-    backgroundColor: '$secondary700',
+    backgroundColor: '$primary600',
     '&[data-disabled]': {
-      background: '$secondary200',
+      background: '$primary200',
       cursor: 'not-allowed'
     }
   },
@@ -64,29 +64,29 @@ const StyledSwitch = styled(SwitchPrimitive.Root, {
   }
 });
 
-type OmitProps = 'disabled' | 'checked' | 'onCheckedChange' | 'required' | 'onChange';
+type OmitProps = 'onCheckedChange' | 'onChange';
 
 export type SwitchProps = {
-  isDisabled?: boolean,
-  isChecked?: boolean,
+  disabled?: boolean,
+  checked?: boolean,
   // eslint-disable-next-line no-unused-vars
   onChange?: (checked: boolean) => void,
-  isRequired?: boolean
+  required?: boolean
 } & Omit<ComponentProps<typeof StyledSwitch>, OmitProps>;
 
 export const Switch: FunctionComponent<SwitchProps> = React.forwardRef(
   (
     {
-      isChecked, isDisabled, onChange, isRequired, ...rest
+      checked, disabled, onChange, required, ...rest
     }: SwitchProps,
     ref
   ) => {
     return (
       <StyledSwitch
         ref={ref}
-        disabled={isDisabled}
-        checked={isChecked}
-        required={isRequired}
+        disabled={disabled}
+        checked={checked}
+        required={required}
         onCheckedChange={onChange}
         {...rest}
       >

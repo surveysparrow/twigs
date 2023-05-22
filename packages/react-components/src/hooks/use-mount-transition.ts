@@ -18,4 +18,4 @@ const useMountTransition = (isMounted, unmountDelay) => {
   return isTransitioning;
 };
 
-export default useMountTransition;
+export { useMountTransition };

@@ -1,5 +1,7 @@
 export * from './alert';
+export * from './alert-dialog';
 export * from './avatar';
+export * from './accordion';
 export * from './box';
 export * from './button';
 export * from './checkbox';
@@ -26,3 +28,4 @@ export * from './text';
 export * from './theme-provider';
 export * from './toast';
 export * from './tooltip';
+export * from './hooks';

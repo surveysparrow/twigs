@@ -10,17 +10,17 @@ export default {
 const Template: ComponentStory<typeof Flex> = (args) => (
   <Flex
     {...args}
+    flexDirection="row"
     css={{
       backgroundColor: 'gray',
       color: 'white',
       height: '200px',
       width: '300px',
-      p: 8,
-      alignItems: 'center',
-      justifyContent: 'center'
+      p: 8
     }}
   >
-    This is a Flex component
+    <span>Flex</span>
+    <span>Flex</span>
   </Flex>
 );
 export const Default = Template.bind({});

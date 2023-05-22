@@ -17,15 +17,16 @@ const StyledCloseButton = styled(IconButton, {
   marginLeft: 'auto'
 });
 
-const StyledAlertDescription = styled(Box, {});
+const StyledAlertDescription = styled(Box, {
+  lineHeight: '$md'
+});
 const StyledAlertIcon = styled('span', {
   display: 'flex'
 });
 
 const StyledAlert = styled(Box, {
   display: 'flex',
-  alignItems: 'center',
-  padding: '$4',
+  alignItems: 'start',
   width: '100%',
   borderWidth: '$xs',
   borderStyle: 'solid',
@@ -37,7 +38,7 @@ const StyledAlert = styled(Box, {
   variants: {
     size: {
       sm: {
-        padding: '$3 $5',
+        padding: '$3 $4',
         [`${StyledAlertIcon}`]: {
           marginInlineEnd: '$2'
         },
@@ -46,12 +47,11 @@ const StyledAlert = styled(Box, {
         },
         [`${IconButton}`]: {
           height: '$5',
-          width: '$5',
-          marginInlineStart: '$2'
+          width: '$5'
         }
       },
       md: {
-        padding: '$4',
+        padding: '$8',
         [`${StyledAlertIcon}`]: {
           marginInlineEnd: '$4'
         },
@@ -60,8 +60,7 @@ const StyledAlert = styled(Box, {
         },
         [`${IconButton}`]: {
           height: '$6',
-          width: '$6',
-          marginInlineStart: '$1'
+          width: '$6'
         }
       }
     },
@@ -74,24 +73,24 @@ const StyledAlert = styled(Box, {
         }
       },
       [STATUSES.info.name]: {
-        backgroundColor: '$system100',
-        borderColor: '$system200',
+        backgroundColorOpacity: ['$accent500', 0.04],
+        borderColorOpacity: ['$accent500', 0.2],
         [`${StyledAlertIcon} svg`]: {
-          color: '$system500'
+          color: '$accent500'
         }
       },
       [STATUSES.error.name]: {
-        backgroundColor: '$negative100',
-        borderColor: '$negative200',
+        backgroundColor: '$error100',
+        borderColor: '$error200',
         [`${StyledAlertIcon} svg`]: {
-          color: '$negative500'
+          color: '$error500'
         }
       },
       [STATUSES.warning.name]: {
-        backgroundColor: '$attention100',
-        borderColor: '$attention200',
+        backgroundColor: '$warning100',
+        borderColor: '$warning200',
         [`${StyledAlertIcon} svg`]: {
-          color: '$attention500'
+          color: '$warning500'
         }
       }
     }
@@ -118,7 +117,10 @@ export const Alert: FunctionComponent<AlertProps> = React.forwardRef(
     children,
     ...rest
   }: AlertProps, ref) => {
-    const ValidAlertIcon = STATUSES[status].icon;
+    const ValidAlertIcon = STATUSES[status]?.icon;
+    if (!ValidAlertIcon) {
+      throw new Error(`Invalid status: ${status}`);
+    }
     return (
       <StyledAlert
         role="alert"
@@ -143,7 +145,7 @@ export const Alert: FunctionComponent<AlertProps> = React.forwardRef(
               <StyledCloseButton
                 icon={<CloseIcon />}
                 aria-label="close"
-                variant="default"
+                color="default"
                 {...(onClose && { onClick: onClose })}
               />
             )

@@ -49,18 +49,18 @@ const StyledCheckbox = styled(CheckboxPrimitive.Root, {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  border: '$borderWidths$xs solid $neutral400',
+  border: '$borderWidths$xs solid $neutral700',
   transition: 'all $transitions$2',
   '&:hover': { border: '$borderWidths$xs solid $neutral700' },
   '&:focus-visible': {
     outline: 'none',
-    $$shadowColor: '$colors$system300',
+    $$shadowColor: '$colors$primary300',
     border: '$borderWidths$xs solid $neutral700',
     boxShadow:
       'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
   },
   '&:active, &[data-state="checked"], &[data-state="indeterminate"]': {
-    background: '$secondary700',
+    background: '$secondary500',
     border: '$borderWidths$xs solid transparent'
   },
   '& .check-icon': {
@@ -100,19 +100,18 @@ const StyledIndicator = styled(CheckboxPrimitive.Indicator, {
 
 const StyledLabelContainer = styled('span', {
   display: 'inline-flex',
-  paddingInlineStart: '$8'
+  paddingInlineStart: '$4'
 });
 
-type OmitProps = 'disabled' | 'checked' | 'onCheckedChange' | 'required' | 'onChange';
+type OmitProps = 'onCheckedChange' | 'onChange';
 
 export type CheckboxBaseProps = {
-  isChecked?: boolean | string,
-  isIndeterminate?: boolean,
+  checked?: boolean | 'indeterminate'
   children?: ReactNode,
   // eslint-disable-next-line no-unused-vars
   onChange?: (checked: boolean | 'indeterminate') => void,
-  isRequired?: boolean,
-  isDisabled?: boolean
+  required?: boolean,
+  disabled?: boolean
 }
 
 export type CheckboxProps = CheckboxBaseProps &
@@ -123,22 +122,22 @@ export type CheckboxProps = CheckboxBaseProps &
   };
 
 export const Checkbox: FunctionComponent<CheckboxProps> = ({
-  isChecked,
-  isIndeterminate,
-  isDisabled,
-  isRequired,
+  checked,
+  disabled,
+  required,
   onChange,
   children,
   ...rest
 }) => {
+  const isIndeterminate = checked === 'indeterminate';
   if (children) {
     return (
-      <FormLabel as="label" css={{ display: 'flex', alignItems: 'center' }}>
+      <FormLabel css={{ display: 'flex', alignItems: 'center' }}>
         <StyledCheckbox
-          checked={isChecked}
+          checked={checked}
           onCheckedChange={onChange}
-          disabled={isDisabled}
-          required={isRequired}
+          disabled={disabled}
+          required={required}
           {...(isIndeterminate && { 'data-state': 'indeterminate' })}
           {...rest}
         >
@@ -157,10 +156,10 @@ export const Checkbox: FunctionComponent<CheckboxProps> = ({
   }
   return (
     <StyledCheckbox
-      checked={isChecked}
+      checked={checked}
       onCheckedChange={onChange}
-      disabled={isDisabled}
-      required={isRequired}
+      disabled={disabled}
+      required={required}
       {...(isIndeterminate && { 'data-state': 'indeterminate' })}
       {...rest}
     >
