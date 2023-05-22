@@ -61,6 +61,7 @@ export { GiftWithHeartIcon } from './gift-with-heart';
 export { GoogleColorIcon } from './google-color';
 export { HappyHomeIcon } from './happy-home';
 export { HashtagIcon } from './hashtag';
+export { HistoryIcon } from './history';
 export { HomeIcon } from './home';
 export { ImagePlusIcon } from './image-plus';
 export { ImageIcon } from './image';
