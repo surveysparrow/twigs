@@ -43,21 +43,21 @@ export const FormInput: FunctionComponent<FormInputProps> = forwardRef(({
               <Text css={{ color: '$neutral700' }} data-testid="input-char-count">
                 {mergedValue?.toString().length || 0}
                 {
-                maxLength ? `/${maxLength}` : null
-              }
+                  maxLength ? `/${maxLength}` : null
+                }
               </Text>
             )
             : null
         }
       </Flex>
       <Input
-        {...rest}
         value={value}
         defaultValue={defaultValue}
         {...(maxLength && {
           maxLength
         })}
         ref={ref}
+        {...rest}
       />
       {
         error
