@@ -54,6 +54,12 @@ const StyledInput = styled('input', {
         borderRadius: '$md',
         padding: '$3 $4',
         fontSize: '$sm'
+      },
+      sm: {
+        height: '$6',
+        borderRadius: '$md',
+        padding: '$3 $4',
+        fontSize: '$xs'
       }
     },
     variant: {
@@ -79,11 +85,13 @@ const StyledInput = styled('input', {
   }
 });
 
-function getInputPadding(size: string | ({ '@initial'?: 'md' | 'lg' | 'xl' })) {
+function getInputPadding(size: string | ({ '@initial'?: 'sm' | 'md' | 'lg' | 'xl' })) {
   switch (size) {
     case 'lg':
       return '$20';
     case 'md':
+      return '$14';
+    case 'sm':
       return '$14';
     default:
       return '$22';
@@ -136,6 +144,14 @@ const IconContainer = styled(Box, {
         '& svg': {
           width: '$4',
           height: '$4'
+        }
+      },
+      sm: {
+        width: '$3',
+        height: '$3',
+        '& svg': {
+          width: '$3',
+          height: '$3'
         }
       }
     }
