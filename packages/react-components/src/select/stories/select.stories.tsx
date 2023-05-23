@@ -18,7 +18,7 @@ export default {
   argTypes: {
     size: {
       control: 'select',
-      options: ['sm', 'md', 'lg']
+      options: ['sm', 'md', 'lg', 'xl']
     },
     isMulti: {
       control: 'boolean'

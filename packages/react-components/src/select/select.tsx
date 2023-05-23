@@ -59,6 +59,9 @@ const selectStyles = {
     color: '$neutral900',
     lineHeight: '$sm'
   },
+  '& .twigs-select__multi-value__label': {
+    fontSize: '100%'
+  },
   '& .twigs-select__option': {
     fontSize: '$sm',
     lineHeight: '$sm',
@@ -92,7 +95,7 @@ const selectStyles = {
   },
   variants: {
     size: {
-      lg: {
+      xl: {
         '& .twigs-select__control': {
           height: '$12',
           minHeight: '$12',
@@ -100,8 +103,18 @@ const selectStyles = {
           fontSize: '$md'
         },
         '& .twigs-select__multi-value__label': {
-          fontSize: '100%',
           padding: '$4'
+        }
+      },
+      lg: {
+        '& .twigs-select__control': {
+          height: '$10',
+          minHeight: '$10',
+          borderRadius: '$lg',
+          fontSize: '$md'
+        },
+        '& .twigs-select__multi-value__label': {
+          padding: '$3'
         },
         '& .twigs-select__value-container, & .twigs-select__placeholder, &.twigs-select__single-value, &.twigs-select__input':
         {
@@ -110,22 +123,28 @@ const selectStyles = {
       },
       md: {
         '& .twigs-select__control': {
-          height: '$10',
-          minHeight: '$10',
+          height: '$8',
+          minHeight: '$8',
           borderRadius: '$lg',
           fontSize: '$sm'
         },
         '& .twigs-select__multi-value__label': {
-          fontSize: '100%',
           padding: '$2'
         }
       },
       sm: {
         '& .twigs-select__control': {
-          height: '$8',
-          minHeight: '$8',
+          height: '$6',
+          minHeight: '$6',
           borderRadius: '$md',
           fontSize: '$sm'
+        },
+        '& .twigs-select__value-container, & .twigs-select__input-container': {
+          paddingTop: 0,
+          paddingBottom: 0
+        },
+        '& .twigs-select__multi-value__label': {
+          padding: '$1'
         }
       }
     },
