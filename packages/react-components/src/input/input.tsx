@@ -188,6 +188,7 @@ export const Input: FunctionComponent<InputProps> = React.forwardRef(({
           </IconContainer>
         )}
         <StyledInput
+          ref={ref}
           size={size}
           data-testid="input"
           css={{
