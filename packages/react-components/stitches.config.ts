@@ -342,7 +342,7 @@ export const {
 
 export const globalStyles = globalCss({
   ...resetStyles,
-  '*': { margin: 0, padding: 0, fontFamily: '$body' },
+  '*': { margin: 0, padding: 0, fontFamily: '$body', '-webkit-font-smoothing': 'antialiased' },
   '*, :before, :after': { boxSizing: 'border-box' },
 });
 
