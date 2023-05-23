@@ -14,6 +14,7 @@ export * from './form-helper-text';
 export * from './form-label';
 export * from './grid';
 export * from './heading';
+export * from './hover-card';
 export * from './input';
 export * from './link';
 export * from './loader';

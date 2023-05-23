@@ -216,7 +216,8 @@ export const Avatar: FunctionComponent<AvatarProps> = React.forwardRef(
         css={{
           position: 'relative',
           height: 'fit-content',
-          width: 'fit-content'
+          width: 'fit-content',
+          display: 'inline-block'
         }}
       >
         <StyledAvatar {...rest} ref={ref}>
