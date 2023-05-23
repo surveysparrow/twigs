@@ -128,10 +128,29 @@ const selectStyles = {
           fontSize: '$sm'
         }
       }
+    },
+    variant: {
+      default: {
+        '& .twigs-select__control': {
+          background: '$white900',
+          borderWidth: '$xs',
+          borderStyle: 'solid',
+          borderColor: '$neutral200',
+          '&:hover, &:focus, &:active': {
+            borderWidth: '$xs',
+            borderStyle: 'solid',
+            borderColor: '$neutral300'
+          }
+        }
+      },
+      filled: {
+        borderColor: 'transparent'
+      }
     }
   },
   defaultVariants: {
-    size: 'sm'
+    size: 'sm',
+    variant: 'default'
   }
 };
 

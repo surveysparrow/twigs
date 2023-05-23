@@ -75,7 +75,7 @@ const StyledInput = styled('input', {
   },
   defaultVariants: {
     size: 'md',
-    variant: 'outlined'
+    variant: 'default'
   }
 });
 

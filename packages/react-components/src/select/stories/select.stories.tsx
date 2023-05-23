@@ -6,19 +6,29 @@ import { Select } from '../select';
 export default {
   component: Select,
   title: 'Select',
+  args: {
+    placeholder: 'Select an option',
+    isClearable: true,
+    isSearchable: true,
+    isMulti: false,
+    disabled: false,
+    size: 'md',
+    variant: 'default'
+  },
   argTypes: {
     size: {
       control: 'select',
-      options: ['sm', 'md', 'lg'],
-      defaultValue: 'sm'
+      options: ['sm', 'md', 'lg']
     },
     isMulti: {
-      control: 'boolean',
-      defaultValue: false
+      control: 'boolean'
     },
     disabled: {
-      control: 'boolean',
-      defaultValue: false
+      control: 'boolean'
+    },
+    variant: {
+      control: 'select',
+      options: ['default', 'filled']
     }
   }
 } as ComponentMeta<typeof Select>;
