@@ -43,7 +43,7 @@ export const StyledHoverCardArrow = styled(HoverCardPrimitive.Arrow, {
 });
 
 export type HoverCardContentProps = {
-  children?: ReactElement;
+  children?: ReactElement | ReactElement[];
   arrow?: boolean
 } & ComponentProps<typeof StyledHoverCardContent>
 

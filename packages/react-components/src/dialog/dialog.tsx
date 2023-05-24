@@ -41,7 +41,7 @@ const StyledContent = styled(DialogPrimitive.Content, {
 });
 
 type ContentProps = {
-  children?: ReactElement;
+  children?: ReactElement | ReactElement[];
 } & ComponentProps<typeof StyledContent>
 
 const Content = ({ children, ...props }: ContentProps) => {
