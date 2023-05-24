@@ -31,16 +31,26 @@ export const FormInput: FunctionComponent<FormInputProps> = forwardRef(({
 
   return (
     <Box>
-      <Flex alignItems="center" justifyContent="space-between">
+      <Flex
+        alignItems="center"
+        justifyContent="space-between"
+        css={{ marginBottom: '$2' }}
+      >
         {
           label
             ? <FormLabel htmlFor={rest.id}>{label}</FormLabel>
-            : <span />
+            : null
         }
         {
           showCount
             ? (
-              <Text css={{ color: '$neutral700' }} data-testid="input-char-count">
+              <Text
+                css={{
+                  color: '$neutral700',
+                  ...(!label ? { marginLeft: 'auto' } : {})
+                }}
+                data-testid="input-char-count"
+              >
                 {mergedValue?.toString().length || 0}
                 {
                   maxLength ? `/${maxLength}` : null
