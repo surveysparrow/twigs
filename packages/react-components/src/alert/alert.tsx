@@ -1,4 +1,4 @@
-import React, { ComponentProps, FunctionComponent } from 'react';
+import React, { cloneElement, ComponentProps, FunctionComponent } from 'react';
 import {
   AlertIcon, CloseIcon, InfoIcon, TickCircleIcon, WarningIcon
 } from '@sparrowengg/twigs-react-icons';
@@ -105,7 +105,8 @@ export type AlertProps = {
   children: React.ReactElement,
   closable?: boolean,
   onClose?: React.MouseEventHandler<HTMLButtonElement>
-  status: 'info' | 'error' | 'success' | 'warning'
+  status: 'info' | 'error' | 'success' | 'warning',
+  icon?: React.ReactElement,
 } & ComponentProps<typeof StyledAlert>
 
 export const Alert: FunctionComponent<AlertProps> = React.forwardRef(
@@ -115,9 +116,10 @@ export const Alert: FunctionComponent<AlertProps> = React.forwardRef(
     onClose,
     status,
     children,
+    icon,
     ...rest
   }: AlertProps, ref) => {
-    const ValidAlertIcon = STATUSES[status]?.icon;
+    const ValidAlertIcon = icon || STATUSES[status]?.icon;
     if (!ValidAlertIcon) {
       throw new Error(`Invalid status: ${status}`);
     }
@@ -133,10 +135,17 @@ export const Alert: FunctionComponent<AlertProps> = React.forwardRef(
           role="img"
           aria-label={`${status}-icon`}
         >
-          <ValidAlertIcon
-            size={size === 'sm' ? 20 : 24}
-            aria-hidden
-          />
+          {
+            icon
+              ? cloneElement(icon)
+              : (
+                <ValidAlertIcon
+                  size={size === 'sm' ? 20 : 24}
+                  aria-hidden
+                />
+              )
+          }
+
         </StyledAlertIcon>
         {children}
         {

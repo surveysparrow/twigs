@@ -1,3 +1,4 @@
+import { UserCircleIcon } from '@sparrowengg/twigs-react-icons';
 import React from 'react';
 import { Alert, AlertDescription } from '../alert';
 
@@ -34,3 +35,20 @@ const Template = (args) => (
   </Alert>
 );
 export const Default = Template.bind({});
+
+const TemplateWithCustomIcon = (args) => (
+  <Alert
+    icon={<UserCircleIcon size={20} />}
+    css={{
+      maxWidth: 400
+    }}
+    {...args}
+  >
+    <AlertDescription>
+      {/* eslint-disable-next-line react/destructuring-assignment */}
+      {`A ${args.status} message here`}
+    </AlertDescription>
+  </Alert>
+);
+
+export const AlertWithCustomIcon = TemplateWithCustomIcon.bind({});
