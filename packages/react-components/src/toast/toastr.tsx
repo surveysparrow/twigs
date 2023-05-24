@@ -12,7 +12,7 @@ import {
 } from './toast';
 import { useToast } from '../hooks/use-toast';
 
-export const Toaster: FunctionComponent<ToastProviderProps> = ({
+export const Toastr: FunctionComponent<ToastProviderProps> = ({
   duration,
   swipeDirection,
   swipeThreshold,

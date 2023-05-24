@@ -6,7 +6,7 @@ import { type ToastProps } from '../toast/toast';
 const TOAST_LIMIT = 1;
 const TOAST_REMOVE_DELAY = 10000;
 
-type ToasterToast = ToastProps & {
+type ToastrToast = ToastProps & {
   icon?: React.ReactElement,
   variant: string,
   id: string
@@ -34,23 +34,23 @@ type ActionType = typeof actionTypes
 type Action =
   | {
     type: ActionType['ADD_TOAST']
-    toast: ToasterToast
+    toast: ToastrToast
   }
   | {
     type: ActionType['UPDATE_TOAST']
-    toast: Partial<ToasterToast>
+    toast: Partial<ToastrToast>
   }
   | {
     type: ActionType['DISMISS_TOAST']
-    toastId?: ToasterToast['id']
+    toastId?: ToastrToast['id']
   }
   | {
     type: ActionType['REMOVE_TOAST']
-    toastId?: ToasterToast['id']
+    toastId?: ToastrToast['id']
   }
 
 interface State {
-  toasts: ToasterToast[]
+  toasts: ToastrToast[]
 }
 
 const toastTimeouts = new Map<string, ReturnType<typeof setTimeout>>();
@@ -131,12 +131,12 @@ const addToRemoveQueue = (toastId: string) => {
   toastTimeouts.set(toastId, timeout);
 };
 
-interface Toast extends Omit<ToasterToast, 'id'> { }
+interface Toast extends Omit<ToastrToast, 'id'> { }
 
 function toast({ ...toastProps }: Toast) {
   const id = generareId();
 
-  const update = (props: ToasterToast) => dispatch({
+  const update = (props: ToastrToast) => dispatch({
     type: 'UPDATE_TOAST',
     toast: { ...props, id }
   });
