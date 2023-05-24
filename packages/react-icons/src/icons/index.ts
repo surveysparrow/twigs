@@ -122,6 +122,7 @@ export { UploadIcon } from './upload';
 export { UploadTwoIcon } from './upload-two';
 export { UserCirclePlusIcon } from './user-circle-plus';
 export { UserCircleIcon } from './user-circle';
+export { UserIcon } from './user';
 export { UsersIcon } from './users';
 export { WarningIcon } from './warning';
 export { WrenchIcon } from './wrench';
