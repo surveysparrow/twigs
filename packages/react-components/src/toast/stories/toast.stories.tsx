@@ -46,7 +46,7 @@ const Template = (
   }, []);
   return (
     <>
-      <Toaster />
+      <Toaster duration={10000} />
       <Button
         variant="outline"
         onClick={() => {

@@ -54,6 +54,12 @@ const StyledInput = styled('input', {
         borderRadius: '$md',
         padding: '$3 $4',
         fontSize: '$sm'
+      },
+      sm: {
+        height: '$6',
+        borderRadius: '$md',
+        padding: '$3 $4',
+        fontSize: '$xs'
       }
     },
     variant: {
@@ -75,15 +81,17 @@ const StyledInput = styled('input', {
   },
   defaultVariants: {
     size: 'md',
-    variant: 'outlined'
+    variant: 'default'
   }
 });
 
-function getInputPadding(size: string | ({ '@initial'?: 'md' | 'lg' | 'xl' })) {
+function getInputPadding(size: string | ({ '@initial'?: 'sm' | 'md' | 'lg' | 'xl' })) {
   switch (size) {
     case 'lg':
       return '$20';
     case 'md':
+      return '$14';
+    case 'sm':
       return '$14';
     default:
       return '$22';
@@ -137,6 +145,14 @@ const IconContainer = styled(Box, {
           width: '$4',
           height: '$4'
         }
+      },
+      sm: {
+        width: '$3',
+        height: '$3',
+        '& svg': {
+          width: '$3',
+          height: '$3'
+        }
       }
     }
   }
@@ -172,6 +188,7 @@ export const Input: FunctionComponent<InputProps> = React.forwardRef(({
           </IconContainer>
         )}
         <StyledInput
+          ref={ref}
           size={size}
           data-testid="input"
           css={{

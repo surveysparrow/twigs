@@ -292,7 +292,8 @@ export const defaultTheme = {
     lg: '0.5rem',
     xl: '0.75rem',
     '2xl': '1rem',
-    '3xl': '1.5rem',
+    '3xl': '1.25rem',
+    '4xl': '1.5rem',
     round: '50%',
     pill: '9999px',
   },
@@ -342,7 +343,7 @@ export const {
 
 export const globalStyles = globalCss({
   ...resetStyles,
-  '*': { margin: 0, padding: 0, fontFamily: '$body' },
+  '*': { margin: 0, padding: 0, fontFamily: '$body', '-webkit-font-smoothing': 'antialiased' },
   '*, :before, :after': { boxSizing: 'border-box' },
 });
 
