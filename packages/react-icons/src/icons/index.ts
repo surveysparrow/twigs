@@ -29,6 +29,7 @@ export { ClockIcon } from './clock';
 export { CloseCircleIcon } from './close-circle';
 export { CloseCircleFillIcon } from './close-circle-fill';
 export { CloseIcon } from './close';
+export { CodeIcon } from './code';;
 export { CogIcon } from './cog';
 export { ColorPaletteIcon } from './color-palette';
 export { ColorSwatchesIcon } from './color-swatches';
