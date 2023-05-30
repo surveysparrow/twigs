@@ -14,7 +14,7 @@ export const TextInputIcon = React.forwardRef<SVGSVGElement, IconProps>(
         xmlns="http://www.w3.org/2000/svg"
       >
         <g clip-path="url(#clip0_10368_72714)">
-          <path fill-rule="evenodd" clipRule="evenodd" d="M20 16H4C3.448 16 3 15.552 3 15V9C3 8.448 3.448 8 4 8H20C20.552 8 21 8.448 21 9V15C21 15.552 20.552 16 20 16Z" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          <path fillRule="evenodd" clipRule="evenodd" d="M20 16H4C3.448 16 3 15.552 3 15V9C3 8.448 3.448 8 4 8H20C20.552 8 21 8.448 21 9V15C21 15.552 20.552 16 20 16Z" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           <path d="M11 20H10C8.895 20 8 19.105 8 18C8 19.105 7.105 20 6 20H5" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           <path d="M8 6V18" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           <path d="M5 4H6C7.105 4 8 4.895 8 6C8 4.895 8.895 4 10 4H11" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
