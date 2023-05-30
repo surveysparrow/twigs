@@ -28,6 +28,9 @@ const StyledStepCounter = styled(Text, {
 const StyledStepperButton = styled('button', {
   background: 'transparent',
   border: 'none',
+  borderBottomStyle: 'solid',
+  borderBottomWidth: '$xs',
+  borderColor: 'transparent',
   height: '$11',
   display: 'flex',
   gap: '$4',
@@ -42,9 +45,11 @@ const StyledStepperButton = styled('button', {
   variants: {
     active: {
       true: {
-        color: '$colors$accent500',
+        borderColor: '$accent500',
+        color: '$accent500',
         [`& ${StyledStepCounter}`]: {
-          borderColor: '$accent500'
+          borderColor: '$accent500',
+          fontWeight: '$7'
         }
       }
     },
