@@ -6,12 +6,15 @@ import { defaultTheme } from '../../../stitches.config';
 import { Text } from '../../text/text';
 import { Heading } from '../../heading/heading';
 import { Flex } from '../../flex/flex';
+import { Button } from '../../button';
 import {
   AllColors,
   AllFontSizes,
   AllFontWeights,
   AllBorderWidths,
   AllRadii,
+  AllSpaces,
+  AllSizes
 } from './theme-blocks';
 
 export const themeData = defaultTheme;
@@ -27,10 +30,8 @@ export const themeString = JSON.stringify(defaultTheme, undefined, 2);
   }}
 />
 
-## ThemeProvider
+## Installation
 
-
-### Installation
 ```
 yarn install @sparrowengg/twigs-react @sparrowengg/twigs-react-icons
 ```
@@ -52,6 +53,15 @@ Twigs come with a `ThemeProvider` which is completely customizable. With the hel
   </li>
   <li>
     <a href="#borderRadius">Border Radius</a>
+  </li>
+  <li>
+    <a href="#spaces">Spaces</a>
+  </li>
+  <li>
+    <a href="#sizes">Size</a>
+  </li>
+  <li>
+    <a href="#using-custom-css">How to do custom CSS</a>
   </li>
 </ol>
 
@@ -84,93 +94,48 @@ Optionally you can pass a `theme` object to `ThemeProvider` to modify the defaul
 Below is the complete theme object which you can modify further.
 
 <Box css={{ maxHeight: '500px', overflowY: 'scroll' }}>
-  <code>{themeString}</code>
+  <pre>{themeString}</pre>
 </Box>
 
 <Story name="Default">
-  <Heading size="h2" css={{ margin: '120px 0 30px' }} id="colors">
-    Colors
-  </Heading>
-  <Flex
-    css={{
-      alignItems: 'center',
-      backgroundColor: 'none',
-      color: 'white',
-      height: 'auto',
-      justifyContent: 'space-between',
-      width: 'auto',
-      gap: '40px',
-      flexWrap: 'wrap',
-    }}
-  >
+  <Flex gap='100px' flexDirection='column' css={{ margin: '100px 0px' }}>
     <AllColors />
-  </Flex>
-  <Heading size="h2" css={{ margin: '120px 0 30px' }} id="fontSize">
-    Font Sizes
-  </Heading>
-  <Flex
-    css={{
-      alignItems: 'center',
-      backgroundColor: 'none',
-      color: 'white',
-      height: 'auto',
-      justifyContent: 'space-between',
-      width: 'auto',
-      flexWrap: 'wrap',
-    }}
-  >
     <AllFontSizes />
-  </Flex>
-  <hr />
-  <Heading size="h2" css={{ margin: '120px 0 30px' }} id="fontWeights">
-    Font Weights
-  </Heading>
-  <Flex
-    css={{
-      alignItems: 'center',
-      backgroundColor: 'none',
-      color: 'white',
-      height: 'auto',
-      justifyContent: 'stretch',
-      width: 'auto',
-      flexWrap: 'wrap',
-    }}
-  >
     <AllFontWeights />
-  </Flex>
-  <hr />
-  <Heading size="h2" css={{ margin: '120px 0 30px' }} id="borderWidths">
-    Border Widths
-  </Heading>
-  <Flex
-    css={{
-      alignItems: 'center',
-      backgroundColor: 'none',
-      color: 'white',
-      height: 'auto',
-      justifyContent: 'space-between',
-      width: 'auto',
-      gap: '25px',
-      flexWrap: 'wrap',
-    }}
-  >
     <AllBorderWidths />
-  </Flex>
-  <Heading size="h2" css={{ margin: '120px 0 30px' }} id="borderRadius">
-    Border Radius
-  </Heading>
-  <Flex
-    css={{
-      alignItems: 'center',
-      backgroundColor: 'none',
-      color: 'white',
-      height: 'auto',
-      justifyContent: 'flex-start',
-      width: 'auto',
-      gap: '50px 60px ',
-      flexWrap: 'wrap',
-    }}
-  >
     <AllRadii />
+    <AllSpaces />
+    <AllSizes />
   </Flex>
 </Story>
+
+
+
+<Story name="CustomCSS">
+<Heading size='h5' id='using-custom-css'>Using custom CSS </Heading>
+
+If you'd like to modify css of any Twigs component, you can `css` prop to give custom CSS.
+
+<Button 
+  size='lg'
+  css={{
+    background: '$accent700',
+    fontWeight: '$4',
+    marginTop: 12
+  }}
+>
+  Save
+</Button>
+</Story>
+
+```
+<Button 
+  size='lg'
+  css={{
+    background: '$accent700',
+    fontWeight: '$4'
+  }}
+>
+  Save
+</Button>
+```

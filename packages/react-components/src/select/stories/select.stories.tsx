@@ -1,5 +1,4 @@
 import React from 'react';
-import { ComponentMeta } from '@storybook/react';
 import { SearchIcon } from '@sparrowengg/twigs-react-icons';
 import { Select } from '../select';
 
@@ -31,7 +30,7 @@ export default {
       options: ['default', 'filled']
     }
   }
-} as ComponentMeta<typeof Select>;
+};
 
 const options = [
   { value: 'chocolate', label: 'Chocolate' },
