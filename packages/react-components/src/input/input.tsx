@@ -101,8 +101,8 @@ function getInputPadding(size: string | ({ '@initial'?: 'sm' | 'md' | 'lg' | 'xl
 export interface InputBaseProps {
   iconLeft?: ReactElement;
   iconRight?: ReactElement;
-  rightElement: ReactElement;
-  leftElement: ReactElement;
+  rightElement?: ReactElement;
+  leftElement?: ReactElement;
   // eslint-disable-next-line no-unused-vars
   onChange?: (e: React.ChangeEvent<HTMLInputElement> | React.FormEvent<HTMLInputElement>) => void
 }
@@ -210,11 +210,11 @@ export const Input: FunctionComponent<InputProps> = React.forwardRef(({
         {
           leftElement
           && (
-          <AddonContainer
-            position="left"
-          >
-            {React.cloneElement(leftElement)}
-          </AddonContainer>
+            <AddonContainer
+              position="left"
+            >
+              {React.cloneElement(leftElement)}
+            </AddonContainer>
           )
         }
 
@@ -242,11 +242,11 @@ export const Input: FunctionComponent<InputProps> = React.forwardRef(({
         {
           rightElement
           && (
-          <AddonContainer
-            position="right"
-          >
-            {React.cloneElement(rightElement)}
-          </AddonContainer>
+            <AddonContainer
+              position="right"
+            >
+              {React.cloneElement(rightElement)}
+            </AddonContainer>
           )
         }
       </Box>
