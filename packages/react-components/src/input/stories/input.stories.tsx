@@ -1,6 +1,7 @@
 import React from 'react';
-import { UserCircleIcon } from '@sparrowengg/twigs-react-icons';
+import { TickCircleFillIcon, UserCircleIcon } from '@sparrowengg/twigs-react-icons';
 import { Input } from '../input';
+import { IconButton } from '../../button';
 
 export default {
   component: Input,
@@ -44,6 +45,25 @@ const TemplateWithRightIcon = (args) => (
   />
 );
 
+const TemplateWithRightElement = (args) => (
+  <Input
+    rightElement={(
+      <IconButton
+        color="default"
+        variant="ghost"
+        size="lg"
+        onClick={() => console.log('hello there')}
+        icon={<TickCircleFillIcon color="green" />}
+        css={{
+          right: 10
+        }}
+      />
+    )}
+    {...args}
+  />
+);
+
 export const Default = Template.bind({});
 export const InputWithLeftIcon = TemplateWithLeftIcon.bind({});
 export const InputWithRightIcon = TemplateWithRightIcon.bind({});
+export const InputWithRightElement = TemplateWithRightElement.bind({});

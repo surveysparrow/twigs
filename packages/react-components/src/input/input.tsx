@@ -101,6 +101,8 @@ function getInputPadding(size: string | ({ '@initial'?: 'sm' | 'md' | 'lg' | 'xl
 export interface InputBaseProps {
   iconLeft?: ReactElement;
   iconRight?: ReactElement;
+  rightElement: ReactElement;
+  leftElement: ReactElement;
   // eslint-disable-next-line no-unused-vars
   onChange?: (e: React.ChangeEvent<HTMLInputElement> | React.FormEvent<HTMLInputElement>) => void
 }
@@ -158,16 +160,33 @@ const IconContainer = styled(Box, {
   }
 });
 
+const AddonContainer = styled(Box, {
+  position: 'absolute',
+  top: '50%',
+  transform: 'translateY(-50%)',
+  variants: {
+    position: {
+      right: {
+        right: 0
+      },
+      left: {
+        left: 0
+      }
+    }
+  }
+});
+
 export const Input: FunctionComponent<InputProps> = React.forwardRef(({
   size = 'md',
   iconLeft,
   iconRight,
   css,
+  rightElement,
+  leftElement,
   ...rest
 }: InputProps, ref) => {
   const inputPaddingValue = getInputPadding(size);
-
-  if (iconLeft || iconRight) {
+  if (iconLeft || iconRight || rightElement || leftElement) {
     return (
       <Box
         css={{
@@ -187,6 +206,18 @@ export const Input: FunctionComponent<InputProps> = React.forwardRef(({
             {React.cloneElement(iconLeft)}
           </IconContainer>
         )}
+
+        {
+          leftElement
+          && (
+          <AddonContainer
+            position="left"
+          >
+            {React.cloneElement(leftElement)}
+          </AddonContainer>
+          )
+        }
+
         <StyledInput
           ref={ref}
           size={size}
@@ -207,6 +238,17 @@ export const Input: FunctionComponent<InputProps> = React.forwardRef(({
             {React.cloneElement(iconRight)}
           </IconContainer>
         )}
+
+        {
+          rightElement
+          && (
+          <AddonContainer
+            position="right"
+          >
+            {React.cloneElement(rightElement)}
+          </AddonContainer>
+          )
+        }
       </Box>
     );
   }
