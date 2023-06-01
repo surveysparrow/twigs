@@ -4,21 +4,13 @@ import { IconProps } from '../types';
 export const InfoPlusIcon = React.forwardRef<SVGSVGElement, IconProps>(
   ({ color = 'currentColor', size = 32, ...rest }, ref) => {
     return (
-      <svg
-        viewBox="0 0 32 32"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        {...rest}
-        width={size}
-        height={size}
-        ref={ref}
-      >
-        <path d="M14.4861 3.28397C13.8474 3.13903 13.1826 3.0625 12.5 3.0625C7.56395 3.0625 3.5625 7.06395 3.5625 12C3.5625 16.936 7.56395 20.9375 12.5 20.9375C17.436 20.9375 21.4375 16.936 21.4375 12C21.4375 11.2759 21.3514 10.5719 21.1888 9.89767" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M11.6875 15.25H13.3125" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M12.5 15.25V11.1875H11.6875" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-        <ellipse cx="12.5" cy="8.75" rx="0.8125" ry="0.8125" fill={color} />
-        <path d="M19.75 2.25V6.25" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M17.75 4.25H21.75" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <svg width={size} height={size} ref={ref} viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" {...rest}>
+      <path d="M18.6481 4.3786C17.7965 4.18535 16.9101 4.08331 16 4.08331C9.41859 4.08331 4.08331 9.41859 4.08331 16C4.08331 22.5814 9.41859 27.9166 16 27.9166C22.5814 27.9166 27.9166 22.5814 27.9166 16C27.9166 15.0345 27.8018 14.0958 27.5851 13.1969" stroke={color} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M14.9167 20.3333H17.0834" stroke={color} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M16 20.3334V14.9167H14.9167" stroke={color} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="16" cy="11.6666" r="1.08333" fill={color}/>
+      <path d="M25.6667 3V8.33333" stroke={color} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M23 5.66669H28.3333" stroke={color} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     );
   }
