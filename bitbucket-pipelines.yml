@@ -139,17 +139,17 @@ pipelines:
               caches:
                 - node
           - step:
-            name: Test
-            condition:
-              changesets:
-                includePaths:
-                  - "packages/react-components/**"
-            caches:
-              - node
-            script:
-              - npm install -g lerna
-              - yarn install
-              - lerna run test
+              name: Test
+              condition:
+                changesets:
+                  includePaths:
+                    - "packages/react-components/**"
+              caches:
+                - node
+              script:
+                - npm install -g lerna
+                - yarn install
+                - lerna run test
 
           - step:
               name: Build Components
