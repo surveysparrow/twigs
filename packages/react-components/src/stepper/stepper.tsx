@@ -8,6 +8,8 @@ import * as DefaultStepperTrigger from './stepper-trigger';
 export type StepperProps = {
   activeStep: number,
   children: React.ReactElement[],
+  // eslint-disable-next-line no-unused-vars
+  onChange?: (step: number) => void,
   components?: {
     TriggerSeparator?: React.ComponentType
     TriggerContainer?: React.ComponentType<{ children: React.ReactNode }>,
@@ -19,12 +21,14 @@ const StyledStepper = styled('div', {});
 
 type StepperItemProps = {
   children: React.ReactNode,
-  label: string
+  label: string,
+  allowClick?: boolean
 } & BoxProps;
 
 const StepperItem = ({
   children,
   label,
+  allowClick,
   ...props
 }: StepperItemProps) => {
   return (
@@ -36,6 +40,7 @@ const StepperItem = ({
 
 const Stepper: FunctionComponent<StepperProps> = forwardRef(({
   activeStep = 0,
+  onChange,
   children,
   components = {}
 }: StepperProps, ref) => {
@@ -55,16 +60,21 @@ const Stepper: FunctionComponent<StepperProps> = forwardRef(({
       <TriggerContainer>
         {
           children.map((child: React.ReactElement, index: number) => {
-            const { label, ...rest } = child.props;
+            const { label, allowClick = true, ...rest } = child.props;
             const showSeparator = index !== children.length - 1;
             const completed = activeStep > index;
             const id = useId();
             return (
               <React.Fragment key={`stepper-control-${stepperId}-${id}`}>
                 <TriggerButton
-                  tabIndex={-1} // disabling tab index for now, since click on tab button won't focus the tab item
+                  tabIndex={allowClick ? 0 : -1}
                   active={index === activeStep}
                   completed={completed}
+                  type="button"
+                  cursor={allowClick ? 'pointer' : 'default'}
+                  {...(onChange && allowClick && {
+                    onClick: () => onChange(index)
+                  })}
                   {...rest}
                 >
                   <DefaultStepperTrigger.StepperCount>

@@ -19,30 +19,24 @@ const Template = (args) => {
       <Stepper
         activeStep={activeStep}
         {...args}
+        onChange={setActiveStep}
       >
         <StepperItem
           label="Registration"
-          css={{
-            padding: '20px'
-          }}
+          allowClick
         >
           {' '}
           Step 1
         </StepperItem>
         <StepperItem
           label="Account settings"
-          css={{
-            padding: '20px'
-          }}
+          allowClick={false}
         >
           {' '}
-          Step 2
+          For this tab, allowClick is set to false. So, TabsTrigger is not focusable and clickable.
         </StepperItem>
         <StepperItem
           label="Confirm"
-          css={{
-            padding: '20px'
-          }}
         >
           {' '}
           Step 3

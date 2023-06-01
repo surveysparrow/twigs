@@ -60,6 +60,14 @@ const StyledStepperButton = styled('button', {
           backgroundColor: '$neutral700'
         }
       }
+    },
+    cursor: {
+      pointer: {
+        cursor: 'pointer'
+      },
+      default: {
+        cursor: 'default'
+      }
     }
   }
 });
