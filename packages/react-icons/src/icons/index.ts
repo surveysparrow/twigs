@@ -107,6 +107,7 @@ export { ShrinkIcon } from './shrink';
 export { ShuffleIcon } from './shuffle';
 export { SignalIcon } from './signal';
 export { SlackColorIcon } from './slack-color';
+export {SmileySadIcon} from './smiley-sad';
 export { StackIcon } from './stack';
 export { TableIcon } from './table';
 export { TabletIcon } from './tablet';
