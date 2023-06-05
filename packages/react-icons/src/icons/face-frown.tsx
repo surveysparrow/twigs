@@ -1,49 +1,41 @@
 import React from 'react';
 import { IconProps } from '../types';
 
-export const InfoPlusIcon = React.forwardRef<SVGSVGElement, IconProps>(
+export const FaceFrownIcon = React.forwardRef<SVGSVGElement, IconProps>(
   ({ color = 'currentColor', size = 32, ...rest }, ref) => {
     return (
       <svg
-        width={size}
-        height={size}
-        ref={ref}
         viewBox="0 0 32 32"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         {...rest}
+        width={size}
+        height={size}
+        ref={ref}
       >
         <path
-          d="M18.6481 4.3786C17.7965 4.18535 16.9101 4.08331 16 4.08331C9.41859 4.08331 4.08331 9.41859 4.08331 16C4.08331 22.5814 9.41859 27.9166 16 27.9166C22.5814 27.9166 27.9166 22.5814 27.9166 16C27.9166 15.0345 27.8018 14.0958 27.5851 13.1969"
+          d="M24.4853 7.51472C29.1716 12.201 29.1716 19.799 24.4853 24.4853C19.7991 29.1715 12.2011 29.1715 7.51481 24.4853C2.82852 19.799 2.82852 12.201 7.51481 7.51472C12.2011 2.82843 19.7991 2.82843 24.4853 7.51472"
           stroke={color}
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
-          d="M14.9167 20.3333H17.0834"
+          d="M11.3333 21.3333C11.3333 21.3333 13.084 19.584 16 19.584C18.9173 19.584 20.6667 21.3333 20.6667 21.3333"
           stroke={color}
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
-          d="M16 20.3334V14.9167H14.9167"
-          stroke={color}
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <circle cx="16" cy="11.6666" r="1.08333" fill={color} />
-        <path
-          d="M25.6667 3V8.33333"
+          d="M9.33334 13.3333C9.86001 12.6866 10.58 12.32 11.3333 12.32C12.0867 12.32 12.7867 12.6866 13.3333 13.3333"
           stroke={color}
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
-          d="M23 5.66669H28.3333"
+          d="M18.6667 13.3333C19.1933 12.6866 19.9133 12.32 20.6667 12.32C21.42 12.32 22.12 12.6866 22.6667 13.3333"
           stroke={color}
           strokeWidth="1.5"
           strokeLinecap="round"
