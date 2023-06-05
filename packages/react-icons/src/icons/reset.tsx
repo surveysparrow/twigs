@@ -5,7 +5,7 @@ export const ResetIcon = React.forwardRef<SVGSVGElement, IconProps>(
   ({ color = 'currentColor', size = 32, ...rest }, ref) => {
     return (
       <svg
-        viewBox="0 0 20 20"
+        viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         {...rest}
@@ -13,20 +13,22 @@ export const ResetIcon = React.forwardRef<SVGSVGElement, IconProps>(
         height={size}
         ref={ref}
       >
-        <path
-          d="M6.01604 6.18533V10.9H10.7294"
-          stroke={color}
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M6.63069 10.9C8.44002 7.58401 11.9574 5.33334 16 5.33334C21.8907 5.33334 26.6667 10.1093 26.6667 16C26.6667 21.8907 21.8907 26.6667 16 26.6667C11.2734 26.6667 7.26446 23.5917 5.86461 19.3333"
-          stroke={color}
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
+          <g clip-path="url(#clip0_6866_104904)">
+            <path
+              d="M5.75998 5.86523V8.8119H8.70581"
+              stroke={color}
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M6.14413 8.81217C7.27496 6.73967 9.47329 5.33301 12 5.33301C15.6816 5.33301 18.6666 8.31801 18.6666 11.9997C18.6666 15.6813 15.6816 18.6663 12 18.6663C9.04583 18.6663 6.54023 16.7445 5.66533 14.083"
+              stroke={color}
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+        </g>
       </svg>
     );
   }
