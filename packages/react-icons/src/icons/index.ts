@@ -61,6 +61,7 @@ export { ForwardArrowIcon } from './forward-arrow';
 export { GaugeColorIcon } from './gauge-color';
 export { GiftWithHeartIcon } from './gift-with-heart';
 export { GoogleColorIcon } from './google-color';
+export { GripDotsVerticalIcon } from './grip-dots-vertical';
 export { HappyHomeIcon } from './happy-home';
 export { HashtagIcon } from './hashtag';
 export { HistoryIcon } from './history';
