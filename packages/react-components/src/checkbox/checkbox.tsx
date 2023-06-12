@@ -48,6 +48,7 @@ const StyledCheckbox = styled(CheckboxPrimitive.Root, {
   borderRadius: '$sm',
   display: 'flex',
   alignItems: 'center',
+  flexShrink: '0',
   justifyContent: 'center',
   border: '$borderWidths$xs solid $neutral700',
   transition: 'all $transitions$2',
