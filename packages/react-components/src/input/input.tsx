@@ -54,6 +54,12 @@ const StyledInput = styled('input', {
         borderRadius: '$md',
         padding: '$3 $4',
         fontSize: '$sm'
+      },
+      sm: {
+        height: '$6',
+        borderRadius: '$md',
+        padding: '$3 $4',
+        fontSize: '$xs'
       }
     },
     variant: {
@@ -75,15 +81,17 @@ const StyledInput = styled('input', {
   },
   defaultVariants: {
     size: 'md',
-    variant: 'outlined'
+    variant: 'default'
   }
 });
 
-function getInputPadding(size: string | ({ '@initial'?: 'md' | 'lg' | 'xl' })) {
+function getInputPadding(size: string | ({ '@initial'?: 'sm' | 'md' | 'lg' | 'xl' })) {
   switch (size) {
     case 'lg':
       return '$20';
     case 'md':
+      return '$14';
+    case 'sm':
       return '$14';
     default:
       return '$22';
@@ -93,6 +101,8 @@ function getInputPadding(size: string | ({ '@initial'?: 'md' | 'lg' | 'xl' })) {
 export interface InputBaseProps {
   iconLeft?: ReactElement;
   iconRight?: ReactElement;
+  rightElement?: ReactElement;
+  leftElement?: ReactElement;
   // eslint-disable-next-line no-unused-vars
   onChange?: (e: React.ChangeEvent<HTMLInputElement> | React.FormEvent<HTMLInputElement>) => void
 }
@@ -137,6 +147,30 @@ const IconContainer = styled(Box, {
           width: '$4',
           height: '$4'
         }
+      },
+      sm: {
+        width: '$3',
+        height: '$3',
+        '& svg': {
+          width: '$3',
+          height: '$3'
+        }
+      }
+    }
+  }
+});
+
+const AddonContainer = styled(Box, {
+  position: 'absolute',
+  top: '50%',
+  transform: 'translateY(-50%)',
+  variants: {
+    position: {
+      right: {
+        right: 0
+      },
+      left: {
+        left: 0
       }
     }
   }
@@ -147,11 +181,12 @@ export const Input: FunctionComponent<InputProps> = React.forwardRef(({
   iconLeft,
   iconRight,
   css,
+  rightElement,
+  leftElement,
   ...rest
 }: InputProps, ref) => {
   const inputPaddingValue = getInputPadding(size);
-
-  if (iconLeft || iconRight) {
+  if (iconLeft || iconRight || rightElement || leftElement) {
     return (
       <Box
         css={{
@@ -171,7 +206,20 @@ export const Input: FunctionComponent<InputProps> = React.forwardRef(({
             {React.cloneElement(iconLeft)}
           </IconContainer>
         )}
+
+        {
+          leftElement
+          && (
+            <AddonContainer
+              position="left"
+            >
+              {React.cloneElement(leftElement)}
+            </AddonContainer>
+          )
+        }
+
         <StyledInput
+          ref={ref}
           size={size}
           data-testid="input"
           css={{
@@ -190,6 +238,17 @@ export const Input: FunctionComponent<InputProps> = React.forwardRef(({
             {React.cloneElement(iconRight)}
           </IconContainer>
         )}
+
+        {
+          rightElement
+          && (
+            <AddonContainer
+              position="right"
+            >
+              {React.cloneElement(rightElement)}
+            </AddonContainer>
+          )
+        }
       </Box>
     );
   }

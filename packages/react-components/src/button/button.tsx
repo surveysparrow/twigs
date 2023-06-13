@@ -30,7 +30,7 @@ const StyledButton = styled('button', {
     size: {
       '2xl': {
         padding: '$9 $12',
-        borderRadius: '$xl',
+        borderRadius: '$2xl',
         fontSize: '$lg',
         lineHeight: '$lg',
         height: '$16',
@@ -52,7 +52,7 @@ const StyledButton = styled('button', {
       },
       lg: {
         padding: '$4 $8',
-        borderRadius: '$lg',
+        borderRadius: '$xl',
         fontSize: '$md',
         lineHeight: '$md',
         height: '$10',
@@ -63,7 +63,7 @@ const StyledButton = styled('button', {
       },
       md: {
         padding: '$3 $5',
-        borderRadius: '$md',
+        borderRadius: '$lg',
         fontSize: '$sm',
         lineHeight: '$md',
         height: '$8',
@@ -74,7 +74,7 @@ const StyledButton = styled('button', {
       },
       sm: {
         padding: '$1 $4',
-        borderRadius: '$sm',
+        borderRadius: '$md',
         fontSize: '$sm',
         lineHeight: '$sm',
         height: '$6',
@@ -85,7 +85,7 @@ const StyledButton = styled('button', {
       },
       xs: {
         padding: '$1 $3',
-        borderRadius: '$sm',
+        borderRadius: '$md',
         fontSize: '$xs',
         lineHeight: '$xs',
         height: '$5',

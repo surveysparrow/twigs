@@ -6,7 +6,7 @@ import {
   Toast, ToastAction, ToastProps
 } from '../toast';
 import { toast } from '../../hooks/use-toast';
-import { Toaster } from '../toastr';
+import { Toastr } from '../toastr';
 
 export default {
   component: Toast,
@@ -46,7 +46,7 @@ const Template = (
   }, []);
   return (
     <>
-      <Toaster />
+      <Toastr duration={10000} />
       <Button
         variant="outline"
         onClick={() => {

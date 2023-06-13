@@ -73,7 +73,6 @@ const AvatarNestedItem = styled('div', {
   borderStyle: 'solid',
   borderRadius: '100%',
   zIndex: 0,
-  backgroundColor: '$accent200',
   variants: {
     size: {
       '5xl': {
