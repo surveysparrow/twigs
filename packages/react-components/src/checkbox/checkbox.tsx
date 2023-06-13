@@ -128,17 +128,19 @@ export const Checkbox: FunctionComponent<CheckboxProps> = ({
   required,
   onChange,
   children,
+  id,
   ...rest
 }) => {
   const isIndeterminate = checked === 'indeterminate';
   if (children) {
     return (
-      <FormLabel css={{ display: 'flex', alignItems: 'center' }}>
+      <FormLabel css={{ display: 'flex', alignItems: 'center' }} htmlFor={id}>
         <StyledCheckbox
           checked={checked}
           onCheckedChange={onChange}
           disabled={disabled}
           required={required}
+          id={id}
           {...(isIndeterminate && { 'data-state': 'indeterminate' })}
           {...rest}
         >
