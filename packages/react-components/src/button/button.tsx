@@ -41,7 +41,7 @@ const StyledButton = styled('button', {
       },
       xl: {
         padding: '$5 $10',
-        borderRadius: '$xl',
+        borderRadius: 10,
         fontSize: '$lg',
         lineHeight: '$lg',
         height: '$12',
@@ -52,7 +52,7 @@ const StyledButton = styled('button', {
       },
       lg: {
         padding: '$4 $8',
-        borderRadius: '$xl',
+        borderRadius: 10,
         fontSize: '$md',
         lineHeight: '$md',
         height: '$10',
