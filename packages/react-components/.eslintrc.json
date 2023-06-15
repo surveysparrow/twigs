@@ -28,7 +28,7 @@
         "max-len": [
             "error",
             {
-                "code": 150
+                "code": 200
             }
         ],
         "import/prefer-default-export": "off",
@@ -64,7 +64,8 @@
                 "devDependencies": true
             }
         ],
-        "react/jsx-props-no-spreading": "off"
+        "react/jsx-props-no-spreading": "off",
+        "react/destructuring-assignment": "off"
     },
     "settings": {
         "import/resolver": {
