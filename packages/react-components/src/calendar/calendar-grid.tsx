@@ -4,8 +4,8 @@ import { useCalendarGrid, useLocale } from 'react-aria';
 import { CalendarState, RangeCalendarState } from 'react-stately';
 import { Box } from '../box';
 import { CalendarCell } from './calendar-cell';
-import { DaysContainer } from './day';
-import { Week, WeekContainer } from './week';
+import { DaysContainer } from './calendar-day';
+import { Week, WeekContainer } from './calendar-week';
 
 type CalendarGridType = {
   state: RangeCalendarState | CalendarState,

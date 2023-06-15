@@ -2,7 +2,7 @@ import { CalendarDate, isSameDay, isSameMonth } from '@internationalized/date';
 import { useRef } from 'react';
 import { useCalendarCell } from 'react-aria';
 import { CalendarState, RangeCalendarState } from 'react-stately';
-import { Day, DayContainer } from './day';
+import { Day, DayContainer } from './calendar-day';
 
 type CalendarCellProps = {
   state: RangeCalendarState | CalendarState,
