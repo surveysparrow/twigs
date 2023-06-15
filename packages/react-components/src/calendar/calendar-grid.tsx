@@ -1,5 +1,5 @@
 import { DateDuration, endOfMonth, getWeeksInMonth } from '@internationalized/date';
-import React from 'react';
+import { useId } from 'react';
 import { useCalendarGrid, useLocale } from 'react-aria';
 import { CalendarState, RangeCalendarState } from 'react-stately';
 import { Box } from '../box';
@@ -14,6 +14,7 @@ type CalendarGridType = {
 
 export const CalendarGrid = ({ state, offset = {} }: CalendarGridType) => {
   const { locale } = useLocale();
+  const id = useId();
   const startDate = state.visibleRange.start.add(offset);
   const endDate = endOfMonth(startDate);
   const { gridProps, headerProps, weekDays } = useCalendarGrid(
@@ -30,25 +31,25 @@ export const CalendarGrid = ({ state, offset = {} }: CalendarGridType) => {
   return (
     <Box {...gridProps}>
       <WeekContainer {...headerProps}>
-        {weekDays.map((day) => (
-          <Week key={`twigs-caledar-grid-${day}`}>{day}</Week>
+        {weekDays.map((day, index) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <Week key={`twigs-calendar-grid-${day}-${startDate}-${id}-${index}`}>{day}</Week>
         ))}
       </WeekContainer>
       <Box>
-        {[...new Array(weeksInMonth).keys()].map((weekIndex) => (
-          <DaysContainer key={weekIndex}>
+        {[...new Array(weeksInMonth).keys()].map((weekIndex, index) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <DaysContainer key={`weekIndex-${startDate}-${id}-${index}`}>
             {state
               .getDatesInWeek(weekIndex, startDate)
               .map((date) => (date ? (
                 <CalendarCell
-                  key={`twigs-calendar-cell-${date}`}
+                  key={`twigs-calendar-cell-${date}-${id}`}
                   state={state}
                   date={date}
                   currentMonth={startDate}
                 />
-              ) : (
-                <Box key="twigs-calendar-cell-box" />
-              )))}
+              ) : null))}
           </DaysContainer>
         ))}
       </Box>

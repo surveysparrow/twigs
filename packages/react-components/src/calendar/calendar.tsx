@@ -7,10 +7,9 @@ import { useCalendarState } from 'react-stately';
 import { ChevronLeftIcon, ChevronRightIcon } from '@sparrowengg/twigs-react-icons';
 import { Box } from '../box';
 import {
-  CalendarMonthYear, Header
+  CalendarMonth, CalendarHeader, CalendarNavigationButton
 } from './calendar-header';
 import { CalendarGrid } from './calendar-grid';
-import { CalendarButton } from './calendar-button';
 
 export const Calendar = (props: AriaCalendarProps<DateValue>) => {
   const { locale } = useLocale();
@@ -32,25 +31,18 @@ export const Calendar = (props: AriaCalendarProps<DateValue>) => {
     <Box
       {...calendarProps}
       ref={ref}
-      css={{
-        maxWidth: 340
-      }}
     >
-      <Header>
-        <CalendarButton
+      <CalendarHeader>
+        <CalendarNavigationButton
           {...prevButtonProps}
           icon={<ChevronLeftIcon />}
         />
-        <CalendarMonthYear>
-          {' '}
-          {title}
-          {' '}
-        </CalendarMonthYear>
-        <CalendarButton
+        <CalendarMonth>{title}</CalendarMonth>
+        <CalendarNavigationButton
           {...nextButtonProps}
           icon={<ChevronRightIcon />}
         />
-      </Header>
+      </CalendarHeader>
       <CalendarGrid state={state} />
     </Box>
   );

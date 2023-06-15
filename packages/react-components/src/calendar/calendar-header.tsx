@@ -6,9 +6,12 @@ import { Flex } from '../flex';
 
 type Button = {
   icon: React.ReactElement,
+  isDisabled?: boolean
 } & AriaButtonProps
 
-export const CalendarButton = ({ icon, onPress, ...rest }: Button) => {
+export const CalendarNavigationButton = ({
+  icon, onPress, isDisabled, ...rest
+}: Button) => {
   return (
     <IconButton
       color="default"
@@ -16,17 +19,18 @@ export const CalendarButton = ({ icon, onPress, ...rest }: Button) => {
       onClick={onPress as any}
       icon={icon}
       size="lg"
+      disabled={isDisabled}
     />
   );
 };
 
-export const Header = styled(Flex, {
+export const CalendarHeader = styled(Flex, {
   alignItems: 'center',
   justifyContent: 'space-between',
   height: '64px'
 });
 
-export const CalendarMonthYear = styled('span', {
+export const CalendarMonth = styled('span', {
   color: '$neutral800',
   fontSize: '$md',
   fontWeight: '$7'

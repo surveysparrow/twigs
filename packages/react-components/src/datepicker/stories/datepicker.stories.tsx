@@ -1,19 +1,21 @@
-import React from 'react';
-import { ComponentMeta } from '@storybook/react';
+import React, { useState } from 'react';
 import { DatePicker } from '../datepicker';
 
 export default {
   component: DatePicker,
   title: 'DatePicker',
   argTypes: {}
-} as ComponentMeta<typeof DatePicker>;
+};
 
 const WithPopOverTemplate = (args) => {
-
+  const [value, setValue] = useState(null);
   return (
     <DatePicker
       {...args}
-      label='Enter date of birth'
+      value={value}
+      onChange={setValue}
+      label="Enter date of birth"
+      closeOnSelect={false}
     />
   );
 };

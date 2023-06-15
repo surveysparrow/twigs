@@ -43,8 +43,11 @@ export const Day = styled('button', {
 export const DayContainer = styled(Box, {
   // all of the selected dates in calendar range
   borderRadius: '$round',
+  [`& ${Day}`]: {
+    borderRadius: '$round'
+  },
   // start date of the selected range
-  '&[data-is-start="true"]': {
+  '&[data-selection-start="true"]': {
     backgroundColorOpacity: ['$secondary500', '0.08'],
     borderTopRightRadius: '0',
     borderBottomRightRadius: '0',
@@ -55,7 +58,7 @@ export const DayContainer = styled(Box, {
     }
   },
   // end date of the selected range
-  '&[data-is-end="true"]': {
+  '&[data-selection-end="true"]': {
     backgroundColorOpacity: ['$secondary500', '0.08'],
     borderTopLeftRadius: '0',
     borderBottomLeftRadius: '0',
@@ -65,8 +68,7 @@ export const DayContainer = styled(Box, {
       color: '$white900 !important'
     }
   },
-  // selected dates between the first and last date
-  '&[aria-selected="true"][data-is-start="false"], &[aria-selected="true"][data-is-end="false"]': {
+  '&[data-in-range="true"]': {
     borderRadius: 'none',
     [`& ${Day}`]: {
       borderRadius: '0',
@@ -75,14 +77,14 @@ export const DayContainer = styled(Box, {
     }
   },
   // first item in a week row of the selected range
-  '&[aria-selected="true"]:first-of-type': {
+  '&[data-in-range="true"]:first-of-type': {
     [`& ${Day}`]: {
       borderTopLeftRadius: '$round',
       borderBottomLeftRadius: '$round'
     }
   },
   // last item in a week row of the selected range
-  '&[aria-selected="true"]:last-of-type': {
+  '&[data-in-range="true"]:last-of-type': {
     [`& ${Day}`]: {
       borderTopRightRadius: '$round',
       borderBottomRightRadius: '$round'

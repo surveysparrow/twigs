@@ -1,4 +1,4 @@
-import React, { CalendarDate, isSameDay, isSameMonth } from '@internationalized/date';
+import { CalendarDate, isSameDay, isSameMonth } from '@internationalized/date';
 import { useRef } from 'react';
 import { useCalendarCell } from 'react-aria';
 import { CalendarState, RangeCalendarState } from 'react-stately';
@@ -20,15 +20,22 @@ export const CalendarCell = ({ state, date, currentMonth }: CalendarCellProps) =
   } = useCalendarCell({ date }, state, ref);
 
   const isOutsideMonth = !isSameMonth(currentMonth, date);
-  // @ts-ignore - adding this temporarily
-  const isFirstDayInRange = state?.value?.start! && isSameDay(date, state.value.start);
-  // @ts-ignore - adding this temporarily
-  const isLastDayInRange = state?.value?.end && isSameDay(date, state.value.end);
+
+  let isSelectionStart = false;
+  let isSelectionEnd = false;
+  let isRangeCalendar = false;
+  if ('highlightedRange' in state && state.highlightedRange) {
+    isSelectionStart = isSameDay(date, state.highlightedRange.start);
+    isSelectionEnd = isSameDay(date, state.highlightedRange.end);
+    isRangeCalendar = true;
+  }
+
   return (
     <DayContainer
       {...cellProps}
-      data-is-start={isFirstDayInRange}
-      data-is-end={isLastDayInRange}
+      data-selection-start={isSelectionStart}
+      data-selection-end={isSelectionEnd}
+      data-in-range={isRangeCalendar && isSelected}
     >
       <Day
         {...buttonProps}

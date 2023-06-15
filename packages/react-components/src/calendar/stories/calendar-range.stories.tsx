@@ -1,23 +1,25 @@
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
-import { ComponentMeta } from '@storybook/react';
-import { CalendarRange } from '../calendar-range';
 import { parseDate } from '@internationalized/date';
+import { CalendarRange } from '../calendar-range';
 
 export default {
   component: CalendarRange,
   title: 'CalendarRange',
   argTypes: {}
-} as ComponentMeta<typeof CalendarRange>;
+};
 
 const Template = (args) => {
+  const [value, setValue] = React.useState({
+    start: parseDate('2023-06-12'),
+    end: parseDate('2023-06-20')
+  });
+  console.log(value);
   return (
     <CalendarRange
       {...args}
-      defaultValue={{
-        start: parseDate('2023-04-12'),
-        end: parseDate('2023-05-12')
-      }}
+      onChange={setValue}
+      value={value}
     />
   );
 };

@@ -9,10 +9,15 @@ import { DateField } from './date-field';
 import { FormLabel } from '../form-label';
 import { IconButton } from '../button';
 
-export const DatePicker = (props: AriaDatePickerProps<DateValue>) => {
+export type DatePickerProps = AriaDatePickerProps<DateValue> & {
+  label?: string,
+  closeOnSelect?: boolean,
+}
+
+export const DatePicker = (props: DatePickerProps) => {
   const state = useDatePickerState({
     ...props,
-    shouldCloseOnSelect: false
+    shouldCloseOnSelect: props.closeOnSelect
   });
   const ref = useRef(null);
   const {
@@ -65,7 +70,7 @@ export const DatePicker = (props: AriaDatePickerProps<DateValue>) => {
             <IconButton
               {...buttonProps}
               onClick={state.open}
-              variant="bright"
+              color="bright"
               size="md"
               css={{
                 background: 'none',
