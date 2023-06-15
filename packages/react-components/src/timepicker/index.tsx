@@ -1,1 +1,1 @@
-export * from './timepicker';
+export { TimePicker } from './timepicker';
