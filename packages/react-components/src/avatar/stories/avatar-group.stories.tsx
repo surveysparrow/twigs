@@ -8,7 +8,7 @@ export default {
   argTypes: {
     size: {
       control: 'select',
-      options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl']
+      options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl']
     },
     src: {
       control: 'text'
@@ -30,10 +30,16 @@ export default {
 
 const Template = (args) => (
   // eslint-disable-next-line react/destructuring-assignment
-  <AvatarGroup size={args.size} limit={args.limit} rounded={args.rounded}>
-    <Avatar {...args} key="my-avatar-1" />
-    <Avatar {...args} key="my-avatar-2" />
-    <Avatar {...args} key="my-avatar-3" />
+  <AvatarGroup {...args}>
+    {
+      [...Array(10)].map((_, i) => (
+        <Avatar
+          // eslint-disable-next-line react/no-array-index-key
+          key={i}
+          src={`https://i.pravatar.cc/150?img=${i}`}
+        />
+      ))
+    }
   </AvatarGroup>
 );
 export const AvatarGrouped = Template.bind({});

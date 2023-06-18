@@ -105,7 +105,7 @@ const AvatarNestedItem = styled('div', {
       },
       sm: {
         borderWidth: '1px',
-        marginLeft: '-$sizes$4'
+        marginLeft: '-$sizes$3'
       },
       xs: {
         borderWidth: '1px',
@@ -169,6 +169,9 @@ const StyledAvatarGroup = styled('div', {
         }
       }
     }
+  },
+  defaultVariants: {
+    rounded: 'full'
   }
 });
 
@@ -184,6 +187,7 @@ export const AvatarGroup: FunctionComponent<AvatarGroupProps> = React.forwardRef
     .map((child: React.ReactElement, index: number): React.ReactNode => {
       const isFirstChild = index === 0;
       const childProps = {
+        size,
         ...child.props
       };
       return (
