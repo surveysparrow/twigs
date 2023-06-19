@@ -1,3 +1,5 @@
+'use client';
+
 // Inspired by shadcn/ui
 /* eslint-disable no-use-before-define, no-shadow */
 import * as React from 'react';

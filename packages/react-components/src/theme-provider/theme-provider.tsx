@@ -4,7 +4,7 @@ import {
 } from '../../stitches.config';
 
 export const ThemeContext = React.createContext<any>(null);
-const html = document.documentElement;
+const html = typeof window !== 'undefined' && document.documentElement;
 
 type ThemeProviderProps = {
   theme: typeof stichesTheme | {};
@@ -22,7 +22,12 @@ export const ThemeProvider = ({ theme, children }: ThemeProviderProps) => {
   );
 
   const customTheme = createTheme(mergedTheme);
-  html.classList.add(customTheme);
+  useEffect(() => {
+    if (!html) {
+      return;
+    }
+    html.classList.add(customTheme);
+  }, [html]);
 
   if (!children) {
     return null;

@@ -317,6 +317,7 @@ export const {
   config,
   reset,
   css,
+  getCssText
 } = createStitches({
   prefix: 'twigs',
   theme: defaultTheme,
