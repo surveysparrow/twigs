@@ -4,7 +4,7 @@ import { Switch } from '../switch';
 
 export default {
   component: Switch,
-  title: 'Switch',
+  title: 'Form/Switch',
   argTypes: {
     disabled: {
       control: 'boolean'

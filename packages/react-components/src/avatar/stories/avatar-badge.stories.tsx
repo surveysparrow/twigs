@@ -3,8 +3,8 @@ import { Avatar } from '../avatar';
 import { AvatarBadge as AB } from '../avatar-badge';
 
 export default {
-  component: Avatar,
-  title: 'Avatar',
+  component: AB,
+  title: 'Data Display/Avatar/Avatar Badge',
   argTypes: {
     size: {
       control: 'select',

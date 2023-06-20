@@ -3,11 +3,10 @@ import { Button } from '../../button';
 import {
   TooltipProvider, Tooltip
 } from '../tooltip';
-import { Flex } from '../../flex';
 
 export default {
   component: Tooltip,
-  title: 'Tooltip',
+  title: 'Overlay/Tooltip',
   args: {
     content: 'Twigs tooltip text',
     side: 'top'
@@ -36,25 +35,15 @@ export default {
 
 const Template = (args) => (
   <TooltipProvider delayDuration={0}>
-    <Flex
-      justifyContent="center"
-      alignItems="center"
-      css={{
-        height: '100vh',
-        width: '100vw'
-      }}
+    <Tooltip
+      side="top"
+      align="end"
+      {...args}
     >
-      <Tooltip
-        open
-        side="top"
-        align="end"
-        {...args}
-      >
-        <Button color="default" size="lg">
-          tooltip button
-        </Button>
-      </Tooltip>
-    </Flex>
+      <Button color="default" size="lg">
+        tooltip button
+      </Button>
+    </Tooltip>
   </TooltipProvider>
 );
 export const Default = Template.bind({});

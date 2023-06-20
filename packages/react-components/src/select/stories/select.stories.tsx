@@ -4,7 +4,7 @@ import { Select } from '../select';
 
 export default {
   component: Select,
-  title: 'Select',
+  title: 'Form/Select',
   args: {
     placeholder: 'Select an option',
     isClearable: true,

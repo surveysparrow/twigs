@@ -1,13 +1,12 @@
 import React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Flex } from '../flex';
 
 export default {
   component: Flex,
-  title: 'Flex'
-} as ComponentMeta<typeof Flex>;
+  title: 'Layout/Flex'
+};
 
-const Template: ComponentStory<typeof Flex> = (args) => (
+const Template = (args) => (
   <Flex
     {...args}
     flexDirection="row"

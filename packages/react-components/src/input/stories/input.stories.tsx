@@ -5,7 +5,7 @@ import { IconButton } from '../../button';
 
 export default {
   component: Input,
-  title: 'Input',
+  title: 'Form/Input',
   args: {
     variant: 'default'
   },

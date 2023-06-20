@@ -4,7 +4,7 @@ import { Link } from '../link';
 
 export default {
   component: Link,
-  title: 'Link',
+  title: 'Navigation/Link',
   argTypes: {
     size: {
       control: 'select',

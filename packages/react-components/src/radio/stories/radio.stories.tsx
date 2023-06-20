@@ -6,7 +6,7 @@ import { FormLabel } from '../../form-label';
 
 export default {
   component: Radio,
-  title: 'Radio',
+  title: 'Form/Radio',
   argTypes: {
     size: {
       control: 'select',

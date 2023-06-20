@@ -3,7 +3,7 @@ import { FormInput } from '../form-input';
 
 export default {
   component: FormInput,
-  title: 'FormInput',
+  title: 'Form/FormInput',
   args: {
     variant: 'default'
   },

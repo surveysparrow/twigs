@@ -4,7 +4,7 @@ import { Heading } from '../heading';
 
 export default {
   component: Heading,
-  title: 'Heading',
+  title: 'Typography/Heading',
   argTypes: {
     size: {
       control: 'select',

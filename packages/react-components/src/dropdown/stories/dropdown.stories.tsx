@@ -1,5 +1,4 @@
 import React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -18,15 +17,15 @@ import { Button } from '../../button';
 
 export default {
   component: DropdownMenu,
-  title: 'Dropdown'
-} as ComponentMeta<typeof DropdownMenu>;
+  title: 'Overlay/Dropdown'
+};
 
-const Template: ComponentStory<typeof DropdownMenu> = (args) => (
+const Template = (args) => (
   <DropdownMenu {...args}>
     <DropdownMenuTrigger asChild>
       <Button
         size="lg"
-        variant="primary"
+        color="primary"
         aria-label="Customise options"
       >
         More Options

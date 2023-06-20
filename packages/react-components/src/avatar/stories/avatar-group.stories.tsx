@@ -3,8 +3,8 @@ import { Avatar } from '../avatar';
 import { AvatarGroup } from '../avatar-group';
 
 export default {
-  component: Avatar,
-  title: 'Avatar',
+  component: AvatarGroup,
+  title: 'Data Display/Avatar/Avatar Group',
   argTypes: {
     size: {
       control: 'select',

@@ -4,7 +4,7 @@ import { Button } from '../button';
 
 export default {
   component: Button,
-  title: 'Button',
+  title: 'Form/Button',
   argTypes: {
     size: {
       control: 'select',
