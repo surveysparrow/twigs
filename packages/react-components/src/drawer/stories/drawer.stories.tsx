@@ -11,7 +11,7 @@ import { Box } from '../../box';
 
 export default {
   component: Drawer,
-  title: 'Drawer',
+  title: 'Overlay/Drawer',
   argTypes: {
     size: {
       control: 'select',

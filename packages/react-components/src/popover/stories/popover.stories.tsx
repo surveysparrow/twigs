@@ -7,7 +7,7 @@ import { Button } from '../../button';
 
 export default {
   component: Popover,
-  title: 'Popover',
+  title: 'Overlay/Popover',
   argTypes: {
     open: {
       control: 'boolean'

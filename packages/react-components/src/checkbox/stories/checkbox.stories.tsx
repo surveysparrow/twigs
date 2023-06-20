@@ -3,7 +3,7 @@ import { Checkbox } from '../checkbox';
 
 export default {
   component: Checkbox,
-  title: 'Checkbox',
+  title: 'Form/Checkbox',
   argTypes: {
     size: {
       control: 'select',

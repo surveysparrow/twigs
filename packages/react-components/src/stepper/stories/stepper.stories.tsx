@@ -5,7 +5,7 @@ import { Flex } from '../../flex';
 
 export default {
   component: Stepper,
-  title: 'Stepper'
+  title: 'Navigation/Stepper'
 };
 
 const Template = (args) => {

@@ -10,7 +10,7 @@ import { Toastr } from '../toastr';
 
 export default {
   component: Toast,
-  title: 'Toast',
+  title: 'Feedback/Toast',
   argTypes: {
     duration: {
       control: 'number',

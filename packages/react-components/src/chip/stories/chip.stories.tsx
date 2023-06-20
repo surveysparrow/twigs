@@ -3,7 +3,7 @@ import { Chip } from '../chip';
 
 export default {
   component: Chip,
-  title: 'Chip',
+  title: 'Data Display/Chip',
   args: {
     variant: 'solid',
     color: 'primary',

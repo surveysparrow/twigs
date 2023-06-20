@@ -5,7 +5,7 @@ import { IconButton } from '../icon-button';
 
 export default {
   component: IconButton,
-  title: 'Icon Button',
+  title: 'Form/Icon Button',
   argTypes: {
     color: {
       control: 'select',

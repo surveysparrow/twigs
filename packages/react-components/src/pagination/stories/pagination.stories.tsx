@@ -3,7 +3,7 @@ import { Pagination } from '../pagination';
 
 export default {
   component: Pagination,
-  title: 'Pagination',
+  title: 'Navigation/Pagination',
   argTypes: {
     total: {
       control: 'number',

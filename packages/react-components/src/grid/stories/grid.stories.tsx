@@ -5,7 +5,7 @@ import { Box } from '../../box';
 
 export default {
   component: Grid,
-  title: 'Grid',
+  title: 'Layout/Grid',
   argTypes: {
     gap: {
       defaultValue: [20, 20]

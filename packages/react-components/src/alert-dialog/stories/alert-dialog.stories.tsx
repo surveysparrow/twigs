@@ -13,7 +13,7 @@ import { Button } from '../../button';
 
 export default {
   component: AlertDialog,
-  title: 'AlertDialog'
+  title: 'Overlay/AlertDialog'
 };
 
 const Template = (args) => (

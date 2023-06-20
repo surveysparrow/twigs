@@ -4,7 +4,7 @@ import { TimePicker } from '../timepicker';
 
 export default {
   component: TimePicker,
-  title: 'TimePicker',
+  title: 'Date & Time/TimePicker',
   argTypes: {
     hourCycle: {
       control: 'select',
@@ -18,11 +18,10 @@ export default {
 } as ComponentMeta<typeof TimePicker>;
 
 const Template = (args) => {
-
   return (
     <TimePicker
       {...args}
-      label='Enter time'
+      label="Enter time"
     />
   );
 };

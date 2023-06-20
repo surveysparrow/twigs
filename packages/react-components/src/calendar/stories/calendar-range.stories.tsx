@@ -5,7 +5,7 @@ import { CalendarRange } from '../calendar-range';
 
 export default {
   component: CalendarRange,
-  title: 'CalendarRange',
+  title: 'Date & Time/CalendarRange',
   argTypes: {}
 };
 
