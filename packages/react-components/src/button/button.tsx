@@ -1,6 +1,18 @@
 import React, { ReactElement, FunctionComponent, ComponentProps } from 'react';
-import { styled } from '../../stitches.config';
-import { DotLoader } from '../loader';
+import { keyframes, styled } from '../../stitches.config';
+import { ButtonProgress } from './button-loader';
+
+const fadeBgColorAnimation = keyframes({
+  '0%': {
+    color: '$white900'
+  },
+  '40%': {
+    color: '$white500'
+  },
+  '100%': {
+    color: '$white900'
+  }
+});
 
 const StyledButton = styled('button', {
   appearance: 'none',
@@ -14,7 +26,7 @@ const StyledButton = styled('button', {
   justifyContent: 'center',
   fontWeight: '$7',
   cursor: 'pointer',
-  transition: 'all $transitions$2',
+  transition: 'all $transitions$2 linear',
   '&:disabled': {
     opacity: 0.4,
     cursor: 'not-allowed'
@@ -187,7 +199,10 @@ const StyledButton = styled('button', {
     },
     loading: {
       true: {
-        pointerEvents: 'none'
+        pointerEvents: 'none',
+        background: '$primary700',
+        animation: `${fadeBgColorAnimation} 2s ease-out 0s infinite normal none running`,
+        animationTimingFunction: 'cubic-bezier(0.445,  0.050, 0.550, 0.950)'
       }
     },
     isIcon: {
@@ -363,7 +378,7 @@ export interface ButtonBaseProps {
   iconRight?: ReactElement;
   icon?: ReactElement;
   loading?: boolean,
-  disabled?: boolean
+  disabled?: boolean,
 }
 
 type ButtonProps = ButtonBaseProps &
@@ -375,10 +390,19 @@ type ButtonProps = ButtonBaseProps &
 export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
   (
     {
-      children, color = 'primary', icon, iconLeft, iconRight, loading, disabled, onClick, ...rest
+      children,
+      color = 'primary',
+      icon,
+      iconLeft,
+      iconRight,
+      loading,
+      disabled,
+      onClick,
+      ...rest
     }: ButtonProps,
     ref
   ) => {
+
     return (
       <StyledButton
         ref={ref}
@@ -387,29 +411,27 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
         disabled={disabled}
         data-testid="button"
         onClick={onClick}
+        loading={loading}
         {...rest}
       >
-        {loading
-          ? <DotLoader />
-          : (
-            <>
-              {icon && React.cloneElement(icon)}
+        {icon && React.cloneElement(icon)}
 
-              {iconLeft && (
-                <StyledSpan css={{ marginRight: '$4' }}>
-                  {React.cloneElement(iconLeft)}
-                </StyledSpan>
-              )}
+        {iconLeft && (
+          <StyledSpan css={{ marginRight: '$4' }}>
+            {React.cloneElement(iconLeft)}
+          </StyledSpan>
+        )}
+        {
+          loading &&
+          <ButtonProgress size={rest.size} />
+        }
+        {children}
 
-              {children}
-
-              {iconRight && (
-                <StyledSpan css={{ marginLeft: '$4' }}>
-                  {React.cloneElement(iconRight)}
-                </StyledSpan>
-              )}
-            </>
-          )}
+        {iconRight && (
+          <StyledSpan css={{ marginLeft: '$4' }}>
+            {React.cloneElement(iconRight)}
+          </StyledSpan>
+        )}
       </StyledButton>
     );
   }

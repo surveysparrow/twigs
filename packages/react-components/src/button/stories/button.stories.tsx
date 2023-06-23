@@ -1,5 +1,6 @@
 import { TickCircleFillIcon } from '@sparrowengg/twigs-react-icons';
 import React from 'react';
+import { Spinner } from '../../loaders/spinner';
 import { Button } from '../button';
 
 export default {
@@ -27,7 +28,12 @@ export default {
   }
 };
 
-const Template = (args) => <Button {...args}>Submit</Button>;
+const Template = (args) => <Button {...args} loader={<Spinner />}>
+  {
+    args.loading ?
+      'Sending...' : 'Send invites'
+  }
+</Button>;
 export const Buttons = Template.bind({});
 
 const ButtonWithIconR = (args) => <Button {...args} iconRight={<TickCircleFillIcon />}>Submit</Button>;
