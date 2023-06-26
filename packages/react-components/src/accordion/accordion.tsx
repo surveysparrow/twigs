@@ -3,6 +3,11 @@ import * as AccordionPrimitive from '@radix-ui/react-accordion';
 import { ChevronDownIcon } from '@sparrowengg/twigs-react-icons';
 import { keyframes, styled } from '../../stitches.config';
 
+const StyledChevron = styled(ChevronDownIcon, {
+  color: '$neutral800',
+  transition: 'transform 300ms cubic-bezier(0.87, 0, 0.13, 1)'
+});
+
 const StyledTrigger = styled(AccordionPrimitive.Trigger, {
   all: 'unset',
   flex: 1,
@@ -11,7 +16,10 @@ const StyledTrigger = styled(AccordionPrimitive.Trigger, {
   justifyContent: 'space-between',
   color: '$neutral900',
   backgroundColor: 'white',
-  fontWeight: '$7'
+  fontWeight: '$7',
+  [`[data-state=open] & ${StyledChevron}`]: {
+    transform: 'rotate(180deg)'
+  }
 });
 
 const Accordion = styled(AccordionPrimitive.Root, {
@@ -54,12 +62,6 @@ const AccordionItem = styled(AccordionPrimitive.Item, {
 const StyledHeader = styled(AccordionPrimitive.Header, {
   all: 'unset',
   display: 'flex'
-});
-
-const StyledChevron = styled(ChevronDownIcon, {
-  color: '$neutral800',
-  transition: 'transform 300ms cubic-bezier(0.87, 0, 0.13, 1)',
-  '[data-state=open] &': { transform: 'rotate(180deg)' }
 });
 
 const AccordionTrigger = React.forwardRef<
