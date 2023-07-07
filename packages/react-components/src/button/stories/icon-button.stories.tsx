@@ -7,22 +7,20 @@ export default {
   component: IconButton,
   title: 'Form/Icon Button',
   argTypes: {
+    size: {
+      control: 'select',
+      options: ['xxs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl']
+    },
     color: {
       control: 'select',
-      options: ['default', 'primary', 'accent', 'secondary'],
-      defaultValue: 'primary'
-    },
-    disabled: {
-      control: 'boolean'
+      options: ['default', 'primary', 'secondary', 'bright', 'light', 'error']
     },
     variant: {
       control: 'select',
-      options: ['solid', 'text', 'outline']
+      options: ['solid', 'ghost', 'outline']
     },
-    size: {
-      control: 'select',
-      options: ['xxs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'],
-      defaultValue: 'xl'
+    disabled: {
+      control: 'boolean'
     }
   }
 };

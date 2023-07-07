@@ -5,6 +5,12 @@ import { Button } from '../button';
 export default {
   component: Button,
   title: 'Form/Button',
+  args: {
+    color: 'primary',
+    variant: 'solid',
+    size: 'md',
+    loading: false
+  },
   argTypes: {
     size: {
       control: 'select',
