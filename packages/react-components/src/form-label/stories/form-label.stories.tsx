@@ -1,13 +1,12 @@
 import React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { FormLabel } from '../form-label';
 
 export default {
   component: FormLabel,
-  title: 'Form label'
-} as ComponentMeta<typeof FormLabel>;
+  title: 'Form/Form label'
+};
 
-const Template: ComponentStory<typeof FormLabel> = (args) => (
+const Template = (args) => (
   <FormLabel {...args}>
     Email address
   </FormLabel>

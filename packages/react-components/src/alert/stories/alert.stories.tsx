@@ -4,7 +4,7 @@ import { Alert, AlertDescription } from '../alert';
 
 export default {
   component: Alert,
-  title: 'Alert',
+  title: 'Feedback/Alert',
   argTypes: {
     status: {
       control: 'select',

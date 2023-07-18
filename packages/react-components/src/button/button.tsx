@@ -176,10 +176,7 @@ const StyledButton = styled('button', {
         unset: 'none'
       },
       ghost: {
-        background: 'transparent',
-        '&:hover, &:focus, &:active': {
-          background: 'transparent'
-        }
+        background: 'transparent'
       },
       outline: {
         background: '$white900'
@@ -210,11 +207,18 @@ const StyledButton = styled('button', {
       variant: 'ghost',
       css: {
         color: '$primary500',
+        '&:focus': {
+          backgroundColorOpacity: ['$primary500', 0.06]
+        },
+        '&:hover': {
+          backgroundColorOpacity: ['$primary500', 0.08]
+        },
         '&:hover, &:focus': {
           color: '$primary700'
         },
         '&:active': {
-          color: '$primary800'
+          color: '$primary800',
+          backgroundColorOpacity: ['$primary500', 0.15]
         }
       }
     },
@@ -243,11 +247,13 @@ const StyledButton = styled('button', {
       variant: 'ghost',
       css: {
         color: '$secondary500',
-        '&:hover, &:focus, ': {
-          color: '$secondary600'
+        '&:hover, &:focus': {
+          color: '$secondary600',
+          backgroundColorOpacity: ['$secondary500', 0.08]
         },
         '&:active': {
-          color: '$secondary800'
+          color: '$secondary700',
+          backgroundColorOpacity: ['$secondary500', 0.15]
         }
       }
     },
@@ -258,6 +264,25 @@ const StyledButton = styled('button', {
         color: '$neutral800',
         '&:hover, &:focus, &:active': {
           color: '$neutral900'
+        },
+        '&:active': {
+          backgroundColorOpacity: ['$black500', 0.08]
+        },
+        '&:hover, &:focus': {
+          backgroundColorOpacity: ['$black500', 0.04]
+        }
+      }
+    },
+    {
+      color: 'error',
+      variant: 'ghost',
+      css: {
+        color: '$error600',
+        '&:active': {
+          background: '$error200'
+        },
+        '&:hover, &:focus': {
+          background: '$error100'
         }
       }
     },

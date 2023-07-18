@@ -3,7 +3,7 @@ import { DatePicker } from '../datepicker';
 
 export default {
   component: DatePicker,
-  title: 'DatePicker',
+  title: 'Date & Time/DatePicker',
   argTypes: {}
 };
 

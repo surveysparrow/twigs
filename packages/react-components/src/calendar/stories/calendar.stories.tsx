@@ -5,7 +5,7 @@ import { Calendar } from '../calendar';
 
 export default {
   component: Calendar,
-  title: 'Calendar',
+  title: 'Date & Time/Calendar',
   argTypes: {}
 } as ComponentMeta<typeof Calendar>;
 

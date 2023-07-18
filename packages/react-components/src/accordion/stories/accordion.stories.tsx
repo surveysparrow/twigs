@@ -5,7 +5,7 @@ import {
 
 export default {
   component: Accordion,
-  title: 'Accordion',
+  title: 'Data Display/Accordion',
   args: {
     size: 'sm',
     type: 'single'

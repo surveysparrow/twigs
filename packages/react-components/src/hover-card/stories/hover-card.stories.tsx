@@ -6,7 +6,7 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from '../hover-card';
 
 export default {
   component: HoverCard,
-  title: 'HoverCard',
+  title: 'Overlay/HoverCard',
   args: {
     arrow: true
   },

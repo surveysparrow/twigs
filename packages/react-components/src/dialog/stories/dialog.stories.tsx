@@ -1,5 +1,4 @@
 import React from 'react';
-import { ComponentMeta } from '@storybook/react';
 import {
   Dialog, DialogTitle, DialogDescription, DialogClose, DialogTrigger, DialogContent
 } from '../dialog';
@@ -38,8 +37,8 @@ const CloseIcon = () => {
 
 export default {
   component: Dialog,
-  title: 'Dialog'
-} as ComponentMeta<typeof Dialog>;
+  title: 'Overlay/Dialog'
+};
 
 const Template = (args) => (
   <Dialog {...args}>

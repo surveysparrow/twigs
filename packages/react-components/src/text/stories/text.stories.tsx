@@ -1,10 +1,9 @@
 import React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Text } from '../text';
 
 export default {
   component: Text,
-  title: 'Text',
+  title: 'Typography/Text',
   argTypes: {
     size: {
       control: 'select',
@@ -16,9 +15,9 @@ export default {
       options: ['regular', 'medium', 'bold']
     }
   }
-} as ComponentMeta<typeof Text>;
+};
 
-const Template: ComponentStory<typeof Text> = (args) => (
+const Template = (args) => (
   <Text {...args}>
     Sample text
   </Text>

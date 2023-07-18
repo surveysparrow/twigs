@@ -1,15 +1,14 @@
 import React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
 import {
   Table, Tbody, Td, Th, Thead, Tr
 } from '../table';
 
 export default {
   component: Table,
-  title: 'Table'
-} as ComponentMeta<typeof Table>;
+  title: 'Data Display/Table'
+};
 
-const Template: ComponentStory<typeof Table> = (args) => (
+const Template = (args) => (
   <Table {...args}>
     <Thead>
       <Th>Name</Th>

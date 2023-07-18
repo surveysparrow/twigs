@@ -4,22 +4,22 @@ import { styled, keyframes } from '../../stitches.config';
 
 const slideUpAndFade = keyframes({
   '0%': { opacity: 0, transform: 'translateY(2px)' },
-  '100%': { opacity: 0.8, transform: 'translateY(0)' }
+  '100%': { opacity: 1, transform: 'translateY(0)' }
 });
 
 const slideRightAndFade = keyframes({
   '0%': { opacity: 0, transform: 'translateX(-2px)' },
-  '100%': { opacity: 0.8, transform: 'translateX(0)' }
+  '100%': { opacity: 1, transform: 'translateX(0)' }
 });
 
 const slideDownAndFade = keyframes({
   '0%': { opacity: 0, transform: 'translateY(-2px)' },
-  '100%': { opacity: 0.8, transform: 'translateY(0)' }
+  '100%': { opacity: 1, transform: 'translateY(0)' }
 });
 
 const slideLeftAndFade = keyframes({
   '0%': { opacity: 0, transform: 'translateX(2px)' },
-  '100%': { opacity: 0.8, transform: 'translateX(0)' }
+  '100%': { opacity: 1, transform: 'translateX(0)' }
 });
 
 const StyledContent = styled(TooltipPrimitive.Content, {
@@ -27,7 +27,7 @@ const StyledContent = styled(TooltipPrimitive.Content, {
   color: '$white900',
   backgroundColor: '$black900',
   userSelect: 'none',
-  opacity: 0.8,
+  opacity: 1,
   maxWidth: '240px',
   '@media (prefers-reduced-motion: no-preference)': {
     animationDuration: '800ms',
