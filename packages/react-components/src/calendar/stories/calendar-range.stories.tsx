@@ -11,8 +11,8 @@ export default {
 
 const Template = (args) => {
   const [value, setValue] = React.useState({
-    start: parseDate('2023-06-12'),
-    end: parseDate('2023-06-20')
+    start: parseDate('2023-07-12'),
+    end: parseDate('2023-07-20')
   });
   console.log(value);
   return (
@@ -20,6 +20,7 @@ const Template = (args) => {
       {...args}
       onChange={setValue}
       value={value}
+      minValue={parseDate('2023-07-10')}
     />
   );
 };

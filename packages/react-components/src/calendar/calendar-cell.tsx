@@ -41,7 +41,6 @@ export const CalendarCell = ({ state, date, currentMonth }: CalendarCellProps) =
         {...buttonProps}
         ref={ref}
         isHidden={isOutsideMonth}
-        data-is-hidden={isOutsideMonth}
         isSelected={isSelected}
       >
         {formattedDate}

@@ -25,6 +25,13 @@ export const Day = styled('button', {
     outline: 'none',
     color: '$neutral900'
   },
+  '&[aria-disabled="true"]': {
+    cursor: 'not-allowed',
+    color: '$neutral500',
+    '&:hover': {
+      backgroundColor: '$white900'
+    }
+  },
   variants: {
     isHidden: {
       true: {

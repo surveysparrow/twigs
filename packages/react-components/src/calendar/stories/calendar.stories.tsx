@@ -1,5 +1,4 @@
 import React from 'react';
-import { ComponentMeta } from '@storybook/react';
 import { parseDate } from '@internationalized/date';
 import { Calendar } from '../calendar';
 
@@ -7,15 +6,16 @@ export default {
   component: Calendar,
   title: 'Date & Time/Calendar',
   argTypes: {}
-} as ComponentMeta<typeof Calendar>;
+};
 
 const Template = (args) => {
-  const [value, setValue] = React.useState(parseDate('2023-01-01'));
+  const [value, setValue] = React.useState(parseDate('2023-07-24'));
   return (
     <Calendar
       {...args}
       onChange={setValue}
       value={value}
+      minValue={parseDate('2023-07-20')}
     />
   );
 };
