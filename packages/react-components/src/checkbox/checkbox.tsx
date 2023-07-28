@@ -132,48 +132,27 @@ export const Checkbox: FunctionComponent<CheckboxProps> = ({
   ...rest
 }) => {
   const isIndeterminate = checked === 'indeterminate';
-  if (children) {
-    return (
-      <FormLabel css={{ display: 'flex', alignItems: 'center' }} htmlFor={id}>
-        <StyledCheckbox
-          checked={checked}
-          onCheckedChange={onChange}
-          disabled={disabled}
-          required={required}
-          id={id}
-          {...(isIndeterminate && { 'data-state': 'indeterminate' })}
-          {...rest}
-        >
-          <StyledIndicator
-            {...(isIndeterminate && { 'data-state': 'indeterminate' })}
-          >
-            <StyledCheckIconContainer className="check-icon">
-              <TickIcon />
-            </StyledCheckIconContainer>
-            {isIndeterminate && <HorizontalLineIcon />}
-          </StyledIndicator>
-        </StyledCheckbox>
-        <StyledLabelContainer>{children}</StyledLabelContainer>
-      </FormLabel>
-    );
-  }
   return (
-    <StyledCheckbox
-      checked={checked}
-      onCheckedChange={onChange}
-      disabled={disabled}
-      required={required}
-      {...(isIndeterminate && { 'data-state': 'indeterminate' })}
-      {...rest}
-    >
-      <StyledIndicator
+    <FormLabel css={{ display: 'flex', alignItems: 'center' }} htmlFor={id}>
+      <StyledCheckbox
+        checked={checked}
+        onCheckedChange={onChange}
+        disabled={disabled}
+        required={required}
+        id={id}
         {...(isIndeterminate && { 'data-state': 'indeterminate' })}
+        {...rest}
       >
-        <StyledCheckIconContainer className="check-icon">
-          <TickIcon />
-        </StyledCheckIconContainer>
-        {isIndeterminate && <HorizontalLineIcon />}
-      </StyledIndicator>
-    </StyledCheckbox>
+        <StyledIndicator
+          {...(isIndeterminate && { 'data-state': 'indeterminate' })}
+        >
+          <StyledCheckIconContainer className="check-icon">
+            <TickIcon />
+          </StyledCheckIconContainer>
+          {isIndeterminate && <HorizontalLineIcon />}
+        </StyledIndicator>
+      </StyledCheckbox>
+      {children && <StyledLabelContainer>{children}</StyledLabelContainer>}
+    </FormLabel>
   );
 };

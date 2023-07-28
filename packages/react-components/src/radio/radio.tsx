@@ -1,6 +1,7 @@
 import React, { ComponentProps, FunctionComponent } from 'react';
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
 import { styled } from '../../stitches.config';
+import { FormLabel } from '../form-label';
 
 const StyledRadio = styled(RadioGroupPrimitive.Item, {
   all: 'unset',
@@ -92,6 +93,11 @@ export const RadioGroup: FunctionComponent<RadioRootProps> = React.forwardRef(
   }
 );
 
+const StyledLabelContainer = styled('span', {
+  display: 'inline-flex',
+  paddingInlineStart: '$4'
+});
+
 export type RadioProps = {
   disabled?: boolean,
   required?: boolean
@@ -100,20 +106,25 @@ export type RadioProps = {
 export const Radio: FunctionComponent<RadioProps> = React.forwardRef(
   (
     {
-      disabled, value, required, ...rest
+      disabled, value, required, children, id, ...rest
     }: RadioProps,
     ref
   ) => {
     return (
-      <StyledRadio
-        ref={ref}
-        disabled={disabled}
-        required={required}
-        value={value}
-        {...rest}
-      >
-        <StyledIndicator />
-      </StyledRadio>
+      <FormLabel css={{ display: 'flex', alignItems: 'center' }} htmlFor={id}>
+        <StyledRadio
+          ref={ref}
+          disabled={disabled}
+          required={required}
+          value={value}
+          id={id}
+          {...rest}
+        >
+          <StyledIndicator />
+        </StyledRadio>
+        {children && <StyledLabelContainer>{children}</StyledLabelContainer>}
+
+      </FormLabel>
     );
   }
 );
