@@ -1,0 +1,46 @@
+import { Button, Flex, Table, Thead, Th, Tbody, Tr, Td, Input } from "@sparrowengg/twigs-react";
+import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
+import { Divider } from 'docs/src/components/common'
+
+# Input
+
+### Import
+
+```jsx
+import { Input } from "@sparrowengg/twigs-react";
+```
+<Divider />
+
+### Usage 
+```jsx live
+<Input placeholder="Enter your email" />
+```
+<Divider />
+
+### Variants
+<Flex gap='4px' flexDirection='column'>
+  <Input placeholder='Default input variant' variant="default" />
+  <Input variant='filled' placeholder='Filled input variant' />
+</Flex>
+<Divider />
+
+### Input with icons
+```jsx live
+<Flex gap='4px' flexDirection='row'>
+  <Input iconLeft={<SearchIcon />} placeholder='Input with left icon' />
+  <Input iconRight={<SearchIcon />} placeholder='Input with right icon' />
+  <Input iconLeft={<UserIcon />} iconRight={<SearchIcon />} placeholder='Input with left and right icon' />
+</Flex>
+```
+<Divider />
+
+## Props
+| Property  | Description                            | Type            | Default |
+|-----------|----------------------------------------|-----------------|---------|
+| variant   | style of input                         | default, filled | default |
+| onChange  |                                        | function        |         |
+| size      | input size                             | sm,md,lg,xl     | md      |
+| disabled  |                                        | boolean         | false   |
+| iconLeft  | Append icon on the left side of input  | JSX Element     |         |
+| iconRight | Append icon on the right side of input | JSX Element     |         |
+| css       | Custom styles for input                | object          |         |

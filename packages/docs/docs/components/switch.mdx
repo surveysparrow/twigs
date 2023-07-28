@@ -1,0 +1,28 @@
+import { Button, Flex, Table, Thead, Th, Tbody, Tr, Td, Input, Switch } from "@sparrowengg/twigs-react";
+import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
+import { Divider } from 'docs/src/components/common'
+
+# Switch
+
+### Import
+
+```jsx
+import { Switch } from "@sparrowengg/twigs-react";
+```
+<Divider />
+
+### Usage 
+```jsx live
+<Switch size="md" />
+```
+<Divider />
+
+### Props
+| Property       | Description                                | Type                    | Default |
+|----------------|--------------------------------------------|-------------------------|---------|
+| checked        | state of the Switch                      | boolean,"indeterminate" | false   |
+| defaultChecked | Uncontrolled default state of Switch     | boolean                 |         |
+| required       |                                            | booleam                 | false   |
+| disabled       |                                            | boolean                 | false   |
+| size           | Size of the Switch                       | sm,md                   | sm      |
+| onChange       | Callback function when Switch is clicked | function                |         |

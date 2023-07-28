@@ -1,0 +1,30 @@
+import { Button, Flex, Table, Thead, Th, Tbody, Tr, Td, Input, Checkbox } from "@sparrowengg/twigs-react";
+import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
+import { Divider } from 'docs/src/components/common'
+
+# Checkbox
+
+### Import
+
+```jsx
+import { Checkbox } from "@sparrowengg/twigs-react";
+```
+<Divider />
+
+### Usage 
+```jsx live
+<Checkbox id="accept-terms" size="md"> 
+  Accept terms and conditions
+</Checkbox>
+```
+<Divider />
+
+### Props
+| Property       | Description                                | Type                    | Default |
+|----------------|--------------------------------------------|-------------------------|---------|
+| checked        | state of the checkbox                      | boolean,"indeterminate" | false   |
+| defaultChecked | Uncontrolled default state of checkbox     | boolean                 |         |
+| required       |                                            | booleam                 | false   |
+| disabled       |                                            | boolean                 | false   |
+| size           | Size of the checkbox                       | sm,md                   | sm      |
+| onChange       | Callback function when checkbox is clicked | function                |         |

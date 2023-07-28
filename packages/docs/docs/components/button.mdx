@@ -1,0 +1,64 @@
+import { Button, Flex, Table, Thead, Th, Tbody, Tr, Td } from "@sparrowengg/twigs-react";
+import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
+import { Divider } from 'docs/src/components/common'
+
+# Button
+
+### Import
+
+```jsx
+import { Button } from "@sparrowengg/twigs-react";
+```
+
+### Usage 
+```jsx live
+<Button> Submit </Button>
+```
+<Divider />
+
+### Colors
+<Flex gap='4px' flexDirection='row'>
+  <Button size="md"> Primary </Button>
+  <Button size="md" color="default"> Default </Button>
+  <Button size="md" color="secondary"> Secondary </Button>
+  <Button size="md" color="bright"> Bright </Button>
+  <Button size="md" color="error"> Error </Button>
+</Flex>
+
+<Divider />
+
+### Variants
+<Flex gap='4px' flexDirection='row'>
+  <Button size="md"> Solid variant </Button>
+  <Button size="md" variant="outline"> Outline variant </Button>
+  <Button size="md" variant="ghost"> Ghost variant </Button>
+</Flex>
+
+<Divider />
+
+### Adding icons to button
+Button component makes it easy to add icon before or after the button text. 
+`iconLeft` and `iconRight` can be used to pass icons to the button. 
+
+```jsx live
+<Button size='md' iconLeft={<ArrowLeftIcon />}> Go back </Button>
+```
+
+<Divider />
+
+### Size
+<ButtonSizes />
+
+<Divider />
+
+### Props
+
+
+| Property | Description         | Type                                              | Default |
+|----------|---------------------|---------------------------------------------------|---------|
+| color    | Color of the button | primary, secondary, default, bright, error, light | primary |
+| loading  | Loading state       | boolean                                           | false   |
+| disabled | Button state        | boolean                                           | false   |
+| size     | Size of the button  | xxs, xs, sm, md, lg, xl, 2xl                      | sm      |
+| variant  | button variant      | solid, outline, ghost                             | solid   |
+| css      | Custom css styles   | object                                            |         |

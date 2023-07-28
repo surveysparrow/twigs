@@ -1,0 +1,26 @@
+---
+sidebar_position: 1
+---
+
+# Installation
+TO get started with Twigs, run the following commands in your project repository terminal. 
+
+```bash
+npm i @sparrowengg/twigs-react @sparrowengg/twigs-react-icons
+```
+
+Now, you can wrap your application root in Twigs `ThemeProvider`. 
+
+```jsx
+import { ThemeProvider } from '@sparrowengg/twigs-react';
+
+function App() {
+  return (
+    <ThemeProvider>
+      <YourApp />
+    </ThemeProvider>
+  )
+}
+```
+
+The `theme` object in `ThemeProvider` will help you customize the theme settings of your application. 

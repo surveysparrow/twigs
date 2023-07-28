@@ -1,0 +1,104 @@
+---
+sidebar_position: 2
+---
+
+import { theme } from "@sparrowengg/twigs-react";
+import { AllColors, AllFontSizes, AllFontWeights, AllBorderWidths, AllRadii, AllSpaces, AllSizes, CustomizedButton, DefaultThemeContainer } from "docs/src/components/theming";
+import { Divider } from 'docs/src/components/common'
+
+
+# Theming
+
+Twigs ships with maximum flexibility to customize the look and feel of your application. 
+
+Once you wrap your application inside `ThemeProvider`, you will have access to `theme` object which can be used to modify the colors and other aspects of the components. 
+
+## Default theme
+
+Below is the complete theme object for Twigs. 
+
+### Colors
+<AllColors />
+<Divider />
+
+### Font size
+<AllFontSizes />
+<Divider />
+
+### Font weights
+<AllFontWeights />
+<Divider />
+
+### Border width
+<AllBorderWidths />
+<Divider />
+
+### Radius
+<AllRadii />
+<Divider />
+
+### Spacing
+<AllSpaces />
+<Divider />
+
+### Size
+<AllSizes />
+<Divider />
+
+### Customize component style
+
+Twigs exposes an prop `css` which can be used to pass your own styles to modify the components. 
+
+You can pass your theme variables in css attributes to `css` object. Below is an example on how to use that. In order to use your `primary100` as background color, use a `$` before the theme variable. Example below, 
+
+```jsx
+<Button 
+  css={{
+    backgroundColor: '$primary100'
+  }}>
+  Submit
+</Button>
+```
+
+Below is an example which modifies our primary button using custom css and theme variables. 
+
+```jsx
+<Button 
+  css={{
+    backgroundColor: '$primary500',
+    color: '$white900',
+    borderRadius: '$none',
+    padding: '$10 $12',
+    '&:hover': {
+      backgroundColor: '$primary600'
+    },
+    '&:active': {
+      backgroundColor: '$primary700'
+    }
+  }}]>
+  Submit
+</Button>
+```
+Output
+<CustomizedButton />
+
+## Default theme object
+
+Below is the complete default theme object
+<DefaultThemeContainer />
+
+## Customize theme
+
+If you'd like to modify any of the theme values, you can pass the prop to `ThemeProvider`. Below is an example on how you can modify the `primary` color of the theme.
+
+```jsx
+<ThemeProvider
+  theme={{
+    colors: {
+      primary: 'black'
+    }
+  }}
+>
+  <App>
+</ThemeProvider>
+```

@@ -1,0 +1,26 @@
+import { Button, Flex, Table, Thead, Th, Tbody, Tr, Td, Input, FormInput } from "@sparrowengg/twigs-react";
+import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
+import { Divider } from 'docs/src/components/common'
+
+# FormInput
+
+### Import
+
+```jsx
+import { FormInput } from "@sparrowengg/twigs-react";
+```
+<Divider />
+
+### Usage 
+```jsx live
+<FormInput
+  label="Email Address"
+  error="not a valid email address"
+/>
+```
+<Divider />
+
+### Props
+| Property       | Description                                | Type                    | Default |
+|----------------|--------------------------------------------|-------------------------|---------|
+| size           | Size of the FormInput                       | xs,sm                   | sm      |
