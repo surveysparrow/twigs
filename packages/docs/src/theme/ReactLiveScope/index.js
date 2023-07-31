@@ -1,4 +1,4 @@
-import { Button, Input, Flex, Checkbox, Radio, Select, FormInput, FormLabel, RadioGroup, Switch } from '@site/../react-components/dist/index';
+import { Button, Input, Flex, Checkbox, Radio, Select, FormInput, FormLabel, RadioGroup, Switch, FormHelperText, Text, Heading, Link, Pagination, Stepper, Tabs } from '@site/../react-components/dist/index';
 import { ArrowLeftIcon, SearchIcon, UserIcon } from '@site/../react-icons/dist/index';
 import React from 'react';
 
@@ -16,6 +16,13 @@ const ReactLiveScope = {
   FormLabel,
   RadioGroup,
   Switch,
+  FormHelperText,
+  Text,
+  Heading,
+  Link,
+  Pagination,
+  Stepper,
+  Tabs,
   ArrowLeftIcon,
   SearchIcon,
   UserIcon

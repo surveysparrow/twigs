@@ -4,6 +4,8 @@ import { Divider } from 'docs/src/components/common'
 
 # FormInput
 
+FormInput is a wrapper around Input and FormLabel component. It is used to create a form input field with label and error message.
+
 ### Import
 
 ```jsx
@@ -15,12 +17,59 @@ import { FormInput } from "@sparrowengg/twigs-react";
 ```jsx live
 <FormInput
   label="Email Address"
-  error="not a valid email address"
 />
+```
+<Divider />
+
+
+### Input error
+```jsx live
+<FormInput
+  label="Email Address"
+  error="Not a valid email address"
+/>
+```
+<Divider />
+
+### Character count
+
+```jsx
+<FormInput
+  value={'john@example.com'}
+  // highlight-start
+  showCount={true}
+  maxLength={10}
+  // highlight-end
+/>
+```
+Using `maxLength` and `showCount` props, you can show the character count of the input field.
+
+```jsx live
+function CharacterCount() {
+  const [value, setValue] = React.useState('');
+  return (
+    <FormInput
+      label="Email Address"
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+      showCount
+      maxLength={10}
+    />
+  );
+}
 ```
 <Divider />
 
 ### Props
 | Property       | Description                                | Type                    | Default |
 |----------------|--------------------------------------------|-------------------------|---------|
-| size           | Size of the FormInput                       | xs,sm                   | sm      |
+| variant   | style of input                         | default, filled | default |
+| onChange  |                                        | function        |         |
+| size      | input size                             | sm,md,lg,xl     | md      |
+| disabled  |                                        | boolean         | false   |
+| iconLeft  | Append icon on the left side of input  | JSX Element     |         |
+| iconRight | Append icon on the right side of input | JSX Element     |         |
+| css       | Custom styles for input                | object          |         |
+| error       | Message for input error                | string          |         |
+| maxLength       | Maximum allowed characters                | number          |         |
+| showCount       | Show remaining allowed character length                 | boolean          |         |

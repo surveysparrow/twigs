@@ -1,0 +1,35 @@
+import { Input, FormHelperText } from "@sparrowengg/twigs-react";
+import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
+import { Divider } from 'docs/src/components/common'
+
+# FormHelperText
+
+FormHelperText can be used for providing additional context to your input fields. 
+
+### Import
+
+```jsx
+import { FormHelperText } from "@sparrowengg/twigs-react";
+```
+<Divider />
+
+### Usage 
+```jsx live
+<FormHelperText> Password should have a minimum length of 6. </FormHelperText>
+```
+<Divider />
+
+### Pair with Input 
+```jsx live
+<>
+  <Input placeholder="password" type="password" />
+  <FormHelperText> Password should have a minimum length of 6. </FormHelperText>
+</>
+```
+<Divider />
+
+### Props
+| Property       | Description                                | Type                    | Default |
+|----------------|--------------------------------------------|-------------------------|---------|
+| size           | font size of the FormLabel                       | xxs,xs,sm,md,lg                   | xs      |
+| weight           | font weight                       | regular, medium, bold                   | regular      |

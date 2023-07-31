@@ -1,0 +1,30 @@
+import { Button, Flex, Radio, RadioGroup } from "@sparrowengg/twigs-react";
+import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
+import { Divider } from 'docs/src/components/common'
+
+# Radio
+
+### Import
+
+```jsx
+import { Radio, RadioGroup } from "@sparrowengg/twigs-react";
+```
+<Divider />
+
+### Usage 
+```jsx live
+<RadioGroup>
+  <Radio> Hello there </Radio>
+</RadioGroup>
+```
+<Divider />
+
+### Props
+
+| Property       | Description                                | Type                    | Default |
+|----------------|--------------------------------------------|-------------------------|---------|
+| checked        | state of the radio                      | boolean | false   |
+| defaultChecked | Uncontrolled default state of Switch     | boolean                 |         |
+| disabled       |                                            | boolean                 | false   |
+| size           | Size of the Switch                       | sm,md                   | sm      |
+| onChange       | Callback function when Switch is clicked | function                |         |

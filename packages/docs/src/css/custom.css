@@ -36,3 +36,11 @@ body,
 h2 {
   font-family: 'DM Sans', sans-serif;
 }
+
+*[class^='twigs'] ul {
+  list-style-type: none;
+}
+
+*[class^='twigs'] ul li {
+  margin-top: 0px !important;
+}
