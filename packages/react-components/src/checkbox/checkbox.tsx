@@ -1,7 +1,7 @@
-import React, { FunctionComponent, ComponentProps, ReactNode } from 'react';
+import React, { FunctionComponent, ComponentProps, ReactNode, useId } from 'react';
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
-import { FormLabel } from '../form-label';
 import { styled } from '../../stitches.config';
+import { Flex } from '../flex';
 
 const TickIcon = () => {
   return (
@@ -99,7 +99,7 @@ const StyledIndicator = styled(CheckboxPrimitive.Indicator, {
   display: 'flex'
 });
 
-const StyledLabelContainer = styled('span', {
+const StyledLabelContainer = styled('label', {
   display: 'inline-flex',
   paddingInlineStart: '$4'
 });
@@ -132,14 +132,15 @@ export const Checkbox: FunctionComponent<CheckboxProps> = ({
   ...rest
 }) => {
   const isIndeterminate = checked === 'indeterminate';
+  const uniqueId = id || useId();
   return (
-    <FormLabel css={{ display: 'flex', alignItems: 'center' }} htmlFor={id}>
+    <Flex alignItems={"center"}>
       <StyledCheckbox
         checked={checked}
         onCheckedChange={onChange}
         disabled={disabled}
         required={required}
-        id={id}
+        id={uniqueId}
         {...(isIndeterminate && { 'data-state': 'indeterminate' })}
         {...rest}
       >
@@ -152,7 +153,7 @@ export const Checkbox: FunctionComponent<CheckboxProps> = ({
           {isIndeterminate && <HorizontalLineIcon />}
         </StyledIndicator>
       </StyledCheckbox>
-      {children && <StyledLabelContainer>{children}</StyledLabelContainer>}
-    </FormLabel>
+      {children && <StyledLabelContainer htmlFor={uniqueId}>{children}</StyledLabelContainer>}
+    </Flex>
   );
 };
