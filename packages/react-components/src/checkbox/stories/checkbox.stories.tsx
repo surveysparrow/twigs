@@ -20,6 +20,6 @@ export default {
 };
 
 const Template = (args) => (
-  <Checkbox {...args} id="accept-terms"> Accept terms and conditions </Checkbox>
+  <Checkbox {...args}> Accept terms and conditions </Checkbox>
 );
 export const Default = Template.bind({});

@@ -1,7 +1,7 @@
-import React, { FunctionComponent, ComponentProps, ReactNode } from 'react';
+import React, { FunctionComponent, ComponentProps, ReactNode, useId } from 'react';
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
-import { FormLabel } from '../form-label';
 import { styled } from '../../stitches.config';
+import { Flex } from '../flex';
 
 const TickIcon = () => {
   return (
@@ -99,7 +99,7 @@ const StyledIndicator = styled(CheckboxPrimitive.Indicator, {
   display: 'flex'
 });
 
-const StyledLabelContainer = styled('span', {
+const StyledLabelContainer = styled('label', {
   display: 'inline-flex',
   paddingInlineStart: '$4'
 });
@@ -132,48 +132,28 @@ export const Checkbox: FunctionComponent<CheckboxProps> = ({
   ...rest
 }) => {
   const isIndeterminate = checked === 'indeterminate';
-  if (children) {
-    return (
-      <FormLabel css={{ display: 'flex', alignItems: 'center' }} htmlFor={id}>
-        <StyledCheckbox
-          checked={checked}
-          onCheckedChange={onChange}
-          disabled={disabled}
-          required={required}
-          id={id}
-          {...(isIndeterminate && { 'data-state': 'indeterminate' })}
-          {...rest}
-        >
-          <StyledIndicator
-            {...(isIndeterminate && { 'data-state': 'indeterminate' })}
-          >
-            <StyledCheckIconContainer className="check-icon">
-              <TickIcon />
-            </StyledCheckIconContainer>
-            {isIndeterminate && <HorizontalLineIcon />}
-          </StyledIndicator>
-        </StyledCheckbox>
-        <StyledLabelContainer>{children}</StyledLabelContainer>
-      </FormLabel>
-    );
-  }
+  const uniqueId = id || useId();
   return (
-    <StyledCheckbox
-      checked={checked}
-      onCheckedChange={onChange}
-      disabled={disabled}
-      required={required}
-      {...(isIndeterminate && { 'data-state': 'indeterminate' })}
-      {...rest}
-    >
-      <StyledIndicator
+    <Flex alignItems={"center"}>
+      <StyledCheckbox
+        checked={checked}
+        onCheckedChange={onChange}
+        disabled={disabled}
+        required={required}
+        id={uniqueId}
         {...(isIndeterminate && { 'data-state': 'indeterminate' })}
+        {...rest}
       >
-        <StyledCheckIconContainer className="check-icon">
-          <TickIcon />
-        </StyledCheckIconContainer>
-        {isIndeterminate && <HorizontalLineIcon />}
-      </StyledIndicator>
-    </StyledCheckbox>
+        <StyledIndicator
+          {...(isIndeterminate && { 'data-state': 'indeterminate' })}
+        >
+          <StyledCheckIconContainer className="check-icon">
+            <TickIcon />
+          </StyledCheckIconContainer>
+          {isIndeterminate && <HorizontalLineIcon />}
+        </StyledIndicator>
+      </StyledCheckbox>
+      {children && <StyledLabelContainer htmlFor={uniqueId}>{children}</StyledLabelContainer>}
+    </Flex>
   );
 };
