@@ -1,7 +1,3 @@
-import { Button, Flex, Table, Thead, Th, Tbody, Tr, Td, Input } from "@sparrowengg/twigs-react";
-import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
-import { Divider } from 'docs/src/components/common'
-
 # Input
 
 ### Import
@@ -9,20 +5,19 @@ import { Divider } from 'docs/src/components/common'
 ```jsx
 import { Input } from "@sparrowengg/twigs-react";
 ```
-<Divider />
 
 ### Usage 
 ```jsx live
 <Input placeholder="Enter your email" />
 ```
-<Divider />
+
 
 ### Variants
 <Flex gap='4px' flexDirection='column'>
   <Input placeholder='Default input variant' variant="default" />
   <Input variant='filled' placeholder='Filled input variant' />
 </Flex>
-<Divider />
+
 
 ### Input with icons
 ```jsx live
@@ -32,7 +27,7 @@ import { Input } from "@sparrowengg/twigs-react";
   <Input iconLeft={<UserIcon />} iconRight={<SearchIcon />} placeholder='Input with left and right icon' />
 </Flex>
 ```
-<Divider />
+
 
 ## Props
 | Property  | Description                            | Type            | Default |
