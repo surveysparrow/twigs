@@ -1,6 +1,13 @@
-import React, { ComponentProps, FunctionComponent } from 'react';
+import React, { ComponentProps, FunctionComponent, useId } from 'react';
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
 import { styled } from '../../stitches.config';
+import { Flex } from '../flex';
+
+const StyledRadioGroup = styled(RadioGroupPrimitive.Root, {
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '$2'
+});
 
 const StyledRadio = styled(RadioGroupPrimitive.Item, {
   all: 'unset',
@@ -79,7 +86,7 @@ export const RadioGroup: FunctionComponent<RadioRootProps> = React.forwardRef(
     }: RadioRootProps, ref
   ) => {
     return (
-      <RadioGroupPrimitive.Root
+      <StyledRadioGroup
         ref={ref}
         onValueChange={onChange}
         disabled={disabled}
@@ -87,10 +94,15 @@ export const RadioGroup: FunctionComponent<RadioRootProps> = React.forwardRef(
         {...rest}
       >
         {children}
-      </RadioGroupPrimitive.Root>
+      </StyledRadioGroup>
     );
   }
 );
+
+const StyledLabelContainer = styled('label', {
+  display: 'inline-flex',
+  paddingInlineStart: '$4'
+});
 
 export type RadioProps = {
   disabled?: boolean,
@@ -100,20 +112,25 @@ export type RadioProps = {
 export const Radio: FunctionComponent<RadioProps> = React.forwardRef(
   (
     {
-      disabled, value, required, ...rest
+      disabled, value, required, children, id, ...rest
     }: RadioProps,
     ref
   ) => {
+    const uniqueId = id || useId();
     return (
-      <StyledRadio
-        ref={ref}
-        disabled={disabled}
-        required={required}
-        value={value}
-        {...rest}
-      >
-        <StyledIndicator />
-      </StyledRadio>
+      <Flex alignItems={"center"}>
+        <StyledRadio
+          ref={ref}
+          disabled={disabled}
+          required={required}
+          value={value}
+          id={uniqueId}
+          {...rest}
+        >
+          <StyledIndicator />
+        </StyledRadio>
+        {children && <StyledLabelContainer htmlFor={uniqueId}>{children}</StyledLabelContainer>}
+      </Flex>
     );
   }
 );

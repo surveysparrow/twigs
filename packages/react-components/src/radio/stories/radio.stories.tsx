@@ -17,14 +17,8 @@ export default {
 
 const Template = (args) => (
   <RadioGroup defaultValue="default" aria-label="View density" {...args}>
-    <Flex css={{ alignItems: 'center' }}>
-      <Radio size="sm" value="default" id="r1" {...args} />
-      <FormLabel css={{ marginLeft: '6px' }}>Default</FormLabel>
-    </Flex>
-    <Flex css={{ margin: '10px 0', alignItems: 'center' }}>
-      <Radio size="sm" value="comfortable" id="r2" {...args} />
-      <FormLabel css={{ marginLeft: '6px' }}>Comfortable</FormLabel>
-    </Flex>
+    <Radio size="sm" value="default" {...args}>Default</Radio>
+    <Radio size="sm" value="comfortable" id="r2" {...args}>Comfortable</Radio>
   </RadioGroup>
 );
 export const Default = Template.bind({});
