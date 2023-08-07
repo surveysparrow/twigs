@@ -44,3 +44,19 @@ h2 {
 *[class^='twigs'] ul li {
   margin-top: 0px !important;
 }
+
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  text-align: left;
+}
+
+.hero__title {
+  font-size: 2rem;
+  margin-bottom: 0;
+}
+
+.hero__subtitle {
+  font-size: 1.2rem;
+}

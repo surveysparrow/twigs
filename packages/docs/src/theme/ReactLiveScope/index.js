@@ -25,6 +25,9 @@ const ReactLiveScope = {
   Tabs: twigsComponentLoader("Tabs"),
   ArrowLeftIcon: twigsIconLoader("ArrowLeftIcon"),
   SearchIcon: twigsIconLoader("SearchIcon"),
-  UserIcon: twigsIconLoader("UserIcon")
+  UserIcon: twigsIconLoader("UserIcon"),
+  Chip: twigsComponentLoader("Chip"),
+  Avatar: twigsComponentLoader("Avatar"),
+  AvatarBadge: twigsComponentLoader("AvatarBadge"),
 };
 export default ReactLiveScope;

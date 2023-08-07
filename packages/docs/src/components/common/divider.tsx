@@ -1,7 +1,8 @@
 import React from 'react';
-import { Box } from "@site/../react-components/dist/index";
+import { twigsComponentLoader } from '@site/src/theme/ReactLiveScope/twigs-loader';
+const Box = twigsComponentLoader('Box');
 
-export function Divider() {
+export default function Divider() {
   return (
     <Box css={{
       padding: '2rem 0',

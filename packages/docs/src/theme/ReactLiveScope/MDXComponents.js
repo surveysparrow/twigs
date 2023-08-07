@@ -1,8 +1,8 @@
 import React from 'react';
 // Import the original mapper
 import MDXComponents from '@theme-original/MDXComponents';
-import { Divider, AllColors, AllFontSizes, AllFontWeights, AllBorderWidths, AllRadii, AllSpaces, AllSizes, CustomizedButton, DefaultThemeContainer } from '@site/src/components/common/divider';
-
+import { AllColors, AllFontSizes, AllFontWeights, AllBorderWidths, AllRadii, AllSpaces, AllSizes, CustomizedButton, DefaultThemeContainer } from '@site/src/components/theming';
+import Divider from '@site/src/components/common/divider';
 export default {
   // Re-use the default mapping
   ...MDXComponents,

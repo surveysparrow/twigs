@@ -2,6 +2,16 @@
 sidebar_position: 2
 ---
 
+import AllColors from '../src/components/theming/colors';
+import AllFontSizes from '../src/components/theming/font-sizes';
+import AllFontWeights from '../src/components/theming/font-weights';
+import AllBorderWidths from '../src/components/theming/border-widths';
+import AllRadii from '../src/components/theming/radii';
+import AllSpaces from '../src/components/theming/spaces';
+import AllSizes from '../src/components/theming/sizes';
+import Divider from '../src/components/common/divider';
+import { CustomizedButton, DefaultThemeContainer } from '../src/components/theming';
+
 # Theming
 
 Twigs ships with maximum flexibility to customize the look and feel of your application. 
@@ -15,30 +25,37 @@ Below is the complete theme object for Twigs.
 ### Colors
 <AllColors />
 
+<Divider />
 
 ### Font size
 <AllFontSizes />
 
+<Divider />
 
 ### Font weights
 <AllFontWeights />
 
+<Divider />
 
 ### Border width
 <AllBorderWidths />
 
+<Divider />
 
 ### Radius
 <AllRadii />
 
+<Divider />
 
 ### Spacing
 <AllSpaces />
 
+<Divider />
 
 ### Size
 <AllSizes />
 
+<Divider />
 
 ### Customize component style
 
@@ -60,27 +77,35 @@ Below is an example which modifies our primary button using custom css and theme
 ```jsx
 <Button 
   css={{
-    backgroundColor: '$primary500',
+    backgroundColor: '$positive500',
     color: '$white900',
-    borderRadius: '$none',
-    padding: '$10 $12',
+    borderRadius: '$pill',
+    width: '200px',
+    padding: '$6 $10',
+    cursor: 'pointer',
+    fontSize: '$md',
     '&:hover': {
-      backgroundColor: '$primary600'
+      backgroundColor: '$positive600'
     },
     '&:active': {
-      backgroundColor: '$primary700'
+      backgroundColor: '$positive900'
     }
   }}]>
   Submit
 </Button>
 ```
-Output
+#### Output
+
 <CustomizedButton />
+
+<Divider />
 
 ## Default theme object
 
 Below is the complete default theme object
 <DefaultThemeContainer />
+
+<Divider />
 
 ## Customize theme
 

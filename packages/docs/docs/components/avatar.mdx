@@ -1,0 +1,36 @@
+# Avatar
+
+FormHelperText can be used for providing additional context to your input fields. 
+
+### Import
+
+```jsx
+import { Avatar } from "@sparrowengg/twigs-react";
+```
+
+
+### Usage 
+```jsx live
+<Avatar
+  src="https://randomuser.me/api/portraits/men/35.jpg"
+  name="John Doe"
+  size="5xl"
+/>
+```
+
+### Avatar Badge
+```jsx live
+<Avatar
+  src="https://randomuser.me/api/portraits/men/35.jpg"
+  name="John Doe"
+  size="xl"
+>
+  <AvatarBadge />
+</Avatar>
+```
+
+### Props
+| Property       | Description                                | Type                    | Default |
+|----------------|--------------------------------------------|-------------------------|---------|
+| size           | font size of the FormLabel                       | xxs,xs,sm,md,lg                   | xs      |
+| weight           | font weight                       | regular, medium, bold                   | regular      |

@@ -25,3 +25,6 @@ export function twigsIconLoader(componentExportName) {
     );
   }
 };
+export function remToPix(remVal) {
+  return parseFloat(remVal.replace('rem', '')) * 16;
+}

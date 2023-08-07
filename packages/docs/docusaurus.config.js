@@ -6,8 +6,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Twigs',
-  tagline: 'React component library',
+  title: 'Twigs - React UI component library',
+  tagline: 'Twigs is a flexible and customizable React component library for building UIs. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, nisl eget aliquam ultricies, nunc nunc ultricies nunc, eget ultricies nunc nunc eget nunc.',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -81,19 +81,19 @@ const config = {
         ],
       },
       footer: {
-        style: 'dark',
-        links: [
-          {
-            title: 'Docs',
-            items: [
-              {
-                label: 'Getting Started',
-                to: '/',
-              },
-            ],
-          }
-        ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        style: 'light',
+        // links: [
+        //   {
+        //     title: 'Docs',
+        //     items: [
+        //       {
+        //         label: 'Getting Started',
+        //         to: '/',
+        //       },
+        //     ],
+        //   }
+        // ],
+        copyright: `Copyright © ${new Date().getFullYear()} SurveySparrow`,
       },
       prism: {
         theme: lightCodeTheme,
