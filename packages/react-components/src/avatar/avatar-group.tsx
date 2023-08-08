@@ -188,6 +188,7 @@ export const AvatarGroup: FunctionComponent<AvatarGroupProps> = React.forwardRef
       const isFirstChild = index === 0;
       const childProps = {
         size,
+        rounded,
         ...child.props
       };
       return (
