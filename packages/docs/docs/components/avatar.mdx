@@ -29,8 +29,37 @@ import { Avatar } from "@sparrowengg/twigs-react";
 </Avatar>
 ```
 
+### Avatar Group
+```jsx live
+<AvatarGroup size="2xl">
+  <Avatar
+    src="https://randomuser.me/api/portraits/men/35.jpg"
+    name="John Doe"
+  />
+  <Avatar
+    src="https://randomuser.me/api/portraits/men/34.jpg"
+    name="Sam"
+  />
+  <Avatar
+    src="https://randomuser.me/api/portraits/men/32.jpg"
+    name="Adam"
+  />
+</AvatarGroup>
+```
+
 ### Props
+
+#### Avatar
 | Property       | Description                                | Type                    | Default |
 |----------------|--------------------------------------------|-------------------------|---------|
-| size           | font size of the FormLabel                       | xxs,xs,sm,md,lg                   | xs      |
-| weight           | font weight                       | regular, medium, bold                   | regular      |
+| size           | size of avatar                       | 'xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl'                   | sm      |
+| src           | image URL                       | string                  |       |
+| name           | name of the user                       | string                  |       |
+| rounded           | border radius                       | 'xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', 'full'                  | full      |
+
+
+#### AvatarGroup
+| Property       | Description                                | Type                    | Default |
+|----------------|--------------------------------------------|-------------------------|---------|
+| size           | size of avatar                       | 'xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl'                   | sm      |
+| rounded           | border radius                       | 'xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', 'full'                  | full      |

@@ -29,5 +29,6 @@ const ReactLiveScope = {
   Chip: twigsComponentLoader("Chip"),
   Avatar: twigsComponentLoader("Avatar"),
   AvatarBadge: twigsComponentLoader("AvatarBadge"),
+  AvatarGroup: twigsComponentLoader("AvatarGroup"),
 };
 export default ReactLiveScope;
