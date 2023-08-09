@@ -1,0 +1,45 @@
+# HoverCard
+
+### Import
+
+```jsx
+import { HoverCard, HoverCardTrigger, HoverCardContent } from "@sparrowengg/twigs-react";
+```
+
+
+### Usage 
+```jsx live
+<HoverCard>
+  <HoverCardTrigger>
+    <Avatar
+      size="3xl"
+      src="https://randomuser.me/api/portraits/men/35.jpg"
+    />
+  </HoverCardTrigger>
+  <HoverCardContent arrow>
+    <Avatar
+      size="xl"
+      src="https://randomuser.me/api/portraits/men/35.jpg"
+    />
+    <Heading size="h5">Jane Doe</Heading>
+    <Text>Head of design</Text>
+  </HoverCardContent>
+</HoverCard>
+```
+
+
+### Props
+
+#### HoverCard
+| Property     | Description                                           | Type    | Default |
+|--------------|-------------------------------------------------------|---------|---------|
+| defaultOpen  | uncontrolled open state                               | boolean | false   |
+| open         | controller open state                                 | boolean |         |
+| onOpenChange | callback function for state changes                   |         |         |
+| openDelay    | delay to open the card                                | number  | 700     |
+| closeDelat   | delay to close the card when mouse leaves the trigger | number  | 300     |
+
+#### HoverCardContent
+| Property | Description                   | Type    | Default |
+|----------|-------------------------------|---------|---------|
+| arrow    | Show arrow at the top of card | boolean | true    |

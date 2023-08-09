@@ -1,0 +1,49 @@
+# Tooltip
+
+### Import
+
+```jsx
+import { TooltipProvider, Tooltip } from "@sparrowengg/twigs-react";
+```
+
+You should wrap your application with `TooltipProvider` to make sure that the tooltip is rendered correctly.
+
+### Usage
+
+#### TooltipProvider
+
+```jsx
+function App() {
+  return (
+      // highlight-start
+    <TooltipProvider delayDuration={0}>
+      // highlight-end
+      <App />
+    </TooltipProvider>
+  )
+}
+```
+
+#### Tooltip
+```jsx
+// highlight-start
+<Tooltip content="Tooltip content">
+// highlight-end
+  <Button> Hover me </Button>
+</Tooltip>
+```
+
+### Props
+
+#### TooltipProvider
+| Property          | Description                                                                       | Type   | Default |
+|-------------------|-----------------------------------------------------------------------------------|--------|---------|
+| delayDuration     | The duration from when the mouse enters a tooltip trigger until the tooltip opens | number | 700     |
+| skipDelayDuration | time a user has to enter another trigger without incurring a delay again          | number | 300     |
+
+#### Tooltip
+| Property | Description                                 | Type                  | Default |
+|----------|---------------------------------------------|-----------------------|---------|
+| side     | position of tooltip                         | bottom,left,right,top | top     |
+| content  | Content inside tooltip                      | string,JSX            |         |
+| align    | The preferred alignment against the trigger | start,center,end      | start   |

@@ -1,0 +1,64 @@
+# AlertDialog
+
+`AlertDialog` can be used to warn or get users attention before destructive actions.
+
+### Import
+
+```jsx
+import { AlertDialog,
+  AlertDialogAction,
+  AlertDialogActions,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogTitle,
+  AlertDialogTrigger } from "@sparrowengg/twigs-react";
+```
+
+
+### Usage 
+```jsx live
+<AlertDialog>
+  <AlertDialogTrigger asChild>
+    <Button color="error">
+      Delete account
+    </Button>
+  </AlertDialogTrigger>
+  <AlertDialogContent>
+    <AlertDialogTitle>
+      Are you absolutely sure?
+    </AlertDialogTitle>
+    <AlertDialogDescription>
+      This action cannot be undone. This will permanently delete your account and remove your data from our servers.
+    </AlertDialogDescription>
+    <AlertDialogActions>
+      <AlertDialogCancel asChild>
+        <Button
+          color="default"
+          size="lg"
+        >
+          Cancel
+        </Button>
+      </AlertDialogCancel>
+      <AlertDialogAction asChild>
+        <Button
+          color="error"
+          size="lg"
+        >
+          Yes, delete account
+        </Button>
+      </AlertDialogAction>
+    </AlertDialogActions>
+  </AlertDialogContent>
+</AlertDialog>
+```
+
+
+### Props
+
+#### AlertDialog
+| Property     | Description                         | Type    | Default |
+|--------------|-------------------------------------|---------|---------|
+| defaultOpen  | uncontrolled open state             | boolean | false   |
+| open         | controller open state               | boolean |         |
+| onOpenChange | callback function for state changes |         |         |

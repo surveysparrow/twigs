@@ -1,0 +1,47 @@
+# CalendarRange
+
+`CalendarRange` component requires additional dependancy of `@internationalized/date` to be installed. 
+
+```jsx
+npm install --save @internationalized/date
+```
+:::info
+We will be working on removing this additional dependancy in the future. 
+:::
+
+### Import
+
+```jsx
+import { CalendarRange } from "@sparrowengg/twigs-react";
+```
+
+### Usage 
+```jsx
+import { parseDate } from '@internationalized/date';
+
+function App() {
+
+  const [value, setValue] = React.useState({
+    start: parseDate('2023-07-12'),
+    end: parseDate('2023-07-20')
+  });
+
+  return (
+    <CalendarRange
+      onChange={setValue}
+      value={value}
+      minValue={parseDate('2023-07-10')}
+    />
+  );
+}
+```
+
+
+### Props
+| Property   | Description                                                             | Type                         | Default |
+|------------|-------------------------------------------------------------------------|------------------------------|---------|
+| value      | selected value range                                                    | @internationalized/date Date |         |
+| minValue   | minimum selectable date value. Dates beyond this value will be disabled | @internationalized/date Date |         |
+| maxValue   | maximum selectable date value. Dates beyond this value will be disabled | @internationalized/date Date |         |
+| isDisabled | Disable the calendar component                                          | boolean                      | false   |
+| onChange   | Callback function when date range is selected                                 | function                     |         |
