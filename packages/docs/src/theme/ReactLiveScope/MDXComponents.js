@@ -9,5 +9,10 @@ export default {
   // Map the "<Highlight>" tag to our Highlight component
   // `Highlight` will receive all props that were passed to `<Highlight>` in MDX
   Divider,
-  AllColors, AllFontSizes, AllFontWeights, AllBorderWidths, AllRadii, AllSpaces, AllSizes, CustomizedButton, DefaultThemeContainer
+  AllColors,
+  AllFontSizes,
+  AllFontWeights,
+  AllBorderWidths,
+  AllRadii,
+  AllSpaces, AllSizes, CustomizedButton, DefaultThemeContainer
 };

@@ -7,7 +7,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Twigs - React UI component library',
-  tagline: 'Twigs is a flexible and customizable React component library for building UIs. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, nisl eget aliquam ultricies, nunc nunc ultricies nunc, eget ultricies nunc nunc eget nunc.',
+  tagline: 'Twigs is a flexible, customizable and accessible React component library for building UIs. Comes with 30+ components and room for you to bring your own components, styles and themes.',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -81,6 +81,9 @@ const config = {
       },
       footer: {
         style: 'light',
+      },
+      colorMode: {
+        disableSwitch: true
       },
       prism: {
         theme: lightCodeTheme,

@@ -61,3 +61,11 @@ h2 {
 .hero__subtitle {
   font-size: 1.2rem;
 }
+
+.hero {
+  background-color: transparent;
+}
+
+.footer {
+  display: none;
+}

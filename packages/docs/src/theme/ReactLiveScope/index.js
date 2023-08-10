@@ -1,5 +1,3 @@
-// import { Button, Input, Flex, Checkbox, Radio, Select, FormInput, FormLabel, RadioGroup, Switch, FormHelperText, Text, Heading, Link, Pagination, Stepper, Tabs } from '@site/../react-components/dist/index';
-// import { ArrowLeftIcon, SearchIcon, UserIcon } from '@site/../react-icons/dist/index';
 import React from 'react';
 import { twigsComponentLoader, twigsIconLoader } from './twigs-loader';
 
