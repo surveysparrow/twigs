@@ -114,15 +114,17 @@ export const Alert: FunctionComponent<AlertProps> = React.forwardRef(
     closable,
     size,
     onClose,
-    status,
+    status = 'info',
     children,
     icon,
     ...rest
   }: AlertProps, ref) => {
+
     const ValidAlertIcon = icon || STATUSES[status]?.icon;
     if (!ValidAlertIcon) {
       throw new Error(`Invalid status: ${status}`);
     }
+
     return (
       <StyledAlert
         role="alert"
