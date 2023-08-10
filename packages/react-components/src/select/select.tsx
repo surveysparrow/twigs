@@ -25,7 +25,7 @@ const selectStyles = {
         'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
     },
     '&.twigs-select__control--is-disabled': {
-      background: '$black100'
+      backgroundColorOpacity: ['$neutral500', 0.06],
     }
   },
   '& .twigs-select__value-container, & .twigs-select__placeholder, &.twigs-select__single-value, &.twigs-select__input':
