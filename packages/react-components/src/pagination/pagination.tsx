@@ -22,8 +22,9 @@ export type PaginationProps = {
   activePage: number,
   siblingCount?: number,
   // eslint-disable-next-line no-unused-vars
-  onChange?: (event: SyntheticEvent, page: number) => void
-} & ButtonSizeType
+  onChange?: (event: SyntheticEvent, page: number) => void,
+  size?: ButtonSizeType['size']
+}
 
 const DOTS = 'DOTS';
 
@@ -34,7 +35,13 @@ const DOTS = 'DOTS';
  * @param onChange returns click event and active page number
  */
 export const Pagination: FunctionComponent<PaginationProps> = ({
-  total, itemsPerPage, activePage, siblingCount, onChange, size, ...rest
+  total,
+  itemsPerPage,
+  activePage,
+  siblingCount,
+  onChange,
+  size = 'sm',
+  ...rest
 }: PaginationProps) => {
   const keyId = useId();
   const [page, setPage] = useState<number>(activePage);
