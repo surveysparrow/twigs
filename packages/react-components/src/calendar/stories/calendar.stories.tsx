@@ -13,6 +13,7 @@ const Template = (args) => {
   return (
     <Calendar
       {...args}
+      isDisabled
       onChange={setValue}
       value={value}
       minValue={parseDate('2023-07-20')}

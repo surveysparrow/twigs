@@ -9,11 +9,11 @@ export type StepperProps = {
   activeStep: number,
   children: React.ReactElement[],
   // eslint-disable-next-line no-unused-vars
-  onChange?: (step: number) => void,
+  onChange: (step: number) => void,
   components?: {
     TriggerSeparator?: React.ComponentType
     TriggerContainer?: React.ComponentType<{ children: React.ReactNode }>,
-    TriggerButton?: React.ComponentType<{ children: React.ReactNode, active?: boolean, completed?: boolean }>,
+    TriggerButton?: React.ComponentType<{ index: number, children: React.ReactNode, active?: boolean, completed?: boolean }>,
   }
 } & BoxProps;
 
@@ -54,7 +54,6 @@ const Stepper: FunctionComponent<StepperProps> = forwardRef(({
   const Separator = components.TriggerSeparator || DefaultSeparator;
   const TriggerContainer = components.TriggerContainer || DefaultStepperTrigger.StepperTriggerContainer;
   const TriggerButton = components.TriggerButton || DefaultStepperTrigger.StepperTrigger;
-
   return (
     <StyledStepper ref={ref}>
       <TriggerContainer>
@@ -67,15 +66,18 @@ const Stepper: FunctionComponent<StepperProps> = forwardRef(({
             return (
               <React.Fragment key={`stepper-control-${stepperId}-${id}`}>
                 <TriggerButton
-                  tabIndex={allowClick ? 0 : -1}
+                  // tabIndex={allowClick ? 0 : -1}
+                  title="my-react-button"
+                  index={index}
                   active={index === activeStep}
                   completed={completed}
-                  type="button"
+                  // type="button"
                   cursor={allowClick ? 'pointer' : 'default'}
                   {...(onChange && allowClick && {
                     onClick: () => onChange(index)
                   })}
                   {...rest}
+                  onClick={() => console.log(index)}
                 >
                   <DefaultStepperTrigger.StepperCount>
                     {

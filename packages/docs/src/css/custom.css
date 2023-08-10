@@ -39,6 +39,7 @@ h2 {
 
 *[class^='twigs'] ul {
   list-style-type: none;
+  margin-bottom: 0;
 }
 
 *[class^='twigs'] ul li {
@@ -54,7 +55,7 @@ h2 {
 
 .hero__title {
   font-size: 2rem;
-  margin-bottom: 0;
+  margin-bottom: 2rem;
 }
 
 .hero__subtitle {

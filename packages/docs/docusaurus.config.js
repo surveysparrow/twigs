@@ -49,7 +49,16 @@ const config = {
       }),
     ],
   ],
-  plugins: ['@docusaurus/theme-live-codeblock'],
+  plugins: [
+    '@docusaurus/theme-live-codeblock',
+    require.resolve('docusaurus-lunr-search')
+    // [
+    //   require.resolve("@cmfcmf/docusaurus-search-local"),
+    //   {
+    //     indexBlog: false,
+    //   },
+    // ],
+  ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
@@ -72,18 +81,6 @@ const config = {
       },
       footer: {
         style: 'light',
-        // links: [
-        //   {
-        //     title: 'Docs',
-        //     items: [
-        //       {
-        //         label: 'Getting Started',
-        //         to: '/',
-        //       },
-        //     ],
-        //   }
-        // ],
-        copyright: `Copyright © ${new Date().getFullYear()} SurveySparrow`,
       },
       prism: {
         theme: lightCodeTheme,
