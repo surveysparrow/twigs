@@ -400,7 +400,7 @@ type ButtonProps = ButtonBaseProps &
 export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
   (
     {
-      children, color = 'primary', icon, iconLeft, iconRight, loading, disabled, onClick, ...rest
+      children, color = 'default', icon, iconLeft, iconRight, loading, disabled, onClick, ...rest
     }: ButtonProps,
     ref
   ) => {
