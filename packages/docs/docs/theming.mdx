@@ -18,7 +18,43 @@ Twigs ships with maximum flexibility to customize the look and feel of your appl
 
 Once you wrap your application inside `ThemeProvider`, you will have access to `theme` object which can be used to modify the colors and other aspects of the components. 
 
-## Default theme
+
+## Default theme object
+
+Below is the complete default theme object
+<DefaultThemeContainer />
+
+<Divider />
+
+### Using theme variables
+You can consume thene variables in your components using `$` before the variable name. Below is an example on how to use theme variables in your components. 
+
+```jsx
+import { Button } from '@sparrowengg/twigs-react';
+
+<Button
+  css={{
+    //highlight-start
+    backgroundColor: '$primary100',
+    color: '$white900',
+    borderRadius: '$pill',
+    width: '200px',
+    padding: '$6 $10',
+    cursor: 'pointer',
+    fontSize: '$md',
+    '&:hover': {
+      backgroundColor: '$primary200'
+    },
+    '&:active': {
+      backgroundColor: '$primary900'
+    }
+    //highlight-end
+  }}
+  }}
+> Submit </Button>
+```
+
+<Divider />
 
 ### Colors
 <AllColors />
@@ -97,11 +133,6 @@ Below is an example which modifies our primary button using custom css and theme
 <CustomizedButton />
 
 <Divider />
-
-## Default theme object
-
-Below is the complete default theme object
-<DefaultThemeContainer />
 
 <Divider />
 

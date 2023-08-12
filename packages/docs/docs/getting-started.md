@@ -9,6 +9,10 @@ TO get started with Twigs, run the following commands in your project repository
 npm i @sparrowengg/twigs-react @sparrowengg/twigs-react-icons
 ```
 
+:::warning
+Twigs is still in alpha. Please expect breaking changes. We'll try out best to make the updates smooth. 
+:::
+
 Now, you can wrap your application root in Twigs `ThemeProvider`. 
 
 ```jsx

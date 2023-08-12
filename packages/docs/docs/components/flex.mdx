@@ -1,0 +1,32 @@
+# Flex
+
+### Import
+
+```jsx
+import { Flex } from "@sparrowengg/twigs-react";
+```
+
+`Flex` is a wrapper around HTML element div, but comes with flexbox properties.
+
+### Usage 
+```jsx live
+<Flex flexDirection="column" gap="$8"> 
+  <p> Hello </p>
+  <p> World </p>
+</Flex>
+```
+
+### Props
+| Property       | Description | Type | Default |
+|----------------|-------------|------|---------|
+| flexDirection  |             |      | row     |
+| justifyContent |             |      | normal  |
+| alignItems     |             |      | normal  |
+| alignContent   |             |      | normal  |
+| justifyItems   |             |      | legacy  |
+| wrap           |             |      | nowrap  |
+| grow           |             |      | 0       |
+| gap            |             |      |         |
+| shrink         |             |      | 1       |
+| flow           |             |      |         |
+| basis          |             |      | auto    |
