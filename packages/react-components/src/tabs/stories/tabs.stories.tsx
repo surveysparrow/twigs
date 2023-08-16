@@ -13,19 +13,19 @@ const Template = (args) => (
   <Tabs defaultValue="tab1" {...args}>
     <TabsList
       aria-label="tabs example"
-      css={{ display: 'flex', alignItems: 'center', height: '$18' }}
+      css={{ display: 'flex', alignItems: 'center' }}
     >
       <TabsTrigger value="tab1">One</TabsTrigger>
       <TabsTrigger value="tab2">Two</TabsTrigger>
       <TabsTrigger value="tab3" disabled>Three</TabsTrigger>
     </TabsList>
-    <TabsContent css={{ padding: '$16 0' }} value="tab1">
+    <TabsContent value="tab1">
       Tab 1
     </TabsContent>
-    <TabsContent css={{ padding: '$16 0' }} value="tab2">
+    <TabsContent value="tab2">
       Tab 2
     </TabsContent>
-    <TabsContent css={{ padding: '$16 0' }} value="tab3">
+    <TabsContent value="tab3">
       Tab 3
     </TabsContent>
   </Tabs>
