@@ -176,7 +176,7 @@ const StyledButton = styled('button', {
         unset: 'none'
       },
       ghost: {
-        background: 'transparent'
+        background: 'transparent !important'
       },
       outline: {
         background: '$white900'
