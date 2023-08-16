@@ -115,10 +115,10 @@ const StyledChip = styled(Box, {
         }
       },
       error: {
-        background: '$error200',
-        color: '$error700',
+        background: '$negative200',
+        color: '$negative700',
         [`& ${StyledCloseButton}`]: {
-          background: '$error700'
+          background: '$negative700'
         }
       },
       warning: {

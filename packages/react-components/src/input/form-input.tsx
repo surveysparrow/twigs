@@ -14,7 +14,7 @@ export type FormInputProps = {
 } & InputProps;
 
 const StyledError = styled(FormHelperText, {
-  color: '$error500 !important',
+  color: '$negative500 !important',
   marginTop: '$2'
 });
 
