@@ -19,7 +19,8 @@ const StyledTrigger = styled(TabsPrimitive.Trigger, {
   backgroundColor: '$white900',
   paddingInlineStart: '$8',
   paddingInlineEnd: '$8',
-  height: 'calc(100% - 3px)',
+  paddingTop: '$4',
+  paddingBottom: '$4',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -46,7 +47,8 @@ const StyledTrigger = styled(TabsPrimitive.Trigger, {
 const StyledContent = styled(TabsPrimitive.Content, {
   flexGrow: 1,
   backgroundColor: '$white900',
-  outline: 'none'
+  outline: 'none',
+  padding: '$8'
 });
 
 export const Tabs = StyledTabs;

@@ -162,13 +162,13 @@ const StyledButton = styled('button', {
         }
       },
       error: {
-        background: '$error100',
-        color: '$error600',
+        background: '$negative100',
+        color: '$negative600',
         '&:hover': {
-          background: '$error200'
+          background: '$negative200'
         },
         '&:active': {
-          background: '$error300'
+          background: '$negative300'
         }
       }
     },
@@ -281,13 +281,13 @@ const StyledButton = styled('button', {
       color: 'error',
       variant: 'ghost',
       css: {
+        color: '$negative600',
         background: 'transparent',
-        color: '$error600',
         '&:active': {
-          background: '$error200'
+          background: '$negative200'
         },
         '&:hover, &:focus': {
-          background: '$error100'
+          background: '$negative100'
         }
       }
     },
