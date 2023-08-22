@@ -80,6 +80,7 @@ export const Pagination: FunctionComponent<PaginationProps> = ({
             size={size}
             disabled={isPrevDisabled}
             onClick={(event: SyntheticEvent) => changeActivePage(event, page - 1)}
+            type="button"
           />
         </li>
         {
@@ -89,13 +90,13 @@ export const Pagination: FunctionComponent<PaginationProps> = ({
                 // eslint-disable-next-line react/no-array-index-key
                 <li key={`pagination-dots-${keyId}-${index}`}>
                   <IconButton
-                    as="a"
+                    as={"span"}
                     icon={<EllipsisHorizontalIcon />}
-                    role="presentation"
                     color="bright"
                     size={size}
                     css={{
-                      cursor: 'default'
+                      cursor: 'default',
+                      pointerEvents: 'none'
                     }}
                   />
                 </li>
@@ -104,12 +105,11 @@ export const Pagination: FunctionComponent<PaginationProps> = ({
             return (
               <li key={`pagination-${keyId}-page-${pageNumber}`}>
                 <Button
-                  as="a"
                   onClick={(event: SyntheticEvent) => changeActivePage(event, Number(pageNumber))}
                   aria-label={`Page ${pageNumber}`}
                   color={page === pageNumber ? 'default' : 'bright'}
                   aria-current={page === pageNumber}
-                  role="link"
+                  type="button"
                   size={size}
                 >
                   {pageNumber}
@@ -127,6 +127,7 @@ export const Pagination: FunctionComponent<PaginationProps> = ({
             disabled={isNextDisabled}
             aria-disabled={isNextDisabled}
             onClick={(event: SyntheticEvent) => changeActivePage(event, page + 1)}
+            type="button"
           />
         </li>
       </StyledList>
