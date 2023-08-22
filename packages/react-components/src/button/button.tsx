@@ -24,7 +24,8 @@ const StyledButton = styled('button', {
   },
   '&:focus-visible': {
     $$shadowColor: '$colors$primary300',
-    boxShadow: 'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
+    boxShadow:
+      'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
   },
   variants: {
     size: {
@@ -176,7 +177,7 @@ const StyledButton = styled('button', {
         unset: 'none'
       },
       ghost: {
-        background: 'transparent !important'
+        background: 'transparent'
       },
       outline: {
         background: '$white900'
@@ -206,6 +207,7 @@ const StyledButton = styled('button', {
       color: 'primary',
       variant: 'ghost',
       css: {
+        background: 'transparent',
         color: '$primary500',
         '&:focus': {
           backgroundColorOpacity: ['$primary500', 0.06]
@@ -246,6 +248,7 @@ const StyledButton = styled('button', {
       color: 'secondary',
       variant: 'ghost',
       css: {
+        background: 'transparent',
         color: '$secondary500',
         '&:hover, &:focus': {
           color: '$secondary600',
@@ -261,6 +264,7 @@ const StyledButton = styled('button', {
       color: 'default',
       variant: 'ghost',
       css: {
+        background: 'transparent',
         color: '$neutral800',
         '&:hover, &:focus, &:active': {
           color: '$neutral900'
@@ -278,6 +282,7 @@ const StyledButton = styled('button', {
       variant: 'ghost',
       css: {
         color: '$negative600',
+        background: 'transparent',
         '&:active': {
           background: '$negative200'
         },
