@@ -1,6 +1,6 @@
 import React from 'react';
 import { twigsComponentLoader } from '@site/src/theme/ReactLiveScope/twigs-loader';
-import { theme } from '@site/../react-components/dist/stitches.config';
+import { defaultTheme as theme } from '@site/../react-components/dist/stitches.config';
 const Box = twigsComponentLoader('Box');
 const Button = twigsComponentLoader('Box');
 

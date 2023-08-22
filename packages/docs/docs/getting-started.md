@@ -3,7 +3,7 @@ sidebar_position: 1
 ---
 
 # Installation
-TO get started with Twigs, run the following commands in your project repository terminal. 
+To get started with Twigs, run the following commands in your project repository terminal. 
 
 ```bash
 npm i @sparrowengg/twigs-react @sparrowengg/twigs-react-icons

@@ -39,8 +39,8 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          sidebarCollapsible: false,
-          sidebarCollapsed: false
+          // sidebarCollapsible: false,
+          // sidebarCollapsed: false
         },
         blog: false,
         theme: {
@@ -81,6 +81,81 @@ const config = {
       },
       footer: {
         style: 'light',
+        copyright: `Copyright © ${new Date().getFullYear()} SurveySparrow`,
+        links: [
+          {
+            title: 'Docs',
+            items: [
+              {
+                label: 'Getting Started',
+                to: '/docs/getting-started',
+              },
+              {
+                label: 'Theming',
+                to: '/docs/theming',
+              },
+              {
+                label: 'Components',
+                to: '/docs/category/components',
+              },
+              {
+                label: 'Examples',
+                to: '/docs/category/examples',
+              }
+            ],
+          },
+          {
+            title: 'Overlay',
+            items: [
+              {
+                label: 'Dialog',
+                to: '/docs/components/dialog',
+              },
+              {
+                label: 'Drawer',
+                to: '/docs/components/Drawer',
+              },
+              {
+                label: 'Popover',
+                to: '/docs/components/popover',
+              },
+            ],
+          },
+          {
+            title: 'Layout',
+            items: [
+              {
+                label: 'Grid',
+                to: '/docs/components/grid',
+              },
+              {
+                label: 'Flex',
+                to: '/docs/components/flex',
+              },
+              {
+                label: 'Box',
+                to: '/docs/components/box',
+              },
+            ]
+          },
+          {
+            title: 'Form',
+            items: [
+              {
+                label: 'Checkbox',
+                to: '/docs/components/checkbox',
+              },
+              {
+                label: 'Radio',
+                to: '/docs/components/radio',
+              },
+              {
+                label: 'Select',
+                to: '/docs/components/select',
+              },
+            ]
+          }
+        ]
       },
       colorMode: {
         disableSwitch: true

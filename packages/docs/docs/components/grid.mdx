@@ -1,0 +1,40 @@
+# Grid
+
+### Import
+
+```jsx
+import { Grid } from "@sparrowengg/twigs-react";
+```
+
+`Grid` is a wrapper around HTML element div, but comes with grid properties.
+
+### Usage 
+```jsx live
+<Grid>
+  <Box css={{
+    height: 100,
+    backgroundColor: '$primary500'
+  }}
+  />
+  <Box css={{
+    height: 100,
+    backgroundColor: '$warning500'
+  }}
+  />
+  <Box css={{
+    height: 100,
+    backgroundColor: '$accent100'
+  }}
+  />
+</Grid>
+```
+
+### Props
+| Property        | Description | Type        | Default |
+|-----------------|-------------|-------------|---------|
+| width           |             |             |         |
+| templateColumns |             |             |         |
+| templateRows    |             |             |         |
+| templateAreas   |             |             |         |
+| gap             |             | array       |         |
+| repeat          |             | fill,repeat |         |

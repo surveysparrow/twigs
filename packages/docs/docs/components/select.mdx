@@ -1,0 +1,44 @@
+# Select
+
+### Import
+
+```jsx
+import { Select } from "@sparrowengg/twigs-react";
+```
+
+:::info
+Select component is powered by [react-select](https://react-select.com/home). API options supported by react-select will be supported in Twigs as well.
+:::
+
+### Usage 
+```jsx live
+<Select
+  size="lg"
+  options={[{
+    label: "Option 1",
+    value: "option1"
+  }, {
+    label: "Option 2",
+    value: "option2"
+  }, {
+    label: "Option 3",
+    value: "option3"
+  }]}
+/>
+```
+
+### Props
+| Property                  | Description                                                        | Type           | Default |
+|---------------------------|--------------------------------------------------------------------|----------------|---------|
+| placeholder               |                                                                    | string         |         |
+| isClearable               | Is the select value clearable                                      | boolean        | false   |
+| isSearchable              | Whether to enable search functionality                             | boolean        | true    |
+| isMulti                   | Support multiple selected options                                  | boolean        | false   |
+| disabled                  |                                                                    | boolean        | fase    |
+| size                      |                                                                    | sm,md,lg,xl    | md      |
+| variant                   |                                                                    | default,filled | default |
+| showSeparator             | Show a line separator between option and dropdown indicator        | boolean        | false   |
+| isAsync                   |                                                                    | boolean        | false   |
+| isCreatable               | Ability to create option from the select, if option is not present | boolean        | false   |
+| dropdownIndicatorIcon     |                                                                    |                |         |
+| dropdownIndicatorPosition |                                                                    |                |         |

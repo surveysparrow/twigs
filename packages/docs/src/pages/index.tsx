@@ -12,22 +12,10 @@ function HomepageHeader() {
   return (
     <header className={clsx('hero ', styles.heroBanner)}>
       <div className="container">
-        <h1 className="hero__title">{siteConfig.title}</h1>
-        <BrowserOnly>
-          {() => {
-            const Box = require('@sparrowengg/twigs-react').Box;
-            return <Box />;
-          }
-          }
-        </BrowserOnly>
+        <h1 className="hero__title">Twigs</h1>
+        <h2 className='hero__tagline'> React UI component Library </h2>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div className={styles.buttons}>
-          <Link
-            className="button button--primary button--lg"
-            to="/docs/getting-started">
-            Get Started
-          </Link>
-        </div>
+
       </div>
     </header>
   );
@@ -39,200 +27,155 @@ export default function Home(): JSX.Element {
     <Layout
       title={`Hello from ${siteConfig.title}`}
       description="Description will go into a meta tag in <head />">
-      <BrowserOnly>
-        {() => {
-          const Box = require('@sparrowengg/twigs-react').Box;
-          const Flex = require('@sparrowengg/twigs-react').Flex;
-          const Heading = require('@sparrowengg/twigs-react').Heading;
-          const Text = require('@sparrowengg/twigs-react').Text;
-          const CalendarRange = require('@sparrowengg/twigs-react').CalendarRange;
-          const Avatar = require('@sparrowengg/twigs-react').Avatar;
-          const AvatarGroup = require('@sparrowengg/twigs-react').AvatarGroup;
-          const FormInput = require('@sparrowengg/twigs-react').FormInput;
-          const Button = require('@sparrowengg/twigs-react').Button;
-          const Checkbox = require('@sparrowengg/twigs-react').Checkbox;
+      <div className='homepage'>
+        <div>
+          <div className='linear-gradient'>
+            <HomepageHeader />
+            <div className='container'>
+              <Link
+                style={{
+                  marginBottom: '2rem',
+                }}
+                className="button button--primary button--lg"
+                to="/docs/getting-started">
+                Get Started
+              </Link>
+            </div>
+          </div>
+        </div>
 
-          return (
-            <Box
-              css={{
-                background: 'radial-gradient(at center, #FFFFFF, #CCF5F4)',
-                minHeight: 'calc(100vh - 60px)',
-              }}
-            >
-              <HomepageHeader />
-              <Flex gap='$8' css={{
-                overflow: 'hidden',
-                flexWrap: 'no-wrap',
-                padding: '$8',
-                maxWidth: 1440,
-                margin: '0 auto',
-                zIndex: 1,
-                position: 'relative'
-              }}>
-                <Box css={{
-                  width: 640,
-                  height: 400,
-                  padding: '$8 $4',
-                  border: '1px solid $neutral200',
-                  borderRadius: '$2xl',
-                  boxShadow: '$sm',
-                  backgroundColor: '$white900',
-                }}>
-                  <CalendarRange />
-                </Box>
+        <FeatureCards />
 
-                <Flex gap='$8' flexDirection='column'>
-                  <Box
-                    css={{
-                      width: 380,
-                      height: 250,
-                      padding: '$4 $8',
-                      border: '1px solid $neutral200',
-                      borderRadius: '$2xl',
-                      boxShadow: '$sm',
-                      backgroundColor: '$white900',
-                    }}
-                  >
-                    <Avatar
-                      src="https://randomuser.me/api/portraits/men/1.jpg"
-                      alt="avatar"
-                      size="xl"
-                    />
-                    <Heading size="h4" css={{ marginBottom: 0, color: '$black700' }}> John Doe </Heading>
-                    <Text size="sm"> Director of design </Text>
-                    <Flex gap="$8" css={{ marginTop: '$4' }}>
-                      <Text css={{ color: '$neutral700' }} weight="medium"> Email: </Text>
-                      <Text css={{ color: '$neutral600' }}> john@example.com </Text>
-                    </Flex>
+        <div className='container component-section'>
+          <h2> Components </h2>
+          <BrowserOnly>
+            {() => {
 
-                    <Text css={{ marginTop: '$12', marginBottom: '$2', color: '$primary500' }} size='sm' weight='medium'> Followed by </Text>
-                    <Flex justifyContent="space-between">
-                      <AvatarGroup size="md" limit={5}>
-                        {
-                          [
-                            'https://randomuser.me/api/portraits/women/78.jpg',
-                            'https://randomuser.me/api/portraits/men/78.jpg',
-                            'https://randomuser.me/api/portraits/women/18.jpg',
-                            'https://randomuser.me/api/portraits/women/1.jpg',
-                            'https://randomuser.me/api/portraits/men/3.jpg',
-                            'https://randomuser.me/api/portraits/men/5.jpg'
-                          ].map((src, index) => (
-                            <Avatar
-                              key={index}
-                              src={src}
-                            />
-                          ))
-                        }
-                      </AvatarGroup>
-                      <Button color='default' size='md'>
-                        Book a meeting
-                      </Button>
-                    </Flex>
-                  </Box>
-                  <Box css={{
-                    width: 380,
-                    height: 180,
-                    borderRadius: '$2xl',
-                    border: "1px solid $black100",
-                    padding: '$10 $8',
-                    boxShadow: '$sm',
-                  }}>
-                    <Flex gap='$7' wrap="wrap">
-                      {
-                        [
-                          '#5F5CB0',
-                          '#7158F5',
-                          '#84BCEF',
-                          '#7158F5',
-                          '#74B5AF',
-                          '#98E0D8',
-                          '#F4B583',
-                          '#EE7D61',
-                          '#F4BEB4',
-                          '#A65E6E',
-                          '#C083D8',
-                          '#D946EF',
-                          '#8B5CF6',
-                          '#0EA5E9',
-                          '#74B5AF',
-                          '#FF6B97',
-                          '#5CA878',
-                          '#EFBE55',
-                          '#FFFFFF',
-                          '#C6C6C6',
-                          '#000000'
-                        ].map((color) => (
-                          <Box
-                            css={{
-                              height: 36,
-                              width: 36,
-                              backgroundColor: color,
-                              border: "1px solid $black50",
-                              borderRadius: 4,
-                              transition: 'all 0.1s ease-in-out',
-                              '&:hover': {
-                                scale: 1.1,
-                              }
-                            }}
-                          />
-                        ))
-                      }
-                    </Flex>
-                  </Box>
-                </Flex>
-                <Flex gap='$8' flexDirection='column'>
-                  <Flex
-                    flexDirection="column"
-                    gap="$8"
-                    shrink={0}
-                    css={{
-                      width: 340,
-                      height: 370,
-                      borderRadius: '$2xl',
-                      boxShadow: '$sm',
-                      padding: '$8 $12',
-                      border: '1px solid $neutral200',
-                      backgroundColor: '$white900',
-                    }}
-                  >
+              const Heading = require('@sparrowengg/twigs-react').Heading;
+              const Button = require('@sparrowengg/twigs-react').Button;
+              const Alert = require('@sparrowengg/twigs-react').Alert;
+              const Chip = require('@sparrowengg/twigs-react').Chip;
+              const DatePicker = require('@sparrowengg/twigs-react').DatePicker;
+              const Input = require('@sparrowengg/twigs-react').Input;
+              const Pagination = require('@sparrowengg/twigs-react').Pagination;
+              const Switch = require('@sparrowengg/twigs-react').Switch;
+              const ClapIcon = require('@sparrowengg/twigs-react-icons').ClapIcon;
+              const SearchIcon = require('@sparrowengg/twigs-react-icons').SearchIcon;
 
-                    <FormInput
-                      label="Full Name"
-                      placeholder="Enter your full name"
-                      type="text"
-                      size="lg"
-                      variant="filled"
-                      required
-                    />
+              return (
+                <div className='row'>
+                  <div className='col col--3'>
+                    <div className='component-section__component'>
+                      <Button size="md"> Submit Details </Button>
+                    </div>
+                    <Heading as="h6" size="h6"> Button </Heading>
+                  </div>
 
-                    <FormInput
-                      label="Email"
-                      placeholder="Enter your email"
-                      type="email"
-                      variant="filled"
-                      size="lg"
-                      required
-                    />
+                  <div className='col col--3'>
+                    <div className='component-section__component'>
+                      <Chip color="warning" size="md" closable> Closable Chip </Chip>
+                    </div>
+                    <Heading as="h6" size="h6"> Chip </Heading>
+                  </div>
 
-                    <FormInput
-                      label="Password"
-                      placeholder="Enter your password"
-                      type="password"
-                      size="lg"
-                      variant="filled"
-                      required
-                    />
-                    <Checkbox css={{ color: '$neutral700' }} size="sm"> Remember me </Checkbox>
+                  <div className='col col--3'>
+                    <div className='component-section__component'>
+                      <DatePicker />
+                    </div>
+                    <Heading as="h6" size="h6"> DatePicker </Heading>
+                  </div>
 
-                    <Button size="lg"> Create your account </Button>
-                  </Flex>
-                </Flex>
-              </Flex>
-            </Box>
-          )
-        }
-        }
-      </BrowserOnly>
+                  <div className='col col--3'>
+                    <div className='component-section__component'>
+                      <Pagination
+                        activePage={4}
+                        total={50}
+                        itemsPerPage={10}
+                      />
+                    </div>
+                    <Heading as="h6" size="h6"> Pagination </Heading>
+                  </div>
+
+                  <div className='col col--3'>
+                    <div className='component-section__component'>
+                      <Input
+                        placeholder="Search"
+                        iconLeft={<SearchIcon />}
+                      />
+                    </div>
+                    <Heading as="h6" size="h6"> Input </Heading>
+                  </div>
+
+                  <div className='col col--3'>
+                    <div className='component-section__component'>
+                      <Alert icon={<ClapIcon size={24} style={{ marginRight: 10 }} />} css={{ width: 200 }}>Hi Twigs!</Alert>
+                    </div>
+                    <Heading as="h6" size="h6"> Alert </Heading>
+                  </div>
+
+                  <div className='col col--3'>
+                    <div className='component-section__component'>
+                      <Switch size="md" />
+                    </div>
+                    <Heading as="h6" size="h6"> Switch </Heading>
+                  </div>
+
+
+                  <div className='col col--3'>
+                    <div className='component-section__component'>
+                      <Link
+                        to="/docs/category/components">
+                        View All components
+                      </Link>
+                    </div>
+                  </div>
+
+                </div>
+              )
+            }
+            }
+          </BrowserOnly>
+        </div>
+
+      </div>
     </Layout>
+  );
+}
+
+function FeatureCards() {
+  return (
+    <div className="container feature-cards">
+      <div className='row'>
+        <FeatureCard
+          title={'Accessible'}
+          description={'Embrace inclusivity – Twigs\' components ensure every user can navigate seamlessly, enhancing user experiences.'}
+          img={'/img/accessible.svg'}
+        />
+        <FeatureCard
+          title={'Extensible'}
+          description={'Unleash your creativity – Twigs\' components grant unparalleled customization, enabling tailored designs and layouts.'}
+          img={'img/extensible.svg'}
+        />
+        <FeatureCard
+          title={'Themeable'}
+          description={'Elevate aesthetics – Twigs\' themeability feature empowers you to create visually stunning and consistent interfaces.'}
+          img={'img/theming.svg'}
+        />
+      </div>
+    </div>
+  );
+}
+
+function FeatureCard({ title, description, img }) {
+  return (
+    <div className={clsx('col col--4')}>
+      <div className="card">
+        <img className='card__image' src={img} alt="Feature card" />
+        <div className="card__body">
+          <h3>{title}</h3>
+          <p>{description}</p>
+        </div>
+      </div>
+    </div>
   );
 }

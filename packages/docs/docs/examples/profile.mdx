@@ -1,0 +1,51 @@
+# Profile
+
+```jsx live
+<Box
+  css={{
+    width: 340,
+    height: 250,
+    padding: '$4 $8',
+    border: '1px solid $neutral200',
+    borderRadius: '$lg',
+    boxShadow: '$sm',
+    backgroundColor: '$white900',
+  }}
+>
+  <Avatar
+    src="https://randomuser.me/api/portraits/men/1.jpg"
+    alt="avatar"
+    size="xl"
+  />
+  <Heading size="h4" css={{ marginBottom: 0, color: '$black700' }}> John Doe </Heading>
+  <Text size="sm"> Director of design </Text>
+  <Flex gap="$8" css={{ marginTop: '$4' }}>
+    <Text css={{ color: '$neutral700' }} weight="medium"> Email: </Text>
+    <Text css={{ color: '$neutral600' }}> john@example.com </Text>
+  </Flex>
+
+  <Text css={{ marginTop: '$12', marginBottom: '$2', color: '$primary500' }} size='sm' weight='medium'> Followed by </Text>
+  <Flex justifyContent="space-between">
+    <AvatarGroup size="md" limit={5}>
+      {
+        [
+          'https://randomuser.me/api/portraits/women/78.jpg',
+          'https://randomuser.me/api/portraits/men/78.jpg',
+          'https://randomuser.me/api/portraits/women/18.jpg',
+          'https://randomuser.me/api/portraits/women/1.jpg',
+          'https://randomuser.me/api/portraits/men/3.jpg',
+          'https://randomuser.me/api/portraits/men/5.jpg'
+        ].map((src, index) => (
+          <Avatar
+            key={index}
+            src={src}
+          />
+        ))
+      }
+    </AvatarGroup>
+    <Button color='default' size='md'>
+      Book a meeting
+    </Button>
+  </Flex>
+</Box>
+```
