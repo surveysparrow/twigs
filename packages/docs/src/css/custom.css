@@ -5,8 +5,8 @@
  */
 
 /* You can override the default Infima variables here. */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 
 :root {
   --ifm-color-primary: #56b0bb;
@@ -18,6 +18,7 @@
   --ifm-color-primary-lightest: #E6F3F4;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --ifm-heading-font-family: 'DM Sans', sans-serif;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -32,10 +33,10 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
-/* html,
+html,
 body {
-  font-family: 'Inter', sans-serif;
-} */
+  font-family: 'DM Sans', sans-serif !important;
+}
 
 /* .homepage h1,
 h2,
@@ -182,4 +183,12 @@ h3 {
   letter-spacing: -.01em;
   line-height: 16px;
   transition: opacity .2s ease-out;
+}
+
+/* styles for react live editor and code block */
+.codeBlockLines_------node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-Content-styles-module,
+.playgroundEditor_------node_modules-\@docusaurus-theme-live-codeblock-lib-theme-Playground-styles-module pre,
+.theme-code-block {
+  font-family: 'Roboto Mono', monospace !important;
+  font-size: 14px !important;
 }
