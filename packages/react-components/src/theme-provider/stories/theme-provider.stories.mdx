@@ -7,15 +7,6 @@ import { Text } from '../../text/text';
 import { Heading } from '../../heading/heading';
 import { Flex } from '../../flex/flex';
 import { Button } from '../../button';
-import {
-  AllColors,
-  AllFontSizes,
-  AllFontWeights,
-  AllBorderWidths,
-  AllRadii,
-  AllSpaces,
-  AllSizes
-} from './theme-blocks';
 
 export const themeData = defaultTheme;
 export const themeString = JSON.stringify(defaultTheme, undefined, 2);
@@ -96,46 +87,3 @@ Below is the complete theme object which you can modify further.
 <Box css={{ maxHeight: '500px', overflowY: 'scroll' }}>
   <pre>{themeString}</pre>
 </Box>
-
-<Story name="Default">
-  <Flex gap='100px' flexDirection='column' css={{ margin: '100px 0px' }}>
-    <AllColors />
-    <AllFontSizes />
-    <AllFontWeights />
-    <AllBorderWidths />
-    <AllRadii />
-    <AllSpaces />
-    <AllSizes />
-  </Flex>
-</Story>
-
-
-
-<Story name="CustomCSS">
-<Heading size='h5' id='using-custom-css'>Using custom CSS </Heading>
-
-If you'd like to modify css of any Twigs component, you can `css` prop to give custom CSS.
-
-<Button 
-  size='lg'
-  css={{
-    background: '$accent700',
-    fontWeight: '$4',
-    marginTop: 12
-  }}
->
-  Save
-</Button>
-</Story>
-
-```
-<Button 
-  size='lg'
-  css={{
-    background: '$accent700',
-    fontWeight: '$4'
-  }}
->
-  Save
-</Button>
-```
