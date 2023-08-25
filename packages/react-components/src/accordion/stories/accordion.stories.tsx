@@ -7,14 +7,9 @@ export default {
   component: Accordion,
   title: 'Data Display/Accordion',
   args: {
-    size: 'sm',
     type: 'single'
   },
   argTypes: {
-    size: {
-      control: 'radio',
-      options: ['sm', 'md']
-    },
     type: {
       control: 'radio',
       options: ['single', 'multiple']

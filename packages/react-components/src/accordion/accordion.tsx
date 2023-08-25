@@ -9,46 +9,39 @@ const StyledChevron = styled(ChevronDownIcon, {
 });
 
 const StyledTrigger = styled(AccordionPrimitive.Trigger, {
-  all: 'unset',
-  flex: 1,
+  border: 'none',
+  width: '100%',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
   color: '$neutral900',
   backgroundColor: 'white',
   fontWeight: '$7',
+  paddingInlineStart: '$8',
+  paddingInlineEnd: '$8',
+  paddingTop: '$2',
+  paddingBottom: '$2',
   [`[data-state=open] & ${StyledChevron}`]: {
     transform: 'rotate(180deg)'
+  },
+  '&:hover': {
+    backgroundColorOpacity: ['$primary500', 0.04]
+  },
+  '&:focus-visible': {
+    outline: 'none',
+    $$shadowColor: '$colors$primary300',
+    outlineColor:
+      'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
   }
 });
 
 const Accordion = styled(AccordionPrimitive.Root, {
-  variants: {
-    size: {
-      sm: {
-        [`& ${StyledTrigger}`]: {
-          height: '$10',
-          fontSize: '$sm',
-          lineHeight: '$md'
-        }
-      },
-      md: {
-        [`& ${StyledTrigger}`]: {
-          height: '$18',
-          fontSize: '$lg',
-          lineHeight: '$lg'
-        }
-      }
-    }
-  },
-  defaultVariants: {
-    size: 'sm'
-  }
+  fontSize: '$sm',
+  lineHeight: '$md'
 });
 
 const AccordionItem = styled(AccordionPrimitive.Item, {
   overflow: 'hidden',
-  marginTop: '$1',
   borderBottom: '$borderWidths$xs solid $black200',
   '&:first-child': {
     marginTop: 0
@@ -59,12 +52,7 @@ const AccordionItem = styled(AccordionPrimitive.Item, {
   }
 });
 
-const StyledHeader = styled(AccordionPrimitive.Header, {
-  all: 'unset',
-  display: 'flex',
-  paddingInlineStart: '$4',
-  paddingInlineEnd: '$4',
-});
+const StyledHeader = styled(AccordionPrimitive.Header);
 
 const AccordionTrigger = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Trigger>,
@@ -93,8 +81,8 @@ const StyledContent = styled(AccordionPrimitive.Content, {
   overflow: 'hidden',
   fontSize: 15,
   backgroundColor: 'white',
-  paddingInlineStart: '$4',
-  paddingInlineEnd: '$4',
+  paddingInlineStart: '$8',
+  paddingInlineEnd: '$8',
   '&[data-state="open"]': {
     animation: `${slideDown} 300ms cubic-bezier(0.87, 0, 0.13, 1)`
   },
