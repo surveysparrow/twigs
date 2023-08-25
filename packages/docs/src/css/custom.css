@@ -19,6 +19,8 @@
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --ifm-heading-font-family: 'DM Sans', sans-serif;
+  --ifm-font-family-monospace: 'Roboto Mono', monospace;
+  --ifm-code-font-size: 85%;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -183,12 +185,4 @@ h3 {
   letter-spacing: -.01em;
   line-height: 16px;
   transition: opacity .2s ease-out;
-}
-
-/* styles for react live editor and code block */
-.codeBlockLines_------node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-Content-styles-module,
-.playgroundEditor_------node_modules-\@docusaurus-theme-live-codeblock-lib-theme-Playground-styles-module pre,
-.theme-code-block {
-  font-family: 'Roboto Mono', monospace !important;
-  font-size: 14px !important;
 }
