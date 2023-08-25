@@ -36,8 +36,8 @@ export default {
 const Template = (args) => <Button {...args}>Submit</Button>;
 export const Buttons = Template.bind({});
 
-const ButtonWithIconR = (args) => <Button {...args} iconRight={<TickCircleFillIcon />}>Submit</Button>;
+const ButtonWithIconR = (args) => <Button {...args} rightIcon={<TickCircleFillIcon />}>Submit</Button>;
 export const ButtonWithRightIcon = ButtonWithIconR.bind({});
 
-const ButtonWithIconL = (args) => <Button {...args} iconLeft={<TickCircleFillIcon />}>Submit</Button>;
+const ButtonWithIconL = (args) => <Button {...args} leftIcon={<TickCircleFillIcon />}>Submit</Button>;
 export const ButtonWithLeftIcon = ButtonWithIconL.bind({});
