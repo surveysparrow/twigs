@@ -68,7 +68,7 @@ describe('Dropdown', () => {
             css={{ marginTop: '$8' }}
             size="lg"
             color="primary"
-            iconRight={<ChevronIcon />}
+            rightIcon={<ChevronIcon />}
             aria-label="Customise options"
           >
             More Options

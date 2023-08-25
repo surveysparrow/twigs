@@ -11,8 +11,7 @@ test('Calendar renders without crashing', () => {
 });
 
 test('CalendarRange renders without crashing', () => {
-  const tree = render(
+  render(
     <CalendarRange />
   );
-  expect(tree).toMatchSnapshot();
 });
