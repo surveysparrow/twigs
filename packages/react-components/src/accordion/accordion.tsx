@@ -61,7 +61,9 @@ const AccordionItem = styled(AccordionPrimitive.Item, {
 
 const StyledHeader = styled(AccordionPrimitive.Header, {
   all: 'unset',
-  display: 'flex'
+  display: 'flex',
+  paddingInlineStart: '$4',
+  paddingInlineEnd: '$4',
 });
 
 const AccordionTrigger = React.forwardRef<
@@ -91,7 +93,8 @@ const StyledContent = styled(AccordionPrimitive.Content, {
   overflow: 'hidden',
   fontSize: 15,
   backgroundColor: 'white',
-
+  paddingInlineStart: '$4',
+  paddingInlineEnd: '$4',
   '&[data-state="open"]': {
     animation: `${slideDown} 300ms cubic-bezier(0.87, 0, 0.13, 1)`
   },
