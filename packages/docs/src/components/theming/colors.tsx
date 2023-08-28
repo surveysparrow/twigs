@@ -14,7 +14,7 @@ export default function AllColors() {
       <ColorDisplay selectedColor={'accent'} />
       <ColorDisplay selectedColor={'highlight'} />
       <ColorDisplay selectedColor={'positive'} />
-      <ColorDisplay selectedColor={'error'} />
+      <ColorDisplay selectedColor={'negative'} />
       <ColorDisplay selectedColor={'neutral'} />
       <ColorDisplay selectedColor={'black'} />
       <ColorDisplay selectedColor={'white'} />
