@@ -61,8 +61,8 @@ export const Pagination: FunctionComponent<PaginationProps> = ({
     setPage(activePage);
   }, [activePage]);
 
-  const isPrevDisabled = page === 1;
-  const isNextDisabled = page === paginationRange?.[paginationRange?.length - 1];
+  const isPrevDisabled = page === 1 || total === 0;
+  const isNextDisabled = page === paginationRange?.[paginationRange?.length - 1] || total === 0;
 
   return (
     <Box
@@ -90,7 +90,7 @@ export const Pagination: FunctionComponent<PaginationProps> = ({
                 // eslint-disable-next-line react/no-array-index-key
                 <li key={`pagination-dots-${keyId}-${index}`}>
                   <IconButton
-                    as={"span"}
+                    as="span"
                     icon={<EllipsisHorizontalIcon />}
                     color="bright"
                     size={size}
