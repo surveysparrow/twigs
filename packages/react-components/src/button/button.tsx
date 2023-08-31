@@ -389,8 +389,8 @@ const StyledSpan = styled('span', {
 });
 
 export interface ButtonBaseProps {
-  iconLeft?: ReactElement;
-  iconRight?: ReactElement;
+  leftIcon?: ReactElement;
+  rightIcon?: ReactElement;
   icon?: ReactElement;
   loading?: boolean,
   disabled?: boolean
@@ -405,7 +405,7 @@ type ButtonProps = ButtonBaseProps &
 export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
   (
     {
-      children, color = 'primary', icon, iconLeft, iconRight, loading, disabled, onClick, ...rest
+      children, color = 'primary', icon, leftIcon, rightIcon, loading, disabled, onClick, ...rest
     }: ButtonProps,
     ref
   ) => {
@@ -425,17 +425,17 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
             <>
               {icon && React.cloneElement(icon)}
 
-              {iconLeft && (
+              {leftIcon && (
                 <StyledSpan css={{ marginRight: '$4' }}>
-                  {React.cloneElement(iconLeft)}
+                  {React.cloneElement(leftIcon)}
                 </StyledSpan>
               )}
 
               {children}
 
-              {iconRight && (
+              {rightIcon && (
                 <StyledSpan css={{ marginLeft: '$4' }}>
-                  {React.cloneElement(iconRight)}
+                  {React.cloneElement(rightIcon)}
                 </StyledSpan>
               )}
             </>
