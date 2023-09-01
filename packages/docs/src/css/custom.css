@@ -186,3 +186,8 @@ h3 {
   line-height: 16px;
   transition: opacity .2s ease-out;
 }
+
+/* remove the margin bottom from accordion */
+*[class^='twigs'] h3 {
+  margin-bottom: 0;
+}

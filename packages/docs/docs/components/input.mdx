@@ -22,9 +22,9 @@ import { Input } from "@sparrowengg/twigs-react";
 ### Input with icons
 ```jsx live
 <Flex gap='4px' flexDirection='row'>
-  <Input iconLeft={<SearchIcon />} placeholder='Input with left icon' />
-  <Input iconRight={<SearchIcon />} placeholder='Input with right icon' />
-  <Input iconLeft={<UserIcon />} iconRight={<SearchIcon />} placeholder='Input with left and right icon' />
+  <Input leftIcon={<SearchIcon />} placeholder='Input with left icon' />
+  <Input rightIcon={<SearchIcon />} placeholder='Input with right icon' />
+  <Input leftIcon={<UserIcon />} rightIcon={<SearchIcon />} placeholder='Input with left and right icon' />
 </Flex>
 ```
 
@@ -36,7 +36,7 @@ import { Input } from "@sparrowengg/twigs-react";
 | onChange  |                                        | function        |         |
 | size      | input size                             | `sm` `md` `lg` `xl`     | md      |
 | disabled  |                                        | boolean         | false   |
-| iconLeft  | Append icon on the left side of input  | JSX Element     |         |
-| iconRight | Append icon on the right side of input | JSX Element     |         |
+| leftIcon  | Append icon on the left side of input  | JSX Element     |         |
+| rightIcon | Append icon on the right side of input | JSX Element     |         |
 | css       | Custom styles for input                | object          |         |
 | maxLength       | Maximum allowed characters                | number          |         |

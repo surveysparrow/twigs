@@ -100,7 +100,7 @@ export default function Home(): JSX.Element {
                     <div className='component-section__component'>
                       <Input
                         placeholder="Search"
-                        iconLeft={<SearchIcon />}
+                        leftIcon={<SearchIcon />}
                       />
                     </div>
                     <Heading as="h6" size="h6"> Input </Heading>
