@@ -1,0 +1,48 @@
+# Pagination
+
+### Import
+
+```jsx
+import { Pagination } from "@sparrowengg/twigs-react";
+```
+
+### Usage 
+
+```jsx live
+function App() {
+  const [activePage, setActivePage] = useState(1);
+  return (
+    <Pagination
+      activePage={activePage}
+      itemsPerPage={10}
+      total={100}
+      onChange={(event, page) => setActivePage(page)}
+    />
+  );
+}
+```
+
+### siblingCount
+`siblingCount` is the number of buttons to show on left and right of the active page button. By default `siblingCount` count is 1.
+
+```jsx
+<Pagination
+  activePage={activePage}
+  itemsPerPage={10}
+  total={100}
+  // highlight-start
+  siblingCount={2}
+  // highlight-end
+  onChange={(event, page) => setActivePage(page)}
+/>
+```
+
+### Props
+| Property     | Description                                                           | Type                   | Default |
+|--------------|-----------------------------------------------------------------------|------------------------|---------|
+| activePage   | Current highlighted page                                              | number                 |         |
+| itemsPerPage | Items in each page                                                    | number                 |         |
+| total        | total items                                                           |                        |         |
+| siblingCount | number of buttons to show on left and right of the active page button | number                 | 1       |
+| onChange     | function                                                              |                        |         |
+| size         | size of buttons in pagination                                         | `xxs` `xs` `sm` `md` `lg` `xl` `2xl` |         |

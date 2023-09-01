@@ -1,0 +1,47 @@
+# DatePicker
+
+:::info
+`DatePicker` component requires additional dependancy of `@internationalized/date` to be installed. 
+
+We will be working on removing this additional dependancy in the future. 
+:::
+
+```jsx
+npm install --save @internationalized/date
+```
+
+### Import
+
+```jsx
+import { DatePicker } from "@sparrowengg/twigs-react";
+```
+
+### Usage 
+```jsx
+import { parseDate } from '@internationalized/date';
+
+function App() {
+
+  const [value, setValue] = React.useState(parseDate('2023-07-24'));
+  
+  return (
+    <DatePicker
+      value={value}
+      onChange={setValue}
+      label="Enter date of birth"
+    />
+  );
+}
+```
+
+### Props
+| Property      | Description                                                             | Type                         | Default |
+|---------------|-------------------------------------------------------------------------|------------------------------|---------|
+| value         | selected value range                                                    | @internationalized/date Date |         |
+| minValue      | minimum selectable date value. Dates beyond this value will be disabled | @internationalized/date Date |         |
+| maxValue      | maximum selectable date value. Dates beyond this value will be disabled | @internationalized/date Date |         |
+| isDisabled    | Disable the calendar component                                          | boolean                      | false   |
+| onChange      | Callback function when date is selected                                 | function                     |         |
+| isOpen        | open the calendar popover                                               | boolean                      | false   |
+| closeOnSelect | Close datepicker on selecting a date                                    | boolean                      | false   |
+| label         |                                                                         | string                       |         |

@@ -1,0 +1,59 @@
+# Dropdown
+
+### Import
+
+```jsx
+import { DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSub,
+  DropdownMenuSeparator,
+  DropdownMenuSubContent } from "@sparrowengg/twigs-react";
+```
+
+
+### Usage 
+```jsx live
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button aria-label="Customise options">
+      More Options
+    </Button>
+  </DropdownMenuTrigger>
+
+  <DropdownMenuContent>
+    <DropdownMenuItem>New Tab</DropdownMenuItem>
+
+    <DropdownMenuSub>
+      <DropdownMenuSubTrigger>
+        More Tools
+      </DropdownMenuSubTrigger>
+
+      <DropdownMenuSubContent sideOffset={2} alignOffset={-5}>
+        <DropdownMenuItem>Save Page As…</DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>Developer Tools</DropdownMenuItem>
+      </DropdownMenuSubContent>
+    </DropdownMenuSub>
+
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+
+### Props
+
+#### DropdownMenu
+| Property     | Description                                         | Type    | Default |
+|--------------|-----------------------------------------------------|---------|---------|
+| defaultOpen  | default open state of dropdown                      | boolean | false   |
+| open         | controlled open state                               |         |         |
+| onOpenChange | callback function when dropdown open status changed |         |         |
+
+#### DropdownMenuContent
+| Property     | Description                                         | Type                  | Default |
+|--------------|-----------------------------------------------------|-----------------------|---------|
+| side         | preferred side of the trigger to open the menu      | `top` `right` `bottom` `left` | bottom  |
+| align        | preferred alignment against the trigger             | `start` `center` `end`      | center  |
+| onOpenChange | callback function when dropdown open status changed |                       |         |

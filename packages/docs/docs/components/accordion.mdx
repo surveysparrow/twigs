@@ -1,0 +1,40 @@
+# Accordion
+
+### Import
+
+```jsx
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@sparrowengg/twigs-react";
+```
+
+
+### Usage 
+```jsx live
+<Accordion>
+  <AccordionItem value="item-1">
+    <AccordionTrigger>Page settings</AccordionTrigger>
+    <AccordionContent>Yes. It adheres to the WAI-ARIA design pattern.</AccordionContent>
+  </AccordionItem>
+
+  <AccordionItem value="item-2">
+    <AccordionTrigger>Profile Information</AccordionTrigger>
+    <AccordionContent>Yes. It adheres to the WAI-ARIA design pattern.</AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+
+### Props
+
+#### Accordion
+| Property | Description                           | Type            | Default |
+|----------|---------------------------------------|-----------------|---------|
+| type     | ability to open one or more accordion | `single` `multiple` | single  |
+| size     |                                       | `sm` `md`           | sm      |
+| defaultValue  | uncontrolled default selected accorion item             | boolean | false   |
+| value         | controlled selected accordion item               | boolean |         |
+| onValueChange | callback function for state changes |         |         |
+
+#### AccordionItem
+| Property | Description         | Type            | Default |
+|----------|---------------------|-----------------|---------|
+| value    | identifier for item | single,multiple | single  |

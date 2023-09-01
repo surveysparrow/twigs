@@ -1,0 +1,43 @@
+# Drawer
+
+### Import
+
+```jsx
+import { Drawer, DrawerHeader, DrawerFooter, DrawerBody } from "@sparrowengg/twigs-react";
+```
+
+
+### Usage 
+```jsx live
+function App() {
+  const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
+  return (
+    <>
+      <Drawer
+        isOpen={isDrawerOpen}
+        onClose={() => setIsDrawerOpen(false)}
+      >
+        <DrawerHeader>
+          <Heading size="h4">Edit Profile</Heading>
+        </DrawerHeader>
+        <DrawerBody>
+          Drawer content
+        </DrawerBody>
+        <DrawerFooter>
+          Drawer Footer
+        </DrawerFooter>
+      </Drawer>
+      <Button onClick={() => setIsDrawerOpen(true)}>
+        Open Drawer
+      </Button>
+    </>
+  );
+}
+```
+
+
+### Props
+| Property | Description                            | Type    | Default |
+|----------|----------------------------------------|---------|---------|
+| isOpen   | state of drawer                        | boolean | false   |
+| onClose  | callback function when modal is closed |         |         |

@@ -1,0 +1,31 @@
+# FormHelperText
+
+FormHelperText can be used for providing additional context to your input fields. 
+
+### Import
+
+```jsx
+import { FormHelperText } from "@sparrowengg/twigs-react";
+```
+
+
+### Usage 
+```jsx live
+<FormHelperText> Password should have a minimum length of 6. </FormHelperText>
+```
+
+
+### Pair with Input 
+```jsx live
+<>
+  <Input placeholder="password" type="password" />
+  <FormHelperText> Password should have a minimum length of 6. </FormHelperText>
+</>
+```
+
+
+### Props
+| Property       | Description                                | Type                    | Default |
+|----------------|--------------------------------------------|-------------------------|---------|
+| size           | font size of the FormLabel                       | `xxs` `xs` `sm` `md` `lg`                   | xs      |
+| weight           | font weight                       | `regular` `medium` `bold`                   | regular      |

@@ -1,0 +1,34 @@
+# Popover
+
+### Import
+
+```jsx
+import { Popover, PopoverTrigger, PopoverArrow, PopoverClose, PopoverContent } from "@sparrowengg/twigs-react";
+```
+
+
+### Usage 
+```jsx
+<Popover>
+  <PopoverTrigger asChild>
+    <Button>
+      Trigger the popover
+    </Button>
+  </PopoverTrigger>
+  <PopoverContent>
+    Hello there
+    <PopoverClose> Close me</PopoverClose>
+    <PopoverArrow />
+  </PopoverContent>
+</Popover>
+```
+
+
+### Props
+
+#### Popover
+| Property     | Description                         | Type    | Default |
+|--------------|-------------------------------------|---------|---------|
+| defaultOpen  | uncontrolled open state             | boolean | false   |
+| open         | controller open state               | boolean |         |
+| onOpenChange | callback function for state changes |         |         |

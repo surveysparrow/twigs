@@ -41,7 +41,7 @@ export default {
 };
 
 const Template = (args) => (
-  <Dialog {...args}>
+  <Dialog {...args} >
     <DialogTrigger asChild>
       <Button size="lg">Edit profile</Button>
     </DialogTrigger>

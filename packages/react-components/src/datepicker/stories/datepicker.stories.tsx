@@ -1,3 +1,4 @@
+import { parseDate } from '@internationalized/date';
 import React, { useState } from 'react';
 import { DatePicker } from '../datepicker';
 
@@ -8,14 +9,13 @@ export default {
 };
 
 const WithPopOverTemplate = (args) => {
-  const [value, setValue] = useState(null);
+  const [value, setValue] = React.useState(parseDate('2023-07-24'));
   return (
     <DatePicker
       {...args}
       value={value}
       onChange={setValue}
       label="Enter date of birth"
-      closeOnSelect={false}
     />
   );
 };

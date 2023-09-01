@@ -14,7 +14,6 @@ const Template = (args) => {
     start: parseDate('2023-07-12'),
     end: parseDate('2023-07-20')
   });
-  console.log(value);
   return (
     <CalendarRange
       {...args}

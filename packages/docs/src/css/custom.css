@@ -1,0 +1,193 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+
+:root {
+  --ifm-color-primary: #56b0bb;
+  --ifm-color-primary-dark: #3B8088;
+  --ifm-color-primary-darker: #36737A;
+  --ifm-color-primary-darkest: #2E666D;
+  --ifm-color-primary-light: #9CCFD6;
+  --ifm-color-primary-lighter: #CEE7EA;
+  --ifm-color-primary-lightest: #E6F3F4;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --ifm-heading-font-family: 'DM Sans', sans-serif;
+  --ifm-font-family-monospace: 'Roboto Mono', monospace;
+  --ifm-code-font-size: 85%;
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  --ifm-color-primary: #25c2a0;
+  --ifm-color-primary-dark: #21af90;
+  --ifm-color-primary-darker: #1fa588;
+  --ifm-color-primary-darkest: #1a8870;
+  --ifm-color-primary-light: #29d5b0;
+  --ifm-color-primary-lighter: #32d8b4;
+  --ifm-color-primary-lightest: #4fddbf;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+html,
+body {
+  font-family: 'DM Sans', sans-serif !important;
+}
+
+/* .homepage h1,
+h2,
+h3 {
+  font-family: 'Newsreader', serif;
+} */
+
+*[class^='twigs'] ul {
+  list-style-type: none;
+  margin-bottom: 0;
+}
+
+*[class^='twigs'] ul li {
+  margin-top: 0px !important;
+}
+
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  text-align: left;
+}
+
+.hero__title {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.hero__tagline {
+  font-weight: 600;
+}
+
+.hero__subtitle {
+  font-size: 1.2rem;
+}
+
+.hero {
+  background-color: transparent;
+}
+
+/* .home__hero {
+  padding: 60px 100px;
+} */
+
+@media screen and (max-width: 768px) {
+  .heroBanner_src-pages-index-module {
+    padding: 4rem 0 !important;
+  }
+}
+
+.card {
+  /* border-radius: 0.5rem;
+  padding: 4px 8px; */
+  box-shadow: none;
+  padding: 0;
+  margin-bottom: 3rem;
+  max-width: 600px;
+  background: transparent;
+}
+
+.card__image {
+  height: 60px;
+  width: 60px;
+  margin-bottom: 16px;
+}
+
+.card__body {
+  padding: 0;
+}
+
+.card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.15rem;
+}
+
+.card p {
+  font-size: 1rem;
+}
+
+.linear-gradient {
+  background-image: linear-gradient(to bottom, #ffffff, #f9fafe, #f1f6fd, #e7f3fa, #dcf0f6);
+}
+
+.component-section {
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.component-section .row .col {
+  margin: 12px 0;
+}
+
+.component-section__component {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  background-color: #f2f7f7;
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 20px;
+}
+
+.component-section h2 {
+  font-size: 2rem;
+}
+
+.component-section h6 {
+  margin-top: 1rem;
+  font-weight: 500;
+  text-align: center;
+  color: #3e3e3f;
+}
+
+.feature-cards {
+  margin-top: 100px;
+}
+
+.feature-cards h3 {
+  margin-bottom: .5rem;
+}
+
+/* sidebar */
+#__docusaurus .theme-doc-sidebar-item-category-level-1>.menu__list>.menu__list-item:last-of-type {
+  padding-block-end: 1.5rem;
+}
+
+#__docusaurus ul.menu__list {
+  transition-duration: .2s !important;
+}
+
+#__docusaurus .theme-doc-sidebar-item-link-level-1>.menu__link {
+  color: var(--ifm-hero-text-color);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 100%;
+}
+
+#__docusaurus .menu__link {
+  align-items: center;
+  display: flex;
+  font-size: .938rem;
+  font-weight: 500;
+  letter-spacing: -.01em;
+  line-height: 16px;
+  transition: opacity .2s ease-out;
+}
+
+/* remove the margin bottom from accordion */
+*[class^='twigs'] h3 {
+  margin-bottom: 0;
+}

@@ -1,0 +1,63 @@
+# Toast
+
+### Import
+
+```jsx
+import { Toast } from "@sparrowengg/twigs-react";
+```
+
+
+### Usage 
+
+You can add `Toast` at top level of your application to configure the options. 
+
+```jsx
+function App () {
+  return (
+    <>
+      //highlight-start
+      <Toastr duration={10000} />
+      // highlight-end
+      <App />
+    </>
+  )
+}
+```
+
+
+### Trigger toast
+Using `toast` hook you can trigger toast from anywhere in your application.
+
+```jsx
+<Button
+  variant="outline"
+  onClick={() => {
+    //highlight-start
+    toast({
+      variant: 'default',
+      title: 'Default message',
+      description: 'There was a problem with your request.'
+    });
+    // highlight-end
+  }}
+>
+  Show Toast
+</Button>
+```
+
+
+
+### Props
+
+#### Toastr
+| Property | Description                                                     | Type                          | Default |
+|----------|-----------------------------------------------------------------|-------------------------------|---------|
+| duration | how long the toast should be visible in the UI, in milliseconds | number                        | 10000   |
+
+
+#### toast
+| Property | Description                                                     | Type                          | Default |
+|----------|-----------------------------------------------------------------|-------------------------------|---------|
+| variant  |                                                                 | `default` `success` `error` `warning` | default |
+| icon     | Add an icon on the left side of the toast                       |                               |         |
+

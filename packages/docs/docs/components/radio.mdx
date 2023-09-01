@@ -1,0 +1,28 @@
+# Radio
+
+### Import
+
+```jsx
+import { Radio, RadioGroup } from "@sparrowengg/twigs-react";
+```
+
+
+### Usage 
+```jsx live
+<RadioGroup defaultValue="robin">
+  <Radio value="robin"> Robin </Radio>
+  <Radio value="falcon"> Falcon </Radio>
+  <Radio value="raven"> Raven </Radio>
+</RadioGroup>
+```
+
+
+### Props
+
+| Property       | Description                                | Type                    | Default |
+|----------------|--------------------------------------------|-------------------------|---------|
+| checked        | state of the radio                      | boolean | false   |
+| defaultChecked | Uncontrolled default state of Switch     | boolean                 |         |
+| disabled       |                                            | boolean                 | false   |
+| size           | Size of the Switch                       | `sm` `md`                   | sm      |
+| onChange       | Callback function when Switch is clicked | function                |         |
