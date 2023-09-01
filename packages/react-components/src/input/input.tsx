@@ -99,8 +99,8 @@ function getInputPadding(size: string | ({ '@initial'?: 'sm' | 'md' | 'lg' | 'xl
 }
 
 export interface InputBaseProps {
-  iconLeft?: ReactElement;
-  iconRight?: ReactElement;
+  leftIcon?: ReactElement;
+  rightIcon?: ReactElement;
   rightElement?: ReactElement;
   leftElement?: ReactElement;
   // eslint-disable-next-line no-unused-vars
@@ -178,15 +178,15 @@ const AddonContainer = styled(Box, {
 
 export const Input: FunctionComponent<InputProps> = React.forwardRef(({
   size = 'md',
-  iconLeft,
-  iconRight,
+  leftIcon,
+  rightIcon,
   css,
   rightElement,
   leftElement,
   ...rest
 }: InputProps, ref) => {
   const inputPaddingValue = getInputPadding(size);
-  if (iconLeft || iconRight || rightElement || leftElement) {
+  if (leftIcon || rightIcon || rightElement || leftElement) {
     return (
       <Box
         css={{
@@ -196,14 +196,14 @@ export const Input: FunctionComponent<InputProps> = React.forwardRef(({
           ...css
         }}
       >
-        {iconLeft && (
+        {leftIcon && (
           <IconContainer
             size={size}
             css={{
               left: size === 'md' ? '$4' : '$6'
             }}
           >
-            {React.cloneElement(iconLeft)}
+            {React.cloneElement(leftIcon)}
           </IconContainer>
         )}
 
@@ -223,19 +223,19 @@ export const Input: FunctionComponent<InputProps> = React.forwardRef(({
           size={size}
           data-testid="input"
           css={{
-            ...(iconLeft && { paddingInlineStart: inputPaddingValue }),
-            ...(iconRight && { paddingInlineEnd: inputPaddingValue })
+            ...(leftIcon && { paddingInlineStart: inputPaddingValue }),
+            ...(rightIcon && { paddingInlineEnd: inputPaddingValue })
           }}
           {...rest}
         />
-        {iconRight && (
+        {rightIcon && (
           <IconContainer
             size={size}
             css={{
               right: size === 'md' ? '$4' : '$6'
             }}
           >
-            {React.cloneElement(iconRight)}
+            {React.cloneElement(rightIcon)}
           </IconContainer>
         )}
 

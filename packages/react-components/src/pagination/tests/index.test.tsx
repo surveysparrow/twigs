@@ -66,7 +66,7 @@ describe('Pagination', () => {
       itemsPerPage={2}
       total={10}
     />);
-    const links = await screen.findAllByRole('link');
-    expect(links).toHaveLength(result.current.length);
+    const links = await screen.findAllByRole('button');
+    expect(links).toHaveLength(result.current.length + 2);
   });
 });

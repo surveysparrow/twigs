@@ -80,10 +80,10 @@ const StyledAlert = styled(Box, {
         }
       },
       [STATUSES.error.name]: {
-        backgroundColor: '$error100',
-        borderColor: '$error200',
+        backgroundColor: '$negative100',
+        borderColor: '$negative200',
         [`${StyledAlertIcon} svg`]: {
-          color: '$error500'
+          color: '$negative500'
         }
       },
       [STATUSES.warning.name]: {

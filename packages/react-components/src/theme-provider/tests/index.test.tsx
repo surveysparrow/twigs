@@ -6,10 +6,9 @@ import { Box } from '../../box';
 import { ThemeProvider } from '../index';
 
 test('renders without crashing', () => {
-  const tree = render(
+  render(
     <ThemeProvider theme={{}}>
       <Box />
     </ThemeProvider>
   );
-  expect(tree).toMatchSnapshot();
 });

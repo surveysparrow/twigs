@@ -24,7 +24,8 @@ const StyledButton = styled('button', {
   },
   '&:focus-visible': {
     $$shadowColor: '$colors$primary300',
-    boxShadow: 'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
+    boxShadow:
+      'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
   },
   variants: {
     size: {
@@ -161,13 +162,13 @@ const StyledButton = styled('button', {
         }
       },
       error: {
-        background: '$error100',
-        color: '$error600',
+        background: '$negative100',
+        color: '$negative600',
         '&:hover': {
-          background: '$error200'
+          background: '$negative200'
         },
         '&:active': {
-          background: '$error300'
+          background: '$negative300'
         }
       }
     },
@@ -206,6 +207,7 @@ const StyledButton = styled('button', {
       color: 'primary',
       variant: 'ghost',
       css: {
+        background: 'transparent',
         color: '$primary500',
         '&:focus': {
           backgroundColorOpacity: ['$primary500', 0.06]
@@ -246,6 +248,7 @@ const StyledButton = styled('button', {
       color: 'secondary',
       variant: 'ghost',
       css: {
+        background: 'transparent',
         color: '$secondary500',
         '&:hover, &:focus': {
           color: '$secondary600',
@@ -261,6 +264,7 @@ const StyledButton = styled('button', {
       color: 'default',
       variant: 'ghost',
       css: {
+        background: 'transparent',
         color: '$neutral800',
         '&:hover, &:focus, &:active': {
           color: '$neutral900'
@@ -277,12 +281,13 @@ const StyledButton = styled('button', {
       color: 'error',
       variant: 'ghost',
       css: {
-        color: '$error600',
+        color: '$negative600',
+        background: 'transparent',
         '&:active': {
-          background: '$error200'
+          background: '$negative200'
         },
         '&:hover, &:focus': {
-          background: '$error100'
+          background: '$negative100'
         }
       }
     },
@@ -384,8 +389,8 @@ const StyledSpan = styled('span', {
 });
 
 export interface ButtonBaseProps {
-  iconLeft?: ReactElement;
-  iconRight?: ReactElement;
+  leftIcon?: ReactElement;
+  rightIcon?: ReactElement;
   icon?: ReactElement;
   loading?: boolean,
   disabled?: boolean
@@ -400,7 +405,7 @@ type ButtonProps = ButtonBaseProps &
 export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
   (
     {
-      children, color = 'primary', icon, iconLeft, iconRight, loading, disabled, onClick, ...rest
+      children, color = 'primary', icon, leftIcon, rightIcon, loading, disabled, onClick, ...rest
     }: ButtonProps,
     ref
   ) => {
@@ -420,17 +425,17 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
             <>
               {icon && React.cloneElement(icon)}
 
-              {iconLeft && (
+              {leftIcon && (
                 <StyledSpan css={{ marginRight: '$4' }}>
-                  {React.cloneElement(iconLeft)}
+                  {React.cloneElement(leftIcon)}
                 </StyledSpan>
               )}
 
               {children}
 
-              {iconRight && (
+              {rightIcon && (
                 <StyledSpan css={{ marginLeft: '$4' }}>
-                  {React.cloneElement(iconRight)}
+                  {React.cloneElement(rightIcon)}
                 </StyledSpan>
               )}
             </>

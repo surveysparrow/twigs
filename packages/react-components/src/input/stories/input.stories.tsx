@@ -33,14 +33,14 @@ const Template = (args) => (
 
 const TemplateWithLeftIcon = (args) => (
   <Input
-    iconLeft={<UserCircleIcon />}
+    leftIcon={<UserCircleIcon />}
     {...args}
   />
 );
 
 const TemplateWithRightIcon = (args) => (
   <Input
-    iconRight={<UserCircleIcon />}
+    rightIcon={<UserCircleIcon />}
     {...args}
   />
 );
