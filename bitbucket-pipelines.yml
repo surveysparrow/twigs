@@ -1,98 +1,109 @@
-#  Template npm-publish
-
-#  This template allows you to publish your npm package, as defined in package.json, to npmjs.com or any other npm-like registry.
-#  The workflow allows running tests, code linting and security scans on feature branches (as well as master).
-#  The npm package will be validated and published after the code is merged to master.
-
-# Prerequisites: $NPM_TOKEN setup in the Deployment variables.
-# For advanced cases, please, follow examples from the pipe's README https://bitbucket.org/atlassian/npm-publish/src/master/README.md
-
 image: node:16
 
 pipelines:
-  default:
-    - parallel:
-        - step:
-            name: Security Scan for React Icons
-            script:
-              - cd packages/react-icons
-              # Run a security scan for sensitive data.
-              # See more security tools at https://bitbucket.org/product/features/pipelines/integrations?&category=security
-              - pipe: atlassian/git-secrets-scan:0.5.1
+  pull-requests:
+    "**":
+      - parallel:
+          - step:
+              name: Security Scan for React Icons
+              script:
+                - cd packages/react-icons
+                # Run a security scan for sensitive data.
+                # See more security tools at https://bitbucket.org/product/features/pipelines/integrations?&category=security
+                - pipe: atlassian/git-secrets-scan:0.5.1
 
-        - step:
-            name: Run eslint
-            condition:
-              changesets:
-                includePaths:
-                  # any changes in given directory
-                  - "packages/react-icons/**"
-            script:
-              - cd packages/react-icons
-              - npm install eslint
-              - npx eslint .
-            caches:
-              - node
+          - step:
+              name: Run eslint
+              condition:
+                changesets:
+                  includePaths:
+                    # any changes in given directory
+                    - "packages/react-icons/src/**"
+              script:
+                - cd packages/react-icons
+                - npm install eslint
+                - npx eslint .
+              caches:
+                - node
 
-        - step:
-            name: Build Icons
-            caches:
-              - node
-            condition:
-              changesets:
-                includePaths:
-                  # any changes in given directory
-                  - "packages/react-icons/**"
+          - step:
+              name: Build Icons
+              caches:
+                - node
+              condition:
+                changesets:
+                  includePaths:
+                    # any changes in given directory
+                    - "packages/react-icons/src/**"
 
-            script:
-              - npm install -g lerna
-              - yarn install
-              - lerna run build --scope=@sparrowengg/twigs-react-icons
+              script:
+                - npm install -g lerna
+                - yarn install
+                - lerna run build --scope=@sparrowengg/twigs-react-icons
 
-        # components
-    - parallel:
-        - step:
-            name: Security Scan for React Components
-            script:
-              - cd packages/react-components
-              - pipe: atlassian/git-secrets-scan:0.5.1
-        - step:
-            name: Run eslint
-            condition:
-              changesets:
-                includePaths:
-                  # any changes in given directory
-                  - "packages/react-components/**"
-            script:
-              - cd packages/react-components
-              - npm install eslint
-              - npx eslint .
-            caches:
-              - node
-        - step:
-            name: Test
-            condition:
-              changesets:
-                includePaths:
-                  - "packages/react-components/**"
-            caches:
-              - node
-            script:
-              - npm install -g lerna
-              - yarn install
-              - lerna run test
-        - step:
-            name: Build Components
-            condition:
-              changesets:
-                includePaths:
-                  - "packages/react-components/**"
-            caches:
-              - node
-            script:
-              - npm install -g lerna
-              - yarn install
-              - lerna run build --scope=@sparrowengg/twigs-react
+          # components
+      - parallel:
+          - step:
+              name: Security Scan for React Components
+              script:
+                - cd packages/react-components
+                - pipe: atlassian/git-secrets-scan:0.5.1
+          - step:
+              name: Run eslint
+              condition:
+                changesets:
+                  includePaths:
+                    # any changes in given directory
+                    - "packages/react-components/src/**"
+              script:
+                - cd packages/react-components
+                - npm install eslint
+                - npx eslint .
+              caches:
+                - node
+          - step:
+              name: Test
+              condition:
+                changesets:
+                  includePaths:
+                    - "packages/react-components/src/**"
+              caches:
+                - node
+              script:
+                - npm install -g lerna
+                - yarn install
+                - lerna run test
+          - step:
+              name: Build Components
+              condition:
+                changesets:
+                  includePaths:
+                    - "packages/react-components/src/**"
+              caches:
+                - node
+              script:
+                - npm install -g lerna
+                - yarn install
+                - lerna run build --scope=@sparrowengg/twigs-react
+
+      - parallel:
+          - step:
+              name: Security Scan for Docs
+              script:
+                - cd packages/docs
+                - pipe: atlassian/git-secrets-scan:0.5.1
+          - step:
+              name: Build docs
+              condition:
+                changesets:
+                  includePaths:
+                    - "packages/docs/**"
+              caches:
+                - node
+              script:
+                - npm install -g lerna
+                - yarn install
+                - lerna run build --scope=@sparrowengg/twigs-docs --verbose
 
   branches:
     master:
@@ -147,3 +158,29 @@ pipelines:
                 - npm install -g lerna
                 - yarn install
                 - lerna run build --scope=@sparrowengg/twigs-react
+
+          - step:
+              name: Create changelog
+              script:
+                - cd packages/react-components
+                - npx auto-changelog changelog
+                - npm run changelog:commit
+      # docs
+      - parallel:
+          - step:
+              name: Security Scan for Docs
+              script:
+                - cd packages/docs
+                - pipe: atlassian/git-secrets-scan:0.5.1
+          - step:
+              name: Build docs
+              condition:
+                changesets:
+                  includePaths:
+                    - "packages/docs/**"
+              caches:
+                - node
+              script:
+                - npm install -g lerna
+                - yarn install
+                - lerna run build --scope=@sparrowengg/twigs-docs --verbose
