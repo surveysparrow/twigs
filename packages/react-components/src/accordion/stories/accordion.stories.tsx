@@ -20,9 +20,6 @@ export default {
 const Template = (args) => (
   <Accordion
     {...args}
-    type="single"
-    defaultValue='item-2'
-    onValueChange={(value) => console.log(value)}
   >
     <AccordionItem value="item-1">
       <AccordionTrigger>Page settings</AccordionTrigger>
