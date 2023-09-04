@@ -1,4 +1,5 @@
 import React from 'react';
+import { Box } from '../../box';
 import { Text } from '../text';
 
 export default {
@@ -13,13 +14,23 @@ export default {
     weight: {
       control: 'select',
       options: ['regular', 'medium', 'bold']
+    },
+    showLines: {
+      control: 'number',
+    },
+    truncate: {
+      control: 'boolean'
     }
   }
 };
 
 const Template = (args) => (
-  <Text {...args}>
-    Sample text
-  </Text>
+  <Box css={{
+    width: 500
+  }}>
+    <Text {...args}>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </Text>
+  </Box>
 );
 export const Default = Template.bind({});
