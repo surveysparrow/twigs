@@ -1,6 +1,7 @@
 import React, { ReactElement, FunctionComponent, ComponentProps } from 'react';
 import { styled } from '../../stitches.config';
-import { DotLoader } from '../loader';
+import { ButtonSideElement } from './button-side-element';
+import { getLoaderIconSizeFromButtonProps } from './utils';
 
 const StyledButton = styled('button', {
   appearance: 'none',
@@ -35,7 +36,7 @@ const StyledButton = styled('button', {
         fontSize: '$lg',
         lineHeight: '$lg',
         height: '$16',
-        '& svg': {
+        '& .button-icon-container svg': {
           width: '$6',
           height: '$6'
         }
@@ -46,7 +47,7 @@ const StyledButton = styled('button', {
         fontSize: '$lg',
         lineHeight: '$lg',
         height: '$12',
-        '& svg': {
+        '& .button-icon-container svg': {
           width: '$6',
           height: '$6'
         }
@@ -57,7 +58,7 @@ const StyledButton = styled('button', {
         fontSize: '$md',
         lineHeight: '$md',
         height: '$10',
-        '& svg': {
+        '& .button-icon-container svg': {
           width: '$5',
           height: '$5'
         }
@@ -68,7 +69,7 @@ const StyledButton = styled('button', {
         fontSize: '$sm',
         lineHeight: '$md',
         height: '$8',
-        '& svg': {
+        '& .button-icon-container svg': {
           width: '$5',
           height: '$5'
         }
@@ -79,7 +80,7 @@ const StyledButton = styled('button', {
         fontSize: '$sm',
         lineHeight: '$sm',
         height: '$6',
-        '& svg': {
+        '& .button-icon-container svg': {
           width: '$4',
           height: '$4'
         }
@@ -90,7 +91,7 @@ const StyledButton = styled('button', {
         fontSize: '$xs',
         lineHeight: '$xs',
         height: '$5',
-        '& svg': {
+        '& .button-icon-container svg': {
           width: '$2',
           height: '$2'
         }
@@ -101,7 +102,7 @@ const StyledButton = styled('button', {
         fontSize: '$xxs',
         lineHeight: '$xxs',
         height: '$4',
-        '& svg': {
+        '& .button-icon-container svg': {
           width: '$2',
           height: '$2'
         }
@@ -297,7 +298,7 @@ const StyledButton = styled('button', {
       css: {
         width: '$16',
         height: '$16',
-        '& svg': {
+        '& .button-icon-container svg': {
           width: '$8',
           height: '$8'
         }
@@ -309,7 +310,7 @@ const StyledButton = styled('button', {
       css: {
         width: '$12',
         height: '$12',
-        '& svg': {
+        '& .button-icon-container svg': {
           width: '$8',
           height: '$8'
         }
@@ -321,7 +322,7 @@ const StyledButton = styled('button', {
       css: {
         width: '$10',
         height: '$10',
-        '& svg': {
+        '& .button-icon-container svg': {
           width: '$6',
           height: '$6'
         }
@@ -333,7 +334,7 @@ const StyledButton = styled('button', {
       css: {
         width: '$8',
         height: '$8',
-        '& svg': {
+        '& .button-icon-container svg': {
           width: '$5',
           height: '$5'
         }
@@ -345,7 +346,7 @@ const StyledButton = styled('button', {
       css: {
         width: '$6',
         height: '$6',
-        '& svg': {
+        '& .button-icon-container svg': {
           width: '$4',
           height: '$4'
         }
@@ -357,7 +358,7 @@ const StyledButton = styled('button', {
       css: {
         width: '$5',
         height: '$5',
-        '& svg': {
+        '& .button-icon-container svg': {
           width: '$3',
           height: '$3'
         }
@@ -369,7 +370,7 @@ const StyledButton = styled('button', {
       css: {
         width: '$4',
         height: '$4',
-        '& svg': {
+        '& .button-icon-container svg': {
           width: '$2',
           height: '$2'
         }
@@ -383,20 +384,16 @@ const StyledButton = styled('button', {
   }
 });
 
-const StyledSpan = styled('span', {
-  display: 'inline-flex',
-  alignItems: 'center'
-});
-
 export interface ButtonBaseProps {
   leftIcon?: ReactElement;
   rightIcon?: ReactElement;
   icon?: ReactElement;
-  loading?: boolean,
-  disabled?: boolean
+  loading?: boolean;
+  disabled?: boolean;
+  loaderType?: 'line' | 'circle';
 }
 
-type ButtonProps = ButtonBaseProps &
+export type ButtonProps = ButtonBaseProps &
   ComponentProps<typeof StyledButton> &
   React.ButtonHTMLAttributes<HTMLButtonElement> & {
     as?: React.ElementType;
@@ -405,10 +402,27 @@ type ButtonProps = ButtonBaseProps &
 export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
   (
     {
-      children, color = 'primary', icon, leftIcon, rightIcon, loading, disabled, onClick, ...rest
+      children,
+      color = 'primary',
+      icon,
+      leftIcon,
+      rightIcon,
+      loading,
+      disabled,
+      loaderType,
+      onClick,
+      ...rest
     }: ButtonProps,
     ref
   ) => {
+    const hasNoIcon = !(leftIcon || rightIcon || icon);
+    const { size: loaderSize, ...loaderCSS } = getLoaderIconSizeFromButtonProps(
+      {
+        buttonSize: rest.size,
+        loaderType
+      }
+    );
+
     return (
       <StyledButton
         ref={ref}
@@ -419,27 +433,52 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
         onClick={onClick}
         {...rest}
       >
-        {loading
-          ? <DotLoader />
-          : (
-            <>
-              {icon && React.cloneElement(icon)}
+        {icon && (
+          <ButtonSideElement
+            icon={icon}
+            loaderSize={loaderSize}
+            loaderCSS={{
+              ...loaderCSS,
+              maxWidth: '90%'
+            }}
+            loading={!!loading}
+            loaderType={loaderType}
+          />
+        )}
 
-              {leftIcon && (
-                <StyledSpan css={{ marginRight: '$4' }}>
-                  {React.cloneElement(leftIcon)}
-                </StyledSpan>
-              )}
+        {(leftIcon || hasNoIcon) && (
+          <ButtonSideElement
+            icon={hasNoIcon ? undefined : leftIcon}
+            loaderSize={loaderSize}
+            loaderCSS={loaderCSS}
+            loading={!!loading}
+            loaderType={loaderType}
+            {...(hasNoIcon
+              ? {
+                containerClass: 'loader-only'
+              }
+              : {
+                containerStyle: {
+                  marginRight: '$4'
+                }
+              })}
+          />
+        )}
 
-              {children}
+        {children}
 
-              {rightIcon && (
-                <StyledSpan css={{ marginLeft: '$4' }}>
-                  {React.cloneElement(rightIcon)}
-                </StyledSpan>
-              )}
-            </>
-          )}
+        {rightIcon && (
+          <ButtonSideElement
+            icon={rightIcon}
+            loaderSize={loaderSize}
+            loaderCSS={loaderCSS}
+            loading={!!loading}
+            containerStyle={{
+              marginLeft: '$4'
+            }}
+            loaderType={loaderType}
+          />
+        )}
       </StyledButton>
     );
   }
