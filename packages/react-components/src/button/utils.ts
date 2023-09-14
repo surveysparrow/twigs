@@ -14,27 +14,27 @@ const buttonSizeToLineLoaderSizeMapping: Record<
   },
   xl: {
     size: 'md',
-    width: '20px'
+    width: '$5'
   },
   lg: {
     size: 'sm',
-    width: '20px'
+    width: '$5'
   },
   md: {
     size: 'sm',
-    width: '16px'
+    width: '$4'
   },
   sm: {
     size: 'sm',
-    width: '16px'
+    width: '$4'
   },
   xs: {
     size: 'sm',
-    width: '12px'
+    width: '$3'
   },
   xxs: {
     size: 'sm',
-    width: '12px'
+    width: '$3'
   }
 };
 
