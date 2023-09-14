@@ -4,6 +4,7 @@ import { render } from '@testing-library/react';
 import { TickCircleFillIcon } from '@sparrowengg/twigs-react-icons';
 import '@testing-library/jest-dom';
 import { Button } from '../index';
+import { config } from '../../../stitches.config';
 
 describe('Button', () => {
   it('renders without crashing', () => {
@@ -40,8 +41,12 @@ describe('Button', () => {
     const button = getByTestId('button');
 
     expect(
-      button.querySelector('.button-side-element-enter-done')
-    ).toBeDefined();
+      button.querySelector(`.${config.prefix}-button__icon-container`)
+    ).not.toBe(null);
+
+    expect(
+      button.querySelector(`.${config.prefix}-button__loader`)
+    ).toBe(null);
 
     rerender(
       <Button color="primary" leftIcon={<TickCircleFillIcon />} loading>
@@ -50,7 +55,7 @@ describe('Button', () => {
     );
 
     expect(
-      button.querySelector('.button-side-element-exit-done')
-    ).toBeDefined();
+      button.querySelector(`.${config.prefix}-button__loader`)
+    ).not.toBe(null);
   });
 });
