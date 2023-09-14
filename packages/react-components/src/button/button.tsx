@@ -1,7 +1,17 @@
 import React, { ReactElement, FunctionComponent, ComponentProps } from 'react';
-import { styled } from '../../stitches.config';
-import { ButtonSideElement } from './button-side-element';
+import clsx from 'clsx';
+import { keyframes, styled, config } from '../../stitches.config';
+import { ButtonSideElement } from './side-element';
 import { getLoaderIconSizeFromButtonProps } from './utils';
+
+const loadingBlink = keyframes({
+  '50%': {
+    opacity: 0.6
+  },
+  '0%, 100%': {
+    opacity: 1
+  }
+});
 
 const StyledButton = styled('button', {
   appearance: 'none',
@@ -28,6 +38,9 @@ const StyledButton = styled('button', {
     boxShadow:
       'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
   },
+  [`&.${config.prefix}-button--loading .${config.prefix}-button__content`]: {
+    animation: `${loadingBlink} 1.5s cubic-bezier(0.51, 0, 0, 1) infinite`
+  },
   variants: {
     size: {
       '2xl': {
@@ -36,7 +49,7 @@ const StyledButton = styled('button', {
         fontSize: '$lg',
         lineHeight: '$lg',
         height: '$16',
-        '& .button-icon-container svg': {
+        [`& .${config.prefix}-button__icon-container svg`]: {
           width: '$6',
           height: '$6'
         }
@@ -47,7 +60,7 @@ const StyledButton = styled('button', {
         fontSize: '$lg',
         lineHeight: '$lg',
         height: '$12',
-        '& .button-icon-container svg': {
+        [`& .${config.prefix}-button__icon-container svg`]: {
           width: '$6',
           height: '$6'
         }
@@ -58,7 +71,7 @@ const StyledButton = styled('button', {
         fontSize: '$md',
         lineHeight: '$md',
         height: '$10',
-        '& .button-icon-container svg': {
+        [`& .${config.prefix}-button__icon-container svg`]: {
           width: '$5',
           height: '$5'
         }
@@ -69,7 +82,7 @@ const StyledButton = styled('button', {
         fontSize: '$sm',
         lineHeight: '$md',
         height: '$8',
-        '& .button-icon-container svg': {
+        [`& .${config.prefix}-button__icon-container svg`]: {
           width: '$5',
           height: '$5'
         }
@@ -80,7 +93,7 @@ const StyledButton = styled('button', {
         fontSize: '$sm',
         lineHeight: '$sm',
         height: '$6',
-        '& .button-icon-container svg': {
+        [`& .${config.prefix}-button__icon-container svg`]: {
           width: '$4',
           height: '$4'
         }
@@ -91,7 +104,7 @@ const StyledButton = styled('button', {
         fontSize: '$xs',
         lineHeight: '$xs',
         height: '$5',
-        '& .button-icon-container svg': {
+        [`& .${config.prefix}-button__icon-container svg`]: {
           width: '$2',
           height: '$2'
         }
@@ -102,7 +115,7 @@ const StyledButton = styled('button', {
         fontSize: '$xxs',
         lineHeight: '$xxs',
         height: '$4',
-        '& .button-icon-container svg': {
+        [`& .${config.prefix}-button__icon-container svg`]: {
           width: '$2',
           height: '$2'
         }
@@ -298,7 +311,7 @@ const StyledButton = styled('button', {
       css: {
         width: '$16',
         height: '$16',
-        '& .button-icon-container svg': {
+        [`& .${config.prefix}-button__icon-container svg`]: {
           width: '$8',
           height: '$8'
         }
@@ -310,7 +323,7 @@ const StyledButton = styled('button', {
       css: {
         width: '$12',
         height: '$12',
-        '& .button-icon-container svg': {
+        [`& .${config.prefix}-button__icon-container svg`]: {
           width: '$8',
           height: '$8'
         }
@@ -322,7 +335,7 @@ const StyledButton = styled('button', {
       css: {
         width: '$10',
         height: '$10',
-        '& .button-icon-container svg': {
+        [`& .${config.prefix}-button__icon-container svg`]: {
           width: '$6',
           height: '$6'
         }
@@ -334,7 +347,7 @@ const StyledButton = styled('button', {
       css: {
         width: '$8',
         height: '$8',
-        '& .button-icon-container svg': {
+        [`& .${config.prefix}-button__icon-container svg`]: {
           width: '$5',
           height: '$5'
         }
@@ -346,7 +359,7 @@ const StyledButton = styled('button', {
       css: {
         width: '$6',
         height: '$6',
-        '& .button-icon-container svg': {
+        [`& .${config.prefix}-button__icon-container svg`]: {
           width: '$4',
           height: '$4'
         }
@@ -358,7 +371,7 @@ const StyledButton = styled('button', {
       css: {
         width: '$5',
         height: '$5',
-        '& .button-icon-container svg': {
+        [`& .${config.prefix}-button__icon-container svg`]: {
           width: '$3',
           height: '$3'
         }
@@ -370,7 +383,7 @@ const StyledButton = styled('button', {
       css: {
         width: '$4',
         height: '$4',
-        '& .button-icon-container svg': {
+        [`& .${config.prefix}-button__icon-container svg`]: {
           width: '$2',
           height: '$2'
         }
@@ -403,6 +416,7 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
   (
     {
       children,
+      className,
       color = 'primary',
       icon,
       leftIcon,
@@ -431,6 +445,10 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
         disabled={disabled}
         data-testid="button"
         onClick={onClick}
+        className={clsx(className, {
+          [`${config.prefix}-button--loading`]: !!loading,
+          [`${config.prefix}-button--disabled`]: disabled
+        })}
         {...rest}
       >
         {icon && (
@@ -453,19 +471,15 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
             loaderCSS={loaderCSS}
             loading={!!loading}
             loaderType={loaderType}
-            {...(hasNoIcon
-              ? {
-                containerClass: 'loader-only'
-              }
-              : {
-                containerStyle: {
-                  marginRight: '$4'
-                }
-              })}
+            containerStyle={{
+              marginRight: hasNoIcon && !loading ? '0' : '$4'
+            }}
           />
         )}
 
-        {children}
+        <span className={`${config.prefix}-button__content`}>
+          {children}
+        </span>
 
         {rightIcon && (
           <ButtonSideElement
