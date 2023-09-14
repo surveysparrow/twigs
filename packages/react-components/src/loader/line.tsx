@@ -4,10 +4,10 @@ import { styled, keyframes, config } from '../../stitches.config';
 import { Box } from '../box';
 
 const loaderMove = keyframes({
-  '0%, 20%': {
+  '0%': {
     left: '-10px'
   },
-  '80%, 100%': {
+  '100%': {
     left: 'calc(100% + 10px)'
   }
 });
@@ -24,7 +24,7 @@ const StyledContainer = styled(Box, {
     backgroundColor: '$white900',
     borderRadius: '100px',
     position: 'absolute',
-    animation: `${loaderMove} 0.8s infinite ease-in-out`
+    animation: `${loaderMove} 1.5s infinite cubic-bezier(0.51, 0, 0, 1)`
   },
   variants: {
     size: {

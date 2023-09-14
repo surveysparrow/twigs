@@ -38,8 +38,8 @@ const StyledContainer = styled(Box, {
   variants: {
     size: {
       xs: {
-        height: '9px',
-        width: '9px'
+        height: '8px',
+        width: '8px'
       },
       sm: {
         height: '10px',
