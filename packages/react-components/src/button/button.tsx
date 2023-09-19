@@ -2,7 +2,10 @@ import React, { ReactElement, FunctionComponent, ComponentProps } from 'react';
 import clsx from 'clsx';
 import { keyframes, styled } from '../../stitches.config';
 import { ButtonSideElement } from './side-element';
-import { getLoaderIconSizeFromButtonProps, getLoaderVariantFromButtonVariant } from './utils';
+import {
+  getLoaderIconSizeFromButtonProps,
+  getLoaderVariantFromButtonVariant
+} from './utils';
 import { prefixClassName } from '../utils';
 
 const loadingBlink = keyframes({
@@ -39,7 +42,9 @@ const StyledButton = styled('button', {
     boxShadow:
       'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
   },
-  [`&.${prefixClassName('button--loading')} .${prefixClassName('button__content')}`]: {
+  [`&.${prefixClassName('button--loading')} .${prefixClassName(
+    'button__content'
+  )}`]: {
     animation: `${loadingBlink} 1.5s cubic-bezier(0.51, 0, 0, 1) infinite`
   },
   variants: {
@@ -437,7 +442,10 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
         loaderType
       }
     );
-    const loaderColor = getLoaderVariantFromButtonVariant({ variant: rest.variant, color });
+    const loaderColor = getLoaderVariantFromButtonVariant({
+      variant: rest.variant ?? 'solid',
+      color
+    });
 
     return (
       <StyledButton
@@ -457,10 +465,7 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
           <ButtonSideElement
             icon={icon}
             loaderSize={loaderSize}
-            loaderCSS={{
-              ...loaderCSS,
-              maxWidth: '90%'
-            }}
+            loaderCSS={loaderCSS}
             loading={!!loading}
             loaderType={loaderType}
             loaderColor={loaderColor}
