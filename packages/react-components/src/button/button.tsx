@@ -1,8 +1,9 @@
 import React, { ReactElement, FunctionComponent, ComponentProps } from 'react';
 import clsx from 'clsx';
-import { keyframes, styled, config } from '../../stitches.config';
+import { keyframes, styled } from '../../stitches.config';
 import { ButtonSideElement } from './side-element';
-import { getLoaderIconSizeFromButtonProps } from './utils';
+import { getLoaderIconSizeFromButtonProps, getLoaderVariantFromButtonVariant } from './utils';
+import { prefixClassName } from '../utils';
 
 const loadingBlink = keyframes({
   '50%': {
@@ -38,7 +39,7 @@ const StyledButton = styled('button', {
     boxShadow:
       'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
   },
-  [`&.${config.prefix}-button--loading .${config.prefix}-button__content`]: {
+  [`&.${prefixClassName('button--loading')} .${prefixClassName('button__content')}`]: {
     animation: `${loadingBlink} 1.5s cubic-bezier(0.51, 0, 0, 1) infinite`
   },
   variants: {
@@ -49,7 +50,7 @@ const StyledButton = styled('button', {
         fontSize: '$lg',
         lineHeight: '$lg',
         height: '$16',
-        [`& .${config.prefix}-button__icon-container svg`]: {
+        [`& .${prefixClassName('button__icon-container svg')}`]: {
           width: '$6',
           height: '$6'
         }
@@ -60,7 +61,7 @@ const StyledButton = styled('button', {
         fontSize: '$lg',
         lineHeight: '$lg',
         height: '$12',
-        [`& .${config.prefix}-button__icon-container svg`]: {
+        [`& .${prefixClassName('button__icon-container svg')}`]: {
           width: '$6',
           height: '$6'
         }
@@ -71,7 +72,7 @@ const StyledButton = styled('button', {
         fontSize: '$md',
         lineHeight: '$md',
         height: '$10',
-        [`& .${config.prefix}-button__icon-container svg`]: {
+        [`& .${prefixClassName('button__icon-container svg')}`]: {
           width: '$5',
           height: '$5'
         }
@@ -82,7 +83,7 @@ const StyledButton = styled('button', {
         fontSize: '$sm',
         lineHeight: '$md',
         height: '$8',
-        [`& .${config.prefix}-button__icon-container svg`]: {
+        [`& .${prefixClassName('button__icon-container svg')}`]: {
           width: '$5',
           height: '$5'
         }
@@ -93,7 +94,7 @@ const StyledButton = styled('button', {
         fontSize: '$sm',
         lineHeight: '$sm',
         height: '$6',
-        [`& .${config.prefix}-button__icon-container svg`]: {
+        [`& .${prefixClassName('button__icon-container svg')}`]: {
           width: '$4',
           height: '$4'
         }
@@ -104,7 +105,7 @@ const StyledButton = styled('button', {
         fontSize: '$xs',
         lineHeight: '$xs',
         height: '$5',
-        [`& .${config.prefix}-button__icon-container svg`]: {
+        [`& .${prefixClassName('button__icon-container svg')}`]: {
           width: '$2',
           height: '$2'
         }
@@ -115,7 +116,7 @@ const StyledButton = styled('button', {
         fontSize: '$xxs',
         lineHeight: '$xxs',
         height: '$4',
-        [`& .${config.prefix}-button__icon-container svg`]: {
+        [`& .${prefixClassName('button__icon-container svg')}`]: {
           width: '$2',
           height: '$2'
         }
@@ -125,7 +126,7 @@ const StyledButton = styled('button', {
       default: {
         backgroundColorOpacity: ['$secondary500', 0.08],
         color: '$secondary500',
-        '&:hover, &:active': {
+        [`&:hover, &:active, &.${prefixClassName('button--loading')}`]: {
           color: '$secondary600',
           backgroundColorOpacity: ['$secondary500', 0.08]
         },
@@ -139,7 +140,7 @@ const StyledButton = styled('button', {
         '&:hover, &:focus': {
           background: '$primary500'
         },
-        '&:active': {
+        [`&:active, &.${prefixClassName('button--loading')}`]: {
           background: '$primary700'
         }
       },
@@ -149,7 +150,7 @@ const StyledButton = styled('button', {
         '&:hover, &:focus': {
           background: '$secondary600'
         },
-        '&:active': {
+        [`&:active, &.${prefixClassName('button--loading')}`]: {
           background: '$secondary800'
         }
       },
@@ -160,7 +161,7 @@ const StyledButton = styled('button', {
           color: '$secondary600',
           background: '$neutral50'
         },
-        '&:active': {
+        [`&:active, &.${prefixClassName('button--loading')}`]: {
           color: '$secondary600',
           background: '$neutral100'
         }
@@ -171,7 +172,7 @@ const StyledButton = styled('button', {
         '&:hover, &:focus': {
           background: '$white300'
         },
-        '&:active': {
+        [`&:active, &.${prefixClassName('button--loading')}`]: {
           background: '$white400'
         }
       },
@@ -181,7 +182,7 @@ const StyledButton = styled('button', {
         '&:hover': {
           background: '$negative200'
         },
-        '&:active': {
+        [`&:active, &.${prefixClassName('button--loading')}`]: {
           background: '$negative300'
         }
       }
@@ -232,7 +233,7 @@ const StyledButton = styled('button', {
         '&:hover, &:focus': {
           color: '$primary700'
         },
-        '&:active': {
+        [`&:active, &.${prefixClassName('button--loading')}`]: {
           color: '$primary800',
           backgroundColorOpacity: ['$primary500', 0.15]
         }
@@ -251,7 +252,7 @@ const StyledButton = styled('button', {
           color: '$primary600',
           background: '$white900'
         },
-        '&:active': {
+        [`&:active, &.${prefixClassName('button--loading')}`]: {
           borderColorOpacity: ['$primary500', 0.9],
           color: '$primary700',
           background: '$white900'
@@ -268,7 +269,7 @@ const StyledButton = styled('button', {
           color: '$secondary600',
           backgroundColorOpacity: ['$secondary500', 0.08]
         },
-        '&:active': {
+        [`&:active, &.${prefixClassName('button--loading')}`]: {
           color: '$secondary700',
           backgroundColorOpacity: ['$secondary500', 0.15]
         }
@@ -283,7 +284,7 @@ const StyledButton = styled('button', {
         '&:hover, &:focus, &:active': {
           color: '$neutral900'
         },
-        '&:active': {
+        [`&:active, &.${prefixClassName('button--loading')}`]: {
           backgroundColorOpacity: ['$black500', 0.08]
         },
         '&:hover, &:focus': {
@@ -297,7 +298,7 @@ const StyledButton = styled('button', {
       css: {
         color: '$negative600',
         background: 'transparent',
-        '&:active': {
+        [`&:active, &.${prefixClassName('button--loading')}`]: {
           background: '$negative200'
         },
         '&:hover, &:focus': {
@@ -311,7 +312,7 @@ const StyledButton = styled('button', {
       css: {
         width: '$16',
         height: '$16',
-        [`& .${config.prefix}-button__icon-container svg`]: {
+        [`& .${prefixClassName('button__icon-container svg')}`]: {
           width: '$8',
           height: '$8'
         }
@@ -323,7 +324,7 @@ const StyledButton = styled('button', {
       css: {
         width: '$12',
         height: '$12',
-        [`& .${config.prefix}-button__icon-container svg`]: {
+        [`& .${prefixClassName('button__icon-container svg')}`]: {
           width: '$8',
           height: '$8'
         }
@@ -335,7 +336,7 @@ const StyledButton = styled('button', {
       css: {
         width: '$10',
         height: '$10',
-        [`& .${config.prefix}-button__icon-container svg`]: {
+        [`& .${prefixClassName('button__icon-container svg')}`]: {
           width: '$6',
           height: '$6'
         }
@@ -347,7 +348,7 @@ const StyledButton = styled('button', {
       css: {
         width: '$8',
         height: '$8',
-        [`& .${config.prefix}-button__icon-container svg`]: {
+        [`& .${prefixClassName('button__icon-container svg')}`]: {
           width: '$5',
           height: '$5'
         }
@@ -359,7 +360,7 @@ const StyledButton = styled('button', {
       css: {
         width: '$6',
         height: '$6',
-        [`& .${config.prefix}-button__icon-container svg`]: {
+        [`& .${prefixClassName('button__icon-container svg')}`]: {
           width: '$4',
           height: '$4'
         }
@@ -371,7 +372,7 @@ const StyledButton = styled('button', {
       css: {
         width: '$5',
         height: '$5',
-        [`& .${config.prefix}-button__icon-container svg`]: {
+        [`& .${prefixClassName('button__icon-container svg')}`]: {
           width: '$3',
           height: '$3'
         }
@@ -383,7 +384,7 @@ const StyledButton = styled('button', {
       css: {
         width: '$4',
         height: '$4',
-        [`& .${config.prefix}-button__icon-container svg`]: {
+        [`& .${prefixClassName('button__icon-container svg')}`]: {
           width: '$2',
           height: '$2'
         }
@@ -436,6 +437,7 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
         loaderType
       }
     );
+    const loaderColor = getLoaderVariantFromButtonVariant({ variant: rest.variant, color });
 
     return (
       <StyledButton
@@ -446,8 +448,8 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
         data-testid="button"
         onClick={onClick}
         className={clsx(className, {
-          [`${config.prefix}-button--loading`]: !!loading,
-          [`${config.prefix}-button--disabled`]: disabled
+          [`${prefixClassName('button--loading')}`]: !!loading,
+          [`${prefixClassName('button--disabled')}`]: disabled
         })}
         {...rest}
       >
@@ -461,6 +463,7 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
             }}
             loading={!!loading}
             loaderType={loaderType}
+            loaderColor={loaderColor}
           />
         )}
 
@@ -471,13 +474,14 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
             loaderCSS={loaderCSS}
             loading={!!loading}
             loaderType={loaderType}
+            loaderColor={loaderColor}
             containerStyle={{
               marginRight: hasNoIcon && !loading ? '0' : '$4'
             }}
           />
         )}
 
-        <span className={`${config.prefix}-button__content`}>
+        <span className={`${prefixClassName('button__content')}`}>
           {children}
         </span>
 
@@ -487,6 +491,7 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
             loaderSize={loaderSize}
             loaderCSS={loaderCSS}
             loading={!!loading}
+            loaderColor={loaderColor}
             containerStyle={{
               marginLeft: '$4'
             }}
