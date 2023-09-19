@@ -84,3 +84,36 @@ export const getLoaderIconSizeFromButtonProps = ({
     typeof buttonSize === 'string' ? buttonSize : 'lg'
   ];
 };
+
+type ButtonVariantString = Extract<ButtonProps['variant'], string>;
+type ButtonColorString = Extract<ButtonProps['color'], string>;
+
+export const buttonVariantToLoaderVariantMapping: Partial<
+  Record<
+    ButtonColorString | `${ButtonColorString}-${ButtonVariantString}`,
+    LineLoaderProps['color']
+  >
+> = {
+  default: 'secondary',
+  bright: 'secondary',
+  primary: 'primary',
+  'primary-solid': 'ghost',
+  secondary: 'ghost',
+  'secondary-ghost': 'secondary',
+  light: 'ghost',
+  error: 'ghost'
+};
+
+export const getLoaderVariantFromButtonVariant = ({ color, variant }: {
+  variant: ButtonProps['variant'],
+  color: ButtonProps['color'],
+}) => {
+  const colorString = color as ButtonColorString;
+  const variantString = variant as ButtonVariantString;
+
+  if (buttonVariantToLoaderVariantMapping[`${colorString}-${variantString}`]) {
+    return buttonVariantToLoaderVariantMapping[`${colorString}-${variantString}`];
+  }
+
+  return buttonVariantToLoaderVariantMapping[colorString];
+};
