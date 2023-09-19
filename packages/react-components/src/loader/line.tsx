@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { CSS, VariantProps } from '@stitches/react';
 import { styled, keyframes, config } from '../../stitches.config';
 import { Box } from '../box';
+import { prefixClassName } from '../utils';
 
 const loaderMove = keyframes({
   '0%': {
@@ -40,10 +41,34 @@ const StyledContainer = styled(Box, {
       xl: {
         height: '8px'
       }
+    },
+    color: {
+      primary: {
+        backgroundColorOpacity: ['$primary800', 0.25],
+
+        [`.${prefixClassName('line-loader__dot')}`]: {
+          backgroundColor: '$primary800'
+        }
+      },
+      secondary: {
+        backgroundColorOpacity: ['$secondary700', 0.4],
+
+        [`.${prefixClassName('line-loader__dot')}`]: {
+          backgroundColor: '$secondary700'
+        }
+      },
+      ghost: {
+        backgroundColorOpacity: ['$white900', 0.5],
+
+        [`.${prefixClassName('line-loader__dot')}`]: {
+          backgroundColor: '$white900'
+        }
+      }
     }
   },
   defaultVariants: {
-    size: 'sm'
+    size: 'sm',
+    color: 'ghost'
   }
 });
 
@@ -67,7 +92,7 @@ export const LineLoader: FunctionComponent<LineLoaderProps> = ({
         ...containerCSS
       }}
     >
-      <Box />
+      <Box className={`${prefixClassName('line-loader__dot')}`} />
     </StyledContainer>
   );
 };

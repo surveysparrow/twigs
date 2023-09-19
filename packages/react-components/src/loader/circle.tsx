@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { CSS, VariantProps } from '@stitches/react';
 import { styled, keyframes, config } from '../../stitches.config';
 import { Box } from '../box';
+import { prefixClassName } from '../utils';
 
 const loaderSpin = keyframes({
   '0%': {
@@ -17,12 +18,12 @@ const StyledContainer = styled(Box, {
   position: 'relative',
   overflow: 'hidden',
 
-  '.outer-circle': {
+  [`.${prefixClassName('circle-loader__ring')}`]: {
     stroke: 'rgba(255, 255, 255, 0.15)',
     fill: 'none'
   },
 
-  '.inner-circle': {
+  [`.${prefixClassName('circle-loader__dot')}`]: {
     stroke: '#fff',
     fill: 'none',
     transformOrigin: '50% 50%',
@@ -57,10 +58,43 @@ const StyledContainer = styled(Box, {
         height: '40px',
         width: '40px'
       }
+    },
+    color: {
+      primary: {
+        [`.${prefixClassName('circle-loader__ring')}`]: {
+          stroke: '$primary800',
+          strokeOpacity: 0.25
+        },
+
+        [`.${prefixClassName('circle-loader__dot')}`]: {
+          stroke: '$primary800'
+        }
+      },
+      secondary: {
+        [`.${prefixClassName('circle-loader__ring')}`]: {
+          stroke: '$secondary700',
+          strokeOpacity: 0.4
+        },
+
+        [`.${prefixClassName('circle-loader__dot')}`]: {
+          stroke: '$secondary700'
+        }
+      },
+      ghost: {
+        [`.${prefixClassName('circle-loader__ring')}`]: {
+          stroke: '$white900',
+          strokeOpacity: 0.5
+        },
+
+        [`.${prefixClassName('circle-loader__dot')}`]: {
+          stroke: '$white900'
+        }
+      }
     }
   },
   defaultVariants: {
-    size: 'md'
+    size: 'md',
+    color: 'ghost'
   }
 });
 
@@ -93,13 +127,13 @@ export const CircleLoader: FunctionComponent<CircleLoaderProps> = ({
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <circle cx="6" cy="6" r="5" strokeWidth="2" className="outer-circle" />
+        <circle cx="6" cy="6" r="5" strokeWidth="2" className={`${prefixClassName('circle-loader__ring')}`} />
         <circle
           cx="6"
           cy="6"
           r="5"
           strokeWidth="2"
-          className="inner-circle"
+          className={`${prefixClassName('circle-loader__dot')}`}
           strokeDasharray={`${circumference / 4} ${circumference}`}
         />
       </svg>
