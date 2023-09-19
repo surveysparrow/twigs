@@ -71,6 +71,7 @@ export const ButtonSideElement = ({
 
   useEffect(() => {
     if (nodeRef.current) {
+      console.log(loaderContainerRef.current, loading);
       const nodeWidth = loading
         ? loaderContainerRef.current?.clientWidth
         : iconContainerRef.current?.querySelector('svg')?.clientWidth || 0;
@@ -131,7 +132,7 @@ export const ButtonSideElement = ({
           <LineLoader
             size={loaderSize as LineLoaderProps['size']}
             className={`${prefixClassName('button__loader')}`}
-            containerCSS={loaderCSS}
+            css={loaderCSS}
             containerRef={loaderContainerRef}
             color={loaderColor}
           />
@@ -139,7 +140,7 @@ export const ButtonSideElement = ({
           <CircleLoader
             size={loaderSize}
             className={`${prefixClassName('button__loader')}`}
-            containerCSS={loaderCSS}
+            css={loaderCSS}
             containerRef={loaderContainerRef}
             color={loaderColor}
           />
