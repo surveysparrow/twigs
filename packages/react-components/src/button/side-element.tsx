@@ -53,17 +53,17 @@ export const ButtonSideElement = ({
   loaderType = 'line',
   loaderSize,
   loaderCSS,
+  loaderColor,
   icon,
-  containerStyle,
-  containerClass
+  containerStyle
 }: {
   loading: boolean;
   loaderType?: ButtonBaseProps['loaderType'];
   loaderSize: LineLoaderProps['size'] | CircleLoaderProps['size'];
   loaderCSS?: CSS<typeof config>;
+  loaderColor?: LineLoaderProps['color']
   icon?: ReactElement;
   containerStyle?: CSS<typeof config>;
-  containerClass?: string;
 }) => {
   const nodeRef = useRef<HTMLSpanElement>(null);
   const loaderContainerRef = useRef<HTMLDivElement>(null);
@@ -79,7 +79,7 @@ export const ButtonSideElement = ({
   }, []);
 
   return (
-    <StyledSpan css={containerStyle} ref={nodeRef} className={containerClass}>
+    <StyledSpan css={containerStyle} ref={nodeRef}>
       {icon && (
         <CSSTransition
           classNames={`${prefixClassName('button__icon-container')}`}
@@ -133,6 +133,7 @@ export const ButtonSideElement = ({
             className={`${prefixClassName('button__loader')}`}
             containerCSS={loaderCSS}
             containerRef={loaderContainerRef}
+            color={loaderColor}
           />
         ) : (
           <CircleLoader
@@ -140,6 +141,7 @@ export const ButtonSideElement = ({
             className={`${prefixClassName('button__loader')}`}
             containerCSS={loaderCSS}
             containerRef={loaderContainerRef}
+            color={loaderColor}
           />
         )}
       </CSSTransition>
