@@ -63,6 +63,20 @@ const StyledContainer = styled(Box, {
         [`.${prefixClassName('line-loader__dot')}`]: {
           backgroundColor: '$white900'
         }
+      },
+      negative: {
+        backgroundColor: '$negative200',
+
+        [`.${prefixClassName('line-loader__dot')}`]: {
+          backgroundColor: '$negative700'
+        }
+      },
+      'negative-ghost': {
+        backgroundColor: '$negative300',
+
+        [`.${prefixClassName('line-loader__dot')}`]: {
+          backgroundColor: '$negative700'
+        }
       }
     }
   },
@@ -74,12 +88,12 @@ const StyledContainer = styled(Box, {
 
 export type LineLoaderProps = VariantProps<typeof StyledContainer> &
   React.HTMLAttributes<HTMLDivElement> & {
-    containerCSS?: CSS<typeof config>;
+    css?: CSS<typeof config>;
     containerRef?: React.RefObject<HTMLDivElement>;
   };
 
 export const LineLoader: FunctionComponent<LineLoaderProps> = ({
-  containerCSS,
+  css,
   containerRef,
   ...props
 }) => {
@@ -88,9 +102,7 @@ export const LineLoader: FunctionComponent<LineLoaderProps> = ({
       data-testid="line-loader"
       {...props}
       ref={containerRef}
-      css={{
-        ...containerCSS
-      }}
+      css={css}
     >
       <Box className={`${prefixClassName('line-loader__dot')}`} />
     </StyledContainer>

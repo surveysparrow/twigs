@@ -89,6 +89,22 @@ const StyledContainer = styled(Box, {
         [`.${prefixClassName('circle-loader__dot')}`]: {
           stroke: '$white900'
         }
+      },
+      negative: {
+        [`.${prefixClassName('circle-loader__ring')}`]: {
+          stroke: '$negative200'
+        },
+        [`.${prefixClassName('circle-loader__dot')}`]: {
+          stroke: '$negative700'
+        }
+      },
+      'negative-ghost': {
+        [`.${prefixClassName('circle-loader__ring')}`]: {
+          stroke: '$negative300'
+        },
+        [`.${prefixClassName('circle-loader__dot')}`]: {
+          stroke: '$negative700'
+        }
       }
     }
   },
@@ -100,12 +116,12 @@ const StyledContainer = styled(Box, {
 
 export type CircleLoaderProps = VariantProps<typeof StyledContainer> &
   React.HTMLAttributes<HTMLDivElement> & {
-    containerCSS?: CSS<typeof config>;
+    css?: CSS<typeof config>;
     containerRef?: React.RefObject<HTMLDivElement>;
   };
 
 export const CircleLoader: FunctionComponent<CircleLoaderProps> = ({
-  containerCSS,
+  css,
   containerRef,
   ...props
 }) => {
@@ -115,9 +131,7 @@ export const CircleLoader: FunctionComponent<CircleLoaderProps> = ({
     <StyledContainer
       data-testid="circle-loader"
       {...props}
-      css={{
-        ...containerCSS
-      }}
+      css={css}
       ref={containerRef}
     >
       <svg
