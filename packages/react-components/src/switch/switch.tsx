@@ -19,6 +19,7 @@ const StyledThumb = styled(SwitchPrimitive.Thumb, {
 const StyledSwitch = styled(SwitchPrimitive.Root, {
   all: 'unset',
   boxSizing: 'border-box',
+  cursor: 'pointer',
   backgroundColor: '$neutral400',
   borderRadius: '$pill',
   position: 'relative',
