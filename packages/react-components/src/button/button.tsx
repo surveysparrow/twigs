@@ -303,11 +303,11 @@ const StyledButton = styled('button', {
       css: {
         color: '$negative600',
         background: 'transparent',
-        [`&:active, &.${prefixClassName('button--loading')}`]: {
-          background: '$negative200'
-        },
         '&:hover, &:focus': {
           background: '$negative100'
+        },
+        [`&:active, &.${prefixClassName('button--loading')}`]: {
+          background: '$negative200'
         }
       }
     },
