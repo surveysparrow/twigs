@@ -1,6 +1,7 @@
 import React, { ReactElement, FunctionComponent, ComponentProps } from 'react';
 import clsx from 'clsx';
-import { keyframes, styled } from '../../stitches.config';
+import { ScaleValue } from '@stitches/react';
+import { config, keyframes, styled } from '../../stitches.config';
 import { ButtonSideElement } from './side-element';
 import {
   getLoaderIconSizeFromButtonProps,
@@ -436,6 +437,14 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
     ref
   ) => {
     const hasNoIcon = !(leftIcon || rightIcon || icon);
+    const buttonLoaderMargin: ScaleValue<'space', typeof config> = [
+      'xxs',
+      'xs',
+      'sm'
+    ].includes(rest.size as Extract<ButtonProps['size'], string>)
+      ? '$2'
+      : '$4';
+
     const { size: loaderSize, ...loaderCSS } = getLoaderIconSizeFromButtonProps(
       {
         buttonSize: rest.size,
@@ -481,7 +490,7 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
             loaderType={loaderType}
             loaderColor={loaderColor}
             containerStyle={{
-              marginRight: hasNoIcon && !loading ? '0' : '$4'
+              marginRight: hasNoIcon && !loading ? '0' : buttonLoaderMargin
             }}
           />
         )}
@@ -498,7 +507,7 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
             loading={!!loading}
             loaderColor={loaderColor}
             containerStyle={{
-              marginLeft: '$4'
+              marginLeft: buttonLoaderMargin
             }}
             loaderType={loaderType}
           />
