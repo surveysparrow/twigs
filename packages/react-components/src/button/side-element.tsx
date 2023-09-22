@@ -71,7 +71,6 @@ export const ButtonSideElement = ({
 
   useEffect(() => {
     if (nodeRef.current) {
-      console.log(loaderContainerRef.current, loading);
       const nodeWidth = loading
         ? loaderContainerRef.current?.clientWidth
         : iconContainerRef.current?.querySelector('svg')?.clientWidth || 0;
