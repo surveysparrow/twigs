@@ -74,7 +74,7 @@ export { KeyIcon } from './key';
 export { LightBulbIcon } from './light-bulb';
 export { LinkIcon } from './link';
 export { LockIcon } from './lock';
-export { MicroPhone } from './microphone';
+export { Microphone } from './microphone';
 export { MinusIcon } from './minus';
 export { MobileIcon } from './mobile';
 export { OfficeChairIcon } from './office-chair';
