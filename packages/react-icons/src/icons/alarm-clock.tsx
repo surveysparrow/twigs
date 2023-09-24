@@ -2,7 +2,9 @@ import React from 'react';
 import { IconProps } from '../types';
 
 export const AlarmClockIcon = React.forwardRef<SVGSVGElement, IconProps>(
-  ({ color = 'currentColor', size = 32, ...rest }, ref) => {
+  ({
+    color = 'currentColor', size = 32, strokeWidth = 1.50004, ...rest
+  }, ref) => {
     return (
       <svg
         viewBox="0 0 32 32"
@@ -16,7 +18,7 @@ export const AlarmClockIcon = React.forwardRef<SVGSVGElement, IconProps>(
         <path
           d="M11.9192 7.4809C17.3613 5.22677 23.6003 7.81111 25.8544 13.2532C28.1086 18.6953 25.5242 24.9343 20.0821 27.1884C14.6401 29.4426 8.40104 26.8582 6.1469 21.4162C3.89276 15.9741 6.4771 9.73505 11.9192 7.4809"
           stroke={color}
-          strokeWidth="1.50004"
+          strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
         />
