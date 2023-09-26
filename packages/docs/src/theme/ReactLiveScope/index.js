@@ -3,7 +3,6 @@ import { twigsComponentLoader, twigsIconLoader } from './twigs-loader';
 
 const ReactLiveScope = {
   React,
-  ...React,
   Button: twigsComponentLoader("Button"),
   Flex: twigsComponentLoader("Flex"),
   Grid: twigsComponentLoader("Grid"),
@@ -86,5 +85,6 @@ const ReactLiveScope = {
   AccordionContent: twigsComponentLoader("AccordionContent"),
   AccordionItem: twigsComponentLoader("AccordionItem"),
   AccordionTrigger: twigsComponentLoader("AccordionTrigger"),
+  TimePicker: twigsComponentLoader("TimePicker"),
 };
 export default ReactLiveScope;

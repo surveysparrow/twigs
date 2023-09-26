@@ -1,0 +1,28 @@
+# TimePicker
+
+### Import
+
+```jsx
+import { TimePicker } from "@sparrowengg/twigs-react";
+```
+
+### Usage 
+```jsx live
+function App() {
+  return (
+    <TimePicker />
+  );
+}
+```
+
+### Props
+| Property      | Description                                                             | Type                         | Default |
+|---------------|-------------------------------------------------------------------------|------------------------------|---------|
+| label         | Label for timepicker input                                              | string                       |         |
+| hourCycle     | Whether to display the time in 12 or 24 hour format                     | `12` `24`                    | `12`    |
+| value         | The current value (controlled).                                         |                              |         |
+| defaultValue  | The default value (uncontrolled)                                        |                              |         |
+| granularity   | Determines the smallest unit that is displayed in the time picker.      | `hour` `minute` `second`     | `minute`|
+| maxValue      | The maximum allowed time that a user may select.                        |                              |         |
+| minValue      | The minimum allowed time that a user may select.                        |                              |         |
+| onChange      | Handler that is called when the value changes.                          |  function                    |         |
