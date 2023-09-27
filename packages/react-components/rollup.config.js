@@ -23,7 +23,16 @@ module.exports = [
         sourcemap: true,
         esModule: true,
         preserveModules: true,
-        preserveModulesRoot: 'src'
+        preserveModulesRoot: 'src',
+        entryFileNames: '[name].mjs'
+      },
+      {
+        dir: 'dist',
+        format: 'cjs',
+        sourcemap: true,
+        preserveModules: true,
+        preserveModulesRoot: 'src',
+        entryFileNames: '[name].[format]'
       }
     ],
     external: [...Object.keys(packageJson.peerDependencies), ...Object.keys(packageJson.dependencies)],
