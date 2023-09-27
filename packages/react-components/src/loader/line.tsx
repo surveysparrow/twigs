@@ -25,7 +25,8 @@ const StyledContainer = styled(Box, {
     backgroundColor: '$white900',
     borderRadius: '100px',
     position: 'absolute',
-    animation: `${loaderMove} 1.5s infinite cubic-bezier(0.51, 0, 0, 1)`
+    animation: `${loaderMove} 1.5s infinite cubic-bezier(0.51, 0, 0, 1)`,
+    animationDelay: '0.15s'
   },
   variants: {
     size: {
