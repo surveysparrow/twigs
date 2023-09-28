@@ -1,6 +1,6 @@
 import React, { ComponentProps, FunctionComponent, useId } from 'react';
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
-import { styled } from '../../stitches.config';
+import { styled } from '../stitches.config';
 import { Flex } from '../flex';
 
 const StyledRadioGroup = styled(RadioGroupPrimitive.Root, {

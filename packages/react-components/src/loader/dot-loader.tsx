@@ -1,5 +1,5 @@
 import React, { FunctionComponent, ComponentProps } from 'react';
-import { styled, keyframes } from '../../stitches.config';
+import { styled, keyframes } from '../stitches.config';
 import { Box } from '../box';
 
 const bounceDelay = keyframes({

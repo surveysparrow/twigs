@@ -1,6 +1,6 @@
 import React, { ComponentProps, ReactElement } from 'react';
 import * as AlertDialogPrimitive from '@radix-ui/react-alert-dialog';
-import { keyframes, styled } from '../../stitches.config';
+import { keyframes, styled } from '../stitches.config';
 import { Grid } from '../grid';
 
 const overlayShow = keyframes({
