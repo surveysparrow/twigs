@@ -9,7 +9,8 @@
     "esModuleInterop": true,
     "moduleResolution": "node",
     "outDir": "dist",
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "emitDeclarationOnly": true
   },
   "exclude": ["src/**/tests", "node_modules", "dist"]
 }
