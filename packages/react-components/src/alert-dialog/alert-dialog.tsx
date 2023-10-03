@@ -41,12 +41,13 @@ const StyledOverlay = styled(AlertDialogPrimitive.Overlay, {
 
 const StyledContent = styled(AlertDialogPrimitive.Content, {
   backgroundColor: 'white',
-  borderRadius: 6,
+  borderRadius: '$2xl',
   boxShadow:
     'hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px',
   position: 'fixed',
   top: '50%',
   left: '50%',
+  lineHeight: '$md',
   transform: 'translate(-50%, -50%)',
   width: '90vw',
   maxWidth: '450px',
@@ -60,7 +61,6 @@ const StyledContent = styled(AlertDialogPrimitive.Content, {
 
 const StyledActions = styled(Grid, {
   gridTemplateColumns: '1fr 1fr',
-  gridGap: '$6',
   padding: '$12'
 });
 

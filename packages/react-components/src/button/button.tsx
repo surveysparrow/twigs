@@ -411,6 +411,7 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
   ) => {
     return (
       <StyledButton
+        type="button"
         ref={ref}
         color={color}
         isIcon={!!icon}

@@ -19,6 +19,7 @@ export const CalendarNavigationButton = ({
       onClick={onPress as any}
       icon={icon}
       size="lg"
+      type="button"
       disabled={isDisabled}
     />
   );
