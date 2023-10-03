@@ -58,7 +58,7 @@ const StyledContainer = styled(Box, {
           backgroundColor: '$secondary700'
         }
       },
-      ghost: {
+      bright: {
         backgroundColorOpacity: ['$white900', 0.5],
 
         [`.${prefixClassName('line-loader__dot')}`]: {
@@ -66,14 +66,7 @@ const StyledContainer = styled(Box, {
         }
       },
       negative: {
-        backgroundColor: '$negative200',
-
-        [`.${prefixClassName('line-loader__dot')}`]: {
-          backgroundColor: '$negative700'
-        }
-      },
-      'negative-ghost': {
-        backgroundColor: '$negative300',
+        backgroundColorOpacity: ['$negative500', 0.4],
 
         [`.${prefixClassName('line-loader__dot')}`]: {
           backgroundColor: '$negative700'

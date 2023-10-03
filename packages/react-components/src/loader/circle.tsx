@@ -80,7 +80,7 @@ const StyledContainer = styled(Box, {
           stroke: '$secondary700'
         }
       },
-      ghost: {
+      bright: {
         [`.${prefixClassName('circle-loader__ring')}`]: {
           stroke: '$white900',
           strokeOpacity: 0.5
@@ -92,15 +92,8 @@ const StyledContainer = styled(Box, {
       },
       negative: {
         [`.${prefixClassName('circle-loader__ring')}`]: {
-          stroke: '$negative200'
-        },
-        [`.${prefixClassName('circle-loader__dot')}`]: {
-          stroke: '$negative700'
-        }
-      },
-      'negative-ghost': {
-        [`.${prefixClassName('circle-loader__ring')}`]: {
-          stroke: '$negative300'
+          stroke: '$negative500',
+          strokeOpacity: 0.4
         },
         [`.${prefixClassName('circle-loader__dot')}`]: {
           stroke: '$negative700'

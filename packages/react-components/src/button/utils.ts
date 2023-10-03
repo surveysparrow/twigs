@@ -97,12 +97,11 @@ export const buttonVariantToLoaderVariantMapping: Partial<
   default: 'secondary',
   bright: 'secondary',
   primary: 'primary',
-  'primary-solid': 'ghost',
-  secondary: 'ghost',
+  'primary-solid': 'bright',
+  secondary: 'bright',
   'secondary-ghost': 'secondary',
-  light: 'ghost',
-  error: 'negative',
-  'error-ghost': 'negative-ghost'
+  light: 'bright',
+  error: 'negative'
 };
 
 export const getLoaderVariantFromButtonVariant = ({ color, variant }: {
