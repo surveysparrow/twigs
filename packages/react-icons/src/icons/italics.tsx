@@ -2,7 +2,9 @@ import React from 'react';
 import { IconProps } from '../types';
 
 export const ItalicsIcon = React.forwardRef<SVGSVGElement, IconProps>(
-  ({ color = 'currentColor', size = 32, ...rest }, ref) => {
+  ({
+    color = 'currentColor', size = 32, strokeWidth = 1.5, ...rest
+  }, ref) => {
     return (
       <svg
         viewBox="0 0 32 32"
@@ -16,21 +18,21 @@ export const ItalicsIcon = React.forwardRef<SVGSVGElement, IconProps>(
         <path
           d="M18 8L14 24"
           stroke={color}
-          strokeWidth="1.5"
+          strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
           d="M18.6667 24H9.33334"
           stroke={color}
-          strokeWidth="1.5"
+          strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
           d="M13.3333 8H22.6667"
           stroke={color}
-          strokeWidth="1.5"
+          strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
         />
