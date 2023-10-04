@@ -3,7 +3,7 @@ import { IconProps } from '../types';
 
 export const AlarmClockIcon = React.forwardRef<SVGSVGElement, IconProps>(
   ({
-    color = 'currentColor', size = 32, strokeWidth = 1.50004, ...rest
+    color = 'currentColor', size = 32, strokeWidth = 1.5, ...rest
   }, ref) => {
     return (
       <svg
