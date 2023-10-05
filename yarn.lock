@@ -5211,37 +5211,6 @@
     p-map "^4.0.0"
     webpack-sources "^3.2.2"
 
-"@sparrowengg/twigs-react@*":
-  version "0.16.1"
-  resolved "https://registry.yarnpkg.com/@sparrowengg/twigs-react/-/twigs-react-0.16.1.tgz#bf150c7fea7a25b76f92c75735e41501ceeaea1b"
-  integrity sha512-YVrXJ3Ad7AITYUs2V3mrUMYqE/eCcYXepsshKzTspo63Y7u3JX/kW1M3vJ7HlsqVG3bi/qzHv1DNbDjv8Ui2YQ==
-  dependencies:
-    "@internationalized/date" "^3.2.0"
-    "@radix-ui/react-accordion" "^1.1.1"
-    "@radix-ui/react-alert-dialog" "^1.0.0"
-    "@radix-ui/react-avatar" "^1.0.0"
-    "@radix-ui/react-checkbox" "^1.0.0"
-    "@radix-ui/react-dialog" "^1.0.0"
-    "@radix-ui/react-dropdown-menu" "^1.0.0"
-    "@radix-ui/react-hover-card" "^1.0.5"
-    "@radix-ui/react-label" "^1.0.0"
-    "@radix-ui/react-popover" "^1.0.4"
-    "@radix-ui/react-portal" "^1.0.0"
-    "@radix-ui/react-radio-group" "^1.0.0"
-    "@radix-ui/react-switch" "^1.0.0"
-    "@radix-ui/react-tabs" "^1.0.0"
-    "@radix-ui/react-toast" "^1.0.0"
-    "@radix-ui/react-tooltip" "^1.0.0"
-    "@stitches/react" "^1.2.8"
-    "@storybook/addon-a11y" "^7.0.8"
-    "@types/react" "^18.0.17"
-    "@types/react-dom" "^18.0.6"
-    react "^18.2.0"
-    react-aria "^3.24.0"
-    react-dom "^18.2.0"
-    react-select "^5.7.2"
-    react-stately "^3.22.0"
-
 "@stitches/react@^1.2.8":
   version "1.2.8"
   resolved "https://registry.yarnpkg.com/@stitches/react/-/react-1.2.8.tgz#954f8008be8d9c65c4e58efa0937f32388ce3a38"

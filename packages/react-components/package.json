@@ -8,9 +8,7 @@
   "files": [
     "/dist"
   ],
-  "sideEffects": [
-    "*.css"
-  ],
+  "sideEffects": false,
   "scripts": {
     "test": "jest test",
     "eslint": "eslint . --fix",
@@ -42,8 +40,8 @@
   "license": "ISC",
   "homepage": "https://bitbucket.org/surveysparrow/twigs-react#readme",
   "peerDependencies": {
-    "react": ">=18.0.0",
-    "react-dom": ">=18.0.0"
+    "react": ">=18.2.0",
+    "react-dom": ">=18.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.18.10",
