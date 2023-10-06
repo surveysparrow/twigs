@@ -1,4 +1,4 @@
-import { styled } from '../../stitches.config';
+import { styled } from '../stitches.config';
 import { Flex } from '../flex';
 import { Text } from '../text';
 

@@ -3,7 +3,7 @@ import ReactSelect, { components as ReactSelectComponent } from 'react-select';
 import AsyncSelect from 'react-select/async';
 import CreatableSelect from 'react-select/creatable';
 import AsyncCreatableSelect from 'react-select/async-creatable';
-import { styled } from '../../stitches.config';
+import { styled } from '../stitches.config';
 
 const selectStyles = {
   transition: 'all $transitions$2',

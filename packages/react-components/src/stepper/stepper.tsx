@@ -1,6 +1,6 @@
 import { TickIcon } from '@sparrowengg/twigs-react-icons';
 import React, { forwardRef, FunctionComponent, useId } from 'react';
-import { styled } from '../../stitches.config';
+import { styled } from '../stitches.config';
 import { Box, BoxProps } from '../box';
 import { Separator as DefaultSeparator } from './stepper-separator';
 import * as DefaultStepperTrigger from './stepper-trigger';

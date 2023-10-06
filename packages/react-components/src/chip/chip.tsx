@@ -1,5 +1,5 @@
 import React, { ComponentProps, FunctionComponent, ReactNode } from 'react';
-import { styled } from '../../stitches.config';
+import { styled } from '../stitches.config';
 import { Box, BoxProps } from '../box';
 import { IconButton } from '../button';
 

@@ -1,5 +1,5 @@
 import React, { ReactElement, FunctionComponent, ComponentProps } from 'react';
-import { styled } from '../../stitches.config';
+import { styled } from '../stitches.config';
 import { DotLoader } from '../loader';
 
 const StyledButton = styled('button', {
