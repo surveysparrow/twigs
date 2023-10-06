@@ -2,7 +2,9 @@ import React from 'react';
 import { IconProps } from '../types';
 
 export const ArrowUpIcon = React.forwardRef<SVGSVGElement, IconProps>(
-  ({ color = 'currentColor', size = 32, ...rest }, ref) => {
+  ({
+    color = 'currentColor', size = 32, strokeWidth = 1.5, ...rest
+  }, ref) => {
     return (
       <svg
         viewBox="0 0 33 32"
@@ -16,14 +18,14 @@ export const ArrowUpIcon = React.forwardRef<SVGSVGElement, IconProps>(
         <path
           d="M16.9888 6.01334V26"
           stroke={color}
-          strokeWidth="1.5"
+          strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
           d="M9.0061 14.0187L16.9754 5.99734L24.9448 14.0187"
           stroke={color}
-          strokeWidth="1.5"
+          strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
         />

@@ -2,7 +2,9 @@ import React from 'react';
 import { IconProps } from '../types';
 
 export const PlusIcon = React.forwardRef<SVGSVGElement, IconProps>(
-  ({ color = 'currentColor', size = 32, ...rest }, ref) => {
+  ({
+    color = 'currentColor', size = 32, strokeWidth = 1.5, ...rest
+  }, ref) => {
     return (
       <svg
         viewBox="0 0 32 32"
@@ -13,8 +15,8 @@ export const PlusIcon = React.forwardRef<SVGSVGElement, IconProps>(
         height={size}
         ref={ref}
       >
-        <path d="M24 16H8" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M16 8V24" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M24 16H8" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M16 8V24" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     );
   }
