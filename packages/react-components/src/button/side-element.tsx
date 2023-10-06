@@ -1,4 +1,6 @@
-import React, { ReactElement, useEffect, useRef } from 'react';
+import React, {
+  ReactElement, isValidElement, useEffect, useMemo, useRef
+} from 'react';
 import { CSS } from '@stitches/react';
 import { CSSTransition } from 'react-transition-group';
 import { config, styled } from '../../stitches.config';
@@ -50,7 +52,7 @@ const StyledSpan = styled('span', {
 
 export const ButtonSideElement = ({
   loading,
-  loaderType = 'line',
+  loader = 'line',
   loaderSize,
   loaderCSS,
   loaderColor,
@@ -58,10 +60,10 @@ export const ButtonSideElement = ({
   containerStyle
 }: {
   loading: boolean;
-  loaderType?: ButtonBaseProps['loaderType'];
+  loader?: ButtonBaseProps['loader'];
   loaderSize: LineLoaderProps['size'] | CircleLoaderProps['size'];
   loaderCSS?: CSS<typeof config>;
-  loaderColor?: LineLoaderProps['color']
+  loaderColor?: LineLoaderProps['color'];
   icon?: ReactElement;
   containerStyle?: CSS<typeof config>;
 }) => {
@@ -77,6 +79,42 @@ export const ButtonSideElement = ({
       nodeRef.current.style.width = `${nodeWidth}px`;
     }
   }, []);
+
+  const loaderComponent = useMemo(() => {
+    switch (loader) {
+      case 'line': {
+        return (
+          <LineLoader
+            size={loaderSize as LineLoaderProps['size']}
+            className={`${prefixClassName('button__loader')}`}
+            css={loaderCSS}
+            containerRef={loaderContainerRef}
+            color={loaderColor}
+          />
+        );
+      }
+      case 'circle': {
+        return (
+          <CircleLoader
+            size={loaderSize}
+            className={`${prefixClassName('button__loader')}`}
+            css={loaderCSS}
+            containerRef={loaderContainerRef}
+            color={loaderColor}
+          />
+        );
+      }
+      default: {
+        return isValidElement(loader) ? (
+          React.cloneElement(loader as ReactElement, {
+            ref: loaderContainerRef
+          })
+        ) : (
+          <span ref={loaderContainerRef} />
+        );
+      }
+    }
+  }, [loader, loaderSize, loaderCSS, loaderCSS]);
 
   return (
     <StyledSpan css={containerStyle} ref={nodeRef}>
@@ -127,23 +165,7 @@ export const ButtonSideElement = ({
         timeout={100}
         mountOnEnter
       >
-        {loaderType === 'line' ? (
-          <LineLoader
-            size={loaderSize as LineLoaderProps['size']}
-            className={`${prefixClassName('button__loader')}`}
-            css={loaderCSS}
-            containerRef={loaderContainerRef}
-            color={loaderColor}
-          />
-        ) : (
-          <CircleLoader
-            size={loaderSize}
-            className={`${prefixClassName('button__loader')}`}
-            css={loaderCSS}
-            containerRef={loaderContainerRef}
-            color={loaderColor}
-          />
-        )}
+        {loaderComponent}
       </CSSTransition>
     </StyledSpan>
   );

@@ -1,4 +1,6 @@
-import React, { ReactElement, FunctionComponent, ComponentProps } from 'react';
+import React, {
+  ReactElement, FunctionComponent, ComponentProps
+} from 'react';
 import clsx from 'clsx';
 import { ScaleValue } from '@stitches/react';
 import { config, keyframes, styled } from '../../stitches.config';
@@ -410,7 +412,7 @@ export interface ButtonBaseProps {
   icon?: ReactElement;
   loading?: boolean;
   disabled?: boolean;
-  loaderType?: 'line' | 'circle';
+  loader?: ReactElement | 'line' | 'circle';
 }
 
 export type ButtonProps = ButtonBaseProps &
@@ -430,7 +432,7 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
       rightIcon,
       loading,
       disabled,
-      loaderType,
+      loader,
       onClick,
       ...rest
     }: ButtonProps,
@@ -448,7 +450,7 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
     const { size: loaderSize, ...loaderCSS } = getLoaderIconSizeFromButtonProps(
       {
         buttonSize: rest.size,
-        loaderType
+        loaderType: loader
       }
     );
     const loaderColor = getLoaderVariantFromButtonVariant({
@@ -476,7 +478,7 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
             loaderSize={loaderSize}
             loaderCSS={loaderCSS}
             loading={!!loading}
-            loaderType={loaderType}
+            loader={loader}
             loaderColor={loaderColor}
           />
         )}
@@ -487,7 +489,7 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
             loaderSize={loaderSize}
             loaderCSS={loaderCSS}
             loading={!!loading}
-            loaderType={loaderType}
+            loader={loader}
             loaderColor={loaderColor}
             containerStyle={{
               marginRight: hasNoIcon && !loading ? '0' : buttonLoaderMargin
@@ -509,7 +511,7 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
             containerStyle={{
               marginLeft: buttonLoaderMargin
             }}
-            loaderType={loaderType}
+            loader={loader}
           />
         )}
       </StyledButton>

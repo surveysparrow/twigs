@@ -71,7 +71,7 @@ export const getLoaderIconSizeFromButtonProps = ({
   buttonSize,
   loaderType
 }: {
-  loaderType: ButtonBaseProps['loaderType'];
+  loaderType: ButtonBaseProps['loader'];
   buttonSize: ButtonProps['size'];
 }) => {
   if (loaderType === 'circle') {
