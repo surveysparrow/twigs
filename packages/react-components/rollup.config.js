@@ -13,7 +13,7 @@ const packageJson = require('./package.json');
  */
 module.exports = [
   {
-    input: 'src/index.tsx',
+    input: 'src/index.ts',
     /**
      * @type {import('rollup').OutputOptions[]}
      */
@@ -40,7 +40,8 @@ module.exports = [
     plugins: [
       external(),
       PluginPure({
-        functions: ['forwardRef', 'React.forwardRef', 'styled']
+        functions: ['forwardRef', 'React.forwardRef', 'styled'],
+        sourcemap: true
       }),
       resolve(),
       commonjs(),
@@ -62,7 +63,7 @@ module.exports = [
     ]
   },
   {
-    input: 'src/index.tsx',
+    input: 'src/index.ts',
     output: {
       file: 'dist/index.d.ts',
       format: 'es'

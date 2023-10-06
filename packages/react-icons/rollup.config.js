@@ -40,7 +40,8 @@ module.exports = [
     plugins: [
       external(),
       PluginPure({
-        functions: ['forwardRef', 'React.forwardRef', 'styled']
+        functions: ['forwardRef', 'React.forwardRef', 'styled'],
+        sourcemap: true
       }),
       resolve(),
       commonjs(),
