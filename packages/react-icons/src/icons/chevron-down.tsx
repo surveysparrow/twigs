@@ -2,7 +2,9 @@ import React from 'react';
 import { IconProps } from '../types';
 
 export const ChevronDownIcon = React.forwardRef<SVGSVGElement, IconProps>(
-  ({ color = 'currentColor', size = 32, ...rest }, ref) => {
+  ({
+    color = 'currentColor', size = 32, strokeWidth = 1.5, ...rest
+  }, ref) => {
     return (
       <svg
         viewBox="0 0 32 32"
@@ -16,7 +18,7 @@ export const ChevronDownIcon = React.forwardRef<SVGSVGElement, IconProps>(
         <path
           d="M10.6667 13.3333L16 18.6667L21.3334 13.3333"
           stroke={color}
-          strokeWidth="1.5"
+          strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
         />

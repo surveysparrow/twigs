@@ -1,6 +1,6 @@
 import React, { ReactElement, FunctionComponent, ComponentProps } from 'react';
 import { Box } from '../box';
-import { styled } from '../../stitches.config';
+import { styled } from '../stitches.config';
 
 const StyledInput = styled('input', {
   width: '100%',

@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ComponentProps, ReactNode, useId } from 'react';
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
-import { styled } from '../../stitches.config';
+import { styled } from '../stitches.config';
 import { Flex } from '../flex';
 
 const TickIcon = () => {
