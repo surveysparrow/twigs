@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ComponentProps } from 'react';
 import * as AvatarPrimitive from '@radix-ui/react-avatar';
-import { styled } from '../../stitches.config';
+import { styled } from '../stitches.config';
 import { Box } from '../box';
 import { AvatarBadge } from './avatar-badge';
 

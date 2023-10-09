@@ -1,5 +1,5 @@
 import React, { FunctionComponent, ComponentProps } from 'react';
-import { styled } from '../../stitches.config';
+import { styled } from '../stitches.config';
 
 const StyledHeading = styled('h1', {
   fontWeight: '$7',

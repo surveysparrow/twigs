@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { CSS, VariantProps } from '@stitches/react';
-import { styled, keyframes, config } from '../../stitches.config';
+import { styled, keyframes, config } from '../stitches.config';
 import { Box } from '../box';
 import { prefixClassName } from '../utils';
 

@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { CSS } from '@stitches/react';
 import { CSSTransition } from 'react-transition-group';
-import { config, styled } from '../../stitches.config';
+import { config, styled } from '../stitches.config';
 import {
   CircleLoader,
   CircleLoaderProps,

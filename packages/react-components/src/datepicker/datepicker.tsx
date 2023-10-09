@@ -76,6 +76,7 @@ export const DatePicker = (props: DatePickerProps) => {
                 background: 'none',
                 color: '$black900'
               }}
+              type="button"
               icon={<CalendarIcon />}
             />
           </Box>

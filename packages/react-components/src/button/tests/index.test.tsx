@@ -4,7 +4,7 @@ import { render } from '@testing-library/react';
 import { TickCircleFillIcon } from '@sparrowengg/twigs-react-icons';
 import '@testing-library/jest-dom';
 import { Button } from '../index';
-import { config } from '../../../stitches.config';
+import { config } from '../../stitches.config';
 
 describe('Button', () => {
   it('renders without crashing', () => {

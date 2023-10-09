@@ -1,7 +1,7 @@
 import { CSS } from '@stitches/react';
 import { ButtonBaseProps, ButtonProps } from './button';
 import { CircleLoaderProps, LineLoaderProps } from '../loader';
-import { config } from '../../stitches.config';
+import { config } from '../stitches.config';
 
 const buttonSizeToLineLoaderSizeMapping: Record<
   Extract<ButtonProps['size'], string>,

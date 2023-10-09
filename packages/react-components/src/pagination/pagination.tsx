@@ -3,7 +3,7 @@ import React, {
   ComponentProps,
   FunctionComponent, SyntheticEvent, useEffect, useId, useState
 } from 'react';
-import { styled } from '../../stitches.config';
+import { styled } from '../stitches.config';
 import { Box } from '../box';
 import { Button, IconButton } from '../button';
 import { usePagination } from '../hooks';

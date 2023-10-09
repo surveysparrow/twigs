@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import clsx from 'clsx';
 import { ScaleValue } from '@stitches/react';
-import { config, keyframes, styled } from '../../stitches.config';
+import { config, keyframes, styled } from '../stitches.config';
 import { ButtonSideElement } from './side-element';
 import {
   getLoaderIconSizeFromButtonProps,
@@ -460,6 +460,7 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
 
     return (
       <StyledButton
+        type="button"
         ref={ref}
         color={color}
         isIcon={!!icon}
