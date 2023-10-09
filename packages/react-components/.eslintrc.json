@@ -65,7 +65,9 @@
             }
         ],
         "react/jsx-props-no-spreading": "off",
-        "react/destructuring-assignment": "off"
+        "react/destructuring-assignment": "off",
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": ["error"]
     },
     "settings": {
         "import/resolver": {
@@ -77,5 +79,8 @@
                 ]
             }
         }
+    },
+    "globals": {
+        "NodeJS": true
     }
 }

@@ -1,1 +1,2 @@
-export * from './dot-loader';
+export * from './line';
+export * from './circle';

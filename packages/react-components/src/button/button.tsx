@@ -1,6 +1,24 @@
-import React, { ReactElement, FunctionComponent, ComponentProps } from 'react';
-import { styled } from '../stitches.config';
-import { DotLoader } from '../loader';
+import React, {
+  ReactElement, FunctionComponent, ComponentProps
+} from 'react';
+import clsx from 'clsx';
+import { ScaleValue } from '@stitches/react';
+import { config, keyframes, styled } from '../stitches.config';
+import { ButtonSideElement } from './side-element';
+import {
+  getLoaderIconSizeFromButtonProps,
+  getLoaderVariantFromButtonVariant
+} from './utils';
+import { prefixClassName } from '../utils';
+
+const loadingBlink = keyframes({
+  '50%': {
+    opacity: 0.6
+  },
+  '0%, 100%': {
+    opacity: 1
+  }
+});
 
 const StyledButton = styled('button', {
   appearance: 'none',
@@ -27,6 +45,11 @@ const StyledButton = styled('button', {
     boxShadow:
       'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
   },
+  [`&.${prefixClassName('button--loading')} .${prefixClassName(
+    'button__content'
+  )}`]: {
+    animation: `${loadingBlink} 1.5s cubic-bezier(0.51, 0, 0, 1) infinite`
+  },
   variants: {
     size: {
       '2xl': {
@@ -35,7 +58,7 @@ const StyledButton = styled('button', {
         fontSize: '$lg',
         lineHeight: '$lg',
         height: '$16',
-        '& svg': {
+        [`& .${prefixClassName('button__icon-container svg')}`]: {
           width: '$6',
           height: '$6'
         }
@@ -46,7 +69,7 @@ const StyledButton = styled('button', {
         fontSize: '$lg',
         lineHeight: '$lg',
         height: '$12',
-        '& svg': {
+        [`& .${prefixClassName('button__icon-container svg')}`]: {
           width: '$6',
           height: '$6'
         }
@@ -57,7 +80,7 @@ const StyledButton = styled('button', {
         fontSize: '$md',
         lineHeight: '$md',
         height: '$10',
-        '& svg': {
+        [`& .${prefixClassName('button__icon-container svg')}`]: {
           width: '$5',
           height: '$5'
         }
@@ -68,7 +91,7 @@ const StyledButton = styled('button', {
         fontSize: '$sm',
         lineHeight: '$md',
         height: '$8',
-        '& svg': {
+        [`& .${prefixClassName('button__icon-container svg')}`]: {
           width: '$5',
           height: '$5'
         }
@@ -79,7 +102,7 @@ const StyledButton = styled('button', {
         fontSize: '$sm',
         lineHeight: '$sm',
         height: '$6',
-        '& svg': {
+        [`& .${prefixClassName('button__icon-container svg')}`]: {
           width: '$4',
           height: '$4'
         }
@@ -90,7 +113,7 @@ const StyledButton = styled('button', {
         fontSize: '$xs',
         lineHeight: '$xs',
         height: '$5',
-        '& svg': {
+        [`& .${prefixClassName('button__icon-container svg')}`]: {
           width: '$2',
           height: '$2'
         }
@@ -101,7 +124,7 @@ const StyledButton = styled('button', {
         fontSize: '$xxs',
         lineHeight: '$xxs',
         height: '$4',
-        '& svg': {
+        [`& .${prefixClassName('button__icon-container svg')}`]: {
           width: '$2',
           height: '$2'
         }
@@ -111,7 +134,7 @@ const StyledButton = styled('button', {
       default: {
         backgroundColorOpacity: ['$secondary500', 0.08],
         color: '$secondary500',
-        '&:hover, &:active': {
+        [`&:hover, &:active, &.${prefixClassName('button--loading')}`]: {
           color: '$secondary600',
           backgroundColorOpacity: ['$secondary500', 0.08]
         },
@@ -125,7 +148,7 @@ const StyledButton = styled('button', {
         '&:hover, &:focus': {
           background: '$primary500'
         },
-        '&:active': {
+        [`&:active, &.${prefixClassName('button--loading')}`]: {
           background: '$primary700'
         }
       },
@@ -135,7 +158,7 @@ const StyledButton = styled('button', {
         '&:hover, &:focus': {
           background: '$secondary600'
         },
-        '&:active': {
+        [`&:active, &.${prefixClassName('button--loading')}`]: {
           background: '$secondary800'
         }
       },
@@ -146,7 +169,7 @@ const StyledButton = styled('button', {
           color: '$secondary600',
           background: '$neutral50'
         },
-        '&:active': {
+        [`&:active, &.${prefixClassName('button--loading')}`]: {
           color: '$secondary600',
           background: '$neutral100'
         }
@@ -157,7 +180,7 @@ const StyledButton = styled('button', {
         '&:hover, &:focus': {
           background: '$white300'
         },
-        '&:active': {
+        [`&:active, &.${prefixClassName('button--loading')}`]: {
           background: '$white400'
         }
       },
@@ -167,7 +190,7 @@ const StyledButton = styled('button', {
         '&:hover': {
           background: '$negative200'
         },
-        '&:active': {
+        [`&:active, &.${prefixClassName('button--loading')}`]: {
           background: '$negative300'
         }
       }
@@ -218,7 +241,7 @@ const StyledButton = styled('button', {
         '&:hover, &:focus': {
           color: '$primary700'
         },
-        '&:active': {
+        [`&:active, &.${prefixClassName('button--loading')}`]: {
           color: '$primary800',
           backgroundColorOpacity: ['$primary500', 0.15]
         }
@@ -237,7 +260,7 @@ const StyledButton = styled('button', {
           color: '$primary600',
           background: '$white900'
         },
-        '&:active': {
+        [`&:active, &.${prefixClassName('button--loading')}`]: {
           borderColorOpacity: ['$primary500', 0.9],
           color: '$primary700',
           background: '$white900'
@@ -254,7 +277,7 @@ const StyledButton = styled('button', {
           color: '$secondary600',
           backgroundColorOpacity: ['$secondary500', 0.08]
         },
-        '&:active': {
+        [`&:active, &.${prefixClassName('button--loading')}`]: {
           color: '$secondary700',
           backgroundColorOpacity: ['$secondary500', 0.15]
         }
@@ -269,7 +292,7 @@ const StyledButton = styled('button', {
         '&:hover, &:focus, &:active': {
           color: '$neutral900'
         },
-        '&:active': {
+        [`&:active, &.${prefixClassName('button--loading')}`]: {
           backgroundColorOpacity: ['$black500', 0.08]
         },
         '&:hover, &:focus': {
@@ -283,11 +306,11 @@ const StyledButton = styled('button', {
       css: {
         color: '$negative600',
         background: 'transparent',
-        '&:active': {
-          background: '$negative200'
-        },
         '&:hover, &:focus': {
           background: '$negative100'
+        },
+        [`&:active, &.${prefixClassName('button--loading')}`]: {
+          background: '$negative200'
         }
       }
     },
@@ -297,7 +320,7 @@ const StyledButton = styled('button', {
       css: {
         width: '$16',
         height: '$16',
-        '& svg': {
+        [`& .${prefixClassName('button__icon-container svg')}`]: {
           width: '$8',
           height: '$8'
         }
@@ -309,7 +332,7 @@ const StyledButton = styled('button', {
       css: {
         width: '$12',
         height: '$12',
-        '& svg': {
+        [`& .${prefixClassName('button__icon-container svg')}`]: {
           width: '$8',
           height: '$8'
         }
@@ -321,7 +344,7 @@ const StyledButton = styled('button', {
       css: {
         width: '$10',
         height: '$10',
-        '& svg': {
+        [`& .${prefixClassName('button__icon-container svg')}`]: {
           width: '$6',
           height: '$6'
         }
@@ -333,7 +356,7 @@ const StyledButton = styled('button', {
       css: {
         width: '$8',
         height: '$8',
-        '& svg': {
+        [`& .${prefixClassName('button__icon-container svg')}`]: {
           width: '$5',
           height: '$5'
         }
@@ -345,7 +368,7 @@ const StyledButton = styled('button', {
       css: {
         width: '$6',
         height: '$6',
-        '& svg': {
+        [`& .${prefixClassName('button__icon-container svg')}`]: {
           width: '$4',
           height: '$4'
         }
@@ -357,7 +380,7 @@ const StyledButton = styled('button', {
       css: {
         width: '$5',
         height: '$5',
-        '& svg': {
+        [`& .${prefixClassName('button__icon-container svg')}`]: {
           width: '$3',
           height: '$3'
         }
@@ -369,7 +392,7 @@ const StyledButton = styled('button', {
       css: {
         width: '$4',
         height: '$4',
-        '& svg': {
+        [`& .${prefixClassName('button__icon-container svg')}`]: {
           width: '$2',
           height: '$2'
         }
@@ -383,20 +406,16 @@ const StyledButton = styled('button', {
   }
 });
 
-const StyledSpan = styled('span', {
-  display: 'inline-flex',
-  alignItems: 'center'
-});
-
 export interface ButtonBaseProps {
   leftIcon?: ReactElement;
   rightIcon?: ReactElement;
   icon?: ReactElement;
-  loading?: boolean,
-  disabled?: boolean
+  loading?: boolean;
+  disabled?: boolean;
+  loader?: ReactElement | 'line' | 'circle';
 }
 
-type ButtonProps = ButtonBaseProps &
+export type ButtonProps = ButtonBaseProps &
   ComponentProps<typeof StyledButton> &
   React.ButtonHTMLAttributes<HTMLButtonElement> & {
     as?: React.ElementType;
@@ -405,10 +424,40 @@ type ButtonProps = ButtonBaseProps &
 export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
   (
     {
-      children, color = 'primary', icon, leftIcon, rightIcon, loading, disabled, onClick, ...rest
+      children,
+      className,
+      color = 'primary',
+      icon,
+      leftIcon,
+      rightIcon,
+      loading,
+      disabled,
+      loader,
+      onClick,
+      ...rest
     }: ButtonProps,
     ref
   ) => {
+    const hasNoIcon = !(leftIcon || rightIcon || icon);
+    const buttonLoaderMargin: ScaleValue<'space', typeof config> = [
+      'xxs',
+      'xs',
+      'sm'
+    ].includes(rest.size as Extract<ButtonProps['size'], string>)
+      ? '$2'
+      : '$4';
+
+    const { size: loaderSize, ...loaderCSS } = getLoaderIconSizeFromButtonProps(
+      {
+        buttonSize: rest.size,
+        loaderType: loader
+      }
+    );
+    const loaderColor = getLoaderVariantFromButtonVariant({
+      variant: rest.variant ?? 'solid',
+      color
+    });
+
     return (
       <StyledButton
         type="button"
@@ -418,29 +467,54 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
         disabled={disabled}
         data-testid="button"
         onClick={onClick}
+        className={clsx(className, {
+          [`${prefixClassName('button--loading')}`]: !!loading,
+          [`${prefixClassName('button--disabled')}`]: disabled
+        })}
         {...rest}
       >
-        {loading
-          ? <DotLoader />
-          : (
-            <>
-              {icon && React.cloneElement(icon)}
+        {icon && (
+          <ButtonSideElement
+            icon={icon}
+            loaderSize={loaderSize}
+            loaderCSS={loaderCSS}
+            loading={!!loading}
+            loader={loader}
+            loaderColor={loaderColor}
+          />
+        )}
 
-              {leftIcon && (
-                <StyledSpan css={{ marginRight: '$4' }}>
-                  {React.cloneElement(leftIcon)}
-                </StyledSpan>
-              )}
+        {(leftIcon || hasNoIcon) && (
+          <ButtonSideElement
+            icon={hasNoIcon ? undefined : leftIcon}
+            loaderSize={loaderSize}
+            loaderCSS={loaderCSS}
+            loading={!!loading}
+            loader={loader}
+            loaderColor={loaderColor}
+            containerStyle={{
+              marginRight: hasNoIcon && !loading ? '0' : buttonLoaderMargin
+            }}
+          />
+        )}
 
-              {children}
+        <span className={`${prefixClassName('button__content')}`}>
+          {children}
+        </span>
 
-              {rightIcon && (
-                <StyledSpan css={{ marginLeft: '$4' }}>
-                  {React.cloneElement(rightIcon)}
-                </StyledSpan>
-              )}
-            </>
-          )}
+        {rightIcon && (
+          <ButtonSideElement
+            icon={rightIcon}
+            loaderSize={loaderSize}
+            loaderCSS={loaderCSS}
+            loading={!!loading}
+            loaderColor={loaderColor}
+            containerStyle={{
+              marginLeft: buttonLoaderMargin
+            }}
+            loader={loader}
+          />
+        )}
       </StyledButton>
     );
   }
