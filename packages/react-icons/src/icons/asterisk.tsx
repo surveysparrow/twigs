@@ -2,7 +2,9 @@ import React from 'react';
 import { IconProps } from '../types';
 
 export const AsteriskIcon = React.forwardRef<SVGSVGElement, IconProps>(
-  ({ color = 'currentColor', size = 32, ...rest }, ref) => {
+  ({
+    color = 'currentColor', size = 32, strokeWidth = 1.5, ...rest
+  }, ref) => {
     return (
       <svg
         viewBox="0 0 32 32"
@@ -16,19 +18,19 @@ export const AsteriskIcon = React.forwardRef<SVGSVGElement, IconProps>(
         <path
           d="M16.1962 6.98889V25.0111"
           stroke={color}
-          strokeWidth="1.5"
+          strokeWidth={strokeWidth}
           strokeLinecap="round"
         />
         <path
           d="M24 11.4944L8.3923 20.5056"
           stroke={color}
-          strokeWidth="1.5"
+          strokeWidth={strokeWidth}
           strokeLinecap="round"
         />
         <path
           d="M24 20.5056L8.39231 11.4944"
           stroke={color}
-          strokeWidth="1.5"
+          strokeWidth={strokeWidth}
           strokeLinecap="round"
         />
       </svg>

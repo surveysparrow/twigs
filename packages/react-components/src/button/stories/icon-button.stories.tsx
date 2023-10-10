@@ -21,6 +21,9 @@ export default {
     },
     disabled: {
       control: 'boolean'
+    },
+    loading: {
+      control: 'boolean'
     }
   }
 };

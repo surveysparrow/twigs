@@ -3,7 +3,7 @@ import * as ToastPrimitive from '@radix-ui/react-toast';
 import {
   AlertFillIcon, TickCircleFillIcon, InfoIcon
 } from '@sparrowengg/twigs-react-icons';
-import { styled, keyframes } from '../../stitches.config';
+import { styled, keyframes } from '../stitches.config';
 import { Flex } from '../flex';
 
 const StyledTickIcon = styled(TickCircleFillIcon);

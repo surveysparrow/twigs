@@ -1,7 +1,7 @@
 import React, { ReactNode, ComponentProps, ReactElement } from 'react';
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import { Flex } from '../flex';
-import { styled, keyframes } from '../../stitches.config';
+import { styled, keyframes } from '../stitches.config';
 
 const ChevronRightIcon = () => {
   return (

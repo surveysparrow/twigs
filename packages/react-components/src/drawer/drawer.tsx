@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, ComponentProps } from 'react';
 import * as Portal from '@radix-ui/react-portal';
-import { styled } from '../../stitches.config';
+import { styled } from '../stitches.config';
 import { Box } from '../box';
 import { useMountTransition } from '../hooks';
 

@@ -2,7 +2,7 @@ import React, { cloneElement, ComponentProps, FunctionComponent } from 'react';
 import {
   AlertIcon, CloseIcon, InfoIcon, TickCircleIcon, WarningIcon
 } from '@sparrowengg/twigs-react-icons';
-import { styled } from '../../stitches.config';
+import { styled } from '../stitches.config';
 import { Box } from '../box';
 import { IconButton } from '../button';
 
