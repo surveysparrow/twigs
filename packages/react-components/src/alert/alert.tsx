@@ -45,7 +45,7 @@ const StyledAlert = styled(Box, {
         [`${StyledAlertDescription}`]: {
           fontSize: '$sm'
         },
-        [`${IconButton}`]: {
+        [`${StyledCloseButton}`]: {
           height: '$5',
           width: '$5'
         }
@@ -58,7 +58,7 @@ const StyledAlert = styled(Box, {
         [`${StyledAlertDescription}`]: {
           fontSize: '$md'
         },
-        [`${IconButton}`]: {
+        [`${StyledCloseButton}`]: {
           height: '$6',
           width: '$6'
         }
