@@ -89,12 +89,9 @@ const SubContent = (props) => {
 
 const itemStyles = {
   all: 'unset',
-  fontSize: '$md',
-  lineHeight: '$md',
   color: '$neutral900',
   display: 'flex',
   alignItems: 'center',
-  padding: '$4 $6',
   position: 'relative',
   userSelect: 'none',
 
@@ -106,8 +103,25 @@ const itemStyles = {
   },
 
   '&[data-highlighted]': {
-    background: '$neutral50',
+    backgroundColorOpacity: ['$secondary500', 0.06],
     color: '$neutral900'
+  },
+  variants: {
+    size: {
+      md: {
+        fontSize: '$md',
+        lineHeight: '$md',
+        padding: '$4 $6'
+      },
+      sm: {
+        fontSize: '$sm',
+        lineHeight: '$sm',
+        padding: '$3 $6'
+      }
+    }
+  },
+  defaultVariants: {
+    size: 'md'
   }
 };
 
@@ -137,11 +151,12 @@ const StyledSubTriggerIcon = styled(Flex, {
 type SubTriggerProps = ComponentProps<typeof StyledSubTrigger> & {
   children: ReactNode;
   icon?: ReactElement;
+  size?: string;
 };
 
-const SubTrigger = ({ children, icon }: SubTriggerProps) => {
+const SubTrigger = ({ children, icon, size }: SubTriggerProps) => {
   return (
-    <StyledSubTrigger>
+    <StyledSubTrigger size={size}>
       {children}
       <StyledSubTriggerIcon>
         {icon ? React.cloneElement(icon) : <ChevronRightIcon />}
