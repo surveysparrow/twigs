@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactNode } from 'react';
 import type * as Stitches from '@stitches/react';
-import { config } from '../../stitches.config';
+import { config } from '../stitches.config';
 import { Box, BoxProps } from '../box';
 
 export interface GridBaseProps extends BoxProps {

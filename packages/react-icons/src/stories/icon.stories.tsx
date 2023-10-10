@@ -72,6 +72,10 @@ export default {
     size: {
       control: 'number',
       defaultValue: 32
+    },
+    strokeWidth: {
+      control: 'number',
+      defaultValue: 1.5
     }
   }
 };
