@@ -1,6 +1,6 @@
 import * as HoverCardPrimitive from '@radix-ui/react-hover-card';
 import { ComponentProps, ReactElement } from 'react';
-import { keyframes, styled } from '../../stitches.config';
+import { keyframes, styled } from '../stitches.config';
 
 const slideUpAndFade = keyframes({
   '0%': { opacity: 0, transform: 'translateY(2px)' },

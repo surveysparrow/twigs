@@ -10,7 +10,6 @@ describe('Accordion', () => {
   it('renders without crashing', () => {
     render(
       <Accordion
-        size="sm"
         type="multiple"
       >
         <AccordionItem value="item-1">

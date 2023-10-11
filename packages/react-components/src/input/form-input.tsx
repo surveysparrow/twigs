@@ -1,5 +1,5 @@
 import { forwardRef, FunctionComponent, ReactElement } from 'react';
-import { styled } from '../../stitches.config';
+import { styled } from '../stitches.config';
 import { Box } from '../box';
 import { Flex } from '../flex';
 import { FormHelperText } from '../form-helper-text';

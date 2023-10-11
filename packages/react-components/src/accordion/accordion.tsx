@@ -1,7 +1,7 @@
 import React from 'react';
 import * as AccordionPrimitive from '@radix-ui/react-accordion';
 import { ChevronDownIcon } from '@sparrowengg/twigs-react-icons';
-import { keyframes, styled } from '../../stitches.config';
+import { keyframes, styled } from '../stitches.config';
 
 const StyledChevron = styled(ChevronDownIcon, {
   color: '$neutral800',

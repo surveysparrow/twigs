@@ -1,6 +1,6 @@
 import React from 'react';
 import { AriaButtonProps } from 'react-aria';
-import { styled } from '../../stitches.config';
+import { styled } from '../stitches.config';
 import { IconButton } from '../button';
 import { Flex } from '../flex';
 
@@ -19,6 +19,7 @@ export const CalendarNavigationButton = ({
       onClick={onPress as any}
       icon={icon}
       size="lg"
+      type="button"
       disabled={isDisabled}
     />
   );

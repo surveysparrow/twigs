@@ -1,2 +1,2 @@
 export * from './src';
-export * from './stitches.config';
+export * from './src/stitches.config';
