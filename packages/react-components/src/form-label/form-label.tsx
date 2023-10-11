@@ -1,5 +1,6 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import * as LabelPrimitive from '@radix-ui/react-label';
+import { ComponentProps } from '@stitches/react';
 import { styled } from '../stitches.config';
 import { Flex } from '../flex';
 import { Text } from '../text';
@@ -31,17 +32,22 @@ const StyledFormLabel = styled(LabelPrimitive.Root, {
   }
 });
 
-export const FormLabel: FunctionComponent<FormLabelProps> = ({
-  children,
-  requiredIndicator = false,
-  as
+export const FormLabel: FunctionComponent<
+  FormLabelProps & ComponentProps<typeof StyledFormLabel>
+> = ({
+  children, requiredIndicator = false, as, ...rest
 }: FormLabelProps) => {
   return (
     <Flex gap="$1">
-      <StyledFormLabel as={as}>{children}</StyledFormLabel>
-      {requiredIndicator === true ? <Text css={{ color: 'red', paddingTop: '$1' }}>*</Text> : null}
+      <StyledFormLabel as={as} {...rest}>
+        {children}
+      </StyledFormLabel>
+      {requiredIndicator === true ? (
+        <Text css={{ color: 'red', paddingTop: '$1' }}>*</Text>
+      ) : null}
       {typeof requiredIndicator !== 'boolean'
-        ? React.cloneElement(requiredIndicator) : null}
+        ? React.cloneElement(requiredIndicator)
+        : null}
     </Flex>
   );
 };
