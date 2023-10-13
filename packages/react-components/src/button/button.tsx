@@ -175,7 +175,7 @@ const StyledButton = styled('button', {
         }
       },
       light: {
-        background: '$white200',
+        backgroundColorOpacity: ['$white200', 0.1],
         color: '$white900',
         '&:hover, &:focus': {
           background: '$white300'
@@ -348,6 +348,24 @@ const StyledButton = styled('button', {
           borderColorOpacity: ['$secondary800', 0.8],
           color: '$secondary800',
           background: '$white900'
+        }
+      }
+    },
+    {
+      color: 'light',
+      variant: 'outline',
+      css: {
+        background: 'transparent',
+        borderColorOpacity: ['$white400', 0.2],
+        borderStyle: 'solid',
+        color: '$white900',
+        '&:hover, &:focus': {
+          background: 'transparent',
+          borderColorOpacity: ['$white500', 0.3]
+        },
+        [`&:active, &.${prefixClassName('button--loading')}`]: {
+          background: 'transparent',
+          borderColorOpacity: ['$white700', 0.7]
         }
       }
     },
