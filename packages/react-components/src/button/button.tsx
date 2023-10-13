@@ -383,6 +383,26 @@ const StyledButton = styled('button', {
       }
     },
     {
+      color: 'error',
+      variant: 'outline',
+      css: {
+        color: '$negative600',
+        background: '$white900',
+        borderColor: '$negative200',
+        borderStyle: 'solid',
+        '&:hover, &:focus': {
+          borderColor: '$negative300',
+          color: '$negative700',
+          background: '$white900'
+        },
+        [`&:active, &.${prefixClassName('button--loading')}`]: {
+          borderColor: '$negative600',
+          color: '$negative800',
+          background: '$white900'
+        }
+      }
+    },
+    {
       isIcon: true,
       size: '2xl',
       css: {
