@@ -34,6 +34,8 @@ pipelines:
               includePaths:
                 # any changes in given directory
                 - "packages/react-icons/src/**"
+                - "packages/react-components/src/**"
+                - "packages/docs/**"
 
           script:
             - npm install -g lerna
@@ -77,6 +79,7 @@ pipelines:
             changesets:
               includePaths:
                 - "packages/react-components/src/**"
+                - "packages/docs/**"
           caches:
             - node
           script:
