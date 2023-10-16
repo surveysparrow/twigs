@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement } from 'react';
+import React, { FunctionComponent, ReactElement, isValidElement } from 'react';
 import * as LabelPrimitive from '@radix-ui/react-label';
 import { ComponentProps } from '@stitches/react';
 import { styled } from '../stitches.config';
@@ -42,6 +42,9 @@ export const FormLabel: FunctionComponent<
 > = ({
   children, requiredIndicator = false, as, ...rest
 }: FormLabelProps) => {
+  if (!isValidElement(requiredIndicator) && typeof requiredIndicator !== 'boolean') {
+    throw Error('requiredIndicator is not a valid component');
+  }
   return (
     <Flex gap="$1">
       <StyledFormLabel as={as} {...rest}>
