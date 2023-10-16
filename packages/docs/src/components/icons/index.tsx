@@ -8,7 +8,7 @@ export default function AllIcons() {
     <BrowserOnly fallback={<div>Loading...</div>}>
       {() => {
         const Icons =
-          require('@site/../react-icons/dist/index');
+          require('@site/../react-icons/src/index');
 
         const [search, setSearch] = useState('');
         const filteredIcons = Object.entries(Icons).filter(([key]) => key.toLowerCase().includes(search.toLowerCase()));
