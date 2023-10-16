@@ -1,4 +1,4 @@
-import { defaultTheme, styled } from '@site/../react-components/dist/stitches.config';
+import { defaultTheme, styled } from '@site/../react-components/src/stitches.config';
 import { twigsComponentLoader } from '@site/src/theme/ReactLiveScope/twigs-loader';
 import React from 'react';
 const Flex = twigsComponentLoader('Flex');
