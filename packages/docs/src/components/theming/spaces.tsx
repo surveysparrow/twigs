@@ -1,4 +1,4 @@
-import { defaultTheme } from '@site/../react-components/dist/stitches.config';
+import { defaultTheme } from '@site/../react-components/src/stitches.config';
 import { remToPix, twigsComponentLoader } from '@site/src/theme/ReactLiveScope/twigs-loader';
 import React from 'react';
 
