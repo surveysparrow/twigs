@@ -48,7 +48,7 @@ export const FormLabel: FunctionComponent<
         {children}
       </StyledFormLabel>
       {requiredIndicator === true ? (
-        <StyledText>*</StyledText>
+        <StyledText data-testid="label-required-indicator">*</StyledText>
       ) : null}
       {typeof requiredIndicator !== 'boolean'
         ? React.cloneElement(requiredIndicator)
