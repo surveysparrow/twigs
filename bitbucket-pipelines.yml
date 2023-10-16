@@ -38,9 +38,10 @@ pipelines:
                 - "packages/docs/**"
 
           script:
-            - cd packages/react-icons
-            - yarn
-            - yarn build
+            - npm install -g lerna
+            - yarn install
+            - nx reset
+            - lerna run build --scope=@sparrowengg/twigs-react-icons
 
       # components
       - step:
@@ -83,9 +84,10 @@ pipelines:
           caches:
             - node
           script:
-            - cd packages/react-components
-            - yarn
-            - yarn build
+            - npm install -g lerna
+            - yarn install
+            - nx reset
+            - lerna run build --scope=@sparrowengg/twigs-react
 
       - step:
           name: Security Scan for Docs
@@ -101,9 +103,10 @@ pipelines:
           caches:
             - node
           script:
-            - cd packages/docs
-            - yarn
-            - yarn build
+            - npm install -g lerna
+            - yarn install
+            - nx reset
+            - lerna run build --scope=@sparrowengg/twigs-docs --verbose
 
   branches:
     master:
