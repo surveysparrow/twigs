@@ -40,7 +40,7 @@ pipelines:
           script:
             - npm install -g lerna
             - yarn install
-            - nx reset
+            - npx nx reset
             - lerna run build --scope=@sparrowengg/twigs-react-icons
 
       # components
@@ -86,7 +86,7 @@ pipelines:
           script:
             - npm install -g lerna
             - yarn install
-            - nx reset
+            - npx nx reset
             - lerna run build --scope=@sparrowengg/twigs-react
 
       - step:
@@ -105,7 +105,7 @@ pipelines:
           script:
             - npm install -g lerna
             - yarn install
-            - nx reset
+            - npx nx reset
             - lerna run build --scope=@sparrowengg/twigs-docs --verbose
 
   branches:
