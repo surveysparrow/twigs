@@ -32,6 +32,11 @@ const StyledFormLabel = styled(LabelPrimitive.Root, {
   }
 });
 
+const StyledText = styled(Text, {
+  color: '$negative600',
+  paddingTop: '$1'
+});
+
 export const FormLabel: FunctionComponent<
   FormLabelProps & ComponentProps<typeof StyledFormLabel>
 > = ({
@@ -43,7 +48,7 @@ export const FormLabel: FunctionComponent<
         {children}
       </StyledFormLabel>
       {requiredIndicator === true ? (
-        <Text css={{ color: 'red', paddingTop: '$1' }}>*</Text>
+        <StyledText>*</StyledText>
       ) : null}
       {typeof requiredIndicator !== 'boolean'
         ? React.cloneElement(requiredIndicator)
