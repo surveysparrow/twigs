@@ -68,6 +68,10 @@ export const FormInput: FunctionComponent<FormInputProps> = forwardRef(({
         })}
         ref={ref}
         {...rest}
+        css={{
+          ...rest.css,
+          ...(error && { borderBottomColor: '$negative600', borderBottomWidth: '1.5px' })
+        }}
       />
       {
         error
