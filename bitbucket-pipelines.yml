@@ -3,26 +3,8 @@ image: node:16
 pipelines:
   pull-requests:
     "**":
-      - step:
-          name: Initial setup
-          condition:
-            changesets:
-              includePaths:
-                # any changes in given directory
-                - "packages/react-icons/src/**"
-                - "packages/react-components/src/**"
-                - "packages/docs/**"
-          script:
-            - yarn
-            - cd packages/react-components && yarn && cd ../../
-            - cd packages/react-icons && yarn && cd ../../
-            - cd packages/docs && yarn && cd ../../
-          caches:
-            - node
-            - components-node-modules
-            - icons-node-modules
-            - docs-node-modules
-      - step:
+      - parallel:
+        - step:
           name: Security Scan for React Icons
           condition:
             changesets:
@@ -34,6 +16,30 @@ pipelines:
             # Run a security scan for sensitive data.
             # See more security tools at https://bitbucket.org/product/features/pipelines/integrations?&category=security
             - pipe: atlassian/git-secrets-scan:0.5.1
+        - step:
+          name: Security Scan for React Components
+          condition:
+            changesets:
+              includePaths:
+                # any changes in given directory
+                - "packages/react-components/src/**"
+          script:
+            - cd packages/react-components
+            - pipe: atlassian/git-secrets-scan:0.5.1
+      - step:
+          name: Initial setup
+          condition:
+            changesets:
+              includePaths:
+                # any changes in given directory
+                - "packages/react-icons/src/**"
+                - "packages/react-components/src/**"
+                - "packages/docs/**"
+          script:
+            - yarn
+          caches:
+            - node
+            - node_modules
 
       - step:
           name: Run eslint
@@ -43,9 +49,7 @@ pipelines:
                 # any changes in given directory
                 - "packages/react-icons/src/**"
           script:
-            - yarn
-            - cd packages/react-icons
-            - yarn eslint
+            - npx lerna run eslint --scope=@sparrowengg/twigs-react-icons
 
       - step:
           name: Build Icons
@@ -59,15 +63,9 @@ pipelines:
           artifacts:
             - packages/react-icons/dist/**
           script:
-            - yarn
             - yarn build:icons
 
       # components
-      - step:
-          name: Security Scan for React Components
-          script:
-            - cd packages/react-components
-            - pipe: atlassian/git-secrets-scan:0.5.1
       - step:
           name: Run eslint
           condition:
@@ -76,9 +74,7 @@ pipelines:
                 # any changes in given directory
                 - "packages/react-components/src/**"
           script:
-            - yarn
-            - cd packages/react-components
-            - yarn eslint
+            - npx lerna run eslint --scope=@sparrowengg/twigs-react
       - step:
           name: Test
           condition:
@@ -196,6 +192,4 @@ pipelines:
 
 definitions:
   caches:
-    components-node-modules: packages/react-components/node_modules
-    icons-node-modules: packages/react-icons/node_modules
-    docs-node-modules: packages/docs/node_modules
+    node_modules: node_modules
