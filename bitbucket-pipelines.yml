@@ -38,6 +38,7 @@ pipelines:
                 # any changes in given directory
                 - "packages/react-icons/src/**"
           script:
+            - yarn
             - cd packages/react-icons
             - npx eslint .
 
@@ -53,6 +54,7 @@ pipelines:
           artifacts:
             - packages/react-icons/dist/**
           script:
+            - yarn
             - npx lerna run build --scope=@sparrowengg/twigs-react-icons
 
       # components
@@ -78,6 +80,7 @@ pipelines:
               includePaths:
                 - "packages/react-components/src/**"
           script:
+            - yarn
             - lerna run test
       - step:
           name: Build Components
