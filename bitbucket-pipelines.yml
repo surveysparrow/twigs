@@ -13,12 +13,10 @@ pipelines:
                 - "packages/react-components/src/**"
                 - "packages/docs/**"
           script:
-            - npm install -g lerna
-            - pwd lerna
             - yarn
+            - yarn add lerna -W
           caches:
             - node
-            - global-npm-packages
       - step:
           name: Security Scan for React Icons
           condition:
@@ -55,7 +53,7 @@ pipelines:
           artifacts:
             - packages/react-icons/dist/**
           script:
-            - lerna run build --scope=@sparrowengg/twigs-react-icons
+            - npx lerna run build --scope=@sparrowengg/twigs-react-icons
 
       # components
       - step:
@@ -89,7 +87,7 @@ pipelines:
                 - "packages/react-components/src/**"
                 - "packages/docs/**"
           script:
-            - lerna run build --scope=@sparrowengg/twigs-react
+            - npx lerna run build --scope=@sparrowengg/twigs-react
 
       - step:
           name: Security Scan for Docs
@@ -103,7 +101,7 @@ pipelines:
               includePaths:
                 - "packages/docs/**"
           script:
-            - lerna run build --scope=@sparrowengg/twigs-docs --verbose
+            - npx lerna run build --scope=@sparrowengg/twigs-docs --verbose
 
   branches:
     master:
@@ -185,6 +183,3 @@ pipelines:
                 - yarn install
                 - lerna run build --scope=@sparrowengg/twigs-docs --verbose
 
-definitions:
-  caches:
-    global-npm-packages: /usr/local/lib/node_modules  # Cache global npm packages
