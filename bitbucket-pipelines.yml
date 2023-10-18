@@ -4,28 +4,27 @@ pipelines:
   pull-requests:
     "**":
       - parallel:
-        - step:
-          name: Security Scan for React Icons
-          condition:
-            changesets:
-              includePaths:
-                # any changes in given directory
-                - "packages/react-icons/src/**"
-          script:
-            - cd packages/react-icons
-            # Run a security scan for sensitive data.
-            # See more security tools at https://bitbucket.org/product/features/pipelines/integrations?&category=security
-            - pipe: atlassian/git-secrets-scan:0.5.1
-        - step:
-          name: Security Scan for React Components
-          condition:
-            changesets:
-              includePaths:
-                # any changes in given directory
-                - "packages/react-components/src/**"
-          script:
-            - cd packages/react-components
-            - pipe: atlassian/git-secrets-scan:0.5.1
+          - step:
+              name: Security Scan for React Icons
+              condition:
+                changesets:
+                  includePaths:
+                    # any changes in given directory
+                    - "packages/react-icons/src/**"
+              script:
+                - cd packages/react-icons
+                # Run a security scan for sensitive data.
+                # See more security tools at https://bitbucket.org/product/features/pipelines/integrations?&category=security
+                - pipe: atlassian/git-secrets-scan:0.5.1
+          - step:
+              name: Security Scan for React Components
+              condition:
+                changesets:
+                  includePaths:
+                    - "packages/react-components/src/**"
+              script:
+                - cd packages/react-components
+                - pipe: atlassian/git-secrets-scan:0.5.1
       - step:
           name: Initial setup
           condition:
@@ -39,7 +38,7 @@ pipelines:
             - yarn
           caches:
             - node
-            - node_modules
+            - nodemodules
 
       - step:
           name: Run eslint
@@ -192,4 +191,4 @@ pipelines:
 
 definitions:
   caches:
-    node_modules: node_modules
+    nodemodules: node_modules
