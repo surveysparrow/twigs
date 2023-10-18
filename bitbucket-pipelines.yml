@@ -71,6 +71,7 @@ pipelines:
                 # any changes in given directory
                 - "packages/react-components/src/**"
           script:
+            - yarn
             - cd packages/react-components
             - npx eslint .
       - step:
@@ -90,6 +91,7 @@ pipelines:
                 - "packages/react-components/src/**"
                 - "packages/docs/**"
           script:
+            - yarn
             - npx lerna run build --scope=@sparrowengg/twigs-react
 
       - step:
@@ -104,6 +106,7 @@ pipelines:
               includePaths:
                 - "packages/docs/**"
           script:
+            - yarn
             - npx lerna run build --scope=@sparrowengg/twigs-docs --verbose
 
   branches:
