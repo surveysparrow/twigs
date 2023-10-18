@@ -53,6 +53,9 @@ pipelines:
               includePaths:
                 # any changes in given directory
                 - "packages/react-icons/src/**"
+          caches:
+            - node
+            - nodemodules
           script:
             - yarn
             - npx lerna run eslint --scope=@sparrowengg/twigs-react-icons
@@ -66,6 +69,9 @@ pipelines:
                 - "packages/react-icons/src/**"
                 - "packages/react-components/src/**"
                 - "packages/docs/**"
+          caches:
+            - node
+            - nodemodules
           artifacts:
             - packages/react-icons/dist/**
           script:
@@ -80,6 +86,9 @@ pipelines:
               includePaths:
                 # any changes in given directory
                 - "packages/react-components/src/**"
+          caches:
+            - node
+            - nodemodules
           script:
             - yarn
             - npx lerna run eslint --scope=@sparrowengg/twigs-react
@@ -89,6 +98,9 @@ pipelines:
             changesets:
               includePaths:
                 - "packages/react-components/src/**"
+          caches:
+            - node
+            - nodemodules
           script:
             - yarn
             - npx lerna run test
@@ -99,6 +111,9 @@ pipelines:
               includePaths:
                 - "packages/react-components/src/**"
                 - "packages/docs/**"
+          caches:
+            - node
+            - nodemodules
           script:
             - yarn
             - yarn build:components
@@ -109,6 +124,9 @@ pipelines:
             changesets:
               includePaths:
                 - "packages/docs/**"
+          caches:
+            - node
+            - nodemodules
           script:
             - yarn
             - yarn build:docs
