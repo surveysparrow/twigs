@@ -17,6 +17,7 @@ pipelines:
             - yarn
           caches:
             - node
+            - global-npm-packages
       - step:
           name: Security Scan for React Icons
           script:
@@ -177,3 +178,7 @@ pipelines:
                 - npm install -g lerna
                 - yarn install
                 - lerna run build --scope=@sparrowengg/twigs-docs --verbose
+
+definitions:
+  caches:
+    global-npm-packages: $BITBUCKET_CLONE_DIR/.npm  # Cache global npm packages
