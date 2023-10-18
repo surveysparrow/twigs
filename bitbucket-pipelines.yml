@@ -54,6 +54,7 @@ pipelines:
           artifacts:
             - packages/react-icons/dist/**
           script:
+            - pwd yarn
             - lerna run build --scope=@sparrowengg/twigs-react-icons
 
       # components
@@ -186,4 +187,4 @@ pipelines:
 
 definitions:
   caches:
-    global-npm-packages: $HOME/.npm  # Cache global npm packages
+    global-npm-packages: /usr/local/lib/node_modules  # Cache global npm packages
