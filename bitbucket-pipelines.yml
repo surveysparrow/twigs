@@ -40,7 +40,7 @@ pipelines:
           script:
             - yarn
             - cd packages/react-icons
-            - npx eslint .
+            - yarn eslint
 
       - step:
           name: Build Icons
@@ -73,7 +73,7 @@ pipelines:
           script:
             - yarn
             - cd packages/react-components
-            - npx eslint .
+            - yarn eslint
       - step:
           name: Test
           condition:
@@ -82,7 +82,7 @@ pipelines:
                 - "packages/react-components/src/**"
           script:
             - yarn
-            - lerna run test
+            - npx lerna run test
       - step:
           name: Build Components
           condition:
