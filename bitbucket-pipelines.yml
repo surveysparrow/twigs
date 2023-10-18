@@ -14,8 +14,14 @@ pipelines:
                 - "packages/docs/**"
           script:
             - yarn
+            - cd packages/react-components && yarn && cd ../../
+            - cd packages/react-icons && yarn && cd ../../
+            - cd packages/docs && yarn && cd ../../
           caches:
             - node
+            - components-node-modules
+            - icons-node-modules
+            - docs-node-modules
       - step:
           name: Security Scan for React Icons
           condition:
@@ -188,3 +194,8 @@ pipelines:
                 - yarn install
                 - lerna run build --scope=@sparrowengg/twigs-docs --verbose
 
+definitions:
+  caches:
+    components-node-modules: packages/react-components/node_modules
+    icons-node-modules: packages/react-icons/node_modules
+    docs-node-modules: packages/docs/node_modules
