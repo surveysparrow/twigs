@@ -43,9 +43,11 @@ pipelines:
           script:
             - yarn
             - npx lerna run eslint --scope=@sparrowengg/twigs-react-icons
+            - yarn build:icons
             - npx lerna run eslint --scope=@sparrowengg/twigs-react
             - npx lerna run test
-            - yarn build:docs # Only build docs since other two builds will be built during this one
+            - yarn build:components
+            - yarn build:docs
           caches:
             - node
             - nodemodules 
