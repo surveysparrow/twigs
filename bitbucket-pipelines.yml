@@ -13,10 +13,8 @@ pipelines:
                 - "packages/react-components/src/**"
                 - "packages/docs/**"
           script:
-            - npm install -g yarn lerna
+            - npm install -g lerna
             - yarn
-          artifacts:
-            - node_modules/**
           caches:
             - node
       - step:
