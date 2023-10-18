@@ -25,6 +25,12 @@ pipelines:
               script:
                 - cd packages/react-components
                 - pipe: atlassian/git-secrets-scan:0.5.1
+
+          - step:
+              name: Security Scan for Docs
+              script:
+                - cd packages/docs
+                - pipe: atlassian/git-secrets-scan:0.5.1
       - step:
           name: Initial setup
           condition:
@@ -48,6 +54,7 @@ pipelines:
                 # any changes in given directory
                 - "packages/react-icons/src/**"
           script:
+            - yarn
             - npx lerna run eslint --scope=@sparrowengg/twigs-react-icons
 
       - step:
@@ -62,6 +69,7 @@ pipelines:
           artifacts:
             - packages/react-icons/dist/**
           script:
+            - yarn
             - yarn build:icons
 
       # components
@@ -73,6 +81,7 @@ pipelines:
                 # any changes in given directory
                 - "packages/react-components/src/**"
           script:
+            - yarn
             - npx lerna run eslint --scope=@sparrowengg/twigs-react
       - step:
           name: Test
@@ -94,11 +103,6 @@ pipelines:
             - yarn
             - yarn build:components
 
-      - step:
-          name: Security Scan for Docs
-          script:
-            - cd packages/docs
-            - pipe: atlassian/git-secrets-scan:0.5.1
       - step:
           name: Build docs
           condition:
