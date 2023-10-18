@@ -27,6 +27,9 @@ export default {
     },
     error: {
       control: 'text'
+    },
+    requiredIndicator: {
+      control: 'boolean'
     }
   }
 };
