@@ -7,6 +7,7 @@ export const ToolbarContext = createContext<ToolbarProperties>({
   isUnderline: false,
   isOrderedList: false,
   isUnOrderedList: false,
+  isLink: false,
   format: 'paragraph'
 });
 

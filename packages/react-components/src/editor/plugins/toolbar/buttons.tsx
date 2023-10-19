@@ -6,12 +6,14 @@ import {
 
 import { $createHeadingNode, HeadingTagType } from '@lexical/rich-text';
 import { $setBlocksType } from '@lexical/selection';
+import { TOGGLE_LINK_COMMAND } from '@lexical/link';
 import {
   AsteriskIcon,
   BoldIcon,
   BulletList,
   ImageIcon,
   ItalicsIcon,
+  LinkIcon,
   MinusIcon
 } from '@sparrowengg/twigs-react-icons';
 import {
@@ -121,6 +123,25 @@ export const OrderedList = ({ editor }: ToolbarButton) => {
           editor.dispatchCommand(INSERT_ORDERED_LIST_COMMAND, undefined);
         } else {
           editor.dispatchCommand(REMOVE_LIST_COMMAND, undefined);
+        }
+      }}
+    />
+  );
+};
+
+export const Link = ({ editor }: ToolbarButton) => {
+  const active = useToolbarContext((state) => state.isLink);
+
+  return (
+    <IconButton
+      icon={<LinkIcon />}
+      variant={active ? 'solid' : 'ghost'}
+      color="primary"
+      onClick={() => {
+        if (!active) {
+          editor.dispatchCommand(TOGGLE_LINK_COMMAND, 'https://asds.wew');
+        } else {
+          editor.dispatchCommand(TOGGLE_LINK_COMMAND, null);
         }
       }}
     />

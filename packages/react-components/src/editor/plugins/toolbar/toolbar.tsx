@@ -13,7 +13,6 @@ import {
 
 import { $isHeadingNode } from '@lexical/rich-text';
 import React, {
-  FC,
   Fragment,
   ReactNode,
   useCallback,
@@ -26,6 +25,7 @@ import {
   Format,
   Image,
   Italic,
+  Link,
   OrderedList,
   Underline,
   UnorderedList
@@ -33,7 +33,7 @@ import {
 import { ToolbarContext } from './utils';
 import { Flex } from '../../../flex';
 
-type Tools =
+export type DefaultToolbarTools =
   | 'format'
   | 'bold'
   | 'italic'
@@ -41,11 +41,13 @@ type Tools =
   | 'ordered-list'
   | 'unordered-list'
   | 'link'
-  | 'image';
+  | 'image'
+  | 'strikethrough'
+  | 'subscript'
+  | 'superscript';
 
 type ToolProps = { editor: LexicalEditor };
 type CustomTool = {
-  type: Tools;
   renderComponent: (props: ToolProps) => ReactNode;
 };
 
@@ -57,39 +59,43 @@ export type ToolbarProperties = {
   isUnderline: boolean;
   isOrderedList: boolean;
   isUnOrderedList: boolean;
+  isLink: boolean;
   format: TextFormats;
 };
 
-type ToolbarTools = Tools[] | CustomTool[];
+type ToolbarTools = DefaultToolbarTools[] | CustomTool[];
 
 const LowPriority = 1;
 
-const defaultTools: Tools[] = [
+const defaultTools: DefaultToolbarTools[] = [
   'format',
   'bold',
   'italic',
   'underline',
   'unordered-list',
   'ordered-list',
+  'link',
   'image'
 ];
 
-const toolMapping: Partial<Record<Tools, (props: ToolProps) => ReactNode>> = {
+const toolMapping: Partial<Record<DefaultToolbarTools, (props: ToolProps) => ReactNode>> = {
   format: Format,
   bold: Bold,
   italic: Italic,
   underline: Underline,
   'unordered-list': UnorderedList,
   'ordered-list': OrderedList,
-  image: Image
+  image: Image,
+  link: Link
 };
 
-export const ToolbarPlugin: FC<{
+export const ToolbarPlugin = ({
+  tools = defaultTools,
+  children
+}: {
   tools?: ToolbarTools;
   children?: ReactNode;
-}> & {
-  Bold: typeof Bold;
-} = ({ tools = defaultTools, children }) => {
+}) => {
   const [editor] = useLexicalComposerContext();
 
   const [isBold, setIsBold] = useState(false);
@@ -204,13 +210,13 @@ export const ToolbarPlugin: FC<{
       ) : (
         <Flex>
           {tools.map((_item, i) => {
-            if ((_item as CustomTool)?.type) {
+            if ((_item as CustomTool)?.renderComponent) {
               const item = _item as CustomTool;
               return (
                 <Fragment key={i}>{item.renderComponent({ editor })}</Fragment>
               );
             }
-            const item = _item as Tools;
+            const item = _item as DefaultToolbarTools;
             const Tool = toolMapping[item];
             if (!Tool) return null;
 
