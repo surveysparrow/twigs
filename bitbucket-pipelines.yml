@@ -51,6 +51,9 @@ pipelines:
           caches:
             - node
             - nodemodules 
+            - componentsnodemodules
+            - iconsnodemodules
+            - docsnodemodules
   branches:
     master:
       - parallel:
@@ -134,3 +137,6 @@ pipelines:
 definitions:
   caches:
     nodemodules: node_modules
+    docsnodemodules: packages/docs/node_modules
+    componentsnodemodules: packages/react-components/node_modules
+    iconsnodemodules: packages/react-icons/node_modules
