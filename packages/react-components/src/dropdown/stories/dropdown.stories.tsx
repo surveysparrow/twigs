@@ -16,12 +16,15 @@ import {
 import { Button } from '../../button';
 
 export default {
-  component: DropdownMenuItem,
+  component: DropdownMenu,
   title: 'Overlay/Dropdown',
   argTypes: {
     size: {
       control: 'select',
-      options: ['sm', 'md']
+      options: ['sm', 'md'],
+      table: {
+        defaultValue: { summary: 'md' }
+      }
     }
   }
 };
@@ -29,7 +32,7 @@ export default {
 const Template = (args) => {
   const { size } = args;
   return (
-    <DropdownMenu {...args}>
+    <DropdownMenu {...args} size={size}>
       <DropdownMenuTrigger asChild>
         <Button
           size="lg"
@@ -45,35 +48,33 @@ const Template = (args) => {
         align="end"
         sideOffset={5}
       >
-        <DropdownMenuItem size={size}>New Tab</DropdownMenuItem>
-        <DropdownMenuItem size={size}>New Window</DropdownMenuItem>
-        <DropdownMenuItem disabled size={size}>
+        <DropdownMenuItem>New Tab</DropdownMenuItem>
+        <DropdownMenuItem>New Window</DropdownMenuItem>
+        <DropdownMenuItem disabled>
           New Private Window
         </DropdownMenuItem>
         <DropdownMenuSub>
-          <DropdownMenuSubTrigger size={size}>
+          <DropdownMenuSubTrigger>
             More Tools
           </DropdownMenuSubTrigger>
           <DropdownMenuSubContent sideOffset={2} alignOffset={-5}>
-            <DropdownMenuItem size={size}>Save Page As…</DropdownMenuItem>
-            <DropdownMenuItem size={size}>Create Shortcut…</DropdownMenuItem>
-            <DropdownMenuItem size={size}>Name Window…</DropdownMenuItem>
+            <DropdownMenuItem>Save Page As…</DropdownMenuItem>
+            <DropdownMenuItem>Create Shortcut…</DropdownMenuItem>
+            <DropdownMenuItem>Name Window…</DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem size={size}>Developer Tools</DropdownMenuItem>
+            <DropdownMenuItem>Developer Tools</DropdownMenuItem>
           </DropdownMenuSubContent>
         </DropdownMenuSub>
         <DropdownMenuSeparator />
         <DropdownMenuCheckboxItem
           checked
           onCheckedChange={() => { }}
-          size={size}
         >
           Show Bookmarks
         </DropdownMenuCheckboxItem>
         <DropdownMenuCheckboxItem
           checked
           onCheckedChange={() => { }}
-          size={size}
         >
           Show Full URLs
         </DropdownMenuCheckboxItem>
@@ -83,10 +84,10 @@ const Template = (args) => {
           value="Maneesh"
           onValueChange={() => { }}
         >
-          <DropdownMenuRadioItem value="pedro" size={size}>
+          <DropdownMenuRadioItem value="pedro">
             Pedro Duarte
           </DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="colm" size={size}>
+          <DropdownMenuRadioItem value="colm">
             Colm Tuite
           </DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>

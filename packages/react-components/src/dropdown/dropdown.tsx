@@ -1,7 +1,25 @@
-import React, { ReactNode, ComponentProps, ReactElement } from 'react';
+import React, {
+  ReactNode, ComponentProps, ReactElement, createContext, useContext
+} from 'react';
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import { Flex } from '../flex';
 import { styled, keyframes } from '../stitches.config';
+
+type DropdownContextType = {
+  size: 'md' | 'sm'
+}
+
+const DropdownContext = createContext<DropdownContextType>({
+  size: 'md' // Default Value
+});
+
+const DropdownProvider = ({ children, size }: { children: ReactNode, size: 'md' | 'sm' }) => {
+  return (
+    <DropdownContext.Provider value={{ size }}>
+      {children}
+    </DropdownContext.Provider>
+  );
+};
 
 const ChevronRightIcon = () => {
   return (
@@ -125,13 +143,54 @@ const itemStyles = {
   }
 };
 
+interface DropdownItemType extends DropdownMenuPrimitive.DropdownMenuItemProps {
+  children: ReactNode
+}
+
 const StyledItem = styled(DropdownMenuPrimitive.Item, { ...itemStyles });
+
+const DropdownItem = ({ children, ...props }: DropdownItemType) => {
+  const context = useContext(DropdownContext);
+  return (
+    <StyledItem size={context.size} {...props}>
+      {children}
+    </StyledItem>
+  );
+};
+
+interface DropdownCheckItemType extends DropdownMenuPrimitive.DropdownMenuCheckboxItemProps {
+  children: ReactNode
+}
 const StyledCheckboxItem = styled(DropdownMenuPrimitive.CheckboxItem, {
   ...itemStyles
 });
+
+const DropdownCheckItem = ({ children, ...props }: DropdownCheckItemType) => {
+  const context = useContext(DropdownContext);
+  return (
+    <StyledCheckboxItem size={context.size} {...props}>
+      {children}
+    </StyledCheckboxItem>
+  );
+};
+
+interface DropdownRadioItemType extends DropdownMenuPrimitive.DropdownMenuRadioItemProps {
+  children: ReactNode,
+}
+
 const StyledRadioItem = styled(DropdownMenuPrimitive.RadioItem, {
   ...itemStyles
 });
+
+const DropdownRadioItem = ({ children, ...props }: DropdownRadioItemType) => {
+  const context = useContext(DropdownContext);
+  return (
+    <StyledRadioItem size={context.size} {...props}>
+      {children}
+    </StyledRadioItem>
+  );
+};
+
 const StyledSubTrigger = styled(DropdownMenuPrimitive.SubTrigger, {
   '&[data-state="open"]': {
     backgroundColor: '$neutral50',
@@ -151,17 +210,32 @@ const StyledSubTriggerIcon = styled(Flex, {
 type SubTriggerProps = ComponentProps<typeof StyledSubTrigger> & {
   children: ReactNode;
   icon?: ReactElement;
-  size?: string;
 };
 
-const SubTrigger = ({ children, icon, size }: SubTriggerProps) => {
+const SubTrigger = ({ children, icon }: SubTriggerProps) => {
+  const context = useContext(DropdownContext);
   return (
-    <StyledSubTrigger size={size}>
+    <StyledSubTrigger size={context.size}>
       {children}
       <StyledSubTriggerIcon>
         {icon ? React.cloneElement(icon) : <ChevronRightIcon />}
       </StyledSubTriggerIcon>
     </StyledSubTrigger>
+  );
+};
+
+type DropdownRootProps = {
+  children : ReactNode,
+  size: 'sm' | 'md'
+}
+
+const DropdownRoot = ({ children, ...props }:DropdownRootProps) => {
+  return (
+    <DropdownProvider size={props.size}>
+      <DropdownMenuPrimitive.Root {...props}>
+        {children}
+      </DropdownMenuPrimitive.Root>
+    </DropdownProvider>
   );
 };
 
@@ -189,13 +263,13 @@ const StyledItemIndicator = styled(DropdownMenuPrimitive.ItemIndicator, {
   justifyContent: 'center'
 });
 
-export const DropdownMenu = DropdownMenuPrimitive.Root;
+export const DropdownMenu = DropdownRoot;
 export const DropdownMenuTrigger = DropdownMenuPrimitive.Trigger;
 export const DropdownMenuContent = Content;
-export const DropdownMenuItem = StyledItem;
-export const DropdownMenuCheckboxItem = StyledCheckboxItem;
+export const DropdownMenuItem = DropdownItem;
+export const DropdownMenuCheckboxItem = DropdownCheckItem;
 export const DropdownMenuRadioGroup = DropdownMenuPrimitive.RadioGroup;
-export const DropdownMenuRadioItem = StyledRadioItem;
+export const DropdownMenuRadioItem = DropdownRadioItem;
 export const DropdownMenuItemIndicator = StyledItemIndicator;
 export const DropdownMenuLabel = StyledLabel;
 export const DropdownMenuSeparator = StyledSeparator;
