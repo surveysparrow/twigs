@@ -6,14 +6,14 @@ import { Flex } from '../flex';
 import { styled, keyframes } from '../stitches.config';
 
 type DropdownContextType = {
-  size: 'md' | 'sm'
+  size?: 'md' | 'sm'
 }
 
 const DropdownContext = createContext<DropdownContextType>({
   size: 'md' // Default Value
 });
 
-const DropdownProvider = ({ children, size }: { children: ReactNode, size: 'md' | 'sm' }) => {
+const DropdownProvider = ({ children, size }: { children: ReactNode, size?: 'md' | 'sm' }) => {
   return (
     <DropdownContext.Provider value={{ size }}>
       {children}
@@ -152,7 +152,7 @@ const StyledItem = styled(DropdownMenuPrimitive.Item, { ...itemStyles });
 const DropdownItem = ({ children, ...props }: DropdownItemType) => {
   const context = useContext(DropdownContext);
   return (
-    <StyledItem size={context.size} {...props}>
+    <StyledItem size={context?.size} {...props}>
       {children}
     </StyledItem>
   );
@@ -168,7 +168,7 @@ const StyledCheckboxItem = styled(DropdownMenuPrimitive.CheckboxItem, {
 const DropdownCheckItem = ({ children, ...props }: DropdownCheckItemType) => {
   const context = useContext(DropdownContext);
   return (
-    <StyledCheckboxItem size={context.size} {...props}>
+    <StyledCheckboxItem size={context?.size} {...props}>
       {children}
     </StyledCheckboxItem>
   );
@@ -185,7 +185,7 @@ const StyledRadioItem = styled(DropdownMenuPrimitive.RadioItem, {
 const DropdownRadioItem = ({ children, ...props }: DropdownRadioItemType) => {
   const context = useContext(DropdownContext);
   return (
-    <StyledRadioItem size={context.size} {...props}>
+    <StyledRadioItem size={context?.size} {...props}>
       {children}
     </StyledRadioItem>
   );
@@ -215,7 +215,7 @@ type SubTriggerProps = ComponentProps<typeof StyledSubTrigger> & {
 const SubTrigger = ({ children, icon }: SubTriggerProps) => {
   const context = useContext(DropdownContext);
   return (
-    <StyledSubTrigger size={context.size}>
+    <StyledSubTrigger size={context?.size}>
       {children}
       <StyledSubTriggerIcon>
         {icon ? React.cloneElement(icon) : <ChevronRightIcon />}
@@ -226,7 +226,7 @@ const SubTrigger = ({ children, icon }: SubTriggerProps) => {
 
 type DropdownRootProps = {
   children : ReactNode,
-  size: 'sm' | 'md'
+  size?: 'sm' | 'md'
 }
 
 const DropdownRoot = ({ children, ...props }:DropdownRootProps) => {
