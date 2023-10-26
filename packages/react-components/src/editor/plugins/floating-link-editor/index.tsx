@@ -19,37 +19,44 @@ import {
   RangeSelection,
   SELECTION_CHANGE_COMMAND
 } from 'lexical';
+import * as React from 'react';
 import {
   Dispatch, useCallback, useEffect, useRef, useState
 } from 'react';
-import * as React from 'react';
 import { createPortal } from 'react-dom';
 
 import { getSelectedNode } from '../../utils/getSelectedNode';
 import { setFloatingElemPositionForLinkEditor } from '../../utils/setFloatingElemPositionForLinkEditor';
 // import { sanitizeUrl } from '../../utils/url';
 import { Box } from '../../../box';
-import { FormInput } from '../../../input';
 import { Button } from '../../../button';
 import { Flex } from '../../../flex';
+import { FormInput } from '../../../input';
 
 const FloatingLinkEditor = ({
   editor,
   isLink,
+  anchorElem,
+  editedLinkUrl,
+  editedLinkText,
   setIsLink,
-  anchorElem
+  setEditedLinkUrl,
+  setEditedLinkText
 }: {
   editor: LexicalEditor;
   isLink: boolean;
-  setIsLink: Dispatch<boolean>;
   anchorElem: HTMLElement;
+  editedLinkUrl: string;
+  editedLinkText: string;
+  setIsLink: Dispatch<boolean>;
+  setEditedLinkUrl: Dispatch<string>;
+  setEditedLinkText: Dispatch<string>;
 }) => {
   const editorRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [linkUrl, setLinkUrl] = useState('');
-  const [editedLinkUrl, setEditedLinkUrl] = useState('https://');
-  const [editedLinkText, setEditedLinkText] = useState('');
+
   const [lastSelection, setLastSelection] = useState<
     RangeSelection | GridSelection | NodeSelection | null
   >(null);
@@ -103,6 +110,7 @@ const FloatingLinkEditor = ({
       setLinkUrl('');
     }
 
+    // eslint-disable-next-line consistent-return
     return true;
   }, [anchorElem, editor, setIsLinkEditMode]);
 
@@ -196,7 +204,7 @@ const FloatingLinkEditor = ({
           }
         });
       }
-      setEditedLinkUrl('https://');
+      setIsLink(false);
       setIsLinkEditMode(false);
     }
   };
@@ -210,7 +218,8 @@ const FloatingLinkEditor = ({
         left: 0,
         top: 0,
         backgroundColor: '$white900',
-        width: 400
+        width: 400,
+        borderRadius: '$md'
       }}
     >
       {!isLink ? null : (
@@ -250,8 +259,23 @@ const FloatingLinkEditor = ({
             />
           </Box>
           <Flex>
-            <Button color="primary">Save</Button>
-            <Button color="bright">Cancel</Button>
+            <Button
+              color="primary"
+              onClick={() => {
+                handleLinkSubmission();
+              }}
+            >
+              Save
+            </Button>
+            <Button
+              color="bright"
+              onClick={() => {
+                setIsLinkEditMode(false);
+                setIsLink(false);
+              }}
+            >
+              Cancel
+            </Button>
           </Flex>
         </Box>
       )}
@@ -264,6 +288,8 @@ function useFloatingLinkEditorToolbar(
   anchorElem: HTMLElement | null
 ) {
   const [activeEditor, setActiveEditor] = useState(editor);
+  const [editedLinkUrl, setEditedLinkUrl] = useState<string>('https://');
+  const [editedLinkText, setEditedLinkText] = useState('');
   const [isLink, setIsLink] = useState(false);
 
   useEffect(() => {
@@ -273,7 +299,6 @@ function useFloatingLinkEditorToolbar(
         const node = getSelectedNode(selection);
         const linkParent = $findMatchingParent(node, $isLinkNode);
         const autoLinkParent = $findMatchingParent(node, $isAutoLinkNode);
-        // We don't want this menu to open for auto links.
         if (linkParent !== null && autoLinkParent === null) {
           setIsLink(true);
         } else {
@@ -303,6 +328,11 @@ function useFloatingLinkEditorToolbar(
           if ($isRangeSelection(selection)) {
             const node = getSelectedNode(selection);
             const linkNode = $findMatchingParent(node, $isLinkNode);
+            if ($isLinkNode(linkNode)) {
+              const url = linkNode.getURL();
+              setEditedLinkUrl(url);
+              setEditedLinkText(linkNode.getTextContent());
+            }
             if ($isLinkNode(linkNode) && (payload.metaKey || payload.ctrlKey)) {
               window.open(linkNode.getURL(), '_blank');
               return true;
@@ -323,6 +353,10 @@ function useFloatingLinkEditorToolbar(
       isLink={isLink}
       anchorElem={anchorElem}
       setIsLink={setIsLink}
+      editedLinkText={editedLinkText}
+      editedLinkUrl={editedLinkUrl}
+      setEditedLinkText={setEditedLinkText}
+      setEditedLinkUrl={setEditedLinkUrl}
     />,
     anchorElem
   );
@@ -332,8 +366,8 @@ export default function FloatingLinkEditorPlugin({
   anchorElem = document.body
 }: {
   anchorElem?: HTMLElement | null;
-  isLinkEditMode: boolean;
-  setIsLinkEditMode: Dispatch<boolean>;
+  // isLinkEditMode: boolean;
+  // setIsLinkEditMode: Dispatch<boolean>;
 }) {
   const [editor] = useLexicalComposerContext();
   return useFloatingLinkEditorToolbar(editor, anchorElem);

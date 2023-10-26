@@ -11,6 +11,7 @@ import {
   SELECTION_CHANGE_COMMAND
 } from 'lexical';
 
+import { $isLinkNode } from '@lexical/link';
 import { $isHeadingNode } from '@lexical/rich-text';
 import React, {
   Fragment,
@@ -20,6 +21,8 @@ import React, {
   useMemo,
   useState
 } from 'react';
+import { Flex } from '../../../flex';
+import { getSelectedNode } from '../../utils/getSelectedNode';
 import {
   Bold,
   Format,
@@ -29,9 +32,8 @@ import {
   OrderedList,
   Underline,
   UnorderedList
-} from './buttons';
+} from './tools';
 import { ToolbarContext } from './utils';
-import { Flex } from '../../../flex';
 
 export type DefaultToolbarTools =
   | 'format'
@@ -60,10 +62,13 @@ export type ToolbarProperties = {
   isOrderedList: boolean;
   isUnOrderedList: boolean;
   isLink: boolean;
+  isStrikethrough: boolean;
+  isSubscript: boolean;
+  isSuperscript: boolean;
   format: TextFormats;
 };
 
-type ToolbarTools = DefaultToolbarTools[] | CustomTool[];
+export type ToolbarTools = DefaultToolbarTools[] | CustomTool[];
 
 const LowPriority = 1;
 
@@ -78,7 +83,9 @@ const defaultTools: DefaultToolbarTools[] = [
   'image'
 ];
 
-const toolMapping: Partial<Record<DefaultToolbarTools, (props: ToolProps) => ReactNode>> = {
+const toolMapping: Partial<
+  Record<DefaultToolbarTools, (props: ToolProps) => ReactNode>
+> = {
   format: Format,
   bold: Bold,
   italic: Italic,
@@ -103,6 +110,10 @@ export const ToolbarPlugin = ({
   const [isUnderline, setIsUnderline] = useState(false);
   const [isOrderedList, setIsOrderedList] = useState(false);
   const [isUnOrderedList, setIsUnOrderedList] = useState(false);
+  const [isStrikethrough, setIsStrikethrough] = useState(false);
+  const [isSubscript, setIsSubscript] = useState(false);
+  const [isSuperscript, setIsSuperscript] = useState(false);
+  const [isLink, setIsLink] = useState(false);
   const [format, setFormat] = useState<TextFormats>('paragraph');
 
   const updateToolbar = useCallback(() => {
@@ -125,7 +136,6 @@ export const ToolbarPlugin = ({
             setIsOrderedList(true);
             setIsUnOrderedList(false);
           }
-          // setBlockType(type);
         } else {
           setIsOrderedList(false);
           setIsUnOrderedList(false);
@@ -144,17 +154,18 @@ export const ToolbarPlugin = ({
       setIsBold(selection.hasFormat('bold'));
       setIsItalic(selection.hasFormat('italic'));
       setIsUnderline(selection.hasFormat('underline'));
-      // setIsStrikethrough(selection.hasFormat("strikethrough"));
-      // setIsCode(selection.hasFormat("code"));
+      setIsStrikethrough(selection.hasFormat('strikethrough'));
+      setIsSubscript(selection.hasFormat('subscript'));
+      setIsSuperscript(selection.hasFormat('superscript'));
 
       // Update links
-      // const node = getSelectedNode(selection);
-      // const parent = node.getParent();
-      // if ($isLinkNode(parent) || $isLinkNode(node)) {
-      //   setIsLink(true);
-      // } else {
-      //   setIsLink(false);
-      // }
+      const node = getSelectedNode(selection);
+      const parent = node.getParent();
+      if ($isLinkNode(parent) || $isLinkNode(node)) {
+        setIsLink(true);
+      } else {
+        setIsLink(false);
+      }
     }
   }, []);
 
@@ -176,7 +187,6 @@ export const ToolbarPlugin = ({
       editor.registerCommand(
         CAN_UNDO_COMMAND,
         () => {
-          // setCanUndo(payload);
           return false;
         },
         LowPriority
@@ -184,7 +194,6 @@ export const ToolbarPlugin = ({
       editor.registerCommand(
         CAN_REDO_COMMAND,
         () => {
-          // setCanRedo(payload);
           return false;
         },
         LowPriority
@@ -192,16 +201,31 @@ export const ToolbarPlugin = ({
     );
   }, [editor, updateToolbar]);
 
-  const toolbarContextValue = useMemo(() => {
+  const toolbarContextValue: ToolbarProperties = useMemo(() => {
     return {
       isBold,
       isItalic,
       isOrderedList,
       isUnderline,
       isUnOrderedList,
-      format
+      format,
+      isLink,
+      isStrikethrough,
+      isSubscript,
+      isSuperscript
     };
-  }, [isBold, isItalic, isOrderedList, isUnderline, isUnOrderedList, format]);
+  }, [
+    isBold,
+    isItalic,
+    isOrderedList,
+    isUnderline,
+    isUnOrderedList,
+    format,
+    isLink,
+    isStrikethrough,
+    isSubscript,
+    isSuperscript
+  ]);
 
   return (
     <ToolbarContext.Provider value={toolbarContextValue}>
@@ -213,14 +237,17 @@ export const ToolbarPlugin = ({
             if ((_item as CustomTool)?.renderComponent) {
               const item = _item as CustomTool;
               return (
+                // eslint-disable-next-line react/no-array-index-key
                 <Fragment key={i}>{item.renderComponent({ editor })}</Fragment>
               );
             }
+
             const item = _item as DefaultToolbarTools;
             const Tool = toolMapping[item];
             if (!Tool) return null;
 
             return (
+              // eslint-disable-next-line react/no-array-index-key
               <Fragment key={i}>
                 <Tool editor={editor} />
               </Fragment>

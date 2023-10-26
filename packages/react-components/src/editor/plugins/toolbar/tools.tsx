@@ -4,9 +4,9 @@ import {
   REMOVE_LIST_COMMAND
 } from '@lexical/list';
 
+import { TOGGLE_LINK_COMMAND } from '@lexical/link';
 import { $createHeadingNode, HeadingTagType } from '@lexical/rich-text';
 import { $setBlocksType } from '@lexical/selection';
-import { TOGGLE_LINK_COMMAND } from '@lexical/link';
 import {
   AsteriskIcon,
   BoldIcon,
@@ -205,11 +205,6 @@ export const Format = ({ editor }: ToolbarButton) => {
       editor.update(() => {
         const selection = $getSelection();
         if ($isRangeSelection(selection)) {
-          const anchorNode = selection.anchor.getNode();
-          const element = anchorNode.getKey() === 'root'
-            ? anchorNode
-            : anchorNode.getTopLevelElementOrThrow();
-          console.log(element.getTag());
           $setBlocksType(selection, () => $createHeadingNode(headingSize));
         }
       });

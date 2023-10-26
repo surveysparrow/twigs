@@ -1,6 +1,4 @@
-import {
-  InitialConfigType
-} from '@lexical/react/LexicalComposer';
+import { Klass, LexicalNode } from 'lexical';
 import { ReactNode } from 'react';
 
 export const EditorFeatures = ({ children }: { children: ReactNode }) => {
@@ -9,7 +7,7 @@ export const EditorFeatures = ({ children }: { children: ReactNode }) => {
 
 export type EditorFeatureProps = {
   children: ReactNode;
-  node?: InitialConfigType['nodes'] | InitialConfigType['nodes'][];
+  node?: ReadonlyArray<Klass<LexicalNode>> | ReadonlyArray<Klass<LexicalNode>>[];
 }
 
 EditorFeatures.Feature = ({

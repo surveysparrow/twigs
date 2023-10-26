@@ -12,37 +12,43 @@ import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import { HeadingNode } from '@lexical/rich-text';
 
-import { EditorState, LexicalEditor } from 'lexical';
+import {
+  EditorState, Klass, LexicalEditor, LexicalNode
+} from 'lexical';
 import {
   Children,
   Fragment,
   ReactElement,
   ReactNode,
+  RefObject,
   isValidElement,
   useMemo,
   useState
 } from 'react';
 import { EditorFeatureProps, EditorFeatures } from './features';
 import {
+  HashTagNode,
   ImageNode,
   KudosNode,
-  HashTagNode,
   MentionNode,
   VariableNode
 } from './nodes';
 import {
-  ImagesPlugin,
   AutoLinkPlugin,
+  FloatingToolbar,
+  FloatingToolbarTools,
   HashTagPlugin,
+  ImagesPlugin,
   KudosPlugin,
+  LinkPlugin,
   MentionsPlugin,
   ToolbarPlugin,
-  VariablesPlugin,
-  LinkPlugin,
-  FloatingToolbar
+  VariablesPlugin
 } from './plugins';
 
+import { ExportPlugin, ExportPluginHandle } from './plugins/export-plugin';
 import FloatingLinkEditorPlugin from './plugins/floating-link-editor';
+import { ToolbarTools } from './plugins/toolbar/toolbar';
 
 const initialConfig: InitialConfigType = {
   namespace: 'MyEditor',
@@ -94,30 +100,38 @@ const featuresToNodeMapping = {
 } as const;
 
 export const Editor = ({
-  editorState,
-  editable,
   nodes,
-  showToolbar,
+  onChange,
+  editable,
   features,
   children,
-  onChange
+  editorState,
+  showToolbar = true,
+  toolbarTools,
+  showFloatingToolbar = true,
+  floatingToolbarTools,
+  exportRef
 }: {
-  editorState: EditorState;
+  editorState?: EditorState;
   onChange: (
     newEditorState: EditorState,
     editor: LexicalEditor,
     tags: Set<string>
   ) => void;
   editable?: boolean;
-  showToolbar?: boolean;
-  nodes?: InitialConfigType['nodes'];
-  features?: (keyof typeof featuresToNodeMapping)[];
   children?: ReactNode;
+  showToolbar?: boolean;
+  toolbarTools?: ToolbarTools;
+  showFloatingToolbar?: boolean;
+  nodes?: InitialConfigType['nodes'];
+  floatingToolbarTools?: FloatingToolbarTools;
+  features?: (keyof typeof featuresToNodeMapping)[];
+  exportRef?: RefObject<ExportPluginHandle>
 }) => {
   const [floatingAnchorElem, setFloatingAnchorElem] = useState<HTMLDivElement | null>(null);
-  const [isLinkEditMode, setIsLinkEditMode] = useState<boolean>(false);
+  // const [isLinkEditMode, setIsLinkEditMode] = useState<boolean>(false);
 
-  const supportedTools = useMemo(() => {
+  const supportedFeatures = useMemo(() => {
     if (features) {
       const selectedNodes = features
         .map((item) => featuresToNodeMapping[item].node)
@@ -129,7 +143,7 @@ export const Editor = ({
       return { nodes: selectedNodes, components: selectedPlugins };
     }
 
-    const defaultTools = {
+    const defaultFeatures = {
       nodes: Object.values(featuresToNodeMapping)
         .map((item) => item.node)
         .flat(),
@@ -138,10 +152,8 @@ export const Editor = ({
         .flat()
     };
 
-    return defaultTools;
+    return defaultFeatures;
   }, [features]);
-
-  console.log(supportedTools);
 
   const onRef = (_floatingAnchorElem: HTMLDivElement) => {
     if (_floatingAnchorElem !== null) {
@@ -154,10 +166,7 @@ export const Editor = ({
       return child && isValidElement(child) && child.type === EditorFeatures;
     }) as ReactElement;
 
-    const customFeatureNodes: (
-      | InitialConfigType['nodes']
-      | InitialConfigType['nodes'][]
-    )[] = [];
+    const customFeatureNodes: ReadonlyArray<Klass<LexicalNode>>[] = [];
     const customFeatureElements: ReactElement[] = [];
 
     if (featuresContainer) {
@@ -170,7 +179,11 @@ export const Editor = ({
           const child = _child as ReactElement<EditorFeatureProps>;
           customFeatureElements.push(child);
           if (child.props.node) {
-            customFeatureNodes.push(child.props.node);
+            if (Array.isArray(child.props.node)) {
+              customFeatureNodes.push(...child.props.node);
+            } else {
+              customFeatureNodes.push(child.props.node);
+            }
           }
         }
       });
@@ -189,14 +202,13 @@ export const Editor = ({
         editorState,
         editable,
         nodes: [
-          ...supportedTools.nodes,
+          ...supportedFeatures.nodes,
           ...customFeatures.nodes,
-          ...(nodes || [])
+          ...(nodes ?? [])
         ]
       }}
     >
-      <>{showToolbar && <ToolbarPlugin />}</>
-      <FloatingToolbar />
+      <>{showToolbar && <ToolbarPlugin tools={toolbarTools} />}</>
       <FloatingLinkEditorPlugin anchorElem={floatingAnchorElem} />
       <RichTextPlugin
         contentEditable={(
@@ -225,10 +237,17 @@ export const Editor = ({
         placeholder={<div>Start typing...</div>}
       />
       <HistoryPlugin />
+      <ExportPlugin ref={exportRef} />
       <OnChangePlugin onChange={onChange} />
       <>
-        {supportedTools.components.map((ToolComponent, i) => {
+        {showFloatingToolbar && (
+          <FloatingToolbar tools={floatingToolbarTools} />
+        )}
+      </>
+      <>
+        {supportedFeatures.components.map((ToolComponent, i) => {
           if (ToolComponent) {
+            // eslint-disable-next-line react/no-array-index-key
             return <ToolComponent key={i} />;
           }
 
@@ -238,6 +257,7 @@ export const Editor = ({
       <>
         {customFeatures.elements.map((ToolComponent, i) => {
           if (ToolComponent) {
+            // eslint-disable-next-line react/no-array-index-key
             return <Fragment key={i}>{ToolComponent}</Fragment>;
           }
 

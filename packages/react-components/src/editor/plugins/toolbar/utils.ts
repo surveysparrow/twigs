@@ -8,7 +8,10 @@ export const ToolbarContext = createContext<ToolbarProperties>({
   isOrderedList: false,
   isUnOrderedList: false,
   isLink: false,
-  format: 'paragraph'
+  format: 'paragraph',
+  isStrikethrough: false,
+  isSubscript: false,
+  isSuperscript: false
 });
 
 export const useToolbarContext = <T>(fn: (state: ToolbarProperties) => T) => {
