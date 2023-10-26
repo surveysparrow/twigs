@@ -54,6 +54,8 @@ type CustomTool = {
   renderComponent: (props: ToolProps) => ReactNode;
 };
 
+export type FloatingToolbarTools = DefaultFloatingToolbarTools[] | CustomTool[];
+
 const defaultTools: DefaultFloatingToolbarTools[] = [
   'bold',
   'italic',
@@ -95,7 +97,7 @@ const TextFormatFloatingToolbar = ({
   editor: LexicalEditor;
   anchorElem: HTMLElement;
   children?: ReactNode;
-  tools?: DefaultFloatingToolbarTools[] | CustomTool[];
+  tools?: FloatingToolbarTools;
 }): React.JSX.Element => {
   const isLink = useFloatingToolbarContext((state) => state.isLink);
   const popupCharStylesEditorRef = useRef<HTMLDivElement | null>(null);
@@ -218,7 +220,7 @@ const TextFormatFloatingToolbar = ({
         position: 'absolute',
         left: 0,
         top: 0,
-        backgroundColor: '$white700',
+        backgroundColor: '$white900',
         borderRadius: '$md',
         display: 'flex'
       }}
@@ -231,6 +233,7 @@ const TextFormatFloatingToolbar = ({
             if (_item.component) {
               const item = _item as CustomTool;
               return (
+                // eslint-disable-next-line react/no-array-index-key
                 <Fragment key={i}>{item.renderComponent({ editor })}</Fragment>
               );
             }
@@ -240,6 +243,7 @@ const TextFormatFloatingToolbar = ({
             if (!Tool) return null;
 
             return (
+              // eslint-disable-next-line react/no-array-index-key
               <Fragment key={i}>
                 <Tool editor={editor} />
               </Fragment>
@@ -350,7 +354,15 @@ function useFloatingTextFormatToolbar(
       isSuperscript,
       isUnderline
     };
-  }, []);
+  }, [
+    isBold,
+    isItalic,
+    isLink,
+    isStrikethrough,
+    isSubscript,
+    isSuperscript,
+    isUnderline
+  ]);
 
   if (!isText || !anchorElem) {
     return null;

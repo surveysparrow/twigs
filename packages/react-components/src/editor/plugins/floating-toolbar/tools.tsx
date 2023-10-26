@@ -1,22 +1,29 @@
 import { FORMAT_TEXT_COMMAND, LexicalEditor } from 'lexical';
 import { useCallback } from 'react';
 import { TOGGLE_LINK_COMMAND } from '@lexical/link';
-import { Button } from '../../../button';
+import {
+  BoldIcon,
+  ItalicsIcon,
+  LinkIcon,
+  MinusIcon
+} from '@sparrowengg/twigs-react-icons';
+import { Button, IconButton } from '../../../button';
 import { useFloatingToolbarContext } from './utils';
 
 export const Bold = ({ editor }: { editor: LexicalEditor }) => {
   const isBold = useFloatingToolbarContext((state) => state.isBold);
 
   return (
-    <Button
+    <IconButton
       onClick={() => {
         editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold');
       }}
-      className={`popup-item spaced ${isBold ? 'active' : ''}`}
+      size="md"
+      icon={<BoldIcon />}
+      variant="solid"
+      color={isBold ? 'primary' : 'bright'}
       aria-label="Format text as bold"
-    >
-      Bold
-    </Button>
+    />
   );
 };
 
@@ -24,15 +31,16 @@ export const Italic = ({ editor }: { editor: LexicalEditor }) => {
   const isItalic = useFloatingToolbarContext((state) => state.isItalic);
 
   return (
-    <Button
+    <IconButton
       onClick={() => {
         editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'italic');
       }}
-      className={`popup-item spaced ${isItalic ? 'active' : ''}`}
-      aria-label="Format text as italics"
-    >
-      Italic
-    </Button>
+      size="md"
+      icon={<ItalicsIcon />}
+      variant="solid"
+      color={isItalic ? 'primary' : 'bright'}
+      aria-label="Format text as Italics"
+    />
   );
 };
 
@@ -40,16 +48,16 @@ export const Underline = ({ editor }: { editor: LexicalEditor }) => {
   const isUnderline = useFloatingToolbarContext((state) => state.isUnderline);
 
   return (
-    <Button
-      type="button"
+    <IconButton
       onClick={() => {
         editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'underline');
       }}
-      className={`popup-item spaced ${isUnderline ? 'active' : ''}`}
-      aria-label="Format text to underlined"
-    >
-      Underline
-    </Button>
+      size="md"
+      icon={<MinusIcon />}
+      variant="solid"
+      color={isUnderline ? 'primary' : 'bright'}
+      aria-label="Format text to underline"
+    />
   );
 };
 
@@ -64,23 +72,34 @@ export const Link = ({ editor }: { editor: LexicalEditor }) => {
     }
   }, [editor, isLink]);
 
-  return <Button onClick={insertLink}>Link</Button>;
+  return (
+    <IconButton
+      onClick={insertLink}
+      size="md"
+      icon={<LinkIcon />}
+      variant="solid"
+      color={isLink ? 'primary' : 'bright'}
+      aria-label="Convert text to link"
+    />
+  );
 };
 
 export const Strikethrough = ({ editor }: { editor: LexicalEditor }) => {
-  const isStrikethrough = useFloatingToolbarContext((state) => state.isStrikethrough);
+  const isStrikethrough = useFloatingToolbarContext(
+    (state) => state.isStrikethrough
+  );
 
   return (
-    <Button
-      type="button"
+    <IconButton
       onClick={() => {
         editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'underline');
       }}
-      className={`popup-item spaced ${isStrikethrough ? 'active' : ''}`}
+      size="md"
+      icon={<MinusIcon />}
+      variant="solid"
+      color={isStrikethrough ? 'primary' : 'bright'}
       aria-label="Format text to strike"
-    >
-      Strike
-    </Button>
+    />
   );
 };
 
@@ -91,29 +110,31 @@ export const Subscript = ({ editor }: { editor: LexicalEditor }) => {
     <Button
       type="button"
       onClick={() => {
-        editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'underline');
+        editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'subscript');
       }}
       className={`popup-item spaced ${isSubscript ? 'active' : ''}`}
-      aria-label="Format text to strike"
+      aria-label="Format text to subscript"
     >
-      Strike
+      Subscript
     </Button>
   );
 };
 
 export const Superscript = ({ editor }: { editor: LexicalEditor }) => {
-  const isSuperscript = useFloatingToolbarContext((state) => state.isSuperscript);
+  const isSuperscript = useFloatingToolbarContext(
+    (state) => state.isSuperscript
+  );
 
   return (
     <Button
       type="button"
       onClick={() => {
-        editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'underline');
+        editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'superscript');
       }}
       className={`popup-item spaced ${isSuperscript ? 'active' : ''}`}
-      aria-label="Format text to strike"
+      aria-label="Format text to superscript"
     >
-      Strike
+      Superscript
     </Button>
   );
 };
