@@ -11,6 +11,7 @@ export type FormInputProps = {
   label?: string,
   showCount?: boolean,
   error?: string,
+  errorBorder?:boolean;
 } & InputProps;
 
 const StyledError = styled(FormHelperText, {
@@ -25,6 +26,7 @@ export const FormInput: FunctionComponent<FormInputProps> = forwardRef(({
   error,
   defaultValue,
   maxLength,
+  errorBorder = false,
   ...rest
 }: FormInputProps, ref) => {
   const mergedValue = value || defaultValue;
@@ -70,7 +72,7 @@ export const FormInput: FunctionComponent<FormInputProps> = forwardRef(({
         {...rest}
         css={{
           ...rest.css,
-          ...(error && {
+          ...(error && errorBorder && {
             boxShadow: '$colors$negative500 0px 1.5px 0px 0px',
             borderBottom: '0',
             '&:hover': {

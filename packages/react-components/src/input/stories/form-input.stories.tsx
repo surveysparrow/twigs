@@ -27,6 +27,9 @@ export default {
     },
     error: {
       control: 'text'
+    },
+    errorBorder: {
+      control: 'boolean'
     }
   }
 };
