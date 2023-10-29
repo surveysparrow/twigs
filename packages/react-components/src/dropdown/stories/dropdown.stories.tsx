@@ -21,18 +21,18 @@ export default {
   argTypes: {
     size: {
       control: 'select',
-      options: ['sm', 'md'],
-      table: {
-        defaultValue: { summary: 'md' }
-      }
+      options: ['sm', 'md']
     }
+  },
+  args: {
+    size: 'md'
   }
 };
 
 const Template = (args) => {
-  const { size } = args;
+  const size = args?.size;
   return (
-    <DropdownMenu {...args} size={size}>
+    <DropdownMenu {...args}>
       <DropdownMenuTrigger asChild>
         <Button
           size="lg"
@@ -47,6 +47,7 @@ const Template = (args) => {
         showArrow={false}
         align="end"
         sideOffset={5}
+        size={size}
       >
         <DropdownMenuItem>New Tab</DropdownMenuItem>
         <DropdownMenuItem>New Window</DropdownMenuItem>
@@ -57,7 +58,7 @@ const Template = (args) => {
           <DropdownMenuSubTrigger>
             More Tools
           </DropdownMenuSubTrigger>
-          <DropdownMenuSubContent sideOffset={2} alignOffset={-5}>
+          <DropdownMenuSubContent sideOffset={2} alignOffset={-5} size={size}>
             <DropdownMenuItem>Save Page As…</DropdownMenuItem>
             <DropdownMenuItem>Create Shortcut…</DropdownMenuItem>
             <DropdownMenuItem>Name Window…</DropdownMenuItem>
