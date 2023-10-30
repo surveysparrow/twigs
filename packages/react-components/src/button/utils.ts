@@ -99,6 +99,7 @@ export const buttonVariantToLoaderVariantMapping: Partial<
   primary: 'primary',
   'primary-solid': 'bright',
   secondary: 'bright',
+  'secondary-outline': 'secondary',
   'secondary-ghost': 'secondary',
   light: 'bright',
   error: 'negative'

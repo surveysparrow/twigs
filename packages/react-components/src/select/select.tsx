@@ -25,7 +25,7 @@ const selectStyles = {
         'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
     },
     '&.twigs-select__control--is-disabled': {
-      backgroundColorOpacity: ['$neutral500', 0.06],
+      backgroundColorOpacity: ['$neutral500', 0.06]
     }
   },
   '& .twigs-select__value-container, & .twigs-select__placeholder, &.twigs-select__single-value, &.twigs-select__input':
@@ -67,13 +67,13 @@ const selectStyles = {
     lineHeight: '$sm',
     fontWeight: '$4',
     padding: '$4 $6',
-    color: '$neutral800',
+    color: '$neutral900',
     '&.twigs-select__option--is-focused': {
-      background: '$neutral50'
+      backgroundColorOpacity: ['$secondary500', 0.06]
     },
     '&.twigs-select__option--is-selected': {
-      color: '$white900',
-      background: '$secondary500',
+      color: '$neutral900',
+      background: '$primary100',
       '&.twigs-select__option--is-disabled': {
         opacity: 1,
         cursor: 'not-allowed',

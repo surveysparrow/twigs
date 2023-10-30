@@ -175,7 +175,7 @@ const StyledButton = styled('button', {
         }
       },
       light: {
-        background: '$white200',
+        backgroundColorOpacity: ['$white200', 0.1],
         color: '$white900',
         '&:hover, &:focus': {
           background: '$white300'
@@ -227,6 +227,55 @@ const StyledButton = styled('button', {
       }
     },
     {
+      variant: 'outline',
+      size: 'xxs',
+      css: {
+        borderWidth: '$xs'
+      }
+    },
+    {
+      variant: 'outline',
+      size: 'xs',
+      css: {
+        borderWidth: '$xs'
+      }
+    },
+    {
+      variant: 'outline',
+      size: 'sm',
+      css: {
+        borderWidth: '$xs'
+      }
+    },
+    {
+      variant: 'outline',
+      size: 'md',
+      css: {
+        borderWidth: '1.5px'
+      }
+    },
+    {
+      variant: 'outline',
+      size: 'lg',
+      css: {
+        borderWidth: '$sm'
+      }
+    },
+    {
+      variant: 'outline',
+      size: 'xl',
+      css: {
+        borderWidth: '$sm'
+      }
+    },
+    {
+      variant: 'outline',
+      size: '2xl',
+      css: {
+        borderWidth: '$sm'
+      }
+    },
+    {
       color: 'primary',
       variant: 'ghost',
       css: {
@@ -253,7 +302,6 @@ const StyledButton = styled('button', {
       css: {
         color: '$primary500',
         borderColorOpacity: ['$primary500', 0.4],
-        borderWidth: '$xs',
         borderStyle: 'solid',
         '&:hover, &:focus': {
           borderColorOpacity: ['$primary500', 0.8],
@@ -280,6 +328,44 @@ const StyledButton = styled('button', {
         [`&:active, &.${prefixClassName('button--loading')}`]: {
           color: '$secondary700',
           backgroundColorOpacity: ['$secondary500', 0.15]
+        }
+      }
+    },
+    {
+      color: 'secondary',
+      variant: 'outline',
+      css: {
+        color: '$secondary500',
+        background: '$white900',
+        borderColorOpacity: ['$secondary400', 0.2],
+        borderStyle: 'solid',
+        '&:hover, &:focus': {
+          borderColorOpacity: ['$secondary600', 0.4],
+          color: '$secondary600',
+          background: '$white900'
+        },
+        [`&:active, &.${prefixClassName('button--loading')}`]: {
+          borderColorOpacity: ['$secondary800', 0.8],
+          color: '$secondary800',
+          background: '$white900'
+        }
+      }
+    },
+    {
+      color: 'light',
+      variant: 'outline',
+      css: {
+        background: 'transparent',
+        borderColorOpacity: ['$white400', 0.2],
+        borderStyle: 'solid',
+        color: '$white900',
+        '&:hover, &:focus': {
+          background: 'transparent',
+          borderColorOpacity: ['$white500', 0.3]
+        },
+        [`&:active, &.${prefixClassName('button--loading')}`]: {
+          background: 'transparent',
+          borderColorOpacity: ['$white700', 0.7]
         }
       }
     },
@@ -311,6 +397,26 @@ const StyledButton = styled('button', {
         },
         [`&:active, &.${prefixClassName('button--loading')}`]: {
           background: '$negative200'
+        }
+      }
+    },
+    {
+      color: 'error',
+      variant: 'outline',
+      css: {
+        color: '$negative600',
+        background: '$white900',
+        borderColor: '$negative200',
+        borderStyle: 'solid',
+        '&:hover, &:focus': {
+          borderColor: '$negative300',
+          color: '$negative700',
+          background: '$white900'
+        },
+        [`&:active, &.${prefixClassName('button--loading')}`]: {
+          borderColor: '$negative600',
+          color: '$negative800',
+          background: '$white900'
         }
       }
     },
