@@ -75,7 +75,7 @@ export const ButtonSideElement = ({
     if (nodeRef.current) {
       const nodeWidth = loading
         ? loaderContainerRef.current?.clientWidth
-        : iconContainerRef.current?.querySelector('svg')?.clientWidth || 0;
+        : iconContainerRef.current?.firstElementChild?.clientWidth || 0;
       nodeRef.current.style.width = `${nodeWidth}px`;
     }
   }, []);
