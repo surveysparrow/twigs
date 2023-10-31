@@ -50,7 +50,7 @@ pipelines:
             - yarn build:docs
           caches:
             - node
-            - nodemodules 
+            - nodemodules
             - componentsnodemodules
             - iconsnodemodules
             - docsnodemodules
@@ -59,80 +59,54 @@ pipelines:
       - parallel:
           - step:
               name: Security Scan for React Icons
+              condition:
+                changesets:
+                  includePaths:
+                    # any changes in given directory
+                    - "packages/react-icons/src/**"
               script:
                 - cd packages/react-icons
                 # Run a security scan for sensitive data.
                 # See more security tools at https://bitbucket.org/product/features/pipelines/integrations?&category=security
                 - pipe: atlassian/git-secrets-scan:0.5.1
-
-          - step:
-              name: Run eslint
-              script:
-                - cd packages/react-icons
-                - npm install eslint
-                - npx eslint .
-              caches:
-                - node
-
-          - step:
-              name: Build Icons
-              caches:
-                - node
-              script:
-                - npm install -g lerna
-                - yarn install
-                - lerna run build --scope=@sparrowengg/twigs-react-icons
-
-      # components
-      - parallel:
           - step:
               name: Security Scan for React Components
+              condition:
+                changesets:
+                  includePaths:
+                    - "packages/react-components/src/**"
               script:
                 - cd packages/react-components
                 - pipe: atlassian/git-secrets-scan:0.5.1
-          - step:
-              name: Run eslint
-              script:
-                - cd packages/react-components
-                - npm install eslint
-                - npx eslint .
-              caches:
-                - node
 
-          - step:
-              name: Build Components
-              caches:
-                - node
-              script:
-                - npm install -g lerna
-                - yarn install
-                - lerna run build --scope=@sparrowengg/twigs-react
-
-          - step:
-              name: Create changelog
-              script:
-                - cd packages/react-components
-                - npx auto-changelog changelog
-                - npm run changelog:commit
-      # docs
-      - parallel:
           - step:
               name: Security Scan for Docs
               script:
                 - cd packages/docs
                 - pipe: atlassian/git-secrets-scan:0.5.1
-          - step:
-              name: Build docs
-              condition:
-                changesets:
-                  includePaths:
-                    - "packages/docs/**"
-              caches:
-                - node
-              script:
-                - npm install -g lerna
-                - yarn install
-                - lerna run build --scope=@sparrowengg/twigs-docs --verbose
+      - step:
+          name: Lint, Test and Build
+          condition:
+            changesets:
+              includePaths:
+                # any changes in given directory
+                - "packages/react-icons/src/**"
+                - "packages/react-components/src/**"
+                - "packages/docs/**"
+          script:
+            - yarn
+            - npx lerna run eslint --scope=@sparrowengg/twigs-react-icons
+            - yarn build:icons
+            - npx lerna run eslint --scope=@sparrowengg/twigs-react
+            - npx lerna run test
+            - yarn build:components
+            - yarn build:docs
+          caches:
+            - node
+            - nodemodules
+            - componentsnodemodules
+            - iconsnodemodules
+            - docsnodemodules
 
 definitions:
   caches:
