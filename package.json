@@ -5,6 +5,11 @@
   "workspaces": [
     "packages/*"
   ],
+  "scripts": {
+    "build:icons": "lerna run build --scope=@sparrowengg/twigs-react-icons",
+    "build:components": "lerna run build --scope=@sparrowengg/twigs-react",
+    "build:docs": "lerna run build --scope=@sparrowengg/twigs-docs --verbose"
+  },
   "devDependencies": {
     "lerna": "^7.0.0"
   }

@@ -67,7 +67,9 @@
         "react/jsx-props-no-spreading": "off",
         "react/destructuring-assignment": "off",
         "no-unused-vars": "off",
-        "@typescript-eslint/no-unused-vars": ["error"]
+        "@typescript-eslint/no-unused-vars": ["error", { "ignoreRestSiblings": true }],
+        "no-use-before-define": "off",
+        "react/prop-types": "off"
     },
     "settings": {
         "import/resolver": {

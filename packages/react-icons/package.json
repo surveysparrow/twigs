@@ -14,7 +14,8 @@
     "react-dom": ">=18.2.0"
   },
   "scripts": {
-    "eslint": "eslint . --fix",
+    "eslint": "eslint . --ext .ts,.tsx",
+    "eslint:fix": "eslint . --ext .ts,.tsx --fix",
     "build": "rimraf dist && rollup -c",
     "storybook": "storybook dev -p 6007",
     "build-storybook": "storybook build"

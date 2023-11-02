@@ -1,36 +1,42 @@
 import { createStitches } from '@stitches/react';
 
 export const resetStyles = {
-  'html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, main, menu, nav, output, ruby, section, summary, time, mark, audio, video': {
+  [`html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
+  blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em,
+  img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u,
+  i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table,
+  caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details,
+  embed, figure, figcaption, footer, header, hgroup, main, menu, nav, output,
+  ruby, section, summary, time, mark, audio, video`]: {
     margin: '0',
     padding: '0',
     border: '0',
     fontSize: '100%',
-    verticalAlign: 'baseline',
+    verticalAlign: 'baseline'
   },
   'article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section': {
-    display: 'block',
+    display: 'block'
   },
   '*[hidden]': {
-    display: 'none',
+    display: 'none'
   },
   body: {
-    lineHeight: '1',
+    lineHeight: '1'
   },
   'ol, ul': {
-    listStyle: 'none',
+    listStyle: 'none'
   },
   'blockquote, q': {
-    quotes: 'none',
+    quotes: 'none'
   },
   'blockquote:before, blockquote:after, q:before, q:after': {
-    content: '',
+    content: ''
     // eslint-disable-next-line no-dupe-keys
     // content: 'none',
   },
   table: {
-    borderSpacing: '0',
-  },
+    borderSpacing: '0'
+  }
 };
 
 export const defaultTheme = {
@@ -136,7 +142,7 @@ export const defaultTheme = {
     white600: '#FFFFFF80',
     white700: '#FFFFFFB2',
     white800: '#FFFFFFCC',
-    white900: '#FFFFFF',
+    white900: '#FFFFFF'
   },
   space: {
     1: '0.125rem',
@@ -188,7 +194,7 @@ export const defaultTheme = {
     47: '5.875rem',
     48: '6rem',
     49: '6.125rem',
-    50: '6.25rem',
+    50: '6.25rem'
   },
   fontSizes: {
     xxs: '0.579rem',
@@ -200,11 +206,11 @@ export const defaultTheme = {
     '2xl': '1.728rem',
     '3xl': '2.074rem',
     '4xl': '2.488rem',
-    '5xl': '2.986rem',
+    '5xl': '2.986rem'
   },
   fonts: {
     body: 'sytem-ui',
-    heading: 'sans-serif',
+    heading: 'sans-serif'
   },
   fontWeights: {
     1: '100',
@@ -215,7 +221,7 @@ export const defaultTheme = {
     6: '600',
     7: '700',
     8: '800',
-    9: '900',
+    9: '900'
   },
   lineHeights: {
     xxs: '0.75rem',
@@ -226,7 +232,7 @@ export const defaultTheme = {
     xl: '2rem',
     '2xl': '2.5rem',
     '3xl': '3rem',
-    '4xl': '4rem',
+    '4xl': '4rem'
   },
   letterSpacings: {},
   sizes: {
@@ -263,14 +269,14 @@ export const defaultTheme = {
     31: '124px',
     32: '128px',
     33: '132px',
-    34: '136px',
+    34: '136px'
   },
   borderWidths: {
     xs: '1px',
     sm: '2px',
     md: '3px',
     lg: '4px',
-    xl: '5px',
+    xl: '5px'
   },
   borderStyles: {},
   radii: {
@@ -284,17 +290,17 @@ export const defaultTheme = {
     '3xl': '1.25rem',
     '4xl': '1.5rem',
     round: '50%',
-    pill: '9999px',
+    pill: '9999px'
   },
   shadows: {
-    sm: '0px 5px 15px rgba(0, 0, 0, 0.04)',
+    sm: '0px 5px 15px rgba(0, 0, 0, 0.04)'
   },
   zIndices: {},
   transitions: {
     1: '0.1s',
     2: '0.2s',
-    3: '0.3s',
-  },
+    3: '0.3s'
+  }
 };
 
 export const {
@@ -305,20 +311,20 @@ export const {
   keyframes,
   config,
   reset,
-  css,
+  css
 } = createStitches({
   prefix: 'twigs',
   theme: defaultTheme,
   utils: {
     backgroundColorOpacity: ([value, opacity]: [string, number]) => ({
-      backgroundColor: hexToRgba(value, opacity),
+      backgroundColor: hexToRgba(value, opacity)
     }),
     colorOpacity: ([value, opacity]: [string, number]) => ({
-      color: hexToRgba(value, opacity),
+      color: hexToRgba(value, opacity)
     }),
     borderColorOpacity: ([value, opacity]: [string, number]) => ({
-      borderColor: hexToRgba(value, opacity),
-    }),
+      borderColor: hexToRgba(value, opacity)
+    })
   },
   media: {
     'screen-xs': '(min-width: 480px)',
@@ -327,13 +333,15 @@ export const {
     'screen-lg': '(min-width: 1024px)',
     'screen-xl': '(min-width: 1280px)',
     'screen-2xl': '(min-width: 1536px)'
-  },
+  }
 });
 
 export const globalStyles = globalCss({
   ...resetStyles,
-  '*': { margin: 0, padding: 0, fontFamily: '$body', '-webkit-font-smoothing': 'antialiased' },
-  '*, :before, :after': { boxSizing: 'border-box' },
+  '*': {
+    margin: 0, padding: 0, fontFamily: '$body', '-webkit-font-smoothing': 'antialiased'
+  },
+  '*, :before, :after': { boxSizing: 'border-box' }
 });
 
 function hexToRgba(hex: string, opacity: number) {
@@ -344,5 +352,6 @@ function hexToRgba(hex: string, opacity: number) {
   const b = parseInt(color.value.substring(5, 7), 16);
 
   // return the new hex color code with opacity
+  // eslint-disable-next-line no-bitwise
   return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}${Math.round(opacity * 255).toString(16).padStart(2, '0')}`;
 }
