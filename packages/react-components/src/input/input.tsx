@@ -103,6 +103,7 @@ export interface InputBaseProps {
   rightIcon?: ReactElement;
   rightElement?: ReactElement;
   leftElement?: ReactElement;
+  errorBorder?:boolean;
   // eslint-disable-next-line no-unused-vars
   onChange?: (e: React.ChangeEvent<HTMLInputElement> | React.FormEvent<HTMLInputElement>) => void
 }
@@ -176,6 +177,19 @@ const AddonContainer = styled(Box, {
   }
 });
 
+const errorBorderStyles = {
+  boxShadow: '$colors$negative500 0px 1.5px 0px 0px',
+  borderBottom: '0',
+  '&:hover': {
+    borderBottom: '0'
+  },
+  '&:focus,&:active': {
+    $$shadowColor: '$colors$primary300',
+    borderBottom: '0',
+    boxShadow: '$colors$negative500 0px 1.5px 0px 0px,rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
+  }
+};
+
 export const Input: FunctionComponent<InputProps> = React.forwardRef(({
   size = 'md',
   leftIcon,
@@ -183,6 +197,7 @@ export const Input: FunctionComponent<InputProps> = React.forwardRef(({
   css,
   rightElement,
   leftElement,
+  errorBorder = false,
   ...rest
 }: InputProps, ref) => {
   const inputPaddingValue = getInputPadding(size);
@@ -224,7 +239,10 @@ export const Input: FunctionComponent<InputProps> = React.forwardRef(({
           data-testid="input"
           css={{
             ...(leftIcon && { paddingInlineStart: inputPaddingValue }),
-            ...(rightIcon && { paddingInlineEnd: inputPaddingValue })
+            ...(rightIcon && { paddingInlineEnd: inputPaddingValue }),
+            ...(errorBorder && {
+              ...errorBorderStyles
+            })
           }}
           {...rest}
         />
@@ -253,6 +271,6 @@ export const Input: FunctionComponent<InputProps> = React.forwardRef(({
     );
   }
   return (
-    <StyledInput ref={ref} size={size} data-testid="input" {...rest} css={css} />
+    <StyledInput ref={ref} size={size} data-testid="input" {...rest} css={{ ...css, ...(errorBorder && { ...errorBorderStyles }) }} />
   );
 });
