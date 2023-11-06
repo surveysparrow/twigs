@@ -11,7 +11,6 @@ export type FormInputProps = {
   label?: string,
   showCount?: boolean,
   error?: string,
-  errorBorder?:boolean;
   requiredIndicator?:boolean | ReactElement
 } & InputProps;
 
@@ -27,7 +26,6 @@ export const FormInput: FunctionComponent<FormInputProps> = forwardRef(({
   error,
   defaultValue,
   maxLength,
-  errorBorder = false,
   requiredIndicator,
   ...rest
 }: FormInputProps, ref) => {
@@ -72,22 +70,6 @@ export const FormInput: FunctionComponent<FormInputProps> = forwardRef(({
         })}
         ref={ref}
         {...rest}
-        css={{
-          ...rest.css,
-          ...(error && errorBorder && {
-            boxShadow: '$colors$negative500 0px 1.5px 0px 0px',
-            borderBottom: '0',
-            '&:hover': {
-              borderBottom: '0'
-            },
-            '&:focus,&:active': {
-              $$shadowColor: '$colors$primary300',
-              borderBottom: '0',
-              boxShadow: '$colors$negative500 0px 1.5px 0px 0px,rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
-
-            }
-          })
-        }}
       />
       {
         error
