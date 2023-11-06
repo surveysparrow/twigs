@@ -42,7 +42,7 @@ const StyledText = styled('p', {
       true: {
         overflow: 'hidden',
         textOverflow: 'ellipsis',
-        whiteSpace: 'nowrap',
+        whiteSpace: 'nowrap'
       }
     }
   },
@@ -66,16 +66,20 @@ export const Text: FunctionComponent<TextProps> = ({
   ...rest
 }: TextProps) => {
   return (
-    <StyledText data-testid="text" {...rest} css={{
-      ...css,
-      ...(showLines && {
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-        display: '-webkit-box',
-        '-webkit-line-clamp': showLines,
-        '-webkit-box-orient': 'vertical'
-      })
-    }}>
+    <StyledText
+      data-testid="text"
+      {...rest}
+      css={{
+        ...css,
+        ...(showLines && {
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          display: '-webkit-box',
+          '-webkit-line-clamp': showLines,
+          '-webkit-box-orient': 'vertical'
+        })
+      }}
+    >
       {children}
     </StyledText>
   );

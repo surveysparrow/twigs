@@ -58,7 +58,7 @@ const StyledButton = styled('button', {
         fontSize: '$lg',
         lineHeight: '$lg',
         height: '$16',
-        [`& .${prefixClassName('button__icon-container svg')}`]: {
+        [`& .${prefixClassName('button__icon-container > *')}`]: {
           width: '$6',
           height: '$6'
         }
@@ -69,7 +69,7 @@ const StyledButton = styled('button', {
         fontSize: '$lg',
         lineHeight: '$lg',
         height: '$12',
-        [`& .${prefixClassName('button__icon-container svg')}`]: {
+        [`& .${prefixClassName('button__icon-container > *')}`]: {
           width: '$6',
           height: '$6'
         }
@@ -80,7 +80,7 @@ const StyledButton = styled('button', {
         fontSize: '$md',
         lineHeight: '$md',
         height: '$10',
-        [`& .${prefixClassName('button__icon-container svg')}`]: {
+        [`& .${prefixClassName('button__icon-container > *')}`]: {
           width: '$5',
           height: '$5'
         }
@@ -91,7 +91,7 @@ const StyledButton = styled('button', {
         fontSize: '$sm',
         lineHeight: '$md',
         height: '$8',
-        [`& .${prefixClassName('button__icon-container svg')}`]: {
+        [`& .${prefixClassName('button__icon-container > *')}`]: {
           width: '$5',
           height: '$5'
         }
@@ -102,7 +102,7 @@ const StyledButton = styled('button', {
         fontSize: '$sm',
         lineHeight: '$sm',
         height: '$6',
-        [`& .${prefixClassName('button__icon-container svg')}`]: {
+        [`& .${prefixClassName('button__icon-container > *')}`]: {
           width: '$4',
           height: '$4'
         }
@@ -113,7 +113,7 @@ const StyledButton = styled('button', {
         fontSize: '$xs',
         lineHeight: '$xs',
         height: '$5',
-        [`& .${prefixClassName('button__icon-container svg')}`]: {
+        [`& .${prefixClassName('button__icon-container > *')}`]: {
           width: '$2',
           height: '$2'
         }
@@ -124,7 +124,7 @@ const StyledButton = styled('button', {
         fontSize: '$xxs',
         lineHeight: '$xxs',
         height: '$4',
-        [`& .${prefixClassName('button__icon-container svg')}`]: {
+        [`& .${prefixClassName('button__icon-container > *')}`]: {
           width: '$2',
           height: '$2'
         }
@@ -175,7 +175,7 @@ const StyledButton = styled('button', {
         }
       },
       light: {
-        background: '$white200',
+        backgroundColorOpacity: ['$white200', 0.1],
         color: '$white900',
         '&:hover, &:focus': {
           background: '$white300'
@@ -227,6 +227,55 @@ const StyledButton = styled('button', {
       }
     },
     {
+      variant: 'outline',
+      size: 'xxs',
+      css: {
+        borderWidth: '$xs'
+      }
+    },
+    {
+      variant: 'outline',
+      size: 'xs',
+      css: {
+        borderWidth: '$xs'
+      }
+    },
+    {
+      variant: 'outline',
+      size: 'sm',
+      css: {
+        borderWidth: '$xs'
+      }
+    },
+    {
+      variant: 'outline',
+      size: 'md',
+      css: {
+        borderWidth: '1.5px'
+      }
+    },
+    {
+      variant: 'outline',
+      size: 'lg',
+      css: {
+        borderWidth: '$sm'
+      }
+    },
+    {
+      variant: 'outline',
+      size: 'xl',
+      css: {
+        borderWidth: '$sm'
+      }
+    },
+    {
+      variant: 'outline',
+      size: '2xl',
+      css: {
+        borderWidth: '$sm'
+      }
+    },
+    {
       color: 'primary',
       variant: 'ghost',
       css: {
@@ -253,7 +302,6 @@ const StyledButton = styled('button', {
       css: {
         color: '$primary500',
         borderColorOpacity: ['$primary500', 0.4],
-        borderWidth: '$xs',
         borderStyle: 'solid',
         '&:hover, &:focus': {
           borderColorOpacity: ['$primary500', 0.8],
@@ -280,6 +328,44 @@ const StyledButton = styled('button', {
         [`&:active, &.${prefixClassName('button--loading')}`]: {
           color: '$secondary700',
           backgroundColorOpacity: ['$secondary500', 0.15]
+        }
+      }
+    },
+    {
+      color: 'secondary',
+      variant: 'outline',
+      css: {
+        color: '$secondary500',
+        background: '$white900',
+        borderColorOpacity: ['$secondary400', 0.2],
+        borderStyle: 'solid',
+        '&:hover, &:focus': {
+          borderColorOpacity: ['$secondary600', 0.4],
+          color: '$secondary600',
+          background: '$white900'
+        },
+        [`&:active, &.${prefixClassName('button--loading')}`]: {
+          borderColorOpacity: ['$secondary800', 0.8],
+          color: '$secondary800',
+          background: '$white900'
+        }
+      }
+    },
+    {
+      color: 'light',
+      variant: 'outline',
+      css: {
+        background: 'transparent',
+        borderColorOpacity: ['$white400', 0.2],
+        borderStyle: 'solid',
+        color: '$white900',
+        '&:hover, &:focus': {
+          background: 'transparent',
+          borderColorOpacity: ['$white500', 0.3]
+        },
+        [`&:active, &.${prefixClassName('button--loading')}`]: {
+          background: 'transparent',
+          borderColorOpacity: ['$white700', 0.7]
         }
       }
     },
@@ -315,12 +401,32 @@ const StyledButton = styled('button', {
       }
     },
     {
+      color: 'error',
+      variant: 'outline',
+      css: {
+        color: '$negative600',
+        background: '$white900',
+        borderColor: '$negative200',
+        borderStyle: 'solid',
+        '&:hover, &:focus': {
+          borderColor: '$negative300',
+          color: '$negative700',
+          background: '$white900'
+        },
+        [`&:active, &.${prefixClassName('button--loading')}`]: {
+          borderColor: '$negative600',
+          color: '$negative800',
+          background: '$white900'
+        }
+      }
+    },
+    {
       isIcon: true,
       size: '2xl',
       css: {
         width: '$16',
         height: '$16',
-        [`& .${prefixClassName('button__icon-container svg')}`]: {
+        [`& .${prefixClassName('button__icon-container > *')}`]: {
           width: '$8',
           height: '$8'
         }
@@ -332,7 +438,7 @@ const StyledButton = styled('button', {
       css: {
         width: '$12',
         height: '$12',
-        [`& .${prefixClassName('button__icon-container svg')}`]: {
+        [`& .${prefixClassName('button__icon-container > *')}`]: {
           width: '$8',
           height: '$8'
         }
@@ -344,7 +450,7 @@ const StyledButton = styled('button', {
       css: {
         width: '$10',
         height: '$10',
-        [`& .${prefixClassName('button__icon-container svg')}`]: {
+        [`& .${prefixClassName('button__icon-container > *')}`]: {
           width: '$6',
           height: '$6'
         }
@@ -356,7 +462,7 @@ const StyledButton = styled('button', {
       css: {
         width: '$8',
         height: '$8',
-        [`& .${prefixClassName('button__icon-container svg')}`]: {
+        [`& .${prefixClassName('button__icon-container > *')}`]: {
           width: '$5',
           height: '$5'
         }
@@ -368,7 +474,7 @@ const StyledButton = styled('button', {
       css: {
         width: '$6',
         height: '$6',
-        [`& .${prefixClassName('button__icon-container svg')}`]: {
+        [`& .${prefixClassName('button__icon-container > *')}`]: {
           width: '$4',
           height: '$4'
         }
@@ -380,7 +486,7 @@ const StyledButton = styled('button', {
       css: {
         width: '$5',
         height: '$5',
-        [`& .${prefixClassName('button__icon-container svg')}`]: {
+        [`& .${prefixClassName('button__icon-container > *')}`]: {
           width: '$3',
           height: '$3'
         }
@@ -392,7 +498,7 @@ const StyledButton = styled('button', {
       css: {
         width: '$4',
         height: '$4',
-        [`& .${prefixClassName('button__icon-container svg')}`]: {
+        [`& .${prefixClassName('button__icon-container > *')}`]: {
           width: '$2',
           height: '$2'
         }

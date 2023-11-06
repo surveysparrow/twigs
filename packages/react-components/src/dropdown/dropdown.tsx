@@ -1,4 +1,6 @@
-import React, { ReactNode, ComponentProps, ReactElement } from 'react';
+import React, {
+  ReactNode, ComponentProps, ReactElement, createContext, useContext
+} from 'react';
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import { Flex } from '../flex';
 import { styled, keyframes } from '../stitches.config';
@@ -8,6 +10,22 @@ const ChevronRightIcon = () => {
     <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M1.33325 8.33332L4.66658 4.99999L1.33325 1.66666" stroke="#6A6A6A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
+  );
+};
+
+type DropdownContextType = {
+  size: 'md' | 'sm'
+}
+
+const DropdownContext = createContext<DropdownContextType>({
+  size: 'md' // Default Value
+});
+
+const DropdownProvider = ({ children, size }: { children: ReactNode, size: 'md' | 'sm' }) => {
+  return (
+    <DropdownContext.Provider value={{ size }}>
+      {children}
+    </DropdownContext.Provider>
   );
 };
 
@@ -31,70 +49,11 @@ const slideLeftAndFade = keyframes({
   '100%': { opacity: 1, transform: 'translateX(0)' }
 });
 
-const contentStyles = {
-  minWidth: 234,
-  backgroundColor: 'white',
-  padding: '$6 0',
-  borderRadius: '$lg',
-  boxShadow: '$sm',
-  border: '$borderWidths$xs solid $colors$neutral300',
-  '@media (prefers-reduced-motion: no-preference)': {
-    animationDuration: '400ms',
-    animationTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
-    willChange: 'transform, opacity',
-    '&[data-state="open"]': {
-      '&[data-side="top"]': { animationName: slideDownAndFade },
-      '&[data-side="right"]': { animationName: slideLeftAndFade },
-      '&[data-side="bottom"]': { animationName: slideUpAndFade },
-      '&[data-side="left"]': { animationName: slideRightAndFade }
-    }
-  }
-};
-
-const StyledContent = styled(DropdownMenuPrimitive.Content, {
-  ...contentStyles
-});
-
-const StyledArrow = styled(DropdownMenuPrimitive.Arrow, {
-  fill: 'white'
-});
-
-type ContentProps = ComponentProps<typeof StyledContent> & {
-  children: ReactNode,
-  showArrow?: boolean
-}
-
-const Content = ({ children, showArrow, ...props }: ContentProps) => {
-  return (
-    <DropdownMenuPrimitive.Portal>
-      <StyledContent {...props}>
-        {children}
-        {showArrow && <StyledArrow />}
-      </StyledContent>
-    </DropdownMenuPrimitive.Portal>
-  );
-};
-
-const StyledSubContent = styled(DropdownMenuPrimitive.SubContent, {
-  ...contentStyles
-});
-
-const SubContent = (props) => {
-  return (
-    <DropdownMenuPrimitive.Portal>
-      <StyledSubContent {...props} />
-    </DropdownMenuPrimitive.Portal>
-  );
-};
-
 const itemStyles = {
   all: 'unset',
-  fontSize: '$md',
-  lineHeight: '$md',
   color: '$neutral900',
   display: 'flex',
   alignItems: 'center',
-  padding: '$4 $6',
   position: 'relative',
   userSelect: 'none',
 
@@ -106,12 +65,29 @@ const itemStyles = {
   },
 
   '&[data-highlighted]': {
-    background: '$neutral50',
+    backgroundColorOpacity: ['$secondary500', 0.06],
     color: '$neutral900'
   }
 };
 
 const StyledItem = styled(DropdownMenuPrimitive.Item, { ...itemStyles });
+
+const mediumItemStyles = {
+  fontSize: '$md',
+  lineHeight: '$md',
+  padding: '$4 $6'
+};
+
+const smallItemStyles = {
+  fontSize: '$sm',
+  lineHeight: '$sm',
+  padding: '$3 $6'
+};
+
+const StyledArrow = styled(DropdownMenuPrimitive.Arrow, {
+  fill: 'white'
+});
+
 const StyledCheckboxItem = styled(DropdownMenuPrimitive.CheckboxItem, {
   ...itemStyles
 });
@@ -174,7 +150,95 @@ const StyledItemIndicator = styled(DropdownMenuPrimitive.ItemIndicator, {
   justifyContent: 'center'
 });
 
-export const DropdownMenu = DropdownMenuPrimitive.Root;
+const contentStyles = {
+  minWidth: 234,
+  backgroundColor: 'white',
+  padding: '$6 0',
+  borderRadius: '$lg',
+  boxShadow: '$sm',
+  border: '$borderWidths$xs solid $colors$neutral300',
+  '@media (prefers-reduced-motion: no-preference)': {
+    animationDuration: '400ms',
+    animationTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
+    willChange: 'transform, opacity',
+    '&[data-state="open"]': {
+      '&[data-side="top"]': { animationName: slideDownAndFade },
+      '&[data-side="right"]': { animationName: slideLeftAndFade },
+      '&[data-side="bottom"]': { animationName: slideUpAndFade },
+      '&[data-side="left"]': { animationName: slideRightAndFade }
+    }
+  },
+  variants: {
+    size: {
+      sm: {
+        [`& ${StyledItem}`]: smallItemStyles,
+        [`& ${StyledCheckboxItem}`]: smallItemStyles,
+        [`& ${StyledRadioItem}`]: smallItemStyles,
+        [`& ${StyledSubTrigger}`]: smallItemStyles
+      },
+      md: {
+        [`& ${StyledItem}`]: mediumItemStyles,
+        [`& ${StyledCheckboxItem}`]: mediumItemStyles,
+        [`& ${StyledRadioItem}`]: mediumItemStyles,
+        [`& ${StyledSubTrigger}`]: mediumItemStyles
+      }
+    }
+  },
+  defaultVariants: {
+    size: 'md'
+  }
+};
+
+const StyledSubContent = styled(DropdownMenuPrimitive.SubContent, {
+  ...contentStyles
+});
+
+const SubContent = (props) => {
+  const size = useContext(DropdownContext);
+  return (
+    <DropdownMenuPrimitive.Portal>
+      <StyledSubContent {...props} {...size} />
+    </DropdownMenuPrimitive.Portal>
+  );
+};
+
+const StyledContent = styled(DropdownMenuPrimitive.Content, {
+  ...contentStyles
+});
+
+type ContentProps = ComponentProps<typeof StyledContent> & {
+  children: ReactNode,
+  showArrow?: boolean
+}
+
+const Content = ({ children, showArrow, ...props }: ContentProps) => {
+  const size = useContext(DropdownContext);
+  return (
+    <DropdownMenuPrimitive.Portal>
+      <StyledContent {...props} {...size}>
+        {children}
+        {showArrow && <StyledArrow />}
+      </StyledContent>
+    </DropdownMenuPrimitive.Portal>
+  );
+};
+
+type DropdownRootProps = {
+  children : ReactNode,
+  size: 'sm' | 'md'
+}
+
+const DropdownRoot = ({ children, ...props }:DropdownRootProps) => {
+  return (
+    <DropdownProvider size={props.size}>
+      <DropdownMenuPrimitive.Root {...props}>
+        {children}
+      </DropdownMenuPrimitive.Root>
+    </DropdownProvider>
+  );
+};
+
+export const DropdownMenu = DropdownRoot;
 export const DropdownMenuTrigger = DropdownMenuPrimitive.Trigger;
 export const DropdownMenuContent = Content;
 export const DropdownMenuItem = StyledItem;

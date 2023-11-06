@@ -18,6 +18,9 @@ export default {
       control: 'select',
       options: ['default', 'filled']
     },
+    errorBorder: {
+      control: 'boolean'
+    },
     disabled: {
       control: 'boolean'
     }

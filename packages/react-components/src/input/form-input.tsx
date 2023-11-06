@@ -1,4 +1,4 @@
-import { forwardRef, FunctionComponent } from 'react';
+import { forwardRef, FunctionComponent, ReactElement } from 'react';
 import { styled } from '../stitches.config';
 import { Box } from '../box';
 import { Flex } from '../flex';
@@ -11,6 +11,7 @@ export type FormInputProps = {
   label?: string,
   showCount?: boolean,
   error?: string,
+  requiredIndicator?:boolean | ReactElement
 } & InputProps;
 
 const StyledError = styled(FormHelperText, {
@@ -25,6 +26,7 @@ export const FormInput: FunctionComponent<FormInputProps> = forwardRef(({
   error,
   defaultValue,
   maxLength,
+  requiredIndicator,
   ...rest
 }: FormInputProps, ref) => {
   const mergedValue = value || defaultValue;
@@ -38,7 +40,7 @@ export const FormInput: FunctionComponent<FormInputProps> = forwardRef(({
       >
         {
           label
-            ? <FormLabel htmlFor={rest.id}>{label}</FormLabel>
+            ? <FormLabel htmlFor={rest.id} requiredIndicator={requiredIndicator}>{label}</FormLabel>
             : null
         }
         {
