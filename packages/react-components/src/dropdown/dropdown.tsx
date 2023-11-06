@@ -1,4 +1,6 @@
-import React, { ReactNode, ComponentProps, ReactElement } from 'react';
+import React, {
+  ReactNode, ComponentProps, ReactElement, createContext, useContext
+} from 'react';
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import { Flex } from '../flex';
 import { styled, keyframes } from '../stitches.config';
@@ -8,6 +10,22 @@ const ChevronRightIcon = () => {
     <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M1.33325 8.33332L4.66658 4.99999L1.33325 1.66666" stroke="#6A6A6A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
+  );
+};
+
+type DropdownContextType = {
+  size: 'md' | 'sm'
+}
+
+const DropdownContext = createContext<DropdownContextType>({
+  size: 'md' // Default Value
+});
+
+const DropdownProvider = ({ children, size }: { children: ReactNode, size: 'md' | 'sm' }) => {
+  return (
+    <DropdownContext.Provider value={{ size }}>
+      {children}
+    </DropdownContext.Provider>
   );
 };
 
@@ -153,16 +171,16 @@ const contentStyles = {
   variants: {
     size: {
       sm: {
-        [`${StyledItem}`]: smallItemStyles,
-        [`${StyledCheckboxItem}`]: smallItemStyles,
-        [`${StyledRadioItem}`]: smallItemStyles,
-        [`${StyledSubTrigger}`]: smallItemStyles
+        [`& ${StyledItem}`]: smallItemStyles,
+        [`& ${StyledCheckboxItem}`]: smallItemStyles,
+        [`& ${StyledRadioItem}`]: smallItemStyles,
+        [`& ${StyledSubTrigger}`]: smallItemStyles
       },
       md: {
-        [`${StyledItem}`]: mediumItemStyles,
-        [`${StyledCheckboxItem}`]: mediumItemStyles,
-        [`${StyledRadioItem}`]: mediumItemStyles,
-        [`${StyledSubTrigger}`]: mediumItemStyles
+        [`& ${StyledItem}`]: mediumItemStyles,
+        [`& ${StyledCheckboxItem}`]: mediumItemStyles,
+        [`& ${StyledRadioItem}`]: mediumItemStyles,
+        [`& ${StyledSubTrigger}`]: mediumItemStyles
       }
     }
   },
@@ -170,14 +188,16 @@ const contentStyles = {
     size: 'md'
   }
 };
+
 const StyledSubContent = styled(DropdownMenuPrimitive.SubContent, {
   ...contentStyles
 });
 
 const SubContent = (props) => {
+  const size = useContext(DropdownContext);
   return (
     <DropdownMenuPrimitive.Portal>
-      <StyledSubContent {...props} />
+      <StyledSubContent {...props} {...size} />
     </DropdownMenuPrimitive.Portal>
   );
 };
@@ -192,9 +212,10 @@ type ContentProps = ComponentProps<typeof StyledContent> & {
 }
 
 const Content = ({ children, showArrow, ...props }: ContentProps) => {
+  const size = useContext(DropdownContext);
   return (
     <DropdownMenuPrimitive.Portal>
-      <StyledContent {...props}>
+      <StyledContent {...props} {...size}>
         {children}
         {showArrow && <StyledArrow />}
       </StyledContent>
@@ -202,7 +223,22 @@ const Content = ({ children, showArrow, ...props }: ContentProps) => {
   );
 };
 
-export const DropdownMenu = DropdownMenuPrimitive.Root;
+type DropdownRootProps = {
+  children : ReactNode,
+  size: 'sm' | 'md'
+}
+
+const DropdownRoot = ({ children, ...props }:DropdownRootProps) => {
+  return (
+    <DropdownProvider size={props.size}>
+      <DropdownMenuPrimitive.Root {...props}>
+        {children}
+      </DropdownMenuPrimitive.Root>
+    </DropdownProvider>
+  );
+};
+
+export const DropdownMenu = DropdownRoot;
 export const DropdownMenuTrigger = DropdownMenuPrimitive.Trigger;
 export const DropdownMenuContent = Content;
 export const DropdownMenuItem = StyledItem;
