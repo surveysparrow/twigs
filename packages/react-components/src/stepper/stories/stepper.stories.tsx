@@ -37,7 +37,7 @@ const Template = (args) => {
         </StepperItem>
         <StepperItem
           label="Confirm"
-          allowClick={true}
+          allowClick
         >
           {' '}
           Step 3
@@ -56,7 +56,6 @@ const Template = (args) => {
 };
 
 const App = () => {
-
   const [activeStep, setActiveStep] = React.useState(0);
 
   const nextStep = () => setActiveStep((current) => (current < 2 ? current + 1 : current));
@@ -70,16 +69,17 @@ const App = () => {
         components={{
           TriggerSeparator: () => <span> Next  </span>,
           TriggerContainer: ({ children }) => <div>{children}</div>,
-          TriggerButton: ({ index, children, active, completed }) => (
+          TriggerButton: ({
+            children
+          }) => (
             <div
-              onClick={() => console.log(index)}
               style={{
-                backgroundColor: 'red',
+                backgroundColor: 'red'
               }}
             >
               {children}
             </div>
-          ),
+          )
         }}
       >
         <StepperItem label="Step 1" allowClick>Steps 1</StepperItem>
@@ -97,7 +97,7 @@ const App = () => {
         </Button>
       </Flex>
     </>
-  )
-}
+  );
+};
 export const Default = Template.bind({});
 export const Custom = App.bind({});
