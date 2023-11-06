@@ -118,7 +118,7 @@ export const Radio: FunctionComponent<RadioProps> = React.forwardRef(
   ) => {
     const uniqueId = id || useId();
     return (
-      <Flex alignItems={"center"}>
+      <Flex alignItems="center">
         <StyledRadio
           ref={ref}
           disabled={disabled}

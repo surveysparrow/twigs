@@ -1,4 +1,6 @@
-import React, { FunctionComponent, ComponentProps, ReactNode, useId } from 'react';
+import React, {
+  FunctionComponent, ComponentProps, ReactNode, useId
+} from 'react';
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import { styled } from '../stitches.config';
 import { Flex } from '../flex';
@@ -134,7 +136,7 @@ export const Checkbox: FunctionComponent<CheckboxProps> = ({
   const isIndeterminate = checked === 'indeterminate';
   const uniqueId = id || useId();
   return (
-    <Flex alignItems={"center"}>
+    <Flex alignItems="center">
       <StyledCheckbox
         checked={checked}
         onCheckedChange={onChange}
