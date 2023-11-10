@@ -14,14 +14,14 @@ const ChevronRightIcon = () => {
 };
 
 type DropdownContextType = {
-  size?: 'md' | 'sm'
+  size: 'md' | 'sm'
 }
 
 const DropdownContext = createContext<DropdownContextType>({
   size: 'md' // Default Value
 });
 
-const DropdownProvider = ({ children, size }: { children: ReactNode, size?: 'md' | 'sm' }) => {
+const DropdownProvider = ({ children, size = 'md' }: { children: ReactNode, size?: 'md' | 'sm' }) => {
   return (
     <DropdownContext.Provider value={{ size }}>
       {children}
