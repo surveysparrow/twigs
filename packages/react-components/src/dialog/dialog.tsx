@@ -31,26 +31,48 @@ const StyledContent = styled(DialogPrimitive.Content, {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: '90vw',
-  maxWidth: '450px',
-  maxHeight: '85vh',
+  maxHeight: '80vh',
   padding: '$12',
   zIndex: 999,
   '@media (prefers-reduced-motion: no-preference)': {
     animation: `${contentShow} 150ms cubic-bezier(0.16, 1, 0.3, 1)`
   },
-  '&:focus': { outline: 'none' }
+  '&:focus': { outline: 'none' },
+  variants: {
+    size: {
+      xl: {
+        width: '1346px',
+        minHeight: '792px'
+      },
+      lg: {
+        width: '980px',
+        minHeight: '862px'
+      },
+      md: {
+        width: '600px',
+        minHeight: '580px'
+      },
+      sm: {
+        width: '464px',
+        minHeight: '240px'
+      }
+    }
+  },
+  defaultVariants: {
+    size: 'md'
+  }
 });
 
 type ContentProps = {
   children?: ReactElement | ReactElement[];
+  size?: 'sm' | 'md' | 'lg' | 'xl' ;
 } & ComponentProps<typeof StyledContent>
 
-const Content = ({ children, ...props }: ContentProps) => {
+const Content = ({ children, size = 'md', ...props }: ContentProps) => {
   return (
     <DialogPrimitive.Portal>
       <StyledOverlay />
-      <StyledContent {...props}>{children}</StyledContent>
+      <StyledContent size={size} {...props}>{children}</StyledContent>
     </DialogPrimitive.Portal>
   );
 };
