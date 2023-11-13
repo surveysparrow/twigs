@@ -3,7 +3,7 @@ import React, { forwardRef, FunctionComponent, useId } from 'react';
 import { styled } from '../stitches.config';
 import { Box, BoxProps } from '../box';
 import { Separator as DefaultSeparator } from './stepper-separator';
-import * as DefaultStepperTrigger from './stepper-trigger';
+import * as DefaultStep from './step';
 
 export type StepperProps = {
   activeStep: number,
@@ -11,9 +11,14 @@ export type StepperProps = {
   // eslint-disable-next-line no-unused-vars
   onChange?: (step: number) => void,
   components?: {
-    TriggerSeparator?: React.ComponentType
-    TriggerContainer?: React.ComponentType<{ children: React.ReactNode }>,
-    TriggerButton?: React.ComponentType<{ children: React.ReactNode, active?: boolean, completed?: boolean }>,
+    Separator?: React.ComponentType
+    Container?: React.ComponentType<{ children: React.ReactNode }>,
+    Step?: React.ComponentType<{
+      children: React.ReactNode,
+      active?: boolean,
+      completed?: boolean,
+      position: number
+    }>,
   }
 } & BoxProps;
 
@@ -51,9 +56,10 @@ const Stepper: FunctionComponent<StepperProps> = forwardRef(({
     throw new Error('Invalid active step');
   }
 
-  const Separator = components.TriggerSeparator || DefaultSeparator;
-  const TriggerContainer = components.TriggerContainer || DefaultStepperTrigger.StepperTriggerContainer;
-  const TriggerButton = components.TriggerButton || DefaultStepperTrigger.StepperTrigger;
+  const Separator = components.Separator || DefaultSeparator;
+  const TriggerContainer = components.Container || DefaultStep.Container;
+  const Step = components.Step || DefaultStep.Step;
+  const hasCustomStep = components.Step !== undefined;
 
   return (
     <StyledStepper ref={ref}>
@@ -66,8 +72,9 @@ const Stepper: FunctionComponent<StepperProps> = forwardRef(({
             const id = useId();
             return (
               <React.Fragment key={`stepper-control-${stepperId}-${id}`}>
-                <TriggerButton
+                <Step
                   tabIndex={allowClick ? 0 : -1}
+                  position={index}
                   active={index === activeStep}
                   completed={completed}
                   type="button"
@@ -77,22 +84,16 @@ const Stepper: FunctionComponent<StepperProps> = forwardRef(({
                   })}
                   {...rest}
                 >
-                  <DefaultStepperTrigger.StepperCount>
-                    {
-                      completed
-                        ? (
-                          <TickIcon
-                            size={14}
-                            color="#fff"
-                          />
-                        )
-                        : index + 1
-                    }
-                  </DefaultStepperTrigger.StepperCount>
-                  <>
-                    {label}
-                  </>
-                </TriggerButton>
+                  {
+                    !hasCustomStep && (
+                      <DefaultStep.StepperCount
+                        completed={completed}
+                        label={index + 1}
+                      />
+                    )
+                  }
+                  {label}
+                </Step>
                 {
                   showSeparator
                     ? <Separator />

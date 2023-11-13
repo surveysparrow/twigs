@@ -2,6 +2,7 @@ import React from 'react';
 import { Stepper, StepperItem } from '../stepper';
 import { Button } from '../../button';
 import { Flex } from '../../flex';
+import { Box } from '../../box';
 
 export default {
   component: Stepper,
@@ -23,7 +24,6 @@ const Template = (args) => {
       >
         <StepperItem
           label="Registration"
-          allowClick
         >
           {' '}
           Step 1
@@ -67,32 +67,48 @@ const App = () => {
         activeStep={activeStep}
         onChange={(index) => console.log(index)}
         components={{
-          TriggerSeparator: () => <span> Next  </span>,
-          TriggerContainer: ({ children }) => <div>{children}</div>,
-          TriggerButton: ({
-            children
+          Separator: () => <Box css={{
+            height: '$1',
+            backgroundColor: '$accent500',
+            width: '$10'
+          }} />,
+          Container: ({ children }) => <Flex gap={6} alignItems='center' css={{
+            backgroundColor: '$highlight100',
+            padding: '$4'
+          }}>{children}</Flex>,
+          Step: ({
+            children,
+            active,
+            completed,
+            position
           }) => (
-            <div
-              style={{
-                backgroundColor: 'red'
-              }}
+            <Button
+              color={active ? 'primary' : completed ? 'error' : 'default'}
+              onChange={() => setActiveStep(position)}
             >
               {children}
-            </div>
+            </Button>
           )
         }}
       >
-        <StepperItem label="Step 1" allowClick>Steps 1</StepperItem>
-        <StepperItem label="Step 2">Step 2</StepperItem>
+        <StepperItem label="Step 1" allowClick css={{
+          padding: '$4'
+        }}>Steps 1</StepperItem>
+        <StepperItem label="Step 2" css={{
+          padding: '$4'
+        }}>Step 2</StepperItem>
+        <StepperItem label="Step 3" css={{
+          padding: '$4'
+        }}>Step 3</StepperItem>
       </Stepper>
       <Flex
         alignItems="center"
         gap="$4"
       >
-        <Button onClick={prevStep}>
+        <Button onClick={prevStep} variant={'outline'}>
           Previous
         </Button>
-        <Button onClick={nextStep}>
+        <Button onClick={nextStep} variant={'outline'}>
           Next
         </Button>
       </Flex>
