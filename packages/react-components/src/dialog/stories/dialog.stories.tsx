@@ -5,7 +5,6 @@ import {
 import { Box } from '../../box';
 import { Button, IconButton } from '../../button';
 import { FormLabel } from '../../form-label';
-import { Flex } from '../../flex';
 import { Input } from '../../input';
 
 const CloseIcon = () => {
@@ -37,7 +36,14 @@ const CloseIcon = () => {
 
 export default {
   component: Dialog,
-  title: 'Overlay/Dialog'
+  title: 'Overlay/Dialog',
+  argTypes: {
+    size: {
+      control: 'select',
+      options: ['sm', 'md', 'lg', 'xl'],
+      defaultValue: 'md'
+    }
+  }
 };
 
 const Template = (args) => (
@@ -45,7 +51,7 @@ const Template = (args) => (
     <DialogTrigger asChild>
       <Button size="lg">Edit profile</Button>
     </DialogTrigger>
-    <DialogContent>
+    <DialogContent size="md" css={{ paddingBottom: '$20' }} {...args}>
       <DialogTitle>Edit profile</DialogTitle>
       <DialogDescription
         css={{ color: '$neutral600', fontSize: '$sm' }}
@@ -65,7 +71,7 @@ const Template = (args) => (
           }}
         />
       </Box>
-      <Box css={{ marginBottom: '$12' }}>
+      <Box css={{ marginBottom: '$25' }}>
         <FormLabel css={{ marginBottom: '$8' }}>
           Username
         </FormLabel>
@@ -78,13 +84,13 @@ const Template = (args) => (
           }}
         />
       </Box>
-      <Flex justifyContent="flex-end" css={{ justifyContent: 'flex-end' }}>
+      <Box css={{ position: 'absolute', bottom: '$12', right: '$12' }}>
         <DialogClose asChild>
           <Button size="lg" color="primary">
             Save changes
           </Button>
         </DialogClose>
-      </Flex>
+      </Box>
       <Box
         css={{ position: 'absolute', top: '10px', right: '10px' }}
       >
