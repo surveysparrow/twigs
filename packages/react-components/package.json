@@ -16,6 +16,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "build": "rimraf dist && rollup -c",
+    "dev": "rimraf dist && rollup -c rollup.config.dev.js --watch",
     "version": "echo $npm_package_version",
     "changelog": "auto-changelog -p && git add CHANGELOG.md",
     "changelog:commit": "git add CHANGELOG.md && git commit -am 'chore: add changelog' && git push"
