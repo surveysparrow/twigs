@@ -32,6 +32,7 @@ const StyledContent = styled(DialogPrimitive.Content, {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   maxHeight: '80vh',
+  maxWidth: '95vw',
   padding: '$12',
   zIndex: 999,
   '@media (prefers-reduced-motion: no-preference)': {
