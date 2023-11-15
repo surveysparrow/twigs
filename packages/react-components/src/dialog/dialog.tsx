@@ -14,8 +14,10 @@ const contentShow = keyframes({
   '100%': { opacity: 1, transform: 'translate(-50%, -50%) scale(1)' }
 });
 
+type SizeType = 'sm' | 'md' | 'lg' | 'xl' | 'full';
+
 type DialogContextType = {
-  size: 'sm' | 'md' | 'lg' | 'xl' | 'full'
+  size: SizeType;
 }
 
 const DialogContext = createContext<DialogContextType>({
@@ -93,18 +95,18 @@ type ContentProps = {
 } & ComponentProps<typeof StyledContent>
 
 const Content = ({ children }: ContentProps) => {
-  const size = useContext(DialogContext);
+  const dialogContext = useContext(DialogContext);
   return (
     <DialogPrimitive.Portal>
       <StyledOverlay />
-      <StyledContent {...size}>{children}</StyledContent>
+      <StyledContent {...dialogContext}>{children}</StyledContent>
     </DialogPrimitive.Portal>
   );
 };
 
 type DialogRootProps = {
   children : ReactNode,
-  size: 'sm' | 'md' | 'lg' | 'xl' | 'full'
+  size: SizeType;
 }
 
 const DialogRoot = ({ children, ...props }:DialogRootProps) => {

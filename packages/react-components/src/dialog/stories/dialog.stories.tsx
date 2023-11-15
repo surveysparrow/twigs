@@ -88,7 +88,7 @@ const Template = (args) => {
             }}
           />
         </Box>
-        <Box css={{ position: 'absolute', bottom: '$12', right: '$12' }}>
+        <Box css={{ position: 'absolute', bottom: '$8', right: '$12' }}>
           <DialogClose asChild>
             <Button size="lg" color="primary">
               Save changes
