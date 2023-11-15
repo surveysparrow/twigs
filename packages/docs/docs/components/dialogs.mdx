@@ -41,6 +41,20 @@ Add `Dialogs` to a top level component like `App` and you can call `openDialog` 
 | ------------- | --------------------------------------------------------- | ------ | ------- |
 | customDialogs | Custom dialogs that can be opened using `dialogs` methods | object | {}      |
 
+Example:
+
+```tsx
+<Dialogs
+  customDialogs={{
+    deleteModal: DeleteModal,
+  }}
+/>;
+
+const DeleteModal = ({ title, onDelete }) => {
+  return <Modal defaultOpen>{/* Content */}</Modal>;
+};
+```
+
 ### Methods
 
 #### dialogs.openDialog(dialogName, options)
@@ -68,3 +82,18 @@ Used to close a particular dialog
 #### dialogs.closeAllDialogs()
 
 Used to close all open dialogs
+
+### Typesafe options
+
+When creating custom dialogs, you can ensure type safety to `openDialog` and `pushDialog` by overriding the `DialogOptionsOverride` interface as shown below
+
+```tsx
+declare module "@sparrowengg/twigs-react" {
+  export interface DialogOptionsOverride {
+    deleteModal: {
+      title: string;
+      onDelete: () => void;
+    };
+  }
+}
+```
