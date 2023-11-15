@@ -1,6 +1,6 @@
-import React, { ReactElement, ComponentProps } from 'react';
+import { ComponentProps, ReactNode } from 'react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
-import { styled, keyframes } from '../stitches.config';
+import { keyframes, styled } from '../stitches.config';
 
 const overlayShow = keyframes({
   '0%': { opacity: 0 },
@@ -43,7 +43,7 @@ const StyledContent = styled(DialogPrimitive.Content, {
 });
 
 type ContentProps = {
-  children?: ReactElement | ReactElement[];
+  children?: ReactNode;
 } & ComponentProps<typeof StyledContent>
 
 const Content = ({ children, ...props }: ContentProps) => {
