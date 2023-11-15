@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useState } from 'react';
 import { DefaultAlertDialog, DefaultAlertDialogProps } from './default-alert';
-import { DefaultInfo, DefaultInfoDialogProps } from './default-info';
+import { DefaultModal, DefaultInfoDialogProps } from './default-modal';
 import { store } from './store';
 import {
   DefaultConfirmDialog,
@@ -10,12 +10,12 @@ import {
 const defaultDialogs = {
   confirm: DefaultConfirmDialog,
   alert: DefaultAlertDialog,
-  info: DefaultInfo
+  modal: DefaultModal
 };
 
 export type DefaultDialogOptions = {
   alert: DefaultAlertDialogProps;
-  info: DefaultInfoDialogProps;
+  modal: DefaultInfoDialogProps;
   confirm: DefaultConfirmDialogProps;
 };
 
@@ -52,7 +52,7 @@ export const Dialogs = ({
             key={dia.name}
             onClose={() => {
               store.publish(
-                store.data.filter((item) => item.__modalId !== dia.__modalId)
+                store.data.filter((item) => item.__dialogId !== dia.__dialogId)
               );
 
               dia?.options?.onClose?.();
@@ -72,38 +72,42 @@ function openDialog<T extends AllDialogNames>(
   name: T,
   options: AllDialogOptions[T] extends undefined ? any : AllDialogOptions[T]
 ) {
-  const modalId = store.getModalId();
+  const dialogId = store.getDialogId();
   store.publish([
     {
       name,
       options,
-      __modalId: modalId
+      __dialogId: dialogId
     }
   ]);
 
-  return modalId;
+  const close = () => closeDialog(dialogId);
+
+  return { close, dialogId };
 }
 
 function pushDialog<T extends AllDialogNames>(
   name: T,
   options: AllDialogOptions[T] extends undefined ? any : AllDialogOptions[T]
 ) {
-  const modalId = store.getModalId();
+  const dialogId = store.getDialogId();
   store.publish([
     ...store.data,
     {
       name,
       options,
-      __modalId: modalId
+      __dialogId: dialogId
     }
   ]);
 
-  return modalId;
+  const close = () => closeDialog(dialogId);
+
+  return { close, dialogId };
 }
 
-function closeDialog(modalId: number) {
-  if (modalId) {
-    store.publish(store.data.filter((item) => item.__modalId !== modalId));
+function closeDialog(dialogId: number) {
+  if (dialogId) {
+    store.publish(store.data.filter((item) => item.__dialogId !== dialogId));
   } else {
     store.publish([...store.data].slice(0, -1));
   }
