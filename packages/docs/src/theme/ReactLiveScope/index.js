@@ -1,5 +1,6 @@
 import React from 'react';
 import { twigsComponentLoader, twigsIconLoader } from './twigs-loader';
+import { dialogs, Dialogs } from '@sparrowengg/twigs-react';
 
 const ReactLiveScope = {
   React,
@@ -67,6 +68,8 @@ const ReactLiveScope = {
   DrawerFooter: twigsComponentLoader("DrawerFooter"),
   DrawerBody: twigsComponentLoader("DrawerBody"),
   Box: twigsComponentLoader("Box"),
+  dialogs,
+  Dialogs,
   Dialog: twigsComponentLoader("Dialog"),
   DialogTitle: twigsComponentLoader("DialogTitle"),
   DialogDescription: twigsComponentLoader("DialogDescription"),
