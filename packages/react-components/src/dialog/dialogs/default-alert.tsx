@@ -7,25 +7,27 @@ import {
   AlertDialogDescription,
   AlertDialogTitle
 } from '../../alert-dialog';
-import { Button } from '../../button';
+import { Button, ButtonProps } from '../../button';
 
 export type DefaultAlertDialogProps = {
   title: ReactNode;
-  children: ReactNode;
+  content: ReactNode;
   labels?: {
-    confirm?: ReactNode;
+    action?: ReactNode;
   };
-  onConfirm?: () => void;
+  actionButtonProps?: ButtonProps;
+  onAction?: () => void;
   onClose?: () => void;
 };
 
 export const DefaultAlertDialog = ({
   title,
-  children,
+  content,
   labels = {
-    confirm: 'Close'
+    action: 'Close'
   },
-  onConfirm,
+  actionButtonProps,
+  onAction,
   onClose
 }: DefaultAlertDialogProps) => {
   return (
@@ -39,14 +41,24 @@ export const DefaultAlertDialog = ({
     >
       <AlertDialogContent>
         <AlertDialogTitle>{title}</AlertDialogTitle>
-        <AlertDialogDescription>{children}</AlertDialogDescription>
-        <AlertDialogActions>
+        <AlertDialogDescription>{content}</AlertDialogDescription>
+        <AlertDialogActions
+          css={{
+            display: 'flex',
+            justifyContent: 'flex-end'
+          }}
+        >
           <AlertDialogAction asChild>
-            {isValidElement(labels.confirm) ? (
-              labels.confirm
+            {isValidElement(labels.action) ? (
+              labels.action
             ) : (
-              <Button color="default" size="lg" onClick={onConfirm}>
-                {labels.confirm}
+              <Button
+                color="default"
+                size="lg"
+                onClick={onAction}
+                {...actionButtonProps}
+              >
+                {labels.action}
               </Button>
             )}
           </AlertDialogAction>

@@ -8,15 +8,17 @@ import {
   AlertDialogDescription,
   AlertDialogTitle
 } from '../../alert-dialog';
-import { Button } from '../../button';
+import { Button, ButtonProps } from '../../button';
 
 export type DefaultConfirmDialogProps = {
   title: ReactNode;
-  children: ReactNode;
+  content: ReactNode;
   labels?: {
     confirm?: ReactNode;
     cancel?: ReactNode;
   };
+  confirmButtonProps?: ButtonProps;
+  cancelButtonProps?: ButtonProps;
   onConfirm?: () => void;
   onCancel?: () => void;
   onClose?: () => void;
@@ -24,11 +26,13 @@ export type DefaultConfirmDialogProps = {
 
 export const DefaultConfirmDialog = ({
   title,
-  children,
+  content,
   labels = {
     confirm: 'Confirm',
     cancel: 'Cancel'
   },
+  confirmButtonProps,
+  cancelButtonProps,
   onConfirm,
   onCancel,
   onClose
@@ -44,14 +48,19 @@ export const DefaultConfirmDialog = ({
     >
       <AlertDialogContent>
         <AlertDialogTitle>{title}</AlertDialogTitle>
-        <AlertDialogDescription>{children}</AlertDialogDescription>
+        <AlertDialogDescription>{content}</AlertDialogDescription>
         <AlertDialogActions>
           {labels.cancel && (
             <AlertDialogCancel asChild>
               {isValidElement(labels.cancel) ? (
                 labels.cancel
               ) : (
-                <Button color="default" size="lg" onClick={onCancel}>
+                <Button
+                  color="default"
+                  size="lg"
+                  onClick={onCancel}
+                  {...cancelButtonProps}
+                >
                   {labels.cancel}
                 </Button>
               )}
@@ -62,7 +71,12 @@ export const DefaultConfirmDialog = ({
               {isValidElement(labels.confirm) ? (
                 labels.confirm
               ) : (
-                <Button color="default" size="lg" onClick={onConfirm}>
+                <Button
+                  color="default"
+                  size="lg"
+                  onClick={onConfirm}
+                  {...confirmButtonProps}
+                >
                   {labels.confirm}
                 </Button>
               )}
