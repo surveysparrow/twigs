@@ -1,7 +1,7 @@
 interface Data {
   name: string;
   options: any;
-  __modalId: number;
+  __dialogId: number;
 }
 
 export class ModalStore {
@@ -11,13 +11,13 @@ export class ModalStore {
 
   private subscribers: Record<number, Function>;
 
-  private modalId: number;
+  private dialogId: number;
 
   constructor() {
     this.data = [];
     this.subId = 1;
     this.subscribers = {};
-    this.modalId = 0;
+    this.dialogId = 0;
   }
 
   subscribe = (fn: (state: Data[]) => void) => {
@@ -37,9 +37,9 @@ export class ModalStore {
     });
   };
 
-  getModalId() {
-    this.modalId += 1;
-    return this.modalId;
+  getDialogId() {
+    this.dialogId += 1;
+    return this.dialogId;
   }
 }
 
