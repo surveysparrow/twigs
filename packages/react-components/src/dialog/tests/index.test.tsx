@@ -43,11 +43,11 @@ const CloseIcon = () => {
 describe('Dialog', () => {
   it('renders without crashing', () => {
     render(
-      <Dialog>
+      <Dialog size="full">
         <DialogTrigger asChild>
           <Button size="lg">Terms</Button>
         </DialogTrigger>
-        <DialogContent size="sm">
+        <DialogContent>
           <DialogTitle>Agree Terms</DialogTitle>
           <DialogDescription>
             Please read all the terms and conditions given in this modal.

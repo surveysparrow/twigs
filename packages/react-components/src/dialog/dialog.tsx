@@ -1,4 +1,6 @@
-import React, { ReactElement, ComponentProps } from 'react';
+import React, {
+  ReactElement, ComponentProps, useContext, createContext, ReactNode
+} from 'react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { styled, keyframes } from '../stitches.config';
 
@@ -12,6 +14,21 @@ const contentShow = keyframes({
   '100%': { opacity: 1, transform: 'translate(-50%, -50%) scale(1)' }
 });
 
+type DialogContextType = {
+  size: 'sm' | 'md' | 'lg' | 'xl' | 'full'
+}
+
+const DialogContext = createContext<DialogContextType>({
+  size: 'md' // setting default Variant as 'md'
+});
+
+const DialogProvider = ({ children, size }: { children: ReactNode, size: 'sm' | 'md' | 'lg' | 'xl' | 'full' }) => {
+  return (
+    <DialogContext.Provider value={{ size }}>
+      {children}
+    </DialogContext.Provider>
+  );
+};
 const StyledOverlay = styled(DialogPrimitive.Overlay, {
   backgroundColor: '$black700',
   position: 'fixed',
@@ -41,6 +58,13 @@ const StyledContent = styled(DialogPrimitive.Content, {
   '&:focus': { outline: 'none' },
   variants: {
     size: {
+      full: {
+        width: '100vw',
+        height: '100vh',
+        // overriding default maxHeight and maxWidth
+        maxHeight: '100vh',
+        maxWidth: '100vw'
+      },
       xl: {
         width: '1346px',
         minHeight: '792px'
@@ -66,15 +90,30 @@ const StyledContent = styled(DialogPrimitive.Content, {
 
 type ContentProps = {
   children?: ReactElement | ReactElement[];
-  size?: 'sm' | 'md' | 'lg' | 'xl' ;
 } & ComponentProps<typeof StyledContent>
 
-const Content = ({ children, size = 'md', ...props }: ContentProps) => {
+const Content = ({ children }: ContentProps) => {
+  const size = useContext(DialogContext);
   return (
     <DialogPrimitive.Portal>
       <StyledOverlay />
-      <StyledContent size={size} {...props}>{children}</StyledContent>
+      <StyledContent {...size}>{children}</StyledContent>
     </DialogPrimitive.Portal>
+  );
+};
+
+type DialogRootProps = {
+  children : ReactNode,
+  size: 'sm' | 'md' | 'lg' | 'xl' | 'full'
+}
+
+const DialogRoot = ({ children, ...props }:DialogRootProps) => {
+  return (
+    <DialogProvider size={props.size}>
+      <DialogPrimitive.Root {...props}>
+        {children}
+      </DialogPrimitive.Root>
+    </DialogProvider>
   );
 };
 
@@ -90,7 +129,7 @@ const StyledDescription = styled(DialogPrimitive.Description, {
 });
 
 // Exports
-export const Dialog = DialogPrimitive.Root;
+export const Dialog = DialogRoot;
 export const DialogTrigger = DialogPrimitive.Trigger;
 export const DialogContent = Content;
 export const DialogTitle = StyledTitle;

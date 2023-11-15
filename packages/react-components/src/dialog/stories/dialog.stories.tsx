@@ -40,69 +40,74 @@ export default {
   argTypes: {
     size: {
       control: 'select',
-      options: ['sm', 'md', 'lg', 'xl'],
-      defaultValue: 'md'
+      options: ['sm', 'md', 'lg', 'xl', 'full']
     }
+  },
+  args: {
+    size: 'md'
   }
 };
 
-const Template = (args) => (
-  <Dialog {...args}>
-    <DialogTrigger asChild>
-      <Button size="lg">Edit profile</Button>
-    </DialogTrigger>
-    <DialogContent size="md" css={{ paddingBottom: '$20' }} {...args}>
-      <DialogTitle>Edit profile</DialogTitle>
-      <DialogDescription
-        css={{ color: '$neutral600', fontSize: '$sm' }}
-      >
-        Make changes to your profile here. Click save when done.
-      </DialogDescription>
-      <Box css={{ marginBottom: '$12' }}>
-        <FormLabel css={{ marginBottom: '$8' }}>
-          Name
-        </FormLabel>
-        <Input
-          size="md"
-          id="name"
-          defaultValue="Pedro Duarte"
-          css={{
-            boxSizing: 'border-box'
-          }}
-        />
-      </Box>
-      <Box css={{ marginBottom: '$25' }}>
-        <FormLabel css={{ marginBottom: '$8' }}>
-          Username
-        </FormLabel>
-        <Input
-          size="md"
-          id="username"
-          defaultValue="@peduarte"
-          css={{
-            boxSizing: 'border-box'
-          }}
-        />
-      </Box>
-      <Box css={{ position: 'absolute', bottom: '$12', right: '$12' }}>
-        <DialogClose asChild>
-          <Button size="lg" color="primary">
-            Save changes
-          </Button>
-        </DialogClose>
-      </Box>
-      <Box
-        css={{ position: 'absolute', top: '10px', right: '10px' }}
-      >
-        <DialogClose asChild>
-          <IconButton
-            icon={<CloseIcon />}
-            aria-label="Close"
-            color="default"
+const Template = (args) => {
+  const size = args?.size;
+  return (
+    <Dialog {...args} size={size}>
+      <DialogTrigger asChild>
+        <Button size="lg">Edit profile</Button>
+      </DialogTrigger>
+      <DialogContent css={{ paddingBottom: '$20' }} {...args}>
+        <DialogTitle>Edit profile</DialogTitle>
+        <DialogDescription
+          css={{ color: '$neutral600', fontSize: '$sm' }}
+        >
+          Make changes to your profile here. Click save when done.
+        </DialogDescription>
+        <Box css={{ marginBottom: '$12' }}>
+          <FormLabel css={{ marginBottom: '$8' }}>
+            Name
+          </FormLabel>
+          <Input
+            size="md"
+            id="name"
+            defaultValue="Pedro Duarte"
+            css={{
+              boxSizing: 'border-box'
+            }}
           />
-        </DialogClose>
-      </Box>
-    </DialogContent>
-  </Dialog>
-);
+        </Box>
+        <Box css={{ marginBottom: '$25' }}>
+          <FormLabel css={{ marginBottom: '$8' }}>
+            Username
+          </FormLabel>
+          <Input
+            size="md"
+            id="username"
+            defaultValue="@peduarte"
+            css={{
+              boxSizing: 'border-box'
+            }}
+          />
+        </Box>
+        <Box css={{ position: 'absolute', bottom: '$12', right: '$12' }}>
+          <DialogClose asChild>
+            <Button size="lg" color="primary">
+              Save changes
+            </Button>
+          </DialogClose>
+        </Box>
+        <Box
+          css={{ position: 'absolute', top: '10px', right: '10px' }}
+        >
+          <DialogClose asChild>
+            <IconButton
+              icon={<CloseIcon />}
+              aria-label="Close"
+              color="default"
+            />
+          </DialogClose>
+        </Box>
+      </DialogContent>
+    </Dialog>
+  );
+};
 export const Default = Template.bind({});
