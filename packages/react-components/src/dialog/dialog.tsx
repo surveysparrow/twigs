@@ -24,7 +24,7 @@ const DialogContext = createContext<DialogContextType>({
   size: 'md' // setting default Variant as 'md'
 });
 
-const DialogProvider = ({ children, size }: { children: ReactNode, size: 'sm' | 'md' | 'lg' | 'xl' | 'full' }) => {
+const DialogProvider = ({ children, size }: { children: ReactNode, size: SizeType }) => {
   return (
     <DialogContext.Provider value={{ size }}>
       {children}
