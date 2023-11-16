@@ -25,10 +25,17 @@ export class ModalStore {
     this.subscribers[subId] = fn;
     this.subId += 1;
 
-    return async () => {
-      delete this.subscribers[subId];
+    return {
+      id: subId,
+      unsubscribe: async () => {
+        delete this.subscribers[subId];
+      }
     };
   };
+
+  getLastSubscriber() {
+    return Object.keys(this.subscribers).at(-1);
+  }
 
   publish = (data: Data[]) => {
     this.data = data;
