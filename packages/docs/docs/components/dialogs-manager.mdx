@@ -1,22 +1,20 @@
-import { Dialogs } from "@sparrowengg/twigs-react";
-
-# Dialogs
+# DialogsManager
 
 ### Import
 
 ```jsx
-import { Dialogs, dialogs } from "@sparrowengg/twigs-react";
+import { DialogsManager, dialogs } from "@sparrowengg/twigs-react";
 ```
 
 ### Usage
 
-Add `Dialogs` to a top level component like `App` and you can call `openDialog` or `pushDialog` to open new dialogs.
+Add `DialogsManager` to a top level component like `App` and you can call `dialogs.open` or `dialogs.push` to open new dialogs.
 
 ```jsx live
 <div>
   <Button
     onClick={() => {
-      dialogs.openDialog("confirm", {
+      dialogs.open("confirm", {
         title: "Are you sure you want to perform this action",
         content: "You can perform this action again.",
         labels: {
@@ -31,20 +29,20 @@ Add `Dialogs` to a top level component like `App` and you can call `openDialog` 
   >
     Open Dialog
   </Button>
-  <Dialogs />
+  <DialogsManager />
 </div>
 ```
 
 ### Props
 
-| Property      | Description                                               | Type   | Default |
-| ------------- | --------------------------------------------------------- | ------ | ------- |
-| customDialogs | Custom dialogs that can be opened using `dialogs` methods | object | {}      |
+| Property      | Description                                               | Type                        | Default |
+| ------------- | --------------------------------------------------------- | --------------------------- | ------- |
+| customDialogs | Custom dialogs that can be opened using `dialogs` methods | `Record<string, ReactNode>` | {}      |
 
 Example:
 
 ```tsx
-<Dialogs
+<DialogsManager
   customDialogs={{
     deleteModal: DeleteModal,
   }}
@@ -57,7 +55,7 @@ const DeleteModal = ({ title, onDelete }) => {
 
 ### Methods
 
-#### dialogs.openDialog(dialogName, options)
+#### dialogs.open(dialogName, options)
 
 | Parameter  | Description                                                                                                                                                                                                        | Type   | Default |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------ | ------- |
@@ -66,26 +64,26 @@ const DeleteModal = ({ title, onDelete }) => {
 
 Returns object with two properties
 
-| Name     | Type     | Description                                                 |
-| -------- | -------- | ----------------------------------------------------------- |
-| close    | Function | Can be called to close the dialog manually                  |
-| dialogId | number   | Can be used to close the dialog using `dialogs.closeDialog` |
+| Name     | Type     | Description                                           |
+| -------- | -------- | ----------------------------------------------------- |
+| close    | Function | Can be called to close the dialog manually            |
+| dialogId | number   | Can be used to close the dialog using `dialogs.close` |
 
-#### dialogs.pushDialog(dialogName, options)
+#### dialogs.push(dialogName, options)
 
-The parameters and return types are same as that of openDialog, the only difference is that `pushDialog` doesn't close existing modals
+The parameters and return types are same as that of `dialogs.open`, the only difference is that `push` doesn't close existing modals
 
-#### dialogs.closeDialog(dialogId)
+#### dialogs.close(dialogId)
 
 Used to close a particular dialog
 
-#### dialogs.closeAllDialogs()
+#### dialogs.closeAll()
 
 Used to close all open dialogs
 
 ### Typesafe options
 
-When creating custom dialogs, you can ensure type safety to `openDialog` and `pushDialog` by overriding the `DialogOptionsOverride` interface as shown below
+When creating custom dialogs, you can ensure type safety to `dialogs.open` and `dialogs.push` by overriding the `DialogOptionsOverride` interface as shown below
 
 ```tsx
 declare module "@sparrowengg/twigs-react" {

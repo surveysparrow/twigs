@@ -1,15 +1,15 @@
 import { Button } from '../../button';
-import { Dialogs, dialogs } from '../dialogs';
+import { DialogsManager, dialogs } from '../dialogs-manager';
 
 export default {
-  component: Dialogs,
-  title: 'Overlay/Dialogs'
+  component: DialogsManager,
+  title: 'Overlay/DialogsManager'
 };
 
 const Template = (args) => {
   return (
     <div>
-      <Dialogs />
+      <DialogsManager />
       <Button onClick={args.handleClick}>Open Dialog</Button>
     </div>
   );
@@ -18,7 +18,7 @@ const Template = (args) => {
 export const Default = () => (
   <Template
     handleClick={() => {
-      dialogs.openDialog('confirm', {
+      dialogs.open('confirm', {
         title: 'Are you sure you want to perform this action',
         content: 'You can perform this action again.',
         labels: {
@@ -35,7 +35,7 @@ export const Default = () => (
 
 export const AlertDialog = () => (
   <Template
-    handleClick={() => dialogs.openDialog('alert', {
+    handleClick={() => dialogs.open('alert', {
       title: 'You just performed an action',
       content: 'You can perform this action again.',
       labels: {
@@ -51,7 +51,7 @@ export const AlertDialog = () => (
 export const GeneralDialog = () => (
   <Template
     handleClick={() => {
-      dialogs.openDialog('modal', {
+      dialogs.open('modal', {
         title: 'Title',
         content: 'Description',
         buttonLabel: 'Button'

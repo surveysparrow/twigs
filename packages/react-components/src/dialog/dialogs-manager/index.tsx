@@ -21,7 +21,7 @@ export type DefaultDialogOptions = {
 
 export interface DialogOptionsOverride {}
 
-export const Dialogs = ({
+export const DialogsManager = ({
   customDialogs
 }: {
   customDialogs?: Record<
@@ -120,8 +120,8 @@ function closeAllDialogs() {
 }
 
 export const dialogs = {
-  openDialog,
-  pushDialog,
-  closeDialog,
-  closeAllDialogs
+  open: openDialog,
+  push: pushDialog,
+  close: closeDialog,
+  closeAll: closeAllDialogs
 };

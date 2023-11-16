@@ -1,2 +1,2 @@
 export * from './dialog';
-export * from './dialogs';
+export * from './dialogs-manager';
