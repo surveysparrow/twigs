@@ -32,11 +32,13 @@ export const Dialogs = ({
   const [data, setData] = useState(store.data);
 
   useEffect(() => {
-    const unsub = store.subscribe((state) => {
-      setData([...state]);
+    const { unsubscribe, id } = store.subscribe((state) => {
+      if (`${id}` === store.getLastSubscriber()) {
+        setData([...state]);
+      }
     });
     return () => {
-      unsub();
+      unsubscribe();
     };
   }, []);
 
