@@ -14,7 +14,9 @@ export type DefaultInfoDialogProps = {
   content?: ReactNode;
   footer?: ReactNode;
   children?: ReactNode;
-  buttonLabel?: string;
+  labels?: {
+    action?: string;
+  };
   onAction?: () => void;
   onClose?: () => void;
 };
@@ -24,7 +26,9 @@ export const DefaultModal = ({
   content,
   footer,
   children,
-  buttonLabel,
+  labels = {
+    action: 'Close'
+  },
   onClose,
   onAction
 }: DefaultInfoDialogProps) => {
@@ -55,7 +59,7 @@ export const DefaultModal = ({
               >
                 <DialogClose asChild>
                   <Button size="lg" color="default" onClick={onAction}>
-                    {buttonLabel}
+                    {labels?.action}
                   </Button>
                 </DialogClose>
               </Flex>

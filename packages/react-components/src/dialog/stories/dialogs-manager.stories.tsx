@@ -54,7 +54,9 @@ export const GeneralDialog = () => (
       dialogs.open('modal', {
         title: 'Title',
         content: 'Description',
-        buttonLabel: 'Button'
+        labels: {
+          action: 'Button'
+        }
       });
     }}
   />
