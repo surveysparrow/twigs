@@ -15,6 +15,7 @@ const ReactLiveScope = {
   FormLabel: twigsComponentLoader("FormLabel"),
   RadioGroup: twigsComponentLoader("RadioGroup"),
   Switch: twigsComponentLoader("Switch"),
+  Slider: twigsComponentLoader("Slider"),
   FormHelperText: twigsComponentLoader("FormHelperText"),
   Text: twigsComponentLoader("Text"),
   Heading: twigsComponentLoader("Heading"),
