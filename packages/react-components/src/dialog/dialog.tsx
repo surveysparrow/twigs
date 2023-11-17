@@ -21,7 +21,7 @@ type DialogContextType = {
 }
 
 const DialogContext = createContext<DialogContextType>({
-  size: 'md' // setting default Variant as 'md'
+  size: 'md'
 });
 
 const DialogProvider = ({ children, size }: { children: ReactNode, size: SizeType }) => {
@@ -68,20 +68,16 @@ const StyledContent = styled(DialogPrimitive.Content, {
         maxWidth: '100vw'
       },
       xl: {
-        width: '1346px',
-        minHeight: '792px'
+        width: '1346px'
       },
       lg: {
-        width: '980px',
-        minHeight: '862px'
+        width: '980px'
       },
       md: {
-        width: '600px',
-        minHeight: '580px'
+        width: '600px'
       },
       sm: {
-        width: '464px',
-        minHeight: '240px'
+        width: '464px'
       }
     }
   },
@@ -106,12 +102,12 @@ const Content = ({ children }: ContentProps) => {
 
 type DialogRootProps = {
   children : ReactNode,
-  size: SizeType;
+  size?: SizeType;
 }
 
-const DialogRoot = ({ children, ...props }:DialogRootProps) => {
+const DialogRoot = ({ children, size, ...props }:DialogRootProps) => {
   return (
-    <DialogProvider size={props.size}>
+    <DialogProvider size={size || 'md'}>
       <DialogPrimitive.Root {...props}>
         {children}
       </DialogPrimitive.Root>
