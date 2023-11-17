@@ -1,7 +1,7 @@
 import React, { forwardRef, FunctionComponent, useId } from 'react';
 import { styled } from '../stitches.config';
 import { Box, BoxProps } from '../box';
-import { Separator as DefaultSeparator } from './stepper-separator';
+import { Separator as DefaultSeparator } from './separator';
 import * as DefaultStep from './step';
 
 export type StepperProps = {

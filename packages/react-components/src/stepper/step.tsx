@@ -1,3 +1,4 @@
+import React from 'react';
 import { TickIcon } from '@sparrowengg/twigs-react-icons';
 import { styled } from '../stitches.config';
 import { Flex } from '../flex';
