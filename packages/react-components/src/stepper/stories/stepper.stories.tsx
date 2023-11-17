@@ -65,7 +65,6 @@ const App = () => {
     <>
       <Stepper
         activeStep={activeStep}
-        onChange={(index) => console.log(index)}
         components={{
           Separator: () => (
             <Box
