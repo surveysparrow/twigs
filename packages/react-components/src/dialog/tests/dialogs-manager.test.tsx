@@ -4,7 +4,7 @@ import '@testing-library/jest-dom';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import { DialogsManager, dialogs } from '../dialogs-manager';
 
-describe('Checkbox', () => {
+describe('Dialogs Manager', () => {
   it('renders without crashing', () => {
     render(
       <DialogsManager
