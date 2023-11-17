@@ -67,15 +67,27 @@ const App = () => {
         activeStep={activeStep}
         onChange={(index) => console.log(index)}
         components={{
-          Separator: () => <Box css={{
-            height: '$1',
-            backgroundColor: '$accent500',
-            width: '$10'
-          }} />,
-          Container: ({ children }) => <Flex gap={6} alignItems='center' css={{
-            backgroundColor: '$highlight100',
-            padding: '$4'
-          }}>{children}</Flex>,
+          Separator: () => (
+            <Box
+              css={{
+                height: '$1',
+                backgroundColor: '$accent500',
+                width: '$10'
+              }}
+            />
+          ),
+          Container: ({ children }) => (
+            <Flex
+              gap={6}
+              alignItems="center"
+              css={{
+                backgroundColor: '$highlight100',
+                padding: '$4'
+              }}
+            >
+              {children}
+            </Flex>
+          ),
           Step: ({
             children,
             active,
@@ -83,6 +95,7 @@ const App = () => {
             position
           }) => (
             <Button
+              // eslint-disable-next-line no-nested-ternary
               color={active ? 'primary' : completed ? 'error' : 'default'}
               onChange={() => setActiveStep(position)}
             >
@@ -91,24 +104,40 @@ const App = () => {
           )
         }}
       >
-        <StepperItem label="Step 1" allowClick css={{
-          padding: '$4'
-        }}>Steps 1</StepperItem>
-        <StepperItem label="Step 2" css={{
-          padding: '$4'
-        }}>Step 2</StepperItem>
-        <StepperItem label="Step 3" css={{
-          padding: '$4'
-        }}>Step 3</StepperItem>
+        <StepperItem
+          label="Step 1"
+          allowClick
+          css={{
+            padding: '$4'
+          }}
+        >
+          Steps 1
+        </StepperItem>
+        <StepperItem
+          label="Step 2"
+          css={{
+            padding: '$4'
+          }}
+        >
+          Step 2
+        </StepperItem>
+        <StepperItem
+          label="Step 3"
+          css={{
+            padding: '$4'
+          }}
+        >
+          Step 3
+        </StepperItem>
       </Stepper>
       <Flex
         alignItems="center"
         gap="$4"
       >
-        <Button onClick={prevStep} variant={'outline'}>
+        <Button onClick={prevStep} variant="outline">
           Previous
         </Button>
-        <Button onClick={nextStep} variant={'outline'}>
+        <Button onClick={nextStep} variant="outline">
           Next
         </Button>
       </Flex>

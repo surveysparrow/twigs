@@ -1,7 +1,7 @@
+import { TickIcon } from '@sparrowengg/twigs-react-icons';
 import { styled } from '../stitches.config';
 import { Flex } from '../flex';
 import { Text } from '../text';
-import { TickIcon } from '@sparrowengg/twigs-react-icons';
 
 const StyledContainer = styled(Flex, {
   gap: '$4',
@@ -93,7 +93,7 @@ const StepperCount = ({ completed, label }: StepperCountProps) => {
       }
     </StyledCounter>
   );
-}
+};
 
 export const Step = StyledStep;
 export const Container = StyledContainer;
