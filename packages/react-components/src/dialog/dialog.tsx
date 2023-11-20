@@ -15,18 +15,21 @@ const contentShow = keyframes({
 });
 
 type SizeType = 'sm' | 'md' | 'lg' | 'xl' | 'full';
+type ScrollType = 'auto' | 'scroll' | 'hidden'
 
 type DialogContextType = {
   size: SizeType;
+  scrollBehavior: ScrollType;
 }
 
 const DialogContext = createContext<DialogContextType>({
-  size: 'md'
+  size: 'md',
+  scrollBehavior: 'auto'
 });
 
-const DialogProvider = ({ children, size }: { children: ReactNode, size: SizeType }) => {
+const DialogProvider = ({ children, size, scrollBehavior }: { children: ReactNode, size: SizeType, scrollBehavior: ScrollType }) => {
   return (
-    <DialogContext.Provider value={{ size }}>
+    <DialogContext.Provider value={{ size, scrollBehavior }}>
       {children}
     </DialogContext.Provider>
   );
@@ -79,10 +82,22 @@ const StyledContent = styled(DialogPrimitive.Content, {
       sm: {
         width: '464px'
       }
+    },
+    scrollBehavior: {
+      auto: {
+        overflowY: 'auto'
+      },
+      scroll: {
+        overflowY: 'scroll'
+      },
+      hidden: {
+        overflowY: 'hidden'
+      }
     }
   },
   defaultVariants: {
-    size: 'md'
+    size: 'md',
+    scrollBehavior: 'auto'
   }
 });
 
@@ -90,12 +105,12 @@ type ContentProps = {
   children?: ReactElement | ReactElement[];
 } & ComponentProps<typeof StyledContent>
 
-const Content = ({ children }: ContentProps) => {
+const Content = ({ children, ...props }: ContentProps) => {
   const dialogContext = useContext(DialogContext);
   return (
     <DialogPrimitive.Portal>
       <StyledOverlay />
-      <StyledContent {...dialogContext}>{children}</StyledContent>
+      <StyledContent {...dialogContext} {...props}>{children}</StyledContent>
     </DialogPrimitive.Portal>
   );
 };
@@ -103,11 +118,14 @@ const Content = ({ children }: ContentProps) => {
 type DialogRootProps = {
   children : ReactNode,
   size?: SizeType;
+  scrollBehavior? : ScrollType;
 }
 
-const DialogRoot = ({ children, size, ...props }:DialogRootProps) => {
+const DialogRoot = ({
+  children, size, scrollBehavior, ...props
+}:DialogRootProps) => {
   return (
-    <DialogProvider size={size || 'md'}>
+    <DialogProvider scrollBehavior={scrollBehavior || 'auto'} size={size || 'md'}>
       <DialogPrimitive.Root {...props}>
         {children}
       </DialogPrimitive.Root>

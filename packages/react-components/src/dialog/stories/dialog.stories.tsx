@@ -6,6 +6,7 @@ import { Box } from '../../box';
 import { Button, IconButton } from '../../button';
 import { FormLabel } from '../../form-label';
 import { Input } from '../../input';
+import { Flex } from '../../flex';
 
 const CloseIcon = () => {
   return (
@@ -41,17 +42,23 @@ export default {
     size: {
       control: 'select',
       options: ['sm', 'md', 'lg', 'xl', 'full']
+    },
+    scrollBehavior: {
+      control: 'select',
+      options: ['auto', 'scroll', 'hidden']
     }
   },
   args: {
-    size: 'md'
+    size: 'md',
+    scrollBehavior: 'auto'
   }
 };
 
 const Template = (args) => {
   const size = args?.size;
+  const scrollBehavior = args?.scrollBehavior;
   return (
-    <Dialog {...args} size={size}>
+    <Dialog {...args} scrollBehavior={scrollBehavior} size={size}>
       <DialogTrigger asChild>
         <Button size="lg">Edit profile</Button>
       </DialogTrigger>
@@ -83,18 +90,15 @@ const Template = (args) => {
             size="md"
             id="username"
             defaultValue="@peduarte"
-            css={{
-              boxSizing: 'border-box'
-            }}
           />
         </Box>
-        <Box css={{ position: 'absolute', bottom: '$8', right: '$12' }}>
+        <Flex justifyContent="flex-end" css={{ justifyContent: 'flex-end' }}>
           <DialogClose asChild>
             <Button size="lg" color="primary">
               Save changes
             </Button>
           </DialogClose>
-        </Box>
+        </Flex>
         <Box
           css={{ position: 'absolute', top: '10px', right: '10px' }}
         >
