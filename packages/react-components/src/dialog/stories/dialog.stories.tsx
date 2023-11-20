@@ -77,9 +77,6 @@ const Template = (args) => {
             size="md"
             id="name"
             defaultValue="Pedro Duarte"
-            css={{
-              boxSizing: 'border-box'
-            }}
           />
         </Box>
         <Box css={{ marginBottom: '$25' }}>
