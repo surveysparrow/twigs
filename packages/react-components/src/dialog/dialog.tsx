@@ -122,10 +122,10 @@ type DialogRootProps = {
 }
 
 const DialogRoot = ({
-  children, size, scrollBehavior, ...props
+  children, size = 'md', scrollBehavior = 'auto', ...props
 }:DialogRootProps) => {
   return (
-    <DialogProvider scrollBehavior={scrollBehavior || 'auto'} size={size || 'md'}>
+    <DialogProvider scrollBehavior={scrollBehavior} size={size}>
       <DialogPrimitive.Root {...props}>
         {children}
       </DialogPrimitive.Root>
