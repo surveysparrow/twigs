@@ -21,27 +21,50 @@ import { Slider } from "@sparrowengg/twigs-react";
 />
 ```
 
-### Props
+#### Range slider
 
-| Property       | Description                                    | Type                                                                    | Default  |
-| -------------- | ---------------------------------------------- | ----------------------------------------------------------------------- | -------- | ----- |
-| defaultValue   | Default value of slider. It should be an array | number[]                                                                |          |
-| value          | Controlled value for slider                    | number[]                                                                |          |
-| min            | Minimum value                                  | number                                                                  |          |
-| max            | Maximum value                                  | number                                                                  |          |
-| labels         | Customize left and right labels                | { left: string; right: string }                                         |          |
-| labelPlacement | Whether to position the label on top or bottom | 'top'                                                                   | 'bottom' | 'top' |
-| components     | Customize individual components                | `Record<Track ǀ Range ǀ Thumb ǀ ThumbLeft ǀ ThumbRight, ReactNode>` |          |
+The slider can be made a range slider by passing a second value to the `defaultValue` or `value` array.
+
+```jsx live
+<Slider
+  defaultValue={[10, 20]}
+  min={0}
+  max={100}
+  labels={{
+    left: "Min",
+    right: "Max",
+  }}
+  labelPlacement="bottom"
+  components={{
+    ThumbLeft: () => (
+      <Slider.Thumb
+        css={{
+          borderRadius: 0,
+          backgroundColor: "$negative900",
+        }}
+      ></Slider.Thumb>
+    ),
+    ThumbRight: () => (
+      <Slider.Thumb
+        css={{
+          backgroundColor: "$black900",
+          borderRadius: 0
+        }}
+      ></Slider.Thumb>
+    ),
+  }}
+/>
+```
 
 ### Customizing components
 
 `Track`, `Range` and `Thumb` can be customized by using the `components` property. Make sure the custom component is wrapped by the corresponding default component as shown below
 
-```tsx
+```tsx live
 <Slider
   components={{
     Thumb: () => (
-      <Slider.Thumb asChild>
+      <Slider.Thumb>
         <Box
           css={{
             backgroundColor: "$negative900",
@@ -50,17 +73,35 @@ import { Slider } from "@sparrowengg/twigs-react";
         />
       </Slider.Thumb>
     ),
-    Range: () => (
-      <Slider.Range>
+    Track: ({ children }) => (
+      <Slider.Track>
         <Box
           css={{
             width: "100%",
             height: "100%",
             background: "linear-gradient(to right, red, blue)",
+            position: 'absolute'
           }}
         />
-      </Slider.Range>
+        {children}
+      </Slider.Track>
     ),
   }}
 />
 ```
+
+The two thumbs can be customized by passing components to `ThumbLeft` and `ThumbRight` in `components` prop.
+
+### Props
+
+| Property       | Description                                    | Type                                                                | Default          |
+| -------------- | ---------------------------------------------- | ------------------------------------------------------------------- | ---------------- |
+| defaultValue   | Default value of slider. It should be an array | number[]                                                            |                  |
+| value          | Controlled value for slider                    | number[]                                                            |                  |
+| min            | Minimum value                                  | number                                                              |                  |
+| max            | Maximum value                                  | number                                                              |                  |
+| labels         | Customize left and right labels                | { left: string; right: string }                                     |                  |
+| labelPlacement | Position of the left & right labels | 'top'                                                               | 'bottom' ǀ 'top' |
+| components     | Customize individual components                | `Record<Track ǀ Range ǀ Thumb ǀ ThumbLeft ǀ ThumbRight, ReactNode>` |                  |
+
+
