@@ -22,5 +22,5 @@
       }
     ]
   },
-  "setupFiles": ["./setupTests.ts"]
+  "setupFiles": ["./setup-tests.ts"]
 }
