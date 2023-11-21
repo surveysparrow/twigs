@@ -64,14 +64,12 @@ The slider can be made a range slider by passing a second value to the `defaultV
 <Slider
   components={{
     Thumb: () => (
-      <Slider.Thumb>
-        <Box
-          css={{
-            backgroundColor: "$negative900",
-            borderRadius: 0,
-          }}
-        />
-      </Slider.Thumb>
+      <Slider.Thumb
+        css={{
+          backgroundColor: "$negative900",
+          borderRadius: 0,
+        }}
+      />
     ),
     Track: ({ children }) => (
       <Slider.Track>
