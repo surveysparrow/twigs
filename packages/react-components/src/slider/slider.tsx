@@ -13,7 +13,9 @@ const StyledThumb = styled(RadixSlider.Thumb, {
   width: '20px',
   height: '20px',
   backgroundColor: '$primary800',
-  borderRadius: '10px',
+  borderRadius: '50%',
+  boxShadow: '0 0 0px transparent',
+  transition: 'all 0.25s ease',
 
   '&:hover': {
     $$shadowColor: '$colors$primary300',
@@ -71,7 +73,7 @@ const StyledRoot = styled(RadixSlider.Root, {
 });
 
 const StyledTrack = styled(RadixSlider.Track, {
-  backgroundColor: '$accent50',
+  backgroundColor: '$accent100',
   position: 'relative',
   flexGrow: '1',
   borderRadius: '9999px',
@@ -159,7 +161,6 @@ export const Slider = ({ labelPlacement = 'top', ...props }: SliderProps) => {
       {labelPlacement === 'top' && <RenderLabel css={{ marginBottom: '$3' }} />}
       <StyledRoot defaultValue={[0]} max={100} step={1} {...props}>
         <TrackAndRange />
-        <StyledThumb />
         <RenderThumb />
       </StyledRoot>
       {labelPlacement === 'bottom' && <RenderLabel css={{ marginTop: '$3' }} />}
