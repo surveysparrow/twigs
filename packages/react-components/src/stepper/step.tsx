@@ -1,8 +1,10 @@
+import React from 'react';
+import { TickIcon } from '@sparrowengg/twigs-react-icons';
 import { styled } from '../stitches.config';
 import { Flex } from '../flex';
 import { Text } from '../text';
 
-const StyledStepperTriggerContainer = styled(Flex, {
+const StyledContainer = styled(Flex, {
   gap: '$4',
   alignItems: 'center',
   justifyContent: 'center',
@@ -13,7 +15,7 @@ const StyledStepperTriggerContainer = styled(Flex, {
   borderColorOpacity: ['$accent500', 0.15]
 });
 
-const StyledStepCounter = styled(Text, {
+const StyledCounter = styled(Text, {
   height: '$5',
   width: '$5',
   borderWidth: '$xs',
@@ -25,7 +27,7 @@ const StyledStepCounter = styled(Text, {
   justifyContent: 'center'
 });
 
-const StyledStepperButton = styled('button', {
+const StyledStep = styled('button', {
   background: 'transparent',
   border: 'none',
   borderBottomStyle: 'solid',
@@ -39,7 +41,7 @@ const StyledStepperButton = styled('button', {
   color: '$neutral400',
   fontWeight: '$7',
   padding: '0px !important',
-  [`& ${StyledStepCounter}`]: {
+  [`& ${StyledCounter}`]: {
     fontSize: '$xs'
   },
   variants: {
@@ -47,7 +49,7 @@ const StyledStepperButton = styled('button', {
       true: {
         borderColor: '$accent500',
         color: '$accent500',
-        [`& ${StyledStepCounter}`]: {
+        [`& ${StyledCounter}`]: {
           borderColor: '$accent500',
           fontWeight: '$7'
         }
@@ -56,7 +58,7 @@ const StyledStepperButton = styled('button', {
     completed: {
       true: {
         color: '$neutral700',
-        [`& ${StyledStepCounter}`]: {
+        [`& ${StyledCounter}`]: {
           backgroundColor: '$neutral700'
         }
       }
@@ -72,6 +74,28 @@ const StyledStepperButton = styled('button', {
   }
 });
 
-export const StepperTrigger = StyledStepperButton;
-export const StepperTriggerContainer = StyledStepperTriggerContainer;
-export const StepperCount = StyledStepCounter;
+type StepperCountProps = {
+  completed: boolean,
+  label: number
+};
+
+const StepperCount = ({ completed, label }: StepperCountProps) => {
+  return (
+    <StyledCounter>
+      {
+        completed
+          ? (
+            <TickIcon
+              size={14}
+              color="#fff"
+            />
+          )
+          : label
+      }
+    </StyledCounter>
+  );
+};
+
+export const Step = StyledStep;
+export const Container = StyledContainer;
+export { StepperCount };
