@@ -116,9 +116,13 @@ const Content = ({ children, ...props }: ContentProps) => {
 };
 
 type DialogRootProps = {
-  children : ReactNode,
+  children : ReactNode;
   size?: SizeType;
   scrollBehavior? : ScrollType;
+  defaultOpen?: boolean;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  modal?: boolean;
 }
 
 const DialogRoot = ({
