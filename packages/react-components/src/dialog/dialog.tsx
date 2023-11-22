@@ -116,10 +116,10 @@ const Content = ({ children, ...props }: ContentProps) => {
 };
 
 type DialogRootProps = {
-  children : ReactNode,
+  children : ReactNode;
   size?: SizeType;
   scrollBehavior? : ScrollType;
-}
+} & ComponentProps<typeof DialogPrimitive.Root>
 
 const DialogRoot = ({
   children, size = 'md', scrollBehavior = 'auto', ...props
