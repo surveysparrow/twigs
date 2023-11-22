@@ -1,4 +1,6 @@
-import React, { ReactElement, ComponentProps } from 'react';
+import React, {
+  ReactElement, ComponentProps, useContext, createContext, ReactNode
+} from 'react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { styled, keyframes } from '../stitches.config';
 
@@ -12,6 +14,26 @@ const contentShow = keyframes({
   '100%': { opacity: 1, transform: 'translate(-50%, -50%) scale(1)' }
 });
 
+type SizeType = 'sm' | 'md' | 'lg' | 'xl' | 'full';
+type ScrollType = 'auto' | 'scroll' | 'hidden'
+
+type DialogContextType = {
+  size: SizeType;
+  scrollBehavior: ScrollType;
+}
+
+const DialogContext = createContext<DialogContextType>({
+  size: 'md',
+  scrollBehavior: 'auto'
+});
+
+const DialogProvider = ({ children, size, scrollBehavior }: { children: ReactNode, size: SizeType, scrollBehavior: ScrollType }) => {
+  return (
+    <DialogContext.Provider value={{ size, scrollBehavior }}>
+      {children}
+    </DialogContext.Provider>
+  );
+};
 const StyledOverlay = styled(DialogPrimitive.Overlay, {
   backgroundColor: '$black700',
   position: 'fixed',
@@ -31,15 +53,52 @@ const StyledContent = styled(DialogPrimitive.Content, {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: '90vw',
-  maxWidth: '450px',
-  maxHeight: '85vh',
+  maxHeight: '80vh',
+  maxWidth: '95vw',
   padding: '$12',
   zIndex: 999,
   '@media (prefers-reduced-motion: no-preference)': {
     animation: `${contentShow} 150ms cubic-bezier(0.16, 1, 0.3, 1)`
   },
-  '&:focus': { outline: 'none' }
+  '&:focus': { outline: 'none' },
+  variants: {
+    size: {
+      full: {
+        width: '100vw',
+        height: '100vh',
+        // overriding default maxHeight and maxWidth
+        maxHeight: '100vh',
+        maxWidth: '100vw'
+      },
+      xl: {
+        width: '1346px'
+      },
+      lg: {
+        width: '980px'
+      },
+      md: {
+        width: '600px'
+      },
+      sm: {
+        width: '464px'
+      }
+    },
+    scrollBehavior: {
+      auto: {
+        overflowY: 'auto'
+      },
+      scroll: {
+        overflowY: 'scroll'
+      },
+      hidden: {
+        overflowY: 'hidden'
+      }
+    }
+  },
+  defaultVariants: {
+    size: 'md',
+    scrollBehavior: 'auto'
+  }
 });
 
 type ContentProps = {
@@ -47,11 +106,30 @@ type ContentProps = {
 } & ComponentProps<typeof StyledContent>
 
 const Content = ({ children, ...props }: ContentProps) => {
+  const dialogContext = useContext(DialogContext);
   return (
     <DialogPrimitive.Portal>
       <StyledOverlay />
-      <StyledContent {...props}>{children}</StyledContent>
+      <StyledContent {...dialogContext} {...props}>{children}</StyledContent>
     </DialogPrimitive.Portal>
+  );
+};
+
+type DialogRootProps = {
+  children : ReactNode,
+  size?: SizeType;
+  scrollBehavior? : ScrollType;
+}
+
+const DialogRoot = ({
+  children, size = 'md', scrollBehavior = 'auto', ...props
+}:DialogRootProps) => {
+  return (
+    <DialogProvider scrollBehavior={scrollBehavior} size={size}>
+      <DialogPrimitive.Root {...props}>
+        {children}
+      </DialogPrimitive.Root>
+    </DialogProvider>
   );
 };
 
@@ -67,7 +145,7 @@ const StyledDescription = styled(DialogPrimitive.Description, {
 });
 
 // Exports
-export const Dialog = DialogPrimitive.Root;
+export const Dialog = DialogRoot;
 export const DialogTrigger = DialogPrimitive.Trigger;
 export const DialogContent = Content;
 export const DialogTitle = StyledTitle;
