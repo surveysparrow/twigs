@@ -119,11 +119,7 @@ type DialogRootProps = {
   children : ReactNode;
   size?: SizeType;
   scrollBehavior? : ScrollType;
-  defaultOpen?: boolean;
-  open?: boolean;
-  onOpenChange?: (open: boolean) => void;
-  modal?: boolean;
-}
+} & ComponentProps<typeof DialogPrimitive.Root>
 
 const DialogRoot = ({
   children, size = 'md', scrollBehavior = 'auto', ...props
