@@ -30,6 +30,14 @@ const StyledThumb = styled(RadixSlider.Thumb, {
   }
 });
 
+const StyledTrack = styled(RadixSlider.Track, {
+  backgroundColor: '$accent100',
+  position: 'relative',
+  flexGrow: '1',
+  borderRadius: '9999px',
+  height: '$1'
+});
+
 const StyledRoot = styled(RadixSlider.Root, {
   position: 'relative',
   display: 'flex',
@@ -47,6 +55,10 @@ const StyledRoot = styled(RadixSlider.Root, {
         [`${StyledThumb}`]: {
           width: '$3',
           height: '$3'
+        },
+
+        [`${StyledTrack}`]: {
+          height: '2px'
         }
       },
       md: {
@@ -70,14 +82,6 @@ const StyledRoot = styled(RadixSlider.Root, {
   defaultVariants: {
     size: 'md'
   }
-});
-
-const StyledTrack = styled(RadixSlider.Track, {
-  backgroundColor: '$accent100',
-  position: 'relative',
-  flexGrow: '1',
-  borderRadius: '9999px',
-  height: '3px'
 });
 
 const StyledRange = styled(RadixSlider.Range, {
