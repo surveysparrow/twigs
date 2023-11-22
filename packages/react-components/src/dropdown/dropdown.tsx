@@ -222,11 +222,11 @@ const Content = ({ children, showArrow, ...props }: ContentProps) => {
     </DropdownMenuPrimitive.Portal>
   );
 };
-type DropdownMenuRootProps = ComponentProps<typeof DropdownMenuPrimitive.Root>;
-interface DropdownRootProps extends DropdownMenuRootProps {
+
+type DropdownRootProps = {
   children : ReactNode,
   size?: 'sm' | 'md'
-}
+} & ComponentProps<typeof DropdownMenuPrimitive.Root>;
 
 const DropdownRoot = ({ children, ...props }:DropdownRootProps) => {
   return (
