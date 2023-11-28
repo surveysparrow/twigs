@@ -5,8 +5,8 @@ import {
 import { Box } from '../../box';
 import { Button, IconButton } from '../../button';
 import { FormLabel } from '../../form-label';
-import { Flex } from '../../flex';
 import { Input } from '../../input';
+import { Flex } from '../../flex';
 
 const CloseIcon = () => {
   return (
@@ -37,66 +37,78 @@ const CloseIcon = () => {
 
 export default {
   component: Dialog,
-  title: 'Overlay/Dialog'
+  title: 'Overlay/Dialog',
+  argTypes: {
+    size: {
+      control: 'select',
+      options: ['sm', 'md', 'lg', 'xl', 'full']
+    },
+    scrollBehavior: {
+      control: 'select',
+      options: ['auto', 'scroll', 'hidden']
+    }
+  },
+  args: {
+    size: 'md',
+    scrollBehavior: 'auto'
+  }
 };
 
-const Template = (args) => (
-  <Dialog {...args}>
-    <DialogTrigger asChild>
-      <Button size="lg">Edit profile</Button>
-    </DialogTrigger>
-    <DialogContent>
-      <DialogTitle>Edit profile</DialogTitle>
-      <DialogDescription
-        css={{ color: '$neutral600', fontSize: '$sm' }}
-      >
-        Make changes to your profile here. Click save when done.
-      </DialogDescription>
-      <Box css={{ marginBottom: '$12' }}>
-        <FormLabel css={{ marginBottom: '$8' }}>
-          Name
-        </FormLabel>
-        <Input
-          size="md"
-          id="name"
-          defaultValue="Pedro Duarte"
-          css={{
-            boxSizing: 'border-box'
-          }}
-        />
-      </Box>
-      <Box css={{ marginBottom: '$12' }}>
-        <FormLabel css={{ marginBottom: '$8' }}>
-          Username
-        </FormLabel>
-        <Input
-          size="md"
-          id="username"
-          defaultValue="@peduarte"
-          css={{
-            boxSizing: 'border-box'
-          }}
-        />
-      </Box>
-      <Flex justifyContent="flex-end" css={{ justifyContent: 'flex-end' }}>
-        <DialogClose asChild>
-          <Button size="lg" color="primary">
-            Save changes
-          </Button>
-        </DialogClose>
-      </Flex>
-      <Box
-        css={{ position: 'absolute', top: '10px', right: '10px' }}
-      >
-        <DialogClose asChild>
-          <IconButton
-            icon={<CloseIcon />}
-            aria-label="Close"
-            color="default"
+const Template = (args) => {
+  const size = args?.size;
+  const scrollBehavior = args?.scrollBehavior;
+  return (
+    <Dialog {...args} scrollBehavior={scrollBehavior} size={size}>
+      <DialogTrigger asChild>
+        <Button size="lg">Edit profile</Button>
+      </DialogTrigger>
+      <DialogContent css={{ paddingBottom: '$20' }} {...args}>
+        <DialogTitle>Edit profile</DialogTitle>
+        <DialogDescription
+          css={{ color: '$neutral600', fontSize: '$sm' }}
+        >
+          Make changes to your profile here. Click save when done.
+        </DialogDescription>
+        <Box css={{ marginBottom: '$12' }}>
+          <FormLabel css={{ marginBottom: '$8' }}>
+            Name
+          </FormLabel>
+          <Input
+            size="md"
+            id="name"
+            defaultValue="Pedro Duarte"
           />
-        </DialogClose>
-      </Box>
-    </DialogContent>
-  </Dialog>
-);
+        </Box>
+        <Box css={{ marginBottom: '$25' }}>
+          <FormLabel css={{ marginBottom: '$8' }}>
+            Username
+          </FormLabel>
+          <Input
+            size="md"
+            id="username"
+            defaultValue="@peduarte"
+          />
+        </Box>
+        <Flex justifyContent="flex-end" css={{ justifyContent: 'flex-end' }}>
+          <DialogClose asChild>
+            <Button size="lg" color="primary">
+              Save changes
+            </Button>
+          </DialogClose>
+        </Flex>
+        <Box
+          css={{ position: 'absolute', top: '10px', right: '10px' }}
+        >
+          <DialogClose asChild>
+            <IconButton
+              icon={<CloseIcon />}
+              aria-label="Close"
+              color="default"
+            />
+          </DialogClose>
+        </Box>
+      </DialogContent>
+    </Dialog>
+  );
+};
 export const Default = Template.bind({});

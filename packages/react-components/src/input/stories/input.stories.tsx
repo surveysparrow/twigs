@@ -55,7 +55,6 @@ const TemplateWithRightElement = (args) => (
         color="default"
         variant="ghost"
         size="lg"
-        onClick={() => console.log('hello there')}
         icon={<TickCircleFillIcon color="green" />}
         css={{
           right: 10

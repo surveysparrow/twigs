@@ -23,16 +23,12 @@ export default {
       control: 'select',
       options: ['sm', 'md']
     }
-  },
-  args: {
-    size: 'md'
   }
 };
 
 const Template = (args) => {
-  const size = args?.size;
   return (
-    <DropdownMenu {...args} size={size}>
+    <DropdownMenu {...args}>
       <DropdownMenuTrigger asChild>
         <Button
           size="lg"

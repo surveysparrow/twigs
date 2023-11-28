@@ -23,6 +23,7 @@ export * from './loader';
 export * from './pagination';
 export * from './popover';
 export * from './select';
+export * from './slider';
 export * from './stepper';
 export * from './radio';
 export * from './switch';
