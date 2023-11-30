@@ -37,7 +37,6 @@ export const DefaultModal = ({
   onClose,
   onPrimaryAction
 }: DefaultInfoDialogProps) => {
-  console.log({ size });
   return (
     <Dialog
       onOpenChange={(open) => {
