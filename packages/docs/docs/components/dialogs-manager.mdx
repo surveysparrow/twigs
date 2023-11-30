@@ -8,7 +8,22 @@ import { DialogsManager, dialogs } from "@sparrowengg/twigs-react";
 
 ### Usage
 
-Add `DialogsManager` to a top level component like `App` and you can call `dialogs.open` or `dialogs.push` to open new dialogs.
+Add `DialogsManager` to a top level component like `App` as shown below
+
+```jsx
+import { DialogsManager } from "@sparrowengg/twigs-react";
+
+function App() {
+  return (
+    <Main>
+      <YourApp />
+      <DialogsManager />
+    </Main>
+  );
+}
+```
+
+And now you can call `dialogs.open` or `dialogs.push` to open new dialogs.
 
 ```jsx live
 <div>
@@ -24,6 +39,38 @@ Add `DialogsManager` to a top level component like `App` and you can call `dialo
         confirmButtonProps: {
           color: "error",
         },
+      });
+    }}
+  >
+    Open Dialog
+  </Button>
+  <DialogsManager />
+</div>
+```
+
+Open modals
+
+```jsx live
+<div>
+  <Button
+    onClick={() => {
+      const { close } = dialogs.open("modal", {
+        size: 'sm',
+        children: (
+          <div>
+            <h3>This is a custom modal</h3>
+            <Button
+              css={{
+                marginTop: "$3",
+              }}
+              size="lg"
+              color="error"
+              onClick={() => close()}
+            >
+              Close
+            </Button>
+          </div>
+        ),
       });
     }}
   >
@@ -59,7 +106,7 @@ const DeleteModal = ({ title, onDelete }) => {
 
 | Parameter  | Description                                                                                                                                                                                                        | Type   | Default |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------ | ------- |
-| dialogName | The dialog that should be opened. Three dialogs are included by default - alert, confirm and modal. You can replace these dialogs or add new ones by using the `customDialogs` property in the `Dialogs` component | string | ' '     |
+| dialogName | The dialog that should be opened. Three dialogs are included by default - alert, confirm and modal. You can replace these dialogs or add new ones by using the `customDialogs` property in the `Dialogs` component | string |         |
 | options    | Options supported by the dialog that you wish to trigger, these options might be different for different dialogs                                                                                                   | object | {}      |
 
 Returns object with two properties
