@@ -8,7 +8,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'Twigs - React UI component library',
   tagline: 'Twigs is a flexible, customizable and accessible React component library for building UIs. Comes with 30+ components and room for you to bring your own components, styles and themes.',
-  favicon: 'https://site.surveysparrow.com/wp-content/uploads/2017/10/cropped-sparrow-transparent-32x32.png',
+  favicon: 'https://static.surveysparrow.com/site/twigs/twigs-favicon.png',
 
   // Set the production url of your site here
   url: 'https://twigs.surveysparrow.com',
@@ -65,11 +65,10 @@ const config = {
       // Replace with your project's social card
       image: 'https://static.surveysparrow.com/public-api/surveysparrow-developer-documenation.jpg',
       navbar: {
-        title: 'Twigs',
-        // logo: {
-        //   alt: 'Twigs',
-        //   src: 'img/logo.svg',
-        // },
+        logo: {
+          alt: 'Twigs',
+          src: 'img/logo-with-text.svg',
+        },
         items: [
           {
             type: 'docSidebar',
