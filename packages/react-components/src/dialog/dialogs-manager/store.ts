@@ -4,7 +4,7 @@ interface Data {
   __dialogId: number;
 }
 
-export class ModalStore {
+export class DialogStore {
   data: Data[];
 
   private subId: number;
@@ -50,4 +50,4 @@ export class ModalStore {
   }
 }
 
-export const store = new ModalStore();
+export const store = new DialogStore();
