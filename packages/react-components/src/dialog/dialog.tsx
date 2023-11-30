@@ -128,7 +128,7 @@ const Content = ({ children, ...props }: ContentProps) => {
   );
 };
 
-type DialogRootProps = {
+export type DialogRootProps = {
   children: ReactNode;
   size?: SizeType;
   scrollBehavior?: ScrollType;
