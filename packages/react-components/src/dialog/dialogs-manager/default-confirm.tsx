@@ -19,6 +19,7 @@ export type DefaultConfirmDialogProps = {
   };
   confirmButtonProps?: ButtonProps;
   cancelButtonProps?: ButtonProps;
+  closeOnConfirm?: boolean;
   onConfirm?: () => void;
   onCancel?: () => void;
   onClose?: () => void;
@@ -31,8 +32,9 @@ export const DefaultConfirmDialog = ({
     confirm: 'Confirm',
     cancel: 'Cancel'
   },
-  confirmButtonProps,
+  closeOnConfirm = true,
   cancelButtonProps,
+  confirmButtonProps,
   onConfirm,
   onCancel,
   onClose
@@ -67,7 +69,7 @@ export const DefaultConfirmDialog = ({
             </AlertDialogCancel>
           )}
           {labels.confirm && (
-            <AlertDialogAction asChild>
+            <ConfirmButtonWrapper useActionWrapper={closeOnConfirm}>
               {isValidElement(labels.confirm) ? (
                 labels.confirm
               ) : (
@@ -80,10 +82,24 @@ export const DefaultConfirmDialog = ({
                   {labels.confirm}
                 </Button>
               )}
-            </AlertDialogAction>
+            </ConfirmButtonWrapper>
           )}
         </AlertDialogActions>
       </AlertDialogContent>
     </AlertDialog>
   );
+};
+
+const ConfirmButtonWrapper = ({
+  useActionWrapper,
+  children
+}: {
+  useActionWrapper?: boolean;
+  children?: ReactNode;
+}) => {
+  if (useActionWrapper) {
+    return <AlertDialogAction asChild>{children}</AlertDialogAction>;
+  }
+
+  return <>{children}</>;
 };

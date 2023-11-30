@@ -16,7 +16,8 @@ export type DefaultAlertDialogProps = {
     action?: ReactNode;
   };
   actionButtonProps?: ButtonProps;
-  onAction?: () => void;
+  closeOnPrimaryAction?: boolean;
+  onPrimaryAction?: () => void;
   onClose?: () => void;
 };
 
@@ -26,8 +27,9 @@ export const DefaultAlertDialog = ({
   labels = {
     action: 'Close'
   },
+  closeOnPrimaryAction = true,
   actionButtonProps,
-  onAction,
+  onPrimaryAction,
   onClose
 }: DefaultAlertDialogProps) => {
   return (
@@ -48,22 +50,36 @@ export const DefaultAlertDialog = ({
             justifyContent: 'flex-end'
           }}
         >
-          <AlertDialogAction asChild>
+          <ActionButtonWrapper useActionWrapper={closeOnPrimaryAction}>
             {isValidElement(labels.action) ? (
               labels.action
             ) : (
               <Button
                 color="default"
                 size="lg"
-                onClick={onAction}
+                onClick={onPrimaryAction}
                 {...actionButtonProps}
               >
                 {labels.action}
               </Button>
             )}
-          </AlertDialogAction>
+          </ActionButtonWrapper>
         </AlertDialogActions>
       </AlertDialogContent>
     </AlertDialog>
   );
+};
+
+const ActionButtonWrapper = ({
+  useActionWrapper,
+  children
+}: {
+  useActionWrapper?: boolean;
+  children?: ReactNode;
+}) => {
+  if (useActionWrapper) {
+    return <AlertDialogAction asChild>{children}</AlertDialogAction>;
+  }
+
+  return <>{children}</>;
 };

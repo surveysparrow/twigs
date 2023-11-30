@@ -4,6 +4,7 @@ import {
   DialogClose,
   DialogContent,
   DialogDescription,
+  DialogRootProps,
   DialogTitle
 } from '../dialog';
 import { Button } from '../../button';
@@ -14,14 +15,17 @@ export type DefaultInfoDialogProps = {
   content?: ReactNode;
   footer?: ReactNode;
   children?: ReactNode;
+  size?: DialogRootProps['size'];
   labels?: {
     action?: string;
   };
-  onAction?: () => void;
+  closeOnPrimaryAction?: boolean;
+  onPrimaryAction?: () => void;
   onClose?: () => void;
 };
 
 export const DefaultModal = ({
+  size,
   title,
   content,
   footer,
@@ -29,14 +33,17 @@ export const DefaultModal = ({
   labels = {
     action: 'Close'
   },
+  closeOnPrimaryAction = true,
   onClose,
-  onAction
+  onPrimaryAction
 }: DefaultInfoDialogProps) => {
+  console.log({ size });
   return (
     <Dialog
       onOpenChange={(open) => {
         if (!open) onClose?.();
       }}
+      size={size}
       defaultOpen
     >
       <DialogContent>
@@ -57,11 +64,11 @@ export const DefaultModal = ({
                   justifyContent: 'flex-end'
                 }}
               >
-                <DialogClose asChild>
-                  <Button size="lg" color="default" onClick={onAction}>
+                <PrimaryActionButtonWrapper useActionWrapper={closeOnPrimaryAction}>
+                  <Button size="lg" color="default" onClick={onPrimaryAction}>
                     {labels?.action}
                   </Button>
-                </DialogClose>
+                </PrimaryActionButtonWrapper>
               </Flex>
             )}
           </>
@@ -69,4 +76,18 @@ export const DefaultModal = ({
       </DialogContent>
     </Dialog>
   );
+};
+
+const PrimaryActionButtonWrapper = ({
+  useActionWrapper,
+  children
+}: {
+  useActionWrapper?: boolean;
+  children?: ReactNode;
+}) => {
+  if (useActionWrapper) {
+    return <DialogClose asChild>{children}</DialogClose>;
+  }
+
+  return <>{children}</>;
 };
