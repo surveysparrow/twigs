@@ -4,7 +4,7 @@ import '@testing-library/jest-dom';
 import { render } from '@testing-library/react';
 import { TextArea } from '../index';
 
-describe('Input', () => {
+describe('TextArea', () => {
   it('renders without crashing', () => {
     render(<TextArea />);
   });
