@@ -177,7 +177,7 @@ const AddonContainer = styled(Box, {
   }
 });
 
-const errorBorderStyles = {
+export const errorBorderStyles = {
   boxShadow: '$colors$negative500 0px 1.5px 0px 0px',
   borderBottom: '0',
   '&:hover': {

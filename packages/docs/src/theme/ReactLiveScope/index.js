@@ -9,6 +9,7 @@ const ReactLiveScope = {
   Flex: twigsComponentLoader("Flex"),
   Grid: twigsComponentLoader("Grid"),
   Input: twigsComponentLoader("Input"),
+  TextArea: twigsComponentLoader("TextArea"),
   Checkbox: twigsComponentLoader("Checkbox"),
   Radio: twigsComponentLoader("Radio"),
   Select: twigsComponentLoader("Select"),
