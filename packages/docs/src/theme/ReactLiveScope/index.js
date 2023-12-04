@@ -1,6 +1,5 @@
 import React from 'react';
 import { twigsComponentLoader, twigsIconLoader } from './twigs-loader';
-import { Slider } from '@sparrowengg/twigs-react';
 
 const ReactLiveScope = {
   React,
@@ -16,7 +15,10 @@ const ReactLiveScope = {
   FormLabel: twigsComponentLoader("FormLabel"),
   RadioGroup: twigsComponentLoader("RadioGroup"),
   Switch: twigsComponentLoader("Switch"),
-  Slider,
+  Slider: twigsComponentLoader("Slider"),
+  SliderThumb: twigsComponentLoader("SliderThumb"),
+  SliderRange: twigsComponentLoader("SliderRange"),
+  SliderTrack: twigsComponentLoader("SliderTrack"),
   FormHelperText: twigsComponentLoader("FormHelperText"),
   Text: twigsComponentLoader("Text"),
   Heading: twigsComponentLoader("Heading"),

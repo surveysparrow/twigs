@@ -138,7 +138,7 @@ export const Slider = ({ labelPlacement = 'top', ...props }: SliderProps) => {
 
     const Comp = props.components?.Thumb ?? StyledThumb;
     return <Comp />;
-  }, [props.components, props.value, props.defaultValue]);
+  }, [props.components]);
 
   const RenderLabel = useCallback(
     (labelProps: FlexProps) => {
@@ -182,6 +182,6 @@ const LabelText = ({ value }: { value?: ReactNode | string }) => {
   return <Text size="sm">{value}</Text>;
 };
 
-Slider.Track = StyledTrack;
-Slider.Range = StyledRange;
-Slider.Thumb = StyledThumb;
+export const SliderTrack = StyledTrack;
+export const SliderRange = StyledRange;
+export const SliderThumb = StyledThumb;
