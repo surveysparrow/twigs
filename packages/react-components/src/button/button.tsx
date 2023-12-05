@@ -525,6 +525,7 @@ export type ButtonProps = ButtonBaseProps &
   ComponentProps<typeof StyledButton> &
   React.ButtonHTMLAttributes<HTMLButtonElement> & {
     as?: React.ElementType;
+    to?: string;
   };
 
 export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
@@ -540,10 +541,14 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
       disabled,
       loader,
       onClick,
+      as,
+      to,
       ...rest
     }: ButtonProps,
     ref
   ) => {
+    const LinkElement = (as && (typeof as === 'function' || typeof as === 'object') ? as : null);
+    const isLinkComponent = LinkElement && Boolean(to);
     const hasNoIcon = !(leftIcon || rightIcon || icon);
     const buttonLoaderMargin: ScaleValue<'space', typeof config> = [
       'xxs',
@@ -564,7 +569,7 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
       color
     });
 
-    return (
+    const ButtonComponent = (
       <StyledButton
         type="button"
         ref={ref}
@@ -580,28 +585,28 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
         {...rest}
       >
         {icon && (
-          <ButtonSideElement
-            icon={icon}
-            loaderSize={loaderSize}
-            loaderCSS={loaderCSS}
-            loading={!!loading}
-            loader={loader}
-            loaderColor={loaderColor}
-          />
+        <ButtonSideElement
+          icon={icon}
+          loaderSize={loaderSize}
+          loaderCSS={loaderCSS}
+          loading={!!loading}
+          loader={loader}
+          loaderColor={loaderColor}
+        />
         )}
 
         {(leftIcon || hasNoIcon) && (
-          <ButtonSideElement
-            icon={hasNoIcon ? undefined : leftIcon}
-            loaderSize={loaderSize}
-            loaderCSS={loaderCSS}
-            loading={!!loading}
-            loader={loader}
-            loaderColor={loaderColor}
-            containerStyle={{
-              marginRight: hasNoIcon && !loading ? '0' : buttonLoaderMargin
-            }}
-          />
+        <ButtonSideElement
+          icon={hasNoIcon ? undefined : leftIcon}
+          loaderSize={loaderSize}
+          loaderCSS={loaderCSS}
+          loading={!!loading}
+          loader={loader}
+          loaderColor={loaderColor}
+          containerStyle={{
+            marginRight: hasNoIcon && !loading ? '0' : buttonLoaderMargin
+          }}
+        />
         )}
 
         <span className={`${prefixClassName('button__content')}`}>
@@ -609,19 +614,24 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
         </span>
 
         {rightIcon && (
-          <ButtonSideElement
-            icon={rightIcon}
-            loaderSize={loaderSize}
-            loaderCSS={loaderCSS}
-            loading={!!loading}
-            loaderColor={loaderColor}
-            containerStyle={{
-              marginLeft: buttonLoaderMargin
-            }}
-            loader={loader}
-          />
+        <ButtonSideElement
+          icon={rightIcon}
+          loaderSize={loaderSize}
+          loaderCSS={loaderCSS}
+          loading={!!loading}
+          loaderColor={loaderColor}
+          containerStyle={{
+            marginLeft: buttonLoaderMargin
+          }}
+          loader={loader}
+        />
         )}
       </StyledButton>
+    );
+    return (
+      <>
+        {isLinkComponent ? <LinkElement style={{ textDecoration: 'none' }} to={to}>{ButtonComponent}</LinkElement> : ButtonComponent}
+      </>
     );
   }
 );
