@@ -2,7 +2,7 @@ import React from 'react';
 import 'jest';
 import '@testing-library/jest-dom';
 import { render } from '@testing-library/react';
-import { Slider } from '../slider';
+import { Slider, SliderThumb } from '../slider';
 
 describe('Slider', () => {
   it('renders without crashing', () => {
@@ -29,7 +29,7 @@ describe('Slider', () => {
       <Slider
         defaultValue={[10, 20]}
         components={{
-          Thumb: () => <Slider.Thumb>(0)</Slider.Thumb>
+          Thumb: () => <SliderThumb>(0)</SliderThumb>
         }}
       />
     );
