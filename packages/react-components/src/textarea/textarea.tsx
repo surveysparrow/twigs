@@ -126,7 +126,6 @@ export const Textarea = ({
                   color: '$neutral700',
                   ...(!label ? { marginLeft: 'auto' } : {})
                 }}
-                data-testid="input-char-count"
               >
                 {mergedValue?.toString().length || 0}
                 {
