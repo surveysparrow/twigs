@@ -226,7 +226,7 @@ const Content = ({ children, showArrow, ...props }: ContentProps) => {
 type DropdownRootProps = {
   children : ReactNode,
   size?: 'sm' | 'md'
-}
+} & ComponentProps<typeof DropdownMenuPrimitive.Root>;
 
 const DropdownRoot = ({ children, ...props }:DropdownRootProps) => {
   return (
