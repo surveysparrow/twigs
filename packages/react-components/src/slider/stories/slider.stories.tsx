@@ -1,5 +1,5 @@
 import { ComponentMeta } from '@storybook/react';
-import { Slider } from '../slider';
+import { Slider, SliderRange, SliderThumb } from '../slider';
 import { Box } from '../../box';
 
 export default {
@@ -29,17 +29,17 @@ const CustomComponentsComp = (args) => (
   <Template
     components={{
       Thumb: () => (
-        <Slider.Thumb asChild>
+        <SliderThumb asChild>
           <Box
             css={{
               backgroundColor: '$negative900',
               borderRadius: 0
             }}
           />
-        </Slider.Thumb>
+        </SliderThumb>
       ),
       Range: () => (
-        <Slider.Range>
+        <SliderRange>
           <Box
             css={{
               width: '100%',
@@ -47,7 +47,7 @@ const CustomComponentsComp = (args) => (
               background: 'linear-gradient(to right, red, blue)'
             }}
           />
-        </Slider.Range>
+        </SliderRange>
       )
     }}
     labels={{
