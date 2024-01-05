@@ -1,13 +1,17 @@
 import { ReactNode, isValidElement } from 'react';
+import { CloseIcon } from '@sparrowengg/twigs-react-icons';
 import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogActions,
+  AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogTitle
 } from '../../alert-dialog';
-import { Button, ButtonProps } from '../../button';
+import { Button, ButtonProps, IconButton } from '../../button';
+import { Box } from '../../box';
+import { prefixClassName } from '../../utils';
 
 export type DefaultAlertDialogProps = {
   title: ReactNode;
@@ -42,7 +46,13 @@ export const DefaultAlertDialog = ({
       }}
     >
       <AlertDialogContent>
-        <AlertDialogTitle>{title}</AlertDialogTitle>
+        <AlertDialogTitle
+          css={{
+            paddingRight: '$20'
+          }}
+        >
+          {title}
+        </AlertDialogTitle>
         <AlertDialogDescription>{content}</AlertDialogDescription>
         <AlertDialogActions
           css={{
@@ -65,6 +75,21 @@ export const DefaultAlertDialog = ({
             )}
           </ActionButtonWrapper>
         </AlertDialogActions>
+        <Box css={{ position: 'absolute', top: '$6', right: '$6' }}>
+          <AlertDialogCancel asChild>
+            <IconButton
+              icon={<CloseIcon />}
+              aria-label="Close"
+              color="bright"
+              css={{
+                [`& .${prefixClassName('button__icon-container')} > svg`]: {
+                  width: '$6',
+                  height: '$6'
+                }
+              }}
+            />
+          </AlertDialogCancel>
+        </Box>
       </AlertDialogContent>
     </AlertDialog>
   );

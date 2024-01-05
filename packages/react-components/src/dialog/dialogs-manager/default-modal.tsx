@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { CloseIcon } from '@sparrowengg/twigs-react-icons';
 import {
   Dialog,
   DialogClose,
@@ -7,8 +8,10 @@ import {
   DialogRootProps,
   DialogTitle
 } from '../dialog';
-import { Button } from '../../button';
+import { Button, IconButton } from '../../button';
 import { Flex } from '../../flex';
+import { Box } from '../../box';
+import { prefixClassName } from '../../utils';
 
 export type DefaultInfoDialogProps = {
   title?: ReactNode;
@@ -48,7 +51,13 @@ export const DefaultModal = ({
       <DialogContent>
         {children ?? (
           <>
-            <DialogTitle>{title}</DialogTitle>
+            <DialogTitle
+              css={{
+                paddingRight: '$16'
+              }}
+            >
+              {title}
+            </DialogTitle>
             <DialogDescription
               css={{
                 paddingTop: '$6',
@@ -63,13 +72,30 @@ export const DefaultModal = ({
                   justifyContent: 'flex-end'
                 }}
               >
-                <PrimaryActionButtonWrapper useActionWrapper={closeOnPrimaryAction}>
+                <PrimaryActionButtonWrapper
+                  useActionWrapper={closeOnPrimaryAction}
+                >
                   <Button size="lg" color="default" onClick={onPrimaryAction}>
                     {labels?.action}
                   </Button>
                 </PrimaryActionButtonWrapper>
               </Flex>
             )}
+            <Box css={{ position: 'absolute', top: '$6', right: '$6' }}>
+              <DialogClose asChild>
+                <IconButton
+                  icon={<CloseIcon />}
+                  aria-label="Close"
+                  color="bright"
+                  css={{
+                    [`& .${prefixClassName('button__icon-container')} > svg`]: {
+                      width: '$6',
+                      height: '$6'
+                    }
+                  }}
+                />
+              </DialogClose>
+            </Box>
           </>
         )}
       </DialogContent>
