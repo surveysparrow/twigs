@@ -20,7 +20,7 @@ const loadingBlink = keyframes({
   }
 });
 
-const StyledButton = styled('button', {
+const commonButtonStyles = {
   appearance: 'none',
   border: 'none',
   background: 'transparent',
@@ -510,7 +510,11 @@ const StyledButton = styled('button', {
     size: 'sm',
     variant: 'solid'
   }
-});
+};
+
+const StyledButton = styled('button', {
+  ...commonButtonStyles
+} as any);
 
 export interface ButtonBaseProps {
   leftIcon?: ReactElement;
@@ -549,6 +553,7 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
   ) => {
     const LinkElement = (as && (typeof as === 'function' || typeof as === 'object') ? as : null);
     const isLinkComponent = LinkElement && Boolean(to);
+    const LinkButton = isLinkComponent ? styled(LinkElement, { ...commonButtonStyles, textDecoration: 'none', width: 'max-content' } as any) : null;
     const hasNoIcon = !(leftIcon || rightIcon || icon);
     const buttonLoaderMargin: ScaleValue<'space', typeof config> = [
       'xxs',
@@ -628,9 +633,70 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
         )}
       </StyledButton>
     );
+    const LinkComponent = LinkButton ? (
+      <LinkButton
+        type="button"
+        to={!disabled && to}
+        ref={ref}
+        color={color}
+        isIcon={!!icon}
+        disabled={disabled}
+        data-testid="button"
+        onClick={onClick}
+        className={clsx(className, {
+          [`${prefixClassName('button--loading')}`]: !!loading,
+          [`${prefixClassName('button--disabled')}`]: disabled
+        })}
+        {...rest}
+      >
+        {icon && (
+        <ButtonSideElement
+          icon={icon}
+          loaderSize={loaderSize}
+          loaderCSS={loaderCSS}
+          loading={!!loading}
+          loader={loader}
+          loaderColor={loaderColor}
+        />
+        )}
+
+        {(leftIcon || hasNoIcon) && (
+        <ButtonSideElement
+          icon={hasNoIcon ? undefined : leftIcon}
+          loaderSize={loaderSize}
+          loaderCSS={loaderCSS}
+          loading={!!loading}
+          loader={loader}
+          loaderColor={loaderColor}
+          containerStyle={{
+            marginRight: hasNoIcon && !loading ? '0' : buttonLoaderMargin
+          }}
+        />
+        )}
+
+        <span className={`${prefixClassName('button__content')}`}>
+          { children }
+        </span>
+
+        {rightIcon && (
+        <ButtonSideElement
+          icon={rightIcon}
+          loaderSize={loaderSize}
+          loaderCSS={loaderCSS}
+          loading={!!loading}
+          loaderColor={loaderColor}
+          containerStyle={{
+            marginLeft: buttonLoaderMargin
+          }}
+          loader={loader}
+        />
+        )}
+      </LinkButton>
+    ) : null;
+
     return (
       <>
-        {isLinkComponent ? <LinkElement style={{ textDecoration: 'none' }} to={to}>{ButtonComponent}</LinkElement> : ButtonComponent}
+        {(isLinkComponent && LinkComponent) ? LinkComponent : ButtonComponent}
       </>
     );
   }
