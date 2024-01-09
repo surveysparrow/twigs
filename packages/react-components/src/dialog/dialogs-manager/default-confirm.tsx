@@ -23,6 +23,7 @@ export type DefaultConfirmDialogProps = {
   confirmButtonProps?: ButtonProps;
   cancelButtonProps?: ButtonProps;
   closeOnConfirm?: boolean;
+  closeButton?: ReactNode;
   onConfirm?: () => void;
   onCancel?: () => void;
   onClose?: () => void;
@@ -38,6 +39,7 @@ export const DefaultConfirmDialog = ({
   closeOnConfirm = true,
   cancelButtonProps,
   confirmButtonProps,
+  closeButton = DefaultCloseButton,
   onConfirm,
   onCancel,
   onClose
@@ -52,9 +54,10 @@ export const DefaultConfirmDialog = ({
       }}
     >
       <AlertDialogContent>
-        <AlertDialogTitle css={{
-          paddingRight: '$20'
-        }}
+        <AlertDialogTitle
+          css={{
+            paddingRight: '$20'
+          }}
         >
           {title}
         </AlertDialogTitle>
@@ -93,25 +96,31 @@ export const DefaultConfirmDialog = ({
             </ConfirmButtonWrapper>
           )}
         </AlertDialogActions>
-        <Box css={{ position: 'absolute', top: '$6', right: '$6' }}>
-          <AlertDialogCancel asChild>
-            <IconButton
-              icon={<CloseIcon />}
-              aria-label="Close"
-              color="bright"
-              css={{
-                [`& .${prefixClassName('button__icon-container')} > svg`]: {
-                  width: '$6',
-                  height: '$6'
-                }
-              }}
-            />
-          </AlertDialogCancel>
-        </Box>
+        {closeButton && (
+          <Box css={{ position: 'absolute', top: '$6', right: '$6' }}>
+            {closeButton}
+          </Box>
+        )}
       </AlertDialogContent>
     </AlertDialog>
   );
 };
+
+const DefaultCloseButton = (
+  <AlertDialogCancel asChild>
+    <IconButton
+      icon={<CloseIcon />}
+      aria-label="Close"
+      color="bright"
+      css={{
+        [`& .${prefixClassName('button__icon-container')} > svg`]: {
+          width: '$6',
+          height: '$6'
+        }
+      }}
+    />
+  </AlertDialogCancel>
+);
 
 const ConfirmButtonWrapper = ({
   useActionWrapper,

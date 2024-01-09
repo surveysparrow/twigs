@@ -22,6 +22,7 @@ export type DefaultInfoDialogProps = {
   labels?: {
     action?: string;
   };
+  closeButton?: ReactNode;
   closeOnPrimaryAction?: boolean;
   onPrimaryAction?: () => void;
   onClose?: () => void;
@@ -36,6 +37,7 @@ export const DefaultModal = ({
   labels = {
     action: 'Close'
   },
+  closeButton = DefaultCloseButton,
   closeOnPrimaryAction = true,
   onClose,
   onPrimaryAction
@@ -81,27 +83,33 @@ export const DefaultModal = ({
                 </PrimaryActionButtonWrapper>
               </Flex>
             )}
-            <Box css={{ position: 'absolute', top: '$6', right: '$6' }}>
-              <DialogClose asChild>
-                <IconButton
-                  icon={<CloseIcon />}
-                  aria-label="Close"
-                  color="bright"
-                  css={{
-                    [`& .${prefixClassName('button__icon-container')} > svg`]: {
-                      width: '$6',
-                      height: '$6'
-                    }
-                  }}
-                />
-              </DialogClose>
-            </Box>
+            {closeButton && (
+              <Box css={{ position: 'absolute', top: '$6', right: '$6' }}>
+                {closeButton}
+              </Box>
+            )}
           </>
         )}
       </DialogContent>
     </Dialog>
   );
 };
+
+const DefaultCloseButton = (
+  <DialogClose asChild>
+    <IconButton
+      icon={<CloseIcon />}
+      aria-label="Close"
+      color="bright"
+      css={{
+        [`& .${prefixClassName('button__icon-container')} > svg`]: {
+          width: '$6',
+          height: '$6'
+        }
+      }}
+    />
+  </DialogClose>
+);
 
 const PrimaryActionButtonWrapper = ({
   useActionWrapper,

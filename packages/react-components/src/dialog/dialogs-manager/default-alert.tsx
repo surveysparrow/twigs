@@ -21,6 +21,7 @@ export type DefaultAlertDialogProps = {
   };
   actionButtonProps?: ButtonProps;
   closeOnPrimaryAction?: boolean;
+  closeButton?: ReactNode;
   onPrimaryAction?: () => void;
   onClose?: () => void;
 };
@@ -33,6 +34,7 @@ export const DefaultAlertDialog = ({
   },
   closeOnPrimaryAction = true,
   actionButtonProps,
+  closeButton = DefaultCloseButton,
   onPrimaryAction,
   onClose
 }: DefaultAlertDialogProps) => {
@@ -75,25 +77,31 @@ export const DefaultAlertDialog = ({
             )}
           </ActionButtonWrapper>
         </AlertDialogActions>
-        <Box css={{ position: 'absolute', top: '$6', right: '$6' }}>
-          <AlertDialogCancel asChild>
-            <IconButton
-              icon={<CloseIcon />}
-              aria-label="Close"
-              color="bright"
-              css={{
-                [`& .${prefixClassName('button__icon-container')} > svg`]: {
-                  width: '$6',
-                  height: '$6'
-                }
-              }}
-            />
-          </AlertDialogCancel>
-        </Box>
+        {closeButton && (
+          <Box css={{ position: 'absolute', top: '$6', right: '$6' }}>
+            {closeButton}
+          </Box>
+        )}
       </AlertDialogContent>
     </AlertDialog>
   );
 };
+
+const DefaultCloseButton = (
+  <AlertDialogCancel asChild>
+    <IconButton
+      icon={<CloseIcon />}
+      aria-label="Close"
+      color="bright"
+      css={{
+        [`& .${prefixClassName('button__icon-container')} > svg`]: {
+          width: '$6',
+          height: '$6'
+        }
+      }}
+    />
+  </AlertDialogCancel>
+);
 
 const ActionButtonWrapper = ({
   useActionWrapper,
