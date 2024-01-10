@@ -34,6 +34,9 @@ export default {
     },
     requiredIndicator: {
       control: 'boolean'
+    },
+    rows: {
+      control: 'number'
     }
   }
 };

@@ -1,4 +1,6 @@
-import React, { ComponentProps, ReactElement } from 'react';
+import React, {
+  ComponentProps, ReactElement, forwardRef, FunctionComponent
+} from 'react';
 import { styled } from '../stitches.config';
 import { StyledError, errorBorderStyles } from '../input';
 import { Box } from '../box';
@@ -91,7 +93,7 @@ interface TextareaBaseProps {
 export type TextareaProps = TextareaBaseProps &
   ComponentProps<typeof StyledTextarea>;
 
-export const Textarea = ({
+export const Textarea:FunctionComponent<TextareaProps> = forwardRef(({
   resize = 'both',
   variant = 'default',
   errorBorder = false,
@@ -103,8 +105,9 @@ export const Textarea = ({
   css,
   value,
   defaultValue,
+  rows,
   ...rest
-}: TextareaProps) => {
+}: TextareaProps, ref) => {
   const mergedValue = value || defaultValue;
   return (
     <Box>
@@ -126,6 +129,7 @@ export const Textarea = ({
                   color: '$neutral700',
                   ...(!label ? { marginLeft: 'auto' } : {})
                 }}
+                data-testid="textarea-char-count"
               >
                 {mergedValue?.toString().length || 0}
                 {
@@ -139,6 +143,7 @@ export const Textarea = ({
       <StyledTextarea
         value={value}
         defaultValue={defaultValue}
+        rows={rows}
         css={{
           ...(errorBorder && {
             ...errorBorderStyles
@@ -149,6 +154,7 @@ export const Textarea = ({
           maxLength
         })}
         resize={resize}
+        ref={ref}
         variant={variant}
         {...rest}
       />
@@ -159,4 +165,4 @@ export const Textarea = ({
       }
     </Box>
   );
-};
+});
