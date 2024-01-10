@@ -14,7 +14,7 @@ export type FormInputProps = {
   requiredIndicator?:boolean | ReactElement
 } & InputProps;
 
-const StyledError = styled(FormHelperText, {
+export const StyledError = styled(FormHelperText, {
   color: '$negative500 !important',
   marginTop: '$2'
 });

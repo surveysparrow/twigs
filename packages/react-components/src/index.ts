@@ -35,5 +35,6 @@ export * from './timepicker';
 export * from './toast';
 export * from './tooltip';
 export * from './hooks';
+export * from './textarea';
 
 export * from './stitches.config';
