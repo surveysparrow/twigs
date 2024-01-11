@@ -19,6 +19,9 @@ export default {
     rounded: {
       control: 'select',
       options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', 'full']
+    },
+    limitExceededLabel: {
+      control: 'string'
     }
   },
   args: {
