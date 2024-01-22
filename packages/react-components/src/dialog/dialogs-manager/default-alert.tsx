@@ -1,4 +1,4 @@
-import { ReactNode, isValidElement } from 'react';
+import React, { ReactNode, isValidElement } from 'react';
 import { CloseIcon } from '@sparrowengg/twigs-react-icons';
 import {
   AlertDialog,
@@ -20,9 +20,8 @@ export type DefaultAlertDialogProps = {
     action?: ReactNode;
   };
   actionButtonProps?: ButtonProps;
-  closeOnPrimaryAction?: boolean;
   closeButton?: ReactNode;
-  onPrimaryAction?: () => void;
+  onPrimaryAction?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onClose?: () => void;
 };
 
@@ -32,7 +31,6 @@ export const DefaultAlertDialog = ({
   labels = {
     action: 'Close'
   },
-  closeOnPrimaryAction = true,
   actionButtonProps,
   closeButton = DefaultCloseButton,
   onPrimaryAction,
@@ -62,7 +60,7 @@ export const DefaultAlertDialog = ({
             justifyContent: 'flex-end'
           }}
         >
-          <ActionButtonWrapper useActionWrapper={closeOnPrimaryAction}>
+          <AlertDialogAction asChild>
             {isValidElement(labels.action) ? (
               labels.action
             ) : (
@@ -75,7 +73,7 @@ export const DefaultAlertDialog = ({
                 {labels.action}
               </Button>
             )}
-          </ActionButtonWrapper>
+          </AlertDialogAction>
         </AlertDialogActions>
         {closeButton && (
           <Box css={{ position: 'absolute', top: '$6', right: '$6' }}>
@@ -102,17 +100,3 @@ const DefaultCloseButton = (
     />
   </AlertDialogCancel>
 );
-
-const ActionButtonWrapper = ({
-  useActionWrapper,
-  children
-}: {
-  useActionWrapper?: boolean;
-  children?: ReactNode;
-}) => {
-  if (useActionWrapper) {
-    return <AlertDialogAction asChild>{children}</AlertDialogAction>;
-  }
-
-  return <>{children}</>;
-};

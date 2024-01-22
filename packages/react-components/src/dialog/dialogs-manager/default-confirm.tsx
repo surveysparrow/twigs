@@ -1,4 +1,4 @@
-import { ReactNode, isValidElement } from 'react';
+import React, { ReactNode, isValidElement } from 'react';
 import { CloseIcon } from '@sparrowengg/twigs-react-icons';
 import {
   AlertDialog,
@@ -22,10 +22,9 @@ export type DefaultConfirmDialogProps = {
   };
   confirmButtonProps?: ButtonProps;
   cancelButtonProps?: ButtonProps;
-  closeOnConfirm?: boolean;
   closeButton?: ReactNode;
-  onConfirm?: () => void;
-  onCancel?: () => void;
+  onConfirm?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onCancel?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onClose?: () => void;
 };
 
@@ -36,7 +35,6 @@ export const DefaultConfirmDialog = ({
     confirm: 'Confirm',
     cancel: 'Cancel'
   },
-  closeOnConfirm = true,
   cancelButtonProps,
   confirmButtonProps,
   closeButton = DefaultCloseButton,
@@ -80,7 +78,7 @@ export const DefaultConfirmDialog = ({
             </AlertDialogCancel>
           )}
           {labels.confirm && (
-            <ConfirmButtonWrapper useActionWrapper={closeOnConfirm}>
+            <AlertDialogAction asChild>
               {isValidElement(labels.confirm) ? (
                 labels.confirm
               ) : (
@@ -93,7 +91,7 @@ export const DefaultConfirmDialog = ({
                   {labels.confirm}
                 </Button>
               )}
-            </ConfirmButtonWrapper>
+            </AlertDialogAction>
           )}
         </AlertDialogActions>
         {closeButton && (
@@ -121,17 +119,3 @@ const DefaultCloseButton = (
     />
   </AlertDialogCancel>
 );
-
-const ConfirmButtonWrapper = ({
-  useActionWrapper,
-  children
-}: {
-  useActionWrapper?: boolean;
-  children?: ReactNode;
-}) => {
-  if (useActionWrapper) {
-    return <AlertDialogAction asChild>{children}</AlertDialogAction>;
-  }
-
-  return <>{children}</>;
-};

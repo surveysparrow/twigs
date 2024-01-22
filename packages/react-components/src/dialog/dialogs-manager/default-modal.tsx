@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { CloseIcon } from '@sparrowengg/twigs-react-icons';
 import {
   Dialog,
@@ -23,8 +23,7 @@ export type DefaultInfoDialogProps = {
     action?: string;
   };
   closeButton?: ReactNode;
-  closeOnPrimaryAction?: boolean;
-  onPrimaryAction?: () => void;
+  onPrimaryAction?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onClose?: () => void;
 };
 
@@ -38,7 +37,6 @@ export const DefaultModal = ({
     action: 'Close'
   },
   closeButton = DefaultCloseButton,
-  closeOnPrimaryAction = true,
   onClose,
   onPrimaryAction
 }: DefaultInfoDialogProps) => {
@@ -74,13 +72,11 @@ export const DefaultModal = ({
                   justifyContent: 'flex-end'
                 }}
               >
-                <PrimaryActionButtonWrapper
-                  useActionWrapper={closeOnPrimaryAction}
-                >
+                <DialogClose asChild>
                   <Button size="lg" color="default" onClick={onPrimaryAction}>
                     {labels?.action}
                   </Button>
-                </PrimaryActionButtonWrapper>
+                </DialogClose>
               </Flex>
             )}
             {closeButton && (
@@ -110,17 +106,3 @@ const DefaultCloseButton = (
     />
   </DialogClose>
 );
-
-const PrimaryActionButtonWrapper = ({
-  useActionWrapper,
-  children
-}: {
-  useActionWrapper?: boolean;
-  children?: ReactNode;
-}) => {
-  if (useActionWrapper) {
-    return <DialogClose asChild>{children}</DialogClose>;
-  }
-
-  return <>{children}</>;
-};
