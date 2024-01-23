@@ -21,7 +21,7 @@ export default {
       options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', 'full']
     },
     limitExceededLabel: {
-      control: 'string'
+      control: 'text'
     }
   },
   args: {
