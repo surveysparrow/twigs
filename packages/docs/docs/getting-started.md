@@ -10,7 +10,7 @@ npm i @sparrowengg/twigs-react
 ```
 
 :::warning
-Twigs is still in alpha. Please expect breaking changes. We'll try out best to make the updates smooth. 
+Twigs is still in alpha. Please expect breaking changes. We'll try our best to make the updates smooth. 
 :::
 
 Now, you can wrap your application root in Twigs `ThemeProvider`. 

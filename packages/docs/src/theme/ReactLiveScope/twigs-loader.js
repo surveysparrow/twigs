@@ -6,7 +6,7 @@ export function twigsComponentLoader(componentExportName) {
     return (
       <BrowserOnly fallback={<div>...</div>}>
         {() => {
-          const Component = require("@site/../react-components/src/index")[componentExportName];
+          const Component = require("@site/../react-components/dist/es")[componentExportName];
           return <Component {...props} />;
         }}
       </BrowserOnly>
@@ -18,7 +18,7 @@ export function twigsIconLoader(componentExportName) {
     return (
       <BrowserOnly fallback={<div>...</div>}>
         {() => {
-          const Component = require("@site/../react-icons/src/index")[componentExportName];
+          const Component = require("@site/../react-icons/dist/es")[componentExportName];
           return <Component {...props} />;
         }}
       </BrowserOnly>
