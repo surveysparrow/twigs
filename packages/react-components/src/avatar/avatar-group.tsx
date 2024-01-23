@@ -220,7 +220,7 @@ export const AvatarGroup: FunctionComponent<AvatarGroupProps> = React.forwardRef
               >
                 <AvatarOverlay />
                 <AvatarOverlayText size={size}>
-                  {extraAvatarsCount || `+${limitExceededLabel}`}
+                  {`+${extraAvatarsCount}` || limitExceededLabel}
                 </AvatarOverlayText>
               </Avatar>
             </AvatarNestedItem>
