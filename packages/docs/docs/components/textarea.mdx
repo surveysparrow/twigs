@@ -1,0 +1,74 @@
+# Textarea
+
+### Import
+
+```jsx
+import { Textarea } from "@sparrowengg/twigs-react";
+```
+
+### Usage 
+```jsx live
+<Textarea rows="8" placeholder="Enter your description" />
+```
+
+### Textarea error
+```jsx live
+<Textarea
+  label="Enter your details"
+  error="Not a valid description"
+/>
+```
+
+### Character count
+
+```jsx
+<Textarea
+  // highlight-start
+  showCount={true}
+  maxLength={10}
+  // highlight-end
+/>
+```
+
+Using `maxLength` and `showCount` props, you can show the character count of the Textarea field.
+
+```jsx live
+function CharacterCount() {
+  const [value, setValue] = React.useState('');
+  return (
+    <Textarea
+      label="Description"
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+      showCount
+      maxLength={10}
+    />
+  );
+}
+```
+
+### Variants
+```jsx live
+<Flex gap='12px' flexDirection='column'>
+  <Textarea rows="4" placeholder='Default textarea variant' variant="default" />
+  <Textarea rows="4" variant='filled' placeholder='Filled textarea variant' />
+</Flex>
+```
+
+## Props
+
+| Property  | Description                            | Type            | Default |
+|-----------|----------------------------------------|-----------------|---------|
+| variant   | style of textzrea                      | `default` `filled` | default |
+| onChange  |                                        | function        |         |   
+| resize    | control the textarea's resize ability  | `both` `verical` `horizontal` `none` | both |
+| disabled  |                                        | boolean         | false   |
+| css       | Custom styles for textarea                | object          |         |
+| maxLength       | Maximum allowed characters       | number          |         |
+| rows            | Maximum allowed rows             | number          |         |
+| cols            | Maximum allowed cols             | number          |         |
+| errorBorder     | Show error border when there is error              | boolean          |  false     |
+| requiredIndicator       | Show required indicator next to textarea                | boolean, JSX Element        |         |
+| error       | Message for textarea error                | string          |         |
+| maxLength       | Maximum allowed characters                | number          |         |
+| showCount       | Show remaining allowed character length                 | boolean          |         |

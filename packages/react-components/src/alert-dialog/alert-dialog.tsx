@@ -1,4 +1,4 @@
-import React, { ComponentProps, ReactElement } from 'react';
+import React, { ComponentProps, ReactNode } from 'react';
 import * as AlertDialogPrimitive from '@radix-ui/react-alert-dialog';
 import { keyframes, styled } from '../stitches.config';
 import { Grid } from '../grid';
@@ -65,7 +65,7 @@ const StyledActions = styled(Grid, {
 });
 
 type ContentProps = {
-  children?: ReactElement;
+  children?: ReactNode;
 } & ComponentProps<typeof StyledContent>
 
 const Content = ({ children, ...props }: ContentProps) => {

@@ -69,7 +69,8 @@
         "no-unused-vars": "off",
         "@typescript-eslint/no-unused-vars": ["error", { "ignoreRestSiblings": true }],
         "no-use-before-define": "off",
-        "react/prop-types": "off"
+        "react/prop-types": "off",
+        "no-underscore-dangle": "off"
     },
     "settings": {
         "import/resolver": {
