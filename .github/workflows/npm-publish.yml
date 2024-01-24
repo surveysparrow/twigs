@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    if: ${{ startsWith(GITHUB_REF_NAME, 'twigs-react@') }}
+    if: ${{ startsWith(vars.GITHUB_REF_NAME, 'twigs-react@') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
