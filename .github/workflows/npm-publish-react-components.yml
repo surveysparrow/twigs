@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    if: ${{ startsWith(GITHUB_REF_NAME, 'twigs-react@') }}
+    if: ${{ startsWith(github.ref_name, 'twigs-react@') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -17,11 +17,11 @@ jobs:
         with:
           node-version: 16
       - run: yarn
-      - run: yarn build
+      - run: yarn build:components
       - run: yarn test
 
   publish-npm:
-    if: ${{ startsWith(GITHUB_REF_NAME, 'twigs-react@') }}
+    if: ${{ startsWith(github.ref_name, 'twigs-react@') }}
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -30,6 +30,6 @@ jobs:
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
-      - run: npm publish
+      - run: cd packages/react-components && npm publish
         env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+          NODE_AUTH_TOKEN: ${{secrets.npm_token_react_components}}
