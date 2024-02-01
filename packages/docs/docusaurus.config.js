@@ -112,7 +112,7 @@ const config = {
               },
               {
                 label: 'Drawer',
-                to: '/docs/components/Drawer',
+                to: '/docs/components/drawer',
               },
               {
                 label: 'Popover',
