@@ -1,5 +1,5 @@
 import { defaultTheme } from '@site/../react-components/src/stitches.config';
-import { twigsComponentLoader } from '@site/src/theme/ReactLiveScope/twigs-loader';
+import { remToPix, twigsComponentLoader } from '@site/src/theme/ReactLiveScope/twigs-loader';
 import React from 'react';
 
 const Box = twigsComponentLoader('Box');
@@ -14,12 +14,15 @@ export default function AllRadii() {
     <Box>
       <Flex gap="$16" wrap="wrap">
         {
-          Object.keys(radii).map((rad) => (
+          Object.keys(radii).map((rad) => {
+          const pxVal = remToPix(radii[rad]);
+            return (
             <div key={`rad-${rad}`}>
               <Chip color="primary">
                 <Text size="sm">{rad}</Text>
                 :
                 <Text size="sm">{radii[rad]}</Text>
+                <Text size="sm">{`(${pxVal})`}</Text>
               </Chip>
               <Box
                 css={{
@@ -33,7 +36,7 @@ export default function AllRadii() {
                 }}
               />
             </div>
-          ))
+          )})
         }
       </Flex>
     </Box>

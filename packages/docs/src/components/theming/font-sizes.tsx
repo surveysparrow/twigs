@@ -27,7 +27,6 @@ export default function AllFontSizes() {
                 (
                 <Text>
                   {pxVal}
-                  px
                 </Text>
                 )
               </Chip>

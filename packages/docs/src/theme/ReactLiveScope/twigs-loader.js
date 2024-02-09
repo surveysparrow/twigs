@@ -26,5 +26,8 @@ export function twigsIconLoader(componentExportName) {
   }
 };
 export function remToPix(remVal) {
-  return parseFloat(remVal.replace('rem', '')) * 16;
+  if(remVal.includes('px')){
+    return remVal
+  }
+  return `${parseFloat(remVal.replace('rem', '')) * 16}px`;
 }
