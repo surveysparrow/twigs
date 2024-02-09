@@ -24,7 +24,7 @@ export default function AllLineHeights() {
               <Text>${lineHeight}</Text>
               /
               <Text>{lineHeights[lineHeight]}</Text>
-              <Text>{`(${pxVal})`}</Text>
+             {lineHeights[lineHeight].includes('rem') && <Text>{`(${pxVal}px)`}</Text>}
             </Chip>
             <Text
               size="sm"

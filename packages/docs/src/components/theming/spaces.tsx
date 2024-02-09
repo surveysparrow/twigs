@@ -45,6 +45,7 @@ export default function AllSpaces() {
                 <Td>{space[sp]}</Td>
                 <Td>
                   {remToPix(space[sp])}
+                  px
                 </Td>
               </Tr>
             ))

@@ -22,7 +22,7 @@ export default function AllRadii() {
                 <Text size="sm">{rad}</Text>
                 :
                 <Text size="sm">{radii[rad]}</Text>
-                <Text size="sm">{`(${pxVal})`}</Text>
+                {radii[rad].includes('rem') && <Text size="sm">{`(${pxVal}px)`}</Text>}
               </Chip>
               <Box
                 css={{

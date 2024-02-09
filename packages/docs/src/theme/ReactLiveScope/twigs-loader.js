@@ -29,5 +29,5 @@ export function remToPix(remVal) {
   if(remVal.includes('px')){
     return remVal
   }
-  return `${parseFloat(remVal.replace('rem', '')) * 16}px`;
+  return `${parseFloat(remVal.replace('rem', '')) * 16}`;
 }
