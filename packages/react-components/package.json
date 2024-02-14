@@ -1,5 +1,5 @@
 {
-  "name": "@sparrowengg/twigs-react",
+  "name": "@sparrowengg/ss-components",
   "version": "0.17.7",
   "description": "In house component library for SurveySparrow",
   "module": "dist/es/index.js",
