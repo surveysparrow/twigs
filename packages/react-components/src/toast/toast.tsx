@@ -5,6 +5,7 @@ import {
 } from '@sparrowengg/twigs-react-icons';
 import { styled, keyframes } from '../stitches.config';
 import { Flex } from '../flex';
+import { Box } from '../box';
 
 const StyledTickIcon = styled(TickCircleFillIcon);
 const StyledErrorIcon = styled(AlertFillIcon);
@@ -210,12 +211,8 @@ const StyledToast = styled(ToastPrimitive.Root, {
   backgroundColor: '$neutral900',
   borderRadius: '$xl',
   border: '$borderWidths$xs solid $black300',
-  display: 'grid',
+  display: 'flex',
   padding: '$8 $6',
-  gridTemplateAreas: '"icon content action" "icon content action"',
-  gridTemplateColumns: 'max-content auto max-content',
-  columnGap: '$8',
-  alignItems: 'center',
   overflow: 'hidden',
   '&:focus, &:active': {
     outline: 'none'
@@ -294,6 +291,14 @@ const StyledToast = styled(ToastPrimitive.Root, {
   }
 });
 
+const StyledToastWrapper = styled(Box, {
+  display: 'grid',
+  gridTemplateAreas: '"icon content action" "icon content action"',
+  gridTemplateColumns: 'max-content auto max-content',
+  columnGap: '$8',
+  alignItems: 'center'
+});
+
 interface ToastBaseProps {
   children?: React.ReactNode;
   variant?: string,
@@ -310,10 +315,13 @@ const ToastWrapper: FunctionComponent<ToastProps> = ({
 }) => {
   return (
     <StyledToast data-testid="toast" variant={variant} {...props}>
-      <Icon variant={variant}>
-        {icon && React.cloneElement(icon)}
-      </Icon>
-      {children}
+      <StyledToastWrapper>
+        <Icon variant={variant}>
+          {icon && React.cloneElement(icon)}
+        </Icon>
+        {children}
+      </StyledToastWrapper>
+
     </StyledToast>
   );
 };
