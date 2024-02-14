@@ -7,25 +7,21 @@ on:
     types: [created]
 
 jobs:
-  build:
+  build-test-and-publish:
     if: ${{ startsWith(github.ref_name, 'twigs-react@') }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Build and Test
+        uses: actions/setup-node@v3
         with:
           node-version: 16
       - run: yarn
       - run: yarn build:components
       - run: yarn test
-
-  publish-npm:
-    if: ${{ startsWith(github.ref_name, 'twigs-react@') }}
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: Publish to npm
+        uses: actions/setup-node@v3
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
