@@ -36,7 +36,7 @@ export const FormInput: FunctionComponent<FormInputProps> = forwardRef(({
       <Flex
         alignItems="center"
         justifyContent="space-between"
-        css={{ marginBottom: '$2' }}
+        {...((showCount || label) && { css: { marginBottom: '$2' } })}
       >
         {
           label
