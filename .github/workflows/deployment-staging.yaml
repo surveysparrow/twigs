@@ -40,5 +40,5 @@ jobs:
           aws_secret_access_key: ${{ secrets.SECRET_KEY_PRODUCTION }}
           aws_default_region: ${{ secrets.AWS_DEFAULT_REGION }}
         run: |
-          aws cp build s3://ss-marketplace-twigs-staging/
+          aws s3 cp build s3://${BUCKET_NAME}/
       
