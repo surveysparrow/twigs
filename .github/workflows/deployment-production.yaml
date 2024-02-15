@@ -45,4 +45,10 @@ jobs:
           aws s3 cp ./build s3://${bucket_name} --region ${AWS_DEFAULT_REGION} --recursive
 
       - name: Clearing Cloudfont Cache
-        run: aws cloudfront create-invalidation --distribution-id ${cloudfront_distribution} --paths "*" --region ${AWS_DEFAULT_REGION}
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_PRODUCTION }}
+          WS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_KEY_PRODUCTION }}
+          AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+        
+        run: |
+          aws cloudfront create-invalidation --region ${AWS_DEFAULT_REGION} --distribution-id ${cloudfront_distribution} --paths '*'
