@@ -21,17 +21,17 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      # - name: Use Node.js ${{ matrix.node-version }}
-      #   uses: actions/setup-node@v3
-      #   with:
-      #     node-version: ${{ matrix.node-version }}
-      #     cache: "npm"
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
       
-      # - name: Installing Dependencies
-      #   run: yarn
+      - name: Installing Dependencies
+        run: yarn
 
-      # - name: Building Twigs Docs
-      #   run: yarn build:docs
+      - name: Building Twigs Docs
+        run: yarn build:docs
       
       - name: Upload Build to S3
         working-directory: ./packages/docs/
@@ -40,5 +40,5 @@ jobs:
           aws_secret_access_key: ${{ secrets.SECRET_KEY_PRODUCTION }}
           aws_default_region: ${{ secrets.AWS_DEFAULT_REGION }}
         run: |
-          aws cp docs s3://${BUCKET_NAME}/
+          aws cp build s3://ss-marketplace-twigs-staging/
       
