@@ -36,9 +36,11 @@ jobs:
       - name: Upload Build to S3
         working-directory: ./packages/docs/
         env:
-          aws_access_key_id: ${{ secrets.ACCESS_KEY_PRODUCTION }}
-          aws_secret_access_key: ${{ secrets.SECRET_KEY_PRODUCTION }}
-          aws_default_region: ${{ secrets.AWS_DEFAULT_REGION }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_PRODUCTION }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_KEY_PRODUCTION }}
+          # AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+          AWS_DEFAULT_REGION: 'us-east-1'
 
-        run: aws s3 cp build s3://ss-marketplace-twigs-staging/ --region us-east-1
+        run: | 
+          aws s3 cp ./build s3://ss-marketplace-twigs-staging --region us-east-1
       
