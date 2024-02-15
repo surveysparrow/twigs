@@ -5,7 +5,7 @@ name: Twigs Deployment Production
 
 on:
   push:
-    branches: ["staging"]
+    branches: ["master"]
 
 jobs:
   build:
