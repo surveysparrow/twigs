@@ -21,27 +21,25 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      # - name: Use Node.js ${{ matrix.node-version }}
-      #   uses: actions/setup-node@v3
-      #   with:
-      #     node-version: ${{ matrix.node-version }}
-      #     cache: "npm"
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
       
-      # - name: Installing Dependencies
-      #   run: yarn
+      - name: Installing Dependencies
+        run: yarn
 
-      # - name: Building Twigs Docs
-      #   run: yarn build:docs
+      - name: Building Twigs Docs
+        run: yarn build:docs
       
       - name: Upload Build to S3
         working-directory: ./packages/docs/
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_PRODUCTION }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_KEY_PRODUCTION }}
-          # AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
           AWS_DEFAULT_REGION: 'us-east-1'
 
         run: | 
-          aws s3 ls
-          aws s3 cp ./docs s3://ss-marketplace-twigs-staging --region us-east-1
+          aws s3 cp ./docs s3://ss-marketplace-twigs-staging --region us-east-1 --recursive
       
