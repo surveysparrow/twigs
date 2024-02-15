@@ -47,7 +47,7 @@ jobs:
       - name: Clearing Cloudfont Cache
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_PRODUCTION }}
-          WS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_KEY_PRODUCTION }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_KEY_PRODUCTION }}
           AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
         
         run: |
