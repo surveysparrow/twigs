@@ -33,10 +33,10 @@ jobs:
       - name: Upload Build to S3
         working-directory: ./packages/docs/
         env:
-          aws_access_key_id: ${{secrets.ACCESS_KEY_PRODUCTION}}
-          aws_secret_access_key: ${{secrets.SECRET_KEY_PRODUCTION}}
+          aws_access_key_id: ${{ secrets.ACCESS_KEY_PRODUCTION }}
+          aws_secret_access_key: ${{ secrets.SECRET_KEY_PRODUCTION }}
           aws_default_region: ${{ secrets.AWS_DEFAULT_REGION }}
-          BUCKET_NAME: ${{ secrets.AWS_BUCKET_NAME }}
+          bucket_name: ${{ secrets.AWS_BUCKET_NAME }}
         run: |
-          aws cp build s3://$BUCKET_NAME/
+          aws cp build s3://$bucket_name/
       
