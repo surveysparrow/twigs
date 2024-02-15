@@ -12,13 +12,12 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      bucket_name: ${{ secrets.AWS_BUCKET_NAME }}
-      cloudfront_distribution: ${{ secrets.CLOUDFRONT_DISTRIBUTION }}
+      AWS_BUCKET_NAME: ${{ secrets.AWS_BUCKET_NAME }}
+      CLOUDFRONT_DISTRIBUTION: ${{ secrets.CLOUDFRONT_DISTRIBUTION }}
 
     strategy:
       matrix:
         node-version: [16.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
       - uses: actions/checkout@v3
@@ -42,7 +41,7 @@ jobs:
           AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
 
         run: | 
-          aws s3 cp ./build s3://${bucket_name} --region ${AWS_DEFAULT_REGION} --recursive
+          aws s3 cp ./build s3://${AWS_BUCKET_NAME} --region ${AWS_DEFAULT_REGION} --recursive
 
       - name: Clearing Cloudfont Cache
         env:
@@ -51,4 +50,4 @@ jobs:
           AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
         
         run: |
-          aws cloudfront create-invalidation --region ${AWS_DEFAULT_REGION} --distribution-id ${cloudfront_distribution} --paths '/*'
+          aws cloudfront create-invalidation --region ${AWS_DEFAULT_REGION} --distribution-id ${CLOUDFRONT_DISTRIBUTION} --paths '/*'
