@@ -26,11 +26,17 @@ jobs:
       
       - name: Installing Dependencies
         run: yarn
-      - name: Building the Doc
+
+      - name: Building Twigs Docs
         run: yarn build:docs
-      - run: pwd
-      - run: ls -la
-      - name: Installing Dependencies
+      
+      - name: Upload Build to S3
         working-directory: ./packages/docs/
-        run: ls -la
+        env:
+          aws_access_key_id: ${{secrets.ACCESS_KEY_PRODUCTION}}
+          aws_secret_access_key: ${{secrets.SECRET_KEY_PRODUCTION}}
+          aws_default_region: ${{ env.AWS_DEFAULT_REGION }}
+          BUCKET_NAME: ${{ env.BUCKET_NAME }}
+
+        run: echo "Bucket Name:${{ env.BUCKET_NAME }}"
       
