@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      BUCKET_NAME: ${{ secrets.AWS_BUCKET_NAME }}
+      bucket_name: ${{ secrets.AWS_BUCKET_NAME }}
 
     strategy:
       matrix:
@@ -39,6 +39,6 @@ jobs:
           aws_access_key_id: ${{ secrets.ACCESS_KEY_PRODUCTION }}
           aws_secret_access_key: ${{ secrets.SECRET_KEY_PRODUCTION }}
           aws_default_region: ${{ secrets.AWS_DEFAULT_REGION }}
-        run: |
-          aws s3 cp build s3://${BUCKET_NAME}/
+          
+        run: aws s3 cp build s3://${bucket_name}/ --region ${aws_default_region}
       
