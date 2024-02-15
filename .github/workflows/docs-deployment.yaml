@@ -1,0 +1,53 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: Twigs Deployment Production
+
+on:
+  push:
+    branches: ["master"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      AWS_BUCKET_NAME: ${{ secrets.AWS_BUCKET_NAME }}
+      CLOUDFRONT_DISTRIBUTION: ${{ secrets.CLOUDFRONT_DISTRIBUTION }}
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+      
+      - name: Installing Dependencies
+        run: yarn
+
+      - name: Building Twigs Docs
+        run: yarn build:docs
+      
+      - name: Upload Build to S3
+        working-directory: ./packages/docs/
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_PRODUCTION }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_KEY_PRODUCTION }}
+          AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+
+        run: | 
+          aws s3 cp ./build s3://${AWS_BUCKET_NAME} --region ${AWS_DEFAULT_REGION} --recursive
+
+      - name: Clearing Cloudfont Cache
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_PRODUCTION }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_KEY_PRODUCTION }}
+          AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+        
+        run: |
+          aws cloudfront create-invalidation --region ${AWS_DEFAULT_REGION} --distribution-id ${CLOUDFRONT_DISTRIBUTION} --paths '/*'
