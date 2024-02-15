@@ -23,8 +23,14 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
-      - run: yarn build:docs
+      
+      - name: Installing Dependencies
+        run: yarn
+      - name: Building the Doc
+        run: yarn build:docs
       - run: pwd
       - run: ls -la
-      - run: ls -la ./packages/docs/
+      - name: Installing Dependencies
+        working-directory: ./packages/docs/
+        run: ls -la
       
