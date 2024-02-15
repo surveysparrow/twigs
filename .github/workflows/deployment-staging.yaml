@@ -11,6 +11,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      BUCKET_NAME: ${{ secrets.AWS_BUCKET_NAME }}
+
     strategy:
       matrix:
         node-version: [16.x]
@@ -36,7 +39,6 @@ jobs:
           aws_access_key_id: ${{ secrets.ACCESS_KEY_PRODUCTION }}
           aws_secret_access_key: ${{ secrets.SECRET_KEY_PRODUCTION }}
           aws_default_region: ${{ secrets.AWS_DEFAULT_REGION }}
-          bucket_name: ${{ secrets.AWS_BUCKET_NAME }}
         run: |
-          aws cp docs s3://${bucket_name}/
+          aws cp docs s3://${BUCKET_NAME}/
       
