@@ -27,6 +27,6 @@ function App() {
 }
 ```
 
-For usage with NextJS, check [NextJS setup](./frameworks-usage/nextjs.mdx)
-
 The `theme` object in `ThemeProvider` will help you customize the theme settings of your application. 
+
+For usage with NextJS, check [NextJS setup](./frameworks-usage/nextjs.mdx)
