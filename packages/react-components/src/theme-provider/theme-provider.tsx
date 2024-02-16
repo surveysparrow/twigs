@@ -4,7 +4,6 @@ import {
 } from '../stitches.config';
 
 export const ThemeContext = React.createContext<any>(null);
-const html = document.documentElement;
 
 type ThemeProviderProps = {
   theme: typeof stichesTheme | {};
@@ -16,6 +15,7 @@ const mergeThemes = (outerTheme: any, theme: any) => {
 };
 
 export const ThemeProvider = ({ theme, children }: ThemeProviderProps) => {
+  const html = document.documentElement;
   const mergedTheme = useMemo(
     () => mergeThemes(defaultTheme, theme),
     [defaultTheme, theme]

@@ -1,0 +1,60 @@
+---
+sidebar_label: NextJS
+---
+
+# NextJS 
+Twigs can be configured to be used in NextJS by making a few changes to your `_document.tsx` file.
+
+
+```tsx
+import { Html, Head, Main, NextScript } from "next/document";
+import { getCssText } from "@sparrowengg/twigs-react";
+
+export default function Document() {
+  return (
+    <Html lang="en">
+      <Head>
+        <!-- Insert stylesheet --!>
+        <style
+          id="stitches"
+          dangerouslySetInnerHTML={{ __html: getCssText() }}
+        />
+      </Head>
+      <body>
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  );
+}
+```
+
+For customizing the theme, use the `createTheme` function
+
+```tsx
+import { Html, Head, Main, NextScript } from "next/document";
+import { createTheme, getCssText } from "@sparrowengg/twigs-react";
+
+export default function Document() {
+  const customTheme = createTheme({
+    colors: {
+      primary: 'green',
+    }
+  })
+
+  return (
+    <Html lang="en" className={customTheme}>
+      <Head>
+        <style
+          id="stitches"
+          dangerouslySetInnerHTML={{ __html: getCssText() }}
+        />
+      </Head>
+      <body>
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  );
+}
+```
