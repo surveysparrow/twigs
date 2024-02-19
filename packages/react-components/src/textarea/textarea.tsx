@@ -18,13 +18,13 @@ const StyledTextarea = styled('textarea', {
   '&::placeholder': {
     color: '$neutral500'
   },
-  '&:hover, &:focus, &:active': {
+  '&:hover:not(:disabled), &:focus, &:active:not(:disabled)': {
     background: '$white900',
     borderWidth: '$xs',
     borderStyle: 'solid',
     borderColorOpacity: ['$secondary500', 0.4]
   },
-  '&:focus, &:active': {
+  '&:focus, &:active:not(:disabled)': {
     $$shadowColor: '$colors$primary300',
     outline: 'none',
     background: '$white900',
@@ -65,7 +65,7 @@ const StyledTextarea = styled('textarea', {
         borderWidth: '$xs',
         borderStyle: 'solid',
         borderColor: '$neutral200',
-        '&:hover, &:focus, &:active': {
+        '&:hover:not(:disabled), &:focus, &:active:not(:disabled)': {
           borderWidth: '$xs',
           borderStyle: 'solid',
           borderColor: '$neutral300'
