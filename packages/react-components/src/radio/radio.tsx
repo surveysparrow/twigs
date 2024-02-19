@@ -16,12 +16,17 @@ const StyledRadio = styled(RadioGroupPrimitive.Item, {
   borderRadius: '$round',
   border: '$borderWidths$xs solid $neutral700',
   transition: 'all $transitions$2',
-  '&:hover': { borderColor: '$secondary500' },
+
+  '&:disabled': {
+    cursor: 'not-allowed',
+    opacity: 0.4
+  },
+
+  '&:hover:not(:disabled)': { borderColor: '$secondary500' },
   '&:focus-visible': {
     borderColor: '$secondary500',
     $$shadowColor: '$colors$primary300',
-    boxShadow:
-      'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
+    boxShadow: 'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
   },
   '&[data-state="checked"]': {
     borderColor: '$secondary500'
@@ -73,31 +78,21 @@ type OmitProps = 'onValueChange' | 'onChange';
 
 type RadioRootProps = {
   // eslint-disable-next-line no-unused-vars
-  onChange?: (value: string) => void,
-  disabled?: boolean,
-  required?: boolean,
-  children: React.ReactNode | React.ReactNode[]
-} & Omit<ComponentProps<typeof RadioGroupPrimitive.Root>, OmitProps>
+  onChange?: (value: string) => void;
+  disabled?: boolean;
+  required?: boolean;
+  children: React.ReactNode | React.ReactNode[];
+} & Omit<ComponentProps<typeof RadioGroupPrimitive.Root>, OmitProps>;
 
-export const RadioGroup: FunctionComponent<RadioRootProps> = React.forwardRef(
-  (
-    {
-      onChange, disabled, required, value, children, ...rest
-    }: RadioRootProps, ref
-  ) => {
-    return (
-      <StyledRadioGroup
-        ref={ref}
-        onValueChange={onChange}
-        disabled={disabled}
-        required={required}
-        {...rest}
-      >
-        {children}
-      </StyledRadioGroup>
-    );
-  }
-);
+export const RadioGroup: FunctionComponent<RadioRootProps> = React.forwardRef(({
+  onChange, disabled, required, value, children, ...rest
+}: RadioRootProps, ref) => {
+  return (
+    <StyledRadioGroup ref={ref} onValueChange={onChange} disabled={disabled} required={required} {...rest}>
+      {children}
+    </StyledRadioGroup>
+  );
+});
 
 const StyledLabelContainer = styled('label', {
   display: 'inline-flex',
@@ -105,32 +100,20 @@ const StyledLabelContainer = styled('label', {
 });
 
 export type RadioProps = {
-  disabled?: boolean,
-  required?: boolean
+  disabled?: boolean;
+  required?: boolean;
 } & Omit<ComponentProps<typeof StyledRadio>, OmitProps>;
 
-export const Radio: FunctionComponent<RadioProps> = React.forwardRef(
-  (
-    {
-      disabled, value, required, children, id, ...rest
-    }: RadioProps,
-    ref
-  ) => {
-    const uniqueId = id || useId();
-    return (
-      <Flex alignItems="center">
-        <StyledRadio
-          ref={ref}
-          disabled={disabled}
-          required={required}
-          value={value}
-          id={uniqueId}
-          {...rest}
-        >
-          <StyledIndicator />
-        </StyledRadio>
-        {children && <StyledLabelContainer htmlFor={uniqueId}>{children}</StyledLabelContainer>}
-      </Flex>
-    );
-  }
-);
+export const Radio: FunctionComponent<RadioProps> = React.forwardRef(({
+  disabled, value, required, children, id, ...rest
+}: RadioProps, ref) => {
+  const uniqueId = id || useId();
+  return (
+    <Flex alignItems="center">
+      <StyledRadio ref={ref} disabled={disabled} required={required} value={value} id={uniqueId} {...rest}>
+        <StyledIndicator />
+      </StyledRadio>
+      {children && <StyledLabelContainer htmlFor={uniqueId}>{children}</StyledLabelContainer>}
+    </Flex>
+  );
+});
