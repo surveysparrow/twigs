@@ -9,7 +9,7 @@ To get started with Twigs, run the following commands in your project repository
 npm i @sparrowengg/twigs-react
 ```
 
-:::warning
+:::caution
 Twigs is still in alpha. Please expect breaking changes. We'll try our best to make the updates smooth. 
 :::
 
@@ -28,3 +28,5 @@ function App() {
 ```
 
 The `theme` object in `ThemeProvider` will help you customize the theme settings of your application. 
+
+For usage with NextJS, check [NextJS setup](./frameworks-usage/nextjs.mdx)

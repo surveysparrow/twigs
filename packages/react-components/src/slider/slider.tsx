@@ -17,7 +17,11 @@ const StyledThumb = styled(RadixSlider.Thumb, {
   boxShadow: '0 0 0px transparent',
   transition: 'all 0.25s ease',
 
-  '&:hover': {
+  '&[data-disabled]': {
+    cursor: 'not-allowed'
+  },
+
+  '&:hover:not([data-disabled])': {
     $$shadowColor: '$colors$primary300',
     boxShadow: '0 0 10px $$shadowColor',
     backgroundColor: '$primary900'
@@ -46,6 +50,10 @@ const StyledRoot = styled(RadixSlider.Root, {
   touchAction: 'none',
   width: '100%',
   height: '20px',
+
+  '&[aria-disabled="true"]': {
+    opacity: 0.4
+  },
 
   variants: {
     size: {
@@ -106,9 +114,7 @@ type SliderBaseProps = {
   labelPlacement?: 'top' | 'bottom';
 };
 
-export type SliderProps = RadixSlider.SliderProps &
-  ComponentProps<typeof StyledRoot> &
-  SliderBaseProps;
+export type SliderProps = RadixSlider.SliderProps & ComponentProps<typeof StyledRoot> & SliderBaseProps;
 
 export const Slider = ({ labelPlacement = 'top', ...props }: SliderProps) => {
   const TrackAndRange = useCallback(() => {

@@ -134,7 +134,7 @@ const StyledButton = styled('button', {
       default: {
         backgroundColorOpacity: ['$secondary500', 0.08],
         color: '$secondary500',
-        [`&:hover, &:active, &.${prefixClassName('button--loading')}`]: {
+        [`&:hover:not(:disabled), &:active:not(:disabled), &.${prefixClassName('button--loading')}`]: {
           color: '$secondary600',
           backgroundColorOpacity: ['$secondary500', 0.08]
         },
@@ -145,31 +145,31 @@ const StyledButton = styled('button', {
       primary: {
         background: '$primary400',
         color: '$white900',
-        '&:hover, &:focus': {
+        '&:hover:not(:disabled), &:focus': {
           background: '$primary500'
         },
-        [`&:active, &.${prefixClassName('button--loading')}`]: {
+        [`&:active:not(:disabled), &.${prefixClassName('button--loading')}`]: {
           background: '$primary700'
         }
       },
       secondary: {
         background: '$secondary500',
         color: '$white900',
-        '&:hover, &:focus': {
+        '&:hover:not(:disabled), &:focus': {
           background: '$secondary600'
         },
-        [`&:active, &.${prefixClassName('button--loading')}`]: {
+        [`&:active:not(:disabled), &.${prefixClassName('button--loading')}`]: {
           background: '$secondary800'
         }
       },
       bright: {
         background: '$white900',
         color: '$secondary500',
-        '&:hover, &:focus': {
+        '&:hover:not(:disabled), &:focus': {
           color: '$secondary600',
           background: '$neutral50'
         },
-        [`&:active, &.${prefixClassName('button--loading')}`]: {
+        [`&:active:not(:disabled), &.${prefixClassName('button--loading')}`]: {
           color: '$secondary600',
           background: '$neutral100'
         }
@@ -177,20 +177,20 @@ const StyledButton = styled('button', {
       light: {
         backgroundColorOpacity: ['$white200', 0.1],
         color: '$white900',
-        '&:hover, &:focus': {
+        '&:hover:not(:disabled), &:focus': {
           background: '$white300'
         },
-        [`&:active, &.${prefixClassName('button--loading')}`]: {
+        [`&:active:not(:disabled), &.${prefixClassName('button--loading')}`]: {
           background: '$white400'
         }
       },
       error: {
         background: '$negative100',
         color: '$negative600',
-        '&:hover': {
+        '&:hover:not(:disabled)': {
           background: '$negative200'
         },
-        [`&:active, &.${prefixClassName('button--loading')}`]: {
+        [`&:active:not(:disabled), &.${prefixClassName('button--loading')}`]: {
           background: '$negative300'
         }
       }
@@ -284,13 +284,13 @@ const StyledButton = styled('button', {
         '&:focus': {
           backgroundColorOpacity: ['$primary500', 0.06]
         },
-        '&:hover': {
+        '&:hover:not(:disabled)': {
           backgroundColorOpacity: ['$primary500', 0.08]
         },
-        '&:hover, &:focus': {
+        '&:hover:not(:disabled), &:focus': {
           color: '$primary700'
         },
-        [`&:active, &.${prefixClassName('button--loading')}`]: {
+        [`&:active:not(:disabled), &.${prefixClassName('button--loading')}`]: {
           color: '$primary800',
           backgroundColorOpacity: ['$primary500', 0.15]
         }
@@ -303,12 +303,12 @@ const StyledButton = styled('button', {
         color: '$primary500',
         borderColorOpacity: ['$primary500', 0.4],
         borderStyle: 'solid',
-        '&:hover, &:focus': {
+        '&:hover:not(:disabled), &:focus': {
           borderColorOpacity: ['$primary500', 0.8],
           color: '$primary600',
           background: '$white900'
         },
-        [`&:active, &.${prefixClassName('button--loading')}`]: {
+        [`&:active:not(:disabled), &.${prefixClassName('button--loading')}`]: {
           borderColorOpacity: ['$primary500', 0.9],
           color: '$primary700',
           background: '$white900'
@@ -321,11 +321,11 @@ const StyledButton = styled('button', {
       css: {
         background: 'transparent',
         color: '$secondary500',
-        '&:hover, &:focus': {
+        '&:hover:not(:disabled), &:focus': {
           color: '$secondary600',
           backgroundColorOpacity: ['$secondary500', 0.08]
         },
-        [`&:active, &.${prefixClassName('button--loading')}`]: {
+        [`&:active:not(:disabled), &.${prefixClassName('button--loading')}`]: {
           color: '$secondary700',
           backgroundColorOpacity: ['$secondary500', 0.15]
         }
@@ -339,12 +339,12 @@ const StyledButton = styled('button', {
         background: '$white900',
         borderColorOpacity: ['$secondary400', 0.2],
         borderStyle: 'solid',
-        '&:hover, &:focus': {
+        '&:hover:not(:disabled), &:focus': {
           borderColorOpacity: ['$secondary600', 0.4],
           color: '$secondary600',
           background: '$white900'
         },
-        [`&:active, &.${prefixClassName('button--loading')}`]: {
+        [`&:active:not(:disabled), &.${prefixClassName('button--loading')}`]: {
           borderColorOpacity: ['$secondary800', 0.8],
           color: '$secondary800',
           background: '$white900'
@@ -359,11 +359,11 @@ const StyledButton = styled('button', {
         borderColorOpacity: ['$white400', 0.2],
         borderStyle: 'solid',
         color: '$white900',
-        '&:hover, &:focus': {
+        '&:hover:not(:disabled), &:focus': {
           background: 'transparent',
           borderColorOpacity: ['$white500', 0.3]
         },
-        [`&:active, &.${prefixClassName('button--loading')}`]: {
+        [`&:active:not(:disabled), &.${prefixClassName('button--loading')}`]: {
           background: 'transparent',
           borderColorOpacity: ['$white700', 0.7]
         }
@@ -375,13 +375,13 @@ const StyledButton = styled('button', {
       css: {
         background: 'transparent',
         color: '$neutral800',
-        '&:hover, &:focus, &:active': {
+        '&:hover:not(:disabled), &:focus, &:active:not(:disabled)': {
           color: '$neutral900'
         },
-        [`&:active, &.${prefixClassName('button--loading')}`]: {
+        [`&:active:not(:disabled), &.${prefixClassName('button--loading')}`]: {
           backgroundColorOpacity: ['$black500', 0.08]
         },
-        '&:hover, &:focus': {
+        '&:hover:not(:disabled), &:focus': {
           backgroundColorOpacity: ['$black500', 0.04]
         }
       }
@@ -392,10 +392,10 @@ const StyledButton = styled('button', {
       css: {
         color: '$negative600',
         background: 'transparent',
-        '&:hover, &:focus': {
+        '&:hover:not(:disabled), &:focus': {
           background: '$negative100'
         },
-        [`&:active, &.${prefixClassName('button--loading')}`]: {
+        [`&:active:not(:disabled), &.${prefixClassName('button--loading')}`]: {
           background: '$negative200'
         }
       }
@@ -408,12 +408,12 @@ const StyledButton = styled('button', {
         background: '$white900',
         borderColor: '$negative200',
         borderStyle: 'solid',
-        '&:hover, &:focus': {
+        '&:hover:not(:disabled), &:focus': {
           borderColor: '$negative300',
           color: '$negative700',
           background: '$white900'
         },
-        [`&:active, &.${prefixClassName('button--loading')}`]: {
+        [`&:active:not(:disabled), &.${prefixClassName('button--loading')}`]: {
           borderColor: '$negative600',
           color: '$negative800',
           background: '$white900'
