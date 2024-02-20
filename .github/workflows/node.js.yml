@@ -19,12 +19,30 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Check for doc changes
+        id: changed-docs-files
+        uses: tj-actions/changed-files@v42
+        with:
+          # Avoid using single or double quotes for multiline patterns
+          files: |
+             packages/docs/**
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
-      - run: yarn
-      - run: yarn build
-      - run: yarn test
+      - name: Yarn install
+        run: yarn
+      - name: Build all
+        if: steps.changed-docs-files.outputs.any_changed == 'true'
+        run: yarn build
+      - name: Build modules only
+        if: steps.changed-docs-files.outputs.any_changed == 'false'
+        run: yarn build:modules
+      - name: Lint
+        run: yarn lint
+      - name: Test
+        run: yarn test
