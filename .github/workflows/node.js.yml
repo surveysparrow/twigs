@@ -36,13 +36,13 @@ jobs:
           cache: "npm"
       - name: Yarn install
         run: yarn
-      - name: Lint
-        run: yarn lint
       - name: Build all
         if: steps.changed-docs-files.outputs.any_changed == 'true'
         run: yarn build
       - name: Build modules only
         if: steps.changed-docs-files.outputs.any_changed == 'false'
         run: yarn build:modules
+      - name: Lint
+        run: yarn lint
       - name: Test
         run: yarn test
