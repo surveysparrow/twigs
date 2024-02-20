@@ -1,3 +1,5 @@
+<p align="center"><img src="https://twigs.surveysparrow.com/img/logo-with-text.svg" width="200" alt="Twigs" /></p>
+
 # Welcome to Twigs monorepo
 
 ## Packages
@@ -12,6 +14,20 @@ This repo is built with lerna to support monorepo. commands can be run from the 
 
 1. Clone the repo
 2. install the dependencies using [yarn](https://yarnpkg.com/) `yarn install`
+
+### Development
+
+Twigs uses [Stitches](https://stitches.dev/) and [Radix](https://radix-ui.com/) for most of its components.
+Storybook is configured for components and icons, so you can run `yarn storybook` from the respective directory to start a development view.
+
+```
+$ git clone https://github.com/surveysparrow/twigs.git
+$ cd twigs
+$ yarn
+
+$ cd packages/react-components
+$ yarn storybook
+```
 
 **Other scripts**
 
