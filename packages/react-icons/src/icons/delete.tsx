@@ -50,7 +50,6 @@ export const DeleteIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeLinecap="round"
           strokeLinejoin="round"
         />
-        <circle cx="16" cy="21.3333" r="1.33333" fill={color} />
       </svg>
     );
   }
