@@ -64,28 +64,28 @@ export default function Home(): JSX.Element {
 
               return (
                 <div className='row'>
-                  <div className='col col--3'>
+                  <Link to='/docs/components/button' className='col col--3 text--no-decoration'>
                     <div className='component-section__component'>
                       <Button size="md"> Submit Details </Button>
                     </div>
                     <Heading as="h6" size="h6"> Button </Heading>
-                  </div>
+                  </Link>
 
-                  <div className='col col--3'>
+                  <Link to='/docs/components/chip' className='col col--3 text--no-decoration'>
                     <div className='component-section__component'>
                       <Chip color="warning" size="md" closable> Closable Chip </Chip>
                     </div>
                     <Heading as="h6" size="h6"> Chip </Heading>
-                  </div>
+                  </Link>
 
-                  <div className='col col--3'>
+                  <Link to='/docs/components/datepicker' className='col col--3 text--no-decoration'>
                     <div className='component-section__component'>
                       <DatePicker />
                     </div>
                     <Heading as="h6" size="h6"> DatePicker </Heading>
-                  </div>
+                  </Link>
 
-                  <div className='col col--3'>
+                  <Link to='/docs/components/pagination' className='col col--3 text--no-decoration'>
                     <div className='component-section__component'>
                       <Pagination
                         activePage={4}
@@ -94,9 +94,9 @@ export default function Home(): JSX.Element {
                       />
                     </div>
                     <Heading as="h6" size="h6"> Pagination </Heading>
-                  </div>
+                  </Link>
 
-                  <div className='col col--3'>
+                  <Link to='/docs/components/input' className='col col--3 text--no-decoration'>
                     <div className='component-section__component'>
                       <Input
                         placeholder="Search"
@@ -104,21 +104,21 @@ export default function Home(): JSX.Element {
                       />
                     </div>
                     <Heading as="h6" size="h6"> Input </Heading>
-                  </div>
+                  </Link>
 
-                  <div className='col col--3'>
+                  <Link to='/docs/components/alert' className='col col--3 text--no-decoration'>
                     <div className='component-section__component'>
                       <Alert icon={<ClapIcon size={24} style={{ marginRight: 10 }} />} css={{ width: 200 }}>Hi Twigs!</Alert>
                     </div>
                     <Heading as="h6" size="h6"> Alert </Heading>
-                  </div>
+                  </Link>
 
-                  <div className='col col--3'>
+                  <Link to='/docs/components/switch' className='col col--3 text--no-decoration'>
                     <div className='component-section__component'>
                       <Switch size="md" />
                     </div>
                     <Heading as="h6" size="h6"> Switch </Heading>
-                  </div>
+                  </Link>
 
 
                   <div className='col col--3'>
