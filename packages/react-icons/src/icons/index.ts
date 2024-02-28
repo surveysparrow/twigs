@@ -16,7 +16,7 @@ export { BackspaceIcon } from './backspace';
 export { BellIcon } from './bell';
 export { BlockIcon } from './block';
 export { BoldIcon } from './bold';
-export { BulletList } from './bullet-list';
+export { UnorderedList } from './unordered-list';
 export { CalendarIcon } from './calendar';
 export { CameraIcon } from './camera';
 export { ChevronDownIcon } from './chevron-down';
