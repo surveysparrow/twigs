@@ -75,6 +75,11 @@ const config = {
             sidebarId: 'tutorialSidebar',
             position: 'left',
             label: 'Getting Started',
+          },
+          {
+            href: 'https://github.com/surveysparrow/twigs',
+            label: 'GitHub',
+            position: 'right',
           }
         ],
       },
