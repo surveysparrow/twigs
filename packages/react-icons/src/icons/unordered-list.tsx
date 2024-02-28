@@ -1,7 +1,7 @@
 import React from 'react';
 import { IconProps } from '../types';
 
-export const UnorderedList = React.forwardRef<SVGSVGElement, IconProps>(
+export const UnorderedListIcon = React.forwardRef<SVGSVGElement, IconProps>(
   ({
     color = 'currentColor', size = 32, strokeWidth = 1.5, ...rest
   }, ref) => {
