@@ -94,5 +94,7 @@ const ReactLiveScope = {
   AccordionContent: twigsComponentLoader("AccordionContent"),
   AccordionItem: twigsComponentLoader("AccordionItem"),
   AccordionTrigger: twigsComponentLoader("AccordionTrigger"),
+  CircleLoader: twigsComponentLoader("CircleLoader"),
+  LineLoader: twigsComponentLoader("LineLoader"),
 };
 export default ReactLiveScope;
