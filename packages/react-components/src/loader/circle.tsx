@@ -39,24 +39,32 @@ const StyledContainer = styled(Box, {
   variants: {
     size: {
       xs: {
-        height: '8px',
-        width: '8px'
+        height: '$2',
+        width: '$2'
       },
       sm: {
         height: '10px',
         width: '10px'
       },
       md: {
-        height: '12px',
-        width: '12px'
+        height: '$3',
+        width: '$3'
       },
       lg: {
-        height: '16px',
-        width: '16px'
+        height: '$4',
+        width: '$4'
       },
       xl: {
-        height: '40px',
-        width: '40px'
+        height: '$6',
+        width: '$6'
+      },
+      '2xl': {
+        height: '$8',
+        width: '$8'
+      },
+      '3xl': {
+        height: '$10',
+        width: '$10'
       }
     },
     color: {
