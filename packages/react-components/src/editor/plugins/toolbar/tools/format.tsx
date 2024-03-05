@@ -6,7 +6,7 @@ import {
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem
-} from '@radix-ui/react-dropdown-menu';
+} from '@src/dropdown';
 import { TextFormatIcon } from '@sparrowengg/twigs-react-icons';
 import { IconButton } from '@src/button';
 import {
