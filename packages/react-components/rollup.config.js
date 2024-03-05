@@ -5,8 +5,14 @@ const postcss = require('rollup-plugin-postcss');
 const { PluginPure } = require('rollup-plugin-pure');
 const { dts } = require('rollup-plugin-dts');
 const esbuild = require('rollup-plugin-esbuild').default;
-
+const alias = require('@rollup/plugin-alias');
+const path = require('path');
 const packageJson = require('./package.json');
+const fs = require('fs');
+
+const projectRootDir = path.resolve(__dirname);
+
+const pathCache = {};
 
 /**
  * @type {import('rollup').RollupOptions}
@@ -45,6 +51,31 @@ module.exports = [
       }),
       resolve(),
       commonjs(),
+      alias({
+        entries: [
+          {
+            find: '@src',
+            replacement: path.resolve(projectRootDir, 'src'),
+            customResolver: (p) => {
+              if (pathCache[p]) {
+                return pathCache[p];
+              }
+
+              if (fs.lstatSync(p).isDirectory()) {
+                if (fs.existsSync(path.resolve(p, 'index.ts'))) {
+                  pathCache[p] = path.resolve(p, 'index.ts');
+                  return path.resolve(p, 'index.ts');
+                } else if (fs.existsSync(path.resolve(p, 'index.tsx'))) {
+                  pathCache[p] = path.resolve(p, 'index.tsx');
+                  return path.resolve(p, 'index.tsx');
+                }
+              }
+
+              return p;
+            }
+          }
+        ]
+      }),
       esbuild({
         include: /\.[jt]sx?$/,
         exclude: /node_modules/,
