@@ -43,15 +43,35 @@ import {
 } from './utils/find-react-child';
 
 const initialConfig: InitialConfigType = {
-  namespace: 'MyEditor',
+  namespace: 'TwigsEditor',
   theme: {
     text: {
       bold: 'text-bold',
       italic: 'text-italic',
       underline: 'text-underline',
-      code: 'text-code'
+      code: 'text-code',
+      base: 'text-base',
+      highlight: 'text-highlight',
+      strikethrough: 'text-strikethrough',
+      subscript: 'text-subscript',
+      superscript: 'text-superscript',
+      underlineStrikethrough: 'text-underline-strikethrough'
     },
-    code: 'block-code'
+    code: 'block-code',
+    quote: 'block-quote',
+    heading: {
+      h1: 'block-h1',
+      h2: 'block-h2',
+      h3: 'block-h3',
+      h4: 'block-h4',
+      h5: 'block-h5',
+      h6: 'block-h6'
+    },
+    list: {
+      ol: 'block-ol',
+      ul: 'block-ul',
+      listitem: 'block-listitem'
+    }
   },
   onError: (err) => {
     console.error(err);
