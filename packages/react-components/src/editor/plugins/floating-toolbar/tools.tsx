@@ -6,9 +6,9 @@ import {
   MinusIcon,
   UnderlineIcon
 } from '@sparrowengg/twigs-react-icons';
+import { Button, IconButton } from '@src/button';
 import { FORMAT_TEXT_COMMAND, LexicalEditor } from 'lexical';
 import { useCallback } from 'react';
-import { Button, IconButton } from '../../../button';
 import { useFloatingToolbarContext } from './utils';
 
 export const Bold = ({ editor }: { editor: LexicalEditor }) => {

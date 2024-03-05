@@ -6,6 +6,14 @@ import {
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { $findMatchingParent, mergeRegister } from '@lexical/utils';
 import {
+  DeleteIcon,
+  LinkIcon,
+  PencilIcon
+} from '@sparrowengg/twigs-react-icons';
+import { Box } from '@src/box';
+import { IconButton } from '@src/button';
+import { Link } from '@src/link';
+import {
   $getSelection,
   $isRangeSelection,
   $isTextNode,
@@ -23,17 +31,9 @@ import {
 import {
   useCallback, useEffect, useRef, useState
 } from 'react';
-import {
-  DeleteIcon,
-  LinkIcon,
-  PencilIcon
-} from '@sparrowengg/twigs-react-icons';
 import { getSelectedNode } from '../../utils/getSelectedNode';
-import { LinkEditorDialog } from './link-editor-dialog';
 import { setFloatingElemPositionForLinkEditor } from '../../utils/setFloatingElemPositionForLinkEditor';
-import { Box } from '../../../box';
-import { Link } from '../../../link';
-import { IconButton } from '../../../button';
+import { LinkEditorDialog } from './link-editor-dialog';
 
 function useDialogLinkEditorToolbar(
   editor: LexicalEditor,

@@ -15,8 +15,8 @@ import React, {
 } from 'react';
 import { createPortal } from 'react-dom';
 import { Box } from '@src/box';
-import { Button } from '../../../button';
-import { Popover, PopoverContent, PopoverTrigger } from '../../../popover';
+import { Button } from '@src/button';
+import { Popover, PopoverContent, PopoverTrigger } from '@src/popover';
 
 export type MenuData = {
   value: string;
@@ -81,7 +81,9 @@ const MentionsTypeaheadMenuItem = ({
 export type BaseLookupDropdownProps = {
   triggerFunction: (text: string) => MenuTextMatch | null;
   getResults: (text: string | null) => Promise<MenuData[]> | MenuData[];
-  $createNode: (data: MentionTypeaheadOption) => LexicalNode;
+  $createNode: (data: MentionTypeaheadOption) => LexicalNode & {
+    select: () => void;
+  };
   suggestionsListLength?: number;
   renderMenu?: (args: {
     anchorElementRef: React.MutableRefObject<HTMLElement | null>;

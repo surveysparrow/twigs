@@ -1,16 +1,16 @@
 import { CloseIcon, DeleteIcon } from '@sparrowengg/twigs-react-icons';
-import React, { useState } from 'react';
+import { Box } from '@src/box';
+import { Button, IconButton } from '@src/button';
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogTitle
-} from '../../../dialog';
-import { Button, IconButton } from '../../../button';
-import { FormInput } from '../../../input';
-import { Box } from '../../../box';
-import { Textarea } from '../../../textarea';
-import { Flex } from '../../../flex';
+} from '@src/dialog';
+import { Flex } from '@src/flex';
+import { FormInput } from '@src/input';
+import { Textarea } from '@src/textarea';
+import React, { useState } from 'react';
 
 export const LinkEditorDialog = ({
   open,

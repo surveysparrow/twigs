@@ -5,6 +5,10 @@ import {
 } from '@lexical/link';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { $findMatchingParent, mergeRegister } from '@lexical/utils';
+import { Box } from '@src/box';
+import { Button } from '@src/button';
+import { Flex } from '@src/flex';
+import { FormInput } from '@src/input';
 import {
   $getSelection,
   $isRangeSelection,
@@ -25,10 +29,6 @@ import {
 import { createPortal } from 'react-dom';
 import { getSelectedNode } from '../../utils/getSelectedNode';
 import { setFloatingElemPositionForLinkEditor } from '../../utils/setFloatingElemPositionForLinkEditor';
-import { Box } from '../../../box';
-import { FormInput } from '../../../input';
-import { Flex } from '../../../flex';
-import { Button } from '../../../button';
 
 const FloatingLinkEditor = ({
   editor,
