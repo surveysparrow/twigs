@@ -9,6 +9,7 @@ const alias = require('@rollup/plugin-alias');
 const path = require('path');
 const packageJson = require('./package.json');
 const fs = require('fs');
+const baseConfig = require('./rollup.config.base');
 
 const projectRootDir = path.resolve(__dirname);
 
@@ -19,20 +20,10 @@ const pathCache = {};
  */
 module.exports = [
   {
-    input: 'src/index.ts',
-    /**
-     * @type {import('rollup').OutputOptions[]}
-     */
+    ...baseConfig,
+    watch: false,
     output: [
-      {
-        dir: 'dist/es',
-        format: 'es',
-        sourcemap: true,
-        esModule: true,
-        preserveModules: true,
-        preserveModulesRoot: 'src',
-        exports: 'named'
-      },
+      ...baseConfig.output,
       {
         dir: 'dist/cjs',
         format: 'cjs',
@@ -41,56 +32,6 @@ module.exports = [
         preserveModulesRoot: 'src',
         exports: 'named'
       }
-    ],
-    external: [...Object.keys(packageJson.peerDependencies)],
-    plugins: [
-      external(),
-      PluginPure({
-        functions: ['forwardRef', 'React.forwardRef', 'styled'],
-        sourcemap: true
-      }),
-      resolve(),
-      commonjs(),
-      alias({
-        entries: [
-          {
-            find: '@src',
-            replacement: path.resolve(projectRootDir, 'src'),
-            customResolver: (p) => {
-              if (pathCache[p]) {
-                return pathCache[p];
-              }
-
-              if (fs.lstatSync(p).isDirectory()) {
-                if (fs.existsSync(path.resolve(p, 'index.ts'))) {
-                  pathCache[p] = path.resolve(p, 'index.ts');
-                  return path.resolve(p, 'index.ts');
-                } else if (fs.existsSync(path.resolve(p, 'index.tsx'))) {
-                  pathCache[p] = path.resolve(p, 'index.tsx');
-                  return path.resolve(p, 'index.tsx');
-                }
-              }
-
-              return p;
-            }
-          }
-        ]
-      }),
-      esbuild({
-        include: /\.[jt]sx?$/,
-        exclude: /node_modules/,
-        sourceMap: true,
-        target: 'es2017',
-        jsx: 'transform',
-        jsxFactory: 'React.createElement',
-        jsxFragment: 'React.Fragment',
-        tsconfig: 'tsconfig.prod.json',
-        loaders: {
-          '.json': 'json',
-          '.js': 'jsx'
-        }
-      }),
-      postcss()
     ]
   },
   {
