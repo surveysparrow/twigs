@@ -22,9 +22,9 @@ import React, {
 import { createPortal } from 'react-dom';
 import { Box } from '@src/box';
 import { Flex } from '@src/flex';
-import { getDOMRangeRect } from '../../utils/getDOMRangeRect';
-import { getSelectedNode } from '../../utils/getSelectedNode';
-import { setFloatingElemPosition } from '../../utils/setFloatingElemPosition';
+import { getDOMRangeRect } from '../../utils/get-dom-range-rect';
+import { getSelectedNode } from '../../utils/get-selected-node';
+import { setFloatingElemPosition } from '../../utils/set-floating-elem-position';
 import { DefaultToolbarTools } from '../toolbar/toolbar';
 import {
   Bold, Italic, Link, Underline

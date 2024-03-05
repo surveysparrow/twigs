@@ -31,8 +31,8 @@ import {
 import {
   useCallback, useEffect, useRef, useState
 } from 'react';
-import { getSelectedNode } from '../../utils/getSelectedNode';
-import { setFloatingElemPositionForLinkEditor } from '../../utils/setFloatingElemPositionForLinkEditor';
+import { getSelectedNode } from '../../utils/get-selected-node';
+import { setFloatingElemPositionForLinkEditor } from '../../utils/set-floating-elem-position-for-link-editor';
 import { LinkEditorDialog } from './link-editor-dialog';
 
 function useDialogLinkEditorToolbar(

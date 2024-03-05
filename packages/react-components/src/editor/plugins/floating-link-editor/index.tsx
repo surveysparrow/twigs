@@ -12,6 +12,7 @@ import { FormInput } from '@src/input';
 import {
   $getSelection,
   $isRangeSelection,
+  BaseSelection,
   CLICK_COMMAND,
   COMMAND_PRIORITY_CRITICAL,
   COMMAND_PRIORITY_HIGH,
@@ -20,15 +21,16 @@ import {
   LexicalEditor,
   NodeSelection,
   RangeSelection,
-  SELECTION_CHANGE_COMMAND
+  SELECTION_CHANGE_COMMAND,
+  TextNode
 } from 'lexical';
 import * as React from 'react';
 import {
   Dispatch, useCallback, useEffect, useRef, useState
 } from 'react';
 import { createPortal } from 'react-dom';
-import { getSelectedNode } from '../../utils/getSelectedNode';
-import { setFloatingElemPositionForLinkEditor } from '../../utils/setFloatingElemPositionForLinkEditor';
+import { getSelectedNode } from '../../utils/get-selected-node';
+import { setFloatingElemPositionForLinkEditor } from '../../utils/set-floating-elem-position-for-link-editor';
 
 const FloatingLinkEditor = ({
   editor,
@@ -55,7 +57,7 @@ const FloatingLinkEditor = ({
   const [linkUrl, setLinkUrl] = useState('');
 
   const [lastSelection, setLastSelection] = useState<
-    RangeSelection | NodeSelection | null
+    RangeSelection | NodeSelection | BaseSelection | null
   >(null);
   const [isLinkEditMode, setIsLinkEditMode] = useState(false);
 
@@ -192,11 +194,10 @@ const FloatingLinkEditor = ({
   const handleLinkSubmission = () => {
     if (lastSelection !== null) {
       if (linkUrl !== '') {
-        // editor.dispatchCommand(TOGGLE_LINK_COMMAND, sanitizeUrl(editedLinkUrl));
         editor.dispatchCommand(TOGGLE_LINK_COMMAND, { url: editedLinkUrl });
         editor.update(() => {
           if ($isRangeSelection(lastSelection)) {
-            const text = getSelectedNode(lastSelection);
+            const text = getSelectedNode(lastSelection) as TextNode;
             text.setTextContent(editedLinkText);
           }
         });

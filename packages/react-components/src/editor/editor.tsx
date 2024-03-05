@@ -40,7 +40,7 @@ import { EditorArea } from './components/editor-area';
 import {
   findReactChildByType,
   findReactChildrenByType
-} from './utils/findReactChild';
+} from './utils/find-react-child';
 
 const initialConfig: InitialConfigType = {
   namespace: 'MyEditor',

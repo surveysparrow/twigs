@@ -23,7 +23,7 @@ import React, {
   useState
 } from 'react';
 import { Flex } from '../../../flex';
-import { getSelectedNode } from '../../utils/getSelectedNode';
+import { getSelectedNode } from '../../utils/get-selected-node';
 import {
   BoldTool,
   CodeBlockTool,
