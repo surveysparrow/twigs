@@ -1,6 +1,6 @@
-import type { Spread } from 'lexical';
-
 import {
+  $applyNodeReplacement,
+  TextNode,
   type DOMConversionMap,
   type DOMConversionOutput,
   type DOMExportOutput,
@@ -8,8 +8,7 @@ import {
   type LexicalNode,
   type NodeKey,
   type SerializedTextNode,
-  $applyNodeReplacement,
-  TextNode
+  type Spread
 } from 'lexical';
 
 export type SerializedHashTagNode = Spread<
