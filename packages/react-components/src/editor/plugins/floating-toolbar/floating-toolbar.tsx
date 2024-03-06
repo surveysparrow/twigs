@@ -1,6 +1,7 @@
-import { $isLinkNode } from '@lexical/link';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { mergeRegister } from '@lexical/utils';
+import { Box } from '@src/box';
+import { Flex } from '@src/flex';
 import {
   $getSelection,
   $isParagraphNode,
@@ -15,21 +16,20 @@ import React, {
   ReactNode,
   useCallback,
   useEffect,
-  useMemo,
   useRef,
   useState
 } from 'react';
 import { createPortal } from 'react-dom';
-import { Box } from '@src/box';
-import { Flex } from '@src/flex';
 import { getDOMRangeRect } from '../../utils/get-dom-range-rect';
 import { getSelectedNode } from '../../utils/get-selected-node';
 import { setFloatingElemPosition } from '../../utils/set-floating-elem-position';
 import { DefaultToolbarTools } from '../toolbar/toolbar';
 import {
-  Bold, Italic, Link, Underline
-} from './tools';
-import { FloatingToolbarContext } from './utils';
+  BoldTool,
+  ItalicTool,
+  LinkTool,
+  UnderlineTool
+} from '../toolbar/tools';
 
 type DefaultFloatingToolbarTools = Extract<
   DefaultToolbarTools,
@@ -57,13 +57,11 @@ const defaultTools: DefaultFloatingToolbarTools[] = [
   'link'
 ];
 
-const toolMapping: Partial<
-  Record<DefaultFloatingToolbarTools, (props: ToolProps) => ReactNode>
-> = {
-  bold: Bold,
-  italic: Italic,
-  underline: Underline,
-  link: Link
+const toolMapping = {
+  bold: BoldTool,
+  italic: ItalicTool,
+  underline: UnderlineTool,
+  link: LinkTool
 };
 
 export type FloatingToolbarProperties = {
@@ -223,10 +221,23 @@ const TextFormatFloatingToolbar = ({
           bottom: '-8px',
           borderBottom: 'none',
           borderTop: '8px solid $black900'
+        },
+        '.twigs-editor-tool-button': {
+          backgroundColor: 'transparent',
+          color: '$neutral100',
+
+          '&:hover': {
+            backgroundColorOpacity: ['$white100', 0.2],
+            color: '$neutral100'
+          },
+
+          '&--active': {
+            backgroundColorOpacity: ['$white100', 0.3]
+          }
         }
       }}
     >
-      {React.Children.toArray(children).length > 0 ? (
+      {children ? (
         <>{children}</>
       ) : (
         <Flex
@@ -251,7 +262,7 @@ const TextFormatFloatingToolbar = ({
             return (
               // eslint-disable-next-line react/no-array-index-key
               <Fragment key={i}>
-                <Tool editor={editor} />
+                <Tool />
               </Fragment>
             );
           })}
@@ -267,13 +278,6 @@ function useFloatingTextFormatToolbar(
   tools?: DefaultFloatingToolbarTools[] | CustomTool[]
 ) {
   const [isText, setIsText] = useState(false);
-  const [isLink, setIsLink] = useState(false);
-  const [isBold, setIsBold] = useState(false);
-  const [isItalic, setIsItalic] = useState(false);
-  const [isUnderline, setIsUnderline] = useState(false);
-  const [isStrikethrough, setIsStrikethrough] = useState(false);
-  const [isSubscript, setIsSubscript] = useState(false);
-  const [isSuperscript, setIsSuperscript] = useState(false);
 
   const updatePopup = useCallback(() => {
     editor.getEditorState().read(() => {
@@ -298,24 +302,7 @@ function useFloatingTextFormatToolbar(
       if (!$isRangeSelection(selection)) {
         return;
       }
-
       const node = getSelectedNode(selection);
-
-      // Update text format
-      setIsBold(selection.hasFormat('bold'));
-      setIsItalic(selection.hasFormat('italic'));
-      setIsUnderline(selection.hasFormat('underline'));
-      setIsStrikethrough(selection.hasFormat('strikethrough'));
-      setIsSubscript(selection.hasFormat('subscript'));
-      setIsSuperscript(selection.hasFormat('superscript'));
-
-      // Update links
-      const parent = node.getParent();
-      if ($isLinkNode(parent) || $isLinkNode(node)) {
-        setIsLink(true);
-      } else {
-        setIsLink(false);
-      }
 
       if (selection.getTextContent() !== '') {
         setIsText($isTextNode(node) || $isParagraphNode(node));
@@ -350,38 +337,16 @@ function useFloatingTextFormatToolbar(
     );
   }, [editor, updatePopup]);
 
-  const floatingToolbarContextValue: FloatingToolbarProperties = useMemo(() => {
-    return {
-      isBold,
-      isItalic,
-      isLink,
-      isStrikethrough,
-      isSubscript,
-      isSuperscript,
-      isUnderline
-    };
-  }, [
-    isBold,
-    isItalic,
-    isLink,
-    isStrikethrough,
-    isSubscript,
-    isSuperscript,
-    isUnderline
-  ]);
-
   if (!isText || !anchorElem) {
     return null;
   }
 
   return createPortal(
-    <FloatingToolbarContext.Provider value={floatingToolbarContextValue}>
-      <TextFormatFloatingToolbar
-        editor={editor}
-        anchorElem={anchorElem}
-        tools={tools}
-      />
-    </FloatingToolbarContext.Provider>,
+    <TextFormatFloatingToolbar
+      editor={editor}
+      anchorElem={anchorElem}
+      tools={tools}
+    />,
     anchorElem
   );
 }
