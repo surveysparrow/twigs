@@ -1,3 +1,4 @@
+import { IconButtonBaseProps } from '@src/button';
 import { LexicalEditor } from 'lexical';
 import { ReactNode } from 'react';
 
@@ -7,7 +8,7 @@ export type RenderButtonProps = {
   onChange?: () => void;
 };
 
-export type ToolbarButton = {
-  editor?: LexicalEditor;
+export type ToolbarButtonProps = {
   renderButton?: (props: RenderButtonProps) => ReactNode;
+  buttonProps?: IconButtonBaseProps;
 };
