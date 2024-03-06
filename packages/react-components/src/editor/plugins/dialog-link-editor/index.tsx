@@ -6,14 +6,6 @@ import {
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { $findMatchingParent, mergeRegister } from '@lexical/utils';
 import {
-  DeleteIcon,
-  LinkIcon,
-  PencilIcon
-} from '@sparrowengg/twigs-react-icons';
-import { Box } from '@src/box';
-import { IconButton } from '@src/button';
-import { Link } from '@src/link';
-import {
   $getSelection,
   $isRangeSelection,
   $isTextNode,
@@ -34,6 +26,7 @@ import {
 import { getSelectedNode } from '../../utils/get-selected-node';
 import { setFloatingElemPositionForLinkEditor } from '../../utils/set-floating-elem-position-for-link-editor';
 import { LinkEditorDialog } from './link-editor-dialog';
+import { LinkTooltip } from './link-tooltip';
 
 function useDialogLinkEditorToolbar(
   editor: LexicalEditor,
@@ -46,6 +39,7 @@ function useDialogLinkEditorToolbar(
     RangeSelection | NodeSelection | BaseSelection | null
   >(null);
   const [isLinkEditMode, setIsLinkEditMode] = useState(false);
+  const isNewLink = useRef(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const containerElem = containerRef.current;
 
@@ -157,6 +151,12 @@ function useDialogLinkEditorToolbar(
   }, [anchorElem, editor, setIsLinkEditMode]);
 
   useEffect(() => {
+    if (!isLinkEditMode) {
+      isNewLink.current = false;
+    }
+  }, [isLinkEditMode]);
+
+  useEffect(() => {
     return mergeRegister(
       editor.registerUpdateListener(({ editorState }) => {
         editorState.read(() => {
@@ -165,9 +165,10 @@ function useDialogLinkEditorToolbar(
       }),
       editor.registerCommand(
         TOGGLE_LINK_COMMAND,
-        (payload: { url?: string } | null) => {
-          if (payload?.url) {
+        (payload: string | { url: string } | null) => {
+          if (typeof payload === 'string' || payload?.url) {
             setIsLinkEditMode(true);
+            isNewLink.current = true;
           } else {
             setIsLinkEditMode(false);
           }
@@ -234,68 +235,19 @@ function useDialogLinkEditorToolbar(
   return (
     <>
       {isLink && !isLinkEditMode && (
-        <Box
-          ref={containerRef}
-          css={{
-            position: 'absolute',
-            left: 0,
-            top: 0,
-            backgroundColor: '$black900',
-            maxWidth: 200,
-            borderRadius: '$lg',
-            display: 'flex',
-            padding: '$2 $4',
-            alignItems: 'center',
-            gap: '$3'
+        <LinkTooltip
+          anchorElem={anchorElem}
+          containerRef={containerRef}
+          handleDelete={() => {
+            if (lastSelection !== null) {
+              editor.dispatchCommand(TOGGLE_LINK_COMMAND, null);
+            }
           }}
-        >
-          <LinkIcon color="#fff" size={16} />
-          <Link
-            css={{
-              color: '$white900',
-              textDecoration: 'underline',
-              fontSize: '$sm'
-            }}
-            target="_blank"
-            referrerPolicy="no-referrer"
-            href={linkUrl}
-          >
-            {linkUrl}
-          </Link>
-          <Box
-            css={{
-              display: 'flex',
-              borderLeft: '1px solid $white600',
-              margin: '$2',
-              paddingLeft: '$4'
-            }}
-          >
-            <IconButton
-              icon={<PencilIcon strokeWidth={2} />}
-              size="xs"
-              color="light"
-              css={{
-                backgroundColor: 'transparent'
-              }}
-              onClick={() => {
-                setIsLinkEditMode(true);
-              }}
-            />
-            <IconButton
-              icon={<DeleteIcon strokeWidth={2} />}
-              size="xs"
-              color="light"
-              css={{
-                backgroundColor: 'transparent'
-              }}
-              onClick={() => {
-                if (lastSelection !== null) {
-                  editor.dispatchCommand(TOGGLE_LINK_COMMAND, null);
-                }
-              }}
-            />
-          </Box>
-        </Box>
+          handleEdit={() => {
+            setIsLinkEditMode(true);
+          }}
+          linkUrl={linkUrl}
+        />
       )}
       <LinkEditorDialog
         key={`${isLink}`}
@@ -306,6 +258,9 @@ function useDialogLinkEditorToolbar(
         closeModal={() => {
           setIsLink(false);
           setIsLinkEditMode(false);
+          if (isNewLink.current) {
+            editor.dispatchCommand(TOGGLE_LINK_COMMAND, null);
+          }
         }}
         setIsLinkEditMode={setIsLinkEditMode}
         textLabel="Link text"
