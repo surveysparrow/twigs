@@ -18,8 +18,7 @@
     },
     "plugins": [
         "react",
-        "@typescript-eslint",
-        "import"
+        "@typescript-eslint"
     ],
     "rules": {
         "comma-dangle": [
@@ -76,9 +75,6 @@
         "class-methods-use-this": "off"
     },
     "settings": {
-        "import/parsers": {
-            "@typescript-eslint/parser": [".ts", ".tsx"]
-        },
         "import/resolver": {
             "typescript": {
                 "alias": {
