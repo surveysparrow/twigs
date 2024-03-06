@@ -41,6 +41,7 @@ import {
   findReactChildByType,
   findReactChildrenByType
 } from './utils/find-react-child';
+import { ToolbarContextPlugin } from './plugins/toolbar-context';
 
 const initialConfig: InitialConfigType = {
   namespace: 'TwigsEditor',
@@ -229,6 +230,7 @@ export const Editor = ({
       <ClearEditorPlugin />
       <DataManagementPlugin ref={dataManagementRef} />
       <TabFocusPlugin />
+      <ToolbarContextPlugin />
       <>{onChange && <OnChangePlugin onChange={onChange} />}</>
       <>
         {showFloatingToolbar && (
