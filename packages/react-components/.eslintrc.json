@@ -18,7 +18,8 @@
     },
     "plugins": [
         "react",
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "import"
     ],
     "rules": {
         "comma-dangle": [
@@ -75,10 +76,24 @@
         "class-methods-use-this": "off"
     },
     "settings": {
+        "import/parsers": {
+            "@typescript-eslint/parser": [".ts", ".tsx"]
+        },
         "import/resolver": {
             "typescript": {
-                "project": ["./tsconfig.json"]
+                "alias": {
+                    "map": [
+                        ["@src", "src"]
+                    ]
+                },
             }
+        },
+        "node": {
+            "extensions": [
+                ".js",
+                ".ts",
+                ".tsx"
+            ]
         }
     },
     "globals": {
