@@ -15,7 +15,9 @@ import {
   $createParagraphNode
 } from 'lexical';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { ToolbarButton, RenderButtonProps } from './commons';
+import { ToolbarButtonProps, RenderButtonProps } from './commons';
+import { useToolbarStore } from '../../toolbar-context/store';
+import { TextFormats } from '../../toolbar-context/utils';
 
 const formatMapping = {
   paragraph: 'Paragraph',
@@ -29,14 +31,16 @@ const formatMapping = {
 
 export const FormatTool = ({
   renderButton
-}: Omit<ToolbarButton, 'renderButton'> & {
+}: Omit<ToolbarButtonProps, 'renderButton'> & {
   renderButton?: (
-    props: Omit<RenderButtonProps, 'onChange'> & {
+    props: Omit<RenderButtonProps, 'onChange' | 'active'> & {
       onChange: (type: keyof typeof formatMapping) => void;
+      active: TextFormats;
     }
   ) => React.ReactNode;
 }) => {
   const [editor] = useLexicalComposerContext();
+  const format = useToolbarStore((state) => state.data.format);
 
   const formatText = (type: keyof typeof formatMapping) => {
     if (type === 'paragraph') {
@@ -69,13 +73,18 @@ export const FormatTool = ({
   const { paragraph, ...headings } = formatMapping;
 
   if (renderButton) {
-    renderButton({ editor, active: false, onChange: formatText });
+    renderButton({ editor, active: format, onChange: formatText });
   }
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <IconButton icon={<TextFormatIcon />} variant="ghost" color="default" />
+        <IconButton
+          icon={<TextFormatIcon />}
+          variant="ghost"
+          color="default"
+          className="twigs-editor-tool-button"
+        />
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem onClick={formatParagraph}>

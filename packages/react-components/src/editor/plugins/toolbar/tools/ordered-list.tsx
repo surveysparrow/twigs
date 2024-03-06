@@ -2,15 +2,19 @@ import {
   INSERT_ORDERED_LIST_COMMAND,
   REMOVE_LIST_COMMAND
 } from '@lexical/list';
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { OrderedListIcon } from '@sparrowengg/twigs-react-icons';
 import { IconButton } from '@src/button';
-import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { useToolbarContext } from '../utils';
-import { ToolbarButton } from './commons';
+import clsx from 'clsx';
+import { useToolbarStore } from '../../toolbar-context/store';
+import { ToolbarButtonProps } from './commons';
 
-export const OrderedListTool = ({ renderButton }: ToolbarButton) => {
-  const active = useToolbarContext((state) => state.isOrderedList);
+export const OrderedListTool = ({
+  renderButton,
+  buttonProps
+}: ToolbarButtonProps) => {
   const [editor] = useLexicalComposerContext();
+  const active = useToolbarStore((state) => state.data.isOrderedList);
 
   const handleClick = () => {
     if (!active) {
@@ -29,7 +33,21 @@ export const OrderedListTool = ({ renderButton }: ToolbarButton) => {
       icon={<OrderedListIcon />}
       variant={active ? 'solid' : 'ghost'}
       color="default"
+      className={clsx('twigs-editor-tool-button', {
+        'twigs-editor-tool-button--active': active
+      })}
       onClick={handleClick}
+      title={
+        active
+          ? 'Change formatting from ordered list to paragraph'
+          : 'Change formatting to ordered list'
+      }
+      aria-label={
+        active
+          ? 'Change formatting from ordered list to paragraph'
+          : 'Change formatting to ordered list'
+      }
+      {...buttonProps}
     />
   );
 };

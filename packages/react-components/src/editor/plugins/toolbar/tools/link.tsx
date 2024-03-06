@@ -1,13 +1,14 @@
 import { TOGGLE_LINK_COMMAND } from '@lexical/link';
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { LinkIcon } from '@sparrowengg/twigs-react-icons';
 import { IconButton } from '@src/button';
-import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { useToolbarContext } from '../utils';
-import { ToolbarButton } from './commons';
+import clsx from 'clsx';
+import { useToolbarStore } from '../../toolbar-context/store';
+import { ToolbarButtonProps } from './commons';
 
-export const LinkTool = ({ renderButton }: ToolbarButton) => {
-  const active = useToolbarContext((state) => state.isLink);
+export const LinkTool = ({ renderButton, buttonProps }: ToolbarButtonProps) => {
   const [editor] = useLexicalComposerContext();
+  const active = useToolbarStore((state) => state.data.isLink);
 
   const handleClick = () => {
     if (!active) {
@@ -26,7 +27,13 @@ export const LinkTool = ({ renderButton }: ToolbarButton) => {
       icon={<LinkIcon />}
       variant={active ? 'solid' : 'ghost'}
       color="default"
+      className={clsx('twigs-editor-tool-button', {
+        'twigs-editor-tool-button--active': active
+      })}
       onClick={handleClick}
+      title={active ? 'Remove link' : 'Convert to link'}
+      aria-label={active ? 'Remove link' : 'Convert to link'}
+      {...buttonProps}
     />
   );
 };
