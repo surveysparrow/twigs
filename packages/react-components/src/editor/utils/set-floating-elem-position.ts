@@ -21,14 +21,16 @@ export function setFloatingElemPosition(
   const anchorElementRect = anchorElem.getBoundingClientRect();
   const editorScrollerRect = scrollerElem.getBoundingClientRect();
 
-  let top = targetRect.top - floatingElemRect.height - verticalGap;
+  let top = targetRect.top + targetRect.height + verticalGap;
   let left = targetRect.left - horizontalOffset;
 
-  if (top < editorScrollerRect.top) {
+  if (
+    top
+    < editorScrollerRect.top + editorScrollerRect.height - floatingElemRect.height
+  ) {
     floatingElem.classList.add('position--bottom');
-    // adjusted height for link element if the element is at top
-    top += floatingElemRect.height + targetRect.height + verticalGap * 2;
   } else {
+    top = targetRect.top - verticalGap - floatingElemRect.height;
     floatingElem.classList.add('position--top');
   }
 
