@@ -80,6 +80,15 @@ export const EditorArea = ({
                   '&, & *': {
                     fontFamily: 'monospace'
                   }
+                },
+                '.block-h1': {
+                  fontSize: '$xl'
+                },
+                '.block-h2': {
+                  fontSize: '$lg'
+                },
+                '.block-h3, .block-h4, .block-h5, .block-h6': {
+                  fontSize: '$md'
                 }
               }}
               ref={containerRef}
