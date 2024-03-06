@@ -9,7 +9,6 @@ import {
 } from '@src/dialog';
 import { Flex } from '@src/flex';
 import { FormInput } from '@src/input';
-import { Textarea } from '@src/textarea';
 import React, { useState } from 'react';
 
 export const LinkEditorDialog = ({
@@ -43,9 +42,7 @@ export const LinkEditorDialog = ({
   const [editedLinkUrl, setEditedLinkUrl] = useState(linkUrl);
 
   const monitorInputInteraction = (
-    event:
-      | React.KeyboardEvent<HTMLInputElement>
-      | React.KeyboardEvent<HTMLTextAreaElement>
+    event: React.KeyboardEvent<HTMLInputElement>
   ) => {
     if (event.key === 'Enter') {
       event.preventDefault();
@@ -117,7 +114,7 @@ export const LinkEditorDialog = ({
               marginTop: '$12'
             }}
           >
-            <Textarea
+            <FormInput
               label={urlLabel}
               onChange={(event) => {
                 setEditedLinkUrl(event.target.value);
@@ -127,8 +124,7 @@ export const LinkEditorDialog = ({
               }}
               value={editedLinkUrl}
               css={{
-                boxSizing: 'border-box',
-                resize: 'none'
+                boxSizing: 'border-box'
               }}
             />
           </Box>
