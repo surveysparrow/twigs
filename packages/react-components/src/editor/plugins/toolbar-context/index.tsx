@@ -3,18 +3,25 @@ import { $isLinkNode } from '@lexical/link';
 import { $isListNode, ListNode } from '@lexical/list';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { $isHeadingNode } from '@lexical/rich-text';
-import { $getNearestNodeOfType, mergeRegister } from '@lexical/utils';
+import {
+  $findMatchingParent,
+  $getNearestNodeOfType,
+  mergeRegister
+} from '@lexical/utils';
 import {
   $getSelection,
+  $isElementNode,
   $isParagraphNode,
   $isRangeSelection,
   CAN_REDO_COMMAND,
   CAN_UNDO_COMMAND,
+  ElementFormatType,
   SELECTION_CHANGE_COMMAND
 } from 'lexical';
 import { useCallback, useEffect } from 'react';
 import { getSelectedNode } from '../../utils/get-selected-node';
 import { useToolbarStore } from './store';
+import { TextAlignments, textAlignments } from './utils';
 
 const LowPriority = 1;
 
@@ -72,6 +79,7 @@ export const ToolbarContextPlugin = () => {
           });
         }
       }
+
       // Update text format
       updateData({
         isBold: selection.hasFormat('bold'),
@@ -85,6 +93,7 @@ export const ToolbarContextPlugin = () => {
       // Update links
       const node = getSelectedNode(selection);
       const parent = node.getParent();
+
       if ($isLinkNode(parent) || $isLinkNode(node)) {
         updateData({
           isLink: true
@@ -94,6 +103,30 @@ export const ToolbarContextPlugin = () => {
           isLink: false
         });
       }
+
+      let matchingParent;
+      if ($isLinkNode(parent)) {
+        // If node is a link, we need to fetch the parent paragraph node to set format
+        matchingParent = $findMatchingParent(
+          node,
+          (parentNode) => $isElementNode(parentNode) && !parentNode.isInline()
+        );
+      }
+
+      let formatType: ElementFormatType | null | undefined = null;
+      if ($isElementNode(matchingParent)) {
+        formatType = matchingParent.getFormatType();
+      } else if ($isElementNode(node)) {
+        formatType = node.getFormatType();
+      } else {
+        formatType = parent?.getFormatType();
+      }
+
+      updateData({
+        textAlign: textAlignments.includes(formatType as any)
+          ? (formatType as TextAlignments)
+          : 'left'
+      });
     }
   }, []);
 

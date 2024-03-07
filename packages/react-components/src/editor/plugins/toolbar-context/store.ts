@@ -18,7 +18,8 @@ export const useToolbarStore = create<ToolbarStore>()((set) => ({
     isSubscript: false,
     isSuperscript: false,
     isUnderline: false,
-    isUnOrderedList: false
+    isUnOrderedList: false,
+    textAlign: 'left'
   },
   updateData: (data) => set((state) => ({ data: { ...state.data, ...data } }))
 }));

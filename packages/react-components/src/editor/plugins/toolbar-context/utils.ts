@@ -8,6 +8,9 @@ export type TextFormats =
   | 'h6'
   | 'code';
 
+export const textAlignments = ['left', 'center', 'right', 'justify'] as const;
+export type TextAlignments = typeof textAlignments[number];
+
 export type ToolbarProperties = {
   isBold: boolean;
   isItalic: boolean;
@@ -20,4 +23,5 @@ export type ToolbarProperties = {
   isSuperscript: boolean;
   isCode: boolean;
   format: TextFormats;
+  textAlign: TextAlignments;
 };

@@ -7,3 +7,4 @@ export * from './ordered-list';
 export * from './underline';
 export * from './unordered-list';
 export * from './format';
+export * from './text-align';
