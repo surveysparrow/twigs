@@ -10,7 +10,11 @@
     "moduleResolution": "node",
     "outDir": "dist",
     "jsx": "react-jsx",
-    "emitDeclarationOnly": true
+    "emitDeclarationOnly": true,
+    "baseUrl": ".",
+    "paths": {
+      "@src/*": ["./src/*"],
+    }
   },
   "exclude": ["src/**/tests", "node_modules", "dist"]
 }

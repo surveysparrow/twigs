@@ -5,28 +5,25 @@ const postcss = require('rollup-plugin-postcss');
 const { PluginPure } = require('rollup-plugin-pure');
 const { dts } = require('rollup-plugin-dts');
 const esbuild = require('rollup-plugin-esbuild').default;
-
+const alias = require('@rollup/plugin-alias');
+const path = require('path');
 const packageJson = require('./package.json');
+const fs = require('fs');
+const baseConfig = require('./rollup.config.base');
+
+const projectRootDir = path.resolve(__dirname);
+
+const pathCache = {};
 
 /**
  * @type {import('rollup').RollupOptions}
  */
 module.exports = [
   {
-    input: 'src/index.ts',
-    /**
-     * @type {import('rollup').OutputOptions[]}
-     */
+    ...baseConfig,
+    watch: false,
     output: [
-      {
-        dir: 'dist/es',
-        format: 'es',
-        sourcemap: true,
-        esModule: true,
-        preserveModules: true,
-        preserveModulesRoot: 'src',
-        exports: 'named'
-      },
+      ...baseConfig.output,
       {
         dir: 'dist/cjs',
         format: 'cjs',
@@ -35,31 +32,6 @@ module.exports = [
         preserveModulesRoot: 'src',
         exports: 'named'
       }
-    ],
-    external: [...Object.keys(packageJson.peerDependencies)],
-    plugins: [
-      external(),
-      PluginPure({
-        functions: ['forwardRef', 'React.forwardRef', 'styled'],
-        sourcemap: true
-      }),
-      resolve(),
-      commonjs(),
-      esbuild({
-        include: /\.[jt]sx?$/,
-        exclude: /node_modules/,
-        sourceMap: true,
-        target: 'es2017',
-        jsx: 'transform',
-        jsxFactory: 'React.createElement',
-        jsxFragment: 'React.Fragment',
-        tsconfig: 'tsconfig.prod.json',
-        loaders: {
-          '.json': 'json',
-          '.js': 'jsx'
-        }
-      }),
-      postcss()
     ]
   },
   {

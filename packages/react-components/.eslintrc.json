@@ -70,17 +70,22 @@
         "@typescript-eslint/no-unused-vars": ["error", { "ignoreRestSiblings": true }],
         "no-use-before-define": "off",
         "react/prop-types": "off",
-        "no-underscore-dangle": "off"
+        "no-underscore-dangle": "off",
+        "no-plusplus": "off",
+        "class-methods-use-this": "off"
     },
     "settings": {
         "import/resolver": {
-            "node": {
-                "extensions": [
-                    ".js",
-                    ".ts",
-                    ".tsx"
-                ]
+            "typescript": {
+                "project": "packages/react-components/tsconfig.json"
             }
+        },
+        "node": {
+            "extensions": [
+                ".js",
+                ".ts",
+                ".tsx"
+            ]
         }
     },
     "globals": {
