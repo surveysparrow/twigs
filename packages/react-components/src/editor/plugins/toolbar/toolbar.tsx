@@ -69,7 +69,11 @@ export const ToolbarPlugin = ({
       {children ? (
         <>{children}</>
       ) : (
-        <Flex>
+        <Flex
+          css={{
+            gap: '$1'
+          }}
+        >
           {tools.map((_item, i) => {
             if ((_item as CustomTool)?.renderComponent) {
               const item = _item as CustomTool;

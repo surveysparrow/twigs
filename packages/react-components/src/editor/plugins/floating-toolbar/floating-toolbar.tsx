@@ -243,7 +243,8 @@ const TextFormatFloatingToolbar = ({
         <Flex
           css={{
             alignItems: 'center',
-            padding: '$2'
+            padding: '$2',
+            gap: '$1'
           }}
         >
           {tools.map((_item, i) => {
