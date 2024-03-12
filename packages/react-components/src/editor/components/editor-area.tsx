@@ -17,11 +17,11 @@ export const EditorArea = ({
 }) => {
   return (
     <Box
+      {...editorContainerProps}
       css={{
         position: 'relative',
         ...editorContainerProps?.css
       }}
-      {...editorContainerProps}
     >
       <RichTextPlugin
         contentEditable={(
