@@ -33,7 +33,7 @@ The tools shown in the toolbar can be customized by passing the `toolbarTools` p
 ```tsx
 {
   renderComponent: (props: { editor: LexicalEditor }) => ReactNode;
-};
+}
 ```
 
 This can be used to change the order of tools or to add custom tools to the toolbar. The `editor` prop is the instance of the editor, and it can be used to interact with the editor.
@@ -50,21 +50,23 @@ import {
   Flex,
   BoldTool,
   ItalicTool,
-  Button
+  Button,
 } from "@sparrowengg/twigs-react";
 ```
 
 ```tsx live
 <Editor
-  showToolbar={false} // Hide the default toolbar
-  hideEditorArea={true} // Hide the editor area
+  showToolbar={false} // Remove the default toolbar
+  hideEditorArea={true} // Remove the editor area
 >
   <EditorContent>
     <ToolbarPlugin>
-      <Flex css={{
-        justifyContent: 'space-between',
-        marginBottom: '$3'
-      }}>
+      <Flex
+        justifyContent="space-between"
+        css={{
+          marginBottom: "$3",
+        }}
+      >
         <Flex>
           <BoldTool />
           <ItalicTool />
@@ -86,23 +88,27 @@ You can also add custom components to the default tools by passing a `renderButt
 >
   <EditorContent>
     <ToolbarPlugin>
-      <Flex css={{
-        justifyContent: 'space-between',
-        marginBottom: '$3'
-      }}>
+      <Flex
+        justifyContent="space-between"
+        css={{
+          marginBottom: "$3",
+        }}
+      >
         <Flex>
-          <BoldTool renderButton={({ onChange, active, editor }) => {
-            return (
-              <Button
-                onClick={() => {
-                  onChange();
-                }}
-                color={active ? 'primary' : 'default'}
-              >
-                B
-              </Button>
-            )
-          }} />
+          <BoldTool
+            renderButton={({ onChange, active, editor }) => {
+              return (
+                <Button
+                  onClick={() => {
+                    onChange();
+                  }}
+                  color={active ? "primary" : "default"}
+                >
+                  B
+                </Button>
+              );
+            }}
+          />
           <ItalicTool />
         </Flex>
         <Button>Save</Button>
