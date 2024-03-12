@@ -22,7 +22,6 @@ import {
   isValidElement,
   useMemo
 } from 'react';
-import { EditorFeatureProps, EditorFeatures } from './features';
 import {
   AutoLinkPlugin,
   DataManagementPlugin,
@@ -37,11 +36,12 @@ import {
 } from './plugins';
 
 import { EditorArea } from './components/editor-area';
+import { ToolbarContextPlugin } from './plugins/toolbar-context';
 import {
   findReactChildByType,
   findReactChildrenByType
 } from './utils/find-react-child';
-import { ToolbarContextPlugin } from './plugins/toolbar-context';
+import { BoxProps } from '..';
 
 const initialConfig: InitialConfigType = {
   namespace: 'TwigsEditor',
@@ -107,12 +107,15 @@ export const Editor = ({
   editable,
   features,
   children,
+  placeholder,
   editorState,
   showToolbar = true,
+  hideEditorArea = false,
   toolbarTools,
   showFloatingToolbar = true,
   floatingToolbarTools,
-  dataManagementRef
+  dataManagementRef,
+  editorContainerProps
 }: {
   editorState?: EditorState;
   onChange?: (
@@ -120,8 +123,10 @@ export const Editor = ({
     editor: LexicalEditor,
     tags: Set<string>
   ) => void;
+  placeholder?: string;
   editable?: boolean;
   children?: ReactNode;
+  hideEditorArea?: boolean;
   showToolbar?: boolean;
   toolbarTools?: ToolbarTools;
   showFloatingToolbar?: boolean;
@@ -129,6 +134,7 @@ export const Editor = ({
   floatingToolbarTools?: FloatingToolbarTools;
   features?: (keyof typeof featuresToNodeMapping)[];
   dataManagementRef?: RefObject<DataManagementPluginHandle>;
+  editorContainerProps?: BoxProps;
 }) => {
   const supportedFeatures = useMemo(() => {
     if (features) {
@@ -158,36 +164,23 @@ export const Editor = ({
   }, [features]);
 
   const customFeatures = useMemo(() => {
-    const featuresContainer = findReactChildByType(
-      children,
-      EditorFeatures
-    ) as ReactElement;
-
     const customFeatureNodes: ReadonlyArray<Klass<LexicalNode>>[] = [];
     const customFeatureElements: ReactElement[] = [];
 
-    if (featuresContainer) {
-      findReactChildrenByType(
-        featuresContainer.props.children,
-        EditorFeatures.Feature
-      ).forEach((_child) => {
-        if (
-          _child
-          && isValidElement(_child)
-          && _child.type === EditorFeatures.Feature
-        ) {
-          const child = _child as ReactElement<EditorFeatureProps>;
-          customFeatureElements.push(child);
-          if (child.props.node) {
-            if (Array.isArray(child.props.node)) {
-              customFeatureNodes.push(...child.props.node);
-            } else {
-              customFeatureNodes.push(child.props.node);
-            }
+    const editorFeatures = findReactChildrenByType(children, 'EditorFeature');
+    editorFeatures.forEach((_child) => {
+      if (_child && isValidElement(_child)) {
+        const child = _child;
+        customFeatureElements.push(child.props.children);
+        if (child.props.node) {
+          if (Array.isArray(child.props.node)) {
+            customFeatureNodes.push(...child.props.node);
+          } else {
+            customFeatureNodes.push(child.props.node);
           }
         }
-      });
-    }
+      }
+    });
 
     return {
       nodes: customFeatureNodes.flat(),
@@ -201,11 +194,11 @@ export const Editor = ({
   const customContent = useMemo(() => {
     const content = findReactChildByType(
       children,
-      EditorFeatures.Content
+      'EditorContent'
     ) as ReactElement;
 
     if (content) {
-      return content;
+      return content.props.children;
     }
     return null;
   }, [children]);
@@ -224,7 +217,14 @@ export const Editor = ({
       }}
     >
       <>{showToolbar && <ToolbarPlugin tools={toolbarTools} />}</>
-      <EditorArea />
+      <>
+        {!hideEditorArea && (
+          <EditorArea
+            editorContainerProps={editorContainerProps}
+            placeholder={placeholder}
+          />
+        )}
+      </>
       <DialogLinkEditorPlugin />
       <HistoryPlugin />
       <ClearEditorPlugin />
