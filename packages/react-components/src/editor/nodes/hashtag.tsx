@@ -33,12 +33,11 @@ function convertHashTagElement(
   return null;
 }
 
-const hashTagStyle = 'background-color: rgba(24, 119, 232, 0.2)';
 export class HashTagNode extends TextNode {
   __hashTag: string;
 
   static getType(): string {
-    return 'hashTag';
+    return 'hashtag';
   }
 
   static clone(node: HashTagNode): HashTagNode {
@@ -64,21 +63,20 @@ export class HashTagNode extends TextNode {
     return {
       ...super.exportJSON(),
       hashTagName: this.__hashTag,
-      type: 'hashTag',
+      type: 'hashtag',
       version: 1
     };
   }
 
   createDOM(config: EditorConfig): HTMLElement {
     const dom = super.createDOM(config);
-    dom.style.cssText = hashTagStyle;
-    dom.className = 'hashTag';
+    dom.className = 'twigs-hashtag';
     return dom;
   }
 
   exportDOM(): DOMExportOutput {
     const element = document.createElement('span');
-    element.setAttribute('data-lexical-hashTag', 'true');
+    element.setAttribute('data-twigs-hashtag', 'true');
     element.textContent = this.__text;
     return { element };
   }
@@ -86,7 +84,7 @@ export class HashTagNode extends TextNode {
   static importDOM(): DOMConversionMap | null {
     return {
       span: (domNode: HTMLElement) => {
-        if (!domNode.hasAttribute('data-lexical-hashTag')) {
+        if (!domNode.hasAttribute('data-twigs-hashtag')) {
           return null;
         }
         return {

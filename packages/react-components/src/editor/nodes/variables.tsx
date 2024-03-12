@@ -33,7 +33,6 @@ function convertVariableElement(
   return null;
 }
 
-const variableStyle = 'background-color: rgba(24, 119, 232, 0.2)';
 export class VariableNode extends TextNode {
   __variable: string;
 
@@ -71,14 +70,13 @@ export class VariableNode extends TextNode {
 
   createDOM(config: EditorConfig): HTMLElement {
     const dom = super.createDOM(config);
-    dom.style.cssText = variableStyle;
-    dom.className = 'variable';
+    dom.className = 'twigs-variable';
     return dom;
   }
 
   exportDOM(): DOMExportOutput {
     const element = document.createElement('span');
-    element.setAttribute('data-lexical-variable', 'true');
+    element.setAttribute('data-twigs-variable', 'true');
     element.textContent = this.__text;
     return { element };
   }
@@ -86,7 +84,7 @@ export class VariableNode extends TextNode {
   static importDOM(): DOMConversionMap | null {
     return {
       span: (domNode: HTMLElement) => {
-        if (!domNode.hasAttribute('data-lexical-variable')) {
+        if (!domNode.hasAttribute('data-twigs-variable')) {
           return null;
         }
         return {
