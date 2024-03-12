@@ -1,9 +1,6 @@
+/* eslint-disable react/default-props-match-prop-types */
 import { Klass, LexicalNode } from 'lexical';
 import { ReactNode } from 'react';
-
-export const EditorFeatures = ({ children }: { children?: ReactNode }) => {
-  return <>{children}</>;
-};
 
 export type EditorFeatureProps = {
   children?: ReactNode;
@@ -13,10 +10,18 @@ export type EditorFeatureProps = {
     | ReadonlyArray<Klass<LexicalNode>>[];
 };
 
-EditorFeatures.Feature = ({ children }: EditorFeatureProps) => {
+export const EditorFeature = ({ children }: EditorFeatureProps) => {
   return <>{children}</>;
 };
 
-EditorFeatures.Content = ({ children }: { children?: ReactNode }) => {
+EditorFeature.defaultProps = {
+  ___TYPE: 'EditorFeature'
+};
+
+export const EditorContent = ({ children }: { children?: ReactNode }) => {
   return <>{children}</>;
+};
+
+EditorContent.defaultProps = {
+  ___TYPE: 'EditorContent'
 };
