@@ -14,12 +14,12 @@ By default four features are available in the editor:
 - **Links**: Allows you to add links to the editor, this will also convert any link added as text to clickable links.
 - **Code**: Allows you to add code blocks to the editor.
 
-## Removing Features
+## Configuring Features
 
-You can remove features from the editor by passing an array of features that you want to keep to the `features` prop.
+You can decide which features to be included in the editor by passing an array of features to the `features` prop.
 
 ```tsx
-<Editor features={['links', 'lists']}>
+<Editor features={['link', 'list']} />
 ```
 
 The above code will remove support for headings and code blocks from the editor.
