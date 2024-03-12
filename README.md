@@ -24,6 +24,7 @@ Storybook is configured for components and icons, so you can run `yarn storybook
 $ git clone https://github.com/surveysparrow/twigs.git
 $ cd twigs
 $ yarn
+$ yarn build
 
 $ cd packages/react-components
 $ yarn storybook
