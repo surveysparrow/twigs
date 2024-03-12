@@ -1,5 +1,6 @@
 ---
 sidebar_label: Setup
+sidebar_position: 1
 ---
 
 # Editor
@@ -24,7 +25,7 @@ The editor is not two way binded, so even if you update the `editorState` after 
 
 Another method to get / set the editor state is by using the `dataManagementRef` prop. This prop takes a ref object, which can be used to get / set the editor state.
 
-```jsx
+```tsx
 import { DataManagementPluginHandle } from "@sparrowengg/twigs-react"
 
 const Component = () => {
@@ -50,7 +51,7 @@ const Component = () => {
             const data = someFunctionToGetSavedHtml();
 
             if (data) {
-              dataManagementRef.current?.insertHtml(data);
+              dataManagementRef.current?.setHtml(data);
             }
           }}
         >
@@ -62,4 +63,4 @@ const Component = () => {
 };
 ```
 
-Currently `getDataAsync` returns the data in HTML and JSON FormatTool, however to set the data, you can only use `insertHtml` method. Other methods and helpers will be introduced soon.
+Currently `getDataAsync` returns the data in HTML and JSON Format, however to set the data, you can only use `setHtml` method. Other methods and helpers will be introduced soon.

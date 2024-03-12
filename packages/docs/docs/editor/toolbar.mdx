@@ -1,0 +1,114 @@
+---
+sidebar_label: Toolbar
+sidebar_position: 3
+---
+
+# Toolbar
+
+The toolbar will appear on top of the editor by default and it will contain the following buttons:
+
+- Format tool (headings / paragraph)
+- Bold
+- Italic
+- Underline
+- Unordered List
+- Ordered List
+- Link
+- Codeblock
+- Inline code
+- Text align tool
+
+You can hide the toolbar by setting `showToolbar` prop to `false`.
+
+```tsx
+<Editor showToolbar={false} />
+```
+
+## Customizing
+
+### Using `toolbarTools` prop
+
+The tools shown in the toolbar can be customized by passing the `toolbarTools` prop. The `toolbar` prop is an array that can contain the following values: `format`, `bold`, `italic`, `underline`, `unordered-list`, `ordered-list`, `link`, `codeblock`, `code`, `text-align`; it also supports an object in the following format:
+
+```tsx
+{
+  renderComponent: (props: { editor: LexicalEditor }) => ReactNode;
+};
+```
+
+This can be used to change the order of tools or to add custom tools to the toolbar. The `editor` prop is the instance of the editor, and it can be used to interact with the editor.
+
+### Using ToolbarPlugin component
+
+You can also use the `ToolbarPlugin` component to add custom tools to the toolbar. Components can be directly added as children to the component. You can use the default tools by importing them from `@sparrowengg/twigs-react` and passing them as children to the `ToolbarPlugin` component.
+
+```tsx
+import {
+  Editor,
+  EditorContent,
+  ToolbarPlugin,
+  Flex,
+  BoldTool,
+  ItalicTool,
+  Button
+} from "@sparrowengg/twigs-react";
+```
+
+```tsx live
+<Editor
+  showToolbar={false} // Hide the default toolbar
+  hideEditorArea={true} // Hide the editor area
+>
+  <EditorContent>
+    <ToolbarPlugin>
+      <Flex css={{
+        justifyContent: 'space-between',
+        marginBottom: '$3'
+      }}>
+        <Flex>
+          <BoldTool />
+          <ItalicTool />
+        </Flex>
+        <Button>Save</Button>
+      </Flex>
+    </ToolbarPlugin>
+    <EditorArea placeholder="Start typing" />
+  </EditorContent>
+</Editor>
+```
+
+You can also add custom components to the default tools by passing a `renderButton` prop.
+
+```tsx live
+<Editor
+  showToolbar={false} // Hide the default toolbar
+  hideEditorArea={true} // Hide the editor area
+>
+  <EditorContent>
+    <ToolbarPlugin>
+      <Flex css={{
+        justifyContent: 'space-between',
+        marginBottom: '$3'
+      }}>
+        <Flex>
+          <BoldTool renderButton={({ onChange, active, editor }) => {
+            return (
+              <Button
+                onClick={() => {
+                  onChange();
+                }}
+                color={active ? 'primary' : 'default'}
+              >
+                B
+              </Button>
+            )
+          }} />
+          <ItalicTool />
+        </Flex>
+        <Button>Save</Button>
+      </Flex>
+    </ToolbarPlugin>
+    <EditorArea placeholder="Start typing" />
+  </EditorContent>
+</Editor>
+```
