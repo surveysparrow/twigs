@@ -83,15 +83,15 @@ let featureId = 0;
 let customFeatureId = 0;
 
 const featuresToNodeMapping = {
-  headings: {
+  heading: {
     node: HeadingNode,
     component: null
   },
-  lists: {
+  list: {
     node: [ListNode, ListItemNode],
     component: ListPlugin
   },
-  links: {
+  link: {
     node: [LinkNode, AutoLinkNode],
     component: [AutoLinkPlugin, LinkPlugin]
   },
