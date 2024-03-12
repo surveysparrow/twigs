@@ -2,22 +2,26 @@ import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import { ReactNode, RefObject, isValidElement } from 'react';
-import { Box } from '../../box';
+import { Box, BoxProps } from '../../box';
 
 export const EditorArea = ({
   containerRef,
-  placeholder
+  placeholder,
+  editorContainerProps
 }: {
   containerRef?:
     | ((instance: HTMLDivElement | null) => void)
     | RefObject<HTMLDivElement>;
   placeholder?: ReactNode | string;
+  editorContainerProps?: BoxProps;
 }) => {
   return (
     <Box
       css={{
-        position: 'relative'
+        position: 'relative',
+        ...editorContainerProps?.css
       }}
+      {...editorContainerProps}
     >
       <RichTextPlugin
         contentEditable={(
@@ -109,7 +113,8 @@ export const EditorArea = ({
               css={{
                 position: 'absolute',
                 top: '12px',
-                left: '12px'
+                left: '12px',
+                color: '$black500'
               }}
             >
               {placeholder}
