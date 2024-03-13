@@ -5,7 +5,7 @@ sidebar_position: 2
 
 # Features
 
-Features refer to the various functionalities that are available in the editor outside of its basic text formatting capabilities such as bold, italic, underline, etc.
+Features refer to the various functionalities that are available in the editor outside of its basic text formatting capabilities such as bold, italic, underline, inline code, strikethrough.
 
 By default four features are available in the editor:
 
@@ -19,7 +19,9 @@ By default four features are available in the editor:
 You can decide which features to be included in the editor by passing an array of features to the `features` prop.
 
 ```tsx
-<Editor features={['link', 'list']} />
+<Editor features={["link", "list"]}>
+  <RichEditor />
+</Editor>
 ```
 
 The above code will remove support for headings and code blocks from the editor.
@@ -35,22 +37,19 @@ Each feature can have zero or more nodes and components associated with it.
 
 ### Adding a custom feature
 
-All custom features should be added inside `EditorFeature` component.
-
 ```tsx
-import { Editor, EditorFeature } from "@sparrowengg/twigs-react";
+import { Editor } from "@sparrowengg/twigs-react";
 
-<Editor>
-  <EditorFeature nodes={[NodeOne, NodeTwo]}>
-    <ComponentOne />
-    <ComponentTwo />
-  </EditorFeature>
+<Editor nodes={[NodeOne, NodeTwo]}>
+  <RichEditor />
+  <CustomFeatureOne />
+  <CustomFeatureTwo />
 </Editor>;
 ```
 
 ### Included custom features
 
-Twigs comes with some generally used features that can be manually added to the editor. This is not added by default to keep the bundle size small. You can add these features to the editor by importing them from `@sparrowengg/twigs-react` and adding them to the `EditorFeature` component.
+Twigs comes with some generally used features that can be manually added to the editor. This is not added by default to keep the bundle size small. You can add these features to the editor by importing them from `@sparrowengg/twigs-react` and adding them inside `Editor` component.
 
 The included features are:
 
@@ -64,7 +63,6 @@ These can be used as follows:
 ```tsx
 import {
   Editor,
-  EditorFeature,
   MentionsPlugin,
   HashtagsPlugin,
   KudosPlugin,
@@ -75,19 +73,12 @@ import {
   VariableNode,
 } from "@sparrowengg/twigs-react";
 
-<Editor>
-  <EditorFeature node={[MentionNode]}>
-    <MentionsPlugin />
-  </EditorFeature>
-  <EditorFeature node={[HashtagNode]}>
-    <HashtagsPlugin />
-  </EditorFeature>
-  <EditorFeature node={[KudosNode]}>
-    <KudosPlugin />
-  </EditorFeature>
-  <EditorFeature node={[VariableNode]}>
-    <VariablesPlugin />
-  </EditorFeature>
+<Editor nodes={[MentionNode, HashTagNode, KudosNode, VariableNode]}>
+  <RichEditor />
+  <MentionsPlugin />
+  <HashtagsPlugin />
+  <KudosPlugin />
+  <VariablesPlugin />
 </Editor>;
 ```
 
@@ -121,39 +112,41 @@ const Demo = () => {
   ];
 
   return (
-    <Editor
-      editorContainerProps={{
-        css: {
-          ".editor-container .editor": {
-            ".twigs-mention": {
-              backgroundColor: "$accent100",
-              display: "inline-block",
-              borderRadius: "$md",
-              padding: "0 $2",
+    <Editor nodes={[MentionNode]}>
+      <EditorToolbar />
+      <RichEditor
+        editorContainerProps={{
+          css: {
+            ".editor-container .editor": {
+              ".twigs-mention": {
+                backgroundColor: "$accent100",
+                display: "inline-block",
+                borderRadius: "$md",
+                padding: "0 $2",
+              },
             },
           },
-        },
-      }}
-    >
-      <EditorFeature node={[MentionNode]}>
-        <MentionsPlugin
-          getResults={(searchString) => {
-            return users
-              .filter((user) =>
-                user.name
-                  .toLowerCase()
-                  .includes((searchString || "").toLowerCase())
-              )
-              .map((user) => ({
-                value: user.username,
-                label: user.name,
-              }));
-          }}
-        />
-      </EditorFeature>
+        }}
+      />
+      <MentionsPlugin
+        getResults={(searchString) => {
+          return users
+            .filter((user) =>
+              user.name
+                .toLowerCase()
+                .includes((searchString || "").toLowerCase())
+            )
+            .map((user) => ({
+              value: user.username,
+              label: user.name,
+            }));
+        }}
+      />
     </Editor>
   );
 };
 
 render(<Demo />);
 ```
+import { Editor } from "@sparrowengg/twigs-react"
+

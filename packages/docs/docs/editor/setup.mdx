@@ -14,7 +14,10 @@ import { Editor } from "@sparrowengg/twigs-react";
 ### Usage
 
 ```jsx live
-<Editor />
+<Editor>
+  <EditorToolbar />
+  <RichEditor />
+</Editor>
 ```
 
 ### Handling data
@@ -34,7 +37,10 @@ const Component = () => {
 
   return (
     <Box>
-      <Editor dataManagementRef={dataManagementRef} />
+      <Editor dataManagementRef={dataManagementRef}>
+        <EditorToolbar />
+        <RichEditor />
+      </Editor>
       <Flex>
         <Button
           onClick={() => {
