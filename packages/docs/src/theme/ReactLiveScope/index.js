@@ -4,14 +4,12 @@ import {
   dialogs,
   DialogsManager,
   Editor,
-  EditorFeature,
   MentionNode,
   MentionsPlugin,
-  EditorContent,
   BoldTool,
   ItalicTool,
-  ToolbarPlugin,
-  EditorArea,
+  EditorToolbar,
+  RichEditor,
 } from "@sparrowengg/twigs-react";
 
 const ReactLiveScope = {
@@ -109,13 +107,11 @@ const ReactLiveScope = {
   CircleLoader: twigsComponentLoader("CircleLoader"),
   LineLoader: twigsComponentLoader("LineLoader"),
   Editor,
-  EditorFeature,
   MentionsPlugin,
   MentionNode,
   BoldTool,
   ItalicTool,
-  EditorContent,
-  ToolbarPlugin,
-  EditorArea,
+  EditorToolbar,
+  RichEditor,
 };
 export default ReactLiveScope;
