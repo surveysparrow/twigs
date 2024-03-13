@@ -1,9 +1,9 @@
 import { MenuTextMatch } from '@lexical/react/LexicalTypeaheadMenuPlugin';
 import {
-  BaseLookupDropdown,
-  BaseLookupDropdownProps,
+  EditorLookupDropdownBase,
+  EditorLookupDropdownBaseProps,
   MenuData
-} from '../base-dropdown';
+} from '../../components';
 import { $createKudosNode } from '../../nodes/kudos';
 
 const PUNCTUATION = '\\.,\\+\\*\\?\\$\\@\\|#{}\\(\\)\\^\\-\\[\\]\\\\/!%\'"~=<>_:;';
@@ -62,9 +62,9 @@ export const KudosPlugin = ({
   ...props
 }: {
   getResults: (text: string | null) => MenuData[] | Promise<MenuData[]>;
-} & Partial<BaseLookupDropdownProps>) => {
+} & Partial<EditorLookupDropdownBaseProps>) => {
   return (
-    <BaseLookupDropdown
+    <EditorLookupDropdownBase
       $createNode={({ data }) => $createKudosNode(`+${data.value}`)}
       getResults={getResults}
       triggerFunction={(text) => getPossibleQueryMatch(text)}

@@ -2,10 +2,10 @@
 import { MenuTextMatch } from '@lexical/react/LexicalTypeaheadMenuPlugin';
 
 import {
-  BaseLookupDropdown,
-  BaseLookupDropdownProps,
+  EditorLookupDropdownBase,
+  EditorLookupDropdownBaseProps,
   MenuData
-} from '../base-dropdown';
+} from '../../components/base-dropdown';
 import { $createVariableNode } from '../../nodes/variables';
 
 const PUNCTUATION = '\\.,\\+\\*\\?\\$\\@\\|#{}\\(\\)\\^\\-\\[\\]\\\\/!%\'"~=<>_:;';
@@ -57,11 +57,11 @@ function getPossibleQueryMatch(text: string): MenuTextMatch | null {
 export const VariablesPlugin = ({
   getResults,
   ...props
-}: Partial<BaseLookupDropdownProps> & {
+}: Partial<EditorLookupDropdownBaseProps> & {
   getResults: (text: string | null) => MenuData[] | Promise<MenuData[]>;
 }) => {
   return (
-    <BaseLookupDropdown
+    <EditorLookupDropdownBase
       $createNode={({ data }) => $createVariableNode(`$${data.value}`)}
       getResults={getResults}
       triggerFunction={(text) => getPossibleQueryMatch(text)}
