@@ -17,7 +17,6 @@ import {
   AutoLinkPlugin,
   DataManagementPlugin,
   DataManagementPluginHandle,
-  DialogLinkEditorPlugin,
   LinkPlugin,
   TabFocusPlugin
 } from './plugins';
@@ -139,7 +138,6 @@ export const Editor = ({
       }}
     >
       <ToolbarContextPlugin>
-        <DialogLinkEditorPlugin />
         <HistoryPlugin />
         <ClearEditorPlugin />
         <DataManagementPlugin ref={dataManagementRef} />
