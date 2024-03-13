@@ -9,6 +9,7 @@ import {
   BoldTool,
   ItalicTool,
   EditorToolbar,
+  DialogLinkEditor,
   RichEditor,
 } from "@sparrowengg/twigs-react";
 
@@ -112,6 +113,7 @@ const ReactLiveScope = {
   BoldTool,
   ItalicTool,
   EditorToolbar,
+  DialogLinkEditor,
   RichEditor,
 };
 export default ReactLiveScope;
