@@ -1,5 +1,11 @@
 import React from 'react';
 import { Editor } from '../editor';
+import {
+  RichEditor,
+  EditorToolbar,
+  EditorFloatingToolbar,
+  DialogLinkEditor
+} from '../components';
 
 export default {
   component: Editor,
@@ -7,6 +13,13 @@ export default {
 };
 
 const Template = (args) => {
-  return <Editor {...args} />;
+  return (
+    <Editor {...args}>
+      <EditorToolbar />
+      <DialogLinkEditor />
+      <RichEditor />
+      <EditorFloatingToolbar />
+    </Editor>
+  );
 };
 export const Default = Template.bind({});
