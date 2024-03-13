@@ -59,7 +59,7 @@ const toolMapping = {
   'text-align': TextAlignTool
 };
 
-export const ToolbarPlugin = ({
+export const EditorToolbar = ({
   tools = defaultTools,
   children
 }: {

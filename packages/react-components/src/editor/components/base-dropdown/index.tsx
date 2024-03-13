@@ -85,7 +85,7 @@ const TypeaheadMenuItem = ({
   );
 };
 
-export type BaseLookupDropdownProps = {
+export type EditorLookupDropdownBaseProps = {
   triggerFunction: (text: string) => MenuTextMatch | null;
   getResults: (text: string | null) => Promise<MenuData[]> | MenuData[];
   $createNode: (data: TypeaheadOption) => LexicalNode & {
@@ -117,7 +117,7 @@ const defaultMenuRender = ({
   selectedIndex: number | null;
   menuOptions: TypeaheadOption[];
   editor: LexicalEditor;
-  renderMenuItemContent?: BaseLookupDropdownProps['renderMenuItemContent'];
+  renderMenuItemContent?: EditorLookupDropdownBaseProps['renderMenuItemContent'];
 }) => {
   if (anchorElementRef.current && menuOptions.length) {
     return createPortal(
@@ -170,14 +170,14 @@ const defaultMenuRender = ({
   return null;
 };
 
-export const BaseLookupDropdown = ({
+export const EditorLookupDropdownBase = ({
   triggerFunction,
   getResults,
   $createNode,
   renderMenu,
   renderMenuItemContent,
   suggestionsListLength = 5
-}: BaseLookupDropdownProps) => {
+}: EditorLookupDropdownBaseProps) => {
   const [editor] = useLexicalComposerContext();
 
   const [queryString, setQueryString] = useState<string | null>(null);
