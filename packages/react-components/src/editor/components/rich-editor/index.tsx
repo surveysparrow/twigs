@@ -2,9 +2,9 @@ import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import { ReactNode, RefObject, isValidElement } from 'react';
-import { Box, BoxProps } from '../../box';
+import { Box, BoxProps } from '@src/box';
 
-export const EditorArea = ({
+export const RichEditor = ({
   containerRef,
   placeholder,
   editorContainerProps
@@ -114,7 +114,8 @@ export const EditorArea = ({
                 position: 'absolute',
                 top: '12px',
                 left: '12px',
-                color: '$black500'
+                color: '$black500',
+                pointerEvents: 'none'
               }}
             >
               {placeholder}
