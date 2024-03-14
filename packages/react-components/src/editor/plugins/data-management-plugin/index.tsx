@@ -5,7 +5,7 @@ import { forwardRef, useImperativeHandle } from 'react';
 
 export interface DataManagementPluginHandle {
   getDataAsync: () => Promise<{ html: string; json: Object }>;
-  insertHtml: (html: string) => void;
+  setHtml: (html: string) => void;
 }
 
 interface DataManagementPluginProps {}
@@ -18,7 +18,7 @@ export const DataManagementPlugin = forwardRef<
 
   useImperativeHandle(ref, () => ({
     getDataAsync,
-    insertHtml
+    setHtml
   }));
 
   function getDataAsync(): Promise<{ html: string; json: Object }> {
@@ -35,7 +35,7 @@ export const DataManagementPlugin = forwardRef<
     });
   }
 
-  function insertHtml(html: string) {
+  function setHtml(html: string) {
     editor.update(() => {
       const parser = new DOMParser();
       const dom = parser.parseFromString(html, 'text/html');

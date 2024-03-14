@@ -18,16 +18,32 @@ import {
   ElementFormatType,
   SELECTION_CHANGE_COMMAND
 } from 'lexical';
-import { useCallback, useEffect } from 'react';
+import { ReactNode, useCallback, useEffect } from 'react';
 import { getSelectedNode } from '../../utils/get-selected-node';
-import { useToolbarStore } from './store';
+import { useToolbarStore, ToolbarStoreProvider } from './store';
 import { TextAlignments, textAlignments } from './utils';
 
 const LowPriority = 1;
 
-export const ToolbarContextPlugin = () => {
+export const ToolbarContextPlugin = ({
+  children
+}: {
+  children?: ReactNode;
+}) => {
+  return (
+    <ToolbarStoreProvider>
+      <ToolbarContextConsumer>{children}</ToolbarContextConsumer>
+    </ToolbarStoreProvider>
+  );
+};
+
+export const ToolbarContextConsumer = ({
+  children
+}: {
+  children?: ReactNode;
+}) => {
   const [editor] = useLexicalComposerContext();
-  const { updateData } = useToolbarStore();
+  const updateData = useToolbarStore((state) => state.updateData);
 
   const updateToolbar = useCallback(() => {
     const selection = $getSelection();
@@ -162,5 +178,5 @@ export const ToolbarContextPlugin = () => {
     );
   }, [editor, updateToolbar]);
 
-  return null;
+  return children;
 };

@@ -4,7 +4,7 @@ import {
   MenuOption,
   MenuTextMatch
 } from '@lexical/react/LexicalTypeaheadMenuPlugin';
-import { LexicalNode, TextNode } from 'lexical';
+import { LexicalEditor, LexicalNode, TextNode } from 'lexical';
 import React, {
   ReactNode,
   ReactPortal,
@@ -27,10 +27,10 @@ export type MenuData = {
 type RenderMenuItemContentProps = {
   index: number;
   isSelected: boolean;
-  option: MentionTypeaheadOption;
+  option: TypeaheadOption;
 };
 
-class MentionTypeaheadOption extends MenuOption {
+class TypeaheadOption extends MenuOption {
   data: MenuData;
 
   constructor(data: MenuData) {
@@ -39,7 +39,7 @@ class MentionTypeaheadOption extends MenuOption {
   }
 }
 
-const MentionsTypeaheadMenuItem = ({
+const TypeaheadMenuItem = ({
   index,
   isSelected,
   onClick,
@@ -51,7 +51,7 @@ const MentionsTypeaheadMenuItem = ({
   isSelected: boolean;
   onClick: () => void;
   onMouseEnter: () => void;
-  option: MentionTypeaheadOption;
+  option: TypeaheadOption;
   renderMenuItemContent?: (props: RenderMenuItemContentProps) => ReactNode;
 }) => {
   return (
@@ -64,6 +64,11 @@ const MentionsTypeaheadMenuItem = ({
       id={`typeahead-item-${index}`}
       onMouseEnter={onMouseEnter}
       onClick={onClick}
+      size="md"
+      css={{
+        width: '100%',
+        justifyContent: 'flex-start'
+      }}
     >
       {renderMenuItemContent ? (
         renderMenuItemContent({
@@ -72,37 +77,107 @@ const MentionsTypeaheadMenuItem = ({
           option
         })
       ) : (
-        <span className="text">{option.data.label}</span>
+        <Box as="span" className="text">
+          {option.data.label}
+        </Box>
       )}
     </Button>
   );
 };
 
-export type BaseLookupDropdownProps = {
+export type EditorLookupDropdownBaseProps = {
   triggerFunction: (text: string) => MenuTextMatch | null;
   getResults: (text: string | null) => Promise<MenuData[]> | MenuData[];
-  $createNode: (data: MentionTypeaheadOption) => LexicalNode & {
+  $createNode: (data: TypeaheadOption) => LexicalNode & {
     select: () => void;
   };
   suggestionsListLength?: number;
   renderMenu?: (args: {
     anchorElementRef: React.MutableRefObject<HTMLElement | null>;
     selectedIndex: number | null;
-    selectOptionAndCleanUp: (option: MentionTypeaheadOption) => void;
+    selectOptionAndCleanUp: (option: TypeaheadOption) => void;
     setHighlightedIndex: (index: number) => void;
-    menuOptions: MentionTypeaheadOption[];
+    menuOptions: TypeaheadOption[];
   }) => ReactPortal | React.JSX.Element | null;
   renderMenuItemContent?: (props: RenderMenuItemContentProps) => ReactNode;
 };
 
-export const BaseLookupDropdown = ({
+const defaultMenuRender = ({
+  selectOptionAndCleanUp,
+  setHighlightedIndex,
+  renderMenuItemContent,
+  anchorElementRef,
+  menuOptions,
+  selectedIndex,
+  editor
+}: {
+  anchorElementRef: React.MutableRefObject<HTMLElement | null>;
+  selectOptionAndCleanUp: (option: TypeaheadOption) => void;
+  setHighlightedIndex: (index: number) => void;
+  selectedIndex: number | null;
+  menuOptions: TypeaheadOption[];
+  editor: LexicalEditor;
+  renderMenuItemContent?: EditorLookupDropdownBaseProps['renderMenuItemContent'];
+}) => {
+  if (anchorElementRef.current && menuOptions.length) {
+    return createPortal(
+      <div className="typeahead-popover dropdown-menu">
+        <Popover open>
+          <PopoverTrigger asChild>
+            <Box
+              as="span"
+              css={{
+                visibility: 'hidden',
+                display: 'block',
+                height: '0px'
+              }}
+            >
+              -
+            </Box>
+          </PopoverTrigger>
+          <PopoverContent
+            autoFocus={false}
+            sideOffset={10}
+            align="start"
+            onOpenAutoFocus={() => {
+              editor.focus();
+              return false;
+            }}
+          >
+            {menuOptions.map((option, i: number) => (
+              <TypeaheadMenuItem
+                index={i}
+                isSelected={selectedIndex === i}
+                onClick={() => {
+                  setHighlightedIndex(i);
+                  selectOptionAndCleanUp(option);
+                }}
+                onMouseEnter={() => {
+                  setHighlightedIndex(i);
+                }}
+                key={option.key}
+                option={option}
+                renderMenuItemContent={renderMenuItemContent}
+              />
+            ))}
+          </PopoverContent>
+        </Popover>
+      </div>,
+      anchorElementRef.current
+    );
+  }
+
+  return null;
+};
+
+export const EditorLookupDropdownBase = ({
   triggerFunction,
   getResults,
   $createNode,
   renderMenu,
   renderMenuItemContent,
   suggestionsListLength = 5
-}: BaseLookupDropdownProps) => {
+}: EditorLookupDropdownBaseProps) => {
   const [editor] = useLexicalComposerContext();
 
   const [queryString, setQueryString] = useState<string | null>(null);
@@ -118,14 +193,14 @@ export const BaseLookupDropdown = ({
 
   const menuOptions = useMemo(
     () => results
-      .map((result) => new MentionTypeaheadOption(result))
+      .map((result) => new TypeaheadOption(result))
       .slice(0, suggestionsListLength),
     [results, suggestionsListLength]
   );
 
   const onSelectOption = useCallback(
     (
-      selectedOption: MentionTypeaheadOption,
+      selectedOption: TypeaheadOption,
       nodeToReplace: TextNode | null,
       closeMenu: () => void
     ) => {
@@ -141,68 +216,8 @@ export const BaseLookupDropdown = ({
     [editor, $createNode]
   );
 
-  const defaultMenuRender = ({
-    anchorElementRef,
-    selectOptionAndCleanUp,
-    setHighlightedIndex,
-    selectedIndex
-  }: {
-    anchorElementRef: React.MutableRefObject<HTMLElement | null>;
-    selectOptionAndCleanUp: (option: MentionTypeaheadOption) => void;
-    setHighlightedIndex: (index: number) => void;
-    selectedIndex: number | null;
-  }) => {
-    if (anchorElementRef.current && menuOptions.length) {
-      return createPortal(
-        <div className="typeahead-popover mentions-menu">
-          <Popover open>
-            <PopoverTrigger asChild>
-              <Box
-                as="span"
-                css={{
-                  visibility: 'hidden'
-                }}
-              >
-                -
-              </Box>
-            </PopoverTrigger>
-            <PopoverContent
-              autoFocus={false}
-              sideOffset={10}
-              align="start"
-              onOpenAutoFocus={() => {
-                editor.focus();
-                return false;
-              }}
-            >
-              {menuOptions.map((option, i: number) => (
-                <MentionsTypeaheadMenuItem
-                  index={i}
-                  isSelected={selectedIndex === i}
-                  onClick={() => {
-                    setHighlightedIndex(i);
-                    selectOptionAndCleanUp(option);
-                  }}
-                  onMouseEnter={() => {
-                    setHighlightedIndex(i);
-                  }}
-                  key={option.key}
-                  option={option}
-                  renderMenuItemContent={renderMenuItemContent}
-                />
-              ))}
-            </PopoverContent>
-          </Popover>
-        </div>,
-        anchorElementRef.current
-      );
-    }
-
-    return null;
-  };
-
   return (
-    <LexicalTypeaheadMenuPlugin<MentionTypeaheadOption>
+    <LexicalTypeaheadMenuPlugin<TypeaheadOption>
       onQueryChange={setQueryString}
       onSelectOption={onSelectOption}
       triggerFn={triggerFunction}
@@ -213,19 +228,22 @@ export const BaseLookupDropdown = ({
       ) => {
         if (renderMenu) {
           return renderMenu({
-            anchorElementRef,
+            menuOptions,
             selectedIndex,
-            selectOptionAndCleanUp,
+            anchorElementRef,
             setHighlightedIndex,
-            menuOptions
+            selectOptionAndCleanUp
           });
         }
 
         return defaultMenuRender({
-          anchorElementRef,
+          editor,
+          menuOptions,
           selectedIndex,
-          selectOptionAndCleanUp,
-          setHighlightedIndex
+          anchorElementRef,
+          setHighlightedIndex,
+          renderMenuItemContent,
+          selectOptionAndCleanUp
         });
       }}
     />

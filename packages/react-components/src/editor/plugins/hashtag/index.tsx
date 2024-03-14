@@ -1,9 +1,9 @@
 import { MenuTextMatch } from '@lexical/react/LexicalTypeaheadMenuPlugin';
 import {
-  BaseLookupDropdown,
-  BaseLookupDropdownProps,
+  EditorLookupDropdownBase,
+  EditorLookupDropdownBaseProps,
   MenuData
-} from '../base-dropdown';
+} from '../../components';
 import { $createHashTagNode } from '../../nodes/hashtag';
 
 const PUNCTUATION = '\\.,\\+\\*\\?\\$\\@\\|#{}\\(\\)\\^\\-\\[\\]\\\\/!%\'"~=<>_:;';
@@ -61,11 +61,11 @@ function getPossibleQueryMatch(text: string): MenuTextMatch | null {
 export const HashTagPlugin = ({
   getResults,
   ...props
-}: Partial<BaseLookupDropdownProps> & {
+}: Partial<EditorLookupDropdownBaseProps> & {
   getResults: (text: string | null) => MenuData[] | Promise<MenuData[]>;
 }) => {
   return (
-    <BaseLookupDropdown
+    <EditorLookupDropdownBase
       $createNode={({ data }) => $createHashTagNode(`#${data.value}`)}
       getResults={getResults}
       triggerFunction={(text) => getPossibleQueryMatch(text)}

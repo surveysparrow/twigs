@@ -276,7 +276,7 @@ function useDialogLinkEditorToolbar(
   );
 }
 
-export function DialogLinkEditorPlugin({
+export function DialogLinkEditor({
   anchorElem = document.body
 }: {
   anchorElem?: HTMLElement | null;

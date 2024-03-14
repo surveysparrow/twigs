@@ -1,6 +1,17 @@
-import React from 'react';
-import { twigsComponentLoader, twigsIconLoader } from './twigs-loader';
-import { dialogs, DialogsManager } from '@sparrowengg/twigs-react';
+import React from "react";
+import { twigsComponentLoader, twigsIconLoader } from "./twigs-loader";
+import {
+  dialogs,
+  DialogsManager,
+  Editor,
+  MentionNode,
+  MentionsPlugin,
+  BoldTool,
+  ItalicTool,
+  EditorToolbar,
+  DialogLinkEditor,
+  RichEditor,
+} from "@sparrowengg/twigs-react";
 
 const ReactLiveScope = {
   React,
@@ -96,6 +107,13 @@ const ReactLiveScope = {
   AccordionTrigger: twigsComponentLoader("AccordionTrigger"),
   CircleLoader: twigsComponentLoader("CircleLoader"),
   LineLoader: twigsComponentLoader("LineLoader"),
-  Editor: twigsComponentLoader("Editor"),
+  Editor,
+  MentionsPlugin,
+  MentionNode,
+  BoldTool,
+  ItalicTool,
+  EditorToolbar,
+  DialogLinkEditor,
+  RichEditor,
 };
 export default ReactLiveScope;

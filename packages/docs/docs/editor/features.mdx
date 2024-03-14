@@ -1,0 +1,145 @@
+---
+sidebar_label: Features
+sidebar_position: 2
+---
+
+# Features
+
+Features refer to the various functionalities that are available in the editor outside of its basic text formatting capabilities such as bold, italic, underline, inline code, strikethrough.
+
+By default four features are available in the editor:
+
+- **Headings**: Allows you to add heading tags to the editor.
+- **Lists**: Allows you to add ordered and unordered lists to the editor.
+- **Links**: Allows you to add links to the editor, this will also convert any link added as text to clickable links.
+- **Code**: Allows you to add code blocks to the editor.
+
+## Configuring Features
+
+You can decide which features to be included in the editor by passing an array of features to the `features` prop.
+
+```tsx
+<Editor features={["link", "list"]}>
+  <RichEditor />
+</Editor>
+```
+
+The above code will remove support for headings and code blocks from the editor.
+
+## Custom Features
+
+A feature generally consists of two parts:
+
+- **Node**: The node acts as a blueprint for the feature, it defines how the feature will be rendered in the editor as well as how it is exported and imported to the editor. You can read more about nodes [here](https://lexical.dev/docs/concepts/nodes).
+- **Component**: The component is the UI for the feature, it is what the user interacts with to use the feature.
+
+Each feature can have zero or more nodes and components associated with it.
+
+### Adding a custom feature
+
+```tsx
+import { Editor } from "@sparrowengg/twigs-react";
+
+<Editor nodes={[NodeOne, NodeTwo]}>
+  <RichEditor />
+  <CustomFeatureOne />
+  <CustomFeatureTwo />
+</Editor>;
+```
+
+### Included custom features
+
+Twigs comes with some generally used features that can be manually added to the editor. This is not added by default to keep the bundle size small. You can add these features to the editor by importing them from `@sparrowengg/twigs-react` and adding them inside `Editor` component.
+
+The included features are:
+
+- Mentions
+- Hashtags
+
+These can be used as follows:
+
+```tsx
+import {
+  Editor,
+  MentionsPlugin,
+  HashtagsPlugin,
+  MentionNode,
+  HashtagNode,
+} from "@sparrowengg/twigs-react";
+
+<Editor nodes={[MentionNode, HashTagNode, KudosNode, VariableNode]}>
+  <RichEditor />
+  <MentionsPlugin />
+  <HashtagsPlugin />
+</Editor>;
+```
+
+#### Mentions demo
+
+`@` is the trigger word for mentions, type `@j` to see the mentions in action.
+
+```tsx live noInline
+const Demo = () => {
+  const users = [
+    {
+      id: "1",
+      name: "John Doe",
+      username: "johndoe",
+    },
+    {
+      id: "2",
+      name: "Jane Doe",
+      username: "janedoe",
+    },
+    {
+      id: "3",
+      name: "John Smith",
+      username: "johnsmith",
+    },
+    {
+      id: "4",
+      name: "Jane Smith",
+      username: "janesmith",
+    },
+  ];
+
+  return (
+    <Editor nodes={[MentionNode]}>
+      <EditorToolbar />
+      <RichEditor
+        editorContainerProps={{
+          css: {
+            ".editor-container .editor": {
+              ".twigs-mention": {
+                backgroundColor: "$accent100",
+                display: "inline-block",
+                borderRadius: "$md",
+                padding: "0 $2",
+              },
+            },
+          },
+        }}
+      />
+      <DialogLinkEditor /> {/* This is required for editable links */}
+      <MentionsPlugin
+        getResults={(searchString) => {
+          return users
+            .filter((user) =>
+              user.name
+                .toLowerCase()
+                .includes((searchString || "").toLowerCase())
+            )
+            .map((user) => ({
+              value: user.username,
+              label: user.name,
+            }));
+        }}
+      />
+    </Editor>
+  );
+};
+
+render(<Demo />);
+```
+import { Editor } from "@sparrowengg/twigs-react"
+

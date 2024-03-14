@@ -10,6 +10,7 @@ import {
   ItalicTool,
   LinkTool,
   OrderedListTool,
+  TextAlignTool,
   UnderlineTool,
   UnorderedListTool
 } from './tools';
@@ -23,7 +24,8 @@ export type DefaultToolbarTools =
   | 'unordered-list'
   | 'link'
   | 'codeblock'
-  | 'code';
+  | 'code'
+  | 'text-align';
 
 type CustomTool = {
   renderComponent: (props: { editor: LexicalEditor }) => ReactNode;
@@ -40,7 +42,8 @@ const defaultTools: DefaultToolbarTools[] = [
   'ordered-list',
   'link',
   'codeblock',
-  'code'
+  'code',
+  'text-align'
 ];
 
 const toolMapping = {
@@ -52,10 +55,11 @@ const toolMapping = {
   'ordered-list': OrderedListTool,
   codeblock: CodeBlockTool,
   code: CodeTool,
-  link: LinkTool
+  link: LinkTool,
+  'text-align': TextAlignTool
 };
 
-export const ToolbarPlugin = ({
+export const EditorToolbar = ({
   tools = defaultTools,
   children
 }: {
