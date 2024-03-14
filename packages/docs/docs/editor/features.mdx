@@ -55,8 +55,6 @@ The included features are:
 
 - Mentions
 - Hashtags
-- Kudos
-- Variables
 
 These can be used as follows:
 
@@ -65,20 +63,14 @@ import {
   Editor,
   MentionsPlugin,
   HashtagsPlugin,
-  KudosPlugin,
-  VariablesPlugin,
   MentionNode,
   HashtagNode,
-  KudosNode,
-  VariableNode,
 } from "@sparrowengg/twigs-react";
 
 <Editor nodes={[MentionNode, HashTagNode, KudosNode, VariableNode]}>
   <RichEditor />
   <MentionsPlugin />
   <HashtagsPlugin />
-  <KudosPlugin />
-  <VariablesPlugin />
 </Editor>;
 ```
 
