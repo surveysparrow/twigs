@@ -5,8 +5,8 @@ const postcss = require('rollup-plugin-postcss');
 const esbuild = require('rollup-plugin-esbuild').default;
 const alias = require('@rollup/plugin-alias');
 const path = require('path');
-const packageJson = require('./package.json');
 const fs = require('fs');
+const packageJson = require('./package.json');
 
 const projectRootDir = path.resolve(__dirname);
 
@@ -51,7 +51,8 @@ module.exports = {
               if (fs.existsSync(path.resolve(p, 'index.ts'))) {
                 pathCache[p] = path.resolve(p, 'index.ts');
                 return path.resolve(p, 'index.ts');
-              } else if (fs.existsSync(path.resolve(p, 'index.tsx'))) {
+              }
+              if (fs.existsSync(path.resolve(p, 'index.tsx'))) {
                 pathCache[p] = path.resolve(p, 'index.tsx');
                 return path.resolve(p, 'index.tsx');
               }

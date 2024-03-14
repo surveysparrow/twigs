@@ -11,37 +11,17 @@ import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
 import { HeadingNode } from '@lexical/rich-text';
 
 import { CodeNode } from '@lexical/code';
-import {
-  EditorState, Klass, LexicalEditor, LexicalNode
-} from 'lexical';
-import {
-  Fragment,
-  ReactElement,
-  ReactNode,
-  RefObject,
-  isValidElement,
-  useMemo
-} from 'react';
-import { EditorFeatureProps, EditorFeatures } from './features';
+import { EditorState, LexicalEditor } from 'lexical';
+import { ReactNode, RefObject, useMemo } from 'react';
 import {
   AutoLinkPlugin,
   DataManagementPlugin,
   DataManagementPluginHandle,
-  DialogLinkEditorPlugin,
-  FloatingToolbar,
-  FloatingToolbarTools,
   LinkPlugin,
-  TabFocusPlugin,
-  ToolbarPlugin,
-  ToolbarTools
+  TabFocusPlugin
 } from './plugins';
 
-import { EditorArea } from './components/editor-area';
-import {
-  findReactChildByType,
-  findReactChildrenByType
-} from './utils/find-react-child';
-import { ToolbarContextPlugin } from './plugins/toolbar-context';
+import { ToolbarContextPlugin } from './components';
 
 const initialConfig: InitialConfigType = {
   namespace: 'TwigsEditor',
@@ -80,18 +60,17 @@ const initialConfig: InitialConfigType = {
 };
 
 let featureId = 0;
-let customFeatureId = 0;
 
 const featuresToNodeMapping = {
-  headings: {
+  heading: {
     node: HeadingNode,
     component: null
   },
-  lists: {
+  list: {
     node: [ListNode, ListItemNode],
     component: ListPlugin
   },
-  links: {
+  link: {
     node: [LinkNode, AutoLinkNode],
     component: [AutoLinkPlugin, LinkPlugin]
   },
@@ -108,10 +87,6 @@ export const Editor = ({
   features,
   children,
   editorState,
-  showToolbar = true,
-  toolbarTools,
-  showFloatingToolbar = true,
-  floatingToolbarTools,
   dataManagementRef
 }: {
   editorState?: EditorState;
@@ -122,11 +97,7 @@ export const Editor = ({
   ) => void;
   editable?: boolean;
   children?: ReactNode;
-  showToolbar?: boolean;
-  toolbarTools?: ToolbarTools;
-  showFloatingToolbar?: boolean;
   nodes?: InitialConfigType['nodes'];
-  floatingToolbarTools?: FloatingToolbarTools;
   features?: (keyof typeof featuresToNodeMapping)[];
   dataManagementRef?: RefObject<DataManagementPluginHandle>;
 }) => {
@@ -157,106 +128,33 @@ export const Editor = ({
     return defaultFeatures;
   }, [features]);
 
-  const customFeatures = useMemo(() => {
-    const featuresContainer = findReactChildByType(
-      children,
-      EditorFeatures
-    ) as ReactElement;
-
-    const customFeatureNodes: ReadonlyArray<Klass<LexicalNode>>[] = [];
-    const customFeatureElements: ReactElement[] = [];
-
-    if (featuresContainer) {
-      findReactChildrenByType(
-        featuresContainer.props.children,
-        EditorFeatures.Feature
-      ).forEach((_child) => {
-        if (
-          _child
-          && isValidElement(_child)
-          && _child.type === EditorFeatures.Feature
-        ) {
-          const child = _child as ReactElement<EditorFeatureProps>;
-          customFeatureElements.push(child);
-          if (child.props.node) {
-            if (Array.isArray(child.props.node)) {
-              customFeatureNodes.push(...child.props.node);
-            } else {
-              customFeatureNodes.push(child.props.node);
-            }
-          }
-        }
-      });
-    }
-
-    return {
-      nodes: customFeatureNodes.flat(),
-      elements: customFeatureElements.map((item) => ({
-        component: item,
-        id: customFeatureId++
-      }))
-    };
-  }, [children]);
-
-  const customContent = useMemo(() => {
-    const content = findReactChildByType(
-      children,
-      EditorFeatures.Content
-    ) as ReactElement;
-
-    if (content) {
-      return content;
-    }
-    return null;
-  }, [children]);
-
   return (
     <LexicalComposer
       initialConfig={{
         ...initialConfig,
         editorState,
         editable,
-        nodes: [
-          ...supportedFeatures.nodes,
-          ...customFeatures.nodes,
-          ...(nodes ?? [])
-        ]
+        nodes: [...supportedFeatures.nodes, ...(nodes ?? [])]
       }}
     >
-      <>{showToolbar && <ToolbarPlugin tools={toolbarTools} />}</>
-      <EditorArea />
-      <DialogLinkEditorPlugin />
-      <HistoryPlugin />
-      <ClearEditorPlugin />
-      <DataManagementPlugin ref={dataManagementRef} />
-      <TabFocusPlugin />
-      <ToolbarContextPlugin />
-      <>{onChange && <OnChangePlugin onChange={onChange} />}</>
-      <>
-        {showFloatingToolbar && (
-          <FloatingToolbar tools={floatingToolbarTools} />
-        )}
-      </>
-      <>
-        {supportedFeatures.components.map((comp) => {
-          const ToolComponent = comp.component;
-          if (ToolComponent) {
-            return <ToolComponent key={comp.id} />;
-          }
+      <ToolbarContextPlugin>
+        <HistoryPlugin />
+        <ClearEditorPlugin />
+        <DataManagementPlugin ref={dataManagementRef} />
+        <TabFocusPlugin />
+        <>{onChange && <OnChangePlugin onChange={onChange} />}</>
+        <>
+          {supportedFeatures.components.map((comp) => {
+            const ToolComponent = comp.component;
+            if (ToolComponent) {
+              return <ToolComponent key={comp.id} />;
+            }
 
-          return <></>;
-        })}
-      </>
-      <>
-        {customFeatures.elements.map((comp) => {
-          if (comp.component) {
-            return <Fragment key={comp.id}>{comp.component}</Fragment>;
-          }
-
-          return <></>;
-        })}
-      </>
-      <>{customContent}</>
+            return <></>;
+          })}
+        </>
+        <>{children}</>
+      </ToolbarContextPlugin>
     </LexicalComposer>
   );
 };

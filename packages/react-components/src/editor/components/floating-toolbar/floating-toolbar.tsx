@@ -1,6 +1,6 @@
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { mergeRegister } from '@lexical/utils';
-import { Box } from '@src/box';
+import { Box, BoxProps } from '@src/box';
 import { Flex } from '@src/flex';
 import {
   $getSelection,
@@ -74,16 +74,18 @@ export type FloatingToolbarProperties = {
   isSuperscript: boolean;
 };
 
-const TextFormatFloatingToolbar = ({
+const FloatingToolbarContainer = ({
   editor,
   anchorElem,
   children,
-  tools = defaultTools
+  tools = defaultTools,
+  containerProps
 }: {
   editor: LexicalEditor;
   anchorElem: HTMLElement;
   children?: ReactNode;
   tools?: FloatingToolbarTools;
+  containerProps?: BoxProps;
 }): React.JSX.Element => {
   const popupCharStylesEditorRef = useRef<HTMLDivElement | null>(null);
 
@@ -125,7 +127,7 @@ const TextFormatFloatingToolbar = ({
     }
   }, [popupCharStylesEditorRef]);
 
-  const updateTextFormatFloatingToolbar = useCallback(() => {
+  const updateFloatingToolbar = useCallback(() => {
     const selection = $getSelection();
 
     const popupCharStylesEditorElem = popupCharStylesEditorRef.current;
@@ -154,7 +156,7 @@ const TextFormatFloatingToolbar = ({
 
     const update = () => {
       editor.getEditorState().read(() => {
-        updateTextFormatFloatingToolbar();
+        updateFloatingToolbar();
       });
     };
 
@@ -169,33 +171,34 @@ const TextFormatFloatingToolbar = ({
         scrollerElem.removeEventListener('scroll', update);
       }
     };
-  }, [editor, updateTextFormatFloatingToolbar, anchorElem]);
+  }, [editor, updateFloatingToolbar, anchorElem]);
 
   useEffect(() => {
     editor.getEditorState().read(() => {
-      updateTextFormatFloatingToolbar();
+      updateFloatingToolbar();
     });
     return mergeRegister(
       editor.registerUpdateListener(({ editorState }) => {
         editorState.read(() => {
-          updateTextFormatFloatingToolbar();
+          updateFloatingToolbar();
         });
       }),
 
       editor.registerCommand(
         SELECTION_CHANGE_COMMAND,
         () => {
-          updateTextFormatFloatingToolbar();
+          updateFloatingToolbar();
           return false;
         },
         COMMAND_PRIORITY_LOW
       )
     );
-  }, [editor, updateTextFormatFloatingToolbar]);
+  }, [editor, updateFloatingToolbar]);
 
   return (
     <Box
       ref={popupCharStylesEditorRef}
+      {...containerProps}
       css={{
         position: 'absolute',
         left: 0,
@@ -222,29 +225,30 @@ const TextFormatFloatingToolbar = ({
           borderBottom: 'none',
           borderTop: '8px solid $black900'
         },
-        '.twigs-editor-tool-button': {
-          backgroundColor: 'transparent',
-          color: '$neutral100',
-
-          '&:hover': {
-            backgroundColorOpacity: ['$white100', 0.2],
-            color: '$neutral100'
-          },
-
-          '&--active': {
-            backgroundColorOpacity: ['$white100', 0.3]
-          }
-        }
+        ...containerProps?.css
       }}
     >
       {children ? (
         <>{children}</>
       ) : (
         <Flex
+          alignItems="center"
           css={{
-            alignItems: 'center',
             padding: '$2',
-            gap: '$1'
+            gap: '$1',
+            '.twigs-editor-tool-button': {
+              backgroundColor: 'transparent',
+              color: '$neutral100',
+
+              '&:hover': {
+                backgroundColorOpacity: ['$white100', 0.2],
+                color: '$neutral100'
+              },
+
+              '&--active': {
+                backgroundColorOpacity: ['$white100', 0.3]
+              }
+            }
           }}
         >
           {tools.map((_item, i) => {
@@ -273,11 +277,19 @@ const TextFormatFloatingToolbar = ({
   );
 };
 
-function useFloatingTextFormatToolbar(
-  editor: LexicalEditor,
-  anchorElem: HTMLElement,
-  tools?: DefaultFloatingToolbarTools[] | CustomTool[]
-) {
+function useFloatingTextFormatToolbar({
+  editor,
+  anchorElem,
+  children,
+  tools,
+  containerProps
+}: {
+  editor: LexicalEditor;
+  anchorElem: HTMLElement;
+  tools?: DefaultFloatingToolbarTools[] | CustomTool[];
+  children?: ReactNode;
+  containerProps?: BoxProps;
+}) {
   const [isText, setIsText] = useState(false);
 
   const updatePopup = useCallback(() => {
@@ -343,22 +355,35 @@ function useFloatingTextFormatToolbar(
   }
 
   return createPortal(
-    <TextFormatFloatingToolbar
+    <FloatingToolbarContainer
       editor={editor}
       anchorElem={anchorElem}
       tools={tools}
-    />,
+      containerProps={containerProps}
+    >
+      {children}
+    </FloatingToolbarContainer>,
     anchorElem
   );
 }
 
-export const FloatingToolbar = ({
+export const EditorFloatingToolbar = ({
   anchorElem = document.body,
-  tools
+  tools,
+  children,
+  containerProps
 }: {
   anchorElem?: HTMLElement;
   tools?: DefaultFloatingToolbarTools[] | CustomTool[];
+  children?: ReactNode;
+  containerProps?: BoxProps;
 }) => {
   const [editor] = useLexicalComposerContext();
-  return useFloatingTextFormatToolbar(editor, anchorElem, tools);
+  return useFloatingTextFormatToolbar({
+    editor,
+    anchorElem,
+    tools,
+    children,
+    containerProps
+  });
 };

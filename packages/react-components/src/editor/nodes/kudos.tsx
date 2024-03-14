@@ -33,7 +33,6 @@ function convertKudosElement(domNode: HTMLElement): DOMConversionOutput | null {
   return null;
 }
 
-const kudosStyle = 'background-color: rgba(24, 119, 232, 0.2)';
 export class KudosNode extends TextNode {
   __kudos: string;
 
@@ -71,14 +70,13 @@ export class KudosNode extends TextNode {
 
   createDOM(config: EditorConfig): HTMLElement {
     const dom = super.createDOM(config);
-    dom.style.cssText = kudosStyle;
-    dom.className = nodeName;
+    dom.className = `twigs-${nodeName}`;
     return dom;
   }
 
   exportDOM(): DOMExportOutput {
     const element = document.createElement('span');
-    element.setAttribute('data-lexical-kudos', 'true');
+    element.setAttribute('data-twigs-kudos', 'true');
     element.textContent = this.__text;
     return { element };
   }
@@ -86,7 +84,7 @@ export class KudosNode extends TextNode {
   static importDOM(): DOMConversionMap | null {
     return {
       span: (domNode: HTMLElement) => {
-        if (!domNode.hasAttribute('data-lexical-kudos')) {
+        if (!domNode.hasAttribute('data-twigs-kudos')) {
           return null;
         }
         return {
