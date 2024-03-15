@@ -6,7 +6,6 @@ const esbuild = require('rollup-plugin-esbuild').default;
 const alias = require('@rollup/plugin-alias');
 const path = require('path');
 const fs = require('fs');
-const replace = require('@rollup/plugin-replace');
 const packageJson = require('./package.json');
 
 const projectRootDir = path.resolve(__dirname);
@@ -36,11 +35,6 @@ module.exports = {
   external: [...Object.keys(packageJson.peerDependencies)],
   plugins: [
     external(),
-    replace({
-      'import.meta.env': 'process.env',
-      'import.meta.env.MODE': 'process.env.NODE_ENV',
-      preventAssignment: false
-    }),
     resolve(),
     commonjs(),
     alias({
