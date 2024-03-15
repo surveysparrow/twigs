@@ -40,7 +40,7 @@ export const FormatTool = ({
   ) => React.ReactNode;
 }) => {
   const [editor] = useLexicalComposerContext();
-  const format = useToolbarStore((state) => state.data.format);
+  const [format] = useToolbarStore((state) => state.data.format);
 
   const formatText = (type: keyof typeof formatMapping) => {
     if (type === 'paragraph') {

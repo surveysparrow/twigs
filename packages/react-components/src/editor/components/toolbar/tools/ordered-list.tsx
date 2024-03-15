@@ -14,7 +14,7 @@ export const OrderedListTool = ({
   buttonProps
 }: ToolbarButtonProps) => {
   const [editor] = useLexicalComposerContext();
-  const active = useToolbarStore((state) => state.data.isOrderedList);
+  const [active] = useToolbarStore((state) => state.data.isOrderedList);
 
   const handleClick = () => {
     if (!active) {

@@ -11,7 +11,7 @@ export const ItalicTool = ({
   buttonProps
 }: ToolbarButtonProps) => {
   const [editor] = useLexicalComposerContext();
-  const active = useToolbarStore((state) => state.data.isItalic);
+  const [active] = useToolbarStore((state) => state.data.isItalic);
 
   const handleClick = () => {
     editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'italic');
