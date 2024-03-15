@@ -17,7 +17,7 @@ export const CodeBlockTool = ({
   buttonProps
 }: ToolbarButtonProps) => {
   const [editor] = useLexicalComposerContext();
-  const format = useToolbarStore((state) => state.data.format);
+  const [format] = useToolbarStore((state) => state.data.format);
 
   const active = format === 'code';
 
