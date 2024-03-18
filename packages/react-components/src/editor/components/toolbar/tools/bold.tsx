@@ -8,7 +8,7 @@ import { ToolbarButtonProps } from './commons';
 
 export const BoldTool = ({ renderButton, buttonProps }: ToolbarButtonProps) => {
   const [editor] = useLexicalComposerContext();
-  const active = useToolbarStore((state) => state.data.isBold);
+  const [active] = useToolbarStore((state) => state.data.isBold);
 
   const handleClick = () => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold');
 

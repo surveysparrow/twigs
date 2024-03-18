@@ -43,7 +43,7 @@ export const ToolbarContextConsumer = ({
   children?: ReactNode;
 }) => {
   const [editor] = useLexicalComposerContext();
-  const updateData = useToolbarStore((state) => state.updateData);
+  const [, updateData] = useToolbarStore((state) => state.data);
 
   const updateToolbar = useCallback(() => {
     const selection = $getSelection();
