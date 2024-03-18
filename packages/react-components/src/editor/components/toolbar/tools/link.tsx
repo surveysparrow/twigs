@@ -8,7 +8,7 @@ import { ToolbarButtonProps } from './commons';
 
 export const LinkTool = ({ renderButton, buttonProps }: ToolbarButtonProps) => {
   const [editor] = useLexicalComposerContext();
-  const active = useToolbarStore((state) => state.data.isLink);
+  const [active] = useToolbarStore((state) => state.data.isLink);
 
   const handleClick = () => {
     if (!active) {

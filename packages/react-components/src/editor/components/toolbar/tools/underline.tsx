@@ -11,7 +11,7 @@ export const UnderlineTool = ({
   buttonProps
 }: ToolbarButtonProps) => {
   const [editor] = useLexicalComposerContext();
-  const active = useToolbarStore((state) => state.data.isUnderline);
+  const [active] = useToolbarStore((state) => state.data.isUnderline);
 
   const handleClick = () => {
     editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'underline');

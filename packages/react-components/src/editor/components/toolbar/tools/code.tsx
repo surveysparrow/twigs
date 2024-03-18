@@ -8,7 +8,7 @@ import { ToolbarButtonProps } from './commons';
 
 export const CodeTool = ({ renderButton, buttonProps }: ToolbarButtonProps) => {
   const [editor] = useLexicalComposerContext();
-  const active = useToolbarStore((state) => state.data.isCode);
+  const [active] = useToolbarStore((state) => state.data.isCode);
 
   const handleClick = () => {
     editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'code');

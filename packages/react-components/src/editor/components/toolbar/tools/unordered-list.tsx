@@ -13,7 +13,7 @@ export const UnorderedListTool = ({
   renderButton,
   buttonProps
 }: ToolbarButtonProps) => {
-  const active = useToolbarStore((state) => state.data.isUnOrderedList);
+  const [active] = useToolbarStore((state) => state.data.isUnOrderedList);
   const [editor] = useLexicalComposerContext();
 
   const handleClick = () => {

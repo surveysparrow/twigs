@@ -32,7 +32,7 @@ export const TextAlignTool = ({
   ) => React.ReactNode;
 }) => {
   const [editor] = useLexicalComposerContext();
-  const alignment = useToolbarStore((state) => state.data.textAlign);
+  const [alignment] = useToolbarStore((state) => state.data.textAlign);
 
   const getNextAlignment = (currentAlign: TextAlignments) => {
     let activeIndex = textAlignments.indexOf(currentAlign);
