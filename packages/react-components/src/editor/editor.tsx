@@ -3,6 +3,7 @@ import { ListItemNode, ListNode } from '@lexical/list';
 import { ClearEditorPlugin } from '@lexical/react/LexicalClearEditorPlugin';
 import {
   InitialConfigType,
+  InitialEditorStateType,
   LexicalComposer
 } from '@lexical/react/LexicalComposer';
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
@@ -89,7 +90,7 @@ export const Editor = ({
   editorState,
   dataManagementRef
 }: {
-  editorState?: EditorState;
+  editorState?: InitialEditorStateType;
   onChange?: (
     newEditorState: EditorState,
     editor: LexicalEditor,
