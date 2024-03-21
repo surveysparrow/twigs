@@ -4,6 +4,7 @@ import AsyncSelect from 'react-select/async';
 import CreatableSelect from 'react-select/creatable';
 import AsyncCreatableSelect from 'react-select/async-creatable';
 import { styled } from '../stitches.config';
+import { Flex, FormLabel } from '..';
 
 const selectStyles = {
   transition: 'all $transitions$2',
@@ -183,7 +184,9 @@ type SelectBaseProps = {
   isAsync?: boolean;
   isCreatable?: boolean,
   dropdownIndicatorIcon?: ReactElement;
-  dropdownIndicatorPosition?: 'left' | 'right'
+  dropdownIndicatorPosition?: 'left' | 'right';
+  label?: string;
+  requiredIndicator?: boolean;
 };
 
 const DropdownIndicator = (
@@ -203,7 +206,7 @@ export type SelectProps = SelectBaseProps &
   ComponentProps<typeof StyledCreatableAsyncSelect>;
 
 export const Select = ({
-  showSeparator, isAsync, isCreatable, components, dropdownIndicatorIcon, styles, dropdownIndicatorPosition = 'right', ...props
+  showSeparator, isAsync, isCreatable, components, dropdownIndicatorIcon, styles, dropdownIndicatorPosition = 'right', label, requiredIndicator ,...props
 }: SelectProps) => {
   const customStyles = useMemo(() => {
     const isLIconLeftPositioned = dropdownIndicatorPosition === 'left';
@@ -234,6 +237,8 @@ export const Select = ({
   // eslint-disable-next-line no-nested-ternary
   const SelectComponent = isCreatable ? (isAsync ? StyledCreatableAsyncSelect : StyledCreatableSelect) : (isAsync ? StyledAsyncSelect : StyledSelect);
   return (
+    <Flex flexDirection="column" gap="$2">
+    {!!label && <FormLabel requiredIndicator={requiredIndicator}>{label}</FormLabel>}
     <SelectComponent
       styles={customStyles}
       {...props}
@@ -249,5 +254,6 @@ export const Select = ({
       classNamePrefix="twigs-select"
       theme={(theme) => ({ ...theme, borderRadius: 10 })}
     />
+    </Flex>
   );
 };
