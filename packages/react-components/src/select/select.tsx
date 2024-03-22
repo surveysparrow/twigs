@@ -238,7 +238,7 @@ export const Select = ({
   const SelectComponent = isCreatable ? (isAsync ? StyledCreatableAsyncSelect : StyledCreatableSelect) : (isAsync ? StyledAsyncSelect : StyledSelect);
   return (
     <Box>
-      {!!label && <FormLabel css={{ marginBottom: "$2" }} requiredIndicator={requiredIndicator}>{label}</FormLabel>}
+      {!!label && <FormLabel css={{ marginBottom: '$2' }} requiredIndicator={requiredIndicator}>{label}</FormLabel>}
       <SelectComponent
         styles={customStyles}
         {...props}
