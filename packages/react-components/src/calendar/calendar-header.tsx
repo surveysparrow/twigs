@@ -31,8 +31,6 @@ export const CalendarHeader = styled(Flex, {
   height: '64px'
 });
 
-export const CalendarMonth = styled('span', {
-  color: '$neutral800',
-  fontSize: '$md',
-  fontWeight: '$7'
+export const CalendarMonth = styled(Flex, {
+  alignItems: 'center'
 });
