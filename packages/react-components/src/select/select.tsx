@@ -4,7 +4,8 @@ import AsyncSelect from 'react-select/async';
 import CreatableSelect from 'react-select/creatable';
 import AsyncCreatableSelect from 'react-select/async-creatable';
 import { styled } from '../stitches.config';
-import { Box, FormLabel } from '..';
+import { Box } from '../box';
+import { FormLabel } from '../form-label';
 
 const selectStyles = {
   transition: 'all $transitions$2',
@@ -236,24 +237,38 @@ export const Select = ({
 
   // eslint-disable-next-line no-nested-ternary
   const SelectComponent = isCreatable ? (isAsync ? StyledCreatableAsyncSelect : StyledCreatableSelect) : (isAsync ? StyledAsyncSelect : StyledSelect);
+  const SelectElement = (
+    <SelectComponent
+      styles={customStyles}
+      {...props}
+      components={{
+        ...(!showSeparator && {
+          IndicatorSeparator: null
+        }),
+        ...(dropdownIndicatorIcon && {
+          DropdownIndicator: (dropdownProps) => DropdownIndicator(dropdownProps, dropdownIndicatorIcon)
+        }),
+        ...components
+      }}
+      classNamePrefix="twigs-select"
+      theme={(theme) => ({ ...theme, borderRadius: 10 })}
+    />
+  );
   return (
-    <Box>
-      {!!label && <FormLabel css={{ marginBottom: '$2' }} requiredIndicator={requiredIndicator}>{label}</FormLabel>}
-      <SelectComponent
-        styles={customStyles}
-        {...props}
-        components={{
-          ...(!showSeparator && {
-            IndicatorSeparator: null
-          }),
-          ...(dropdownIndicatorIcon && {
-            DropdownIndicator: (dropdownProps) => DropdownIndicator(dropdownProps, dropdownIndicatorIcon)
-          }),
-          ...components
-        }}
-        classNamePrefix="twigs-select"
-        theme={(theme) => ({ ...theme, borderRadius: 10 })}
-      />
-    </Box>
+    <>
+      {label ? (
+        <Box>
+          <FormLabel
+            css={{ marginBottom: '$2' }}
+            requiredIndicator={requiredIndicator}
+          >
+            {label}
+          </FormLabel>
+          {SelectElement}
+        </Box>
+      ) : (
+        SelectElement
+      )}
+    </>
   );
 };
