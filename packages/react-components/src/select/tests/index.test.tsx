@@ -1,7 +1,7 @@
 import React from 'react';
 import 'jest';
 import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { Select } from '../index';
 
 const options = [
@@ -15,6 +15,13 @@ describe('Select', () => {
     render(
       <Select options={options} />
     );
+  });
+
+  it('renders label when label prop is provided', () => {
+    const label = 'Please select an option';
+    render(<Select label={label} />);
+    const labelNode = screen.getByText(label);
+    expect(labelNode).toBeInTheDocument();
   });
 
   it('separator is present', () => {
