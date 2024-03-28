@@ -143,16 +143,35 @@ Below is an example which modifies our primary button using custom css and theme
 
 ## Customize theme
 
-If you'd like to modify any of the theme values, you can pass the prop to `ThemeProvider`. Below is an example on how you can modify the `primary` color of the theme.
+The recommended way to customize the theme is to create a `twigs.config.js` file in the root of your project and then using that in the `ThemeProvider`. Below is an example on how you can customize the theme.
 
-```jsx
-<ThemeProvider
-  theme={{
-    colors: {
-      primary: 'black'
-    }
-  }}
->
+```js title=twigs.config.js
+export default {
+  colors: {
+    primary: "#2E666D",
+    secondary: "#363A43",
+  },
+  fontSizes: {
+    xxs: "0.5rem",
+    xs: "0.7rem",
+    sm: "0.85rem",
+    md: "1rem",
+    lg: "1.2rem",
+    xl: "1.44rem",
+    "2xl": "2rem",
+    "3xl": "2.5rem",
+    "4xl": "3.6rem",
+    "5xl": "5rem",
+  },
+};
+```
+
+```jsx title=src/index.js
+import customTheme from '@root/twigs.config.js';
+
+<ThemeProvider theme={customTheme}>
   <App>
 </ThemeProvider>
 ```
+
+You can always directly pass the theme object to the `ThemeProvider` as well, however, it is recommended to use a separate file as it will be helpful in providing better VSCode intellisense support if you are using our VSCode plugin.
