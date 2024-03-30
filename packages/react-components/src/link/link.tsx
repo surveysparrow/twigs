@@ -1,30 +1,56 @@
 import React, { FunctionComponent } from 'react';
+import { Slot } from '@radix-ui/react-slot';
+import { styled } from '@stitches/react';
 import { Box, BoxProps } from '../box';
 
-type LinkProps = BoxProps & React.AnchorHTMLAttributes<HTMLAnchorElement>;
+type LinkProps = BoxProps &
+  React.AnchorHTMLAttributes<HTMLAnchorElement> & {
+    asChild?: boolean;
+  };
+
+const defaultStyle = {
+  color: '$link',
+  fontWeight: 'inherit',
+  textDecoration: 'none',
+  display: 'inline-block',
+  backgroundColor: '$colors$neutral800',
+  '&:focus, &:active': {
+    outline: 'none'
+  }
+};
+
+const StyledSlot = styled(Slot, {
+  ...defaultStyle
+});
+
+function getStyledComp(Comp: any) {
+  return styled(Comp, {
+    ...defaultStyle
+  });
+}
 
 export const Link: FunctionComponent<LinkProps> = React.forwardRef(
-  ({ children, css, ...rest }: LinkProps, ref) => {
+  ({ children, css, asChild, ...rest }: LinkProps, ref) => {
+    const StyledChildren = getStyledComp((children as any).type);
+    const RootComp = asChild ? StyledChildren : Box;
+    console.log({ StyledChildren, StyledSlot });
     return (
-      <Box
+      <RootComp
         ref={ref}
-        as="a"
+        {...(!asChild && { as: 'a' })}
         css={{
-          color: '$link',
-          fontWeight: 'inherit',
-          textDecoration: 'none',
-          display: 'inline-block',
-          '&:focus, &:active': {
-            outline: 'none'
-          },
+          ...(!asChild && {
+            ...defaultStyle
+          }),
           ...css
         }}
         tabIndex={0}
         data-testid="link"
         {...rest}
+        {...(asChild && (children as any).props)}
       >
-        {children}
-      </Box>
+        {!asChild ? children : (children as any).props.children}
+      </RootComp>
     );
   }
 );
