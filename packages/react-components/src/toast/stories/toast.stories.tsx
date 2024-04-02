@@ -7,6 +7,7 @@ import {
 } from '../toast';
 import { toast } from '../../hooks/use-toast';
 import { Toastr } from '../toastr';
+import { CircleLoader } from '../../loader/circle';
 
 export default {
   component: Toast,
@@ -23,7 +24,22 @@ export default {
     }
   }
 };
-
+function handleToast() {
+  toast({
+    icon: <CircleLoader color="primary" size="lg" />,
+    variant: 'default',
+    title: 'Please wait',
+    description: 'Record is being created'
+  });
+  setTimeout(() => {
+    toast({
+      icon: <UserCircleIcon />,
+      variant: 'success',
+      title: 'Success',
+      description: 'Created record'
+    });
+  }, 1000);
+}
 const Template = (
   { variant: storyVariant }: ToastProps & ToastProviderProps
 ) => {
@@ -40,10 +56,17 @@ const Template = (
     warning: 'Please check the form',
     default: 'Default message'
   };
-  const promise = () => new Promise<void>((resolve, reject) => {
+  const promise = () => new Promise<{ data: string }>((resolve, reject) => {
     setTimeout(() => {
-      return Math.random() > 0.5 ? resolve() : reject();
-    }, 1000);
+      if (Math.random() > 0.5) {
+        resolve({ data: 'Data from JSON' });
+      } else {
+        // eslint-disable-next-line prefer-promise-reject-errors
+        reject({
+          data: 'Something went wrong'
+        });
+      }
+    }, 2000);
   });
 
   useEffect(() => {
@@ -56,9 +79,17 @@ const Template = (
         variant="outline"
         onClick={() => {
           toast.promise(promise(), {
-            warning: { title: 'Saving...', duration: 2000 },
-            success: { title: 'Saved', duration: 2000 },
-            error: { title: 'Error', duration: 4000 }
+            loading: { title: 'Creating, please wait...', duration: Infinity, icon: <CircleLoader size="xl" /> },
+            success: (p) => ({
+              title: `${p.data} saved successfully`,
+              variant: 'success',
+              duration: 2000
+            }),
+            error: ({ data }) => ({
+              title: `Error while creating record: ${data}`,
+              variant: 'error',
+              duration: 2000
+            })
           });
         }}
       >

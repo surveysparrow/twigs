@@ -173,28 +173,31 @@ const createHandler = (variant?: Variant) => (
 toast.error = createHandler('error');
 toast.success = createHandler('success');
 toast.loading = createHandler('loading');
-toast.warning = createHandler('warning');
-toast.default = createHandler('default');
 
 toast.promise = <T>(
   promise: Promise<T>,
   options: {
-    loading?: Omit<ToastProps, 'variant'>;
-    success: Omit<ToastProps, 'variant'>;
-    error: Omit<ToastProps, 'variant'>;
-    warning: Omit<ToastProps, 'variant'>;
-    default?: Omit<ToastProps, 'variant'>;
+    loading: Omit<ToastProps, 'variant'>;
+    success: ((p: T) => Omit<ToastProps, 'variant'>) | Omit<ToastProps, 'variant'>;
+    error: ((e:T) => Omit<ToastProps, 'variant'>) | Omit<ToastProps, 'variant'>;
   }
 ) => {
-  const id = toast.warning(options.warning);
-
+  const id = toast.loading(options.loading);
   promise
     .then((p) => {
-      toast.success({ id, ...options.success });
+      if (typeof options.success === 'function') {
+        toast.success({ id, ...options.success(p) });
+      } else {
+        toast.success({ id, ...options.success });
+      }
       return p;
     })
     .catch((e) => {
-      toast.error({ id, ...options.error });
+      if (typeof options.error === 'function') {
+        toast.error({ id, ...options.error(e) });
+      } else {
+        toast.error({ id, ...options.error });
+      }
       return e;
     });
   return promise;

@@ -271,6 +271,18 @@ const StyledToast = styled(ToastPrimitive.Root, {
         [`& ${StyledDescription}`]: {
           color: '$black800'
         }
+      },
+      loading: {
+        background: '$accent100',
+        [`& ${StyledIcon} svg`]: {
+          color: '$accent500'
+        },
+        [`& ${StyledTitle}`]: {
+          color: '$black900'
+        },
+        [`& ${StyledDescription}`]: {
+          color: '$black800'
+        }
       }
     }
   },
