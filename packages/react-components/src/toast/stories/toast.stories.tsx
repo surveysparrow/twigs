@@ -40,6 +40,11 @@ const Template = (
     warning: 'Please check the form',
     default: 'Default message'
   };
+  const promise = () => new Promise<void>((resolve, reject) => {
+    setTimeout(() => {
+      return Math.random() > 0.5 ? resolve() : reject();
+    }, 1000);
+  });
 
   useEffect(() => {
     return () => clearTimeout(timerRef.current);
@@ -50,12 +55,10 @@ const Template = (
       <Button
         variant="outline"
         onClick={() => {
-          toast({
-            icon: <UserCircleIcon />,
-            variant: (storyVariant || 'default' as any),
-            title: messages[variant!] || 'Default message',
-            description: 'There was a problem with your request.',
-            action: <ToastAction altText="Try again" asChild><Button color="light"> Close </Button></ToastAction>
+          toast.promise(promise(), {
+            warning: { title: 'Saving...', duration: 2000 },
+            success: { title: 'Saved', duration: 2000 },
+            error: { title: 'Error', duration: 4000 }
           });
         }}
       >

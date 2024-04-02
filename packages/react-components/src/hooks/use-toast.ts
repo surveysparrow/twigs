@@ -6,9 +6,11 @@ import { type ToastProps } from '../toast/toast';
 const TOAST_LIMIT = 1;
 const TOAST_REMOVE_DELAY = 10000;
 
+type Variant = 'default' | 'success' | 'error' | 'warning' | 'loading';
+
 type ToastrToast = ToastProps & {
   icon?: React.ReactElement,
-  variant: string,
+  variant: Variant,
   id: string
   title?: React.ReactNode
   description?: React.ReactNode
@@ -160,6 +162,43 @@ function toast({ ...toastProps }: Toast) {
     update
   };
 }
+const createHandler = (variant?: Variant) => (
+  args: ToastProps
+) => {
+  const newToast = toast(({ ...args, variant } as any));
+  dispatch({ type: 'UPDATE_TOAST', toast: newToast });
+  return newToast.id;
+};
+
+toast.error = createHandler('error');
+toast.success = createHandler('success');
+toast.loading = createHandler('loading');
+toast.warning = createHandler('warning');
+toast.default = createHandler('default');
+
+toast.promise = <T>(
+  promise: Promise<T>,
+  options: {
+    loading?: Omit<ToastProps, 'variant'>;
+    success: Omit<ToastProps, 'variant'>;
+    error: Omit<ToastProps, 'variant'>;
+    warning: Omit<ToastProps, 'variant'>;
+    default?: Omit<ToastProps, 'variant'>;
+  }
+) => {
+  const id = toast.warning(options.warning);
+
+  promise
+    .then((p) => {
+      toast.success({ id, ...options.success });
+      return p;
+    })
+    .catch((e) => {
+      toast.error({ id, ...options.error });
+      return e;
+    });
+  return promise;
+};
 
 function useToast() {
   const [state, setState] = React.useState<State>(memoryState);
