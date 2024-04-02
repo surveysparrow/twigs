@@ -24,22 +24,7 @@ export default {
     }
   }
 };
-function handleToast() {
-  toast({
-    icon: <CircleLoader color="primary" size="lg" />,
-    variant: 'default',
-    title: 'Please wait',
-    description: 'Record is being created'
-  });
-  setTimeout(() => {
-    toast({
-      icon: <UserCircleIcon />,
-      variant: 'success',
-      title: 'Success',
-      description: 'Created record'
-    });
-  }, 1000);
-}
+
 const Template = (
   { variant: storyVariant }: ToastProps & ToastProviderProps
 ) => {
@@ -56,6 +41,32 @@ const Template = (
     warning: 'Please check the form',
     default: 'Default message'
   };
+
+  useEffect(() => {
+    return () => clearTimeout(timerRef.current);
+  }, []);
+  return (
+    <>
+      <Toastr duration={10000} />
+      <Button
+        variant="outline"
+        onClick={() => {
+          toast({
+            icon: <UserCircleIcon />,
+            variant: (storyVariant || 'default' as any),
+            title: messages[variant!] || 'Default message',
+            description: 'There was a problem with your request.',
+            action: <ToastAction altText="Try again" asChild><Button color="light"> Close </Button></ToastAction>
+          });
+        }}
+      >
+        Show Toast
+      </Button>
+    </>
+  );
+};
+
+const ToastrPromise = () => {
   const promise = () => new Promise<{ data: string }>((resolve, reject) => {
     setTimeout(() => {
       if (Math.random() > 0.5) {
@@ -69,9 +80,6 @@ const Template = (
     }, 2000);
   });
 
-  useEffect(() => {
-    return () => clearTimeout(timerRef.current);
-  }, []);
   return (
     <>
       <Toastr duration={10000} />
@@ -79,16 +87,27 @@ const Template = (
         variant="outline"
         onClick={() => {
           toast.promise(promise(), {
-            loading: { title: 'Creating, please wait...', duration: Infinity, icon: <CircleLoader size="xl" /> },
+            loading: {
+              title: 'Creating, please wait...',
+              icon: <CircleLoader size="xl" />
+            },
             success: (p) => ({
               title: `${p.data} saved successfully`,
               variant: 'success',
-              duration: 2000
+              action: (
+                <ToastAction altText="Try again" asChild>
+                  <Button color="light"> Close </Button>
+                </ToastAction>
+              )
             }),
             error: ({ data }) => ({
               title: `Error while creating record: ${data}`,
               variant: 'error',
-              duration: 2000
+              action: (
+                <ToastAction altText="Try again" asChild>
+                  <Button color="light"> Close </Button>
+                </ToastAction>
+              )
             })
           });
         }}
@@ -98,4 +117,6 @@ const Template = (
     </>
   );
 };
+
 export const Default = Template.bind({});
+export const ToastWithPromise = ToastrPromise.bind({});
