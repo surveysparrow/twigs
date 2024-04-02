@@ -175,7 +175,7 @@ const createHandler = (variant: Variant) => (
   args: ToastProps
 ) => {
   const newToast = toast({ ...args, variant });
-  dispatch({ type: 'UPSERT_TOAST', toast: newToast });
+  dispatch({ type: 'UPSERT_TOAST', toast: { ...newToast, variant } });
   return newToast;
 };
 toast.loading = createHandler('loading');
