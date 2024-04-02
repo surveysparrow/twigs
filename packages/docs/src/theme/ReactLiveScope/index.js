@@ -11,7 +11,16 @@ import {
   EditorToolbar,
   DialogLinkEditor,
   RichEditor,
+  HashTagNode,
+  HashTagPlugin,
+  SlashesPlugin,
+  VariableContainerNode,
+  VariableCloseIcon,
+  EditorLookupDropdownBase
 } from "@sparrowengg/twigs-react";
+
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { $getSelection, $isTextNode } from "lexical";
 
 const ReactLiveScope = {
   React,
@@ -110,10 +119,19 @@ const ReactLiveScope = {
   Editor,
   MentionsPlugin,
   MentionNode,
+  HashTagPlugin,
+  HashTagNode,
   BoldTool,
   ItalicTool,
   EditorToolbar,
   DialogLinkEditor,
   RichEditor,
+  SlashesPlugin,
+  VariableContainerNode,
+  VariableCloseIcon,
+  EditorLookupDropdownBase,
+  useLexicalComposerContext,
+  $getSelection,
+  $isTextNode
 };
 export default ReactLiveScope;
