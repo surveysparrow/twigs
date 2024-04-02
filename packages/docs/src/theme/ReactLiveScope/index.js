@@ -13,9 +13,6 @@ import {
   RichEditor,
   HashTagNode,
   HashTagPlugin,
-  SlashesPlugin,
-  VariableContainerNode,
-  VariableCloseIcon,
   EditorLookupDropdownBase
 } from "@sparrowengg/twigs-react";
 
@@ -126,12 +123,10 @@ const ReactLiveScope = {
   EditorToolbar,
   DialogLinkEditor,
   RichEditor,
-  SlashesPlugin,
-  VariableContainerNode,
-  VariableCloseIcon,
   EditorLookupDropdownBase,
   useLexicalComposerContext,
   $getSelection,
   $isTextNode
 };
+
 export default ReactLiveScope;
