@@ -6,6 +6,8 @@ import { type ToastProps } from '../toast/toast';
 const TOAST_LIMIT = 1;
 const TOAST_REMOVE_DELAY = 10000;
 
+type Variant = 'default' | 'success' | 'error' | 'warning' | 'loading';
+
 type ToastrToast = ToastProps & {
   icon?: React.ReactElement,
   variant: string,
@@ -160,10 +162,10 @@ function toast({ ...toastProps }: Toast) {
     update
   };
 }
-const createHandler = (variant?: string) => (
+const createHandler = (variant: Variant) => (
   args: ToastProps
 ) => {
-  const newToast = toast(({ ...args, variant } as any));
+  const newToast = toast({ ...args, variant });
   dispatch({ type: 'UPDATE_TOAST', toast: newToast });
   return newToast.id;
 };
