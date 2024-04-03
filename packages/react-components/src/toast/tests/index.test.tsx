@@ -16,7 +16,6 @@ import {
 } from '../toast';
 import { Toastr } from '../toastr';
 import { toast } from '../../hooks/use-toast';
-import { CircleLoader } from '../../loader/circle';
 
 const Component = () => {
   const [open, setOpen] = useState(false);
@@ -87,7 +86,7 @@ const ToastrPromise = ({ variant, isError }: { variant?:string, isError?:boolean
             toast.promise(isError ? RejectPromise() : ResolvePromise(), {
               loading: {
                 title: 'Loading...',
-                icon: <CircleLoader size="xl" />
+                variant: 'loading'
               },
               success: (p) => ({
                 title: `${p.title}`,

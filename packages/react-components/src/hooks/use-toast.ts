@@ -183,9 +183,9 @@ toast.loading = createHandler('loading');
 toast.promise = <T>(
   promise: Promise<T>,
   options: {
-    loading: ToastProps;
-    success: ((p: T) => ToastProps) | ToastProps;
-    error: ((e: T) => ToastProps) | ToastProps;
+    loading: Omit<ToastrToast, 'id'>;
+    success: ((p: T) => Omit<ToastrToast, 'id'>) | Omit<ToastrToast, 'id'>;
+    error: ((e: T) => Omit<ToastrToast, 'id'>) | Omit<ToastrToast, 'id'>;
   }
 ) => {
   const loadingToast = toast.loading(options.loading);

@@ -3,6 +3,7 @@ import * as ToastPrimitive from '@radix-ui/react-toast';
 import {
   AlertFillIcon, TickCircleFillIcon, InfoIcon
 } from '@sparrowengg/twigs-react-icons';
+import { CircleLoader } from '../loader/circle';
 import { styled, keyframes } from '../stitches.config';
 import { Flex } from '../flex';
 import { Box } from '../box';
@@ -186,7 +187,14 @@ const Icon = ({ children, variant = 'success', ...props }: IconProps) => {
     error: () => <StyledErrorIcon />,
     warning: () => <StyledWarningIcon />
   };
-  return (
+  return variant === 'loading' ? (
+    children || (
+    <CircleLoader
+      size="xl"
+      color="accent"
+    />
+    )
+  ) : (
     <StyledIcon {...props}>
       {children || <>{iconMap[variant]()}</>}
     </StyledIcon>
@@ -273,12 +281,11 @@ const StyledToast = styled(ToastPrimitive.Root, {
         }
       },
       loading: {
-        background: '$accent100',
-        [`& ${StyledIcon} svg`]: {
-          color: '$accent500'
-        },
+        backgroundColorOpacity: ['$accent500', 0.04],
+        borderColorOpacity: ['$accent500', 0.2],
+        borderRadius: '$xl',
         [`& ${StyledTitle}`]: {
-          color: '$black900'
+          color: '$neutral900'
         },
         [`& ${StyledDescription}`]: {
           color: '$black800'

@@ -8,7 +8,6 @@ import {
 } from '../toast';
 import { toast } from '../../hooks/use-toast';
 import { Toastr } from '../toastr';
-import { CircleLoader } from '../../loader/circle';
 
 export default {
   component: Toast,
@@ -102,7 +101,7 @@ const ToastrPromise = ({ variant: storyVariant } : { variant:string }) => {
             toast.promise(ResolvePromise(), {
               loading: {
                 title: 'Creating, please wait...',
-                icon: <CircleLoader size="xl" />
+                variant: 'loading'
               },
               success: (p) => ({
                 title: `${p.title}`,
@@ -134,7 +133,7 @@ const ToastrPromise = ({ variant: storyVariant } : { variant:string }) => {
             toast.promise(RejectPromise(), {
               loading: {
                 title: 'Creating, please wait...',
-                icon: <CircleLoader size="xl" />
+                variant: 'loading'
               },
               success: (p) => ({
                 title: `${p.data} saved successfully`,
