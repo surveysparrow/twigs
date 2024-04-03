@@ -9,7 +9,7 @@ type Variant = 'default' | 'success' | 'error' | 'warning' | 'loading';
 
 type ToastrToast = ToastProps & {
   icon?: React.ReactElement,
-  variant: Variant,
+  variant: string,
   id: string
   title?: React.ReactNode
   description?: React.ReactNode
@@ -183,24 +183,26 @@ toast.loading = createHandler('loading');
 toast.promise = <T>(
   promise: Promise<T>,
   options: {
-    loading: Omit<ToastProps, 'variant'>;
-    success: ((p: T) => Omit<ToastProps, 'variant'>) | Omit<ToastProps, 'variant'>;
-    error: ((e:T) => Omit<ToastProps, 'variant'>) | Omit<ToastProps, 'variant'>;
+    loading: ToastProps;
+    success: ((p: T) => ToastProps) | ToastProps;
+    error: ((e: T) => ToastProps) | ToastProps;
   }
 ) => {
   const loadingToast = toast.loading(options.loading);
   promise
     .then((p) => {
       const successProps = typeof options.success === 'function' ? options.success(p) : options.success;
+      const variant = successProps.variant || 'default';
       loadingToast.update({
-        ...successProps, variant: 'success', id: loadingToast.id, icon: successProps.icon
+        ...successProps, variant, id: loadingToast.id, icon: successProps.icon
       });
       return p;
     })
     .catch((e) => {
       const errorProps = typeof options.error === 'function' ? options.error(e) : options.error;
+      const variant = errorProps.variant || 'error';
       loadingToast.update({
-        ...errorProps, variant: 'error', id: loadingToast.id, icon: errorProps.icon
+        ...errorProps, variant, id: loadingToast.id, icon: errorProps.icon
       });
       return e;
     });

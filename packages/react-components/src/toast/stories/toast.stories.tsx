@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { UserCircleIcon } from '@sparrowengg/twigs-react-icons';
+import { UserCircleIcon, AlertFillIcon } from '@sparrowengg/twigs-react-icons';
 import { ToastProviderProps } from '@radix-ui/react-toast';
 import { Button } from '../../button';
 import { Flex } from '../../flex';
@@ -76,10 +76,10 @@ const Template = (
   );
 };
 
-const ToastrPromise = () => {
-  const ResolvePromise = () => new Promise<{ data: string }>((resolve) => {
+const ToastrPromise = ({ variant: storyVariant } : { variant:string }) => {
+  const ResolvePromise = () => new Promise<{ title: string, description: string }>((resolve) => {
     setTimeout(() => {
-      resolve({ data: 'Data from JSON' });
+      resolve({ title: 'Success!', description: 'Record created successfully' });
     }, 2000);
   });
 
@@ -105,17 +105,18 @@ const ToastrPromise = () => {
                 icon: <CircleLoader size="xl" />
               },
               success: (p) => ({
-                title: `${p.data} saved successfully`,
-                variant: 'success',
+                title: `${p.title}`,
+                variant: (storyVariant || 'default' as any),
+                description: `${p.description}`,
                 action: (
                   <ToastAction altText="Try again" asChild>
                     <Button color="light"> Close </Button>
                   </ToastAction>
                 )
               }),
-              error: ({ data }) => ({
-                title: `Error while creating record: ${data}`,
-                variant: 'error',
+              error: (p) => ({
+                title: `Error while creating record: ${p.title}`,
+                variant: (storyVariant || 'error' as any),
                 action: (
                   <ToastAction altText="Try again" asChild>
                     <Button color="light"> Close </Button>
@@ -146,7 +147,8 @@ const ToastrPromise = () => {
               }),
               error: ({ data }) => ({
                 title: `Error while creating record: ${data}`,
-                variant: 'error',
+                variant: (storyVariant || 'error' as any),
+                icon: <AlertFillIcon />,
                 action: (
                   <ToastAction altText="Try again" asChild>
                     <Button color="light"> Close </Button>
