@@ -5,7 +5,7 @@ import { type ToastProps } from '../toast/toast';
 
 const TOAST_REMOVE_DELAY = 10000;
 
-type Variant = 'default' | 'success' | 'error' | 'warning' | 'loading';
+export type ToasterVariants = 'default' | 'success' | 'error' | 'warning' | 'loading';
 
 type ToastrToast = ToastProps & {
   icon?: React.ReactElement,
@@ -171,7 +171,7 @@ function toast({ ...toastProps }: Toast) {
     update
   };
 }
-const createHandler = (variant: Variant) => (
+const createHandler = (variant: ToasterVariants) => (
   args: ToastProps
 ) => {
   const newToast = toast({ ...args, variant });
