@@ -23,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/surveysparrow/twigs-react.git"
+    "url": "git@github.com:surveysparrow/twigs.git"
   },
   "auto-changelog": {
     "output": "CHANGELOG.md",
@@ -39,7 +39,7 @@
     "accessible"
   ],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "homepage": "https://bitbucket.org/surveysparrow/twigs-react#readme",
   "peerDependencies": {
     "@lexical/code": ">=0.13.1",
