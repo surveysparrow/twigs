@@ -73,12 +73,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.org/surveysparrow/twigs-react/src/master/packages/react-icons/"
+    "url": "git@github.com:surveysparrow/twigs.git"
   },
   "keywords": [
     "react",
     "icons"
   ],
   "sideEffects": false,
-  "license": "ISC"
+  "license": "MIT"
 }
