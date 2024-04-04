@@ -106,6 +106,15 @@ const StyledContainer = styled(Box, {
         [`.${prefixClassName('circle-loader__dot')}`]: {
           stroke: '$negative700'
         }
+      },
+      accent: {
+        [`.${prefixClassName('circle-loader__ring')}`]: {
+          stroke: '$accent500',
+          strokeOpacity: 0.2
+        },
+        [`.${prefixClassName('circle-loader__dot')}`]: {
+          stroke: '$accent500'
+        }
       }
     }
   },
