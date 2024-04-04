@@ -89,6 +89,7 @@
     "@types/react-dom": "^18.0.6",
     "@types/react-test-renderer": "^18.0.0",
     "@types/testing-library__jest-dom": "^5.14.5",
+    "@types/validator": "^13.11.9",
     "@typescript-eslint/eslint-plugin": "^7.1.1",
     "@typescript-eslint/parser": "^7.1.1",
     "babel-loader": "^8.2.5",
@@ -148,7 +149,8 @@
     "react-select": "^5.7.2",
     "react-stately": "^3.22.0",
     "react-table": "^7.8.0",
-    "react-transition-group": "^4.4.5"
+    "react-transition-group": "^4.4.5",
+    "validator": "^13.11.0"
   },
   "husky": {
     "hooks": {

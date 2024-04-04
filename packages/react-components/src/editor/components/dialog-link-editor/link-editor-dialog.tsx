@@ -14,6 +14,7 @@ import React, { useState } from 'react';
 export const LinkEditorDialog = ({
   open,
   title,
+  errors,
   linkUrl,
   linkText,
   urlLabel,
@@ -37,6 +38,10 @@ export const LinkEditorDialog = ({
   removeLink: () => void;
   handleLinkSubmission: ({ text, url }: { text: string; url: string }) => void;
   setIsLinkEditMode: (isLinkEditMode: boolean) => void;
+  errors: {
+    text: boolean;
+    url: boolean;
+  }
 }) => {
   const [editedLinkText, setEditedLinkText] = useState(linkText);
   const [editedLinkUrl, setEditedLinkUrl] = useState(linkUrl);
@@ -108,6 +113,7 @@ export const LinkEditorDialog = ({
             css={{
               boxSizing: 'border-box'
             }}
+            error={errors.text ? 'Please enter a valid text' : undefined}
           />
           <Box
             css={{
@@ -126,6 +132,7 @@ export const LinkEditorDialog = ({
               css={{
                 boxSizing: 'border-box'
               }}
+              error={errors.url ? 'Please enter a valid URL' : undefined}
             />
           </Box>
           <Flex

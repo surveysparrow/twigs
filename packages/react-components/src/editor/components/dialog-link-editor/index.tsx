@@ -23,6 +23,7 @@ import {
 import {
   useCallback, useEffect, useRef, useState
 } from 'react';
+import isURL from 'validator/es/lib/isURL';
 import { getSelectedNode } from '../../utils/get-selected-node';
 import { setFloatingElemPositionForLinkEditor } from '../../utils/set-floating-elem-position-for-link-editor';
 import { LinkEditorDialog } from './link-editor-dialog';
@@ -39,6 +40,11 @@ function useDialogLinkEditorToolbar(
     RangeSelection | NodeSelection | BaseSelection | null
   >(null);
   const [isLinkEditMode, setIsLinkEditMode] = useState(false);
+  const [errors, setErrors] = useState({
+    text: false,
+    url: false
+  });
+
   const isNewLink = useRef(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const containerElem = containerRef.current;
@@ -167,7 +173,9 @@ function useDialogLinkEditorToolbar(
         TOGGLE_LINK_COMMAND,
         (payload: string | { url: string } | null) => {
           if (typeof payload === 'string' || payload?.url) {
-            setIsLinkEditMode(true);
+            setTimeout(() => {
+              setIsLinkEditMode(true);
+            }, 40);
             isNewLink.current = true;
           } else {
             setIsLinkEditMode(false);
@@ -212,7 +220,10 @@ function useDialogLinkEditorToolbar(
     url: string;
   }) => {
     if (lastSelection !== null) {
-      if (url !== '') {
+      const isValidUrl = isURL(url);
+      const isValidText = text.trim().length > 0;
+
+      if (isValidUrl && isValidText) {
         editor.dispatchCommand(TOGGLE_LINK_COMMAND, { url });
         editor.update(() => {
           if ($isRangeSelection(lastSelection)) {
@@ -222,11 +233,20 @@ function useDialogLinkEditorToolbar(
             }
           }
         });
+        setErrors({
+          text: false,
+          url: false
+        });
+        setTimeout(() => {
+          setIsLink(false);
+          setIsLinkEditMode(false);
+        }, 50);
+      } else {
+        setErrors({
+          text: !isValidText,
+          url: !isValidUrl
+        });
       }
-      setTimeout(() => {
-        setIsLink(false);
-        setIsLinkEditMode(false);
-      }, 10);
     }
   };
 
@@ -249,29 +269,31 @@ function useDialogLinkEditorToolbar(
           linkUrl={linkUrl}
         />
       )}
-      <LinkEditorDialog
-        key={`${isLink}`}
-        handleLinkSubmission={handleLinkSubmission}
-        linkText={linkText}
-        linkUrl={linkUrl}
-        open={isLink && isLinkEditMode}
-        closeModal={() => {
-          setIsLink(false);
-          setIsLinkEditMode(false);
-          if (isNewLink.current) {
-            editor.dispatchCommand(TOGGLE_LINK_COMMAND, null);
-          }
-        }}
-        setIsLinkEditMode={setIsLinkEditMode}
-        textLabel="Link text"
-        urlLabel="Link URL"
-        removeLink={() => {
-          if (lastSelection !== null) {
-            editor.dispatchCommand(TOGGLE_LINK_COMMAND, null);
-          }
-        }}
-        title="Add Link"
-      />
+      {isLinkEditMode && (
+        <LinkEditorDialog
+          handleLinkSubmission={handleLinkSubmission}
+          linkText={linkText}
+          linkUrl={linkUrl}
+          open={isLink && isLinkEditMode}
+          closeModal={() => {
+            setIsLink(false);
+            setIsLinkEditMode(false);
+            if (isNewLink.current) {
+              editor.dispatchCommand(TOGGLE_LINK_COMMAND, null);
+            }
+          }}
+          setIsLinkEditMode={setIsLinkEditMode}
+          textLabel="Link text"
+          urlLabel="Link URL"
+          removeLink={() => {
+            if (lastSelection !== null) {
+              editor.dispatchCommand(TOGGLE_LINK_COMMAND, null);
+            }
+          }}
+          errors={errors}
+          title="Add Link"
+        />
+      )}
     </>
   );
 }

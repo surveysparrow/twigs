@@ -4,7 +4,10 @@ import {
   MenuOption,
   MenuTextMatch
 } from '@lexical/react/LexicalTypeaheadMenuPlugin';
-import { LexicalEditor, LexicalNode, TextNode } from 'lexical';
+import { Box } from '@src/box';
+import { Button } from '@src/button';
+import { Popover, PopoverContent, PopoverTrigger } from '@src/popover';
+import { LexicalEditor, TextNode } from 'lexical';
 import React, {
   ReactNode,
   ReactPortal,
@@ -14,11 +17,8 @@ import React, {
   useState
 } from 'react';
 import { createPortal } from 'react-dom';
-import { Box } from '@src/box';
-import { Button } from '@src/button';
-import { Popover, PopoverContent, PopoverTrigger } from '@src/popover';
 
-export type MenuData = {
+export type TypeaheadMenuData = {
   value: string;
   label: string;
   [x: string]: unknown;
@@ -31,9 +31,9 @@ type RenderMenuItemContentProps = {
 };
 
 class TypeaheadOption extends MenuOption {
-  data: MenuData;
+  data: TypeaheadMenuData;
 
-  constructor(data: MenuData) {
+  constructor(data: TypeaheadMenuData) {
     super(data.value);
     this.data = data;
   }
@@ -87,10 +87,8 @@ const TypeaheadMenuItem = ({
 
 export type EditorLookupDropdownBaseProps = {
   triggerFunction: (text: string) => MenuTextMatch | null;
-  getResults: (text: string | null) => Promise<MenuData[]> | MenuData[];
-  $createNode: (data: TypeaheadOption) => LexicalNode & {
-    select: () => void;
-  };
+  getResults: (text: string | null) => Promise<TypeaheadMenuData[]> | TypeaheadMenuData[];
+  $createNode?: (data: TypeaheadOption) => TextNode;
   suggestionsListLength?: number;
   renderMenu?: (args: {
     anchorElementRef: React.MutableRefObject<HTMLElement | null>;
@@ -100,6 +98,7 @@ export type EditorLookupDropdownBaseProps = {
     menuOptions: TypeaheadOption[];
   }) => ReactPortal | React.JSX.Element | null;
   renderMenuItemContent?: (props: RenderMenuItemContentProps) => ReactNode;
+  onMenuItemSelect?: (option: TypeaheadOption, closeMenu?: () => void) => void | boolean;
 };
 
 const defaultMenuRender = ({
@@ -175,6 +174,7 @@ export const EditorLookupDropdownBase = ({
   getResults,
   $createNode,
   renderMenu,
+  onMenuItemSelect,
   renderMenuItemContent,
   suggestionsListLength = 5
 }: EditorLookupDropdownBaseProps) => {
@@ -182,7 +182,7 @@ export const EditorLookupDropdownBase = ({
 
   const [queryString, setQueryString] = useState<string | null>(null);
 
-  const [results, setResults] = useState<MenuData[]>([]);
+  const [results, setResults] = useState<TypeaheadMenuData[]>([]);
 
   useEffect(() => {
     (async () => {
@@ -205,6 +205,15 @@ export const EditorLookupDropdownBase = ({
       closeMenu: () => void
     ) => {
       editor.update(() => {
+        if (onMenuItemSelect) {
+          const result = onMenuItemSelect(selectedOption, closeMenu);
+          if (result) {
+            return;
+          }
+        }
+
+        if (!$createNode) return;
+
         const node = $createNode(selectedOption);
         if (nodeToReplace) {
           nodeToReplace.replace(node);
