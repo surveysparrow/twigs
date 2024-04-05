@@ -1,5 +1,7 @@
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Button } from '@src/button';
+import { Box } from '@src/box';
 import { Link } from '../link';
 
 export default {
@@ -9,6 +11,9 @@ export default {
     size: {
       control: 'select',
       options: ['md', 'lg', 'xl']
+    },
+    asChild: {
+      control: 'boolean'
     }
   }
 } as ComponentMeta<typeof Link>;
