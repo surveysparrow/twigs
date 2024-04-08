@@ -10,13 +10,16 @@ import {
 } from './toast';
 import { useToast } from '../hooks/use-toast';
 
-export const Toastr: FunctionComponent<ToastProviderProps> = ({
+export const Toastr: FunctionComponent<ToastProviderProps & { maxToasts?: number }> = ({
   duration,
   swipeDirection,
   swipeThreshold,
+  maxToasts,
   ...rest
 }) => {
-  const { toasts } = useToast();
+  const { toasts } = useToast({
+    maxToasts
+  });
 
   return (
     <ToastProvider

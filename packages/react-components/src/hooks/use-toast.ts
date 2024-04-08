@@ -3,8 +3,9 @@
 import * as React from 'react';
 import { type ToastProps } from '../toast/toast';
 
-const TOAST_LIMIT = 1;
 const TOAST_REMOVE_DELAY = 10000;
+
+export type ToasterVariants = 'default' | 'success' | 'error' | 'warning' | 'loading';
 
 type ToastrToast = ToastProps & {
   icon?: React.ReactElement,
@@ -19,7 +20,8 @@ const actionTypes = {
   ADD_TOAST: 'ADD_TOAST',
   UPDATE_TOAST: 'UPDATE_TOAST',
   DISMISS_TOAST: 'DISMISS_TOAST',
-  REMOVE_TOAST: 'REMOVE_TOAST'
+  REMOVE_TOAST: 'REMOVE_TOAST',
+  UPSERT_TOAST: 'UPSERT_TOAST'
 } as const;
 
 let count = 0;
@@ -48,6 +50,10 @@ type Action =
     type: ActionType['REMOVE_TOAST']
     toastId?: ToastrToast['id']
   }
+  | {
+    type: ActionType['UPSERT_TOAST']
+    toast: ToastrToast
+  }
 
 interface State {
   toasts: ToastrToast[]
@@ -63,7 +69,7 @@ export function reducer(state: State, action: Action): State {
     case 'ADD_TOAST':
       return {
         ...state,
-        toasts: [action.toast, ...state.toasts].slice(0, TOAST_LIMIT)
+        toasts: [action.toast, ...state.toasts]
       };
 
     case 'UPDATE_TOAST':
@@ -71,7 +77,12 @@ export function reducer(state: State, action: Action): State {
         ...state,
         toasts: state.toasts.map((t) => (t.id === action.toast.id ? { ...t, ...action.toast } : t))
       };
-
+    case 'UPSERT_TOAST': {
+      const { toast } = action;
+      return state.toasts.find((t) => t.id === toast.id)
+        ? reducer(state, { type: 'UPDATE_TOAST', toast })
+        : reducer(state, { type: 'ADD_TOAST', toast });
+    }
     case 'DISMISS_TOAST': {
       const { toastId } = action;
       if (toastId) {
@@ -160,8 +171,45 @@ function toast({ ...toastProps }: Toast) {
     update
   };
 }
+const createHandler = (variant: ToasterVariants) => (
+  args: ToastProps
+) => {
+  const newToast = toast({ ...args, variant });
+  dispatch({ type: 'UPSERT_TOAST', toast: { ...newToast, variant } });
+  return newToast;
+};
+toast.loading = createHandler('loading');
 
-function useToast() {
+toast.promise = <T>(
+  promise: Promise<T>,
+  options: {
+    loading: Omit<ToastrToast, 'id'>;
+    success: ((p: T) => Omit<ToastrToast, 'id'>) | Omit<ToastrToast, 'id'>;
+    error: ((e: T) => Omit<ToastrToast, 'id'>) | Omit<ToastrToast, 'id'>;
+  }
+) => {
+  const loadingToast = toast.loading(options.loading);
+  promise
+    .then((p) => {
+      const successProps = typeof options.success === 'function' ? options.success(p) : options.success;
+      const variant = successProps.variant || 'default';
+      loadingToast.update({
+        ...successProps, variant, id: loadingToast.id, icon: successProps.icon
+      });
+      return p;
+    })
+    .catch((e) => {
+      const errorProps = typeof options.error === 'function' ? options.error(e) : options.error;
+      const variant = errorProps.variant || 'error';
+      loadingToast.update({
+        ...errorProps, variant, id: loadingToast.id, icon: errorProps.icon
+      });
+      return e;
+    });
+  return promise;
+};
+
+function useToast({ maxToasts = 3 }) {
   const [state, setState] = React.useState<State>(memoryState);
 
   React.useEffect(() => {
@@ -175,7 +223,7 @@ function useToast() {
   }, [state]);
 
   return {
-    ...state,
+    toasts: state.toasts.slice(0, maxToasts),
     toast,
     dismiss: (toastId?: string) => dispatch({ type: 'DISMISS_TOAST', toastId })
   };

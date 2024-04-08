@@ -3,7 +3,7 @@ import { MenuTextMatch } from '@lexical/react/LexicalTypeaheadMenuPlugin';
 import {
   EditorLookupDropdownBase,
   EditorLookupDropdownBaseProps,
-  MenuData
+  TypeaheadMenuData
 } from '../../components';
 import { $createMentionNode } from '../../nodes/mention';
 
@@ -84,7 +84,7 @@ export const MentionsPlugin = ({
   getResults,
   ...props
 }: Partial<EditorLookupDropdownBaseProps> & {
-  getResults: (text: string | null) => MenuData[] | Promise<MenuData[]>;
+  getResults: (text: string | null) => TypeaheadMenuData[] | Promise<TypeaheadMenuData[]>;
 }) => {
   return (
     <EditorLookupDropdownBase

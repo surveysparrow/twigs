@@ -87,10 +87,10 @@ export const Editor = ({
   editable,
   features,
   children,
-  editorState,
+  initialEditorState,
   dataManagementRef
 }: {
-  editorState?: InitialEditorStateType;
+  initialEditorState?: InitialEditorStateType;
   onChange?: (
     newEditorState: EditorState,
     editor: LexicalEditor,
@@ -133,7 +133,7 @@ export const Editor = ({
     <LexicalComposer
       initialConfig={{
         ...initialConfig,
-        editorState,
+        editorState: initialEditorState,
         editable,
         nodes: [...supportedFeatures.nodes, ...(nodes ?? [])]
       }}

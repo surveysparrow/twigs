@@ -10,6 +10,9 @@ jobs:
   build-test-and-publish:
     if: ${{ startsWith(github.ref_name, 'twigs-react-icons@') }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -25,6 +28,6 @@ jobs:
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
-      - run: cd packages/react-icons && npm publish
+      - run: cd packages/react-icons &&  && npm publish --provenance
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token_react_icons}}
