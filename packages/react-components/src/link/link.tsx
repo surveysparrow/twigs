@@ -1,6 +1,6 @@
-import React, { FunctionComponent } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { CSS } from '@stitches/react';
+import React from 'react';
 import { config, styled } from '..';
 import { Box, BoxProps } from '../box';
 
@@ -19,17 +19,24 @@ const defaultStyle: CSS<typeof config> = {
   }
 };
 
-const StyledSlot = styled(Slot);
+const StyledSlot = styled(Slot, {
+  ...defaultStyle
+});
 
-export const Link: FunctionComponent<LinkProps> = React.forwardRef(
-  ({ children, css, asChild, ...rest }: LinkProps, ref) => {
+export const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
+  ({
+    children, css, asChild, ...rest
+  }: LinkProps, ref) => {
     const RootComp = asChild ? StyledSlot : Box;
     return (
       <RootComp
+        // @ts-ignore
         ref={ref}
-        as="a"
+        {...(!asChild && { as: 'a' })}
         css={{
-          ...defaultStyle,
+          ...(!asChild && {
+            ...defaultStyle
+          }),
           ...css
         }}
         tabIndex={0}
