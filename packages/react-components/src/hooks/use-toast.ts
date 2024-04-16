@@ -194,7 +194,7 @@ toast.promise = <T>(
       const successProps = typeof options.success === 'function' ? options.success(p) : options.success;
       const variant = successProps.variant || 'default';
       loadingToast.update({
-        ...successProps, variant, id: loadingToast.id, icon: successProps.icon
+        variant, id: loadingToast.id, icon: successProps.icon, css: successProps.css, action: successProps.action, title: successProps.title, description: successProps.description
       });
       return p;
     })
@@ -202,7 +202,7 @@ toast.promise = <T>(
       const errorProps = typeof options.error === 'function' ? options.error(e) : options.error;
       const variant = errorProps.variant || 'error';
       loadingToast.update({
-        ...errorProps, variant, id: loadingToast.id, icon: errorProps.icon
+        variant, id: loadingToast.id, icon: errorProps.icon, css: errorProps.css, action: errorProps.action, title: errorProps.title, description: errorProps.description
       });
       return e;
     });

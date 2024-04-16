@@ -219,7 +219,6 @@ const StyledToast = styled(ToastPrimitive.Root, {
   backgroundColor: '$neutral900',
   borderRadius: '$xl',
   border: '$borderWidths$xs solid $black300',
-  display: 'flex',
   padding: '$8 $6',
   overflow: 'hidden',
   '&:focus, &:active': {
