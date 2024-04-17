@@ -218,6 +218,7 @@ const StyledDescription = styled(ToastPrimitive.Description, {
 const StyledToast = styled(ToastPrimitive.Root, {
   backgroundColor: '$neutral900',
   borderRadius: '$xl',
+  display: 'flex',
   border: '$borderWidths$xs solid $black300',
   padding: '$8 $6',
   overflow: 'hidden',
@@ -311,6 +312,7 @@ const StyledToast = styled(ToastPrimitive.Root, {
 
 const StyledToastWrapper = styled(Box, {
   display: 'grid',
+  minWidth: '100%',
   gridTemplateAreas: '"icon content action" "icon content action"',
   gridTemplateColumns: 'max-content auto max-content',
   columnGap: '$8',

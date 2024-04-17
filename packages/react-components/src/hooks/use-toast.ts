@@ -5,16 +5,21 @@ import { type ToastProps } from '../toast/toast';
 
 const TOAST_REMOVE_DELAY = 10000;
 
-export type ToasterVariants = 'default' | 'success' | 'error' | 'warning' | 'loading';
+export type ToasterVariants =
+  | 'default'
+  | 'success'
+  | 'error'
+  | 'warning'
+  | 'loading';
 
 type ToastrToast = ToastProps & {
-  icon?: React.ReactElement,
-  variant: string,
-  id: string
-  title?: React.ReactNode
-  description?: React.ReactNode
-  action?: React.ReactElement
-}
+  icon?: React.ReactElement;
+  variant: string;
+  id: string;
+  title?: React.ReactNode;
+  description?: React.ReactNode;
+  action?: React.ReactElement;
+};
 
 const actionTypes = {
   ADD_TOAST: 'ADD_TOAST',
@@ -31,32 +36,32 @@ function generareId() {
   return count.toString();
 }
 
-type ActionType = typeof actionTypes
+type ActionType = typeof actionTypes;
 
 type Action =
   | {
-    type: ActionType['ADD_TOAST']
-    toast: ToastrToast
-  }
+      type: ActionType['ADD_TOAST'];
+      toast: ToastrToast;
+    }
   | {
-    type: ActionType['UPDATE_TOAST']
-    toast: Partial<ToastrToast>
-  }
+      type: ActionType['UPDATE_TOAST'];
+      toast: Partial<ToastrToast>;
+    }
   | {
-    type: ActionType['DISMISS_TOAST']
-    toastId?: ToastrToast['id']
-  }
+      type: ActionType['DISMISS_TOAST'];
+      toastId?: ToastrToast['id'];
+    }
   | {
-    type: ActionType['REMOVE_TOAST']
-    toastId?: ToastrToast['id']
-  }
+      type: ActionType['REMOVE_TOAST'];
+      toastId?: ToastrToast['id'];
+    }
   | {
-    type: ActionType['UPSERT_TOAST']
-    toast: ToastrToast
-  }
+      type: ActionType['UPSERT_TOAST'];
+      toast: ToastrToast;
+    };
 
 interface State {
-  toasts: ToastrToast[]
+  toasts: ToastrToast[];
 }
 
 const toastTimeouts = new Map<string, ReturnType<typeof setTimeout>>();
@@ -75,7 +80,9 @@ export function reducer(state: State, action: Action): State {
     case 'UPDATE_TOAST':
       return {
         ...state,
-        toasts: state.toasts.map((t) => (t.id === action.toast.id ? { ...t, ...action.toast } : t))
+        toasts: state.toasts.map((t) =>
+          t.id === action.toast.id ? { ...t, ...action.toast } : t
+        )
       };
     case 'UPSERT_TOAST': {
       const { toast } = action;
@@ -95,12 +102,14 @@ export function reducer(state: State, action: Action): State {
 
       return {
         ...state,
-        toasts: state.toasts.map((t) => (t.id === toastId || toastId === undefined
-          ? {
-            ...t,
-            open: false
-          }
-          : t))
+        toasts: state.toasts.map((t) =>
+          t.id === toastId || toastId === undefined
+            ? {
+                ...t,
+                open: false
+              }
+            : t
+        )
       };
     }
     case 'REMOVE_TOAST':
@@ -142,15 +151,16 @@ const addToRemoveQueue = (toastId: string) => {
   toastTimeouts.set(toastId, timeout);
 };
 
-interface Toast extends Omit<ToastrToast, 'id'> { }
+interface Toast extends Omit<ToastrToast, 'id'> {}
 
 function toast({ ...toastProps }: Toast) {
   const id = generareId();
 
-  const update = (props: ToastrToast) => dispatch({
-    type: 'UPDATE_TOAST',
-    toast: { ...props, id }
-  });
+  const update = (props: ToastrToast) =>
+    dispatch({
+      type: 'UPDATE_TOAST',
+      toast: { ...props, id }
+    });
   const dismiss = () => dispatch({ type: 'DISMISS_TOAST', toastId: id });
 
   dispatch({
@@ -171,9 +181,7 @@ function toast({ ...toastProps }: Toast) {
     update
   };
 }
-const createHandler = (variant: ToasterVariants) => (
-  args: ToastProps
-) => {
+const createHandler = (variant: ToasterVariants) => (args: ToastProps) => {
   const newToast = toast({ ...args, variant });
   dispatch({ type: 'UPSERT_TOAST', toast: { ...newToast, variant } });
   return newToast;
@@ -191,18 +199,34 @@ toast.promise = <T>(
   const loadingToast = toast.loading(options.loading);
   promise
     .then((p) => {
-      const successProps = typeof options.success === 'function' ? options.success(p) : options.success;
+      const successProps =
+        typeof options.success === 'function'
+          ? options.success(p)
+          : options.success;
       const variant = successProps.variant || 'default';
       loadingToast.update({
-        variant, id: loadingToast.id, icon: successProps.icon, css: successProps.css, action: successProps.action, title: successProps.title, description: successProps.description
+        variant,
+        id: loadingToast.id,
+        icon: successProps.icon,
+        css: successProps.css,
+        action: successProps.action,
+        title: successProps.title,
+        description: successProps.description
       });
       return p;
     })
     .catch((e) => {
-      const errorProps = typeof options.error === 'function' ? options.error(e) : options.error;
+      const errorProps =
+        typeof options.error === 'function' ? options.error(e) : options.error;
       const variant = errorProps.variant || 'error';
       loadingToast.update({
-        variant, id: loadingToast.id, icon: errorProps.icon, css: errorProps.css, action: errorProps.action, title: errorProps.title, description: errorProps.description
+        variant,
+        id: loadingToast.id,
+        icon: errorProps.icon,
+        css: errorProps.css,
+        action: errorProps.action,
+        title: errorProps.title,
+        description: errorProps.description
       });
       return e;
     });
