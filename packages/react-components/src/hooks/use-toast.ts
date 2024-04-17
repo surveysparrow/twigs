@@ -80,9 +80,7 @@ export function reducer(state: State, action: Action): State {
     case 'UPDATE_TOAST':
       return {
         ...state,
-        toasts: state.toasts.map((t) =>
-          t.id === action.toast.id ? { ...t, ...action.toast } : t
-        )
+        toasts: state.toasts.map((t) => (t.id === action.toast.id ? { ...t, ...action.toast } : t))
       };
     case 'UPSERT_TOAST': {
       const { toast } = action;
@@ -102,14 +100,12 @@ export function reducer(state: State, action: Action): State {
 
       return {
         ...state,
-        toasts: state.toasts.map((t) =>
-          t.id === toastId || toastId === undefined
-            ? {
-                ...t,
-                open: false
-              }
-            : t
-        )
+        toasts: state.toasts.map((t) => (t.id === toastId || toastId === undefined
+          ? {
+            ...t,
+            open: false
+          }
+          : t))
       };
     }
     case 'REMOVE_TOAST':
@@ -156,11 +152,10 @@ interface Toast extends Omit<ToastrToast, 'id'> {}
 function toast({ ...toastProps }: Toast) {
   const id = generareId();
 
-  const update = (props: ToastrToast) =>
-    dispatch({
-      type: 'UPDATE_TOAST',
-      toast: { ...props, id }
-    });
+  const update = (props: ToastrToast) => dispatch({
+    type: 'UPDATE_TOAST',
+    toast: { ...props, id }
+  });
   const dismiss = () => dispatch({ type: 'DISMISS_TOAST', toastId: id });
 
   dispatch({
@@ -199,10 +194,9 @@ toast.promise = <T>(
   const loadingToast = toast.loading(options.loading);
   promise
     .then((p) => {
-      const successProps =
-        typeof options.success === 'function'
-          ? options.success(p)
-          : options.success;
+      const successProps = typeof options.success === 'function'
+        ? options.success(p)
+        : options.success;
       const variant = successProps.variant || 'default';
       loadingToast.update({
         variant,
@@ -216,8 +210,7 @@ toast.promise = <T>(
       return p;
     })
     .catch((e) => {
-      const errorProps =
-        typeof options.error === 'function' ? options.error(e) : options.error;
+      const errorProps = typeof options.error === 'function' ? options.error(e) : options.error;
       const variant = errorProps.variant || 'error';
       loadingToast.update({
         variant,
