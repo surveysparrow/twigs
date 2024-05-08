@@ -39,29 +39,28 @@ const slideInFromBottom = keyframes({
 
 const swipeOutToRight = keyframes({
   from: { transform: 'translateX(var(--radix-toast-swipe-end-x))' },
-  to: { transform: 'translateX(calc(100% + $space$12))' }
+  to: { transform: 'translateX(100vw)' }
 });
 
 const swipeOutToLeft = keyframes({
   from: { transform: 'translateX(var(--radix-toast-swipe-end-x))' },
-  to: { transform: 'translateX(calc(-100% + $space$12))' }
+  to: { transform: 'translateX(-100vw)' }
 });
 
 const swipeOutToTop = keyframes({
-  from: { transform: 'translateX(var(--radix-toast-swipe-end-x))' },
-  to: { transform: 'translateY(calc(-100% + $space$12))' }
+  from: { transform: 'translateY(var(--radix-toast-swipe-end-y))' },
+  to: { transform: 'translateY(-100vh)' }
 });
 
 const swipeOutToBottom = keyframes({
-  from: { transform: 'translateX(var(--radix-toast-swipe-end-x))' },
-  to: { transform: 'translateY(calc(100% + $space$12))' }
+  from: { transform: 'translateY(var(--radix-toast-swipe-end-y))' },
+  to: { transform: 'translateY(100vh)' }
 });
 
 const StyledViewport = styled(ToastPrimitive.Viewport, {
   position: 'fixed',
   display: 'flex',
   flexDirection: 'column',
-  paddingBottom: '$12',
   gap: '$space$5',
   width: 406,
   maxWidth: '100vw',
@@ -69,18 +68,59 @@ const StyledViewport = styled(ToastPrimitive.Viewport, {
   listStyle: 'none',
   zIndex: 99999999,
   outline: 'none',
+  '& li': {
+    '@media (prefers-reduced-motion: no-preference)': {
+      '&[data-swipe-direction="up"], &[data-swipe-direction="down"]': {
+        '&[data-swipe="move"]': {
+          transform: 'translateY(var(--radix-toast-swipe-move-y))'
+        },
+        '&[data-swipe="cancel"]': {
+          transform: 'translateY(0)',
+          transition: 'transform 200ms ease-out'
+        }
+      },
+      '&[data-swipe-direction="up"]': {
+        '&[data-swipe="end"]': {
+          animation: `${swipeOutToTop} 150ms ease-out`
+        }
+      },
+      '&[data-swipe-direction="down"]': {
+        '&[data-swipe="end"]': {
+          animation: `${swipeOutToBottom} 150ms ease-out`
+        }
+      },
+      '&[data-swipe-direction="left"], &[data-swipe-direction="right"]': {
+        '&[data-swipe="move"]': {
+          transform: 'translateX(var(--radix-toast-swipe-move-x))'
+        },
+        '&[data-swipe="cancel"]': {
+          transform: 'translateX(0)',
+          transition: 'transform 200ms ease-out'
+        }
+      },
+      '&[data-swipe-direction="left"]': {
+        '&[data-swipe="end"]': {
+          animation: `${swipeOutToLeft} 300ms ease-out`
+        }
+      },
+      '&[data-swipe-direction="right"]': {
+        '&[data-swipe="end"]': {
+          animation: `${swipeOutToRight} 300ms ease-out`
+        }
+      }
+    }
+  },
   variants: {
     position: {
       'top-left': {
         top: '0',
         left: '0',
+        paddingTop: '$12',
+        paddingLeft: '$12',
         '& li': {
           '@media (prefers-reduced-motion: no-preference)': {
             '&[data-state="open"]': {
               animation: `${slideInFromLeft} 150ms cubic-bezier(0.16, 1, 0.3, 1)`
-            },
-            '&[data-swipe="end"]': {
-              animation: `${swipeOutToLeft} 100ms ease-out`
             }
           }
         }
@@ -89,13 +129,11 @@ const StyledViewport = styled(ToastPrimitive.Viewport, {
         top: '0',
         left: '50%',
         transform: 'translateX(-50%)',
+        paddingTop: '$12',
         '& li': {
           '@media (prefers-reduced-motion: no-preference)': {
             '&[data-state="open"]': {
               animation: `${slideInFromTop} 150ms cubic-bezier(0.16, 1, 0.3, 1)`
-            },
-            '&[data-swipe="end"]': {
-              animation: `${swipeOutToTop} 100ms ease-out`
             }
           }
         }
@@ -103,13 +141,12 @@ const StyledViewport = styled(ToastPrimitive.Viewport, {
       'top-right': {
         top: '0',
         right: '0',
+        paddingTop: '$12',
+        paddingRight: '$12',
         '& li': {
           '@media (prefers-reduced-motion: no-preference)': {
             '&[data-state="open"]': {
               animation: `${slideInFromRight} 150ms cubic-bezier(0.16, 1, 0.3, 1)`
-            },
-            '&[data-swipe="end"]': {
-              animation: `${swipeOutToRight} 100ms ease-out`
             }
           }
         }
@@ -117,13 +154,12 @@ const StyledViewport = styled(ToastPrimitive.Viewport, {
       'bottom-left': {
         bottom: '0',
         left: '0',
+        paddingBottom: '$12',
+        paddingLeft: '$12',
         '& li': {
           '@media (prefers-reduced-motion: no-preference)': {
             '&[data-state="open"]': {
               animation: `${slideInFromLeft} 150ms cubic-bezier(0.16, 1, 0.3, 1)`
-            },
-            '&[data-swipe="end"]': {
-              animation: `${swipeOutToLeft} 100ms ease-out`
             }
           }
         }
@@ -131,14 +167,12 @@ const StyledViewport = styled(ToastPrimitive.Viewport, {
       'bottom-center': {
         bottom: '0',
         left: '50%',
+        paddingBottom: '$12',
         transform: 'translateX(-50%)',
         '& li': {
           '@media (prefers-reduced-motion: no-preference)': {
             '&[data-state="open"]': {
               animation: `${slideInFromBottom} 150ms cubic-bezier(0.16, 1, 0.3, 1)`
-            },
-            '&[data-swipe="end"]': {
-              animation: `${swipeOutToBottom} 100ms ease-out`
             }
           }
         }
@@ -146,13 +180,12 @@ const StyledViewport = styled(ToastPrimitive.Viewport, {
       'bottom-right': {
         bottom: '0',
         right: '0',
+        paddingBottom: '$12',
+        paddingRight: '$12',
         '& li': {
           '@media (prefers-reduced-motion: no-preference)': {
             '&[data-state="open"]': {
               animation: `${slideInFromRight} 150ms cubic-bezier(0.16, 1, 0.3, 1)`
-            },
-            '&[data-swipe="end"]': {
-              animation: `${swipeOutToRight} 100ms ease-out`
             }
           }
         }
@@ -177,8 +210,7 @@ type IconBaseProps = {
   variant: string | undefined;
 };
 
-type IconProps = IconBaseProps &
-  React.ComponentProps<typeof StyledIcon>
+type IconProps = IconBaseProps & React.ComponentProps<typeof StyledIcon>;
 
 const Icon = ({ children, variant = 'success', ...props }: IconProps) => {
   const iconMap = {
@@ -227,8 +259,7 @@ const StyledToast = styled(ToastPrimitive.Root, {
   },
   '&:focus-visible': {
     $$shadowColor: '$colors$primary300',
-    boxShadow:
-      'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
+    boxShadow: 'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
   },
   variants: {
     variant: {
@@ -320,48 +351,28 @@ const StyledToastWrapper = styled(Box, {
 
 interface ToastBaseProps {
   children?: React.ReactNode;
-  variant?: string,
+  variant?: string;
   icon?: ReactElement;
 }
 
 export type ToastProps = ToastBaseProps & React.ComponentProps<typeof StyledToast>;
 
-const ToastWrapper: FunctionComponent<ToastProps> = ({
-  children,
-  icon,
-  variant = 'default',
-  ...props
-}) => {
+const ToastWrapper: FunctionComponent<ToastProps> = ({ children, icon, variant = 'default', ...props }) => {
   return (
     <StyledToast data-testid="toast" variant={variant} {...props}>
       <StyledToastWrapper>
-        <Icon variant={variant}>
-          {icon && React.cloneElement(icon)}
-        </Icon>
+        <Icon variant={variant}>{icon && React.cloneElement(icon)}</Icon>
         {children}
       </StyledToastWrapper>
-
     </StyledToast>
   );
 };
 
-export type ToastProviderProps = React.ComponentProps<typeof StyledViewport> & ToastPrimitive.ToastProviderProps
+export type ToastProviderProps = React.ComponentProps<typeof StyledViewport> & ToastPrimitive.ToastProviderProps;
 
-const Provider: FunctionComponent<ToastProviderProps> = ({
-  duration,
-  label,
-  swipeDirection,
-  swipeThreshold,
-  children,
-  ...rest
-}: ToastProviderProps) => {
+const Provider: FunctionComponent<ToastProviderProps> = ({ duration, label, swipeDirection, swipeThreshold, children, ...rest }: ToastProviderProps) => {
   return (
-    <ToastPrimitive.Provider
-      duration={duration}
-      label={label}
-      swipeDirection={swipeDirection}
-      swipeThreshold={swipeThreshold}
-    >
+    <ToastPrimitive.Provider duration={duration} label={label} swipeDirection={swipeDirection} swipeThreshold={swipeThreshold}>
       {children}
       <StyledViewport {...rest} />
     </ToastPrimitive.Provider>
@@ -379,17 +390,13 @@ const StyledContent = styled(Flex, {
 });
 
 type ContentBaseProps = {
-  children: React.ReactNode
-}
+  children: React.ReactNode;
+};
 
-type ContentProps = ContentBaseProps & React.ComponentProps<typeof StyledContent>
+type ContentProps = ContentBaseProps & React.ComponentProps<typeof StyledContent>;
 
 const Content = ({ children, ...props }: ContentProps) => {
-  return (
-    <StyledContent {...props}>
-      {children}
-    </StyledContent>
-  );
+  return <StyledContent {...props}>{children}</StyledContent>;
 };
 
 const StyledAction = styled(ToastPrimitive.Action, {
