@@ -357,7 +357,9 @@ interface ToastBaseProps {
 
 export type ToastProps = ToastBaseProps & React.ComponentProps<typeof StyledToast>;
 
-const ToastWrapper: FunctionComponent<ToastProps> = ({ children, icon, variant = 'default', ...props }) => {
+const ToastWrapper: FunctionComponent<ToastProps> = ({
+  children, icon, variant = 'default', ...props
+}) => {
   return (
     <StyledToast data-testid="toast" variant={variant} {...props}>
       <StyledToastWrapper>
@@ -370,7 +372,9 @@ const ToastWrapper: FunctionComponent<ToastProps> = ({ children, icon, variant =
 
 export type ToastProviderProps = React.ComponentProps<typeof StyledViewport> & ToastPrimitive.ToastProviderProps;
 
-const Provider: FunctionComponent<ToastProviderProps> = ({ duration, label, swipeDirection, swipeThreshold, children, ...rest }: ToastProviderProps) => {
+const Provider: FunctionComponent<ToastProviderProps> = ({
+  duration, label, swipeDirection, swipeThreshold, children, ...rest
+}: ToastProviderProps) => {
   return (
     <ToastPrimitive.Provider duration={duration} label={label} swipeDirection={swipeDirection} swipeThreshold={swipeThreshold}>
       {children}
