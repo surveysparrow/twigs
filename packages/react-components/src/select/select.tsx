@@ -1,6 +1,5 @@
 import React, {
   ComponentProps,
-  FunctionComponent,
   ReactElement,
   useMemo
 } from 'react';
@@ -264,8 +263,8 @@ export const Select = React.forwardRef<
         ? StyledCreatableAsyncSelect
         : StyledCreatableSelect
       : isAsync
-      ? StyledAsyncSelect
-      : StyledSelect;
+        ? StyledAsyncSelect
+        : StyledSelect;
     const SelectElement = (
       <SelectComponent
         ref={ref}
@@ -276,8 +275,7 @@ export const Select = React.forwardRef<
             IndicatorSeparator: null
           }),
           ...(dropdownIndicatorIcon && {
-            DropdownIndicator: (dropdownProps) =>
-              DropdownIndicator(dropdownProps, dropdownIndicatorIcon)
+            DropdownIndicator: (dropdownProps) => DropdownIndicator(dropdownProps, dropdownIndicatorIcon)
           }),
           ...components
         }}
