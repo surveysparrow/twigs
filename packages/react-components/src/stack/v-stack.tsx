@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
-import { Stack, StackProps } from './stack';
+import { Stack, StackBaseProps } from './stack';
 
-type OmitDirection = Omit<StackProps, 'direction'>;
+type OmitDirection = Omit<StackBaseProps, 'direction'>;
 
 export const VStack = forwardRef<HTMLDivElement, OmitDirection>(
   (props, ref) => {

@@ -7,23 +7,28 @@ import React, {
   isValidElement,
   useMemo
 } from 'react';
-import { styled } from '../stitches.config';
-import { Flex } from '../flex';
+import type * as Stitches from '@stitches/react';
+import { styled, config } from '../stitches.config';
+import { Box } from '../box';
 import { getSeparatorStyles } from './get-separator-style';
 
-const StackWrapper = styled(Flex, {
+const StackWrapper = styled(Box, {
+  display: 'flex',
   flexDirection: 'column'
 });
 
-export interface StackProps {
+export interface StackBaseProps {
   children: React.ReactNode;
   alignX?: 'left' | 'center' | 'right';
   alignY?: 'left' | 'center' | 'right';
   wrap?: 'wrap' | 'nowrap' | 'wrap-reverse';
   gap?: string;
   direction?: 'row' | 'column' | 'row-reverse' | 'column-reverse';
+  isInline?: boolean;
   divider?: React.ReactElement;
 }
+
+type StackProps = StackBaseProps & { css?: Stitches.CSS<typeof config> };
 
 export const Stack = forwardRef<HTMLDivElement, StackProps>(
   (
@@ -35,6 +40,8 @@ export const Stack = forwardRef<HTMLDivElement, StackProps>(
       alignY = 'center',
       wrap,
       direction,
+      css,
+      isInline,
       ...props
     },
     ref
@@ -47,7 +54,7 @@ export const Stack = forwardRef<HTMLDivElement, StackProps>(
       gap,
       direction: direction || 'column'
     });
-    console.log(separatorStyles);
+
     const mapAlignX = {
       left: 'flex-start',
       center: 'center',
@@ -63,11 +70,15 @@ export const Stack = forwardRef<HTMLDivElement, StackProps>(
     return (
       <StackWrapper
         ref={ref}
-        gap={divider ? undefined : gap}
-        alignItems={mapAlignY[alignY]}
-        justifyContent={mapAlignX[alignX]}
-        wrap={wrap}
-        flexDirection={direction}
+        css={{
+          alignItems: mapAlignY[alignY],
+          justifyContent: mapAlignX[alignX],
+          flexWrap: wrap,
+          flexDirection: isInline ? 'row' : direction || 'column',
+          ...(divider ? {} : { gap }),
+          ...css
+        }}
+        data-testid="stack"
         {...props}
       >
         {validChildren.map((child, index) => (
