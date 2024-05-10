@@ -1,10 +1,17 @@
 import { CSSProperties } from 'react';
+import { MediaKeys } from './stack';
 
-type StackDirection = 'row' | 'column' | 'row-reverse' | 'column-reverse';
+const stackDirections = [
+  'row',
+  'column',
+  'row-reverse',
+  'column-reverse'
+] as const;
+type StackDirection = typeof stackDirections[number];
 
 interface Options {
   gap: string;
-  direction: StackDirection;
+  direction: StackDirection | Record<MediaKeys, StackDirection>;
 }
 
 export function getSeparatorStyles(options: Options): CSSProperties {
@@ -12,28 +19,24 @@ export function getSeparatorStyles(options: Options): CSSProperties {
 
   const styles: Record<StackDirection, CSSProperties> = {
     column: {
-      width: '100%',
       marginTop: gap,
       marginBottom: gap,
       borderLeftWidth: 0,
       borderTopWidth: '1px'
     },
     'column-reverse': {
-      width: '100%',
       marginTop: gap,
       marginBottom: gap,
       borderLeftWidth: 0,
       borderTopWidth: '1px'
     },
     row: {
-      width: '100%',
       marginLeft: gap,
       marginRight: gap,
       borderLeftWidth: '1px',
       borderTopWidth: 0
     },
     'row-reverse': {
-      width: '100%',
       marginLeft: gap,
       marginRight: gap,
       borderLeftWidth: '1px',
@@ -41,5 +44,12 @@ export function getSeparatorStyles(options: Options): CSSProperties {
     }
   };
 
-  return styles[direction];
+  if (typeof direction === 'string') return styles[direction];
+
+  return Object.keys(direction).reduce((acc, key) => {
+    return {
+      ...acc,
+      [`@${key}`]: styles[direction[key]]
+    };
+  }, {});
 }

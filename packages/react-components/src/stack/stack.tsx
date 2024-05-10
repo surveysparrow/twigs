@@ -13,17 +13,29 @@ import { Box } from '../box';
 import { getSeparatorStyles } from './get-separator-style';
 
 const StackWrapper = styled(Box, {
-  display: 'flex',
-  flexDirection: 'column'
+  display: 'flex'
 });
 
+export type MediaKeys = keyof typeof config.media;
+type Directions = 'row' | 'column' | 'row-reverse' | 'column-reverse';
+
+function getDirection(direction: Directions | Record<MediaKeys, Directions>) {
+  return typeof direction === 'object'
+    ? Object.keys(direction).reduce((acc, key) => {
+      return {
+        ...acc,
+        [`@${key}`]: { flexDirection: direction[key] }
+      };
+    }, {})
+    : { flexDirection: direction };
+}
 export interface StackBaseProps {
   children: React.ReactNode;
   alignX?: 'left' | 'center' | 'right';
   alignY?: 'left' | 'center' | 'right';
   wrap?: 'wrap' | 'nowrap' | 'wrap-reverse';
   gap?: string;
-  direction?: 'row' | 'column' | 'row-reverse' | 'column-reverse';
+  direction?: Directions | Record<MediaKeys, Directions>;
   isInline?: boolean;
   divider?: React.ReactElement;
 }
@@ -39,7 +51,7 @@ export const Stack = forwardRef<HTMLDivElement, StackProps>(
       alignX = 'center',
       alignY = 'center',
       wrap,
-      direction,
+      direction = 'column',
       css,
       isInline,
       ...props
@@ -66,7 +78,6 @@ export const Stack = forwardRef<HTMLDivElement, StackProps>(
       center: 'center',
       right: 'flex-end'
     };
-
     return (
       <StackWrapper
         ref={ref}
@@ -74,7 +85,7 @@ export const Stack = forwardRef<HTMLDivElement, StackProps>(
           alignItems: mapAlignY[alignY],
           justifyContent: mapAlignX[alignX],
           flexWrap: wrap,
-          flexDirection: isInline ? 'row' : direction || 'column',
+          ...(isInline ? { flexDirection: 'row' } : getDirection(direction)),
           ...(divider ? {} : { gap }),
           ...css
         }}
@@ -84,11 +95,12 @@ export const Stack = forwardRef<HTMLDivElement, StackProps>(
         {validChildren.map((child, index) => (
           <Fragment key={index}>
             {child}
-            {index < validChildren.length - 1 && divider && (
-              <div style={separatorStyles}>
-                {cloneElement(divider, { key: `divider-${index}` })}
-              </div>
-            )}
+            {index < validChildren.length - 1
+              && divider
+              && cloneElement(divider, {
+                key: `divider-${index}`,
+                css: separatorStyles
+              })}
           </Fragment>
         ))}
       </StackWrapper>

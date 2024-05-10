@@ -14,9 +14,10 @@ export const resetStyles = {
     fontSize: '100%',
     verticalAlign: 'baseline'
   },
-  'article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section': {
-    display: 'block'
-  },
+  'article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section':
+    {
+      display: 'block'
+    },
   '*[hidden]': {
     display: 'none'
   },
@@ -327,6 +328,7 @@ export const {
     })
   },
   media: {
+    'screen-xxs': '(min-width: 320px)',
     'screen-xs': '(min-width: 480px)',
     'screen-sm': '(min-width: 640px)',
     'screen-md': '(min-width: 768px)',
@@ -339,7 +341,10 @@ export const {
 export const globalStyles = globalCss({
   ...resetStyles,
   '*': {
-    margin: 0, padding: 0, fontFamily: '$body', '-webkit-font-smoothing': 'antialiased'
+    margin: 0,
+    padding: 0,
+    fontFamily: '$body',
+    '-webkit-font-smoothing': 'antialiased'
   },
   '*, :before, :after': { boxSizing: 'border-box' }
 });
@@ -353,5 +358,9 @@ function hexToRgba(hex: string, opacity: number) {
 
   // return the new hex color code with opacity
   // eslint-disable-next-line no-bitwise
-  return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}${Math.round(opacity * 255).toString(16).padStart(2, '0')}`;
+  return `#${((1 << 24) + (r << 16) + (g << 8) + b)
+    .toString(16)
+    .slice(1)}${Math.round(opacity * 255)
+    .toString(16)
+    .padStart(2, '0')}`;
 }

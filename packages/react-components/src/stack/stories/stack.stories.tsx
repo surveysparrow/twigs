@@ -9,15 +9,15 @@ export default {
   title: 'Layout/Stack'
 };
 
-const StackDivider = ({ borderColor }) => (
+const StackDivider = ({ css }) => (
   <Box
     css={{
       borderWidth: 0,
       alignSelf: 'stretch',
-      border: '10px solid',
-      borderColor,
+      border: '1px solid',
       width: 'auto',
-      height: 'auto'
+      height: 'auto',
+      ...css
     }}
   />
 );
@@ -55,7 +55,16 @@ const Template = (args) => (
 );
 
 const VStackTemplate = (args) => (
-  <VStack {...args} divider={<StackDivider borderColor="$black700" />}>
+  <VStack
+    {...args}
+    divider={(
+      <StackDivider
+        css={{
+          borderColor: '$black700'
+        }}
+      />
+    )}
+  >
     <Box
       css={{
         width: 100,
