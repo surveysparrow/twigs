@@ -62,10 +62,13 @@ export const Stack = forwardRef<HTMLDivElement, StackProps>(
       return Children.toArray(children).filter((child) => isValidElement(child));
     }, [children]);
 
-    const separatorStyles = getSeparatorStyles({
-      gap,
-      direction: direction || 'column'
-    });
+    const separatorStyles = {
+      ...getSeparatorStyles({
+        gap,
+        direction: direction || 'column'
+      }),
+      ...divider?.props.css
+    };
 
     const mapAlignX = {
       left: 'flex-start',

@@ -14,7 +14,7 @@ const StackDivider = ({ css }) => (
     css={{
       borderWidth: 0,
       alignSelf: 'stretch',
-      border: '1px solid',
+      border: '0px solid',
       width: 'auto',
       height: 'auto',
       ...css
@@ -60,7 +60,7 @@ const VStackTemplate = (args) => (
     divider={(
       <StackDivider
         css={{
-          borderColor: '$black700'
+          borderColor: '$secondary200'
         }}
       />
     )}
