@@ -1,0 +1,30 @@
+# Icon Button
+
+### Import
+```jsx
+import { IconButton } from '@sparrowengg/twigs-react';
+```
+
+The `IconButton` component is used to render an icon within in a button.
+
+### Usage 
+```jsx live
+ function App(){
+    return (
+        <Flex gap="$4">
+            <IconButton icon={<EmailIcon />} />
+            <IconButton icon={<DownloadIcon />} />
+        </Flex>
+    )
+ }
+```
+
+### Props
+
+| Property   | Description                           | Type    | Default | Options |
+|------------|---------------------------------------|---------|---------|---------|
+| size       | Size of the icon button               | string  | - | 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl' |
+| color      | Color of the icon button              | string  | - | 'default', 'primary', 'secondary', 'bright', 'light', 'error' |
+| variant    | Variant of the icon button            | string  | - | 'solid', 'ghost', 'outline' |
+| disabled   | If true, the button will be disabled  | boolean | - | - |
+| loading    | If true, a loading indicator will be shown | boolean | - | - |

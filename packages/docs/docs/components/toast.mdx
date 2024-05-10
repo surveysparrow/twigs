@@ -45,7 +45,35 @@ Using `toast` hook you can trigger toast from anywhere in your application.
 </Button>
 ```
 
+### Toast With Promise
+Using `toast.promise` you can show toast with promise.
 
+```jsx
+<Button
+variant="outline"
+onClick={() => {
+  //highlight-start
+  toast.promise(ResolvePromise(), {
+    loading: {
+      title: 'Creating, please wait...',
+      variant: 'loading'
+    },
+    success: (p) => ({
+      title: `${p.title}`,
+      variant: 'success',
+      description: `${p.description}`,
+    }),
+    error: (p) => ({
+      title: `Error while creating record: ${p.title}`,
+      variant: 'error',
+    })
+  });
+  //highlight-end
+}}
+>
+  Success
+</Button>
+```
 
 ### Props
 
