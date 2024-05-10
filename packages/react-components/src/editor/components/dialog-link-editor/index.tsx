@@ -52,7 +52,6 @@ function useDialogLinkEditorToolbar(
   useEffect(() => {
     function updateToolbar() {
       const selection = $getSelection();
-      console.log(selection);
       if ($isRangeSelection(selection)) {
         const node = getSelectedNode(selection);
         const linkParent = $findMatchingParent(node, $isLinkNode);
