@@ -46,6 +46,7 @@ const ReactLiveScope = {
   Stepper: twigsComponentLoader("Stepper"),
   StepperItem: twigsComponentLoader("StepperItem"),
   Stack: twigsComponentLoader("Stack"),
+  Separator: twigsComponentLoader("Separator"),
   VStack: twigsComponentLoader("VStack"),
   HStack  : twigsComponentLoader("HStack"),
   Tabs: twigsComponentLoader("Tabs"),
