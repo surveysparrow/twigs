@@ -92,28 +92,12 @@ In some scenarios, you may want to add dividers between stacked elements. Pass t
 
 ```jsx live
 function App () {
-    function StackDivider ({ css })  {
-        return (
-            <Box
-              css={{
-                borderWidth: 0,
-                alignSelf: 'stretch',
-                border: '0px solid',
-                width: 'auto',
-                height: 'auto',
-                ...css
-              }}
-            />
-        );
-    }
 
     return (
         <VStack
-            divider={(
-                <StackDivider css={{
-                    borderColor: '$secondary200'
-                }}/>
-            )}
+            divider={<Separator css={{
+              backgroundColor: '$neutral300',
+            }}/>}
         >
             <Box
                 css={{

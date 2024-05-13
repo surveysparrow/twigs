@@ -1,4 +1,4 @@
-import React from 'react';
+import { Separator } from '@src/separator';
 import { Stack } from '../stack';
 import { HStack } from '../h-stack';
 import { VStack } from '../v-stack';
@@ -8,19 +8,6 @@ export default {
   component: Stack,
   title: 'Layout/Stack'
 };
-
-const StackDivider = ({ css }) => (
-  <Box
-    css={{
-      borderWidth: 0,
-      alignSelf: 'stretch',
-      border: '0px solid',
-      width: 'auto',
-      height: 'auto',
-      ...css
-    }}
-  />
-);
 
 const Template = (args) => (
   <Stack {...args}>
@@ -57,13 +44,7 @@ const Template = (args) => (
 const VStackTemplate = (args) => (
   <VStack
     {...args}
-    divider={(
-      <StackDivider
-        css={{
-          borderColor: '$secondary200'
-        }}
-      />
-    )}
+    divider={<Separator orientation="horizontal" />}
   >
     <Box
       css={{
