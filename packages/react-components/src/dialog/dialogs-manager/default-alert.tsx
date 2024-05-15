@@ -1,5 +1,7 @@
 import React, { ReactNode, isValidElement } from 'react';
 import { CloseIcon } from '@sparrowengg/twigs-react-icons';
+import { config } from '@src/stitches.config';
+import { CSS } from '@stitches/react';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -21,6 +23,7 @@ export type DefaultAlertDialogProps = {
   };
   actionButtonProps?: ButtonProps;
   closeButton?: ReactNode;
+  css?: CSS<typeof config>;
   onPrimaryAction?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onClose?: () => void;
 };
@@ -33,6 +36,7 @@ export const DefaultAlertDialog = ({
   },
   actionButtonProps,
   closeButton = DefaultCloseButton,
+  css,
   onPrimaryAction,
   onClose
 }: DefaultAlertDialogProps) => {
@@ -45,13 +49,26 @@ export const DefaultAlertDialog = ({
         }
       }}
     >
-      <AlertDialogContent>
+      <AlertDialogContent css={{ ...css }}>
         <AlertDialogTitle
           css={{
-            paddingRight: '$20'
+            paddingRight: 'calc($20 + $12 + $6)',
+            position: 'relative'
           }}
         >
           {title}
+          {closeButton && (
+          <Box
+            css={{
+              position: 'absolute',
+              top: '50%',
+              right: '$12',
+              transform: 'translate(0,-50%)'
+            }}
+          >
+            {closeButton}
+          </Box>
+          )}
         </AlertDialogTitle>
         <AlertDialogDescription>{content}</AlertDialogDescription>
         <AlertDialogActions
@@ -75,11 +92,6 @@ export const DefaultAlertDialog = ({
             )}
           </AlertDialogAction>
         </AlertDialogActions>
-        {closeButton && (
-          <Box css={{ position: 'absolute', top: '$6', right: '$6' }}>
-            {closeButton}
-          </Box>
-        )}
       </AlertDialogContent>
     </AlertDialog>
   );
@@ -91,6 +103,7 @@ const DefaultCloseButton = (
       icon={<CloseIcon />}
       aria-label="Close"
       color="bright"
+      size="lg"
       css={{
         [`& .${prefixClassName('button__icon-container')} > svg`]: {
           width: '$6',
