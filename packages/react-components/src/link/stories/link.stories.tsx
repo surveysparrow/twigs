@@ -1,7 +1,4 @@
-import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { Button } from '@src/button';
-import { Box } from '@src/box';
 import { Link } from '../link';
 
 export default {
