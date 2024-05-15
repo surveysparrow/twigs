@@ -1,4 +1,4 @@
-import { Separator ,SeparatorProps } from '../separator';
+import { Separator, SeparatorProps } from '../separator';
 import { Box } from '../../box';
 import { Text } from '../../text';
 import { Flex } from '../../flex';
