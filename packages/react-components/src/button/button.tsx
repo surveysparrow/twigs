@@ -37,6 +37,9 @@ const StyledButton = styled('button', {
     opacity: 0.4,
     cursor: 'not-allowed'
   },
+  '&:active:hover': {
+    opacity: '0.8'
+  },
   '&:focus, &:active': {
     outline: 'none'
   },
@@ -53,7 +56,7 @@ const StyledButton = styled('button', {
   variants: {
     size: {
       '2xl': {
-        padding: '$9 $12',
+        padding: '$9 $10',
         borderRadius: '$2xl',
         fontSize: '$lg',
         lineHeight: '$lg',
@@ -64,8 +67,8 @@ const StyledButton = styled('button', {
         }
       },
       xl: {
-        padding: '$5 $10',
-        borderRadius: 10,
+        padding: '$5 $8',
+        borderRadius: 12,
         fontSize: '$lg',
         lineHeight: '$lg',
         height: '$12',
@@ -75,8 +78,8 @@ const StyledButton = styled('button', {
         }
       },
       lg: {
-        padding: '$4 $8',
-        borderRadius: 10,
+        padding: '$4 $6',
+        borderRadius: 12,
         fontSize: '$md',
         lineHeight: '$md',
         height: '$10',
@@ -86,7 +89,7 @@ const StyledButton = styled('button', {
         }
       },
       md: {
-        padding: '$3 $5',
+        padding: '$3 $4',
         borderRadius: '$lg',
         fontSize: '$sm',
         lineHeight: '$md',
@@ -97,8 +100,8 @@ const StyledButton = styled('button', {
         }
       },
       sm: {
-        padding: '$1 $4',
-        borderRadius: '$md',
+        padding: '$1 $3',
+        borderRadius: '$sm',
         fontSize: '$sm',
         lineHeight: '$sm',
         height: '$6',
@@ -108,8 +111,8 @@ const StyledButton = styled('button', {
         }
       },
       xs: {
-        padding: '$1 $3',
-        borderRadius: '$md',
+        padding: '$1 $2',
+        borderRadius: '$sm',
         fontSize: '$xs',
         lineHeight: '$xs',
         height: '$5',
@@ -119,7 +122,7 @@ const StyledButton = styled('button', {
         }
       },
       xxs: {
-        padding: '$1 $2',
+        padding: '1px $1',
         borderRadius: '$sm',
         fontSize: '$xxs',
         lineHeight: '$xxs',
@@ -387,6 +390,20 @@ const StyledButton = styled('button', {
       }
     },
     {
+      color: 'light',
+      variant: 'ghost',
+      css: {
+        background: 'transparent',
+        color: '$white900',
+        [`&:active:not(:disabled), &.${prefixClassName('button--loading')}`]: {
+          backgroundColorOpacity: ['$white400', 0.2]
+        },
+        '&:hover:not(:disabled), &:focus': {
+          backgroundColorOpacity: ['$white300', 0.15]
+        }
+      }
+    },
+    {
       color: 'error',
       variant: 'ghost',
       css: {
@@ -545,20 +562,18 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
     ref
   ) => {
     const hasNoIcon = !(leftIcon || rightIcon || icon);
-    const buttonLoaderMargin: ScaleValue<'space', typeof config> = [
-      'xxs',
-      'xs',
-      'sm'
-    ].includes(rest.size as Extract<ButtonProps['size'], string>)
-      ? '$2'
-      : '$4';
+    let buttonLoaderMargin: ScaleValue<'space', typeof config> = '$4';
 
-    const { size: loaderSize, ...loaderCSS } = getLoaderIconSizeFromButtonProps(
-      {
-        buttonSize: rest.size,
-        loaderType: loader
-      }
-    );
+    if (['lg', 'xl'].includes(rest.size as Extract<ButtonProps['size'], string>)) {
+      buttonLoaderMargin = '$5';
+    } else if (['xxs', 'xs', 'sm', 'md'].includes(rest.size as Extract<ButtonProps['size'], string>)) {
+      buttonLoaderMargin = '$1';
+    }
+
+    const { size: loaderSize, ...loaderCSS } = getLoaderIconSizeFromButtonProps({
+      buttonSize: rest.size,
+      loaderType: loader
+    });
     const loaderColor = getLoaderVariantFromButtonVariant({
       variant: rest.variant ?? 'solid',
       color
