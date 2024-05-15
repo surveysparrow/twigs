@@ -1,8 +1,9 @@
 # Stack
 
 ### Import
+
 ```jsx
-import { Stack, HStack, VStack } from '@sparrowengg/twigs-react';
+import { Stack, HStack, VStack } from "@sparrowengg/twigs-react";
 ```
 
 `Stack` is a layout component used to group elements together and apply a space between them.
@@ -11,134 +12,140 @@ import { Stack, HStack, VStack } from '@sparrowengg/twigs-react';
 - HStack: used to stack elements in the horizontal direction
 - Stack: used to stack elements in the vertical or horizontal direction
 
+### Usage
 
-### Usage 
 ```jsx live
 <Stack>
-    <Box
-      css={{
-        width: 100,
-        height: 100,
-        backgroundColor: 'yellow'
-      }}
-    >
-      1
-    </Box>
-    <Box
-      css={{
-        width: 100,
-        height: 100,
-        backgroundColor: 'orange'
-      }}
-    >
-      2
-    </Box>
-    <Box
-      css={{
-        width: 100,
-        height: 100,
-        backgroundColor: 'green'
-      }}
-    >
-      3
-    </Box>
-  </Stack>
+  <Box
+    css={{
+      width: 100,
+      height: 100,
+      backgroundColor: "yellow",
+    }}
+  >
+    1
+  </Box>
+  <Box
+    css={{
+      width: 100,
+      height: 100,
+      backgroundColor: "orange",
+    }}
+  >
+    2
+  </Box>
+  <Box
+    css={{
+      width: 100,
+      height: 100,
+      backgroundColor: "green",
+    }}
+  >
+    3
+  </Box>
+</Stack>
 ```
 
 ### Responsive Direction
+
 You can pass responsive values to the Stack component to change stack direction.
 
 ```jsx live
 <Stack
-direction={{
-  'screen-xxs': 'column',
-  'screen-xs': 'column',
-  'screen-sm': 'row',
-  'screen-md': 'row',
-  'screen-lg': 'row-reverse'
-}}
->
-<Box
-  css={{
-    width: 100,
-    height: 100,
-    backgroundColor: 'yellow'
+  direction={{
+    "screen-xxs": "column",
+    "screen-xs": "column",
+    "screen-sm": "row",
+    "screen-md": "row",
+    "screen-lg": "row-reverse",
   }}
 >
-  1
-</Box>
-<Box
-  css={{
-    width: 100,
-    height: 100,
-    backgroundColor: 'orange'
-  }}
->
-  2
-</Box>
-<Box
-  css={{
-    width: 100,
-    height: 100,
-    backgroundColor: 'green'
-  }}
->
-  3
-</Box>
+  <Box
+    css={{
+      width: 100,
+      height: 100,
+      backgroundColor: "yellow",
+    }}
+  >
+    1
+  </Box>
+  <Box
+    css={{
+      width: 100,
+      height: 100,
+      backgroundColor: "orange",
+    }}
+  >
+    2
+  </Box>
+  <Box
+    css={{
+      width: 100,
+      height: 100,
+      backgroundColor: "green",
+    }}
+  >
+    3
+  </Box>
 </Stack>
 ```
+
 ### Stack Dividers
+
 In some scenarios, you may want to add dividers between stacked elements. Pass the divider prop and set its value to any custom React element with a css prop to apply styles.
 
 ```jsx live
-function App () {
-
-    return (
-        <VStack
-            divider={<Separator css={{
-              backgroundColor: '$neutral300',
-            }}/>}
-        >
-            <Box
-                css={{
-                    width: 100,
-                    height: 100,
-                    backgroundColor: 'yellow'
-                }}
-            >
-                1
-            </Box>
-            <Box
-                css={{
-                    width: 100,
-                    height: 100,
-                    backgroundColor: 'orange'
-                }}
-            >
-                2
-            </Box>
-            <Box
-                css={{
-                    width: 100,
-                    height: 100,
-                    backgroundColor: 'green'
-                }}
-            >
-                3
-            </Box>
-        </VStack>
-    );
+function App() {
+  return (
+    <VStack
+      divider={
+        <Separator
+          css={{
+            backgroundColor: "$neutral300",
+          }}
+        />
+      }
+    >
+      <Box
+        css={{
+          width: 100,
+          height: 100,
+          backgroundColor: "yellow",
+        }}
+      >
+        1
+      </Box>
+      <Box
+        css={{
+          width: 100,
+          height: 100,
+          backgroundColor: "orange",
+        }}
+      >
+        2
+      </Box>
+      <Box
+        css={{
+          width: 100,
+          height: 100,
+          backgroundColor: "green",
+        }}
+      >
+        3
+      </Box>
+    </VStack>
+  );
 }
 ```
 
 ### Props
 
-| Property   | Description                           | Type    | Default |
-|------------|---------------------------------------|---------|---------|
-| alignX     | Horizontal alignment of items         | 'left' \| 'center' \| 'right' | - |
-| alignY     | Vertical alignment of items           | 'left' \| 'center' \| 'right' | - |
-| wrap       | Whether items should wrap to new line | 'wrap' \| 'nowrap' \| 'wrap-reverse' | - |
-| gap        | Gap between items                     | string  | - |
-| direction  | The direction of the stack            | 'row' \| 'column' \| 'row-reverse' \| 'column-reverse' | 'column' |
-| isInline   | If true the items will be stacked horizontally.          | boolean | - |
-| divider    | Divider between items                 | ReactElement | - |
+| Property  | Description                                     | Type                                                   | Default  |
+| --------- | ----------------------------------------------- | ------------------------------------------------------ | -------- |
+| alignX    | Horizontal alignment of items                   | 'left' \| 'center' \| 'right'                          | -        |
+| alignY    | Vertical alignment of items                     | 'left' \| 'center' \| 'right'                          | -        |
+| wrap      | Whether items should wrap to new line           | 'wrap' \| 'nowrap' \| 'wrap-reverse'                   | -        |
+| gap       | Gap between items                               | string                                                 | -        |
+| direction | The direction of the stack                      | 'row' \| 'column' \| 'row-reverse' \| 'column-reverse' | 'column' |
+| isInline  | If true the items will be stacked horizontally. | boolean                                                | -        |
+| divider   | Divider between items                           | ReactElement                                           | -        |

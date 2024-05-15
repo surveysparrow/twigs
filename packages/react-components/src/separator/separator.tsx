@@ -3,7 +3,7 @@ import * as SeparatorPrimitive from '@radix-ui/react-separator';
 import { CSS } from '@stitches/react';
 import { styled, config } from '../stitches.config';
 
-const StyledSeparator = styled(SeparatorPrimitive.Root, {
+const SeparatorRoot = styled(SeparatorPrimitive.Root, {
   backgroundColor: '$neutral100',
   '&[data-orientation=horizontal]': { height: 1, width: '100%' },
   '&[data-orientation=vertical]': { height: '100%', width: 1 }
@@ -19,7 +19,7 @@ export type SeparatorProps = {
 export const Separator = forwardRef<HTMLDivElement, SeparatorProps>(
   ({ orientation, decorative, ...props }, ref) => {
     return (
-      <StyledSeparator
+      <SeparatorRoot
         ref={ref}
         data-testid="separator"
         orientation={orientation}
