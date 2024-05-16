@@ -5,6 +5,7 @@ import {
 } from '@lexical/link';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { $findMatchingParent, mergeRegister } from '@lexical/utils';
+import { ADD_BLANK_LINK } from '@src/editor/utils/commands';
 import {
   $getSelection,
   $isRangeSelection,
@@ -107,10 +108,10 @@ function useDialogLinkEditorToolbar(
       const node = getSelectedNode(selection);
       const parent = node.getParent();
       if ($isLinkNode(parent)) {
-        setLinkText(parent.getTextContent());
+        setLinkText(parent.getTextContent().trim());
         setLinkUrl(parent.getURL());
       } else if ($isLinkNode(node)) {
-        setLinkText(node.getTextContent());
+        setLinkText(node.getTextContent().trim());
         setLinkUrl(node.getURL());
       } else {
         setLinkText('');
@@ -169,6 +170,13 @@ function useDialogLinkEditorToolbar(
           updateLinkEditor();
         });
       }),
+      editor.registerCommand(ADD_BLANK_LINK, () => {
+        setTimeout(() => {
+          setIsLinkEditMode(true);
+        }, 40);
+        isNewLink.current = true;
+        return false;
+      }, COMMAND_PRIORITY_HIGH),
       editor.registerCommand(
         TOGGLE_LINK_COMMAND,
         (payload: string | { url: string } | null) => {
