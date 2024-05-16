@@ -1,65 +1,112 @@
 import React, {
-  ComponentProps, FunctionComponent, isValidElement, ReactElement
+  ComponentProps,
+  FunctionComponent,
+  ReactNode,
+  useContext,
+  cloneElement,
+  forwardRef,
+  Children
 } from 'react';
-import { Button } from './button';
 import { styled } from '../stitches.config';
-import { Flex } from '../flex';
-
-type OmitProps = 'leftIcon' | 'rightIcon' | 'loader' | 'loading' | 'isIcon' | 'variant'
+import { Box, IconButton } from '..';
+import { Button } from './button';
+import { SplitButtonContext } from './split-button-context';
 
 export interface SplitButtonBaseProps {
-    icon: ReactElement,
-    color?: 'primary' | 'secondary',
-    disabled?: boolean,
+  size?: 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+  color?: 'primary' | 'secondary';
+  disabled?: boolean;
 }
 
-type SplitButtonProps = SplitButtonBaseProps & Omit<ComponentProps<typeof Button>, OmitProps> &
-React.ButtonHTMLAttributes<HTMLButtonElement>;
+type SplitButtonProps = SplitButtonBaseProps &
+  ComponentProps<typeof Box> &
+  React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-const StyledLeftButton = styled(Button, {
-  '&&': {
-    borderTopRightRadius: 0,
-    borderBottomRightRadius: 0
+interface SplitButtonContainerProps {
+  children?: ReactNode;
+}
+
+const StyledSplitButtonContainer = styled(Box, {
+  display: 'inline-flex',
+  position: 'relative',
+  alignItems: 'center',
+  whiteSpace: 'nowrap'
+});
+
+const StyledPrimaryButton = styled(Box, {
+  'button,a': {
+    borderEndEndRadius: 0,
+    borderStartEndRadius: 0
   }
 });
 
-const StyledRightButton = styled(Button, {
-  '&&': {
-    borderTopLeftRadius: 0,
-    borderBottomLeftRadius: 0
+const StyledSecondaryButton = styled(Box, {
+  'button,a': {
+    borderEndStartRadius: 0,
+    borderStartStartRadius: 0
   },
-  '&:active': {
-    border: '0'
+  variants: {
+    color: {
+      primary: {
+        'button,a': {
+          borderLeft: '1.5px solid $primary500'
+        }
+      },
+      secondary: {
+        'button,a': {
+          borderLeft: '1.5px solid $secondary600'
+        }
+      }
+    }
   }
 });
 
-export const SplitButton : FunctionComponent<SplitButtonProps> = React.forwardRef(
-  (
-    {
-      children, icon, disabled, color, ...rest
-    }: SplitButtonProps,
-    ref
-  ) => {
-    const element = icon || children;
-    const validElement = isValidElement(element) ? element : null;
+const ButtonContainer = ({ children }: { children: ReactNode }) => {
+  const { color, disabled, size } = useContext(SplitButtonContext);
+
+  // Check if the child is a Button component
+  if (React.isValidElement(children) && (children.type === Button || children.type === IconButton)) {
+    return cloneElement(children, { color, disabled, size } as SplitButtonBaseProps);
+  }
+
+  // If not, return the child as is
+  return <>{children}</>;
+};
+
+export const SplitButtonContainer = forwardRef<HTMLDivElement, SplitButtonContainerProps>(
+  ({ children }, ref) => (
+    <StyledSplitButtonContainer ref={ref}>
+      {children}
+    </StyledSplitButtonContainer>
+  )
+);
+
+export const SplitButton: FunctionComponent<SplitButtonProps> = forwardRef<HTMLDivElement>(
+  ({
+    children, disabled = false, color = 'primary', size = 'md'
+  }: SplitButtonProps, ref) => {
+    if (Children.count(children) !== 2) {
+      throw new Error('SplitButton component requires exactly two children');
+    }
+
+    const [PrimaryAction, SecondaryAction] = Children.toArray(children);
+
     return (
-      <Flex>
-        <StyledLeftButton
-          ref={ref}
-          disabled={disabled}
-          color={color}
-          {...rest}
-        >
-          {children}
-        </StyledLeftButton>
-        <StyledRightButton
-          ref={ref}
-          icon={validElement as ReactElement}
-          disabled={disabled}
-          color={color}
-          {...rest}
-        />
-      </Flex>
+      <SplitButtonContext.Provider value={{ color, disabled, size }}>
+        <SplitButtonContainer ref={ref}>
+          <StyledPrimaryButton>
+            <ButtonContainer>{PrimaryAction}</ButtonContainer>
+          </StyledPrimaryButton>
+          <StyledSecondaryButton
+            color={color}
+            onClick={(e) => {
+              console.log(e);
+            }}
+          >
+            <ButtonContainer>{SecondaryAction}</ButtonContainer>
+          </StyledSecondaryButton>
+        </SplitButtonContainer>
+      </SplitButtonContext.Provider>
     );
   }
 );
