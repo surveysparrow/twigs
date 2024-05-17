@@ -47,14 +47,27 @@ module.exports = {
               return pathCache[p];
             }
 
-            if (fs.lstatSync(p).isDirectory()) {
-              if (fs.existsSync(path.resolve(p, 'index.ts'))) {
-                pathCache[p] = path.resolve(p, 'index.ts');
-                return path.resolve(p, 'index.ts');
+            if (fs.existsSync(p) && fs.lstatSync(p).isDirectory()) {
+              const tsResolvedPath = path.resolve(p, 'index.ts');
+              if (fs.existsSync(tsResolvedPath)) {
+                pathCache[p] = tsResolvedPath;
+                return tsResolvedPath;
               }
-              if (fs.existsSync(path.resolve(p, 'index.tsx'))) {
-                pathCache[p] = path.resolve(p, 'index.tsx');
-                return path.resolve(p, 'index.tsx');
+              const tsxResolvedPath = path.resolve(p, 'index.tsx');
+              if (fs.existsSync(tsxResolvedPath)) {
+                pathCache[p] = tsxResolvedPath;
+                return tsxResolvedPath;
+              }
+            } else {
+              const tsResolvedPath = path.resolve(`${p}.ts`);
+              if (fs.existsSync(tsResolvedPath)) {
+                pathCache[p] = tsResolvedPath;
+                return tsResolvedPath;
+              }
+              const tsxResolvedPath = path.resolve(`${p}.tsx`);
+              if (fs.existsSync(tsxResolvedPath)) {
+                pathCache[p] = tsxResolvedPath;
+                return tsxResolvedPath;
               }
             }
 
