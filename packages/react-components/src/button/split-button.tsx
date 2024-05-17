@@ -8,8 +8,9 @@ import React, {
   Children
 } from 'react';
 import { styled } from '../stitches.config';
-import { Box, IconButton } from '..';
+import { Box } from '../box';
 import { Button } from './button';
+import { IconButton } from './icon-button';
 import { SplitButtonContext } from './split-button-context';
 
 export interface SplitButtonBaseProps {
