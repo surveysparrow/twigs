@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import { ChevronDownIcon, PencilIcon } from '@sparrowengg/twigs-react-icons';
 import { Flex } from '../../flex';
 import { SplitButton } from '../split-button';
 import { Button } from '../button';
+import { Box } from '../../box';
 import { IconButton } from '../icon-button';
 import {
   DropdownMenu,
@@ -41,55 +43,51 @@ const Template = (args) => (
   <Flex flexDirection="row" gap="20px">
     <SplitButton {...args}>
       <Button leftIcon={<PencilIcon />}>Link Issue</Button>
-      {/* <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <IconButton icon={<ChevronDownIcon />} {...args} />
-        </DropdownMenuTrigger>
-
-        <DropdownMenuContent>
-          <DropdownMenuItem>New Tab</DropdownMenuItem>
-
-          <DropdownMenuSub>
-            <DropdownMenuSubTrigger>More Tools</DropdownMenuSubTrigger>
-
-            <DropdownMenuSubContent sideOffset={2} alignOffset={-5}>
-              <DropdownMenuItem>Save Page As…</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Developer Tools</DropdownMenuItem>
-            </DropdownMenuSubContent>
-          </DropdownMenuSub>
-        </DropdownMenuContent>
-      </DropdownMenu> */}
       <IconButton icon={<ChevronDownIcon />} />
     </SplitButton>
   </Flex>
 );
 
-const Secondary = (args) => (
-  <Flex flexDirection="row" gap="20px">
-    <SplitButton {...args}>
-      <Button leftIcon={<PencilIcon />}>Link Issue</Button>
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild {...args}>
-          <IconButton icon={<ChevronDownIcon />} {...args} />
-        </DropdownMenuTrigger>
+const Secondary = (args) => {
+  const [isActive, setIsActive] = useState(false);
+  return (
+    <Flex flexDirection="row" gap="20px">
+      <SplitButton {...args}>
+        <Button leftIcon={<PencilIcon />}>Link Issue</Button>
+        <DropdownMenu
+          onOpenChange={() => {
+            setIsActive(!isActive);
+          }}
+        >
+          <DropdownMenuTrigger asChild {...args}>
+            <Box>
+              <IconButton
+                icon={<ChevronDownIcon />}
+                {...args}
+                css={{
+                  backgroundColor: isActive ? '$secondary700' : '$secondary500'
+                }}
+              />
+            </Box>
+          </DropdownMenuTrigger>
 
-        <DropdownMenuContent>
-          <DropdownMenuItem>New Tab</DropdownMenuItem>
+          <DropdownMenuContent>
+            <DropdownMenuItem>New Tab</DropdownMenuItem>
 
-          <DropdownMenuSub>
-            <DropdownMenuSubTrigger>More Tools</DropdownMenuSubTrigger>
+            <DropdownMenuSub>
+              <DropdownMenuSubTrigger>More Tools</DropdownMenuSubTrigger>
 
-            <DropdownMenuSubContent sideOffset={2} alignOffset={-5}>
-              <DropdownMenuItem>Save Page As…</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Developer Tools</DropdownMenuItem>
-            </DropdownMenuSubContent>
-          </DropdownMenuSub>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    </SplitButton>
-  </Flex>
-);
+              <DropdownMenuSubContent sideOffset={2} alignOffset={-5}>
+                <DropdownMenuItem>Save Page As…</DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>Developer Tools</DropdownMenuItem>
+              </DropdownMenuSubContent>
+            </DropdownMenuSub>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </SplitButton>
+    </Flex>
+  );
+};
 export const Primary = Template.bind({});
 export const WithDropdown = Secondary.bind({});

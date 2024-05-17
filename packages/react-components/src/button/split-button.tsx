@@ -65,26 +65,38 @@ const ButtonContainer = ({ children }: { children: ReactNode }) => {
   const { color, disabled, size } = useContext(SplitButtonContext);
 
   // Check if the child is a Button component
-  if (React.isValidElement(children) && (children.type === Button || children.type === IconButton)) {
-    return cloneElement(children, { color, disabled, size } as SplitButtonBaseProps);
+  if (
+    React.isValidElement(children)
+    && (children.type === Button || children.type === IconButton)
+  ) {
+    return cloneElement(children, {
+      color,
+      disabled,
+      size
+    } as SplitButtonBaseProps);
   }
 
   // If not, return the child as is
   return <>{children}</>;
 };
 
-export const SplitButtonContainer = forwardRef<HTMLDivElement, SplitButtonContainerProps>(
-  ({ children }, ref) => (
-    <StyledSplitButtonContainer ref={ref}>
-      {children}
-    </StyledSplitButtonContainer>
-  )
-);
+export const SplitButtonContainer = forwardRef<
+  HTMLDivElement,
+  SplitButtonContainerProps
+>(({ children }, ref) => (
+  <StyledSplitButtonContainer ref={ref}>{children}</StyledSplitButtonContainer>
+));
 
 export const SplitButton: FunctionComponent<SplitButtonProps> = forwardRef<HTMLDivElement>(
-  ({
-    children, disabled = false, color = 'primary', size = 'md'
-  }: SplitButtonProps, ref) => {
+  (
+    {
+      children,
+      disabled = false,
+      color = 'primary',
+      size = 'md'
+    }: SplitButtonProps,
+    ref
+  ) => {
     if (Children.count(children) !== 2) {
       throw new Error('SplitButton component requires exactly two children');
     }
@@ -97,12 +109,7 @@ export const SplitButton: FunctionComponent<SplitButtonProps> = forwardRef<HTMLD
           <StyledPrimaryButton>
             <ButtonContainer>{PrimaryAction}</ButtonContainer>
           </StyledPrimaryButton>
-          <StyledSecondaryButton
-            color={color}
-            onClick={(e) => {
-              console.log(e);
-            }}
-          >
+          <StyledSecondaryButton color={color}>
             <ButtonContainer>{SecondaryAction}</ButtonContainer>
           </StyledSecondaryButton>
         </SplitButtonContainer>
