@@ -17,7 +17,7 @@ const StackWrapper = styled(Box, {
 });
 
 export type MediaKeys = keyof typeof config.media;
-type Directions = 'row' | 'column' | 'row-reverse' | 'column-reverse';
+type Directions = React.CSSProperties['flexDirection'];
 
 function getDirection(direction: Directions | Record<MediaKeys, Directions>) {
   return typeof direction === 'object'
