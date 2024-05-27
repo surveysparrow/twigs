@@ -58,6 +58,43 @@ const StyledSecondaryButton = styled(Box, {
           borderLeft: '1.5px solid $secondary600'
         }
       }
+    },
+    size: {
+      xxs: {
+        'button,a': {
+          borderLeftWidth: '.8px'
+        }
+      },
+      xs: {
+        'button,a': {
+          borderLeftWidth: '.8px'
+        }
+      },
+      sm: {
+        'button,a': {
+          borderLeftWidth: '1px'
+        }
+      },
+      md: {
+        'button,a': {
+          borderLeftWidth: '1px'
+        }
+      },
+      lg: {
+        'button,a': {
+          borderLeftWidth: '1.2px'
+        }
+      },
+      xl: {
+        'button,a': {
+          borderLeftWidth: '1.5px'
+        }
+      },
+      '2xl': {
+        'button,a': {
+          borderLeftWidth: '1.5px'
+        }
+      }
     }
   }
 });
@@ -110,7 +147,7 @@ export const SplitButton: FunctionComponent<SplitButtonProps> = forwardRef<HTMLD
           <StyledPrimaryButton>
             <ButtonContainer>{PrimaryAction}</ButtonContainer>
           </StyledPrimaryButton>
-          <StyledSecondaryButton color={color}>
+          <StyledSecondaryButton color={color} size={size}>
             <ButtonContainer>{SecondaryAction}</ButtonContainer>
           </StyledSecondaryButton>
         </SplitButtonContainer>
