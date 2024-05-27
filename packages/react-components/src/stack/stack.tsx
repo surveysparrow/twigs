@@ -36,7 +36,6 @@ export interface StackBaseProps {
   wrap?: 'wrap' | 'nowrap' | 'wrap-reverse';
   gap?: string;
   direction?: Directions | Record<MediaKeys, Directions>;
-  isInline?: boolean;
   divider?: React.ReactElement;
 }
 
@@ -53,7 +52,6 @@ export const Stack = forwardRef<HTMLDivElement, StackProps>(
       wrap,
       direction = 'column',
       css,
-      isInline,
       ...props
     },
     ref
@@ -88,7 +86,7 @@ export const Stack = forwardRef<HTMLDivElement, StackProps>(
           alignItems: mapAlignY[alignY],
           justifyContent: mapAlignX[alignX],
           flexWrap: wrap,
-          ...(isInline ? { flexDirection: 'row' } : getDirection(direction)),
+          ...getDirection(direction),
           ...(divider ? {} : { gap }),
           ...css
         }}
