@@ -30,6 +30,9 @@ export default {
     },
     disabled: {
       control: 'boolean'
+    },
+    loading: {
+      control: 'boolean'
     }
   },
   args: {
@@ -42,7 +45,7 @@ export default {
 const Template = (args) => (
   <Flex flexDirection="row" gap="20px">
     <SplitButton {...args}>
-      <Button leftIcon={<PencilIcon />}>Link Issue</Button>
+      <Button leftIcon={<PencilIcon />} loading={args.loading}>Link Issue</Button>
       <IconButton icon={<ChevronDownIcon />} />
     </SplitButton>
   </Flex>
