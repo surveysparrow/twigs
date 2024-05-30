@@ -56,7 +56,7 @@ const StyledButton = styled('button', {
   variants: {
     size: {
       '2xl': {
-        padding: '$9 $10',
+        padding: '$9 $12',
         borderRadius: '$2xl',
         fontSize: '$lg',
         lineHeight: '$lg',
@@ -67,7 +67,7 @@ const StyledButton = styled('button', {
         }
       },
       xl: {
-        padding: '$5 $8',
+        padding: '$5 $10',
         borderRadius: 12,
         fontSize: '$lg',
         lineHeight: '$lg',
@@ -78,7 +78,7 @@ const StyledButton = styled('button', {
         }
       },
       lg: {
-        padding: '$4 $6',
+        padding: '$4 $8',
         borderRadius: 12,
         fontSize: '$md',
         lineHeight: '$md',
@@ -89,7 +89,7 @@ const StyledButton = styled('button', {
         }
       },
       md: {
-        padding: '$3 $4',
+        padding: '$3 $5',
         borderRadius: '$lg',
         fontSize: '$sm',
         lineHeight: '$md',
@@ -100,7 +100,7 @@ const StyledButton = styled('button', {
         }
       },
       sm: {
-        padding: '$1 $3',
+        padding: '$1 $4',
         borderRadius: '$sm',
         fontSize: '$sm',
         lineHeight: '$sm',
@@ -111,7 +111,7 @@ const StyledButton = styled('button', {
         }
       },
       xs: {
-        padding: '$1 $2',
+        padding: '$1 $3',
         borderRadius: '$sm',
         fontSize: '$xs',
         lineHeight: '$xs',
@@ -122,7 +122,7 @@ const StyledButton = styled('button', {
         }
       },
       xxs: {
-        padding: '1px $1',
+        padding: '$1 $2',
         borderRadius: '$sm',
         fontSize: '$xxs',
         lineHeight: '$xxs',
@@ -219,6 +219,14 @@ const StyledButton = styled('button', {
         justifyContent: 'center',
         width: '$10',
         height: '$10'
+      }
+    },
+    leftIcon: {
+      true: {
+      }
+    },
+    rightIcon: {
+      true: {
       }
     }
   },
@@ -520,6 +528,104 @@ const StyledButton = styled('button', {
           height: '$2'
         }
       }
+    },
+    {
+      leftIcon: true,
+      size: '2xl',
+      css: {
+        padding: '$9 $12 $9 $10'
+      }
+    },
+    {
+      leftIcon: true,
+      size: 'xl',
+      css: {
+        padding: '$5 $10 $5 $8'
+      }
+    },
+    {
+      leftIcon: true,
+      size: 'lg',
+      css: {
+        padding: '$4 $8 $4 $6'
+      }
+    },
+    {
+      leftIcon: true,
+      size: 'md',
+      css: {
+        padding: '$3 $5 $3 $4'
+      }
+    },
+    {
+      leftIcon: true,
+      size: 'sm',
+      css: {
+        padding: '$1 $4 $1 $3'
+      }
+    },
+    {
+      leftIcon: true,
+      size: 'xs',
+      css: {
+        padding: '$1 $3 $1 $2'
+      }
+    },
+    {
+      leftIcon: true,
+      size: 'xxs',
+      css: {
+        padding: '1px $2 1px $1'
+      }
+    },
+    {
+      rightIcon: true,
+      size: '2xl',
+      css: {
+        padding: '$9 $10 $9 $12'
+      }
+    },
+    {
+      rightIcon: true,
+      size: 'xl',
+      css: {
+        padding: '$5 $8 $5 $10'
+      }
+    },
+    {
+      rightIcon: true,
+      size: 'lg',
+      css: {
+        padding: '$4 $6 $4 $8'
+      }
+    },
+    {
+      rightIcon: true,
+      size: 'md',
+      css: {
+        padding: '$3 $4 $3 $5'
+      }
+    },
+    {
+      rightIcon: true,
+      size: 'sm',
+      css: {
+        padding: '$1 $3 $1 $4'
+      }
+    },
+    {
+      rightIcon: true,
+      size: 'xs',
+      css: {
+        padding: '$1 $2 $1 $3'
+      }
+    },
+    {
+      rightIcon: true,
+      size: 'xxs',
+      css: {
+        padding: '1px $1 1px $2'
+      }
     }
   ],
   defaultVariants: {
@@ -585,6 +691,8 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
         ref={ref}
         color={color}
         isIcon={!!icon}
+        leftIcon={!!leftIcon}
+        rightIcon={!!rightIcon}
         disabled={disabled}
         data-testid="button"
         onClick={onClick}
