@@ -15,6 +15,8 @@ export const Th = styled('th', {
   borderBottom: '$borderWidths$xs solid $colors$neutral200',
   fontWeight: '$5',
   fontSize: '$sm',
+  lineHeight: '$sm',
+  textAlign: 'left',
   '&:last-child': {
     borderRight: 'none'
   }
@@ -32,7 +34,7 @@ export const Tr = styled('tr', {
 export const Td = styled('td', {
   padding: '$6',
   margin: '0',
-  borderBottom: '$borderWidths$xs solid $colors$neutral200',
+  borderBottom: '$borderWidths$xs solid $colors$neutral100',
   fontWeight: '$4',
   color: '$neutral800',
   fontSize: '$sm',
