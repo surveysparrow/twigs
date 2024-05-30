@@ -1,5 +1,7 @@
 import React, { ReactNode } from 'react';
 import { CloseIcon } from '@sparrowengg/twigs-react-icons';
+import { config } from '@src/stitches.config';
+import { CSS } from '@stitches/react';
 import {
   Dialog,
   DialogClose,
@@ -23,6 +25,7 @@ export type DefaultInfoDialogProps = {
     action?: string;
   };
   closeButton?: ReactNode;
+  css?: CSS<typeof config>;
   onPrimaryAction?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onClose?: () => void;
 };
@@ -37,6 +40,7 @@ export const DefaultModal = ({
     action: 'Close'
   },
   closeButton = DefaultCloseButton,
+  css,
   onClose,
   onPrimaryAction
 }: DefaultInfoDialogProps) => {
@@ -48,15 +52,28 @@ export const DefaultModal = ({
       size={size}
       defaultOpen
     >
-      <DialogContent>
+      <DialogContent css={{ ...css }}>
         {children ?? (
           <>
             <DialogTitle
               css={{
-                paddingRight: '$16'
+                paddingRight: 'calc($20 + $12 + $6)',
+                position: 'relative'
               }}
             >
               {title}
+              {closeButton && (
+                <Box
+                  css={{
+                    position: 'absolute',
+                    top: '50%',
+                    right: '0',
+                    transform: 'translate(0,-50%)'
+                  }}
+                >
+                  {closeButton}
+                </Box>
+              )}
             </DialogTitle>
             <DialogDescription
               css={{
@@ -79,11 +96,6 @@ export const DefaultModal = ({
                 </DialogClose>
               </Flex>
             )}
-            {closeButton && (
-              <Box css={{ position: 'absolute', top: '$6', right: '$6' }}>
-                {closeButton}
-              </Box>
-            )}
           </>
         )}
       </DialogContent>
@@ -95,6 +107,7 @@ const DefaultCloseButton = (
   <DialogClose asChild>
     <IconButton
       icon={<CloseIcon />}
+      size="lg"
       aria-label="Close"
       color="bright"
       css={{
