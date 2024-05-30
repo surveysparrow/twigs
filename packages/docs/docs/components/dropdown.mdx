@@ -16,10 +16,16 @@ import { DropdownMenu,
 ### Usage 
 ```jsx live
 <DropdownMenu>
-  <DropdownMenuTrigger asChild>
-    <Button aria-label="Customise options">
-      More Options
-    </Button>
+  <DropdownMenuTrigger css={{
+    padding: '8px',
+    cursor: 'pointer',
+    color: 'white',
+    background: '#56B0BB',
+    border: 'none',
+    fontWeight: 'bold',
+    borderRadius: '8px',
+  }}>
+    More Options
   </DropdownMenuTrigger>
 
   <DropdownMenuContent>

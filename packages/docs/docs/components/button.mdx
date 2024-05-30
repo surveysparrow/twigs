@@ -11,6 +11,11 @@ import { Button } from "@sparrowengg/twigs-react";
 <Button> Submit </Button>
 ```
 
+### Usage with Icons
+```jsx live
+<Button leftIcon={<EmailIcon />}> Submit </Button>
+```
+
 ### Props
 
 
@@ -22,3 +27,5 @@ import { Button } from "@sparrowengg/twigs-react";
 | size     | Size of the button  | `xxs` `xs` `sm` `md` `lg` `xl` `2xl`        | sm      |
 | variant  | button variant      | `solid` `outline` `ghost`                             | solid   |
 | css      | Custom css styles   | object                                            |         |
+| rightIcon | Icon on right side  | ReactNode                                         |         |
+| leftIcon | Icon on left side    | ReactNode                                         |         |
