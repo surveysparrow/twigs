@@ -25,7 +25,7 @@ export type DefaultInfoDialogProps = {
     action?: string;
   };
   closeButton?: ReactNode;
-  css?:CSS<typeof config>
+  css?: CSS<typeof config>;
   onPrimaryAction?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onClose?: () => void;
 };
@@ -63,16 +63,16 @@ export const DefaultModal = ({
             >
               {title}
               {closeButton && (
-              <Box
-                css={{
-                  position: 'absolute',
-                  top: '50%',
-                  right: '0',
-                  transform: 'translate(0,-50%)'
-                }}
-              >
-                {closeButton}
-              </Box>
+                <Box
+                  css={{
+                    position: 'absolute',
+                    top: '50%',
+                    right: '0',
+                    transform: 'translate(0,-50%)'
+                  }}
+                >
+                  {closeButton}
+                </Box>
               )}
             </DialogTitle>
             <DialogDescription
