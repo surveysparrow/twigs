@@ -232,24 +232,24 @@ export const Select = React.forwardRef<
     ref
   ) => {
     const customStyles = useMemo(() => {
-      const isLIconLeftPositioned = dropdownIndicatorPosition === 'left';
+      const isIconLeftPositioned = dropdownIndicatorPosition === 'left';
       return {
         ...styles,
         control: (base: any) => ({
           ...base,
-          ...(isLIconLeftPositioned && {
+          ...(isIconLeftPositioned && {
             flexDirection: 'row-reverse'
           })
         }),
         indicatorsContainer: (base: any) => ({
           ...base,
-          ...(isLIconLeftPositioned && {
+          ...(isIconLeftPositioned && {
             flexDirection: 'row-reverse'
           })
         }),
         clearIndicator: (base: any) => ({
           ...base,
-          ...(isLIconLeftPositioned && {
+          ...(isIconLeftPositioned && {
             position: 'absolute',
             right: 0
           })
