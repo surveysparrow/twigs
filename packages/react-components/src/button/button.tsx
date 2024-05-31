@@ -68,7 +68,7 @@ const StyledButton = styled('button', {
       },
       xl: {
         padding: '$5 $10',
-        borderRadius: 12,
+        borderRadius: '$xl',
         fontSize: '$lg',
         lineHeight: '$lg',
         height: '$12',
@@ -79,7 +79,7 @@ const StyledButton = styled('button', {
       },
       lg: {
         padding: '$4 $8',
-        borderRadius: 12,
+        borderRadius: '$xl',
         fontSize: '$md',
         lineHeight: '$md',
         height: '$10',
@@ -221,11 +221,11 @@ const StyledButton = styled('button', {
         height: '$10'
       }
     },
-    leftIcon: {
+    isLeftIcon: {
       true: {
       }
     },
-    rightIcon: {
+    isRightIcon: {
       true: {
       }
     }
@@ -530,98 +530,98 @@ const StyledButton = styled('button', {
       }
     },
     {
-      leftIcon: true,
+      isLeftIcon: true,
       size: '2xl',
       css: {
         padding: '$9 $12 $9 $10'
       }
     },
     {
-      leftIcon: true,
+      isLeftIcon: true,
       size: 'xl',
       css: {
         padding: '$5 $10 $5 $8'
       }
     },
     {
-      leftIcon: true,
+      isLeftIcon: true,
       size: 'lg',
       css: {
         padding: '$4 $8 $4 $6'
       }
     },
     {
-      leftIcon: true,
+      isLeftIcon: true,
       size: 'md',
       css: {
         padding: '$3 $5 $3 $4'
       }
     },
     {
-      leftIcon: true,
+      isLeftIcon: true,
       size: 'sm',
       css: {
         padding: '$1 $4 $1 $3'
       }
     },
     {
-      leftIcon: true,
+      isLeftIcon: true,
       size: 'xs',
       css: {
         padding: '$1 $3 $1 $2'
       }
     },
     {
-      leftIcon: true,
+      isLeftIcon: true,
       size: 'xxs',
       css: {
         padding: '1px $2 1px $1'
       }
     },
     {
-      rightIcon: true,
+      isRightIcon: true,
       size: '2xl',
       css: {
         padding: '$9 $10 $9 $12'
       }
     },
     {
-      rightIcon: true,
+      isRightIcon: true,
       size: 'xl',
       css: {
         padding: '$5 $8 $5 $10'
       }
     },
     {
-      rightIcon: true,
+      isRightIcon: true,
       size: 'lg',
       css: {
         padding: '$4 $6 $4 $8'
       }
     },
     {
-      rightIcon: true,
+      isRightIcon: true,
       size: 'md',
       css: {
         padding: '$3 $4 $3 $5'
       }
     },
     {
-      rightIcon: true,
+      isRightIcon: true,
       size: 'sm',
       css: {
         padding: '$1 $3 $1 $4'
       }
     },
     {
-      rightIcon: true,
+      isRightIcon: true,
       size: 'xs',
       css: {
         padding: '$1 $2 $1 $3'
       }
     },
     {
-      rightIcon: true,
+      isRightIcon: true,
       size: 'xxs',
       css: {
         padding: '1px $1 1px $2'
@@ -691,8 +691,8 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
         ref={ref}
         color={color}
         isIcon={!!icon}
-        leftIcon={!!leftIcon}
-        rightIcon={!!rightIcon}
+        isLeftIcon={!!leftIcon}
+        isRightIcon={!!rightIcon}
         disabled={disabled}
         data-testid="button"
         onClick={onClick}

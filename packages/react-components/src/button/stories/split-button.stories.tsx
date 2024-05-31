@@ -78,7 +78,10 @@ const Secondary = (args) => {
             </Box>
           </DropdownMenuTrigger>
 
-          <DropdownMenuContent>
+          <DropdownMenuContent css={{
+            zIndex: 1
+          }}
+          >
             <DropdownMenuItem>New Tab</DropdownMenuItem>
 
             <DropdownMenuSub>
