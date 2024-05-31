@@ -16,7 +16,7 @@ const Template = ({ orientation = 'vertical', ...args }: SeparatorProps) => (
         orientation={orientation}
         {...args}
         css={{
-          margin: '0 10px'
+          margin: '0 $5'
         }}
       />
       <Text>Docs</Text>
@@ -24,7 +24,7 @@ const Template = ({ orientation = 'vertical', ...args }: SeparatorProps) => (
         orientation={orientation}
         {...args}
         css={{
-          margin: '0 10px'
+          margin: '0 $5'
         }}
       />
       <Text>Source</Text>

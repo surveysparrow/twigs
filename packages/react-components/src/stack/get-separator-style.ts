@@ -22,24 +22,24 @@ export function getSeparatorStyles(options: Options): CSSProperties {
       marginTop: gap,
       marginBottom: gap,
       borderLeftWidth: 0,
-      borderTopWidth: '1px'
+      borderTopWidth: '$xs'
     },
     'column-reverse': {
       marginTop: gap,
       marginBottom: gap,
       borderLeftWidth: 0,
-      borderTopWidth: '1px'
+      borderTopWidth: '$xs'
     },
     row: {
       marginLeft: gap,
       marginRight: gap,
-      borderLeftWidth: '1px',
+      borderLeftWidth: '$xs',
       borderTopWidth: 0
     },
     'row-reverse': {
       marginLeft: gap,
       marginRight: gap,
-      borderLeftWidth: '1px',
+      borderLeftWidth: '$xs',
       borderTopWidth: 0
     }
   };
