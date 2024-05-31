@@ -9,8 +9,8 @@ export default {
 };
 
 const Template = ({ orientation = 'vertical', ...args }: SeparatorProps) => (
-  <Box css={{ width: '100%', maxWidth: 300, margin: '0 15px' }}>
-    <Flex css={{ height: 20, alignItems: 'center' }}>
+  <Box css={{ width: '100%', maxWidth: 300, margin: '0 $7' }}>
+    <Flex css={{ height: '$5', alignItems: 'center' }}>
       <Text>Blog</Text>
       <Separator
         orientation={orientation}
