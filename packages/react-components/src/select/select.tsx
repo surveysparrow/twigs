@@ -6,7 +6,7 @@ import React, {
 import ReactSelect, {
   SelectInstance,
   GroupBase,
-  components as ReactSelectComponent
+  components as ReactSelectComponents
 } from 'react-select';
 import AsyncSelect from 'react-select/async';
 import CreatableSelect from 'react-select/creatable';
@@ -183,10 +183,10 @@ const selectStyles = {
   }
 };
 
-const StyledSelect = styled(ReactSelect, selectStyles);
-const StyledAsyncSelect = styled(AsyncSelect, selectStyles);
-const StyledCreatableSelect = styled(CreatableSelect, selectStyles);
-const StyledCreatableAsyncSelect = styled(AsyncCreatableSelect, selectStyles);
+export const StyledSelect = styled(ReactSelect, selectStyles);
+export const StyledAsyncSelect = styled(AsyncSelect, selectStyles);
+export const StyledCreatableSelect = styled(CreatableSelect, selectStyles);
+export const StyledCreatableAsyncSelect = styled(AsyncCreatableSelect, selectStyles);
 
 type SelectBaseProps = {
   showSeparator?: boolean;
@@ -200,9 +200,9 @@ type SelectBaseProps = {
 
 const DropdownIndicator = (props, dropdownIndicatorIcon) => {
   return (
-    <ReactSelectComponent.DropdownIndicator {...props}>
+    <ReactSelectComponents.DropdownIndicator {...props}>
       {React.cloneElement(dropdownIndicatorIcon)}
-    </ReactSelectComponent.DropdownIndicator>
+    </ReactSelectComponents.DropdownIndicator>
   );
 };
 
@@ -302,3 +302,5 @@ export const Select = React.forwardRef<
     );
   }
 );
+
+export { ReactSelectComponents };
