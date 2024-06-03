@@ -52,6 +52,8 @@ const ReactLiveScope = {
   ArrowLeftIcon: twigsIconLoader("ArrowLeftIcon"),
   SearchIcon: twigsIconLoader("SearchIcon"),
   UserIcon: twigsIconLoader("UserIcon"),
+  DownloadIcon: twigsIconLoader("DownloadIcon"),
+  EmailIcon: twigsIconLoader("EmailIcon"),
   Chip: twigsComponentLoader("Chip"),
   Avatar: twigsComponentLoader("Avatar"),
   AvatarBadge: twigsComponentLoader("AvatarBadge"),

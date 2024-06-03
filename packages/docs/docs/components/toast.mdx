@@ -6,13 +6,12 @@
 import { Toast } from "@sparrowengg/twigs-react";
 ```
 
+### Usage
 
-### Usage 
-
-You can add `Toast` at top level of your application to configure the options. 
+You can add `Toast` at top level of your application to configure the options.
 
 ```jsx
-function App () {
+function App() {
   return (
     <>
       //highlight-start
@@ -20,12 +19,12 @@ function App () {
       // highlight-end
       <App />
     </>
-  )
+  );
 }
 ```
 
-
 ### Trigger toast
+
 Using `toast` hook you can trigger toast from anywhere in your application.
 
 ```jsx
@@ -34,9 +33,9 @@ Using `toast` hook you can trigger toast from anywhere in your application.
   onClick={() => {
     //highlight-start
     toast({
-      variant: 'default',
-      title: 'Default message',
-      description: 'There was a problem with your request.'
+      variant: "default",
+      title: "Default message",
+      description: "There was a problem with your request.",
     });
     // highlight-end
   }}
@@ -45,19 +44,48 @@ Using `toast` hook you can trigger toast from anywhere in your application.
 </Button>
 ```
 
+### Toast With Promise
 
+Using `toast.promise` you can show toast with promise.
+
+```jsx
+<Button
+  variant="outline"
+  onClick={() => {
+    //highlight-start
+    toast.promise(ResolvePromise(), {
+      loading: {
+        title: "Creating, please wait...",
+        variant: "loading",
+      },
+      success: (p) => ({
+        title: `${p.title}`,
+        variant: "success",
+        description: `${p.description}`,
+      }),
+      error: (p) => ({
+        title: `Error while creating record: ${p.title}`,
+        variant: "error",
+      }),
+    });
+    //highlight-end
+  }}
+>
+  Success
+</Button>
+```
 
 ### Props
 
 #### Toastr
-| Property | Description                                                     | Type                          | Default |
-|----------|-----------------------------------------------------------------|-------------------------------|---------|
-| duration | how long the toast should be visible in the UI, in milliseconds | number                        | 10000   |
 
+| Property | Description                                                     | Type   | Default |
+| -------- | --------------------------------------------------------------- | ------ | ------- |
+| duration | how long the toast should be visible in the UI, in milliseconds | number | 10000   |
 
 #### toast
-| Property | Description                                                     | Type                          | Default |
-|----------|-----------------------------------------------------------------|-------------------------------|---------|
-| variant  |                                                                 | `default` `success` `error` `warning` | default |
-| icon     | Add an icon on the left side of the toast                       |                               |         |
 
+| Property | Description                               | Type                                  | Default |
+| -------- | ----------------------------------------- | ------------------------------------- | ------- |
+| variant  |                                           | `default` `success` `error` `warning` | default |
+| icon     | Add an icon on the left side of the toast |                                       |         |

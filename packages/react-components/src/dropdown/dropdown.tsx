@@ -238,8 +238,9 @@ const DropdownRoot = ({ children, ...props }:DropdownRootProps) => {
   );
 };
 
+const DropdownMenuTrigger = styled(DropdownMenuPrimitive.Trigger);
+
 export const DropdownMenu = DropdownRoot;
-export const DropdownMenuTrigger = DropdownMenuPrimitive.Trigger;
 export const DropdownMenuContent = Content;
 export const DropdownMenuItem = StyledItem;
 export const DropdownMenuCheckboxItem = StyledCheckboxItem;
@@ -251,3 +252,4 @@ export const DropdownMenuSeparator = StyledSeparator;
 export const DropdownMenuSub = DropdownMenuPrimitive.Sub;
 export const DropdownMenuSubTrigger = SubTrigger;
 export const DropdownMenuSubContent = SubContent;
+export { DropdownMenuTrigger };
