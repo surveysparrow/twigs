@@ -1,0 +1,407 @@
+import {
+  CalendarDateTime,
+  ZonedDateTime,
+  toCalendarDateTime
+} from '@internationalized/date';
+import { ChevronDownIcon } from '@sparrowengg/twigs-react-icons';
+import React, {
+  useEffect, useMemo, useRef, useState
+} from 'react';
+import { DateValue } from 'react-aria';
+import { CalendarState } from 'react-stately';
+import { Button } from '../button';
+import { Flex } from '../flex';
+import { Popover, PopoverContent, PopoverTrigger } from '../popover';
+import { styled } from '../stitches.config';
+import { Text } from '../text';
+import { CalendarProps } from './calendar';
+import { FieldButton } from './calendar-commons';
+import { useCalendarContext } from './calendar-utils';
+
+interface TimeValueState {
+  hour: string;
+  minute: string;
+  pm: boolean;
+}
+
+export const CalendarTimePicker = ({
+  value,
+  calendarState,
+  onChange
+}: {
+  value?: DateValue | null;
+  calendarState?: CalendarState;
+  onChange?: CalendarProps['onChange'];
+}) => {
+  const [popoverOpen, setPopoverOpen] = useState(false);
+
+  const calendarContext = useCalendarContext();
+
+  const timeState = useMemo(() => {
+    if (!value) {
+      const timeObj = toCalendarDateTime(calendarState!.value);
+      return timeObj;
+    }
+    if (value instanceof CalendarDateTime || value instanceof ZonedDateTime) {
+      return value;
+    }
+
+    return toCalendarDateTime(value);
+  }, [value]);
+
+  const hoursInTwelveHourFormat = timeState.hour % 12 || 12;
+  const initialHours = hoursInTwelveHourFormat.toString().padStart(2, '0');
+  const initialMinutes = timeState.minute.toString().padStart(2, '0');
+
+  const [timeValue, setTimeValue] = useState<TimeValueState>({
+    hour: initialHours,
+    minute: initialMinutes,
+    pm: timeState.hour >= 12
+  });
+
+  const columnsContainerRef = useRef<HTMLDivElement>(null);
+
+  const updateTimeValue = (values: Partial<TimeValueState>) => {
+    setTimeValue((prev) => ({
+      ...prev,
+      ...values
+    }));
+  };
+
+  const handleArrowKeys = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+    const currentActiveButton = columnsContainerRef.current?.querySelector(
+      '[data-is-active="true"]'
+    ) as HTMLButtonElement | null;
+    const parentColumn = currentActiveButton?.closest('[data-time-column]');
+
+    const toggleActiveButton = (button: HTMLButtonElement) => {
+      if (currentActiveButton) {
+        currentActiveButton.setAttribute('tabindex', '-1');
+        currentActiveButton.setAttribute('data-is-active', 'false');
+      }
+      button.setAttribute('tabindex', '0');
+      button.setAttribute('data-is-active', 'true');
+    };
+
+    switch (e.key) {
+      case 'ArrowDown': {
+        e.preventDefault();
+        const nextButton = e.currentTarget
+          .nextElementSibling as HTMLButtonElement | null;
+
+        if (nextButton) {
+          toggleActiveButton(nextButton);
+          nextButton.focus();
+        }
+        break;
+      }
+      case 'ArrowUp': {
+        e.preventDefault();
+        const prevButton = e.currentTarget
+          .previousElementSibling as HTMLButtonElement | null;
+
+        if (prevButton) {
+          toggleActiveButton(prevButton);
+          prevButton.focus();
+        }
+        break;
+      }
+      case 'ArrowLeft': {
+        e.preventDefault();
+        if (parentColumn && parentColumn.previousElementSibling) {
+          const prevColumn = parentColumn.previousElementSibling.querySelector(
+            '[data-is-selected="true"]'
+          ) as HTMLButtonElement | null;
+
+          if (prevColumn) {
+            toggleActiveButton(prevColumn);
+            prevColumn.focus();
+          }
+        }
+        break;
+      }
+      case 'ArrowRight': {
+        e.preventDefault();
+        if (parentColumn && parentColumn.nextElementSibling) {
+          const nextColumn = parentColumn.nextElementSibling.querySelector(
+            '[data-is-selected="true"]'
+          ) as HTMLButtonElement | null;
+
+          if (nextColumn) {
+            toggleActiveButton(nextColumn);
+            nextColumn.focus();
+          }
+        }
+        break;
+      }
+      default:
+        break;
+    }
+  };
+
+  const handleApply = () => {
+    const updatedTime = timeState.set({
+      hour: timeValue.pm
+        ? parseInt(timeValue.hour, 10) + 12
+        : parseInt(timeValue.hour, 10),
+      minute: parseInt(timeValue.minute, 10)
+    });
+    if (onChange) {
+      onChange(updatedTime);
+    }
+    setPopoverOpen(false);
+  };
+
+  return (
+    <Popover open={popoverOpen} onOpenChange={(open) => setPopoverOpen(open)}>
+      <PopoverTrigger asChild>
+        <Button
+          color="default"
+          size={calendarContext.size === 'lg' ? 'md' : 'sm'}
+          rightIcon={<ChevronDownIcon />}
+        >
+          {initialHours}
+          :
+          {initialMinutes}
+          {' '}
+          {timeState.hour >= 12 ? 'PM' : 'AM'}
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent
+        css={{
+          width: '200px',
+          padding: 0,
+          border: '1px solid $neutral300'
+        }}
+      >
+        <Flex
+          css={{
+            padding: '$4 0'
+          }}
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Text
+            css={{
+              lineHeight: '$sm',
+              color: '$neutral600'
+            }}
+          >
+            {timeValue.hour}
+            :
+            {timeValue.minute}
+            {' '}
+            {timeValue.pm ? 'PM' : 'AM'}
+          </Text>
+        </Flex>
+        <Flex
+          css={{
+            height: '200px',
+            padding: '$4 0',
+            borderBottom: '1px solid $neutral100',
+            borderTop: '1px solid $neutral100'
+          }}
+          ref={columnsContainerRef}
+        >
+          <ListHours
+            handleArrowKeys={handleArrowKeys}
+            timeValue={timeValue}
+            updateTimeValue={updateTimeValue}
+          />
+          <ListMinutes
+            handleArrowKeys={handleArrowKeys}
+            timeValue={timeValue}
+            updateTimeValue={updateTimeValue}
+          />
+          <ListAmPm
+            handleArrowKeys={handleArrowKeys}
+            timeValue={timeValue}
+            updateTimeValue={updateTimeValue}
+          />
+        </Flex>
+        <Flex
+          css={{
+            padding: '$4 $8'
+          }}
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Button
+            color="primary"
+            variant="ghost"
+            size="md"
+            css={{
+              width: '100%'
+            }}
+            onClick={handleApply}
+          >
+            Apply
+          </Button>
+        </Flex>
+      </PopoverContent>
+    </Popover>
+  );
+};
+
+interface ListingColumnProps {
+  timeValue: TimeValueState;
+  updateTimeValue: (values: Partial<TimeValueState>) => void;
+  handleArrowKeys: (e: React.KeyboardEvent<HTMLButtonElement>) => void;
+}
+
+const ListHours = ({
+  timeValue,
+  updateTimeValue,
+  handleArrowKeys
+}: ListingColumnProps) => {
+  const columnRef = useRef<HTMLDivElement>(null);
+  const hours = Array.from({ length: 12 }).map((_, index) => `${index + 1}`.padStart(2, '0'));
+
+  useEffect(() => {
+    const selectedHourButton = columnRef.current?.querySelector(
+      '[data-is-selected="true"]'
+    ) as HTMLButtonElement | null;
+
+    if (selectedHourButton) {
+      /**
+       * Request animation frame used so that hour is focused after minutes is focused.
+       * The focus will scroll the container to the selected hour / minutes.
+       */
+      requestAnimationFrame(() => {
+        selectedHourButton.focus();
+      });
+    }
+  }, []);
+
+  return (
+    <Column gap="0" hasBorderRight ref={columnRef} data-time-column>
+      {hours.map((_, index) => {
+        const hour = `${index + 1}`.padStart(2, '0');
+
+        return (
+          <FieldButton
+            key={hour}
+            color={hour === timeValue.hour ? 'selected' : 'default'}
+            tabIndex={hour === timeValue.hour ? 0 : -1}
+            data-is-selected={hour === timeValue.hour}
+            data-is-active={hour === timeValue.hour}
+            onClick={() => {
+              updateTimeValue({
+                hour
+              });
+            }}
+            onKeyDown={(e) => {
+              handleArrowKeys(e);
+            }}
+          >
+            {hour}
+          </FieldButton>
+        );
+      })}
+    </Column>
+  );
+};
+
+const ListMinutes = ({
+  handleArrowKeys,
+  timeValue,
+  updateTimeValue
+}: ListingColumnProps) => {
+  const columnRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const selectedMinuteButton = columnRef.current?.querySelector(
+      '[data-is-selected="true"]'
+    ) as HTMLButtonElement | null;
+
+    if (selectedMinuteButton) {
+      selectedMinuteButton.focus();
+    }
+  }, []);
+
+  return (
+    <Column gap="0" hasBorderRight ref={columnRef} data-time-column>
+      {Array.from({ length: 60 }).map((_, index) => {
+        const minute = `${index}`.padStart(2, '0');
+
+        return (
+          <FieldButton
+            key={minute}
+            color={timeValue.minute === minute ? 'selected' : 'default'}
+            tabIndex={minute === timeValue.minute ? 0 : -1}
+            data-is-active={minute === timeValue.minute}
+            data-is-selected={minute === timeValue.minute}
+            onClick={() => {
+              updateTimeValue({
+                minute
+              });
+            }}
+            onKeyDown={(e) => {
+              handleArrowKeys(e);
+            }}
+          >
+            {minute}
+          </FieldButton>
+        );
+      })}
+    </Column>
+  );
+};
+
+const ListAmPm = ({
+  handleArrowKeys,
+  timeValue,
+  updateTimeValue
+}: ListingColumnProps) => {
+  return (
+    <Column gap="0" data-time-column>
+      <FieldButton
+        color={!timeValue.pm ? 'selected' : 'default'}
+        tabIndex={!timeValue.hour ? 0 : -1}
+        data-is-active={!timeValue.pm}
+        data-is-selected={!timeValue.pm}
+        onClick={() => {
+          updateTimeValue({
+            pm: false
+          });
+        }}
+        onKeyDown={(e) => handleArrowKeys(e)}
+      >
+        AM
+      </FieldButton>
+      <FieldButton
+        color={timeValue.pm ? 'selected' : 'default'}
+        tabIndex={timeValue.hour ? 0 : -1}
+        data-is-active={timeValue.pm}
+        data-is-selected={timeValue.pm}
+        onKeyDown={(e) => handleArrowKeys(e)}
+        onClick={() => {
+          updateTimeValue({
+            pm: true
+          });
+        }}
+      >
+        PM
+      </FieldButton>
+    </Column>
+  );
+};
+
+const Column = styled(Flex, {
+  flexDirection: 'column',
+  flex: 1,
+  height: '100%',
+  overflow: 'auto',
+  variants: {
+    hasBorderRight: {
+      true: {
+        borderRight: '1px solid',
+        borderColorOpacity: ['$secondary500', 0.08]
+      },
+      false: {}
+    }
+  },
+  defaultVariants: {
+    hasBorderRight: false
+  }
+});

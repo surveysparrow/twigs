@@ -1,24 +1,45 @@
-import React, { useRef } from 'react';
-import { useDatePickerState } from 'react-stately';
-import { AriaDatePickerProps, DateValue, useDatePicker } from 'react-aria';
 import { CalendarIcon } from '@sparrowengg/twigs-react-icons';
+import { ReactNode, useEffect, useRef } from 'react';
+import { AriaDatePickerProps, DateValue, useDatePicker } from 'react-aria';
+import { CalendarState, useDatePickerState } from 'react-stately';
 import { Box } from '../box';
-import { Popover, PopoverContent, PopoverTrigger } from '../popover';
-import { Calendar } from '../calendar';
-import { DateField } from './date-field';
-import { FormLabel } from '../form-label';
 import { IconButton } from '../button';
+import { Calendar } from '../calendar';
+import {
+  CALENDAR_SIZE_TO_WIDTH,
+  CalendarControlProps
+} from '../calendar/calendar-utils';
+import { FormLabel } from '../form-label';
+import { usePrevious } from '../hooks/use-previous';
+import { Popover, PopoverContent, PopoverTrigger } from '../popover';
+import { DateField } from './date-field';
 
 export type DatePickerProps = AriaDatePickerProps<DateValue> & {
-  label?: string,
-  closeOnSelect?: boolean,
-}
+  label?: string;
+  closeOnSelect?: boolean;
+  footerAction?: (
+    state: CalendarState,
+    setPopoverOpen: (isOpen: boolean) => void
+  ) => void;
+  renderFooter?: (
+    state: CalendarState,
+    setPopoverOpen: (isOpen: boolean) => void
+  ) => ReactNode;
+} & CalendarControlProps;
 
-export const DatePicker = (props: DatePickerProps) => {
+export const DatePicker = ({
+  showFooter,
+  showTimePicker,
+  renderFooter,
+  footerAction,
+  footerActionText,
+  ...props
+}: DatePickerProps) => {
   const state = useDatePickerState({
-    ...props,
-    shouldCloseOnSelect: props.closeOnSelect
+    shouldCloseOnSelect: false,
+    ...props
   });
+
   const ref = useRef(null);
   const {
     groupProps,
@@ -29,6 +50,14 @@ export const DatePicker = (props: DatePickerProps) => {
     calendarProps
   } = useDatePicker(props, state, ref);
 
+  const previousDay = usePrevious(state.value?.day);
+
+  useEffect(() => {
+    if (props.closeOnSelect && state.value?.day !== previousDay) {
+      state.close();
+    }
+  }, [state.value?.day, props.closeOnSelect]);
+
   return (
     <Box
       css={{
@@ -37,10 +66,11 @@ export const DatePicker = (props: DatePickerProps) => {
         flexDirection: 'column'
       }}
     >
-      {
-        props.label
-        && <FormLabel {...labelProps} css={{ mb: '3px' }}>{props.label}</FormLabel>
-      }
+      {props.label && (
+        <FormLabel {...labelProps} css={{ mb: '3px' }}>
+          {props.label}
+        </FormLabel>
+      )}
 
       <Popover open={state.isOpen} onOpenChange={state.toggle}>
         <PopoverTrigger asChild>
@@ -85,13 +115,29 @@ export const DatePicker = (props: DatePickerProps) => {
           {...dialogProps}
           css={{
             width: 'auto',
-            maxWidth: 340
+            padding: '0',
+            maxWidth: CALENDAR_SIZE_TO_WIDTH[props.size || 'lg']
           }}
         >
-          <Calendar {...calendarProps} />
+          <Calendar
+            {...calendarProps}
+            showFooter={showFooter}
+            showTimePicker={showTimePicker}
+            renderFooter={
+              renderFooter
+                ? (calendarState) => renderFooter(calendarState, state.setOpen)
+                : undefined
+            }
+            footerAction={
+              footerAction
+                ? (calendarState) => footerAction(calendarState, state.setOpen)
+                : undefined
+            }
+            footerActionText={footerActionText}
+            size={props.size}
+          />
         </PopoverContent>
       </Popover>
-
     </Box>
   );
 };

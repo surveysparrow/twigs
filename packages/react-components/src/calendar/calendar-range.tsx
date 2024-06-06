@@ -1,22 +1,55 @@
-import React, { useRef } from 'react';
-import { useRangeCalendarState } from 'react-stately';
 import {
-  useRangeCalendar, useLocale, AriaRangeCalendarProps, DateValue
+  CalendarDateTime,
+  DateDuration,
+  ZonedDateTime,
+  createCalendar
+} from '@internationalized/date';
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon
+} from '@sparrowengg/twigs-react-icons';
+import {
+  ReactNode, useEffect, useMemo, useRef, useState
+} from 'react';
+import {
+  AriaButtonProps,
+  AriaRangeCalendarProps,
+  DateValue,
+  useDateFormatter,
+  useLocale,
+  useRangeCalendar
 } from 'react-aria';
-import { createCalendar } from '@internationalized/date';
-import { ChevronLeftIcon, ChevronRightIcon } from '@sparrowengg/twigs-react-icons';
+import { RangeCalendarState, useRangeCalendarState } from 'react-stately';
 import { Box } from '../box';
-import { CalendarNavigationButton, CalendarMonth } from './calendar-header';
+import { Button } from '../button';
 import { Flex } from '../flex';
+import { Text } from '../text';
+import { CALENDAR_VIEW } from './calendar';
 import { CalendarGrid } from './calendar-grid';
+import {
+  CalendarNavigationButton,
+  RangeCalendarTitle
+} from './calendar-header';
+import { CalendarMonthsView } from './calendar-months-view';
+import {
+  CALENDAR_SIZE_TO_WIDTH,
+  CalendarContext,
+  CalendarControlProps,
+  useCalendarContext
+} from './calendar-utils';
+import { CalendarYearsView } from './calendar-years-view';
 
-function getMonthName(monthIndex: number, timeZone: string): string {
-  const date = new Date();
-  date.setMonth(monthIndex - 1);
-  return date.toLocaleString('default', { month: 'long', timeZone });
-}
-
-export const CalendarRange = (props: AriaRangeCalendarProps<DateValue>) => {
+export const CalendarRange = ({
+  size = 'lg',
+  showFooter = true,
+  footerActionText = 'Apply',
+  footerAction,
+  ...props
+}: AriaRangeCalendarProps<DateValue> &
+  CalendarControlProps & {
+    footerAction?: (state: RangeCalendarState) => void;
+    renderFooter?: (state: RangeCalendarState) => ReactNode;
+  }) => {
   const { locale } = useLocale();
   const state = useRangeCalendarState({
     ...props,
@@ -25,49 +58,212 @@ export const CalendarRange = (props: AriaRangeCalendarProps<DateValue>) => {
     createCalendar
   });
 
-  const ref = useRef(null);
-  const {
-    calendarProps,
-    prevButtonProps,
-    nextButtonProps
-  } = useRangeCalendar(props, state, ref);
-  const startMonth = getMonthName(state.visibleRange.start.month, state.timeZone);
-  const endMonth = getMonthName(state.visibleRange.end.month, state.timeZone);
-  return (
-    <Flex
-      {...calendarProps}
-      gap="$26"
-      ref={ref}
-    >
-      <Box>
-        <Flex
-          alignItems="center"
-          justifyContent="space-between"
-          css={{
-            marginBottom: '$12'
-          }}
-        >
-          <CalendarNavigationButton {...prevButtonProps} icon={<ChevronLeftIcon />} />
-          <CalendarMonth>{`${startMonth} ${state.visibleRange.start.year}`}</CalendarMonth>
-          <Box />
-        </Flex>
-        <CalendarGrid state={state} />
-      </Box>
+  useEffect(() => {
+    if (
+      props.showTimePicker
+      && !(
+        props.value instanceof ZonedDateTime
+        || props.value instanceof CalendarDateTime
+      )
+    ) {
+      // eslint-disable-next-line no-console
+      console.warn(
+        // eslint-disable-next-line max-len
+        'The value prop must be an instance of ZonedDateTime or CalendarDateTime when showTimePicker is true. Use parseDateTime or parseZonedDateTime from @internationalized/date. The value type will be changed to CalendarDateTime'
+      );
+    }
+    if (props.showTimezonePicker && !(props.value instanceof ZonedDateTime)) {
+      // eslint-disable-next-line no-console
+      console.warn(
+        'The value prop must be an instance of ZonedDateTime when showTimezonePicker is true. The value type will be changed to ZonedDateTime'
+      );
+    }
+  }, [props.showTimePicker]);
 
-      <Box>
+  const ref = useRef(null);
+  const { calendarProps, prevButtonProps, nextButtonProps } = useRangeCalendar(
+    props,
+    state,
+    ref
+  );
+
+  const contextProviderValue = useMemo(() => {
+    return {
+      size
+    };
+  }, [size]);
+
+  const formatter = useDateFormatter({
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric'
+  });
+
+  return (
+    <CalendarContext.Provider value={contextProviderValue}>
+      <Box
+        css={{
+          borderRadius: '$2xl',
+          border: '1px solid',
+          borderColor: '$neutral300',
+          paddingTop: '$6',
+          maxWidth: 'max-content'
+        }}
+      >
         <Flex
-          alignItems="center"
-          justifyContent="space-between"
+          {...calendarProps}
+          gap="$8"
+          ref={ref}
           css={{
-            marginBottom: '$12'
+            overflow: 'auto'
           }}
         >
-          <Box />
-          <CalendarMonth>{`${endMonth} ${state.visibleRange.end.year}`}</CalendarMonth>
-          <CalendarNavigationButton {...nextButtonProps} icon={<ChevronRightIcon />} />
+          <CalendarSingleSection
+            state={state}
+            navigationButtonProps={prevButtonProps}
+            sectionName="start"
+          />
+          <CalendarSingleSection
+            state={state}
+            calendarOffset={{
+              months: 1
+            }}
+            sectionName="end"
+            navigationButtonProps={nextButtonProps}
+          />
         </Flex>
-        <CalendarGrid state={state} offset={{ months: 1 }} />
+        {showFooter && (
+          <>
+            {props.renderFooter ? (
+              props.renderFooter(state)
+            ) : (
+              <Flex
+                alignItems="center"
+                justifyContent="space-between"
+                css={{
+                  borderTop: '1px solid',
+                  borderColor: '$neutral200',
+                  padding: '$6 $8'
+                }}
+              >
+                <Text
+                  weight="bold"
+                  css={{
+                    color: '$neutral700'
+                  }}
+                >
+                  {state.value?.start
+                    && state.value?.end
+                    && formatter.formatRange(
+                      state.value.start.toDate(state.timeZone),
+                      state.value.end.toDate(state.timeZone)
+                    )}
+                </Text>
+                <Button
+                  size="lg"
+                  color="primary"
+                  onClick={() => {
+                    if (footerAction) footerAction(state);
+                  }}
+                >
+                  {footerActionText}
+                </Button>
+              </Flex>
+            )}
+          </>
+        )}
       </Box>
-    </Flex>
+    </CalendarContext.Provider>
+  );
+};
+
+const CalendarSingleSection = ({
+  navigationButtonProps,
+  calendarOffset,
+  sectionName,
+  state
+}: {
+  navigationButtonProps: AriaButtonProps<'button'>;
+  calendarOffset?: DateDuration;
+  sectionName: 'start' | 'end';
+  state: RangeCalendarState;
+}) => {
+  const [currentCalendarView, setCurrentCalendarView] = useState<
+    keyof typeof CALENDAR_VIEW
+  >(CALENDAR_VIEW.GRID);
+  const calendarContext = useCalendarContext();
+
+  return (
+    <Box
+      css={{
+        flexShrink: 1,
+        flexGrow: 1,
+        flexBasis: 0,
+        maxWidth: CALENDAR_SIZE_TO_WIDTH[calendarContext.size]
+      }}
+    >
+      {currentCalendarView === CALENDAR_VIEW.GRID && (
+        <Flex
+          flexDirection="column"
+          alignItems="center"
+          css={{
+            maxWidth: 'max-content'
+          }}
+        >
+          <Flex
+            alignItems="center"
+            justifyContent="space-between"
+            css={{
+              marginBottom: '$12',
+              padding: '0 $8'
+            }}
+          >
+            {sectionName === 'end' && <Box />}
+            {sectionName === 'start' && (
+              <CalendarNavigationButton
+                {...navigationButtonProps}
+                icon={<ChevronLeftIcon />}
+              />
+            )}
+            <RangeCalendarTitle
+              timezone={state.timeZone}
+              value={state.visibleRange[sectionName]}
+              setCurrentCalendarView={setCurrentCalendarView}
+            />
+            {sectionName === 'end' && (
+              <CalendarNavigationButton
+                {...navigationButtonProps}
+                icon={<ChevronRightIcon />}
+              />
+            )}
+            {sectionName === 'start' && <Box />}
+          </Flex>
+          <CalendarGrid
+            state={state}
+            {...(calendarOffset && {
+              offset: calendarOffset
+            })}
+            containerCSS={{
+              maxWidth: 'max-content',
+              padding: '0 $8 $8 $8'
+            }}
+          />
+        </Flex>
+      )}
+      {currentCalendarView === CALENDAR_VIEW.MONTH && (
+        <CalendarMonthsView
+          state={state}
+          range={sectionName}
+          setCurrentCalendarView={setCurrentCalendarView}
+        />
+      )}
+      {currentCalendarView === CALENDAR_VIEW.YEAR && (
+        <CalendarYearsView
+          state={state}
+          range={sectionName}
+          setCurrentCalendarView={setCurrentCalendarView}
+        />
+      )}
+    </Box>
   );
 };

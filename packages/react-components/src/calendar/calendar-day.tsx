@@ -8,10 +8,7 @@ export const Day = styled('button', {
   justifyContent: 'center',
   alignItems: 'center',
   color: '$neutral900',
-  fontSize: '$8',
   fontWeight: '$5',
-  height: '$10',
-  width: '$10',
   cursor: 'pointer',
   borderRadius: '$round',
   '&:hover': {
@@ -33,6 +30,18 @@ export const Day = styled('button', {
     }
   },
   variants: {
+    size: {
+      lg: {
+        height: '$10',
+        width: '$10',
+        fontSize: '$md'
+      },
+      md: {
+        height: '$8',
+        width: '$8',
+        fontSize: '$sm'
+      }
+    },
     isHidden: {
       true: {
         visibility: 'hidden'
