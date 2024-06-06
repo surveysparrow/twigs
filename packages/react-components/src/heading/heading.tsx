@@ -22,17 +22,17 @@ const StyledHeading = styled('h1', {
       h3: {
         fontSize: '$3xl',
         lineHeight: '$2xl',
-        letterSpacing: '-0.664px'
+        letterSpacing: '-0.02em'
       },
       h2: {
         fontSize: '$4xl',
         lineHeight: '$3xl',
-        letterSpacing: '-0.199px'
+        letterSpacing: '-0.005em'
       },
       h1: {
         fontSize: '$5xl',
         lineHeight: '$4xl',
-        letterSpacing: '-0.478px'
+        letterSpacing: '-0.01em'
       }
     },
     weight: {
