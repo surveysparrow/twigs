@@ -1,13 +1,12 @@
 import {
-  INSERT_ORDERED_LIST_COMMAND,
-  REMOVE_LIST_COMMAND
+  INSERT_ORDERED_LIST_COMMAND
 } from '@lexical/list';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { OrderedListIcon } from '@sparrowengg/twigs-react-icons';
 import { IconButton } from '@src/button';
 import clsx from 'clsx';
 import { useToolbarStore } from '../../toolbar-context/store';
-import { ToolbarButtonProps } from './commons';
+import { ToolbarButtonProps, formatParagraph } from './commons';
 
 export const OrderedListTool = ({
   renderButton,
@@ -20,7 +19,7 @@ export const OrderedListTool = ({
     if (!active) {
       editor.dispatchCommand(INSERT_ORDERED_LIST_COMMAND, undefined);
     } else {
-      editor.dispatchCommand(REMOVE_LIST_COMMAND, undefined);
+      formatParagraph(editor);
     }
   };
 

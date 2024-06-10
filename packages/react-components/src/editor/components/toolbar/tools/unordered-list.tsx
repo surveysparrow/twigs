@@ -1,13 +1,12 @@
 import {
-  INSERT_UNORDERED_LIST_COMMAND,
-  REMOVE_LIST_COMMAND
+  INSERT_UNORDERED_LIST_COMMAND
 } from '@lexical/list';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { UnorderedListIcon } from '@sparrowengg/twigs-react-icons';
 import { IconButton } from '@src/button';
 import clsx from 'clsx';
 import { useToolbarStore } from '../../toolbar-context/store';
-import { ToolbarButtonProps } from './commons';
+import { ToolbarButtonProps, formatParagraph } from './commons';
 
 export const UnorderedListTool = ({
   renderButton,
@@ -20,7 +19,7 @@ export const UnorderedListTool = ({
     if (!active) {
       editor.dispatchCommand(INSERT_UNORDERED_LIST_COMMAND, undefined);
     } else {
-      editor.dispatchCommand(REMOVE_LIST_COMMAND, undefined);
+      formatParagraph(editor);
     }
   };
 

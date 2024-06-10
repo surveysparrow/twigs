@@ -1,14 +1,10 @@
 import { CloseIcon, DeleteIcon } from '@sparrowengg/twigs-react-icons';
 import { Box } from '@src/box';
 import { Button, IconButton } from '@src/button';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogTitle
-} from '@src/dialog';
+import { Dialog, DialogContent, DialogTitle } from '@src/dialog';
 import { Flex } from '@src/flex';
 import { FormInput } from '@src/input';
+import { Text } from '@src/text';
 import React, { useState } from 'react';
 
 export const LinkEditorDialog = ({
@@ -18,9 +14,12 @@ export const LinkEditorDialog = ({
   linkUrl,
   linkText,
   urlLabel,
+  isUpdate,
   textLabel,
+  saveLabel = 'Save',
   cancelLabel = 'Cancel',
   updateLabel = 'Update',
+  errorLabels,
   closeModal,
   removeLink,
   setIsLinkEditMode,
@@ -31,17 +30,23 @@ export const LinkEditorDialog = ({
   linkUrl: string;
   linkText: string;
   urlLabel: string;
+  isUpdate?: boolean;
   textLabel: string;
+  saveLabel?: string;
   cancelLabel?: string;
   updateLabel?: string;
+  errorLabels?: {
+    text?: string;
+    url?: string;
+  };
   closeModal: () => void;
   removeLink: () => void;
   handleLinkSubmission: ({ text, url }: { text: string; url: string }) => void;
-  setIsLinkEditMode: (isLinkEditMode: boolean) => void;
+  setIsLinkEditMode: (isEditMode: boolean) => void;
   errors: {
     text: boolean;
     url: boolean;
-  }
+  };
 }) => {
   const [editedLinkText, setEditedLinkText] = useState(linkText);
   const [editedLinkUrl, setEditedLinkUrl] = useState(linkUrl);
@@ -85,7 +90,9 @@ export const LinkEditorDialog = ({
             alignItems: 'center'
           }}
         >
-          <span>{title}</span>
+          <Text weight="bold" size="lg">
+            {title}
+          </Text>
           <IconButton
             onClick={closeModal}
             css={{
@@ -93,10 +100,10 @@ export const LinkEditorDialog = ({
             }}
             icon={<CloseIcon />}
             color="bright"
-            size="md"
+            size="lg"
           />
         </DialogTitle>
-        <DialogDescription
+        <Box
           css={{
             padding: '$8 $12'
           }}
@@ -113,11 +120,15 @@ export const LinkEditorDialog = ({
             css={{
               boxSizing: 'border-box'
             }}
-            error={errors.text ? 'Please enter a valid text' : undefined}
+            error={
+              errors.text
+                ? errorLabels?.text ?? 'Please enter a valid text'
+                : undefined
+            }
           />
           <Box
             css={{
-              marginTop: '$12'
+              marginTop: '$10'
             }}
           >
             <FormInput
@@ -132,43 +143,49 @@ export const LinkEditorDialog = ({
               css={{
                 boxSizing: 'border-box'
               }}
-              error={errors.url ? 'Please enter a valid URL' : undefined}
+              error={
+                errors.url
+                  ? errorLabels?.url ?? 'Please enter a valid URL'
+                  : undefined
+              }
             />
           </Box>
+        </Box>
+        <Flex
+          justifyContent="space-between"
+          css={{
+            padding: '$8 $12'
+          }}
+        >
+          <IconButton
+            icon={<DeleteIcon />}
+            color="bright"
+            size="lg"
+            onClick={removeLink}
+          />
           <Flex
             css={{
-              marginTop: '$6',
-              justifyContent: 'space-between'
+              gap: '$6'
             }}
           >
-            <IconButton
-              icon={<DeleteIcon />}
-              color="bright"
+            <Button color="default" size="lg" onClick={closeModal}>
+              {cancelLabel}
+            </Button>
+            <Button
+              color="primary"
               size="lg"
-              onClick={removeLink}
-              css={{}}
-            />
-            <Flex
-              css={{
-                gap: '$6'
-              }}
+              disabled={
+                editedLinkText === linkText && editedLinkUrl === linkUrl
+              }
+              onClick={() => handleLinkSubmission({
+                text: editedLinkText,
+                url: editedLinkUrl
+              })}
             >
-              <Button color="default" size="lg" onClick={closeModal}>
-                {cancelLabel}
-              </Button>
-              <Button
-                color="primary"
-                size="lg"
-                onClick={() => handleLinkSubmission({
-                  text: editedLinkText,
-                  url: editedLinkUrl
-                })}
-              >
-                {updateLabel}
-              </Button>
-            </Flex>
+              {isUpdate ? updateLabel : saveLabel}
+            </Button>
           </Flex>
-        </DialogDescription>
+        </Flex>
       </DialogContent>
     </Dialog>
   );
