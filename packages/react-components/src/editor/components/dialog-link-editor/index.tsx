@@ -32,15 +32,17 @@ import { LinkTooltip } from './link-tooltip';
 
 function useDialogLinkEditorToolbar(
   editor: LexicalEditor,
-  anchorElem: HTMLElement | null
+  anchorElem: HTMLElement | null,
+  options?: DialogLinkEditorOptions
 ) {
-  const [linkUrl, setLinkUrl] = useState('https://');
+  const [linkUrl, setLinkUrl] = useState('');
   const [linkText, setLinkText] = useState('');
   const [isLink, setIsLink] = useState(false);
   const [lastSelection, setLastSelection] = useState<
     RangeSelection | NodeSelection | BaseSelection | null
   >(null);
   const [isLinkEditMode, setIsLinkEditMode] = useState(false);
+  const [isUpdate, setIsUpdate] = useState(false);
   const [errors, setErrors] = useState({
     text: false,
     url: false
@@ -170,13 +172,19 @@ function useDialogLinkEditorToolbar(
           updateLinkEditor();
         });
       }),
-      editor.registerCommand(ADD_BLANK_LINK, () => {
-        setTimeout(() => {
-          setIsLinkEditMode(true);
-        }, 40);
-        isNewLink.current = true;
-        return false;
-      }, COMMAND_PRIORITY_HIGH),
+
+      editor.registerCommand(
+        ADD_BLANK_LINK,
+        () => {
+          setTimeout(() => {
+            setIsLinkEditMode(true);
+          }, 40);
+          isNewLink.current = true;
+          return false;
+        },
+        COMMAND_PRIORITY_HIGH
+      ),
+
       editor.registerCommand(
         TOGGLE_LINK_COMMAND,
         (payload: string | { url: string } | null) => {
@@ -232,7 +240,12 @@ function useDialogLinkEditorToolbar(
       const isValidText = text.trim().length > 0;
 
       if (isValidUrl && isValidText) {
-        editor.dispatchCommand(TOGGLE_LINK_COMMAND, { url });
+        editor.dispatchCommand(TOGGLE_LINK_COMMAND, {
+          url,
+          rel: options?.anchorOptions?.rel,
+          target: options?.anchorOptions?.target,
+          title: options?.anchorOptions?.title
+        });
         editor.update(() => {
           if ($isRangeSelection(lastSelection)) {
             const textNode = getSelectedNode(lastSelection);
@@ -273,6 +286,7 @@ function useDialogLinkEditorToolbar(
           }}
           handleEdit={() => {
             setIsLinkEditMode(true);
+            setIsUpdate(true);
           }}
           linkUrl={linkUrl}
         />
@@ -290,27 +304,54 @@ function useDialogLinkEditorToolbar(
               editor.dispatchCommand(TOGGLE_LINK_COMMAND, null);
             }
           }}
+          isUpdate={isUpdate}
           setIsLinkEditMode={setIsLinkEditMode}
-          textLabel="Link text"
-          urlLabel="Link URL"
+          textLabel={options?.dialogProps?.textLabel || 'Link text'}
+          urlLabel={options?.dialogProps?.urlLabel || 'Link URL'}
           removeLink={() => {
             if (lastSelection !== null) {
               editor.dispatchCommand(TOGGLE_LINK_COMMAND, null);
             }
           }}
           errors={errors}
-          title="Add Link"
+          saveLabel={options?.dialogProps?.saveLabel || 'Save'}
+          cancelLabel={options?.dialogProps?.cancelLabel || 'Cancel'}
+          updateLabel={options?.dialogProps?.updateLabel || 'Update'}
+          title={options?.dialogProps?.title || 'Add Link'}
+          errorLabels={options?.dialogProps?.errorLabels}
         />
       )}
     </>
   );
 }
 
+export type DialogLinkEditorOptions = {
+  dialogProps?: {
+    textLabel?: string;
+    urlLabel?: string;
+    saveLabel?: string;
+    cancelLabel?: string;
+    updateLabel?: string;
+    title?: string;
+    errorLabels?: {
+      text?: string;
+      url?: string;
+    };
+  };
+  anchorOptions?: {
+    rel?: string;
+    target?: string;
+    title?: string;
+  };
+};
+
 export function DialogLinkEditor({
-  anchorElem = document.body
+  anchorElem = document.body,
+  options
 }: {
   anchorElem?: HTMLElement | null;
+  options?: DialogLinkEditorOptions;
 }) {
   const [editor] = useLexicalComposerContext();
-  return useDialogLinkEditorToolbar(editor, anchorElem);
+  return useDialogLinkEditorToolbar(editor, anchorElem, options);
 }
