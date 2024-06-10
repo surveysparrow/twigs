@@ -127,7 +127,7 @@ export const Calendar = ({
                 justifyContent="center"
                 gap="$2"
                 css={{
-                  paddingTop: '$8'
+                  padding: '$8 0'
                 }}
               >
                 {props.showTimePicker && (
