@@ -41,7 +41,11 @@ export const LinkTooltip = ({
     >
       <Box
         css={{
-          flexShrink: 0
+          flexShrink: 0,
+
+          svg: {
+            display: 'block'
+          }
         }}
       >
         <LinkIcon color="#fff" size={16} />
