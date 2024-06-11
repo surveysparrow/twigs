@@ -172,7 +172,7 @@ export const CalendarYearsView = ({
       <Flex
         wrap="wrap"
         justifyContent="center"
-        gap="$2"
+        gap={calendarContext.size === 'lg' ? '$4' : '$6'}
         css={{
           padding: '$8'
         }}
@@ -186,7 +186,7 @@ export const CalendarYearsView = ({
             tabIndex={dateValue.year === date.year ? 0 : -1}
             disabled={state.isInvalid(date)}
             css={{
-              flexBasis: 'calc(33.333% - $1)',
+              flexBasis: calendarContext.size === 'lg' ? 'calc(33.333% - $2)' : 'calc(33.333% - $3)',
               padding: '$6',
               height:
                 CALENDAR_SIZE_TO_YEAR_MONTH_BTN_HEIGHT[calendarContext.size]
