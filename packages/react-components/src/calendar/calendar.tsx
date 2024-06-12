@@ -160,7 +160,7 @@ export const Calendar = ({
             setCurrentCalendarView={setCurrentCalendarView}
           />
         )}
-        {showFooter && (
+        {(showFooter && currentCalendarView === CALENDAR_VIEW.GRID) && (
           <>
             {props.renderFooter ? (
               props.renderFooter(state)
