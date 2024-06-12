@@ -392,6 +392,21 @@ const Column = styled(Flex, {
   flex: 1,
   height: '100%',
   overflow: 'auto',
+  scrollbarWidth: '3px',
+  '&::-webkit-scrollbar': {
+    width: '3px',
+    opacity: 0
+  },
+  '&:hover::-webkit-scrollbar': {
+    opacity: 1
+  },
+  '&::-webkit-scrollbar-track': {
+    backgroundColor: 'transparent'
+  },
+  '&:hover::-webkit-scrollbar-thumb': {
+    backgroundColorOpacity: ['$secondary500', 0.25],
+    borderRadius: '$2xl'
+  },
   variants: {
     hasBorderRight: {
       true: {

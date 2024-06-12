@@ -215,7 +215,8 @@ const CalendarSingleSection = ({
             justifyContent="space-between"
             css={{
               marginBottom: '$12',
-              padding: '0 $8'
+              padding: '0 $8',
+              width: '100%'
             }}
           >
             {sectionName === 'end' && <Box />}

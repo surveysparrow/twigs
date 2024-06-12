@@ -1,7 +1,6 @@
 import { CalendarDate } from '@internationalized/date';
 import React from 'react';
 import { AriaButtonProps, DateValue, useDateFormatter } from 'react-aria';
-import { ChevronDownIcon } from '@sparrowengg/twigs-react-icons';
 import { Button, IconButton } from '../button';
 import { Flex } from '../flex';
 import { styled } from '../stitches.config';
@@ -23,7 +22,8 @@ export const CalendarNavigationButton = ({
 
   return (
     <IconButton
-      color="default"
+      color="secondary"
+      variant="ghost"
       {...rest}
       onClick={onPress as any}
       icon={icon}
@@ -96,9 +96,9 @@ export const RangeCalendarTitle = ({
   return (
     <Flex gap="$2">
       <Button
-        color="bright"
+        color="default"
+        variant="solid"
         size={calendarContext.size}
-        rightIcon={<ChevronDownIcon />}
         onClick={() => {
           setCurrentCalendarView(CALENDAR_VIEW.YEAR);
         }}
@@ -106,9 +106,9 @@ export const RangeCalendarTitle = ({
         {value.year}
       </Button>
       <Button
-        color="bright"
+        color="default"
+        variant="solid"
         size={calendarContext.size}
-        rightIcon={<ChevronDownIcon />}
         onClick={() => {
           setCurrentCalendarView(CALENDAR_VIEW.MONTH);
         }}
