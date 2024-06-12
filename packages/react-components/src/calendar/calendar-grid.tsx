@@ -31,7 +31,8 @@ export const CalendarGrid = ({
   const { gridProps, headerProps, weekDays } = useCalendarGrid(
     {
       startDate,
-      endDate
+      endDate,
+      weekdayStyle: 'short'
     },
     state
   );
@@ -51,7 +52,7 @@ export const CalendarGrid = ({
         {weekDays.map((day, index) => (
           // eslint-disable-next-line react/no-array-index-key
           <Week key={`twigs-calendar-grid-${day}-${startDate}-${id}-${index}`}>
-            {day}
+            {day.substring(0, 2)}
           </Week>
         ))}
       </WeekContainer>
