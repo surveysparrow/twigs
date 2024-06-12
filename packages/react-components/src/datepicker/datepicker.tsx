@@ -30,6 +30,7 @@ export type DatePickerProps = AriaDatePickerProps<DateValue> & {
 export const DatePicker = ({
   showFooter,
   showTimePicker,
+  showTimezonePicker,
   renderFooter,
   footerAction,
   footerActionText,
@@ -123,6 +124,7 @@ export const DatePicker = ({
             {...calendarProps}
             showFooter={showFooter}
             showTimePicker={showTimePicker}
+            showTimezonePicker={showTimezonePicker}
             renderFooter={
               renderFooter
                 ? (calendarState) => renderFooter(calendarState, state.setOpen)
