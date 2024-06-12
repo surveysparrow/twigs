@@ -1,22 +1,42 @@
-import React, { FunctionComponent } from 'react';
+import { Slot } from '@radix-ui/react-slot';
+import { CSS } from '@stitches/react';
+import React from 'react';
+import { config, styled } from '..';
 import { Box, BoxProps } from '../box';
 
-type LinkProps = BoxProps & React.AnchorHTMLAttributes<HTMLAnchorElement>;
+type LinkProps = BoxProps &
+  React.AnchorHTMLAttributes<HTMLAnchorElement> & {
+    asChild?: boolean;
+  };
 
-export const Link: FunctionComponent<LinkProps> = React.forwardRef(
-  ({ children, css, ...rest }: LinkProps, ref) => {
+const defaultStyle: CSS<typeof config> = {
+  color: '$neutral800',
+  fontWeight: 'inherit',
+  textDecoration: 'none',
+  display: 'inline-block',
+  '&:focus, &:active': {
+    outline: 'none'
+  }
+};
+
+const StyledSlot = styled(Slot, {
+  ...defaultStyle
+});
+
+export const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
+  ({
+    children, css, asChild, ...rest
+  }: LinkProps, ref) => {
+    const RootComp = asChild ? StyledSlot : Box;
     return (
-      <Box
+      <RootComp
+        // @ts-ignore
         ref={ref}
-        as="a"
+        {...(!asChild && { as: 'a' })}
         css={{
-          color: '$link',
-          fontWeight: 'inherit',
-          textDecoration: 'none',
-          display: 'inline-block',
-          '&:focus, &:active': {
-            outline: 'none'
-          },
+          ...(!asChild && {
+            ...defaultStyle
+          }),
           ...css
         }}
         tabIndex={0}
@@ -24,7 +44,7 @@ export const Link: FunctionComponent<LinkProps> = React.forwardRef(
         {...rest}
       >
         {children}
-      </Box>
+      </RootComp>
     );
   }
 );

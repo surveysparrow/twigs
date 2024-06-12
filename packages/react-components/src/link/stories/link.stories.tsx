@@ -1,4 +1,3 @@
-import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Link } from '../link';
 
@@ -9,6 +8,9 @@ export default {
     size: {
       control: 'select',
       options: ['md', 'lg', 'xl']
+    },
+    asChild: {
+      control: 'boolean'
     }
   }
 } as ComponentMeta<typeof Link>;
