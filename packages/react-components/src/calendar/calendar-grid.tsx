@@ -59,7 +59,10 @@ export const CalendarGrid = ({
         ))}
       </WeekContainer>
       <Box css={{
-        padding: '$8 0'
+        padding: '$8 0',
+        ...(calendarContext.size === 'lg' && {
+          paddingBottom: '$4'
+        })
       }}
       >
         {[...new Array(weeksInMonth).keys()].map((weekIndex, index) => (

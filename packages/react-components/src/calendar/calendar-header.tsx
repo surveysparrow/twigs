@@ -45,7 +45,7 @@ export const CalendarHeader = styled(Flex, {
         padding: '$6 $8'
       },
       md: {
-        padding: '$6'
+        padding: '$6 $8'
       }
     }
   },

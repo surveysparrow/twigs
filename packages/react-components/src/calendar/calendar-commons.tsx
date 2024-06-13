@@ -65,7 +65,7 @@ export const GridContainer = styled(Box, {
         padding: '0 $8'
       },
       md: {
-        padding: '0 $6'
+        padding: '0 $8'
       }
     }
   },
@@ -108,7 +108,7 @@ export const MonthYearGridContainer = styled(Box, {
       },
       md: {
         gap: '$6',
-        padding: '$6'
+        padding: '$8'
       }
     }
   }
