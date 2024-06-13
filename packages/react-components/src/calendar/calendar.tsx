@@ -21,7 +21,10 @@ import { CalendarState, useCalendarState } from 'react-stately';
 import { Box } from '../box';
 import { Button } from '../button';
 import { Text } from '../text';
-import { FooterContainer, TimeAndZonePickerContainer } from './calendar-commons';
+import {
+  FooterContainer,
+  TimeAndZonePickerContainer
+} from './calendar-commons';
 import { CalendarGrid } from './calendar-grid';
 import {
   CalendarHeader,
@@ -174,12 +177,18 @@ export const Calendar = ({
                     color: '$neutral700'
                   }}
                 >
-                  {monthFormatter.format(state.value.toDate(state.timeZone))}
-                  {' '}
-                  {state.value.day.toString().padStart(2, '0')}
-                  ,
-                  {' '}
-                  {state.value.year.toString()}
+                  {state?.value && (
+                    <>
+                      {monthFormatter.format(
+                        state.value.toDate(state.timeZone)
+                      )}
+                      {' '}
+                      {state.value.day.toString().padStart(2, '0')}
+                      ,
+                      {' '}
+                      {state.value.year.toString()}
+                    </>
+                  )}
                 </Text>
                 <Button
                   size={size}
