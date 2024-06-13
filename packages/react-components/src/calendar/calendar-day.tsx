@@ -8,22 +8,17 @@ export const Day = styled('button', {
   justifyContent: 'center',
   alignItems: 'center',
   color: '$neutral900',
-  fontSize: '$8',
   fontWeight: '$5',
-  height: '$10',
-  width: '$10',
   cursor: 'pointer',
   borderRadius: '$round',
   '&:hover': {
     backgroundColor: '$black100'
   },
-  '&:focus': {
+  '&:focus-visible': {
     borderWidth: '$sm',
     borderStyle: 'solid',
-    background: '$secondary100',
     borderColor: '$secondary500',
-    outline: 'none',
-    color: '$neutral900'
+    outline: 'none'
   },
   '&[aria-disabled="true"]': {
     cursor: 'not-allowed',
@@ -33,6 +28,18 @@ export const Day = styled('button', {
     }
   },
   variants: {
+    size: {
+      lg: {
+        height: '$10',
+        width: '$10',
+        fontSize: '$md'
+      },
+      md: {
+        height: '$8',
+        width: '$8',
+        fontSize: '$sm'
+      }
+    },
     isHidden: {
       true: {
         visibility: 'hidden'
@@ -41,7 +48,13 @@ export const Day = styled('button', {
     isSelected: {
       true: {
         backgroundColor: '$secondary500',
-        color: '$white900'
+        color: '$white900',
+        '&:focus-visible': {
+          outline: '2px solid $secondary300'
+        },
+        '&:hover': {
+          backgroundColor: '$secondary500'
+        }
       }
     }
   }

@@ -3,6 +3,7 @@ import { useRef } from 'react';
 import { useCalendarCell } from 'react-aria';
 import { CalendarState, RangeCalendarState } from 'react-stately';
 import { Day, DayContainer } from './calendar-day';
+import { useCalendarContext } from './calendar-utils';
 
 type CalendarCellProps = {
   state: RangeCalendarState | CalendarState,
@@ -18,6 +19,8 @@ export const CalendarCell = ({ state, date, currentMonth }: CalendarCellProps) =
     isSelected,
     formattedDate
   } = useCalendarCell({ date }, state, ref);
+
+  const calendarContext = useCalendarContext();
 
   const isOutsideMonth = !isSameMonth(currentMonth, date);
 
@@ -42,6 +45,7 @@ export const CalendarCell = ({ state, date, currentMonth }: CalendarCellProps) =
         ref={ref}
         isHidden={isOutsideMonth}
         isSelected={isSelected}
+        size={calendarContext.size}
       >
         {formattedDate}
       </Day>
