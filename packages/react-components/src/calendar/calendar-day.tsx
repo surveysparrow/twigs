@@ -14,13 +14,11 @@ export const Day = styled('button', {
   '&:hover': {
     backgroundColor: '$black100'
   },
-  '&:focus': {
+  '&:focus-visible': {
     borderWidth: '$sm',
     borderStyle: 'solid',
-    background: '$secondary100',
     borderColor: '$secondary500',
-    outline: 'none',
-    color: '$neutral900'
+    outline: 'none'
   },
   '&[aria-disabled="true"]': {
     cursor: 'not-allowed',
@@ -50,7 +48,13 @@ export const Day = styled('button', {
     isSelected: {
       true: {
         backgroundColor: '$secondary500',
-        color: '$white900'
+        color: '$white900',
+        '&:focus-visible': {
+          outline: '2px solid $secondary300'
+        },
+        '&:hover': {
+          backgroundColor: '$secondary500'
+        }
       }
     }
   }

@@ -156,11 +156,18 @@ export const CalendarTimezonePicker = ({
               marginBottom: '$4'
             }}
           >
-            <Text>{selectedTimezoneObject.label}</Text>
+            <Text
+              css={{
+                lineHeight: '$sm'
+              }}
+            >
+              {selectedTimezoneObject.label}
+            </Text>
             <Text
               size="xs"
               css={{
-                color: '$neutral700'
+                color: '$neutral700',
+                lineHeight: '$xxs'
               }}
             >
               Current Time Zone

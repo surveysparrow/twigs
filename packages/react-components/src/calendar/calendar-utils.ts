@@ -40,3 +40,8 @@ export const CALENDAR_SIZE_TO_WIDTH: Record<CalendarSize, number> = {
   lg: 340,
   md: 260
 };
+
+export const CALENDAR_SIZE_TO_BORDER_RADIUS: Record<CalendarSize, CSS<typeof config>['borderRadius']> = {
+  lg: '$2xl',
+  md: '$xl'
+};

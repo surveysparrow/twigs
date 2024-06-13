@@ -4,13 +4,16 @@ import {
 } from '@sparrowengg/twigs-react-icons';
 import React, { useId, useMemo, useState } from 'react';
 import { CalendarState, RangeCalendarState } from 'react-stately';
+import { Box } from '../box';
 import { Button, IconButton } from '../button';
 import { Flex } from '../flex';
 import { Text } from '../text';
 import { CALENDAR_VIEW } from './calendar';
+import { MonthYearGridContainer } from './calendar-commons';
 import { CalendarHeader } from './calendar-header';
 import {
   CALENDAR_SIZE_TO_FONT_SIZE,
+  CALENDAR_SIZE_TO_WIDTH,
   CALENDAR_SIZE_TO_YEAR_MONTH_BTN_HEIGHT,
   useCalendarContext
 } from './calendar-utils';
@@ -102,8 +105,13 @@ export const CalendarYearsView = ({
   };
 
   return (
-    <>
+    <Box
+      css={{
+        minWidth: CALENDAR_SIZE_TO_WIDTH[calendarContext.size]
+      }}
+    >
       <CalendarHeader
+        calendarSize={calendarContext.size}
         css={{
           borderBottom: '1px solid $neutral100'
         }}
@@ -169,13 +177,8 @@ export const CalendarYearsView = ({
           />
         </Flex>
       </CalendarHeader>
-      <Flex
-        wrap="wrap"
-        justifyContent="center"
-        gap={calendarContext.size === 'lg' ? '$4' : '$6'}
-        css={{
-          padding: '$8'
-        }}
+      <MonthYearGridContainer
+        calendarSize={calendarContext.size}
         id={yearsContainerId}
       >
         {years.map((date, i) => (
@@ -186,7 +189,6 @@ export const CalendarYearsView = ({
             tabIndex={dateValue.year === date.year ? 0 : -1}
             disabled={state.isInvalid(date)}
             css={{
-              flexBasis: calendarContext.size === 'lg' ? 'calc(33.333% - $2)' : 'calc(33.333% - $3)',
               padding: '$6',
               height:
                 CALENDAR_SIZE_TO_YEAR_MONTH_BTN_HEIGHT[calendarContext.size]
@@ -204,7 +206,7 @@ export const CalendarYearsView = ({
             {date.year}
           </Button>
         ))}
-      </Flex>
-    </>
+      </MonthYearGridContainer>
+    </Box>
   );
 };

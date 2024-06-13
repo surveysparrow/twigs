@@ -12,6 +12,8 @@ import { config } from '../stitches.config';
 import { CalendarCell } from './calendar-cell';
 import { DaysContainer } from './calendar-day';
 import { Week, WeekContainer } from './calendar-week';
+import { GridContainer } from './calendar-commons';
+import { useCalendarContext } from './calendar-utils';
 
 type CalendarGridType = {
   state: RangeCalendarState | CalendarState;
@@ -26,6 +28,8 @@ export const CalendarGrid = ({
 }: CalendarGridType) => {
   const { locale } = useLocale();
   const id = useId();
+  const calendarContext = useCalendarContext();
+
   const startDate = state.visibleRange.start.add(offset);
   const endDate = endOfMonth(startDate);
   const { gridProps, headerProps, weekDays } = useCalendarGrid(
@@ -41,14 +45,12 @@ export const CalendarGrid = ({
   const weeksInMonth = getWeeksInMonth(state.visibleRange.start, locale);
 
   return (
-    <Box
+    <GridContainer
+      calendarSize={calendarContext.size}
       {...gridProps}
-      css={{
-        padding: '0 $8',
-        ...containerCSS
-      }}
+      css={containerCSS}
     >
-      <WeekContainer {...headerProps}>
+      <WeekContainer {...headerProps} calendarSize={calendarContext.size}>
         {weekDays.map((day, index) => (
           // eslint-disable-next-line react/no-array-index-key
           <Week key={`twigs-calendar-grid-${day}-${startDate}-${id}-${index}`}>
@@ -56,7 +58,10 @@ export const CalendarGrid = ({
           </Week>
         ))}
       </WeekContainer>
-      <Box>
+      <Box css={{
+        padding: '$8 0'
+      }}
+      >
         {[...new Array(weeksInMonth).keys()].map((weekIndex, index) => (
           // eslint-disable-next-line react/no-array-index-key
           <DaysContainer key={`weekIndex-${startDate}-${id}-${index}`}>
@@ -73,6 +78,6 @@ export const CalendarGrid = ({
           </DaysContainer>
         ))}
       </Box>
-    </Box>
+    </GridContainer>
   );
 };

@@ -6,6 +6,7 @@ import { Box } from '../box';
 import { IconButton } from '../button';
 import { Calendar } from '../calendar';
 import {
+  CALENDAR_SIZE_TO_BORDER_RADIUS,
   CALENDAR_SIZE_TO_WIDTH,
   CalendarControlProps
 } from '../calendar/calendar-utils';
@@ -117,7 +118,8 @@ export const DatePicker = ({
           css={{
             width: 'auto',
             padding: '0',
-            maxWidth: CALENDAR_SIZE_TO_WIDTH[props.size || 'lg']
+            maxWidth: CALENDAR_SIZE_TO_WIDTH[props.size || 'lg'],
+            borderRadius: CALENDAR_SIZE_TO_BORDER_RADIUS[props.size || 'lg']
           }}
         >
           <Calendar

@@ -14,12 +14,14 @@ import {
   AriaCalendarProps,
   DateValue,
   useCalendar,
+  useDateFormatter,
   useLocale
 } from 'react-aria';
 import { CalendarState, useCalendarState } from 'react-stately';
 import { Box } from '../box';
 import { Button } from '../button';
-import { Flex } from '../flex';
+import { Text } from '../text';
+import { FooterContainer, TimeAndZonePickerContainer } from './calendar-commons';
 import { CalendarGrid } from './calendar-grid';
 import {
   CalendarHeader,
@@ -29,7 +31,11 @@ import {
 import { CalendarMonthsView } from './calendar-months-view';
 import { CalendarTimePicker } from './calendar-time-picker';
 import { CalendarTimezonePicker } from './calendar-timezone-picker';
-import { CalendarContext, CalendarControlProps } from './calendar-utils';
+import {
+  CALENDAR_SIZE_TO_BORDER_RADIUS,
+  CalendarContext,
+  CalendarControlProps
+} from './calendar-utils';
 import { CalendarYearsView } from './calendar-years-view';
 
 export const CALENDAR_VIEW = {
@@ -58,6 +64,10 @@ export const Calendar = ({
     ...props,
     locale,
     createCalendar
+  });
+
+  const monthFormatter = useDateFormatter({
+    month: 'short'
   });
 
   useEffect(() => {
@@ -97,15 +107,14 @@ export const Calendar = ({
       <Box
         {...calendarProps}
         css={{
-          borderRadius: '$md',
-          border: '1px solid $black400',
-          paddingBottom: '$8'
+          borderRadius: CALENDAR_SIZE_TO_BORDER_RADIUS[size],
+          border: '1px solid $black400'
         }}
         ref={ref}
       >
         {currentCalendarView === CALENDAR_VIEW.GRID && (
           <>
-            <CalendarHeader>
+            <CalendarHeader calendarSize={size}>
               <CalendarNavigationButton
                 {...prevButtonProps}
                 icon={<ChevronLeftIcon />}
@@ -122,14 +131,7 @@ export const Calendar = ({
             </CalendarHeader>
             <CalendarGrid state={state} />
             {(props.showTimePicker || props.showTimezonePicker) && (
-              <Flex
-                alignItems="center"
-                justifyContent="center"
-                gap="$2"
-                css={{
-                  padding: '$8 0'
-                }}
-              >
+              <TimeAndZonePickerContainer calendarSize={size}>
                 {props.showTimePicker && (
                   <CalendarTimePicker
                     value={props.value}
@@ -144,7 +146,7 @@ export const Calendar = ({
                     calendarState={state}
                   />
                 )}
-              </Flex>
+              </TimeAndZonePickerContainer>
             )}
           </>
         )}
@@ -160,21 +162,25 @@ export const Calendar = ({
             setCurrentCalendarView={setCurrentCalendarView}
           />
         )}
-        {(showFooter && currentCalendarView === CALENDAR_VIEW.GRID) && (
+        {showFooter && currentCalendarView === CALENDAR_VIEW.GRID && (
           <>
             {props.renderFooter ? (
               props.renderFooter(state)
             ) : (
-              <Flex
-                alignItems="center"
-                justifyContent="flex-end"
-                css={{
-                  borderTop: '1px solid',
-                  borderColor: '$neutral200',
-                  padding: '$6 $8',
-                  paddingBottom: '0'
-                }}
-              >
+              <FooterContainer calendarSize={size}>
+                <Text
+                  weight="bold"
+                  css={{
+                    color: '$neutral700'
+                  }}
+                >
+                  {monthFormatter.format(state.value.toDate(state.timeZone))}
+                  {' '}
+                  {state.value.day.toString().padStart(2, '0')}
+                  ,
+                  {' '}
+                  {state.value.year.toString()}
+                </Text>
                 <Button
                   size={size}
                   color="primary"
@@ -184,7 +190,7 @@ export const Calendar = ({
                 >
                   {footerActionText}
                 </Button>
-              </Flex>
+              </FooterContainer>
             )}
           </>
         )}

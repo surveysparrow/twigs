@@ -38,7 +38,20 @@ export const CalendarHeader = styled(Flex, {
   alignItems: 'center',
   justifyContent: 'space-between',
   height: '$16',
-  padding: '$6 $8'
+
+  variants: {
+    calendarSize: {
+      lg: {
+        padding: '$6 $8'
+      },
+      md: {
+        padding: '$6'
+      }
+    }
+  },
+  defaultVariants: {
+    calendarSize: 'lg'
+  }
 });
 
 export const CalendarTitle = ({

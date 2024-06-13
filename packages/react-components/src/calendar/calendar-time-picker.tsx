@@ -171,7 +171,8 @@ export const CalendarTimePicker = ({
         css={{
           width: '200px',
           padding: 0,
-          border: '1px solid $neutral300'
+          border: '1px solid $neutral300',
+          borderRadius: '$xl'
         }}
       >
         <Flex
@@ -182,6 +183,7 @@ export const CalendarTimePicker = ({
           justifyContent="center"
         >
           <Text
+            weight="medium"
             css={{
               lineHeight: '$sm',
               color: '$neutral600'
@@ -392,21 +394,7 @@ const Column = styled(Flex, {
   flex: 1,
   height: '100%',
   overflow: 'auto',
-  scrollbarWidth: '3px',
-  '&::-webkit-scrollbar': {
-    width: '3px',
-    opacity: 0
-  },
-  '&:hover::-webkit-scrollbar': {
-    opacity: 1
-  },
-  '&::-webkit-scrollbar-track': {
-    backgroundColor: 'transparent'
-  },
-  '&:hover::-webkit-scrollbar-thumb': {
-    backgroundColorOpacity: ['$secondary500', 0.25],
-    borderRadius: '$2xl'
-  },
+  scrollbarWidth: 'thin',
   variants: {
     hasBorderRight: {
       true: {

@@ -4,13 +4,15 @@ import React, {
 } from 'react';
 import { useDateFormatter } from 'react-aria';
 import { CalendarState, RangeCalendarState } from 'react-stately';
+import { Box } from '../box';
 import { Button } from '../button';
-import { Flex } from '../flex';
 import { Text } from '../text';
 import { CALENDAR_VIEW } from './calendar';
+import { MonthYearGridContainer } from './calendar-commons';
 import { CalendarHeader } from './calendar-header';
 import {
   CALENDAR_SIZE_TO_FONT_SIZE,
+  CALENDAR_SIZE_TO_WIDTH,
   CALENDAR_SIZE_TO_YEAR_MONTH_BTN_HEIGHT,
   useCalendarContext
 } from './calendar-utils';
@@ -119,10 +121,16 @@ export const CalendarMonthsView = ({
   };
 
   return (
-    <>
+    <Box
+      css={{
+        minWidth: CALENDAR_SIZE_TO_WIDTH[calendarContext.size]
+      }}
+    >
       <CalendarHeader
+        calendarSize={calendarContext.size}
         css={{
-          borderBottom: '1px solid $neutral100'
+          borderBottom: '1px solid $neutral100',
+          justifyContent: 'center'
         }}
       >
         <Text
@@ -136,30 +144,25 @@ export const CalendarMonthsView = ({
           Choose Month
         </Text>
       </CalendarHeader>
-      <Flex
-        wrap="wrap"
-        justifyContent="center"
-        gap={calendarContext.size === 'lg' ? '$4' : '$6'}
-        css={{
-          padding: '$8'
-        }}
+      <MonthYearGridContainer
         ref={containerRef}
         id={monthsContainerId}
+        calendarSize={calendarContext.size}
       >
         {months.map((month, i) => (
           <Button
             key={month.label}
-            color={
-              dateValue.month === month.date.month ? 'secondary' : 'bright'
-            }
+            color={dateValue.month === month.date.month ? 'default' : 'bright'}
             data-monthId={month.date.month}
             tabIndex={dateValue.month === month.date.month ? 0 : -1}
             disabled={state.isInvalid(month.date)}
             css={{
-              flexBasis: calendarContext.size === 'lg' ? 'calc(33.333% - $2)' : 'calc(33.333% - $3)',
               padding: '$6',
               height:
-                CALENDAR_SIZE_TO_YEAR_MONTH_BTN_HEIGHT[calendarContext.size]
+                CALENDAR_SIZE_TO_YEAR_MONTH_BTN_HEIGHT[calendarContext.size],
+              ...(dateValue.month === month.date.month && {
+                color: '$secondary600'
+              })
             }}
             onKeyDown={(e) => handleKeyDown(e, i)}
             size={calendarContext.size}
@@ -174,7 +177,7 @@ export const CalendarMonthsView = ({
             {month.label}
           </Button>
         ))}
-      </Flex>
-    </>
+      </MonthYearGridContainer>
+    </Box>
   );
 };
