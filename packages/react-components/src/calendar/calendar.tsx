@@ -8,7 +8,7 @@ import {
   ChevronRightIcon
 } from '@sparrowengg/twigs-react-icons';
 import {
-  ReactNode, useEffect, useRef, useState
+  ReactNode, useEffect, useMemo, useRef, useState
 } from 'react';
 import {
   AriaCalendarProps,
@@ -101,11 +101,13 @@ export const Calendar = ({
     state
   );
 
+  const contextValue = useMemo(() => ({
+    size
+  }), [size]);
+
   return (
     <CalendarContext.Provider
-      value={{
-        size
-      }}
+      value={contextValue}
     >
       <Box
         {...calendarProps}
