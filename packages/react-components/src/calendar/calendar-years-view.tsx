@@ -184,14 +184,17 @@ export const CalendarYearsView = ({
         {years.map((date, i) => (
           <Button
             key={date.year}
-            color={dateValue.year === date.year ? 'secondary' : 'bright'}
+            color={dateValue.year === date.year ? 'default' : 'bright'}
             data-yearId={date.year}
             tabIndex={dateValue.year === date.year ? 0 : -1}
             disabled={state.isInvalid(date)}
             css={{
               padding: '$6',
               height:
-                CALENDAR_SIZE_TO_YEAR_MONTH_BTN_HEIGHT[calendarContext.size]
+                CALENDAR_SIZE_TO_YEAR_MONTH_BTN_HEIGHT[calendarContext.size],
+              ...(dateValue.year === date.year && {
+                color: '$secondary600'
+              })
             }}
             onKeyDown={(e) => handleKeyDown(e, i)}
             size={calendarContext.size}
