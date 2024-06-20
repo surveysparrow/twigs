@@ -3,6 +3,7 @@
 
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+require('dotenv/config');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -30,6 +31,10 @@ const config = {
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
+  },
+
+  customFields: {
+    playgroundURL: process.env.PLAYGROUND_URL || 'https://play.twigs.surveysparrow.com',
   },
 
   presets: [
