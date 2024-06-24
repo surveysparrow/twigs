@@ -8,15 +8,15 @@ const StyledText = styled('p', {
     size: {
       xxs: {
         fontSize: '$xxs',
-        ineHeight: '$xxs'
+        lineHeight: '$xxs'
       },
       xs: {
         fontSize: '$xs',
-        ineHeight: '$xs'
+        lineHeight: '$xs'
       },
       sm: {
         fontSize: '$sm',
-        ineHeight: '$sm'
+        lineHeight: '$sm'
       },
       md: {
         fontSize: '$md',
