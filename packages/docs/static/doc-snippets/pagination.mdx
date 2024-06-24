@@ -1,0 +1,21 @@
+---
+advancedSnippet: true
+---
+
+```jsx live play=pagination
+import { useState } from 'react';
+import { Pagination } from '@sparrowengg/twigs-react';
+
+export default function PaginationDemo () {
+  const [activePage, setActivePage] = useState(1);
+
+  return (
+    <Pagination
+      activePage={activePage}
+      itemsPerPage={10}
+      total={100}
+      onChange={(event, page) => setActivePage(page)}
+    />
+  );
+}
+```
