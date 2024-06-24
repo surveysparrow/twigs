@@ -1,6 +1,5 @@
 {
   "label": "Editor",
-  "position": 6,
   "className": "editor",
   "link": {
     "type": "generated-index"
