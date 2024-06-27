@@ -17,7 +17,7 @@ export const PlaygroundLink = ({
 
   const anchorTag = (
     <a
-      href={`${customFields.playgroundURL}/snippets?name=${name}`}
+      href={`${customFields.playgroundURL}/snippets/${name}`}
       target="_blank"
     >
       {title}

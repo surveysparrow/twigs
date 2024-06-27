@@ -67,7 +67,7 @@ function EditorWithHeader({ playLink }) {
         </Translate>
         {playLink && (
           <a
-            href={`${customFields.playgroundURL}/snippets?name=${playLink}`}
+            href={`${customFields.playgroundURL}/snippets/${playLink}`}
             target="_blank"
             className={styles.playgroundPlayLink}
           >
