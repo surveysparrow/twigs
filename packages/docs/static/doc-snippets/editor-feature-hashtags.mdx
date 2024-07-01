@@ -1,9 +1,12 @@
-# Hashtags
+---
+advancedSnippet: true
+---
 
-Hashtags plugin can be used to add hashtags dropdown to the editor. The dropdown will be opened when the user types `#` followed by a letter. The dropdown will show the hashtags that start with the letter that the user typed.
+```jsx
+import React, { useState } from 'react';
+import { Editor, RichEditor, EditorToolbar, HashTagPlugin, HashTagNode } from '@sparrowengg/twigs-react';
 
-```tsx live noInline play=editor-feature-hashtags
-const Demo = () => {
+export default function EditorFeatureHashtags() {
   const [hashtags, setHashtags] = useState([
     {
       value: "react",
@@ -85,6 +88,4 @@ const Demo = () => {
     </Editor>
   );
 };
-
-render(<Demo />);
 ```

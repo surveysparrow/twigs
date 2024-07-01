@@ -3,6 +3,9 @@ sidebar_label: Toolbar
 sidebar_position: 3
 ---
 
+import EditorToolbarSnippet from "@site/static/doc-snippets/editor-toolbar.mdx";
+import EditorToolbarCustomSnippet from "@site/static/doc-snippets/editor-toolbar-custom.mdx";
+
 # Toolbar
 
 The toolbar can be added by importing `EditorToolbar` component from `@sparrowengg/twigs-react` and adding it to the editor. By default the toolbar contains the following tools:
@@ -54,57 +57,8 @@ import {
 } from "@sparrowengg/twigs-react";
 ```
 
-```tsx live
-<Editor>
-  <EditorToolbar>
-    <Flex
-      justifyContent="space-between"
-      css={{
-        marginBottom: "$3",
-      }}
-    >
-      <Flex>
-        <BoldTool />
-        <ItalicTool />
-      </Flex>
-      <Button>Save</Button>
-    </Flex>
-  </EditorToolbar>
-  <RichEditor placeholder="Start typing" />
-</Editor>
-```
+<EditorToolbarSnippet />
 
 You can also add custom components to the default tools by passing a `renderButton` prop.
 
-```tsx live
-<Editor>
-  <EditorToolbar>
-    <Flex
-      justifyContent="space-between"
-      css={{
-        marginBottom: "$3",
-      }}
-    >
-      <Flex>
-        <BoldTool
-          renderButton={({ onChange, active, editor }) => {
-            return (
-              <Button
-                onClick={() => {
-                  onChange();
-                }}
-                color={active ? "primary" : "default"}
-              >
-                B
-              </Button>
-            );
-          }}
-        />
-        <ItalicTool />
-      </Flex>
-      <Button>Save</Button>
-    </Flex>
-  </EditorToolbar>
-  <RichEditor placeholder="Start typing" />
-</Editor>
-```
+<EditorToolbarCustomSnippet />
