@@ -1,0 +1,18 @@
+---
+advancedSnippet: true
+---
+
+```jsx
+import React from "react";
+import { TooltipProvider, Tooltip, Button } from "@sparrowengg/twigs-react";
+
+export default function TooltipDemo() {
+  return (
+    <TooltipProvider delayDuration={0}>
+      <Tooltip content="Tooltip content">
+        <Button> Hover me </Button>
+      </Tooltip>
+    </TooltipProvider>
+  );
+}
+```

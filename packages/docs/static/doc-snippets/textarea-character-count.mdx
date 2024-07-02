@@ -1,0 +1,21 @@
+---
+advancedSnippet: true
+---
+
+```jsx
+import React from "react";
+import { Textarea } from "@sparrowengg/twigs-react";
+
+export default function TextareaCharacterCount() {
+  const [value, setValue] = React.useState("");
+  return (
+    <Textarea
+      label="Description"
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+      showCount
+      maxLength={10}
+    />
+  );
+}
+```

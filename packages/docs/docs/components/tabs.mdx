@@ -1,3 +1,5 @@
+import TabsSnippet from "@site/static/doc-snippets/tabs.mdx";
+
 # Tabs
 
 FormLabel can be used for adding label for your input fields. Twigs also comes with a `FormInput` component, which wraps Label and Input in a single component. 
@@ -10,25 +12,8 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@sparrowengg/twigs-rea
 
 
 ### Usage 
-```jsx live
-<Tabs defaultValue="tab1">
-  <TabsList aria-label="tabs example">
-    <TabsTrigger value="tab1"> One </TabsTrigger>
-    <TabsTrigger value="tab2"> Two </TabsTrigger>
-    <TabsTrigger value="tab3"> Three </TabsTrigger>
-  </TabsList>
-  <TabsContent value="tab1">
-    Tab 1
-  </TabsContent>
-  <TabsContent value="tab2">
-    Tab 2
-  </TabsContent>
-  <TabsContent value="tab3">
-    Tab 3
-  </TabsContent>
-</Tabs>
-```
 
+<TabsSnippet />
 
 
 ### Props

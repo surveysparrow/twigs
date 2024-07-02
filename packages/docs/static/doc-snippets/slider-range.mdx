@@ -1,0 +1,34 @@
+---
+imports: import { Slider, SliderThumb } from "@sparrowengg/twigs-react";
+---
+
+```jsx live play=slider-range
+<Slider
+  defaultValue={[10, 20]}
+  min={0}
+  max={100}
+  labels={{
+    left: "Min",
+    right: "Max",
+  }}
+  labelPlacement="bottom"
+  components={{
+    ThumbLeft: () => (
+      <SliderThumb
+        css={{
+          borderRadius: 0,
+          backgroundColor: "$negative900",
+        }}
+      ></SliderThumb>
+    ),
+    ThumbRight: () => (
+      <SliderThumb
+        css={{
+          backgroundColor: "$black900",
+          borderRadius: 0,
+        }}
+      ></SliderThumb>
+    ),
+  }}
+/>
+```

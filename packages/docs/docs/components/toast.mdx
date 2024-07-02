@@ -1,9 +1,11 @@
+import { PlaygroundLink } from "@site/src/components/common/playground-link";
+
 # Toast
 
 ### Import
 
 ```jsx
-import { Toast } from "@sparrowengg/twigs-react";
+import { Toastr } from "@sparrowengg/twigs-react";
 ```
 
 ### Usage
@@ -27,6 +29,8 @@ function App() {
 
 Using `toast` hook you can trigger toast from anywhere in your application.
 
+<PlaygroundLink name="toast" />
+
 ```jsx
 <Button
   variant="outline"
@@ -47,6 +51,7 @@ Using `toast` hook you can trigger toast from anywhere in your application.
 ### Toast With Promise
 
 Using `toast.promise` you can show toast with promise.
+<PlaygroundLink name="toast-promise" />
 
 ```jsx
 <Button

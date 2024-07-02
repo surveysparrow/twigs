@@ -1,0 +1,23 @@
+---
+imports: import { Editor, EditorToolbar, Flex, BoldTool, ItalicTool, Button, RichEditor } from "@sparrowengg/twigs-react";
+---
+
+```tsx live play=editor-toolbar
+<Editor>
+  <EditorToolbar>
+    <Flex
+      justifyContent="space-between"
+      css={{
+        marginBottom: "$3",
+      }}
+    >
+      <Flex>
+        <BoldTool />
+        <ItalicTool />
+      </Flex>
+      <Button>Save</Button>
+    </Flex>
+  </EditorToolbar>
+  <RichEditor placeholder="Start typing" />
+</Editor>
+```

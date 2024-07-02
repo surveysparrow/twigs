@@ -1,3 +1,7 @@
+import TextareaSnippet from "@site/static/doc-snippets/textarea.mdx";
+import TextareaErrorSnippet from "@site/static/doc-snippets/textarea-error.mdx";
+import TextareaVariantsSnippet from "@site/static/doc-snippets/textarea-variants.mdx";
+
 # Textarea
 
 ### Import
@@ -7,17 +11,13 @@ import { Textarea } from "@sparrowengg/twigs-react";
 ```
 
 ### Usage 
-```jsx live
-<Textarea rows="8" placeholder="Enter your description" />
-```
+
+<TextareaSnippet />
 
 ### Textarea error
-```jsx live
-<Textarea
-  label="Enter your details"
-  error="Not a valid description"
-/>
-```
+
+<TextareaErrorSnippet />
+
 
 ### Character count
 
@@ -32,7 +32,7 @@ import { Textarea } from "@sparrowengg/twigs-react";
 
 Using `maxLength` and `showCount` props, you can show the character count of the Textarea field.
 
-```jsx live
+```jsx live play=textarea-character-count
 function CharacterCount() {
   const [value, setValue] = React.useState('');
   return (
@@ -48,12 +48,8 @@ function CharacterCount() {
 ```
 
 ### Variants
-```jsx live
-<Flex gap='12px' flexDirection='column'>
-  <Textarea rows="4" placeholder='Default textarea variant' variant="default" />
-  <Textarea rows="4" variant='filled' placeholder='Filled textarea variant' />
-</Flex>
-```
+
+<TextareaVariantsSnippet />
 
 ## Props
 

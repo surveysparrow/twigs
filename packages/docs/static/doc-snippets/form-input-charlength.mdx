@@ -1,0 +1,21 @@
+---
+advancedSnippet: true
+---
+
+```jsx form-input-charlength
+import React from 'react';
+import { FormInput } from '@sparrowengg/twigs-react';
+
+export default function CharacterCount() {
+  const [value, setValue] = React.useState('');
+  return (
+    <FormInput
+      label="Email Address"
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+      showCount
+      maxLength={10}
+    />
+  );
+}
+```

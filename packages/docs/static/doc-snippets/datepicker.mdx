@@ -1,0 +1,23 @@
+---
+advancedSnippet: true
+---
+
+```jsx
+import React from "react";
+import { DatePicker } from "@sparrowengg/twigs-react";
+import { parseDate } from "@internationalized/date";
+
+export default function DatePickerDemo() {
+
+  const [value, setValue] = React.useState(parseDate('2023-07-24'));
+  
+  return (
+    <DatePicker
+      value={value}
+      onChange={setValue}
+      footerAction={(_, setDropdownOpen) => setDropdownOpen(false)}
+      label="Enter date of birth"
+    />
+  );
+}
+```

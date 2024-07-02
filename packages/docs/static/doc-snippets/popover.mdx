@@ -1,0 +1,22 @@
+---
+advancedSnippet: true
+---
+
+```jsx live
+import { Popover, PopoverTrigger, PopoverArrow, PopoverClose, PopoverContent, Button } from "@sparrowengg/twigs-react";
+
+export default function PopoverDemo() {
+  return (
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button>Trigger the popover</Button>
+      </PopoverTrigger>
+      <PopoverContent>
+        Hello there
+        <PopoverClose>Close me</PopoverClose>
+        <PopoverArrow />
+      </PopoverContent>
+    </Popover>
+  );
+}
+```

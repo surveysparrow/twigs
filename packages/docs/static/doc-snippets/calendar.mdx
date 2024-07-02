@@ -1,0 +1,21 @@
+---
+advancedSnippet: true
+---
+
+```jsx
+import React from "react";
+import { Calendar } from "@sparrowengg/twigs-react";
+import { parseDate } from "@internationalized/date";
+
+export default function CalendarDemo() {
+  const [value, setValue] = React.useState(parseDate("2023-07-24"));
+
+  return (
+    <Calendar
+      onChange={setValue}
+      value={value}
+      minValue={parseDate("2023-07-20")}
+    />
+  );
+}
+```

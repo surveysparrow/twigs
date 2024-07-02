@@ -56,10 +56,15 @@ h3 {
 }
 
 .container {
-  max-width: 980px;
   margin: 0 auto;
   padding: 0 1rem;
   text-align: left;
+}
+
+@media screen and (max-width: 980px) {
+  .container {
+    max-width: 840px;
+  }
 }
 
 .hero__title {

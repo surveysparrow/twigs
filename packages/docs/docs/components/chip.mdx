@@ -1,31 +1,28 @@
+import ChipSnippet, {
+  frontMatter as ChipSnippetFrontMatter,
+} from "@site/static/doc-snippets/chip.mdx";
+import ChipClosableSnippet from "@site/static/doc-snippets/chip-closable.mdx";
+import CodeBlock from "@theme/CodeBlock";
+
 # Chip
 
 ### Import
 
-```jsx
-import { Chip } from "@sparrowengg/twigs-react";
-```
+<CodeBlock language="jsx">{ChipSnippetFrontMatter.imports}</CodeBlock>
 
-
-### Usage 
-```jsx live
-<Chip> Sparrow </Chip>
-```
+<ChipSnippet />
 
 ### Closable chip
-```jsx live
-<Chip 
-  closable 
-  onClose={() => alert("Chip closed")}
-> Sparrow </Chip>
-```
+
+<ChipClosableSnippet />
 
 ### Props
-| Property | Description                             | Type                                  | Default |
-|----------|-----------------------------------------|---------------------------------------|---------|
-| variant  | style of the chip                       | `outline` `solid`                         | solid   |
+
+| Property | Description                             | Type                                            | Default |
+| -------- | --------------------------------------- | ----------------------------------------------- | ------- |
+| variant  | style of the chip                       | `outline` `solid`                               | solid   |
 | color    |                                         | `default` `primary` `success` `error` `warning` | default |
-| size     |                                         | `xs` `sm` `md` `lg`                           | sm      |
-| rounded  | border radius of the chip               | `sm` `full`                               | sm      |
-| closable | add a close icon after the chip content | boolean                               | false   |
-| onClose  | Callback function for closable icon     | function                              |         |
+| size     |                                         | `xs` `sm` `md` `lg`                             | sm      |
+| rounded  | border radius of the chip               | `sm` `full`                                     | sm      |
+| closable | add a close icon after the chip content | boolean                                         | false   |
+| onClose  | Callback function for closable icon     | function                                        |         |

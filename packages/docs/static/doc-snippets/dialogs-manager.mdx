@@ -1,0 +1,80 @@
+---
+advancedSnippet: true
+---
+
+```jsx
+import {
+  DialogsManager,
+  Flex,
+  Button,
+  dialogs,
+} from "@sparrowengg/twigs-react";
+
+export default function DialogsMangerDemo() {
+  return (
+    <Flex gap="$4" flexDirection="column">
+      <div>
+        <Button
+          onClick={() => {
+            dialogs.open("confirm", {
+              title: "Are you sure you want to perform this action",
+              content: "You can perform this action again.",
+              labels: {
+                confirm: "Yes, I am sure",
+                cancel: "Cancel",
+              },
+              confirmButtonProps: {
+                color: "error",
+              },
+            });
+          }}
+        >
+          Open Confirm Dialog
+        </Button>
+      </div>
+      <div>
+        <Button
+          onClick={() => {
+            dialogs.open("alert", {
+              title: "This is an alert",
+              content: "It will have a single button to close the dialog.",
+              labels: {
+                action: "Close Alert",
+              },
+            });
+          }}
+        >
+          Open Alert Dialog
+        </Button>
+      </div>
+      <div>
+        <Button
+          onClick={() => {
+            const { close } = dialogs.open("modal", {
+              size: "sm",
+              children: (
+                <div>
+                  <h3>This is a custom modal</h3>
+                  <Button
+                    css={{
+                      marginTop: "$3",
+                    }}
+                    size="lg"
+                    color="error"
+                    onClick={() => close()}
+                  >
+                    Close
+                  </Button>
+                </div>
+              ),
+            });
+          }}
+        >
+          Open Modal Dialog
+        </Button>
+      </div>
+      <DialogsManager />
+    </Flex>
+  );
+}
+```

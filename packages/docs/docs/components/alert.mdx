@@ -1,23 +1,24 @@
+import AlertSnippet, {
+  frontMatter as AlertSnippetFrontMatter,
+} from "@site/static/doc-snippets/alert.mdx";
+import CodeBlock from "@theme/CodeBlock";
+
 # Alert
 
 ### Import
 
-```jsx
-import { Alert } from "@sparrowengg/twigs-react";
-```
+<CodeBlock language="jsx">{AlertSnippetFrontMatter.imports}</CodeBlock>
 
+### Usage
 
-### Usage 
-```jsx live
-<Alert status='info'> Password should have a minimum length of 6. </Alert>
-```
-
+<AlertSnippet />
 
 ### Props
-| Property | Description                                                 | Type                       | Default |
-|----------|-------------------------------------------------------------|----------------------------|---------|
+
+| Property | Description                                                 | Type                               | Default |
+| -------- | ----------------------------------------------------------- | ---------------------------------- | ------- |
 | status   | color of the alert                                          | `success` `error` `warning` `info` | info    |
-| size     |                                                             | `sm` `md`                      | sm      |
-| closable | show a close button on alert                                | boolean                    | false   |
-| onClose  | callback function to be called on clicking the close button |                            |         |
-| icon     | Change the default alert icon                               | JSX Element                |         |
+| size     |                                                             | `sm` `md`                          | sm      |
+| closable | show a close button on alert                                | boolean                            | false   |
+| onClose  | callback function to be called on clicking the close button |                                    |         |
+| icon     | Change the default alert icon                               | JSX Element                        |         |

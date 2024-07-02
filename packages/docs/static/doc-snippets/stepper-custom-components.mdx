@@ -1,0 +1,95 @@
+---
+advancedSnippet: true
+---
+
+```jsx live play=stepper-custom-components
+import React from "react";
+import { Stepper, StepperItem, Button, Flex } from "@sparrowengg/twigs-react";
+
+export default function StepperCustomComponents() {
+  const [activeStep, setActiveStep] = React.useState(0);
+
+  const nextStep = () =>
+    setActiveStep((current) => (current < 2 ? current + 1 : current));
+  const prevStep = () =>
+    setActiveStep((current) => (current > 0 ? current - 1 : current));
+
+  function renderCustomSeparator() {
+    return (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="1em"
+        viewBox="0 0 448 512"
+      >
+        <path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" />
+      </svg>
+    );
+  }
+
+  return (
+    <>
+      <Stepper
+        activeStep={activeStep}
+        components={{
+          Container: ({ children }) => (
+            <Flex
+              gap={6}
+              alignItems="center"
+              css={{
+                backgroundColor: "$highlight100",
+                padding: "$4",
+              }}
+            >
+              {children}
+            </Flex>
+          ),
+          Separator: () => renderCustomSeparator(),
+          Step: ({ children, active, completed, position }) => (
+            <Button
+              color={active ? "primary" : completed ? "ghost" : "default"}
+              onClick={() => setActiveStep(position)}
+            >
+              {children}
+            </Button>
+          ),
+        }}
+      >
+        <StepperItem
+          label="Step 1"
+          allowClick
+          css={{
+            padding: "$4",
+          }}
+        >
+          Steps 1
+        </StepperItem>
+        <StepperItem
+          label="Step 2"
+          css={{
+            padding: "$4",
+          }}
+        >
+          Step 2
+        </StepperItem>
+        <StepperItem
+          label="Step 3"
+          css={{
+            padding: "$4",
+          }}
+        >
+          Step 3
+        </StepperItem>
+      </Stepper>
+
+      <Flex alignItems="center" gap="$4">
+        <Button onClick={prevStep} variant="outline">
+          Previous
+        </Button>
+        <Button onClick={nextStep} variant="outline">
+          Next
+        </Button>
+      </Flex>
+    </>
+  );
+}
+```

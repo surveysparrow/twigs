@@ -1,0 +1,31 @@
+---
+advancedSnippet: true
+---
+
+```jsx live
+import React from "react";
+import {
+  Drawer,
+  DrawerHeader,
+  DrawerFooter,
+  DrawerBody,
+  Button,
+  Heading,
+} from "@sparrowengg/twigs-react";
+
+export default function DrawerDemo() {
+  const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
+  return (
+    <>
+      <Drawer isOpen={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
+        <DrawerHeader>
+          <Heading size="h4">Edit Profile</Heading>
+        </DrawerHeader>
+        <DrawerBody>Drawer content</DrawerBody>
+        <DrawerFooter>Drawer Footer</DrawerFooter>
+      </Drawer>
+      <Button onClick={() => setIsDrawerOpen(true)}>Open Drawer</Button>
+    </>
+  );
+}
+```

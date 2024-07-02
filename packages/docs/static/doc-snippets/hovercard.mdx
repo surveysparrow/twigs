@@ -1,0 +1,23 @@
+---
+displayImports: import { HoverCard, HoverCardTrigger, HoverCardContent } from "@sparrowengg/twigs-react";
+imports: import { HoverCard, HoverCardTrigger, HoverCardContent, Avatar, Heading, Text } from "@sparrowengg/twigs-react";
+---
+
+```jsx live play=hovercard
+<HoverCard>
+  <HoverCardTrigger>
+    <Avatar
+      size="3xl"
+      src="https://randomuser.me/api/portraits/men/35.jpg"
+    />
+  </HoverCardTrigger>
+  <HoverCardContent arrow>
+    <Avatar
+      size="xl"
+      src="https://randomuser.me/api/portraits/men/35.jpg"
+    />
+    <Heading size="h5">Jane Doe</Heading>
+    <Text>Head of design</Text>
+  </HoverCardContent>
+</HoverCard>
+```
