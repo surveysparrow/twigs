@@ -34,7 +34,7 @@ const config = {
   },
 
   customFields: {
-    playgroundURL: process.env.PLAYGROUND_URL || 'https://play.twigs.surveysparrow.com',
+    playgroundURL: stripTrailingSlash(process.env.PLAYGROUND_URL) || 'https://play.twigs.surveysparrow.com',
   },
 
   presets: [
@@ -181,6 +181,10 @@ const config = {
         playgroundPosition: 'top',
       }
     }),
+};
+
+function stripTrailingSlash(str) {
+  return str.endsWith("/") ? str.slice(0, -1) : str;
 };
 
 module.exports = config;
