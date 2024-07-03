@@ -1,4 +1,6 @@
-import { forwardRef, FunctionComponent, ReactElement } from 'react';
+import {
+  forwardRef, FunctionComponent, ReactElement, useId
+} from 'react';
 import { styled } from '../stitches.config';
 import { Box } from '../box';
 import { Flex } from '../flex';
@@ -11,7 +13,7 @@ export type FormInputProps = {
   label?: string,
   showCount?: boolean,
   error?: string,
-  requiredIndicator?:boolean | ReactElement
+  requiredIndicator?: boolean | ReactElement
 } & InputProps;
 
 export const StyledError = styled(FormHelperText, {
@@ -27,9 +29,11 @@ export const FormInput: FunctionComponent<FormInputProps> = forwardRef(({
   defaultValue,
   maxLength,
   requiredIndicator,
+  id,
   ...rest
 }: FormInputProps, ref) => {
   const mergedValue = value || defaultValue;
+  const inputId = id || `form-input-${useId()}`;
 
   return (
     <Box>
@@ -40,7 +44,16 @@ export const FormInput: FunctionComponent<FormInputProps> = forwardRef(({
       >
         {
           label
-            ? <FormLabel htmlFor={rest.id} requiredIndicator={requiredIndicator}>{label}</FormLabel>
+            ? (
+              <FormLabel
+                as="label"
+                htmlFor={inputId}
+                requiredIndicator={requiredIndicator}
+                id={`${inputId}-label`}
+              >
+                {label}
+              </FormLabel>
+            )
             : null
         }
         {
@@ -51,7 +64,7 @@ export const FormInput: FunctionComponent<FormInputProps> = forwardRef(({
                   color: '$neutral700',
                   ...(!label ? { marginLeft: 'auto' } : {})
                 }}
-                data-testid="input-char-count"
+                id={`${inputId}-char-count`}
               >
                 {mergedValue?.toString().length || 0}
                 {
@@ -69,6 +82,7 @@ export const FormInput: FunctionComponent<FormInputProps> = forwardRef(({
           maxLength
         })}
         ref={ref}
+        id={inputId}
         {...rest}
       />
       {
