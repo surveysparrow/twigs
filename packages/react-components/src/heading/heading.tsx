@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ComponentProps } from 'react';
+import React, { ComponentProps } from 'react';
 import { styled } from '../stitches.config';
 
 const StyledHeading = styled('h1', {
@@ -58,16 +58,16 @@ const StyledHeading = styled('h1', {
 
 export type HeadingProps = ComponentProps<typeof StyledHeading> &
   React.HTMLAttributes<HTMLParagraphElement> & {
-    as?: React.ElementType
- };
+    as?: React.ElementType;
+  };
 
-export const Heading: FunctionComponent<HeadingProps> = ({
-  children,
-  ...rest
-}: HeadingProps) => {
+export const Heading = React.forwardRef<
+  React.ElementRef<typeof StyledHeading>,
+  HeadingProps
+>(({ children, ...rest }, ref) => {
   return (
-    <StyledHeading data-testid="heading" {...rest}>
+    <StyledHeading data-testid="heading" {...rest} ref={ref}>
       {children}
     </StyledHeading>
   );
-};
+});

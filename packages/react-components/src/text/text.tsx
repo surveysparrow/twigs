@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ComponentProps } from 'react';
+import React, { ComponentProps } from 'react';
 import { styled } from '../stitches.config';
 
 const StyledText = styled('p', {
@@ -54,21 +54,22 @@ const StyledText = styled('p', {
 
 export type TextProps = ComponentProps<typeof StyledText> &
   React.HTMLAttributes<HTMLParagraphElement> & {
-    as?: React.ElementType
+    as?: React.ElementType;
   } & {
-    showLines?: number
+    showLines?: number;
   };
 
-export const Text: FunctionComponent<TextProps> = ({
-  children,
-  showLines,
-  css,
-  ...rest
-}: TextProps) => {
+export const Text = React.forwardRef<
+  React.ElementRef<typeof StyledText>,
+  TextProps
+>(({
+  children, showLines, css, ...rest
+}, ref) => {
   return (
     <StyledText
       data-testid="text"
       {...rest}
+      ref={ref}
       css={{
         ...css,
         ...(showLines && {
@@ -83,4 +84,4 @@ export const Text: FunctionComponent<TextProps> = ({
       {children}
     </StyledText>
   );
-};
+});
