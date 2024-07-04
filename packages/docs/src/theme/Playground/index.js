@@ -71,7 +71,7 @@ function EditorWithHeader({ playLink }) {
             target="_blank"
             className={styles.playgroundPlayLink}
           >
-            Try in playground
+            Open in playground
           </a>
         )}
       </Header>
