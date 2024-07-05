@@ -1,0 +1,25 @@
+---
+advancedSnippet: true
+---
+
+```jsx
+import React from 'react';
+import { CalendarRange } from '@sparrowengg/twigs-react'; 
+import { parseDate } from '@internationalized/date';
+
+export default function CalendarRangeDemo() {
+
+  const [value, setValue] = React.useState({
+    start: parseDate('2023-07-12'),
+    end: parseDate('2023-07-20')
+  });
+
+  return (
+    <CalendarRange
+      onChange={setValue}
+      value={value}
+      minValue={parseDate('2023-07-10')}
+    />
+  );
+}
+```

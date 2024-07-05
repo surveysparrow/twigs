@@ -1,44 +1,45 @@
+import FormInputSnippet, {
+  frontMatter as FormInputSnippetFrontMatter,
+} from "@site/static/doc-snippets/form-input.mdx";
+import FormInputErrorSnippet from "@site/static/doc-snippets/form-input-error.mdx";
+import { PlaygroundLink } from "@site/src/components/common/playground-link";
+import CodeBlock from "@theme/CodeBlock";
+
 # FormInput
 
 FormInput is a wrapper around Input and FormLabel component. It is used to create a form input field with label and error message.
 
 ### Import
 
-```jsx
-import { FormInput } from "@sparrowengg/twigs-react";
-```
+<CodeBlock language="jsx">{FormInputSnippetFrontMatter.imports}</CodeBlock>
 
-### Usage 
-```jsx live
-<FormInput
-  label="Email Address"
-/>
-```
+### Usage
+
+<FormInputSnippet />
 
 ### Input error
-```jsx live
-<FormInput
-  label="Email Address"
-  error="Not a valid email address"
-/>
-```
+
+<FormInputErrorSnippet />
 
 ### Character count
 
 ```jsx
 <FormInput
-  value={'john@example.com'}
+  value={"john@example.com"}
   // highlight-start
   showCount={true}
   maxLength={10}
   // highlight-end
 />
 ```
+
 Using `maxLength` and `showCount` props, you can show the character count of the input field.
+
+<PlaygroundLink name="form-input-charlength" />
 
 ```jsx live
 function CharacterCount() {
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = React.useState("");
   return (
     <FormInput
       label="Email Address"
@@ -52,17 +53,18 @@ function CharacterCount() {
 ```
 
 ### Props
-| Property       | Description                                | Type                    | Default |
-|----------------|--------------------------------------------|-------------------------|---------|
-| variant   | style of input                         | `default` `filled` | default |
-| onChange  |                                        | function        |         |
-| size      | input size                             | `sm` `md` `lg` `xl`     | md      |
-| disabled  |                                        | boolean         | false   |
-| leftIcon  | Append icon on the left side of input  | JSX Element     |         |
-| rightIcon | Append icon on the right side of input | JSX Element     |         |
-| css       | Custom styles for input                | object          |         |
-| error       | Message for input error                | string          |         |
-| maxLength       | Maximum allowed characters                | number          |         |
-| showCount       | Show remaining allowed character length                 | boolean          |         |
-| errorBorder       | Show error border when there is error              | boolean          |  false     |
-| requiredIndicator       | Show required indicator next to input label                | boolean, JSX Element        |         |
+
+| Property          | Description                                 | Type                 | Default |
+| ----------------- | ------------------------------------------- | -------------------- | ------- |
+| variant           | style of input                              | `default` `filled`   | default |
+| onChange          |                                             | function             |         |
+| size              | input size                                  | `sm` `md` `lg` `xl`  | md      |
+| disabled          |                                             | boolean              | false   |
+| leftIcon          | Append icon on the left side of input       | JSX Element          |         |
+| rightIcon         | Append icon on the right side of input      | JSX Element          |         |
+| css               | Custom styles for input                     | object               |         |
+| error             | Message for input error                     | string               |         |
+| maxLength         | Maximum allowed characters                  | number               |         |
+| showCount         | Show remaining allowed character length     | boolean              |         |
+| errorBorder       | Show error border when there is error       | boolean              | false   |
+| requiredIndicator | Show required indicator next to input label | boolean, JSX Element |         |
