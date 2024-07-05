@@ -2,7 +2,6 @@ import FormInputSnippet, {
   frontMatter as FormInputSnippetFrontMatter,
 } from "@site/static/doc-snippets/form-input.mdx";
 import FormInputErrorSnippet from "@site/static/doc-snippets/form-input-error.mdx";
-import { PlaygroundLink } from "@site/src/components/common/playground-link";
 import CodeBlock from "@theme/CodeBlock";
 
 # FormInput
@@ -35,9 +34,7 @@ FormInput is a wrapper around Input and FormLabel component. It is used to creat
 
 Using `maxLength` and `showCount` props, you can show the character count of the input field.
 
-<PlaygroundLink name="form-input-charlength" />
-
-```jsx live
+```jsx live play=form-input-charlength
 function CharacterCount() {
   const [value, setValue] = React.useState("");
   return (

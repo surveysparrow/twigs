@@ -1,0 +1,42 @@
+---
+imports: import { VStack, Box, Separator } from "@sparrowengg/twigs-react";
+---
+
+```jsx live play=stack-dividers
+<VStack
+  divider={
+    <Separator
+      orientation="horizontal"
+      css={{ backgroundColor: "$neutral300" }}
+    />
+  }
+>
+  <Box
+    css={{
+      width: 100,
+      height: 100,
+      backgroundColor: "yellow",
+    }}
+  >
+    1
+  </Box>
+  <Box
+    css={{
+      width: 100,
+      height: 100,
+      backgroundColor: "orange",
+    }}
+  >
+    2
+  </Box>
+  <Box
+    css={{
+      width: 100,
+      height: 100,
+      backgroundColor: "green",
+    }}
+  >
+    3
+  </Box>
+</VStack>
+```
