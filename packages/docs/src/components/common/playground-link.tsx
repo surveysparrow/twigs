@@ -30,10 +30,8 @@ export const PlaygroundLink = ({
         textAlign: 'right',
 
         '& a': {
-          letterSpacing: '0.08rem',
-          textTransform: 'uppercase',
           fontWeight: 'bold',
-          fontSize: '12px',
+          fontSize: '14px',
         }
       }}
     >
