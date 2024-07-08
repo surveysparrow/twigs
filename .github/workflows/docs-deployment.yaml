@@ -52,6 +52,8 @@ jobs:
 
       - name: Building Twigs Docs
         run: yarn build:docs
+        env:
+          PLAYGROUND_URL: ${{ vars.PLAYGROUND_URL }}
       
       - name: Upload Build to S3
         working-directory: ./packages/docs/
