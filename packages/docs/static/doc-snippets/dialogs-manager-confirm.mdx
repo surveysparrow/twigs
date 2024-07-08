@@ -1,0 +1,26 @@
+---
+imports:  import { Button, DialogsManager, dialogs } from "@sparrowengg/twigs-react";
+---
+
+```jsx live play=dialogs-manager-confirm
+<div>
+  <Button
+    onClick={() => {
+      dialogs.open("confirm", {
+        title: "Are you sure you want to perform this action",
+        content: "You can perform this action again.",
+        labels: {
+          confirm: "Yes, I am sure",
+          cancel: "Cancel",
+        },
+        confirmButtonProps: {
+          color: "error",
+        },
+      });
+    }}
+  >
+    Open Dialog
+  </Button>
+  <DialogsManager />
+</div>
+```

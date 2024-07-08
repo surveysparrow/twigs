@@ -54,11 +54,6 @@ const Stepper: FunctionComponent<StepperProps> = forwardRef(
 
       React.Children.toArray(children).forEach((_child, index) => {
         const child = _child as React.ReactElement;
-        if (child?.type !== StepperItem) {
-          // eslint-disable-next-line no-console
-          console.warn('Stepper only accepts StepperItem as children');
-          return;
-        }
         let id = (child.props.label || '').toLowerCase().replace(/\s/g, '-');
         if (ids.has(id)) {
           id = `${id}-${index}`;
