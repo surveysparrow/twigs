@@ -1,0 +1,21 @@
+---
+imports: import { Editor, EditorToolbar, RichEditor } from "@sparrowengg/twigs-react";
+---
+
+```jsx live play=editor-basic
+<Editor>
+  <EditorToolbar
+    tools={[
+      "format",
+      "bold",
+      "italic",
+      "underline",
+      "code",
+      "ordered-list",
+      "unordered-list",
+      "codeblock",
+    ]}
+  />
+  <RichEditor />
+</Editor>
+```

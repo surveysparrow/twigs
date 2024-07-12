@@ -1,66 +1,47 @@
+import AvatarSnippet, {
+  frontMatter as AvatarSnippetFrontMatter,
+} from "@site/static/doc-snippets/avatar.mdx";
+
+import AvatarBadgeSnippet from "@site/static/doc-snippets/avatar-badge.mdx";
+import AvatarGroupSnippet from "@site/static/doc-snippets/avatar-group.mdx";
+
+import CodeBlock from "@theme/CodeBlock";
+
 # Avatar
 
-FormHelperText can be used for providing additional context to your input fields. 
+FormHelperText can be used for providing additional context to your input fields.
 
 ### Import
 
-```jsx
-import { Avatar } from "@sparrowengg/twigs-react";
-```
+<CodeBlock language="jsx">{AvatarSnippetFrontMatter.imports}</CodeBlock>
 
+### Usage
 
-### Usage 
-```jsx live
-<Avatar
-  src="https://randomuser.me/api/portraits/men/35.jpg"
-  name="John Doe"
-  size="5xl"
-/>
-```
+<AvatarSnippet />
 
 ### Avatar Badge
-```jsx live
-<Avatar
-  src="https://randomuser.me/api/portraits/men/35.jpg"
-  name="John Doe"
-  size="xl"
->
-  <AvatarBadge />
-</Avatar>
-```
+
+<AvatarBadgeSnippet />
 
 ### Avatar Group
-```jsx live
-<AvatarGroup size="2xl">
-  <Avatar
-    src="https://randomuser.me/api/portraits/men/35.jpg"
-    name="John Doe"
-  />
-  <Avatar
-    src="https://randomuser.me/api/portraits/men/34.jpg"
-    name="Sam"
-  />
-  <Avatar
-    src="https://randomuser.me/api/portraits/men/32.jpg"
-    name="Adam"
-  />
-</AvatarGroup>
-```
+
+<AvatarGroupSnippet />
 
 ### Props
 
 #### Avatar
-| Property       | Description                                | Type                               | Default |
-|----------------|--------------------------------------------|------------------------------------|----------|
-| size           | size of avatar                             | `xs` `sm` `md` `lg` `xl` `2xl` `3xl` `4xl` `5xl`     | sm       |
-| src            | image URL                                  | string                             |          |
-| name           | name of the user                           | string                             |          |
-| rounded        | border radius                              | `xs` `sm` `md` `lg` `xl` `2xl` `3xl` `full`        | full     |
 
+| Property | Description      | Type                                             | Default |
+| -------- | ---------------- | ------------------------------------------------ | ------- |
+| size     | size of avatar   | `xs` `sm` `md` `lg` `xl` `2xl` `3xl` `4xl` `5xl` | sm      |
+| src      | image URL        | string                                           |         |
+| name     | name of the user | string                                           |         |
+| rounded  | border radius    | `xs` `sm` `md` `lg` `xl` `2xl` `3xl` `full`      | full    |
 
 #### AvatarGroup
-| Property       | Description                          | Type                             | Default |
-|----------------|--------------------------------------|----------------------------------|---------|
-| size           | size of avatar                       | `xs` `sm` `md` `lg` `xl` `2xl` `3xl` `4xl` `5xl`   | sm      |
-| rounded        | border radius                        | `xs` `sm` `md` `lg` `xl` `2xl` `3xl` `full`      | full    |
-| limitExceededLabel        | Custom label for limit exceeded count                      | string     |     |
+
+| Property           | Description                           | Type                                             | Default |
+| ------------------ | ------------------------------------- | ------------------------------------------------ | ------- |
+| size               | size of avatar                        | `xs` `sm` `md` `lg` `xl` `2xl` `3xl` `4xl` `5xl` | sm      |
+| rounded            | border radius                         | `xs` `sm` `md` `lg` `xl` `2xl` `3xl` `full`      | full    |
+| limitExceededLabel | Custom label for limit exceeded count | string                                           |         |

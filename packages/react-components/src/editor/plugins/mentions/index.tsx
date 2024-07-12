@@ -76,21 +76,23 @@ function checkForAtSignMentions(
   return null;
 }
 
-function getPossibleQueryMatch(text: string): MenuTextMatch | null {
-  return checkForAtSignMentions(text, 1);
+function getPossibleQueryMatch(text: string, len: number = 1): MenuTextMatch | null {
+  return checkForAtSignMentions(text, len);
 }
 
 export const MentionsPlugin = ({
   getResults,
+  triggerStringLength,
   ...props
 }: Partial<EditorLookupDropdownBaseProps> & {
   getResults: (text: string | null) => TypeaheadMenuData[] | Promise<TypeaheadMenuData[]>;
+  triggerStringLength?: number;
 }) => {
   return (
     <EditorLookupDropdownBase
       $createNode={({ data }) => $createMentionNode(`@${data.value}`)}
       getResults={getResults}
-      triggerFunction={(text) => getPossibleQueryMatch(text)}
+      triggerFunction={(text) => getPossibleQueryMatch(text, triggerStringLength)}
       {...props}
     />
   );

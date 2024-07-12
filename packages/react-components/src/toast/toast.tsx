@@ -221,10 +221,12 @@ const Icon = ({ children, variant = 'success', ...props }: IconProps) => {
   };
   return variant === 'loading' ? (
     children || (
-    <CircleLoader
-      size="xl"
-      color="accent"
-    />
+      <StyledIcon>
+        <CircleLoader
+          size="xl"
+          color="accent"
+        />
+      </StyledIcon>
     )
   ) : (
     <StyledIcon {...props}>

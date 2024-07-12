@@ -1,33 +1,19 @@
+import GridSnippet, {
+  frontMatter as GridSnippetFrontMatter,
+} from "@site/static/doc-snippets/grid.mdx";
+import CodeBlock from "@theme/CodeBlock";
+
 # Grid
 
 ### Import
 
-```jsx
-import { Grid } from "@sparrowengg/twigs-react";
-```
+<CodeBlock language="jsx">{GridSnippetFrontMatter.displayImports || GridSnippetFrontMatter.imports}</CodeBlock>
 
 `Grid` is a wrapper around HTML element div, but comes with grid properties.
 
 ### Usage 
-```jsx live
-<Grid>
-  <Box css={{
-    height: 100,
-    backgroundColor: '$primary500'
-  }}
-  />
-  <Box css={{
-    height: 100,
-    backgroundColor: '$warning500'
-  }}
-  />
-  <Box css={{
-    height: 100,
-    backgroundColor: '$accent100'
-  }}
-  />
-</Grid>
-```
+
+<GridSnippet />
 
 ### Props
 | Property        | Description | Type        | Default |

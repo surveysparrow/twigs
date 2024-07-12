@@ -1,0 +1,44 @@
+import StackSnippet from "@site/static/doc-snippets/stack.mdx";
+import StackResponsiveSnippet from "@site/static/doc-snippets/stack-responsive.mdx";
+import StackDividersSnippet from "@site/static/doc-snippets/stack-dividers.mdx";
+
+# Stack
+
+### Import
+
+```jsx
+import { Stack, HStack, VStack } from "@sparrowengg/twigs-react";
+```
+
+`Stack` is a layout component used to group elements together and apply a space between them.
+
+- VStack: used to stack elements in the vertical direction
+- HStack: used to stack elements in the horizontal direction
+- Stack: used to stack elements in the vertical or horizontal direction
+
+### Usage
+
+<StackSnippet />
+
+### Responsive Direction
+
+You can pass responsive values to the Stack component to change stack direction.
+
+<StackResponsiveSnippet />
+
+### Stack Dividers
+
+In some scenarios, you may want to add dividers between stacked elements. Pass the divider prop and set its value to any custom React element with a css prop to apply styles.
+
+<StackDividersSnippet />
+
+### Props
+
+| Property  | Description                                     | Type                                                   | Default  |
+| --------- | ----------------------------------------------- | ------------------------------------------------------ | -------- |
+| alignX    | Horizontal alignment of items                   | `left` \| `center` \| `right`                          | -        |
+| alignY    | Vertical alignment of items                     | `left` \| `center` \| `right`                          | -        |
+| wrap      | Whether items should wrap to new line           | `wrap` \| `nowrap` \| `wrap-reverse`                   | -        |
+| gap       | Gap between items                               | string                                                 | -        |
+| direction | The direction of the stack                      | `row` \| `column` \| `row-reverse` \| `column-reverse` | `column` |
+| divider   | Divider between items                           | ReactElement                                           | -        |

@@ -73,7 +73,7 @@ export const FormatTool = ({
   const { paragraph, ...headings } = formatMapping;
 
   if (renderButton) {
-    renderButton({ editor, active: format, onChange: formatText });
+    return renderButton({ editor, active: format, onChange: formatText });
   }
 
   return (

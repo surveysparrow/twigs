@@ -26,7 +26,8 @@ const StyledRadio = styled(RadioGroupPrimitive.Item, {
   '&:focus-visible': {
     borderColor: '$secondary500',
     $$shadowColor: '$colors$primary300',
-    boxShadow: 'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
+    boxShadow:
+      'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
   },
   '&[data-state="checked"]': {
     borderColor: '$secondary500'
@@ -84,11 +85,20 @@ type RadioRootProps = {
   children: React.ReactNode | React.ReactNode[];
 } & Omit<ComponentProps<typeof RadioGroupPrimitive.Root>, OmitProps>;
 
-export const RadioGroup: FunctionComponent<RadioRootProps> = React.forwardRef(({
-  onChange, disabled, required, value, children, ...rest
-}: RadioRootProps, ref) => {
+export const RadioGroup: FunctionComponent<RadioRootProps> = React.forwardRef<
+  React.ElementRef<typeof StyledRadioGroup>,
+  RadioRootProps
+>(({
+  onChange, disabled, required, children, ...rest
+}, ref) => {
   return (
-    <StyledRadioGroup ref={ref} onValueChange={onChange} disabled={disabled} required={required} {...rest}>
+    <StyledRadioGroup
+      ref={ref}
+      onValueChange={onChange}
+      disabled={disabled}
+      required={required}
+      {...rest}
+    >
       {children}
     </StyledRadioGroup>
   );
@@ -104,16 +114,32 @@ export type RadioProps = {
   required?: boolean;
 } & Omit<ComponentProps<typeof StyledRadio>, OmitProps>;
 
-export const Radio: FunctionComponent<RadioProps> = React.forwardRef(({
+export const Radio: FunctionComponent<RadioProps> = React.forwardRef<
+  React.ElementRef<typeof StyledRadio>,
+  RadioProps
+>(({
   disabled, value, required, children, id, ...rest
-}: RadioProps, ref) => {
-  const uniqueId = id || useId();
+}, ref) => {
+  const generatedId = useId();
+  const uniqueId = id || generatedId;
+
   return (
     <Flex alignItems="center">
-      <StyledRadio ref={ref} disabled={disabled} required={required} value={value} id={uniqueId} {...rest}>
+      <StyledRadio
+        ref={ref}
+        disabled={disabled}
+        required={required}
+        value={value}
+        id={uniqueId}
+        {...rest}
+      >
         <StyledIndicator />
       </StyledRadio>
-      {children && <StyledLabelContainer htmlFor={uniqueId}>{children}</StyledLabelContainer>}
+      {children && (
+        <StyledLabelContainer htmlFor={uniqueId}>
+          {children}
+        </StyledLabelContainer>
+      )}
     </Flex>
   );
 });

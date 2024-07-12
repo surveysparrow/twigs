@@ -1,20 +1,18 @@
+import RadioSnippet, {
+  frontMatter as RadioSnippetFrontMatter,
+} from "@site/static/doc-snippets/radio.mdx";
+import CodeBlock from "@theme/CodeBlock";
+
 # Radio
 
 ### Import
 
-```jsx
-import { Radio, RadioGroup } from "@sparrowengg/twigs-react";
-```
+<CodeBlock language="jsx">{RadioSnippetFrontMatter.imports}</CodeBlock>
 
 
 ### Usage 
-```jsx live
-<RadioGroup defaultValue="robin">
-  <Radio value="robin"> Robin </Radio>
-  <Radio value="falcon"> Falcon </Radio>
-  <Radio value="raven"> Raven </Radio>
-</RadioGroup>
-```
+
+<RadioSnippet />
 
 
 ### Props
