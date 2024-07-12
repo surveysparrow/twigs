@@ -32,6 +32,7 @@ import {
 } from './calendar-header';
 import { CalendarMonthsView } from './calendar-months-view';
 import {
+  CALENDAR_SIZE_TO_DAY_BTN_SIZE,
   CALENDAR_SIZE_TO_WIDTH,
   CalendarContext,
   CalendarControlProps,
@@ -245,8 +246,9 @@ const CalendarSingleSection = ({
               offset: calendarOffset
             })}
             containerCSS={{
-              maxWidth: 'max-content',
-              padding: '0 $8 $8 $8'
+              maxWidth: `calc(7 * ${CALENDAR_SIZE_TO_DAY_BTN_SIZE[calendarContext.size]})`,
+              boxSizing: 'content-box',
+              padding: '0 $8 0 $8'
             }}
           />
         </Flex>

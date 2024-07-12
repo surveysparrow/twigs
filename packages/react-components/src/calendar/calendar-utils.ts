@@ -45,3 +45,8 @@ export const CALENDAR_SIZE_TO_BORDER_RADIUS: Record<CalendarSize, CSS<typeof con
   lg: '$2xl',
   md: '$xl'
 };
+
+export const CALENDAR_SIZE_TO_DAY_BTN_SIZE: Record<CalendarSize, CSS<typeof config>['width']> = {
+  lg: '$10',
+  md: '$8'
+};
