@@ -23,7 +23,10 @@ export const LinkTool = ({ renderButton, buttonProps }: ToolbarButtonProps) => {
       /**
        * Handle link insertion when there is no selection (cursor blinking at a single point)
        */
-      if (selection?.isCollapsed() && $isRangeSelection(selection)) {
+      if (
+        selection === null
+        || ($isRangeSelection(selection) && selection?.isCollapsed())
+      ) {
         const newLinkNode = $createLinkNode('');
 
         // Completely empty string is not selectable, so we need to add a space.
@@ -31,7 +34,7 @@ export const LinkTool = ({ renderButton, buttonProps }: ToolbarButtonProps) => {
         newLinkNode.append($createTextNode(' '));
 
         $insertNodes([newLinkNode]);
-        newLinkNode.select();
+        newLinkNode.selectStart();
 
         editor.dispatchCommand(ADD_BLANK_LINK, undefined);
 
