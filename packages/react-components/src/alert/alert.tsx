@@ -30,7 +30,6 @@ const StyledAlert = styled(Box, {
   width: '100%',
   borderWidth: '$xs',
   borderStyle: 'solid',
-  borderRadius: '$lg',
   [`${StyledAlertDescription}`]: {
     flex: 1,
     minWidth: 0
@@ -39,28 +38,34 @@ const StyledAlert = styled(Box, {
     size: {
       sm: {
         padding: '$3 $4',
+        borderRadius: '$lg',
         [`${StyledAlertIcon}`]: {
           marginInlineEnd: '$2'
         },
         [`${StyledAlertDescription}`]: {
-          fontSize: '$sm'
+          fontSize: '$sm',
+          lineHeight: '$sm'
         },
         [`${StyledCloseButton}`]: {
           height: '$5',
-          width: '$5'
+          width: '$5',
+          marginInlineStart: '$2'
         }
       },
       md: {
         padding: '$8',
+        borderRadius: '$xl',
         [`${StyledAlertIcon}`]: {
           marginInlineEnd: '$4'
         },
         [`${StyledAlertDescription}`]: {
-          fontSize: '$md'
+          fontSize: '$md',
+          lineHeight: '$md'
         },
         [`${StyledCloseButton}`]: {
           height: '$6',
-          width: '$6'
+          width: '$6',
+          marginInlineStart: '$4'
         }
       }
     },
@@ -112,7 +117,7 @@ export type AlertProps = {
 export const Alert: FunctionComponent<AlertProps> = React.forwardRef(
   ({
     closable,
-    size,
+    size = 'sm',
     onClose,
     status = 'info',
     children,

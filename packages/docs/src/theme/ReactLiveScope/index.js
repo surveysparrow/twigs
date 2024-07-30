@@ -13,7 +13,8 @@ import {
   RichEditor,
   HashTagNode,
   HashTagPlugin,
-  EditorLookupDropdownBase
+  EditorLookupDropdownBase,
+  AlertDescription
 } from "@sparrowengg/twigs-react";
 
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
@@ -62,6 +63,7 @@ const ReactLiveScope = {
   DatePicker: twigsComponentLoader("DatePicker"),
   CalendarRange: twigsComponentLoader("CalendarRange"),
   Alert: twigsComponentLoader("Alert"),
+  AlertDescription: twigsComponentLoader("AlertDescription"),
   Toastr: twigsComponentLoader("Toastr"),
   toast: twigsComponentLoader("toast"),
   ToastAction: twigsComponentLoader("ToastAction"),
