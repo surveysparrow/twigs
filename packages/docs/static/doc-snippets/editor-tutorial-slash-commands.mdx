@@ -1,0 +1,108 @@
+---
+advancedSnippet: true
+---
+
+```jsx
+import React from 'react';
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { $getSelection, $isTextNode } from "lexical";
+import { Editor, RichEditor, EditorToolbar, EditorLookupDropdownBase } from '@sparrowengg/twigs-react';
+
+const PUNCTUATION =
+  "\\.,\\+\\*\\?\\$\\@\\|#{}\\(\\)\\^\\-\\[\\]\\\\/!%'\"~=<>_:;";
+
+const TRIGGERS = ["/"].join("");
+// Chars we expect to see in a slash command (non-space, non-punctuation).
+const VALID_CHARS = `[^${TRIGGERS}${PUNCTUATION}\\s]`;
+const LENGTH_LIMIT = 75;
+
+const SlashRegex = new RegExp(
+  "(^|\\s|\\()(" +
+    `[${TRIGGERS}]` +
+    `((?:${VALID_CHARS}){0,${LENGTH_LIMIT}})` +
+    ")$"
+);
+
+function checkForSlashes(text, minMatchLength) {
+  const match = SlashRegex.exec(text);
+  if (match !== null) {
+    // The strategy ignores leading whitespace but we need to know it's
+    // length to add it to the leadOffset
+    const maybeLeadingWhitespace = match[1];
+    const matchingString = match[3];
+    if (matchingString.length >= minMatchLength) {
+      return {
+        leadOffset: match.index + maybeLeadingWhitespace.length,
+        matchingString,
+        replaceableString: match[2],
+      };
+    }
+  }
+
+  return null;
+}
+
+function getPossibleQueryMatch(text) {
+  return checkForSlashes(text, 0);
+}
+
+const SlashesPlugin = () => {
+  const [editor] = useLexicalComposerContext();
+
+  const commands = [
+    { label: "Show alert", value: "show-alert" },
+    { label: "Show prompt", value: "show-prompt" },
+    { label: "Show confirm", value: "show-confirm" },
+  ];
+
+  return (
+    <EditorLookupDropdownBase
+      getResults={(searchString) => {
+        return commands.filter((command) =>
+          command.label
+            .toLowerCase()
+            .includes((searchString || "").toLowerCase())
+        );
+      }}
+      triggerFunction={(text) => getPossibleQueryMatch(text)}
+      onMenuItemSelect={(item, closeMenu) => {
+        let promptValue = "";
+        // Perform different action based on the selected command
+        if (item.data.value === "show-alert") {
+          alert("Alert!");
+        } else if (item.data.value === "show-prompt") {
+          promptValue = prompt("Prompt!");
+        } else if (item.data.value === "show-confirm") {
+          confirm("Confirm!");
+        }
+        // You can also make changes to the editor content based on a command
+        // This can also include inserting custom nodes, such as MentionNode
+        editor.update(() => {
+          const selection = $getSelection();
+          const nodes = selection.getNodes();
+          if (nodes.length > 0 && nodes[0] && $isTextNode(nodes[0])) {
+            if (promptValue) {
+              nodes[0].setTextContent(promptValue);
+            } else {
+              nodes[0].setTextContent("");
+            }
+          }
+        });
+        closeMenu();
+        // Returning true means that we don't want to perform the default action after menu item selection
+        return true;
+      }}
+    />
+  );
+};
+
+export default function EditorSlashesDemo() {
+  return (
+    <Editor>
+      <EditorToolbar />
+      <RichEditor />
+      <SlashesPlugin />
+    </Editor>
+  );
+};
+```

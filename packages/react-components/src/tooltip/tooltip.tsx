@@ -104,13 +104,15 @@ export const Tooltip = ({
       onOpenChange={onOpenChange}
     >
       <TooltipPrimitive.Trigger asChild>{children}</TooltipPrimitive.Trigger>
-      {content && (
+      {content ? (
         <TooltipPrimitive.Portal>
           <StyledContent side={side} align={align} size={size} {...props}>
             {content}
             <StyledArrow size={size} />
           </StyledContent>
         </TooltipPrimitive.Portal>
+      ) : (
+        <TooltipPrimitive.Content />
       )}
     </TooltipPrimitive.Root>
   );

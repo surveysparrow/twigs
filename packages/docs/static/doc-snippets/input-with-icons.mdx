@@ -1,0 +1,15 @@
+---
+imports: import { Input, Flex } from "@sparrowengg/twigs-react"; import { SearchIcon, UserIcon } from "@sparrowengg/twigs-react-icons";
+---
+
+```jsx live play=input-with-icons
+<Flex gap="4px" flexDirection="row">
+  <Input leftIcon={<SearchIcon />} placeholder="Input with left icon" />
+  <Input rightIcon={<SearchIcon />} placeholder="Input with right icon" />
+  <Input
+    leftIcon={<UserIcon />}
+    rightIcon={<SearchIcon />}
+    placeholder="Input with left and right icon"
+  />
+</Flex>
+```

@@ -24,7 +24,7 @@ export const LinkTool = ({ renderButton, buttonProps }: ToolbarButtonProps) => {
        * Handle link insertion when there is no selection (cursor blinking at a single point)
        */
       if (selection?.isCollapsed() && $isRangeSelection(selection)) {
-        const newLinkNode = $createLinkNode('https://');
+        const newLinkNode = $createLinkNode('');
 
         // Completely empty string is not selectable, so we need to add a space.
         // This space will be trimmed in the editor modal
@@ -39,7 +39,7 @@ export const LinkTool = ({ renderButton, buttonProps }: ToolbarButtonProps) => {
       }
 
       if (!active) {
-        editor.dispatchCommand(TOGGLE_LINK_COMMAND, 'https://');
+        editor.dispatchCommand(TOGGLE_LINK_COMMAND, '');
       } else {
         editor.dispatchCommand(TOGGLE_LINK_COMMAND, null);
       }

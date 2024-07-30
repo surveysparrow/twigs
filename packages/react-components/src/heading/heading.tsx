@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ComponentProps } from 'react';
+import React, { ComponentProps } from 'react';
 import { styled } from '../stitches.config';
 
 const StyledHeading = styled('h1', {
@@ -21,15 +21,18 @@ const StyledHeading = styled('h1', {
       },
       h3: {
         fontSize: '$3xl',
-        lineHeight: '$2xl'
+        lineHeight: '$2xl',
+        letterSpacing: '-0.02em'
       },
       h2: {
         fontSize: '$4xl',
-        lineHeight: '$3xl'
+        lineHeight: '$3xl',
+        letterSpacing: '-0.005em'
       },
       h1: {
         fontSize: '$5xl',
-        lineHeight: '$4xl'
+        lineHeight: '$4xl',
+        letterSpacing: '-0.01em'
       }
     },
     weight: {
@@ -55,16 +58,16 @@ const StyledHeading = styled('h1', {
 
 export type HeadingProps = ComponentProps<typeof StyledHeading> &
   React.HTMLAttributes<HTMLParagraphElement> & {
-    as?: React.ElementType
- };
+    as?: React.ElementType;
+  };
 
-export const Heading: FunctionComponent<HeadingProps> = ({
-  children,
-  ...rest
-}: HeadingProps) => {
+export const Heading = React.forwardRef<
+  React.ElementRef<typeof StyledHeading>,
+  HeadingProps
+>(({ children, ...rest }, ref) => {
   return (
-    <StyledHeading data-testid="heading" {...rest}>
+    <StyledHeading data-testid="heading" {...rest} ref={ref}>
       {children}
     </StyledHeading>
   );
-};
+});

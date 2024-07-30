@@ -16,5 +16,20 @@ export const WeekContainer = styled(Box, {
   alignItems: 'center',
   width: '100%',
   borderBottom: '1px solid $neutral100',
-  height: '$11'
+  height: '$11',
+
+  variants: {
+    calendarSize: {
+      lg: {
+        height: '$11'
+      },
+      md: {
+        height: '$8'
+      }
+    }
+  },
+
+  defaultVariants: {
+    calendarSize: 'lg'
+  }
 });

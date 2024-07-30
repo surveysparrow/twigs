@@ -1,0 +1,55 @@
+---
+advancedSnippet: true
+---
+
+```jsx
+import React from "react";
+import { Toastr, toast, Button } from "@sparrowengg/twigs-react";
+
+export default function ToastExample() {
+  const randomPromise = async () => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (Math.random() > 0.5) {
+          resolve({
+            title: "Record created successfully",
+            description: "Record has been created successfully.",
+          });
+        } else {
+          reject({
+            title: "Record creation failed",
+          });
+        }
+      }, 2000);
+    });
+  };
+
+  return (
+    <>
+      <Toastr duration={10000} />
+      <Button
+        variant="outline"
+        onClick={() => {
+          toast.promise(randomPromise(), {
+            loading: {
+              title: "Creating, please wait...",
+              variant: "loading",
+            },
+            success: (p) => ({
+              title: `${p.title}`,
+              variant: "success",
+              description: `${p.description}`,
+            }),
+            error: (p) => ({
+              title: `Error while creating record: ${p.title}`,
+              variant: "error",
+            }),
+          });
+        }}
+      >
+        Show Toast
+      </Button>
+    </>
+  );
+}
+```

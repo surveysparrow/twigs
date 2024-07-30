@@ -1,3 +1,7 @@
+import SliderSnippet from "@site/static/doc-snippets/slider.mdx";
+import SliderRangeSnippet from "@site/static/doc-snippets/slider-range.mdx";
+import SliderCustomizingSnippet from "@site/static/doc-snippets/slider-customizing.mdx";
+
 # Slider
 
 ### Import
@@ -8,85 +12,19 @@ import { Slider } from "@sparrowengg/twigs-react";
 
 ### Usage
 
-```jsx live
-<Slider
-  defaultValue={[0]}
-  min={0}
-  max={100}
-  labels={{
-    left: "Min",
-    right: "Max",
-  }}
-  labelPlacement="bottom"
-/>
-```
+<SliderSnippet />
 
 #### Range slider
 
 The slider can be made a range slider by passing a second value to the `defaultValue` or `value` array.
 
-```jsx live
-<Slider
-  defaultValue={[10, 20]}
-  min={0}
-  max={100}
-  labels={{
-    left: "Min",
-    right: "Max",
-  }}
-  labelPlacement="bottom"
-  components={{
-    ThumbLeft: () => (
-      <SliderThumb
-        css={{
-          borderRadius: 0,
-          backgroundColor: "$negative900",
-        }}
-      ></SliderThumb>
-    ),
-    ThumbRight: () => (
-      <SliderThumb
-        css={{
-          backgroundColor: "$black900",
-          borderRadius: 0,
-        }}
-      ></SliderThumb>
-    ),
-  }}
-/>
-```
+<SliderRangeSnippet />
 
 ### Customizing components
 
 `Track`, `Range` and `Thumb` can be customized by using the `components` property. Make sure the custom component is wrapped by the corresponding default component as shown below
 
-```tsx live
-<Slider
-  components={{
-    Thumb: () => (
-      <SliderThumb
-        css={{
-          backgroundColor: "$negative900",
-          borderRadius: 0,
-        }}
-      />
-    ),
-    Track: ({ children }) => (
-      <SliderTrack>
-        <Box
-          css={{
-            width: "100%",
-            height: "100%",
-            background: "linear-gradient(to right, red, blue)",
-            position: "absolute",
-          }}
-        />
-        {children}
-      </SliderTrack>
-    ),
-  }}
-/>
-```
+<SliderCustomizingSnippet />
 
 The two thumbs can be customized by passing components to `ThumbLeft` and `ThumbRight` in `components` prop.
 
