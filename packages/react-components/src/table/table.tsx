@@ -26,8 +26,12 @@ export const Tr = styled('tr', {
   '&:hover': {
     backgroundColorOpacity: ['$secondary500', 0.04]
   },
-  '&:active': {
-    backgroundColorOpacity: ['$primary500', 0.06]
+  variants: {
+    active: {
+      true: {
+        backgroundColorOpacity: ['$primary500', 0.06]
+      }
+    }
   }
 });
 
