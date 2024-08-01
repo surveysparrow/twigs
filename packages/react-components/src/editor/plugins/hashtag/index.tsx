@@ -1,10 +1,11 @@
 import { MenuTextMatch } from '@lexical/react/LexicalTypeaheadMenuPlugin';
+import { useNodeFocusListener } from '@src/editor/utils/use-node-focus';
 import {
   EditorLookupDropdownBase,
   EditorLookupDropdownBaseProps,
   TypeaheadMenuData
 } from '../../components';
-import { $createHashTagNode } from '../../nodes/hashtag';
+import { $createHashTagNode, HashTagNode } from '../../nodes/hashtag';
 
 const PUNCTUATION = '\\.,\\+\\*\\?\\$\\@\\|#{}\\(\\)\\^\\-\\[\\]\\\\/!%\'"~=<>_:;';
 const NAME = `\\b[A-Z][^\\s${PUNCTUATION}]`;
@@ -66,6 +67,8 @@ export const HashTagPlugin = ({
   getResults: (text: string | null) => TypeaheadMenuData[] | Promise<TypeaheadMenuData[]>;
   triggerStringLength?: number;
 }) => {
+  useNodeFocusListener(HashTagNode);
+
   return (
     <EditorLookupDropdownBase
       $createNode={({ data }) => $createHashTagNode(`#${data.value}`)}
