@@ -126,7 +126,7 @@ export const Slider = ({ labelPlacement = 'top', ...props }: SliderProps) => {
         <RangeComp />
       </TrackComp>
     );
-  }, [props.components]);
+  }, [props.components?.Range, props.components?.Track]);
 
   const RenderThumb = useCallback(() => {
     const val = props.value ?? props.defaultValue;
@@ -144,7 +144,7 @@ export const Slider = ({ labelPlacement = 'top', ...props }: SliderProps) => {
 
     const Comp = props.components?.Thumb ?? StyledThumb;
     return <Comp />;
-  }, [props.components]);
+  }, [props.components?.ThumbLeft, props.components?.ThumbRight, props.components?.Thumb]);
 
   const RenderLabel = useCallback(
     (labelProps: FlexProps) => {
@@ -157,7 +157,7 @@ export const Slider = ({ labelPlacement = 'top', ...props }: SliderProps) => {
         </Flex>
       );
     },
-    [props.labels]
+    [props.labels?.left, props.labels?.right]
   );
 
   return (
