@@ -1,0 +1,11 @@
+---
+imports: import { Editor, EditorToolbar, RichEditor, DialogLinkEditor, ConvertSelectionToLinkOnPastePlugin } from "@sparrowengg/twigs-react";
+---
+
+```jsx live play=editor-feature-link
+<Editor>
+  <EditorToolbar />
+  <RichEditor placeholder="Add editable links" />
+  <DialogLinkEditor />
+  <ConvertSelectionToLinkOnPastePlugin />
+</Editor>

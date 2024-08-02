@@ -13,7 +13,9 @@ import { HeadingNode } from '@lexical/rich-text';
 
 import { CodeNode } from '@lexical/code';
 import { EditorState, LexicalEditor } from 'lexical';
-import { ReactNode, RefObject, useMemo } from 'react';
+import {
+  Fragment, ReactNode, RefObject, useMemo
+} from 'react';
 import {
   AutoLinkPlugin,
   DataManagementPlugin,
@@ -56,6 +58,7 @@ const initialConfig: InitialConfigType = {
     }
   },
   onError: (err) => {
+    // eslint-disable-next-line no-console
     console.error(err);
   }
 };
@@ -151,7 +154,7 @@ export const Editor = ({
               return <ToolComponent key={comp.id} />;
             }
 
-            return <></>;
+            return <Fragment key={comp.id} />;
           })}
         </>
         <>{children}</>

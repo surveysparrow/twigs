@@ -6,20 +6,17 @@ export const Tbody = styled('tbody', {});
 
 export const Thead = styled('thead', {
   padding: '$6',
-  background: '$neutral100',
-  '& > tr': {
-    '&:hover': {
-      background: '$neutral100'
-    }
-  }
+  background: '$white900'
 });
 
 export const Th = styled('th', {
   padding: '$6',
   margin: '0',
-  borderRight: '$borderWidths$xs solid $colors$neutral200',
+  borderBottom: '$borderWidths$xs solid $colors$neutral200',
   fontWeight: '$5',
   fontSize: '$sm',
+  lineHeight: '$sm',
+  textAlign: 'left',
   '&:last-child': {
     borderRight: 'none'
   }
@@ -27,18 +24,26 @@ export const Th = styled('th', {
 
 export const Tr = styled('tr', {
   '&:hover': {
-    backgroundColorOpacity: ['$primary500', 0.04]
+    backgroundColorOpacity: ['$secondary500', 0.04]
+  },
+  variants: {
+    active: {
+      true: {
+        backgroundColorOpacity: ['$primary500', 0.06]
+      }
+    }
   }
 });
 
 export const Td = styled('td', {
   padding: '$6',
   margin: '0',
-  borderRight: '$borderWidths$xs solid $colors$neutral200',
+  borderBottom: '$borderWidths$xs solid $colors$neutral100',
   fontWeight: '$4',
   color: '$neutral800',
   fontSize: '$sm',
   verticalAlign: 'middle',
+  cursor: 'pointer',
   '&:last-child': {
     borderRight: 'none'
   }

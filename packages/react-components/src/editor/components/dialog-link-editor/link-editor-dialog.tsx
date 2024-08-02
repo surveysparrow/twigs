@@ -78,7 +78,8 @@ export const LinkEditorDialog = ({
     >
       <DialogContent
         css={{
-          padding: '0'
+          padding: '0',
+          borderRadius: '2xl'
         }}
       >
         <DialogTitle
@@ -110,6 +111,7 @@ export const LinkEditorDialog = ({
         >
           <FormInput
             label={textLabel}
+            size="lg"
             onChange={(event) => {
               setEditedLinkText(event.target.value);
             }}
@@ -133,6 +135,7 @@ export const LinkEditorDialog = ({
           >
             <FormInput
               label={urlLabel}
+              size="lg"
               onChange={(event) => {
                 setEditedLinkUrl(event.target.value);
               }}
