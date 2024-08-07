@@ -16,7 +16,7 @@ const StyledInput = styled('input', {
     background: '$white900',
     borderWidth: '$xs',
     borderStyle: 'solid',
-    borderColorOpacity: ['$secondary500', 0.4]
+    borderColor: '$neutral400'
   },
   '&:focus, &:active:not(:disabled)': {
     $$shadowColor: '$colors$primary300',
@@ -39,7 +39,7 @@ const StyledInput = styled('input', {
     size: {
       xl: {
         height: '$12',
-        borderRadius: '$lg',
+        borderRadius: '$xl',
         padding: '$6',
         fontSize: '$md'
       },
@@ -51,14 +51,14 @@ const StyledInput = styled('input', {
       },
       md: {
         height: '$8',
-        borderRadius: '$md',
+        borderRadius: '$lg',
         padding: '$3 $4',
         fontSize: '$sm'
       },
       sm: {
         height: '$6',
-        borderRadius: '$md',
-        padding: '$3 $4',
+        borderRadius: '$sm',
+        padding: '$2 $4',
         fontSize: '$xs'
       }
     },
@@ -67,15 +67,15 @@ const StyledInput = styled('input', {
         background: '$white900',
         borderWidth: '$xs',
         borderStyle: 'solid',
-        borderColor: '$neutral200',
+        borderColor: '$black300',
         '&:hover:not(:disabled), &:focus, &:active:not(:disabled)': {
           borderWidth: '$xs',
           borderStyle: 'solid',
-          borderColor: '$neutral300'
+          borderColor: '$neutral400'
         }
       },
       filled: {
-        background: '$black50'
+        backgroundColorOpacity: ['$secondary500', 0.06]
       }
     }
   },
