@@ -1,12 +1,17 @@
-import React, {
-  ComponentProps, ReactElement, forwardRef, FunctionComponent
+import {
+  ComponentProps,
+  FunctionComponent,
+  ReactElement,
+  ReactNode,
+  forwardRef,
+  useId
 } from 'react';
-import { styled } from '../stitches.config';
-import { StyledError, errorBorderStyles } from '../input';
 import { Box } from '../box';
 import { Flex } from '../flex';
 import { FormLabel } from '../form-label';
-import { Text } from '../text/text';
+import { FormLabelCounter } from '../form-label/form-label-counter';
+import { StyledError, errorBorderStyles } from '../input';
+import { styled } from '../stitches.config';
 
 const StyledTextarea = styled('textarea', {
   width: '100%',
@@ -59,6 +64,24 @@ const StyledTextarea = styled('textarea', {
         resize: 'none'
       }
     },
+    size: {
+      sm: {
+        padding: '$2 $4',
+        borderRadius: '$sm'
+      },
+      md: {
+        padding: '$3 $4',
+        borderRadius: '$lg'
+      },
+      lg: {
+        padding: '$4 $6',
+        borderRadius: '$lg'
+      },
+      xl: {
+        padding: '$6',
+        borderRadius: '$xl'
+      }
+    },
     variant: {
       default: {
         background: '$white900',
@@ -72,7 +95,7 @@ const StyledTextarea = styled('textarea', {
         }
       },
       filled: {
-        background: '$black50'
+        backgroundColorOpacity: ['$secondary500', 0.06]
       }
     }
   },
@@ -87,82 +110,85 @@ interface TextareaBaseProps {
   showCount?: boolean;
   error?: string;
   requiredIndicator?: boolean | ReactElement;
+  counterSideElement?: ReactNode;
   errorBorder?: boolean;
+  info?: string | ReactNode;
 }
 
 export type TextareaProps = TextareaBaseProps &
   ComponentProps<typeof StyledTextarea>;
 
-export const Textarea:FunctionComponent<TextareaProps> = forwardRef(({
-  resize = 'both',
-  variant = 'default',
-  errorBorder = false,
-  label,
-  showCount,
-  error,
-  maxLength,
-  requiredIndicator,
-  css,
-  value,
-  defaultValue,
-  rows,
-  ...rest
-}: TextareaProps, ref) => {
-  const mergedValue = value || defaultValue;
-  return (
-    <Box>
-      <Flex
-        alignItems="center"
-        justifyContent="space-between"
-        css={{ marginBottom: '$2' }}
-      >
-        {
-          label
-            ? <FormLabel htmlFor={rest.id} requiredIndicator={requiredIndicator}>{label}</FormLabel>
-            : null
-        }
-        {
-          showCount
-            ? (
-              <Text
-                css={{
-                  color: '$neutral700',
-                  ...(!label ? { marginLeft: 'auto' } : {})
-                }}
-                data-testid="textarea-char-count"
-              >
-                {mergedValue?.toString().length || 0}
-                {
-                  maxLength ? `/${maxLength}` : null
-                }
-              </Text>
-            )
-            : null
-        }
-      </Flex>
-      <StyledTextarea
-        value={value}
-        defaultValue={defaultValue}
-        rows={rows}
-        css={{
-          ...(errorBorder && {
-            ...errorBorderStyles
-          }),
-          ...css
-        }}
-        {...(maxLength && {
-          maxLength
-        })}
-        resize={resize}
-        ref={ref}
-        variant={variant}
-        {...rest}
-      />
-      {
-        error
-          ? <StyledError size="xs">{error}</StyledError>
-          : null
-      }
-    </Box>
-  );
-});
+export const Textarea: FunctionComponent<TextareaProps> = forwardRef(
+  (
+    {
+      resize = 'both',
+      variant = 'default',
+      errorBorder = false,
+      label,
+      showCount,
+      error,
+      maxLength,
+      requiredIndicator,
+      counterSideElement,
+      css,
+      value,
+      defaultValue,
+      size,
+      info,
+      rows,
+      id,
+      ...rest
+    }: TextareaProps,
+    ref
+  ) => {
+    const inputId = id || `form-input-${useId()}`;
+    const mergedValue = value || defaultValue;
+    return (
+      <Box>
+        <Flex
+          alignItems="center"
+          justifyContent="space-between"
+          css={{ marginBottom: '$2' }}
+        >
+          {label ? (
+            <FormLabel
+              size={size === 'xl' ? 'sm' : 'xs'}
+              htmlFor={id}
+              requiredIndicator={requiredIndicator}
+              info={info}
+            >
+              {label}
+            </FormLabel>
+          ) : null}
+          <FormLabelCounter
+            counterSideElement={counterSideElement}
+            inputId={inputId}
+            label={label}
+            maxLength={maxLength}
+            mergedValue={mergedValue}
+            showCount={showCount}
+          />
+        </Flex>
+        <StyledTextarea
+          value={value}
+          defaultValue={defaultValue}
+          rows={rows}
+          css={{
+            ...(errorBorder && {
+              ...errorBorderStyles
+            }),
+            ...css
+          }}
+          {...(maxLength && {
+            maxLength
+          })}
+          resize={resize}
+          ref={ref}
+          variant={variant}
+          {...rest}
+        />
+        {error ? <StyledError size="xs">{error}</StyledError> : null}
+      </Box>
+    );
+  }
+);

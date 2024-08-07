@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from '@src/button';
 import { Textarea } from '../textarea';
 
 export default {
@@ -16,6 +17,10 @@ export default {
     variant: {
       control: 'select',
       options: ['default', 'filled']
+    },
+    size: {
+      control: 'select',
+      options: ['sm', 'md', 'lg', 'xl']
     },
     errorBorder: {
       control: 'boolean'
@@ -54,4 +59,25 @@ const Template = (args) => {
   );
 };
 
+const WithInfoIconAndCounterButton = (args) => {
+  const [value, setValue] = React.useState('');
+
+  return (
+    <Textarea
+      rows={10}
+      label="Label"
+      placeholder="Placeholder"
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+      info="Textarea info goes here"
+      counterSideElement={<Button variant="ghost" color="primary">Label</Button>}
+      maxLength={100}
+      showCount
+      {...args}
+    />
+  );
+};
+
 export const Default = Template.bind({});
+
+export const WithInfo = WithInfoIconAndCounterButton.bind({});

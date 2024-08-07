@@ -25,7 +25,7 @@ describe('TextArea', () => {
 
   it('prints character count', () => {
     render(<Textarea maxLength={100} showCount defaultValue="Textarea" />);
-    const charNode = screen.getByTestId('textarea-char-count');
+    const charNode = screen.getByTestId('form-label-counter');
     expect(charNode).toBeInTheDocument();
     const charText = screen.getByText('8/100');
     expect(charText).toBeInTheDocument();
