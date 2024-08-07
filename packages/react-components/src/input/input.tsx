@@ -30,7 +30,7 @@ const StyledInput = styled('input', {
     cursor: 'not-allowed',
     borderWidth: '$xs',
     borderStyle: 'solid',
-    borderColorOpacity: ['$neutral500', 0.25],
+    borderColor: '$negative200',
     '&:hover': {
       boxShadow: 'none'
     }
@@ -67,7 +67,7 @@ const StyledInput = styled('input', {
         background: '$white900',
         borderWidth: '$xs',
         borderStyle: 'solid',
-        borderColor: '$black300',
+        borderColorOpacity: ['$black900', 0.15],
         '&:hover:not(:disabled), &:focus, &:active:not(:disabled)': {
           borderWidth: '$xs',
           borderStyle: 'solid',

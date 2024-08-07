@@ -42,7 +42,7 @@ const StyledTextarea = styled('textarea', {
     cursor: 'not-allowed',
     borderWidth: '$xs',
     borderStyle: 'solid',
-    borderColorOpacity: ['$neutral500', 0.25],
+    borderColor: '$neutral200',
     '&:hover': {
       boxShadow: 'none'
     }
@@ -87,11 +87,11 @@ const StyledTextarea = styled('textarea', {
         background: '$white900',
         borderWidth: '$xs',
         borderStyle: 'solid',
-        borderColor: '$neutral200',
+        borderColorOpacity: ['$black900', 0.15],
         '&:hover:not(:disabled), &:focus, &:active:not(:disabled)': {
           borderWidth: '$xs',
           borderStyle: 'solid',
-          borderColor: '$neutral300'
+          borderColor: '$neutral400'
         }
       },
       filled: {
