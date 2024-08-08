@@ -44,6 +44,7 @@ export type DatePickerProps = AriaDatePickerProps<DateValue> & {
   ) => ReactNode;
   enablePortal?: boolean;
   contentStyle?: CSS;
+  portalTarget?: Element | null | undefined;
 } & CalendarControlProps;
 
 export type DatePickerContentProps = AriaDatePickerProps<DateValue> & {
@@ -118,6 +119,7 @@ export const DatePicker = ({
   footerActionText,
   enablePortal = false,
   contentStyle,
+  portalTarget,
   ...props
 }: DatePickerProps) => {
   const state = useDatePickerState({
@@ -197,7 +199,7 @@ export const DatePicker = ({
           </Box>
         </PopoverTrigger>
         {enablePortal ? (
-          <PopoverPortal>
+          <PopoverPortal {...(portalTarget && { container: portalTarget })}>
             <DatePickerContent
               dialogProps={dialogProps}
               calendarProps={calendarProps}
