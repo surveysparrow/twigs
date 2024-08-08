@@ -44,21 +44,6 @@ export type DatePickerProps = AriaDatePickerProps<DateValue> & {
   portalTarget?: Element | null | undefined;
 } & CalendarControlProps;
 
-const PopoverWrapper = ({ enablePortal, portalTarget, children }:{
-  enablePortal: boolean;
-  portalTarget: Element | null | undefined;
-  children: ReactNode;
-}) => {
-  if (enablePortal) {
-    return (
-      <PopoverPortal {...(portalTarget && { container: portalTarget })}>
-        {children}
-      </PopoverPortal>
-    );
-  }
-  return children;
-};
-
 export const DatePicker = ({
   showFooter,
   showTimePicker,
@@ -181,4 +166,19 @@ export const DatePicker = ({
       </Popover>
     </Box>
   );
+};
+
+const PopoverWrapper = ({ enablePortal, portalTarget, children }:{
+  enablePortal: boolean;
+  portalTarget: Element | null | undefined;
+  children: ReactNode;
+}) => {
+  if (enablePortal) {
+    return (
+      <PopoverPortal {...(portalTarget && { container: portalTarget })}>
+        {children}
+      </PopoverPortal>
+    );
+  }
+  return children;
 };
