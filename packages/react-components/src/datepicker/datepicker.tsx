@@ -64,50 +64,15 @@ export type DatePickerContentProps = AriaDatePickerProps<DateValue> & {
   contentStyle?: CSS;
 } & CalendarControlProps;
 
-const DatePickerContent = ({
-  showFooter,
-  showTimePicker,
-  showTimezonePicker,
-  renderFooter,
-  footerAction,
-  footerActionText,
-  state,
-  dialogProps,
-  calendarProps,
-  contentStyle,
-  ...props
-}: DatePickerContentProps) => {
-  return (
-    <PopoverContent
-      {...dialogProps}
-      css={{
-        width: 'auto',
-        padding: '0',
-        maxWidth: CALENDAR_SIZE_TO_WIDTH[props.size || 'lg'],
-        borderRadius: CALENDAR_SIZE_TO_BORDER_RADIUS[props.size || 'lg'],
-        ...contentStyle
-      }}
-    >
-      <Calendar
-        {...calendarProps}
-        showFooter={showFooter}
-        showTimePicker={showTimePicker}
-        showTimezonePicker={showTimezonePicker}
-        renderFooter={
-          renderFooter
-            ? (calendarState) => renderFooter(calendarState, state.setOpen)
-            : undefined
-        }
-        footerAction={
-          footerAction
-            ? (calendarState) => footerAction(calendarState, state.setOpen)
-            : undefined
-        }
-        footerActionText={footerActionText}
-        size={props.size}
-      />
-    </PopoverContent>
-  );
+const PopoverWrapper = ({ enablePortal, portalTarget, children }) => {
+  if (enablePortal) {
+    return (
+      <PopoverPortal {...(portalTarget && { container: portalTarget })}>
+        {children}
+      </PopoverPortal>
+    );
+  }
+  return children;
 };
 
 export const DatePicker = ({
@@ -198,34 +163,37 @@ export const DatePicker = ({
             />
           </Box>
         </PopoverTrigger>
-        {enablePortal ? (
-          <PopoverPortal {...(portalTarget && { container: portalTarget })}>
-            <DatePickerContent
-              dialogProps={dialogProps}
-              calendarProps={calendarProps}
-              state={state}
+        <PopoverWrapper enablePortal={enablePortal} portalTarget={portalTarget}>
+          <PopoverContent
+            {...dialogProps}
+            css={{
+              width: 'auto',
+              padding: '0',
+              maxWidth: CALENDAR_SIZE_TO_WIDTH[props.size || 'lg'],
+              borderRadius: CALENDAR_SIZE_TO_BORDER_RADIUS[props.size || 'lg'],
+              ...contentStyle
+            }}
+          >
+            <Calendar
+              {...calendarProps}
               showFooter={showFooter}
               showTimePicker={showTimePicker}
               showTimezonePicker={showTimezonePicker}
-              renderFooter={renderFooter}
-              footerAction={footerAction}
+              renderFooter={
+                renderFooter
+                  ? (calendarState) => renderFooter(calendarState, state.setOpen)
+                  : undefined
+              }
+              footerAction={
+                footerAction
+                  ? (calendarState) => footerAction(calendarState, state.setOpen)
+                  : undefined
+              }
               footerActionText={footerActionText}
-              contentStyle={contentStyle}
+              size={props.size}
             />
-          </PopoverPortal>
-        ) : (
-          <DatePickerContent
-            dialogProps={dialogProps}
-            calendarProps={calendarProps}
-            state={state}
-            showFooter={showFooter}
-            showTimePicker={showTimePicker}
-            showTimezonePicker={showTimezonePicker}
-            renderFooter={renderFooter}
-            footerAction={footerAction}
-            footerActionText={footerActionText}
-          />
-        )}
+          </PopoverContent>
+        </PopoverWrapper>
       </Popover>
     </Box>
   );
