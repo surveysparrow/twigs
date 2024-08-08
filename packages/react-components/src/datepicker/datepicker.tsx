@@ -1,7 +1,15 @@
 import { CalendarIcon } from '@sparrowengg/twigs-react-icons';
 import { ReactNode, useEffect, useRef } from 'react';
-import { AriaDatePickerProps, DateValue, useDatePicker } from 'react-aria';
-import { CalendarState, useDatePickerState } from 'react-stately';
+import {
+  AriaDatePickerProps,
+  DateValue,
+  useDatePicker
+} from 'react-aria';
+import {
+  CalendarState,
+  useDatePickerState
+} from 'react-stately';
+import { CSS } from '@stitches/react';
 import { Box } from '../box';
 import { IconButton } from '../button';
 import { Calendar } from '../calendar';
@@ -12,7 +20,12 @@ import {
 } from '../calendar/calendar-utils';
 import { FormLabel } from '../form-label';
 import { usePrevious } from '../hooks/use-previous';
-import { Popover, PopoverContent, PopoverTrigger } from '../popover';
+import {
+  Popover,
+  PopoverContent,
+  PopoverPortal,
+  PopoverTrigger
+} from '../popover';
 import { DateField } from './date-field';
 
 export type DatePickerProps = AriaDatePickerProps<DateValue> & {
@@ -26,6 +39,9 @@ export type DatePickerProps = AriaDatePickerProps<DateValue> & {
     state: CalendarState,
     setPopoverOpen: (isOpen: boolean) => void
   ) => ReactNode;
+  enablePortal?: boolean;
+  contentStyle?: CSS;
+  portalTarget?: Element | null | undefined;
 } & CalendarControlProps;
 
 export const DatePicker = ({
@@ -35,6 +51,9 @@ export const DatePicker = ({
   renderFooter,
   footerAction,
   footerActionText,
+  enablePortal = false,
+  contentStyle,
+  portalTarget,
   ...props
 }: DatePickerProps) => {
   const state = useDatePickerState({
@@ -113,35 +132,53 @@ export const DatePicker = ({
             />
           </Box>
         </PopoverTrigger>
-        <PopoverContent
-          {...dialogProps}
-          css={{
-            width: 'auto',
-            padding: '0',
-            maxWidth: CALENDAR_SIZE_TO_WIDTH[props.size || 'lg'],
-            borderRadius: CALENDAR_SIZE_TO_BORDER_RADIUS[props.size || 'lg']
-          }}
-        >
-          <Calendar
-            {...calendarProps}
-            showFooter={showFooter}
-            showTimePicker={showTimePicker}
-            showTimezonePicker={showTimezonePicker}
-            renderFooter={
-              renderFooter
-                ? (calendarState) => renderFooter(calendarState, state.setOpen)
-                : undefined
-            }
-            footerAction={
-              footerAction
-                ? (calendarState) => footerAction(calendarState, state.setOpen)
-                : undefined
-            }
-            footerActionText={footerActionText}
-            size={props.size}
-          />
-        </PopoverContent>
+        <PopoverWrapper enablePortal={enablePortal} portalTarget={portalTarget}>
+          <PopoverContent
+            {...dialogProps}
+            css={{
+              width: 'auto',
+              padding: '0',
+              maxWidth: CALENDAR_SIZE_TO_WIDTH[props.size || 'lg'],
+              borderRadius: CALENDAR_SIZE_TO_BORDER_RADIUS[props.size || 'lg'],
+              ...contentStyle
+            }}
+          >
+            <Calendar
+              {...calendarProps}
+              showFooter={showFooter}
+              showTimePicker={showTimePicker}
+              showTimezonePicker={showTimezonePicker}
+              renderFooter={
+                renderFooter
+                  ? (calendarState) => renderFooter(calendarState, state.setOpen)
+                  : undefined
+              }
+              footerAction={
+                footerAction
+                  ? (calendarState) => footerAction(calendarState, state.setOpen)
+                  : undefined
+              }
+              footerActionText={footerActionText}
+              size={props.size}
+            />
+          </PopoverContent>
+        </PopoverWrapper>
       </Popover>
     </Box>
   );
+};
+
+const PopoverWrapper = ({ enablePortal, portalTarget, children }:{
+  enablePortal: boolean;
+  portalTarget: Element | null | undefined;
+  children: ReactNode;
+}) => {
+  if (enablePortal) {
+    return (
+      <PopoverPortal {...(portalTarget && { container: portalTarget })}>
+        {children}
+      </PopoverPortal>
+    );
+  }
+  return children;
 };
