@@ -2,14 +2,11 @@ import { CalendarIcon } from '@sparrowengg/twigs-react-icons';
 import { ReactNode, useEffect, useRef } from 'react';
 import {
   AriaDatePickerProps,
-  AriaDialogProps,
-  CalendarProps,
   DateValue,
   useDatePicker
 } from 'react-aria';
 import {
   CalendarState,
-  DatePickerState,
   useDatePickerState
 } from 'react-stately';
 import { CSS } from '@stitches/react';
@@ -47,24 +44,11 @@ export type DatePickerProps = AriaDatePickerProps<DateValue> & {
   portalTarget?: Element | null | undefined;
 } & CalendarControlProps;
 
-export type DatePickerContentProps = AriaDatePickerProps<DateValue> & {
-  label?: string;
-  closeOnSelect?: boolean;
-  footerAction?: (
-    state: CalendarState,
-    setPopoverOpen: (isOpen: boolean) => void
-  ) => void;
-  renderFooter?: (
-    state: CalendarState,
-    setPopoverOpen: (isOpen: boolean) => void
-  ) => ReactNode;
-  dialogProps: AriaDialogProps;
-  calendarProps: CalendarProps<DateValue>;
-  state: DatePickerState;
-  contentStyle?: CSS;
-} & CalendarControlProps;
-
-const PopoverWrapper = ({ enablePortal, portalTarget, children }) => {
+const PopoverWrapper = ({ enablePortal, portalTarget, children }:{
+  enablePortal: boolean;
+  portalTarget: Element | null | undefined;
+  children: ReactNode;
+}) => {
   if (enablePortal) {
     return (
       <PopoverPortal {...(portalTarget && { container: portalTarget })}>
