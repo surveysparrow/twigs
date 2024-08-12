@@ -794,6 +794,7 @@ export const Chip: FunctionComponent<ChipProps> = React.forwardRef(
           {leftElement && (
             <SideElementContainer
               className={prefixClassName('addon-element--start')}
+              data-testid="left-element"
             >
               {leftElement}
             </SideElementContainer>
@@ -805,6 +806,7 @@ export const Chip: FunctionComponent<ChipProps> = React.forwardRef(
                 borderRadius: '$round',
                 marginInlineStart: '$2'
               }}
+              data-testid="close-button"
               type="button"
               {...(onClose && { onClick: onClose })}
             >
@@ -814,6 +816,7 @@ export const Chip: FunctionComponent<ChipProps> = React.forwardRef(
           {rightElement && (
             <SideElementContainer
               className={prefixClassName('addon-element--end')}
+              data-testid="right-element"
             >
               {rightElement}
             </SideElementContainer>
