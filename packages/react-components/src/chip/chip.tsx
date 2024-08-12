@@ -36,6 +36,7 @@ const StyledCloseButton = styled('button', {
   cursor: 'pointer',
   borderRadius: '$round',
   outline: 'none',
+  padding: 0,
 
   '&&:hover': {
     color: '$negative500',
