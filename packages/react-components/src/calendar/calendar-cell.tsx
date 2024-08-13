@@ -6,19 +6,26 @@ import { Day, DayContainer } from './calendar-day';
 import { useCalendarContext } from './calendar-utils';
 
 type CalendarCellProps = {
-  state: RangeCalendarState | CalendarState,
-  date: CalendarDate,
-  currentMonth: CalendarDate
-}
+  state: RangeCalendarState | CalendarState;
+  date: CalendarDate;
+  currentMonth: CalendarDate;
+  onDaySelect?: (date: CalendarDate) => void;
+};
 
-export const CalendarCell = ({ state, date, currentMonth }: CalendarCellProps) => {
+export const CalendarCell = ({
+  state,
+  date,
+  currentMonth,
+  onDaySelect
+}: CalendarCellProps) => {
   const ref = useRef(null);
   const {
-    cellProps,
-    buttonProps,
-    isSelected,
-    formattedDate
-  } = useCalendarCell({ date }, state, ref);
+    cellProps, buttonProps, isSelected, formattedDate
+  } = useCalendarCell(
+    { date },
+    state,
+    ref
+  );
 
   const calendarContext = useCalendarContext();
 
@@ -46,6 +53,12 @@ export const CalendarCell = ({ state, date, currentMonth }: CalendarCellProps) =
         isHidden={isOutsideMonth}
         isSelected={isSelected}
         size={calendarContext.size}
+        onClick={(e) => {
+          buttonProps?.onClick?.(e);
+          if (onDaySelect) {
+            onDaySelect(date);
+          }
+        }}
       >
         {formattedDate}
       </Day>

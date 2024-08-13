@@ -45,11 +45,17 @@ export const CalendarRange = ({
   showFooter = true,
   footerActionText = 'Apply',
   footerAction,
+  onDaySelect,
+  onMonthSelect,
+  onYearSelect,
   ...props
 }: AriaRangeCalendarProps<DateValue> &
   CalendarControlProps & {
     footerAction?: (state: RangeCalendarState) => void;
     renderFooter?: (state: RangeCalendarState) => ReactNode;
+    onDaySelect?: (date: DateValue, range: 'start' | 'end') => void;
+    onMonthSelect?: (date: DateValue, range: 'start' | 'end') => void;
+    onYearSelect?: (date: DateValue, range: 'start' | 'end') => void;
   }) => {
   const { locale } = useLocale();
   const state = useRangeCalendarState({
@@ -123,6 +129,9 @@ export const CalendarRange = ({
             state={state}
             navigationButtonProps={prevButtonProps}
             sectionName="start"
+            onDaySelect={(date) => onDaySelect?.(date, 'start')}
+            onMonthSelect={(date) => onMonthSelect?.(date, 'start')}
+            onYearSelect={(date) => onYearSelect?.(date, 'start')}
           />
           <CalendarSingleSection
             state={state}
@@ -131,6 +140,9 @@ export const CalendarRange = ({
             }}
             sectionName="end"
             navigationButtonProps={nextButtonProps}
+            onDaySelect={(date) => onDaySelect?.(date, 'end')}
+            onMonthSelect={(date) => onMonthSelect?.(date, 'end')}
+            onYearSelect={(date) => onYearSelect?.(date, 'end')}
           />
         </Flex>
         {showFooter && (
@@ -182,12 +194,18 @@ const CalendarSingleSection = ({
   navigationButtonProps,
   calendarOffset,
   sectionName,
-  state
+  state,
+  onDaySelect,
+  onYearSelect,
+  onMonthSelect
 }: {
   navigationButtonProps: AriaButtonProps<'button'>;
   calendarOffset?: DateDuration;
   sectionName: 'start' | 'end';
   state: RangeCalendarState;
+  onDaySelect?: (date: DateValue) => void;
+  onMonthSelect?: (date: DateValue) => void;
+  onYearSelect?: (date: DateValue) => void;
 }) => {
   const [currentCalendarView, setCurrentCalendarView] = useState<
     keyof typeof CALENDAR_VIEW
@@ -250,6 +268,7 @@ const CalendarSingleSection = ({
               boxSizing: 'content-box',
               padding: '0 $8 0 $8'
             }}
+            onDaySelect={onDaySelect}
           />
         </Flex>
       )}
@@ -258,6 +277,7 @@ const CalendarSingleSection = ({
           state={state}
           range={sectionName}
           setCurrentCalendarView={setCurrentCalendarView}
+          onMonthSelect={onMonthSelect}
         />
       )}
       {currentCalendarView === CALENDAR_VIEW.YEAR && (
@@ -265,6 +285,7 @@ const CalendarSingleSection = ({
           state={state}
           range={sectionName}
           setCurrentCalendarView={setCurrentCalendarView}
+          onYearSelect={onYearSelect}
         />
       )}
     </Box>

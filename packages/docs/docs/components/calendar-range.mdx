@@ -20,8 +20,7 @@ import { CalendarRange } from "@sparrowengg/twigs-react";
 
 ### Usage
 
-<PlaygroundLink name='calendar-range' />
-
+<PlaygroundLink name="calendar-range" />
 
 ```jsx
 import { parseDate } from "@internationalized/date";
@@ -44,10 +43,13 @@ function App() {
 
 ### Props
 
-| Property   | Description                                                             | Type                         | Default |
-| ---------- | ----------------------------------------------------------------------- | ---------------------------- | ------- |
-| value      | selected value range                                                    | @internationalized/date Date |         |
-| minValue   | minimum selectable date value. Dates beyond this value will be disabled | @internationalized/date Date |         |
-| maxValue   | maximum selectable date value. Dates beyond this value will be disabled | @internationalized/date Date |         |
-| isDisabled | Disable the calendar component                                          | boolean                      | false   |
-| onChange   | Callback function when date range is selected                           | function                     |         |
+| Property      | Description                                                             | Type                                                | Default |
+| ------------- | ----------------------------------------------------------------------- | --------------------------------------------------- | ------- |
+| value         | selected value range                                                    | @internationalized/date Date                        |         |
+| minValue      | minimum selectable date value. Dates beyond this value will be disabled | @internationalized/date Date                        |         |
+| maxValue      | maximum selectable date value. Dates beyond this value will be disabled | @internationalized/date Date                        |         |
+| isDisabled    | Disable the calendar component                                          | boolean                                             | false   |
+| onChange      | Callback function when date range is selected                           | function                                            |         |
+| onDaySelect   | Callback function when day is selected                                  | `(date: DateValue, range: 'start' ǀ 'end') => void` |         |
+| onMonthSelect | Callback function when month is selected                                | `(date: DateValue, range: 'start' ǀ 'end') => void` |         |
+| onYearSelect  | Callback function when year is selected                                 | `(date: DateValue, range: 'start' ǀ 'end') => void` |         |

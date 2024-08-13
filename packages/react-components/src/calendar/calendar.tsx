@@ -1,7 +1,9 @@
 import {
   CalendarDateTime,
   ZonedDateTime,
-  createCalendar
+  createCalendar,
+  getLocalTimeZone,
+  today
 } from '@internationalized/date';
 import {
   ChevronLeftIcon,
@@ -54,18 +56,26 @@ export const Calendar = ({
   showFooter = true,
   footerAction,
   footerActionText = 'Select',
+  onDaySelect,
+  onYearSelect,
+  onMonthSelect,
   ...props
 }: CalendarProps & {
   footerAction?: (state: CalendarState) => void;
   renderFooter?: (state: CalendarState) => ReactNode;
+  onDaySelect?: (date: DateValue) => void;
+  onMonthSelect?: (date: DateValue) => void;
+  onYearSelect?: (date: DateValue) => void;
 }) => {
   const [currentCalendarView, setCurrentCalendarView] = useState<
     keyof typeof CALENDAR_VIEW
   >(CALENDAR_VIEW.GRID);
+  const dateValue = props.value ?? today(getLocalTimeZone());
   const { locale } = useLocale();
   const state = useCalendarState({
     ...props,
     locale,
+    value: dateValue,
     createCalendar
   });
 
@@ -134,7 +144,7 @@ export const Calendar = ({
                 icon={<ChevronRightIcon />}
               />
             </CalendarHeader>
-            <CalendarGrid state={state} />
+            <CalendarGrid state={state} onDaySelect={onDaySelect} />
             {(props.showTimePicker || props.showTimezonePicker) && (
               <TimeAndZonePickerContainer calendarSize={size}>
                 {props.showTimePicker && (
@@ -159,12 +169,14 @@ export const Calendar = ({
           <CalendarMonthsView
             state={state}
             setCurrentCalendarView={setCurrentCalendarView}
+            onMonthSelect={onMonthSelect}
           />
         )}
         {currentCalendarView === CALENDAR_VIEW.YEAR && (
           <CalendarYearsView
             state={state}
             setCurrentCalendarView={setCurrentCalendarView}
+            onYearSelect={onYearSelect}
           />
         )}
         {showFooter && currentCalendarView === CALENDAR_VIEW.GRID && (

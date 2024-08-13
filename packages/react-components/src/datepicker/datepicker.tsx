@@ -1,15 +1,9 @@
+import { getLocalTimeZone, today } from '@internationalized/date';
 import { CalendarIcon } from '@sparrowengg/twigs-react-icons';
-import { ReactNode, useEffect, useRef } from 'react';
-import {
-  AriaDatePickerProps,
-  DateValue,
-  useDatePicker
-} from 'react-aria';
-import {
-  CalendarState,
-  useDatePickerState
-} from 'react-stately';
 import { CSS } from '@stitches/react';
+import { ReactNode, useEffect, useRef } from 'react';
+import { AriaDatePickerProps, DateValue, useDatePicker } from 'react-aria';
+import { CalendarState, useDatePickerState } from 'react-stately';
 import { Box } from '../box';
 import { IconButton } from '../button';
 import { Calendar } from '../calendar';
@@ -42,6 +36,9 @@ export type DatePickerProps = AriaDatePickerProps<DateValue> & {
   enablePortal?: boolean;
   contentStyle?: CSS;
   portalTarget?: Element | null | undefined;
+  onDaySelect?: (date: DateValue) => void;
+  onMonthSelect?: (date: DateValue) => void;
+  onYearSelect?: (date: DateValue) => void;
 } & CalendarControlProps;
 
 export const DatePicker = ({
@@ -54,11 +51,16 @@ export const DatePicker = ({
   enablePortal = false,
   contentStyle,
   portalTarget,
+  onDaySelect,
+  onMonthSelect,
+  onYearSelect,
   ...props
 }: DatePickerProps) => {
+  const dateValue = props.value ?? today(getLocalTimeZone());
   const state = useDatePickerState({
     shouldCloseOnSelect: false,
-    ...props
+    ...props,
+    value: dateValue
   });
 
   const ref = useRef(null);
@@ -160,6 +162,9 @@ export const DatePicker = ({
               }
               footerActionText={footerActionText}
               size={props.size}
+              onDaySelect={onDaySelect}
+              onMonthSelect={onMonthSelect}
+              onYearSelect={onYearSelect}
             />
           </PopoverContent>
         </PopoverWrapper>
@@ -168,7 +173,11 @@ export const DatePicker = ({
   );
 };
 
-const PopoverWrapper = ({ enablePortal, portalTarget, children }:{
+const PopoverWrapper = ({
+  enablePortal,
+  portalTarget,
+  children
+}: {
   enablePortal: boolean;
   portalTarget: Element | null | undefined;
   children: ReactNode;
