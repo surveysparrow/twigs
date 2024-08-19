@@ -36,9 +36,7 @@ export type DatePickerProps = AriaDatePickerProps<DateValue> & {
   enablePortal?: boolean;
   contentStyle?: CSS;
   portalTarget?: Element | null | undefined;
-  onDaySelect?: (date: DateValue) => void;
-  onMonthSelect?: (date: DateValue) => void;
-  onYearSelect?: (date: DateValue) => void;
+  calendarContainerCSS?: CalendarControlProps['containerCSS'];
 } & CalendarControlProps;
 
 export const DatePicker = ({
@@ -51,6 +49,8 @@ export const DatePicker = ({
   enablePortal = false,
   contentStyle,
   portalTarget,
+  containerCSS,
+  calendarContainerCSS,
   onDaySelect,
   onMonthSelect,
   onYearSelect,
@@ -86,7 +86,8 @@ export const DatePicker = ({
       css={{
         position: 'relative',
         display: 'inline-flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        ...containerCSS
       }}
     >
       {props.label && (
@@ -165,6 +166,7 @@ export const DatePicker = ({
               onDaySelect={onDaySelect}
               onMonthSelect={onMonthSelect}
               onYearSelect={onYearSelect}
+              containerCSS={calendarContainerCSS}
             />
           </PopoverContent>
         </PopoverWrapper>

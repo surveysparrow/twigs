@@ -8,6 +8,7 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon
 } from '@sparrowengg/twigs-react-icons';
+import { prefixClassName } from '@src/utils';
 import {
   ReactNode, useEffect, useMemo, useRef, useState
 } from 'react';
@@ -44,6 +45,7 @@ export const CalendarRange = ({
   size = 'lg',
   showFooter = true,
   footerActionText = 'Apply',
+  containerCSS,
   footerAction,
   onDaySelect,
   onMonthSelect,
@@ -114,7 +116,8 @@ export const CalendarRange = ({
           border: '1px solid',
           borderColor: '$neutral300',
           paddingTop: '$6',
-          maxWidth: 'max-content'
+          maxWidth: 'max-content',
+          ...containerCSS
         }}
       >
         <Flex
@@ -214,6 +217,7 @@ const CalendarSingleSection = ({
 
   return (
     <Box
+      className={prefixClassName('calendar-range-section')}
       css={{
         flexShrink: 1,
         flexGrow: 1,

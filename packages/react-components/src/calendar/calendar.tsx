@@ -10,7 +10,7 @@ import {
   ChevronRightIcon
 } from '@sparrowengg/twigs-react-icons';
 import {
-  ReactNode, useEffect, useMemo, useRef, useState
+  useEffect, useMemo, useRef, useState
 } from 'react';
 import {
   AriaCalendarProps,
@@ -19,7 +19,7 @@ import {
   useDateFormatter,
   useLocale
 } from 'react-aria';
-import { CalendarState, useCalendarState } from 'react-stately';
+import { useCalendarState } from 'react-stately';
 import { Box } from '../box';
 import { Button } from '../button';
 import { Text } from '../text';
@@ -59,14 +59,9 @@ export const Calendar = ({
   onDaySelect,
   onYearSelect,
   onMonthSelect,
+  containerCSS,
   ...props
-}: CalendarProps & {
-  footerAction?: (state: CalendarState) => void;
-  renderFooter?: (state: CalendarState) => ReactNode;
-  onDaySelect?: (date: DateValue) => void;
-  onMonthSelect?: (date: DateValue) => void;
-  onYearSelect?: (date: DateValue) => void;
-}) => {
+}: CalendarProps) => {
   const [currentCalendarView, setCurrentCalendarView] = useState<
     keyof typeof CALENDAR_VIEW
   >(CALENDAR_VIEW.GRID);
@@ -123,7 +118,8 @@ export const Calendar = ({
         {...calendarProps}
         css={{
           borderRadius: CALENDAR_SIZE_TO_BORDER_RADIUS[size],
-          border: '1px solid $black400'
+          border: '1px solid $black400',
+          ...containerCSS
         }}
         ref={ref}
       >
