@@ -38,16 +38,7 @@ const StyledCloseButton = styled('button', {
   outline: 'none',
   padding: 0,
 
-  '&&:hover': {
-    color: '$negative500',
-
-    svg: {
-      color: 'inherit'
-    }
-  },
-
   '&:focus-visible': {
-    color: '$negative500',
     outline: 'none',
     boxShadow: 'inset 0 0 0 3px $colors$negative300'
   },
@@ -114,6 +105,9 @@ const StyledChip = styled(Box, {
         [`& ${StyledChipContainer}`]: {
           padding: '0 $7'
         },
+        [`&.closable ${StyledChipContainer}`]: {
+          paddingRight: '$5'
+        },
         [`& ${StyledCloseButton}`]: {
           height: '$5',
           width: '$5'
@@ -132,6 +126,9 @@ const StyledChip = styled(Box, {
 
         [`& ${StyledChipContainer}`]: {
           padding: '0 $6'
+        },
+        [`&.closable ${StyledChipContainer}`]: {
+          paddingRight: '$3'
         },
         [`& ${StyledCloseButton}`]: {
           height: '$5',
@@ -152,6 +149,9 @@ const StyledChip = styled(Box, {
         [`& ${StyledChipContainer}`]: {
           padding: '0 $5'
         },
+        [`&.closable ${StyledChipContainer}`]: {
+          paddingRight: '$2'
+        },
         [`& ${StyledCloseButton}`]: {
           height: '$4',
           width: '$4'
@@ -171,8 +171,10 @@ const StyledChip = styled(Box, {
         [`& ${StyledChipContainer}`]: {
           padding: '0 $5'
         },
+        [`&.closable ${StyledChipContainer}`]: {
+          paddingRight: '$2'
+        },
         [`& ${StyledCloseButton}`]: {
-          marginInlineStart: '$1',
           height: '$4',
           width: '$4'
         },
@@ -191,8 +193,10 @@ const StyledChip = styled(Box, {
         [`& ${StyledChipContainer}`]: {
           padding: '0 $3'
         },
+        [`&.closable ${StyledChipContainer}`]: {
+          paddingRight: '$1'
+        },
         [`& ${StyledCloseButton}`]: {
-          marginInlineStart: '$1',
           height: '$3',
           width: '$3'
         },
@@ -211,8 +215,10 @@ const StyledChip = styled(Box, {
         [`& ${StyledChipContainer}`]: {
           padding: '0 $2'
         },
+        [`&.closable ${StyledChipContainer}`]: {
+          paddingRight: '$2'
+        },
         [`& ${StyledCloseButton}`]: {
-          marginInlineStart: '$1',
           height: '$3',
           width: '$3'
         },
@@ -230,6 +236,14 @@ const StyledChip = styled(Box, {
           background: '$neutral100'
         },
 
+        [`& ${StyledCloseButton}`]: {
+          color: '$neutral500'
+        },
+        [`&.closable ${StyledCloseButton}:hover,
+          &.closable ${StyledCloseButton}:focus-within`]: {
+          color: '$neutral700'
+        },
+
         [`& .${prefixClassName('addon-element--start')}`]: {
           color: '$neutral500'
         }
@@ -239,6 +253,14 @@ const StyledChip = styled(Box, {
 
         [`& ${StyledChipContainer}`]: {
           backgroundColorOpacity: ['$primary500', 0.15]
+        },
+
+        [`& ${StyledCloseButton}`]: {
+          color: '$primary500'
+        },
+        [`&.closable ${StyledCloseButton}:hover,
+          &.closable ${StyledCloseButton}:focus-within`]: {
+          color: '$primary700'
         },
 
         [`& .${prefixClassName('addon-element--start')}`]: {
@@ -251,6 +273,14 @@ const StyledChip = styled(Box, {
           backgroundColorOpacity: ['$secondary500', 0.08]
         },
 
+        [`& ${StyledCloseButton}`]: {
+          color: '$secondary400'
+        },
+        [`&.closable ${StyledCloseButton}:hover,
+          &.closable ${StyledCloseButton}:focus-within`]: {
+          color: '$secondary600'
+        },
+
         [`& .${prefixClassName('addon-element--start')}`]: {
           color: '$secondary500'
         }
@@ -259,6 +289,14 @@ const StyledChip = styled(Box, {
         color: '$negative700',
         [`& ${StyledChipContainer}`]: {
           background: '$negative100'
+        },
+
+        [`& ${StyledCloseButton}`]: {
+          color: '$negative600'
+        },
+        [`&.closable ${StyledCloseButton}:hover,
+          &.closable ${StyledCloseButton}:focus-within`]: {
+          color: '$negative700'
         },
 
         [`& .${prefixClassName('addon-element--start')}`]: {
@@ -271,6 +309,14 @@ const StyledChip = styled(Box, {
           background: '$warning100'
         },
 
+        [`& ${StyledCloseButton}`]: {
+          color: '$warning700'
+        },
+        [`&.closable ${StyledCloseButton}:hover,
+          &.closable ${StyledCloseButton}:focus-within`]: {
+          color: '$warning800'
+        },
+
         [`& .${prefixClassName('addon-element--start')}`]: {
           color: '$warning500'
         }
@@ -281,6 +327,14 @@ const StyledChip = styled(Box, {
           background: '$positive100'
         },
 
+        [`& ${StyledCloseButton}`]: {
+          color: '$positive600'
+        },
+        [`&.closable ${StyledCloseButton}:hover,
+          &.closable ${StyledCloseButton}:focus-within`]: {
+          color: '$positive700'
+        },
+
         [`& .${prefixClassName('addon-element--start')}`]: {
           color: '$positive500'
         }
@@ -289,6 +343,14 @@ const StyledChip = styled(Box, {
         color: '$accent500',
         [`& ${StyledChipContainer}`]: {
           background: '$accent100'
+        },
+
+        [`& ${StyledCloseButton}`]: {
+          color: '$accent500'
+        },
+        [`&.closable ${StyledCloseButton}:hover,
+          &.closable ${StyledCloseButton}:focus-within`]: {
+          color: '$accent700'
         },
 
         [`& .${prefixClassName('addon-element--start')}`]: {
@@ -354,7 +416,11 @@ const StyledChip = styled(Box, {
         color: '$secondary800',
 
         [`& ${StyledCloseButton}`]: {
-          color: '$black300'
+          color: '$black500'
+        },
+        [`&.closable ${StyledCloseButton}:hover, 
+          &.closable ${StyledCloseButton}:focus-within`]: {
+          color: '$black600'
         },
         [`& ${StyledChipContainer}`]: {
           backgroundColor: '$white900'
@@ -782,7 +848,10 @@ export const Chip: FunctionComponent<ChipProps> = React.forwardRef(
         tabIndex={0}
         color={color}
         {...props}
-        className={clsx({ active: active ?? isActive }, props.className)}
+        className={clsx(
+          { active: active ?? isActive, closable },
+          props.className
+        )}
         onClick={handleChange}
         onKeyDown={(e) => {
           if (e.key === ' ') {
@@ -803,10 +872,6 @@ export const Chip: FunctionComponent<ChipProps> = React.forwardRef(
           {children}
           {closable && (
             <StyledCloseButton
-              css={{
-                borderRadius: '$round',
-                marginInlineStart: '$2'
-              }}
               data-testid="close-button"
               type="button"
               {...(onClose && { onClick: onClose })}
