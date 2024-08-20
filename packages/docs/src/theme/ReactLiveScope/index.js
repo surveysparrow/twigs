@@ -14,7 +14,9 @@ import {
   HashTagNode,
   HashTagPlugin,
   EditorLookupDropdownBase,
-  ConvertSelectionToLinkOnPastePlugin
+  ConvertSelectionToLinkOnPastePlugin,
+  EmojiNode,
+  EmojiPlugin
 } from "@sparrowengg/twigs-react";
 
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
@@ -129,7 +131,9 @@ const ReactLiveScope = {
   Tr: twigsComponentLoader("Tr"),
   Editor,
   MentionsPlugin,
+  EmojiPlugin,
   MentionNode,
+  EmojiNode,
   HashTagPlugin,
   HashTagNode,
   BoldTool,

@@ -1,14 +1,16 @@
 import {
   CalendarDateTime,
   ZonedDateTime,
-  createCalendar
+  createCalendar,
+  getLocalTimeZone,
+  today
 } from '@internationalized/date';
 import {
   ChevronLeftIcon,
   ChevronRightIcon
 } from '@sparrowengg/twigs-react-icons';
 import {
-  ReactNode, useEffect, useMemo, useRef, useState
+  useEffect, useMemo, useRef, useState
 } from 'react';
 import {
   AriaCalendarProps,
@@ -17,7 +19,7 @@ import {
   useDateFormatter,
   useLocale
 } from 'react-aria';
-import { CalendarState, useCalendarState } from 'react-stately';
+import { useCalendarState } from 'react-stately';
 import { Box } from '../box';
 import { Button } from '../button';
 import { Text } from '../text';
@@ -54,18 +56,21 @@ export const Calendar = ({
   showFooter = true,
   footerAction,
   footerActionText = 'Select',
+  onDaySelect,
+  onYearSelect,
+  onMonthSelect,
+  containerCSS,
   ...props
-}: CalendarProps & {
-  footerAction?: (state: CalendarState) => void;
-  renderFooter?: (state: CalendarState) => ReactNode;
-}) => {
+}: CalendarProps) => {
   const [currentCalendarView, setCurrentCalendarView] = useState<
     keyof typeof CALENDAR_VIEW
   >(CALENDAR_VIEW.GRID);
+  const dateValue = props.value ?? today(getLocalTimeZone());
   const { locale } = useLocale();
   const state = useCalendarState({
     ...props,
     locale,
+    value: dateValue,
     createCalendar
   });
 
@@ -113,7 +118,8 @@ export const Calendar = ({
         {...calendarProps}
         css={{
           borderRadius: CALENDAR_SIZE_TO_BORDER_RADIUS[size],
-          border: '1px solid $black400'
+          border: '1px solid $black400',
+          ...containerCSS
         }}
         ref={ref}
       >
@@ -134,7 +140,7 @@ export const Calendar = ({
                 icon={<ChevronRightIcon />}
               />
             </CalendarHeader>
-            <CalendarGrid state={state} />
+            <CalendarGrid state={state} onDaySelect={onDaySelect} />
             {(props.showTimePicker || props.showTimezonePicker) && (
               <TimeAndZonePickerContainer calendarSize={size}>
                 {props.showTimePicker && (
@@ -159,12 +165,14 @@ export const Calendar = ({
           <CalendarMonthsView
             state={state}
             setCurrentCalendarView={setCurrentCalendarView}
+            onMonthSelect={onMonthSelect}
           />
         )}
         {currentCalendarView === CALENDAR_VIEW.YEAR && (
           <CalendarYearsView
             state={state}
             setCurrentCalendarView={setCurrentCalendarView}
+            onYearSelect={onYearSelect}
           />
         )}
         {showFooter && currentCalendarView === CALENDAR_VIEW.GRID && (
