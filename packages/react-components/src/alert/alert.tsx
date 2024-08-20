@@ -72,7 +72,7 @@ const StyledAlert = styled(Box, {
     status: {
       [STATUSES.success.name]: {
         backgroundColor: '$positive50',
-        borderColor: '$positive100',
+        borderColor: '$positive200',
         [`${StyledAlertIcon} svg`]: {
           color: '$positive500'
         }
@@ -95,7 +95,7 @@ const StyledAlert = styled(Box, {
         backgroundColor: '$warning100',
         borderColor: '$warning200',
         [`${StyledAlertIcon} svg`]: {
-          color: '$warning500'
+          color: '$warning600'
         }
       }
     }
