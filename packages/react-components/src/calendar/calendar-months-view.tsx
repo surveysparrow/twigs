@@ -20,11 +20,13 @@ import {
 export const CalendarMonthsView = ({
   state,
   range,
+  onMonthSelect,
   setCurrentCalendarView
 }: {
   state: RangeCalendarState | CalendarState;
   range?: 'start' | 'end';
   setCurrentCalendarView: (view: keyof typeof CALENDAR_VIEW) => void;
+  onMonthSelect?: (date: CalendarDate) => void;
 }) => {
   const monthFormatter = useDateFormatter({
     month: 'short',
@@ -66,7 +68,7 @@ export const CalendarMonthsView = ({
       if (!containerRef.current) return;
 
       const currentMonth = containerRef.current.querySelector(
-        `button[data-monthId="${dateValue.month}"]`
+        `button[data-month-id="${dateValue.month}"]`
       ) as HTMLButtonElement;
 
       if (currentMonth) {
@@ -153,7 +155,7 @@ export const CalendarMonthsView = ({
           <Button
             key={month.label}
             color={dateValue.month === month.date.month ? 'default' : 'bright'}
-            data-monthId={month.date.month}
+            data-month-id={month.date.month}
             tabIndex={dateValue.month === month.date.month ? 0 : -1}
             disabled={state.isInvalid(month.date)}
             css={{
@@ -171,6 +173,9 @@ export const CalendarMonthsView = ({
                 (state as CalendarState).selectDate(month.date);
               }
               state.setFocusedDate(month.date);
+              if (onMonthSelect) {
+                onMonthSelect(month.date);
+              }
               setCurrentCalendarView(CALENDAR_VIEW.GRID);
             }}
           >
