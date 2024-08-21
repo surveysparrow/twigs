@@ -108,9 +108,9 @@ const StyledChip = styled(Box, {
         fontSize: '$md',
         fontWeight: '$5',
         lineHeight: '$md',
-        gap: '$2',
 
         [`& ${StyledChipContent}`]: {
+          gap: '$2',
           padding: '0 $7'
         },
         [`&.${CLASSNAMES.chipWithAddonStart} ${StyledChipContent}`]: {
@@ -134,10 +134,10 @@ const StyledChip = styled(Box, {
         fontSize: '$sm',
         fontWeight: '$5',
         lineHeight: '$sm',
-        gap: '$2',
 
         [`& ${StyledChipContent}`]: {
-          padding: '0 $6'
+          gap: '$2',
+          padding: '0 $5'
         },
         [`&.${CLASSNAMES.chipWithAddonStart} ${StyledChipContent}`]: {
           paddingLeft: '$3'
@@ -160,10 +160,10 @@ const StyledChip = styled(Box, {
         fontSize: '$xs',
         fontWeight: '$5',
         lineHeight: '$xs',
-        gap: '$1',
 
         [`& ${StyledChipContent}`]: {
-          padding: '0 $5'
+          gap: '$1',
+          padding: '0 $4'
         },
         [`&.${CLASSNAMES.chipWithAddonStart} ${StyledChipContent}`]: {
           paddingLeft: '$2'
@@ -186,10 +186,10 @@ const StyledChip = styled(Box, {
         fontSize: '$xs',
         fontWeight: '$5',
         lineHeight: '$xs',
-        gap: '$1',
 
         [`& ${StyledChipContent}`]: {
-          padding: '0 $5'
+          gap: '$1',
+          padding: '0 $3'
         },
         [`&.${CLASSNAMES.chipWithAddonStart} ${StyledChipContent}`]: {
           paddingLeft: '$2'
@@ -212,25 +212,26 @@ const StyledChip = styled(Box, {
         fontSize: '$xs',
         fontWeight: '$5',
         lineHeight: '$xxs',
-        gap: '$1',
+        letterSpacing: '0.444px',
 
         [`& ${StyledChipContent}`]: {
+          gap: '$1',
           padding: '0 $3'
         },
         [`&.${CLASSNAMES.chipWithAddonStart} ${StyledChipContent}`]: {
-          paddingLeft: '$1'
+          paddingLeft: '$2'
         },
         [`&.${CLASSNAMES.chipWithAddonEnd} ${StyledChipContent},
           &.closable ${StyledChipContent}`]: {
-          paddingRight: '$1'
+          paddingRight: '$2'
         },
         [`& ${StyledCloseButton}`]: {
-          height: '$3',
-          width: '$3'
+          height: '14px',
+          width: '14px'
         },
         [`& ${SideElementContainer}`]: {
-          width: '$3',
-          height: '$3'
+          width: '14px',
+          height: '14px'
         }
       },
       '3xs': {
@@ -238,9 +239,10 @@ const StyledChip = styled(Box, {
         fontSize: '$xxs',
         fontWeight: '$7',
         lineHeight: '$xxs',
-        gap: '$1',
+        letterSpacing: '0.185px',
 
         [`& ${StyledChipContent}`]: {
+          gap: '$1',
           padding: '0 $2'
         },
         [`&.${CLASSNAMES.chipWithAddonStart} ${StyledChipContent}`]: {
@@ -251,12 +253,12 @@ const StyledChip = styled(Box, {
           paddingRight: '$1'
         },
         [`& ${StyledCloseButton}`]: {
-          height: '$3',
-          width: '$3'
+          height: '$2',
+          width: '$2'
         },
         [`& ${SideElementContainer}`]: {
-          width: '$3',
-          height: '$3'
+          width: '$2',
+          height: '$2'
         }
       }
     },
@@ -277,7 +279,7 @@ const StyledChip = styled(Box, {
         },
 
         [`& .${CLASSNAMES.addonElementStart}`]: {
-          color: '$neutral500'
+          color: '$neutral800'
         }
       },
       primary: {
@@ -452,7 +454,7 @@ const StyledChip = styled(Box, {
       variant: 'outline',
       css: {
         borderColorOpacity: ['$black900', 0.15],
-        color: '$secondary800',
+        color: '$secondary900',
 
         [`& ${StyledCloseButton}`]: {
           color: '$black500'
