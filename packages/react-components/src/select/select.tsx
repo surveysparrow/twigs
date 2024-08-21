@@ -1,19 +1,18 @@
 import React, {
-  ComponentProps,
-  ReactElement,
-  useMemo
+  ComponentProps, ReactElement, ReactNode, useMemo
 } from 'react';
 import ReactSelect, {
-  SelectInstance,
   GroupBase,
-  components as ReactSelectComponents
+  components as ReactSelectComponents,
+  SelectInstance
 } from 'react-select';
 import AsyncSelect from 'react-select/async';
-import CreatableSelect from 'react-select/creatable';
 import AsyncCreatableSelect from 'react-select/async-creatable';
-import { styled } from '../stitches.config';
+import CreatableSelect from 'react-select/creatable';
 import { Box } from '../box';
+import { Flex } from '../flex';
 import { FormLabel } from '../form-label';
+import { styled } from '../stitches.config';
 
 const selectStyles = {
   transition: 'all $transitions$2',
@@ -186,7 +185,10 @@ const selectStyles = {
 export const StyledSelect = styled(ReactSelect, selectStyles);
 export const StyledAsyncSelect = styled(AsyncSelect, selectStyles);
 export const StyledCreatableSelect = styled(CreatableSelect, selectStyles);
-export const StyledCreatableAsyncSelect = styled(AsyncCreatableSelect, selectStyles);
+export const StyledCreatableAsyncSelect = styled(
+  AsyncCreatableSelect,
+  selectStyles
+);
 
 type SelectBaseProps = {
   showSeparator?: boolean;
@@ -196,6 +198,8 @@ type SelectBaseProps = {
   dropdownIndicatorPosition?: 'left' | 'right';
   label?: string;
   requiredIndicator?: boolean;
+  info?: string | ReactNode;
+  topRightElement?: ReactNode;
 };
 
 const DropdownIndicator = (props, dropdownIndicatorIcon) => {
@@ -226,7 +230,9 @@ export const Select = React.forwardRef<
       styles,
       dropdownIndicatorPosition = 'right',
       label,
+      info,
       requiredIndicator,
+      topRightElement,
       ...props
     },
     ref
@@ -287,12 +293,12 @@ export const Select = React.forwardRef<
       <>
         {label ? (
           <Box>
-            <FormLabel
-              css={{ marginBottom: '$2' }}
-              requiredIndicator={requiredIndicator}
-            >
-              {label}
-            </FormLabel>
+            <Flex justifyContent="space-between" css={{ marginBottom: '$2' }}>
+              <FormLabel requiredIndicator={requiredIndicator} info={info}>
+                {label}
+              </FormLabel>
+              {topRightElement}
+            </Flex>
             {SelectElement}
           </Box>
         ) : (
