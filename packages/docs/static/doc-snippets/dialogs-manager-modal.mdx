@@ -1,0 +1,33 @@
+---
+imports:  import { Button, DialogsManager, dialogs } from "@sparrowengg/twigs-react";
+---
+
+```jsx live play=dialogs-manager-modal
+<div>
+  <Button
+    onClick={() => {
+      const { close } = dialogs.open("modal", {
+        size: 'sm',
+        children: (
+          <div>
+            <h3>This is a custom modal</h3>
+            <Button
+              css={{
+                marginTop: "$3",
+              }}
+              size="lg"
+              color="error"
+              onClick={() => close()}
+            >
+              Close
+            </Button>
+          </div>
+        ),
+      });
+    }}
+  >
+    Open Dialog
+  </Button>
+  <DialogsManager />
+</div>
+```

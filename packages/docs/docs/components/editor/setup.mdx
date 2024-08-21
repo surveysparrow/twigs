@@ -1,0 +1,75 @@
+---
+sidebar_label: Setup
+sidebar_position: 1
+---
+import EditorBasicSnippet from "@site/static/doc-snippets/editor-basic.mdx";
+
+# Editor
+
+Twigs editor is built on top of Lexical.
+
+## Installation
+
+```
+yarn add lexical @lexical/code @lexical/html @lexical/link @lexical/list @lexical/react @lexical/rich-text @lexical/selection @lexical/utils
+```
+
+
+```jsx
+import { Editor } from "@sparrowengg/twigs-react";
+```
+
+### Usage
+
+<EditorBasicSnippet />
+
+### Handling data
+
+The `onChange` property can be used to get the editor state, which can be stored in a state variable. You can also pass `initialEditorState` prop to set the initial state of the editor.
+
+The editor is not two way binded, so even if you update the `initialEditorState` after initial render, the editor will not update.
+
+Another method to get / set the editor state is by using the `dataManagementRef` prop. This prop takes a ref object, which can be used to get / set the editor state.
+
+```tsx
+import { DataManagementPluginHandle } from "@sparrowengg/twigs-react";
+
+const Component = () => {
+  // DataManagementPluginHandle used for typescript
+  const dataManagementRef = useRef<DataManagementPluginHandle>(null);
+
+  return (
+    <Box>
+      <Editor dataManagementRef={dataManagementRef}>
+        <EditorToolbar />
+        <RichEditor />
+      </Editor>
+      <Flex>
+        <Button
+          onClick={() => {
+            dataManagementRef.current?.getDataAsync().then((data) => {
+              console.log(data.html, data.json);
+              saveHtmlData(data.html);
+            });
+          }}
+        >
+          Save
+        </Button>
+        <Button
+          onClick={() => {
+            const data = someFunctionToGetSavedHtml();
+
+            if (data) {
+              dataManagementRef.current?.setHtml(data);
+            }
+          }}
+        >
+          Import
+        </Button>
+      </Flex>
+    </Box>
+  );
+};
+```
+
+Currently `getDataAsync` returns the data in HTML and JSON Format, however to set the data, you can only use `setHtml` method. Other methods and helpers will be introduced soon.

@@ -1,3 +1,6 @@
+import FormHelperTextSnippet from "@site/static/doc-snippets/form-helper-text.mdx";
+import FormHelperTextWithInputSnippet from "@site/static/doc-snippets/form-helper-text-with-input.mdx";
+
 # FormHelperText
 
 FormHelperText can be used for providing additional context to your input fields. 
@@ -10,18 +13,13 @@ import { FormHelperText } from "@sparrowengg/twigs-react";
 
 
 ### Usage 
-```jsx live
-<FormHelperText> Password should have a minimum length of 6. </FormHelperText>
-```
+
+<FormHelperTextSnippet />
 
 
 ### Pair with Input 
-```jsx live
-<>
-  <Input placeholder="password" type="password" />
-  <FormHelperText> Password should have a minimum length of 6. </FormHelperText>
-</>
-```
+
+<FormHelperTextWithInputSnippet />
 
 
 ### Props

@@ -1,38 +1,27 @@
+import HoverCardSnippet, {
+  frontMatter as HoverCardSnippetFrontMatter,
+} from "@site/static/doc-snippets/hovercard.mdx";
+import CodeBlock from "@theme/CodeBlock";
+
 # HoverCard
 
 ### Import
 
-```jsx
-import { HoverCard, HoverCardTrigger, HoverCardContent } from "@sparrowengg/twigs-react";
-```
+<CodeBlock language="jsx">
+  {HoverCardSnippetFrontMatter.displayImports ||
+    HoverCardSnippetFrontMatter.imports}
+</CodeBlock>
 
+### Usage
 
-### Usage 
-```jsx live
-<HoverCard>
-  <HoverCardTrigger>
-    <Avatar
-      size="3xl"
-      src="https://randomuser.me/api/portraits/men/35.jpg"
-    />
-  </HoverCardTrigger>
-  <HoverCardContent arrow>
-    <Avatar
-      size="xl"
-      src="https://randomuser.me/api/portraits/men/35.jpg"
-    />
-    <Heading size="h5">Jane Doe</Heading>
-    <Text>Head of design</Text>
-  </HoverCardContent>
-</HoverCard>
-```
-
+<HoverCardSnippet />
 
 ### Props
 
 #### HoverCard
+
 | Property     | Description                                           | Type    | Default |
-|--------------|-------------------------------------------------------|---------|---------|
+| ------------ | ----------------------------------------------------- | ------- | ------- |
 | defaultOpen  | uncontrolled open state                               | boolean | false   |
 | open         | controller open state                                 | boolean |         |
 | onOpenChange | callback function for state changes                   |         |         |
@@ -40,6 +29,7 @@ import { HoverCard, HoverCardTrigger, HoverCardContent } from "@sparrowengg/twig
 | closeDelat   | delay to close the card when mouse leaves the trigger | number  | 300     |
 
 #### HoverCardContent
+
 | Property | Description                   | Type    | Default |
-|----------|-------------------------------|---------|---------|
+| -------- | ----------------------------- | ------- | ------- |
 | arrow    | Show arrow at the top of card | boolean | true    |

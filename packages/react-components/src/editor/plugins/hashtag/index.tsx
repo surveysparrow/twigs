@@ -1,10 +1,11 @@
 import { MenuTextMatch } from '@lexical/react/LexicalTypeaheadMenuPlugin';
+import { useNodeFocusListener } from '@src/editor/utils/use-node-focus';
 import {
   EditorLookupDropdownBase,
   EditorLookupDropdownBaseProps,
   TypeaheadMenuData
 } from '../../components';
-import { $createHashTagNode } from '../../nodes/hashtag';
+import { $createHashTagNode, HashTagNode } from '../../nodes/hashtag';
 
 const PUNCTUATION = '\\.,\\+\\*\\?\\$\\@\\|#{}\\(\\)\\^\\-\\[\\]\\\\/!%\'"~=<>_:;';
 const NAME = `\\b[A-Z][^\\s${PUNCTUATION}]`;
@@ -54,21 +55,25 @@ function checkForHashTags(
   return null;
 }
 
-function getPossibleQueryMatch(text: string): MenuTextMatch | null {
-  return checkForHashTags(text, 1);
+function getPossibleQueryMatch(text: string, len: number = 1): MenuTextMatch | null {
+  return checkForHashTags(text, len);
 }
 
 export const HashTagPlugin = ({
   getResults,
+  triggerStringLength,
   ...props
 }: Partial<EditorLookupDropdownBaseProps> & {
   getResults: (text: string | null) => TypeaheadMenuData[] | Promise<TypeaheadMenuData[]>;
+  triggerStringLength?: number;
 }) => {
+  useNodeFocusListener(HashTagNode);
+
   return (
     <EditorLookupDropdownBase
       $createNode={({ data }) => $createHashTagNode(`#${data.value}`)}
       getResults={getResults}
-      triggerFunction={(text) => getPossibleQueryMatch(text)}
+      triggerFunction={(text) => getPossibleQueryMatch(text, triggerStringLength)}
       {...props}
     />
   );

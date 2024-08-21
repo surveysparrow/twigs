@@ -1,5 +1,13 @@
-import React, { ComponentProps, ReactElement, useMemo } from 'react';
-import ReactSelect, { components as ReactSelectComponent } from 'react-select';
+import React, {
+  ComponentProps,
+  ReactElement,
+  useMemo
+} from 'react';
+import ReactSelect, {
+  SelectInstance,
+  GroupBase,
+  components as ReactSelectComponents
+} from 'react-select';
 import AsyncSelect from 'react-select/async';
 import CreatableSelect from 'react-select/creatable';
 import AsyncCreatableSelect from 'react-select/async-creatable';
@@ -31,9 +39,9 @@ const selectStyles = {
     }
   },
   '& .twigs-select__value-container, & .twigs-select__placeholder, &.twigs-select__single-value, &.twigs-select__input':
-  {
-    fontWeight: '$4'
-  },
+    {
+      fontWeight: '$4'
+    },
   '& .twigs-select__placeholder': {
     color: '$neutral600'
   },
@@ -119,9 +127,9 @@ const selectStyles = {
           padding: '$3'
         },
         '& .twigs-select__value-container, & .twigs-select__placeholder, &.twigs-select__single-value, &.twigs-select__input':
-        {
-          fontSize: '$md'
-        }
+          {
+            fontSize: '$md'
+          }
       },
       md: {
         '& .twigs-select__control': {
@@ -175,28 +183,26 @@ const selectStyles = {
   }
 };
 
-const StyledSelect = styled(ReactSelect, selectStyles);
-const StyledAsyncSelect = styled(AsyncSelect, selectStyles);
-const StyledCreatableSelect = styled(CreatableSelect, selectStyles);
-const StyledCreatableAsyncSelect = styled(AsyncCreatableSelect, selectStyles);
+export const StyledSelect = styled(ReactSelect, selectStyles);
+export const StyledAsyncSelect = styled(AsyncSelect, selectStyles);
+export const StyledCreatableSelect = styled(CreatableSelect, selectStyles);
+export const StyledCreatableAsyncSelect = styled(AsyncCreatableSelect, selectStyles);
 
 type SelectBaseProps = {
   showSeparator?: boolean;
   isAsync?: boolean;
-  isCreatable?: boolean,
+  isCreatable?: boolean;
   dropdownIndicatorIcon?: ReactElement;
   dropdownIndicatorPosition?: 'left' | 'right';
   label?: string;
   requiredIndicator?: boolean;
 };
 
-const DropdownIndicator = (
-  props, dropdownIndicatorIcon
-) => {
+const DropdownIndicator = (props, dropdownIndicatorIcon) => {
   return (
-    <ReactSelectComponent.DropdownIndicator {...props}>
+    <ReactSelectComponents.DropdownIndicator {...props}>
       {React.cloneElement(dropdownIndicatorIcon)}
-    </ReactSelectComponent.DropdownIndicator>
+    </ReactSelectComponents.DropdownIndicator>
   );
 };
 
@@ -206,69 +212,95 @@ export type SelectProps = SelectBaseProps &
   ComponentProps<typeof StyledCreatableSelect> &
   ComponentProps<typeof StyledCreatableAsyncSelect>;
 
-export const Select = ({
-  showSeparator, isAsync, isCreatable, components, dropdownIndicatorIcon, styles, dropdownIndicatorPosition = 'right', label, requiredIndicator, ...props
-}: SelectProps) => {
-  const customStyles = useMemo(() => {
-    const isLIconLeftPositioned = dropdownIndicatorPosition === 'left';
-    return {
-      ...styles,
-      control: (base: any) => ({
-        ...base,
-        ...(isLIconLeftPositioned && {
-          flexDirection: 'row-reverse'
+export const Select = React.forwardRef<
+  SelectInstance<unknown, boolean, GroupBase<unknown>>,
+  SelectProps
+>(
+  (
+    {
+      showSeparator,
+      isAsync,
+      isCreatable,
+      components,
+      dropdownIndicatorIcon,
+      styles,
+      dropdownIndicatorPosition = 'right',
+      label,
+      requiredIndicator,
+      ...props
+    },
+    ref
+  ) => {
+    const customStyles = useMemo(() => {
+      const isIconLeftPositioned = dropdownIndicatorPosition === 'left';
+      return {
+        ...styles,
+        control: (base: any) => ({
+          ...base,
+          ...(isIconLeftPositioned && {
+            flexDirection: 'row-reverse'
+          })
+        }),
+        indicatorsContainer: (base: any) => ({
+          ...base,
+          ...(isIconLeftPositioned && {
+            flexDirection: 'row-reverse'
+          })
+        }),
+        clearIndicator: (base: any) => ({
+          ...base,
+          ...(isIconLeftPositioned && {
+            position: 'absolute',
+            right: 0
+          })
         })
-      }),
-      indicatorsContainer: (base: any) => ({
-        ...base,
-        ...(isLIconLeftPositioned && {
-          flexDirection: 'row-reverse'
-        })
-      }),
-      clearIndicator: (base: any) => ({
-        ...base,
-        ...(isLIconLeftPositioned && {
-          position: 'absolute',
-          right: 0
-        })
-      })
-    };
-  }, [dropdownIndicatorPosition, styles]);
+      };
+    }, [dropdownIndicatorPosition, styles]);
 
-  // eslint-disable-next-line no-nested-ternary
-  const SelectComponent = isCreatable ? (isAsync ? StyledCreatableAsyncSelect : StyledCreatableSelect) : (isAsync ? StyledAsyncSelect : StyledSelect);
-  const SelectElement = (
-    <SelectComponent
-      styles={customStyles}
-      {...props}
-      components={{
-        ...(!showSeparator && {
-          IndicatorSeparator: null
-        }),
-        ...(dropdownIndicatorIcon && {
-          DropdownIndicator: (dropdownProps) => DropdownIndicator(dropdownProps, dropdownIndicatorIcon)
-        }),
-        ...components
-      }}
-      classNamePrefix="twigs-select"
-      theme={(theme) => ({ ...theme, borderRadius: 10 })}
-    />
-  );
-  return (
-    <>
-      {label ? (
-        <Box>
-          <FormLabel
-            css={{ marginBottom: '$2' }}
-            requiredIndicator={requiredIndicator}
-          >
-            {label}
-          </FormLabel>
-          {SelectElement}
-        </Box>
-      ) : (
-        SelectElement
-      )}
-    </>
-  );
-};
+    // eslint-disable-next-line no-nested-ternary
+    const SelectComponent = isCreatable
+      ? isAsync
+        ? StyledCreatableAsyncSelect
+        : StyledCreatableSelect
+      : isAsync
+        ? StyledAsyncSelect
+        : StyledSelect;
+    const SelectElement = (
+      <SelectComponent
+        ref={ref}
+        styles={customStyles}
+        {...props}
+        components={{
+          ...(!showSeparator && {
+            IndicatorSeparator: null
+          }),
+          ...(dropdownIndicatorIcon && {
+            DropdownIndicator: (dropdownProps) => DropdownIndicator(dropdownProps, dropdownIndicatorIcon)
+          }),
+          ...components
+        }}
+        classNamePrefix="twigs-select"
+        theme={(theme) => ({ ...theme, borderRadius: 10 })}
+      />
+    );
+    return (
+      <>
+        {label ? (
+          <Box>
+            <FormLabel
+              css={{ marginBottom: '$2' }}
+              requiredIndicator={requiredIndicator}
+            >
+              {label}
+            </FormLabel>
+            {SelectElement}
+          </Box>
+        ) : (
+          SelectElement
+        )}
+      </>
+    );
+  }
+);
+
+export { ReactSelectComponents };

@@ -37,6 +37,9 @@ const StyledButton = styled('button', {
     opacity: 0.4,
     cursor: 'not-allowed'
   },
+  '&:active:hover': {
+    opacity: '0.8'
+  },
   '&:focus, &:active': {
     outline: 'none'
   },
@@ -65,7 +68,7 @@ const StyledButton = styled('button', {
       },
       xl: {
         padding: '$5 $10',
-        borderRadius: 10,
+        borderRadius: '$xl',
         fontSize: '$lg',
         lineHeight: '$lg',
         height: '$12',
@@ -76,7 +79,7 @@ const StyledButton = styled('button', {
       },
       lg: {
         padding: '$4 $8',
-        borderRadius: 10,
+        borderRadius: '$xl',
         fontSize: '$md',
         lineHeight: '$md',
         height: '$10',
@@ -98,7 +101,7 @@ const StyledButton = styled('button', {
       },
       sm: {
         padding: '$1 $4',
-        borderRadius: '$md',
+        borderRadius: '$sm',
         fontSize: '$sm',
         lineHeight: '$sm',
         height: '$6',
@@ -109,7 +112,7 @@ const StyledButton = styled('button', {
       },
       xs: {
         padding: '$1 $3',
-        borderRadius: '$md',
+        borderRadius: '$sm',
         fontSize: '$xs',
         lineHeight: '$xs',
         height: '$5',
@@ -216,6 +219,14 @@ const StyledButton = styled('button', {
         justifyContent: 'center',
         width: '$10',
         height: '$10'
+      }
+    },
+    isLeftIcon: {
+      true: {
+      }
+    },
+    isRightIcon: {
+      true: {
       }
     }
   },
@@ -387,6 +398,20 @@ const StyledButton = styled('button', {
       }
     },
     {
+      color: 'light',
+      variant: 'ghost',
+      css: {
+        background: 'transparent',
+        color: '$white900',
+        [`&:active:not(:disabled), &.${prefixClassName('button--loading')}`]: {
+          backgroundColorOpacity: ['$white400', 0.2]
+        },
+        '&:hover:not(:disabled), &:focus': {
+          backgroundColorOpacity: ['$white300', 0.15]
+        }
+      }
+    },
+    {
       color: 'error',
       variant: 'ghost',
       css: {
@@ -503,6 +528,104 @@ const StyledButton = styled('button', {
           height: '$2'
         }
       }
+    },
+    {
+      isLeftIcon: true,
+      size: '2xl',
+      css: {
+        padding: '$9 $12 $9 $10'
+      }
+    },
+    {
+      isLeftIcon: true,
+      size: 'xl',
+      css: {
+        padding: '$5 $10 $5 $8'
+      }
+    },
+    {
+      isLeftIcon: true,
+      size: 'lg',
+      css: {
+        padding: '$4 $8 $4 $6'
+      }
+    },
+    {
+      isLeftIcon: true,
+      size: 'md',
+      css: {
+        padding: '$3 $5 $3 $4'
+      }
+    },
+    {
+      isLeftIcon: true,
+      size: 'sm',
+      css: {
+        padding: '$1 $4 $1 $3'
+      }
+    },
+    {
+      isLeftIcon: true,
+      size: 'xs',
+      css: {
+        padding: '$1 $3 $1 $2'
+      }
+    },
+    {
+      isLeftIcon: true,
+      size: 'xxs',
+      css: {
+        padding: '1px $2 1px $1'
+      }
+    },
+    {
+      isRightIcon: true,
+      size: '2xl',
+      css: {
+        padding: '$9 $10 $9 $12'
+      }
+    },
+    {
+      isRightIcon: true,
+      size: 'xl',
+      css: {
+        padding: '$5 $8 $5 $10'
+      }
+    },
+    {
+      isRightIcon: true,
+      size: 'lg',
+      css: {
+        padding: '$4 $6 $4 $8'
+      }
+    },
+    {
+      isRightIcon: true,
+      size: 'md',
+      css: {
+        padding: '$3 $4 $3 $5'
+      }
+    },
+    {
+      isRightIcon: true,
+      size: 'sm',
+      css: {
+        padding: '$1 $3 $1 $4'
+      }
+    },
+    {
+      isRightIcon: true,
+      size: 'xs',
+      css: {
+        padding: '$1 $2 $1 $3'
+      }
+    },
+    {
+      isRightIcon: true,
+      size: 'xxs',
+      css: {
+        padding: '1px $1 1px $2'
+      }
     }
   ],
   defaultVariants: {
@@ -545,20 +668,18 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
     ref
   ) => {
     const hasNoIcon = !(leftIcon || rightIcon || icon);
-    const buttonLoaderMargin: ScaleValue<'space', typeof config> = [
-      'xxs',
-      'xs',
-      'sm'
-    ].includes(rest.size as Extract<ButtonProps['size'], string>)
-      ? '$2'
-      : '$4';
+    let buttonLoaderMargin: ScaleValue<'space', typeof config> = '$4';
 
-    const { size: loaderSize, ...loaderCSS } = getLoaderIconSizeFromButtonProps(
-      {
-        buttonSize: rest.size,
-        loaderType: loader
-      }
-    );
+    if (['lg', 'xl'].includes(rest.size as Extract<ButtonProps['size'], string>)) {
+      buttonLoaderMargin = '$5';
+    } else if (['xxs', 'xs', 'sm', 'md'].includes(rest.size as Extract<ButtonProps['size'], string>)) {
+      buttonLoaderMargin = '$1';
+    }
+
+    const { size: loaderSize, ...loaderCSS } = getLoaderIconSizeFromButtonProps({
+      buttonSize: rest.size,
+      loaderType: loader
+    });
     const loaderColor = getLoaderVariantFromButtonVariant({
       variant: rest.variant ?? 'solid',
       color
@@ -570,6 +691,8 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
         ref={ref}
         color={color}
         isIcon={!!icon}
+        isLeftIcon={!!leftIcon}
+        isRightIcon={!!rightIcon}
         disabled={disabled}
         data-testid="button"
         onClick={onClick}

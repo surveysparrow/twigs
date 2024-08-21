@@ -1,3 +1,5 @@
+import StepperSnippet from "@site/static/doc-snippets/stepper.mdx";
+
 # Stepper
 
 FormHelperText can be used for providing additional context to your input fields. 
@@ -10,25 +12,12 @@ import { Stepper } from "@sparrowengg/twigs-react";
 
 
 ### Usage 
-```jsx live
 
-<Stepper
-  activeStep={0}
->
-  <StepperItem label="Registration">
-    Step 1
-  </StepperItem>
-  <StepperItem label="Account settings">
-    Step 2
-  </StepperItem>
-  <StepperItem label="Confirm">Step 3</StepperItem>
-</Stepper>
-
-```
+<StepperSnippet />
 
 
 ### Navigating between steps
-```jsx live
+```jsx live play=stepper-navigation
 function App() {
 
   const [activeStep, setActiveStep] = React.useState(0);
@@ -75,7 +64,7 @@ You can pass JSX Elements to each of the above 3 props to modify the looks of yo
 
 Below is an example of customized Stepper. 
 
-```jsx live
+```jsx live play=stepper-custom-components
 function App () {
   const [activeStep, setActiveStep] = React.useState(0);
 
@@ -114,7 +103,7 @@ function App () {
           }) => (
             <Button
               color={active ? 'primary' : completed ? 'ghost' : 'default'}
-              onChange={() => setActiveStep(position)}
+              onClick={() => setActiveStep(position)}
             >
               {children}
             </Button>

@@ -67,7 +67,7 @@ export const RichEditor = ({
                   padding: '0 $2',
                   backgroundColor: '$neutral100',
                   border: '1px solid $neutral200',
-                  borderRadius: '$md',
+                  borderRadius: '$sm',
 
                   '&, & *': {
                     fontFamily: 'monospace'

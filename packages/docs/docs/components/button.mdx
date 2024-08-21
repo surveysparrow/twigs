@@ -1,24 +1,33 @@
+import ButtonSnippet, {
+  frontMatter as ButtonSnippetFrontMatter,
+} from "@site/static/doc-snippets/button.mdx";
+import ButtonWithIconSnippet from "@site/static/doc-snippets/button-with-icon.mdx";
+
+import CodeBlock from "@theme/CodeBlock";
+
 # Button
 
 ### Import
 
-```jsx
-import { Button } from "@sparrowengg/twigs-react";
-```
+<CodeBlock language="jsx">{ButtonSnippetFrontMatter.imports}</CodeBlock>
 
-### Usage 
-```jsx live
-<Button> Submit </Button>
-```
+### Usage
+
+<ButtonSnippet />
+
+### Usage with Icons
+
+<ButtonWithIconSnippet />
 
 ### Props
 
-
-| Property | Description         | Type                                              | Default |
-|----------|---------------------|---------------------------------------------------|---------|
-| color    | Color of the button | `primary` `secondary` `default` `bright` `error` `light` | primary |
-| loading  | Loading state       | boolean                                           | false   |
-| disabled | Button state        | boolean                                           | false   |
-| size     | Size of the button  | `xxs` `xs` `sm` `md` `lg` `xl` `2xl`        | sm      |
-| variant  | button variant      | `solid` `outline` `ghost`                             | solid   |
-| css      | Custom css styles   | object                                            |         |
+| Property  | Description         | Type                                                     | Default |
+| --------- | ------------------- | -------------------------------------------------------- | ------- |
+| color     | Color of the button | `primary` `secondary` `default` `bright` `error` `light` | primary |
+| loading   | Loading state       | boolean                                                  | false   |
+| disabled  | Button state        | boolean                                                  | false   |
+| size      | Size of the button  | `xxs` `xs` `sm` `md` `lg` `xl` `2xl`                     | sm      |
+| variant   | button variant      | `solid` `outline` `ghost`                                | solid   |
+| css       | Custom css styles   | object                                                   |         |
+| rightIcon | Icon on right side  | ReactNode                                                |         |
+| leftIcon  | Icon on left side   | ReactNode                                                |         |

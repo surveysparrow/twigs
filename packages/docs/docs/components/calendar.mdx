@@ -1,9 +1,11 @@
+import { PlaygroundLink } from "@site/src/components/common/playground-link";
+
 # Calendar
 
 :::info
-`Calendar` component requires additional dependancy of `@internationalized/date` to be installed. 
+`Calendar` component requires additional dependancy of `@internationalized/date` to be installed.
 
-We will be working on removing this additional dependancy in the future. 
+We will be working on removing this additional dependancy in the future.
 :::
 
 ```jsx
@@ -16,30 +18,40 @@ npm install --save @internationalized/date
 import { Calendar } from "@sparrowengg/twigs-react";
 ```
 
-### Usage 
+### Usage
+
+<PlaygroundLink name="calendar" />
+
 ```jsx
-import { parseDate } from '@internationalized/date';
+import { parseDate } from "@internationalized/date";
 
 function App() {
+  const [value, setValue] = React.useState(parseDate("2023-07-24"));
 
-  const [value, setValue] = React.useState(parseDate('2023-07-24'));
-  
   return (
     <Calendar
       onChange={setValue}
       value={value}
-      minValue={parseDate('2023-07-20')}
+      minValue={parseDate("2023-07-20")}
     />
   );
 }
 ```
 
-
 ### Props
-| Property   | Description                                                             | Type                         | Default |
-|------------|-------------------------------------------------------------------------|------------------------------|---------|
-| value      | selected value range                                                    | @internationalized/date Date |         |
-| minValue   | minimum selectable date value. Dates beyond this value will be disabled | @internationalized/date Date |         |
-| maxValue   | maximum selectable date value. Dates beyond this value will be disabled | @internationalized/date Date |         |
-| isDisabled | Disable the calendar component                                          | boolean                      | false   |
-| onChange   | Callback function when date is selected                                 | function                     |         |
+
+| Property         | Description                                                             | Type                                  | Default  |
+| ---------------- | ----------------------------------------------------------------------- | ------------------------------------- | -------- |
+| value            | selected value range                                                    | @internationalized/date Date          |          |
+| minValue         | minimum selectable date value. Dates beyond this value will be disabled | @internationalized/date Date          |          |
+| maxValue         | maximum selectable date value. Dates beyond this value will be disabled | @internationalized/date Date          |          |
+| isDisabled       | Disable the calendar component                                          | boolean                               | false    |
+| onChange         | Callback function when date is selected                                 | function                              |          |
+| onDaySelect      | Callback function when day is selected                                  | `(date: DateValue) => void`           |          |
+| onMonthSelect    | Callback function when month is selected                                | `(date: DateValue) => void`           |          |
+| onYearSelect     | Callback function when year is selected                                 | `(date: DateValue) => void`           |          |
+| showFooter       | Show footer with action button                                          | boolean                               | true     |
+| footerAction     | Action to be performed on footer button click                           | `(state: CalendarState) => void`      |          |
+| footerActionText | Text to be displayed on footer button                                   | string                                | "Select" |
+| renderFooter     | Custom footer component                                                 | `(state: CalendarState) => ReactNode` |          |
+| containerCSS     | Custom CSS for the container element                                    | `CSS`                                 |          |

@@ -1,5 +1,7 @@
 import React, { ReactNode, isValidElement } from 'react';
 import { CloseIcon } from '@sparrowengg/twigs-react-icons';
+import { config } from '@src/stitches.config';
+import { CSS } from '@stitches/react';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -26,6 +28,7 @@ export type DefaultConfirmDialogProps = {
   onConfirm?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onCancel?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onClose?: () => void;
+  css?: CSS<typeof config>;
 };
 
 export const DefaultConfirmDialog = ({
@@ -38,6 +41,7 @@ export const DefaultConfirmDialog = ({
   cancelButtonProps,
   confirmButtonProps,
   closeButton = DefaultCloseButton,
+  css,
   onConfirm,
   onCancel,
   onClose
@@ -51,16 +55,33 @@ export const DefaultConfirmDialog = ({
         }
       }}
     >
-      <AlertDialogContent>
+      <AlertDialogContent css={{ ...css }}>
         <AlertDialogTitle
           css={{
-            paddingRight: '$20'
+            paddingRight: 'calc($20 + $12 + $6)',
+            position: 'relative'
           }}
         >
           {title}
+          {closeButton && (
+            <Box
+              css={{
+                position: 'absolute',
+                top: '50%',
+                right: '$12',
+                transform: 'translate(0,-50%)'
+              }}
+            >
+              {closeButton}
+            </Box>
+          )}
         </AlertDialogTitle>
         <AlertDialogDescription>{content}</AlertDialogDescription>
-        <AlertDialogActions>
+        <AlertDialogActions
+          css={{
+            gap: '$6'
+          }}
+        >
           {labels.cancel && (
             <AlertDialogCancel asChild>
               {isValidElement(labels.cancel) ? (
@@ -68,7 +89,7 @@ export const DefaultConfirmDialog = ({
               ) : (
                 <Button
                   color="default"
-                  size="lg"
+                  size="xl"
                   onClick={onCancel}
                   {...cancelButtonProps}
                 >
@@ -84,7 +105,7 @@ export const DefaultConfirmDialog = ({
               ) : (
                 <Button
                   color="default"
-                  size="lg"
+                  size="xl"
                   onClick={onConfirm}
                   {...confirmButtonProps}
                 >
@@ -94,11 +115,6 @@ export const DefaultConfirmDialog = ({
             </AlertDialogAction>
           )}
         </AlertDialogActions>
-        {closeButton && (
-          <Box css={{ position: 'absolute', top: '$6', right: '$6' }}>
-            {closeButton}
-          </Box>
-        )}
       </AlertDialogContent>
     </AlertDialog>
   );
@@ -108,6 +124,7 @@ const DefaultCloseButton = (
   <AlertDialogCancel asChild>
     <IconButton
       icon={<CloseIcon />}
+      size="lg"
       aria-label="Close"
       color="bright"
       css={{

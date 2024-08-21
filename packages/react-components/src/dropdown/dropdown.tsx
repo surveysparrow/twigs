@@ -115,9 +115,9 @@ type SubTriggerProps = ComponentProps<typeof StyledSubTrigger> & {
   icon?: ReactElement;
 };
 
-const SubTrigger = ({ children, icon }: SubTriggerProps) => {
+const SubTrigger = ({ children, icon, ...props }: SubTriggerProps) => {
   return (
-    <StyledSubTrigger>
+    <StyledSubTrigger {...props}>
       {children}
       <StyledSubTriggerIcon>
         {icon ? React.cloneElement(icon) : <ChevronRightIcon />}
@@ -238,8 +238,9 @@ const DropdownRoot = ({ children, ...props }:DropdownRootProps) => {
   );
 };
 
+const DropdownMenuTrigger = styled(DropdownMenuPrimitive.Trigger);
+
 export const DropdownMenu = DropdownRoot;
-export const DropdownMenuTrigger = DropdownMenuPrimitive.Trigger;
 export const DropdownMenuContent = Content;
 export const DropdownMenuItem = StyledItem;
 export const DropdownMenuCheckboxItem = StyledCheckboxItem;
@@ -251,3 +252,4 @@ export const DropdownMenuSeparator = StyledSeparator;
 export const DropdownMenuSub = DropdownMenuPrimitive.Sub;
 export const DropdownMenuSubTrigger = SubTrigger;
 export const DropdownMenuSubContent = SubContent;
+export { DropdownMenuTrigger };

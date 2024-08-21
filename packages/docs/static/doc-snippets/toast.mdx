@@ -1,0 +1,28 @@
+---
+advancedSnippet: true
+---
+
+```jsx
+import React from "react";
+import { Toastr, toast, Button } from "@sparrowengg/twigs-react";
+
+export default function ToastExample() {
+  return (
+    <>
+      <Toastr duration={10000} />
+      <Button
+        variant="outline"
+        onClick={() => {
+          toast({
+            variant: "default",
+            title: "Default message",
+            description: "There was a problem with your request.",
+          });
+        }}
+      >
+        Show Toast
+      </Button>
+    </>
+  );
+}
+```

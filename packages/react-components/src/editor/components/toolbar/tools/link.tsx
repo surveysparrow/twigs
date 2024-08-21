@@ -1,8 +1,15 @@
-import { TOGGLE_LINK_COMMAND } from '@lexical/link';
+import { $createLinkNode, TOGGLE_LINK_COMMAND } from '@lexical/link';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { LinkIcon } from '@sparrowengg/twigs-react-icons';
 import { IconButton } from '@src/button';
+import { ADD_BLANK_LINK } from '@src/editor/utils/commands';
 import clsx from 'clsx';
+import {
+  $createTextNode,
+  $getSelection,
+  $insertNodes,
+  $isRangeSelection
+} from 'lexical';
 import { useToolbarStore } from '../../toolbar-context/store';
 import { ToolbarButtonProps } from './commons';
 
@@ -11,11 +18,35 @@ export const LinkTool = ({ renderButton, buttonProps }: ToolbarButtonProps) => {
   const [active] = useToolbarStore((state) => state.data.isLink);
 
   const handleClick = () => {
-    if (!active) {
-      editor.dispatchCommand(TOGGLE_LINK_COMMAND, 'https://');
-    } else {
-      editor.dispatchCommand(TOGGLE_LINK_COMMAND, null);
-    }
+    editor.update(() => {
+      const selection = $getSelection();
+      /**
+       * Handle link insertion when there is no selection (cursor blinking at a single point)
+       */
+      if (
+        selection === null
+        || ($isRangeSelection(selection) && selection?.isCollapsed())
+      ) {
+        const newLinkNode = $createLinkNode('');
+
+        // Completely empty string is not selectable, so we need to add a space.
+        // This space will be trimmed in the editor modal
+        newLinkNode.append($createTextNode(' '));
+
+        $insertNodes([newLinkNode]);
+        newLinkNode.selectStart();
+
+        editor.dispatchCommand(ADD_BLANK_LINK, undefined);
+
+        return;
+      }
+
+      if (!active) {
+        editor.dispatchCommand(TOGGLE_LINK_COMMAND, '');
+      } else {
+        editor.dispatchCommand(TOGGLE_LINK_COMMAND, null);
+      }
+    });
   };
 
   if (renderButton) {

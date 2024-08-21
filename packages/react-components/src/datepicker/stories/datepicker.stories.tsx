@@ -15,6 +15,7 @@ const WithPopOverTemplate = (args) => {
       {...args}
       value={value}
       onChange={setValue}
+      footerAction={(_, setPopoverOpen) => setPopoverOpen(false)}
       label="Enter date of birth"
     />
   );
