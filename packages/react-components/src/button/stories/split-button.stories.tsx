@@ -26,7 +26,7 @@ export default {
     },
     color: {
       control: 'select',
-      options: ['primary', 'secondary']
+      options: ['primary', 'secondary', 'default', 'light', 'error']
     },
     disabled: {
       control: 'boolean'
