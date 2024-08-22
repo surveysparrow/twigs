@@ -25,6 +25,7 @@ export type DefaultAlertDialogProps = {
   closeButton?: ReactNode;
   css?: CSS<typeof config>;
   onPrimaryAction?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  closeOnPrimaryAction?: boolean;
   onClose?: () => void;
 };
 
@@ -36,6 +37,7 @@ export const DefaultAlertDialog = ({
   },
   actionButtonProps,
   closeButton = DefaultCloseButton,
+  closeOnPrimaryAction = true,
   css,
   onPrimaryAction,
   onClose
@@ -58,16 +60,16 @@ export const DefaultAlertDialog = ({
         >
           {title}
           {closeButton && (
-          <Box
-            css={{
-              position: 'absolute',
-              top: '50%',
-              right: '$12',
-              transform: 'translate(0,-50%)'
-            }}
-          >
-            {closeButton}
-          </Box>
+            <Box
+              css={{
+                position: 'absolute',
+                top: '50%',
+                right: '$12',
+                transform: 'translate(0,-50%)'
+              }}
+            >
+              {closeButton}
+            </Box>
           )}
         </AlertDialogTitle>
         <AlertDialogDescription>{content}</AlertDialogDescription>
@@ -77,7 +79,7 @@ export const DefaultAlertDialog = ({
             justifyContent: 'flex-end'
           }}
         >
-          <AlertDialogAction asChild>
+          <ActionWrapper closeOnPrimaryAction={closeOnPrimaryAction}>
             {isValidElement(labels.action) ? (
               labels.action
             ) : (
@@ -90,11 +92,25 @@ export const DefaultAlertDialog = ({
                 {labels.action}
               </Button>
             )}
-          </AlertDialogAction>
+          </ActionWrapper>
         </AlertDialogActions>
       </AlertDialogContent>
     </AlertDialog>
   );
+};
+
+const ActionWrapper = ({
+  children,
+  closeOnPrimaryAction
+}: {
+  children: ReactNode;
+  closeOnPrimaryAction: boolean;
+}) => {
+  if (closeOnPrimaryAction) {
+    return <AlertDialogAction asChild>{children}</AlertDialogAction>;
+  }
+
+  return <>{children}</>;
 };
 
 const DefaultCloseButton = (
