@@ -6,7 +6,7 @@ export default {
   component: Table,
   title: 'Data Display/Table',
   argTypes: {
-    borderPlacement: {
+    border: {
       control: 'select',
       options: ['horizontal', 'vertical', 'both']
     }

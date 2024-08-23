@@ -40,7 +40,7 @@ export const StyledTh = styled('th', {
     borderRight: 'none'
   },
   variants: {
-    borderPlacement: {
+    border: {
       horizontal: {
         borderBottom: '$borderWidths$xs solid $colors$neutral200'
       },
@@ -54,7 +54,7 @@ export const StyledTh = styled('th', {
     }
   },
   defaultVariants: {
-    borderPlacement: 'horizontal'
+    border: 'horizontal'
   }
 });
 
@@ -70,7 +70,7 @@ export const StyledTd = styled('td', {
     borderRight: 'none'
   },
   variants: {
-    borderPlacement: {
+    border: {
       horizontal: {
         borderBottom: '$borderWidths$xs solid $colors$neutral100'
       },
@@ -84,7 +84,7 @@ export const StyledTd = styled('td', {
     }
   },
   defaultVariants: {
-    borderPlacement: 'horizontal'
+    border: 'horizontal'
   }
 });
 
@@ -92,14 +92,14 @@ export type TdProps = ComponentProps<typeof StyledTd>;
 export type ThProps = ComponentProps<typeof StyledTh>;
 
 const TableContext = createContext<{
-  borderPlacement?: TdProps['borderPlacement'];
+  border?: TdProps['border'];
 }>({});
 
 export const Td = ({ children, ...props }: ComponentProps<typeof StyledTd>) => {
   const context = useContext(TableContext);
 
   return (
-    <StyledTd borderPlacement={context.borderPlacement} {...props}>
+    <StyledTd border={context.border} {...props}>
       {children}
     </StyledTd>
   );
@@ -108,33 +108,33 @@ export const Td = ({ children, ...props }: ComponentProps<typeof StyledTd>) => {
 export const Th = ({ children, ...props }: ComponentProps<typeof StyledTh>) => {
   const context = useContext(TableContext);
 
-  let { borderPlacement } = props;
-  if (!borderPlacement) {
-    if (context.borderPlacement === 'vertical') {
-      borderPlacement = 'both';
+  let { border } = props;
+  if (!border) {
+    if (context.border === 'vertical') {
+      border = 'both';
     } else {
-      borderPlacement = context.borderPlacement;
+      border = context.border;
     }
   }
 
   return (
-    <StyledTh borderPlacement={borderPlacement} {...props}>
+    <StyledTh border={border} {...props}>
       {children}
     </StyledTh>
   );
 };
 
 export type TableProps = ComponentProps<typeof StyledTable> & {
-  borderPlacement: TdProps['borderPlacement'];
+  border: TdProps['border'];
 };
 
 export const Table = ({
   children,
-  borderPlacement,
+  border,
   ...props
 }: TableProps) => {
   return (
-    <TableContext.Provider value={{ borderPlacement }}>
+    <TableContext.Provider value={{ border }}>
       <StyledTable {...props}>{children}</StyledTable>
     </TableContext.Provider>
   );
