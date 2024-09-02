@@ -69,6 +69,7 @@ const ReactLiveScope = {
   DatePicker: twigsComponentLoader("DatePicker"),
   CalendarRange: twigsComponentLoader("CalendarRange"),
   Alert: twigsComponentLoader("Alert"),
+  AlertDescription: twigsComponentLoader("AlertDescription"),
   Toastr: twigsComponentLoader("Toastr"),
   toast: twigsComponentLoader("toast"),
   ToastAction: twigsComponentLoader("ToastAction"),

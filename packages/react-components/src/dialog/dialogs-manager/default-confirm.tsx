@@ -25,6 +25,8 @@ export type DefaultConfirmDialogProps = {
   confirmButtonProps?: ButtonProps;
   cancelButtonProps?: ButtonProps;
   closeButton?: ReactNode;
+  closeOnConfirm?: boolean;
+  closeOnCancel?: boolean;
   onConfirm?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onCancel?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onClose?: () => void;
@@ -40,6 +42,8 @@ export const DefaultConfirmDialog = ({
   },
   cancelButtonProps,
   confirmButtonProps,
+  closeOnCancel = true,
+  closeOnConfirm = true,
   closeButton = DefaultCloseButton,
   css,
   onConfirm,
@@ -83,7 +87,7 @@ export const DefaultConfirmDialog = ({
           }}
         >
           {labels.cancel && (
-            <AlertDialogCancel asChild>
+            <CancelButtonWrapper closeOnCancel={closeOnCancel}>
               {isValidElement(labels.cancel) ? (
                 labels.cancel
               ) : (
@@ -96,10 +100,10 @@ export const DefaultConfirmDialog = ({
                   {labels.cancel}
                 </Button>
               )}
-            </AlertDialogCancel>
+            </CancelButtonWrapper>
           )}
           {labels.confirm && (
-            <AlertDialogAction asChild>
+            <ConfirmButtonWrapper closeOnConfirm={closeOnConfirm}>
               {isValidElement(labels.confirm) ? (
                 labels.confirm
               ) : (
@@ -112,12 +116,40 @@ export const DefaultConfirmDialog = ({
                   {labels.confirm}
                 </Button>
               )}
-            </AlertDialogAction>
+            </ConfirmButtonWrapper>
           )}
         </AlertDialogActions>
       </AlertDialogContent>
     </AlertDialog>
   );
+};
+
+const CancelButtonWrapper = ({
+  children,
+  closeOnCancel
+}: {
+  children: ReactNode;
+  closeOnCancel: boolean;
+}) => {
+  if (closeOnCancel) {
+    return <AlertDialogCancel asChild>{children}</AlertDialogCancel>;
+  }
+
+  return <>{children}</>;
+};
+
+const ConfirmButtonWrapper = ({
+  children,
+  closeOnConfirm
+}: {
+  children: ReactNode;
+  closeOnConfirm: boolean;
+}) => {
+  if (closeOnConfirm) {
+    return <AlertDialogAction asChild>{children}</AlertDialogAction>;
+  }
+
+  return <>{children}</>;
 };
 
 const DefaultCloseButton = (
