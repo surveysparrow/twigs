@@ -1,5 +1,7 @@
 import { CSS } from '@stitches/react';
-import { createContext, useContext } from 'react';
+import { ReactNode, createContext, useContext } from 'react';
+import { DateValue } from 'react-aria';
+import { CalendarState } from 'react-stately';
 import { config } from '../stitches.config';
 import { TextProps } from '../text';
 
@@ -11,6 +13,12 @@ export type CalendarControlProps = {
   size?: CalendarSize;
   showFooter?: boolean;
   footerActionText?: string;
+  footerAction?: (state: CalendarState) => void;
+  renderFooter?: (state: CalendarState) => ReactNode;
+  onDaySelect?: (date: DateValue) => void;
+  onMonthSelect?: (date: DateValue) => void;
+  onYearSelect?: (date: DateValue) => void;
+  containerCSS?: CSS<typeof config>;
 };
 
 export const CalendarContext = createContext<{

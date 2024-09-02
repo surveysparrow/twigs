@@ -1,4 +1,5 @@
 import {
+  CalendarDate,
   DateDuration,
   endOfMonth,
   getWeeksInMonth
@@ -19,12 +20,14 @@ type CalendarGridType = {
   state: RangeCalendarState | CalendarState;
   offset?: DateDuration;
   containerCSS?: CSS<typeof config>;
+  onDaySelect?: (date: CalendarDate) => void;
 };
 
 export const CalendarGrid = ({
   state,
   offset = {},
-  containerCSS = {}
+  containerCSS = {},
+  onDaySelect
 }: CalendarGridType) => {
   const { locale } = useLocale();
   const id = useId();
@@ -76,6 +79,7 @@ export const CalendarGrid = ({
                   state={state}
                   date={date}
                   currentMonth={startDate}
+                  onDaySelect={onDaySelect}
                 />
               ) : null))}
           </DaysContainer>

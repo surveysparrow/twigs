@@ -1,3 +1,4 @@
+import { CalendarDate } from '@internationalized/date';
 import {
   ChevronLeftIcon,
   ChevronRightIcon
@@ -21,11 +22,13 @@ import {
 export const CalendarYearsView = ({
   state,
   range,
+  onYearSelect,
   setCurrentCalendarView
 }: {
   state: RangeCalendarState | CalendarState;
   range?: 'start' | 'end';
   setCurrentCalendarView: (view: keyof typeof CALENDAR_VIEW) => void;
+  onYearSelect?: (date: CalendarDate) => void;
 }) => {
   const numYears = 12;
   const [currentYearInView, setCurrentYearInView] = useState(
@@ -204,6 +207,9 @@ export const CalendarYearsView = ({
                 (state as CalendarState).selectDate(date);
               }
               state.setFocusedDate(date);
+              if (onYearSelect) {
+                onYearSelect(date);
+              }
             }}
           >
             {date.year}

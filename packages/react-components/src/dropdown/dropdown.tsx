@@ -115,9 +115,9 @@ type SubTriggerProps = ComponentProps<typeof StyledSubTrigger> & {
   icon?: ReactElement;
 };
 
-const SubTrigger = ({ children, icon }: SubTriggerProps) => {
+const SubTrigger = ({ children, icon, ...props }: SubTriggerProps) => {
   return (
-    <StyledSubTrigger>
+    <StyledSubTrigger {...props}>
       {children}
       <StyledSubTriggerIcon>
         {icon ? React.cloneElement(icon) : <ChevronRightIcon />}

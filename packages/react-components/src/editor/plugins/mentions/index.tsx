@@ -1,11 +1,12 @@
 import { MenuTextMatch } from '@lexical/react/LexicalTypeaheadMenuPlugin';
 
+import { useNodeFocusListener } from '@src/editor/utils/use-node-focus';
 import {
   EditorLookupDropdownBase,
   EditorLookupDropdownBaseProps,
   TypeaheadMenuData
 } from '../../components';
-import { $createMentionNode } from '../../nodes/mention';
+import { $createMentionNode, MentionNode } from '../../nodes/mention';
 
 const PUNCTUATION = '\\.,\\+\\*\\?\\$\\@\\|#{}\\(\\)\\^\\-\\[\\]\\\\/!%\'"~=<>_:;';
 const NAME = `\\b[A-Z][^\\s${PUNCTUATION}]`;
@@ -76,7 +77,10 @@ function checkForAtSignMentions(
   return null;
 }
 
-function getPossibleQueryMatch(text: string, len: number = 1): MenuTextMatch | null {
+function getPossibleQueryMatch(
+  text: string,
+  len: number = 1
+): MenuTextMatch | null {
   return checkForAtSignMentions(text, len);
 }
 
@@ -85,9 +89,13 @@ export const MentionsPlugin = ({
   triggerStringLength,
   ...props
 }: Partial<EditorLookupDropdownBaseProps> & {
-  getResults: (text: string | null) => TypeaheadMenuData[] | Promise<TypeaheadMenuData[]>;
+  getResults: (
+    text: string | null
+  ) => TypeaheadMenuData[] | Promise<TypeaheadMenuData[]>;
   triggerStringLength?: number;
 }) => {
+  useNodeFocusListener(MentionNode);
+
   return (
     <EditorLookupDropdownBase
       $createNode={({ data }) => $createMentionNode(`@${data.value}`)}

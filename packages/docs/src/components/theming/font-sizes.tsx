@@ -36,7 +36,8 @@ export default function AllFontSizes() {
                 css={{
                   fontSize: fontSizes[fontSize],
                   marginTop: '10px',
-                  fontWeight: '500'
+                  fontWeight: '500',
+                  lineHeight: '1.3',
                 }}
               >
                 {defaultText}
