@@ -82,6 +82,55 @@ Used to close a particular dialog
 
 Used to close all open dialogs
 
+### Default dialogs props
+
+#### Alert
+
+| Property             | Description                                    | Type                                               | Default               |
+| -------------------- | ---------------------------------------------- | -------------------------------------------------- | --------------------- |
+| title                | Title of the dialog                            | ReactNode                                          | null                  |
+| content              | Content shown inside the dialog                | ReactNode                                          | null                  |
+| labels               | Labels for the buttons                         | `{ action: string }`                               | `{ action: "Close" }` |
+| actionButtonProps    | Props for the action button                    | `ButtonProps`                                      | {}                    |
+| closeButton          | Close button shown on the top right corner     | ReactNode                                          | ReactNode             |
+| css                  | Custom styles to be applied on the content     | `CSS`                                              | {}                    |
+| closeOnPrimaryAction | Close the dialog when action button is clicked | `boolean`                                          | true                  |
+| onPrimaryAction      | Callback when action button is clicked         | `(e: React.MouseEvent<HTMLButtonElement>) => void` | undefined             |
+| onClose              | Callback when dialog is closed                 | `() => void`                                       | undefined             |
+
+#### Confirm
+
+| Property           | Description                                     | Type                                               | Default                                    |
+| ------------------ | ----------------------------------------------- | -------------------------------------------------- | ------------------------------------------ |
+| title              | Title of the dialog                             | ReactNode                                          | null                                       |
+| content            | Content shown inside the dialog                 | ReactNode                                          | null                                       |
+| labels             | Labels for the buttons                          | `{ confirm: string; cancel: string }`              | `{ confirm: "Confirm", cancel: "Cancel" }` |
+| confirmButtonProps | Props for the confirm button                    | `ButtonProps`                                      | {}                                         |
+| cancelButtonProps  | Props for the cancel button                     | `ButtonProps`                                      | {}                                         |
+| closeButton        | Close button shown on the top right corner      | ReactNode                                          | ReactNode                                  |
+| css                | Custom styles to be applied on the content      | `CSS`                                              | {}                                         |
+| closeOnConfirm     | Close the dialog when confirm button is clicked | `boolean`                                          | true                                       |
+| closeOnCancel      | Close the dialog when cancel button is clicked  | `boolean`                                          | true                                       |
+| onConfirm          | Callback when confirm button is clicked         | `(e: React.MouseEvent<HTMLButtonElement>) => void` | undefined                                  |
+| onCancel           | Callback when cancel button is clicked          | `(e: React.MouseEvent<HTMLButtonElement>) => void` | undefined                                  |
+| onClose            | Callback when dialog is closed                  | `() => void`                                       | undefined                                  |
+
+#### Modal
+
+| Property             | Description                                                                                                             | Type                                               | Default               |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- | --------------------- |
+| title                | Title of the dialog                                                                                                     | ReactNode                                          | null                  |
+| content              | Content shown inside the dialog                                                                                         | ReactNode                                          | null                  |
+| footer               | Dialog footer                                                                                                           | ReactNode                                          | ReactNode             |
+| children             | If provided, completely override the content of the dialog, ignoring all the other props like title, content and footer | ReactNode                                          | ReactNode             |
+| labels               | Labels for the buttons                                                                                                  | `{ action: string }`                               | `{ action: "Close" }` |
+| actionButtonProps    | Props for the action button                                                                                             | `ButtonProps`                                      | {}                    |
+| closeButton          | Close button shown on the top right corner                                                                              | ReactNode                                          | ReactNode             |
+| css                  | Custom styles to be applied on the content                                                                              | `CSS`                                              | {}                    |
+| closeOnPrimaryAction | Close the dialog when action button is clicked                                                                          | `boolean`                                          | true                  |
+| onPrimaryAction      | Callback when action button is clicked                                                                                  | `(e: React.MouseEvent<HTMLButtonElement>) => void` | undefined             |
+| onClose              | Callback when dialog is closed                                                                                          | `() => void`                                       | undefined             |
+
 ### Typesafe options
 
 When creating custom dialogs, you can ensure type safety to `dialogs.open` and `dialogs.push` by overriding the `DialogOptionsOverride` interface as shown below
