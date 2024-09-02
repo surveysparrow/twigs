@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, ComponentProps } from 'react';
 import * as Portal from '@radix-ui/react-portal';
+import clsx from 'clsx';
 import { styled } from '../stitches.config';
 import { Box } from '../box';
 import { useMountTransition } from '../hooks';
@@ -147,7 +148,8 @@ export const Drawer = ({
   isOpen = false,
   onClose,
   finalFocusRef,
-  children
+  children,
+  ...props
 }: DrawerProps) => {
   const bodyRef = useRef(document.querySelector('body'));
   const isTransitioning = useMountTransition(isOpen, 300);
@@ -195,8 +197,10 @@ export const Drawer = ({
     <Portal.Root className="drawer-portal">
       <StyledDrawerContainer>
         <StyledDrawerBackdrop
-          className={`${isOpen ? 'open' : ''} ${isTransitioning ? 'transitioning' : ''
-          }`}
+          className={clsx({
+            open: isOpen,
+            transitioning: isTransitioning
+          })}
           onClick={handleClose}
         />
         <StyledDrawer
@@ -204,8 +208,11 @@ export const Drawer = ({
           size={size}
           isOpen={isOpen}
           data-testid="drawer"
-          className={`${isOpen ? 'open' : ''} ${isTransitioning ? 'transitioning' : ''
-          }`}
+          {...props}
+          className={clsx(props.className, {
+            open: isOpen,
+            transitioning: isTransitioning
+          })}
         >
           {children}
         </StyledDrawer>
