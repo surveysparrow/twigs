@@ -40,7 +40,7 @@
   ],
   "author": "",
   "license": "MIT",
-  "homepage": "https://twigs.surveysparrow.com/",
+  "homepage": "https://twigs.surveysparrow.com",
   "peerDependencies": {
     "@lexical/code": ">=0.13.1",
     "@lexical/html": ">=0.13.1",
