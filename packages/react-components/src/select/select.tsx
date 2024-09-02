@@ -1,3 +1,4 @@
+import { CSS } from '@stitches/react';
 import React, {
   ComponentProps, ReactElement, ReactNode, useMemo
 } from 'react';
@@ -9,12 +10,13 @@ import ReactSelect, {
 import AsyncSelect from 'react-select/async';
 import AsyncCreatableSelect from 'react-select/async-creatable';
 import CreatableSelect from 'react-select/creatable';
+import clsx from 'clsx';
 import { Box } from '../box';
 import { Flex } from '../flex';
 import { FormLabel } from '../form-label';
-import { styled } from '../stitches.config';
+import { config, styled } from '../stitches.config';
 
-const selectStyles = {
+const selectStyles: CSS<typeof config> = {
   transition: 'all $transitions$2',
   '&--is-disabled': {
     cursor: 'not-allowed'
@@ -44,11 +46,26 @@ const selectStyles = {
   '& .twigs-select__placeholder': {
     color: '$neutral600'
   },
+  '& .twigs-select__indicators': {
+    height: '100%'
+  },
   '& .twigs-select__value-container': {
-    color: '$neutral900'
+    height: '100%',
+    color: '$neutral900',
+    paddingLeft: '$0',
+    paddingRight: '$0'
+  },
+  '&.twigs-select--dropdown-left .twigs-select__value-container': {
+    paddingLeft: '$2'
+  },
+  '&.twigs-select--dropdown-right .twigs-select__value-container': {
+    paddingRight: '$2'
   },
   '& .twigs-select__indicator': {
-    padding: '0 $4',
+    padding: '0',
+    '&.twigs-select__clear-indicator': {
+      padding: '0 $4'
+    },
     '& svg': {
       width: '$4',
       height: '$4'
@@ -108,8 +125,15 @@ const selectStyles = {
         '& .twigs-select__control': {
           height: '$12',
           minHeight: '$12',
-          borderRadius: '$lg',
-          fontSize: '$md'
+          borderRadius: '$xl',
+          fontSize: '$md',
+          padding: '0 $6'
+        },
+        '& .twigs-select__indicator': {
+          '& svg': {
+            width: '$5',
+            height: '$5'
+          }
         },
         '& .twigs-select__multi-value__label': {
           padding: '$4'
@@ -120,7 +144,14 @@ const selectStyles = {
           height: '$10',
           minHeight: '$10',
           borderRadius: '$lg',
-          fontSize: '$md'
+          fontSize: '$sm',
+          padding: '0 $6'
+        },
+        '& .twigs-select__indicator': {
+          '& svg': {
+            width: '$5',
+            height: '$5'
+          }
         },
         '& .twigs-select__multi-value__label': {
           padding: '$3'
@@ -135,7 +166,8 @@ const selectStyles = {
           height: '$8',
           minHeight: '$8',
           borderRadius: '$lg',
-          fontSize: '$sm'
+          fontSize: '$sm',
+          padding: '0 $4'
         },
         '& .twigs-select__multi-value__label': {
           padding: '$2'
@@ -145,8 +177,12 @@ const selectStyles = {
         '& .twigs-select__control': {
           height: '$6',
           minHeight: '$6',
-          borderRadius: '$md',
-          fontSize: '$sm'
+          borderRadius: '$sm',
+          fontSize: '$xs',
+          padding: '0 $4'
+        },
+        '&.twigs-select--dropdown-right .twigs-select__value-container': {
+          paddingRight: '$1'
         },
         '& .twigs-select__value-container, & .twigs-select__input-container': {
           paddingTop: 0,
@@ -154,6 +190,12 @@ const selectStyles = {
         },
         '& .twigs-select__multi-value__label': {
           padding: '$1'
+        },
+        '& .twigs-select__indicator': {
+          '& svg': {
+            width: '14px',
+            height: '14px'
+          }
         }
       }
     },
@@ -163,11 +205,11 @@ const selectStyles = {
           background: '$white900',
           borderWidth: '$xs',
           borderStyle: 'solid',
-          borderColor: '$neutral200',
+          borderColor: '$black300',
           '&:hover, &:focus, &:active': {
             borderWidth: '$xs',
             borderStyle: 'solid',
-            borderColor: '$neutral300'
+            borderColor: '$neutral400'
           }
         }
       },
@@ -286,6 +328,11 @@ export const Select = React.forwardRef<
           ...components
         }}
         classNamePrefix="twigs-select"
+        className={clsx(props.className, {
+          'twigs-select--dropdown-left': dropdownIndicatorPosition === 'left',
+          'twigs-select--dropdown-right': dropdownIndicatorPosition === 'right',
+          'twigs-select--is-multi': props.isMulti
+        })}
         theme={(theme) => ({ ...theme, borderRadius: 10 })}
       />
     );
