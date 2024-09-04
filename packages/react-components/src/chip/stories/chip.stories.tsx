@@ -1,4 +1,7 @@
-import React from 'react';
+import {
+  ChevronDownIcon,
+  TickCircleFillIcon
+} from '@sparrowengg/twigs-react-icons';
 import { Chip } from '../chip';
 
 export default {
@@ -13,11 +16,25 @@ export default {
   argTypes: {
     size: {
       control: 'select',
-      options: ['xs', 'sm', 'md', 'lg']
+      options: ['3xs', '2xs', 'xs', 'sm', 'md', 'lg']
     },
     color: {
       control: 'select',
-      options: ['primary', 'default', 'error', 'warning', 'success']
+      options: [
+        'primary',
+        'default',
+        'secondary',
+        'error',
+        'warning',
+        'success',
+        'accent'
+      ]
+    },
+    active: {
+      control: 'boolean'
+    },
+    selectable: {
+      control: 'boolean'
     },
     rounded: {
       control: 'select',
@@ -30,11 +47,34 @@ export default {
   }
 };
 
-const Template = (args) => (
+const Template = (args) => <Chip {...args}>Template</Chip>;
+
+export const Default = Template.bind({});
+
+export const WithLeftElement = (args) => (
   <Chip
     {...args}
+    leftElement={<TickCircleFillIcon />}
   >
     Template
   </Chip>
 );
-export const Default = Template.bind({});
+
+export const WithRightElement = (args) => (
+  <Chip
+    {...args}
+    rightElement={<ChevronDownIcon />}
+  >
+    Template
+  </Chip>
+);
+
+export const WithLeftAndRightElements = (args) => (
+  <Chip
+    {...args}
+    leftElement={<TickCircleFillIcon />}
+    rightElement={<ChevronDownIcon />}
+  >
+    Template
+  </Chip>
+);
