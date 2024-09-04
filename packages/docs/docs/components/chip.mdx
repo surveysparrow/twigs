@@ -2,6 +2,8 @@ import ChipSnippet, {
   frontMatter as ChipSnippetFrontMatter,
 } from "@site/static/doc-snippets/chip.mdx";
 import ChipClosableSnippet from "@site/static/doc-snippets/chip-closable.mdx";
+import ChipSelectableSnippet from "@site/static/doc-snippets/chip-selectable.mdx";
+import ChipSideElementsSnippet from "@site/static/doc-snippets/chip-side-elements.mdx";
 import CodeBlock from "@theme/CodeBlock";
 
 # Chip
@@ -16,13 +18,27 @@ import CodeBlock from "@theme/CodeBlock";
 
 <ChipClosableSnippet />
 
+### Selectable chip
+
+<ChipSelectableSnippet />
+
+### Chip with side elements
+
+<ChipSideElementsSnippet />
+
 ### Props
 
-| Property | Description                             | Type                                            | Default |
-| -------- | --------------------------------------- | ----------------------------------------------- | ------- |
-| variant  | style of the chip                       | `outline` `solid`                               | solid   |
-| color    |                                         | `default` `primary` `success` `error` `warning` | default |
-| size     |                                         | `xs` `sm` `md` `lg`                             | sm      |
-| rounded  | border radius of the chip               | `sm` `full`                                     | sm      |
-| closable | add a close icon after the chip content | boolean                                         | false   |
-| onClose  | Callback function for closable icon     | function                                        |         |
+| Property            | Description                                           | Type                                            | Default |
+| ------------------- | ----------------------------------------------------- | ----------------------------------------------- | ------- |
+| variant             | style of the chip                                     | `outline` `solid`                               | solid   |
+| color               |                                                       | `default` `primary` `success` `error` `warning` | default |
+| size                |                                                       | `xs` `sm` `md` `lg`                             | sm      |
+| rounded             | border radius of the chip                             | `sm` `full`                                     | sm      |
+| closable            | add a close icon after the chip content               | boolean                                         | false   |
+| onClose             | Callback function for closable icon                   | function                                        |         |
+| leftElement         | React element to display on the left side of the chip | ReactNode                                     | null  |
+| rightElement        | React element to display on the left side of the chip | ReactNode                                     | null  |
+| selectable          | Whether the chip is selectable                        | boolean                                         | false   |
+| active              | Whether the chip is active, if its selectable         | boolean                                         | false   |
+| defaultActive       | Default active state of the chip, if its selectable   | boolean                                         | false   |
+| onActiveStateChange | Callback function for active state change             | function                                        |         |
