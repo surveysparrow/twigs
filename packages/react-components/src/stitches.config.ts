@@ -312,7 +312,8 @@ export const {
   keyframes,
   config,
   reset,
-  css
+  css,
+  getCssText
 } = createStitches({
   prefix: 'twigs',
   theme: defaultTheme,
