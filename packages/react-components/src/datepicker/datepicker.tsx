@@ -112,7 +112,8 @@ export const DatePicker = ({
             background: '$black50',
             border: 'none',
             padding: '$4 $6',
-            borderRadius: '$lg'
+            borderRadius: '$lg',
+            justifyContent: 'space-between'
           }}
         >
           <Box
