@@ -1,9 +1,12 @@
 import { getLocalTimeZone, today } from '@internationalized/date';
 import { CalendarIcon } from '@sparrowengg/twigs-react-icons';
 import { CSS } from '@stitches/react';
-import { ReactNode, useEffect, useRef } from 'react';
+import {
+  ComponentProps, ReactNode, useEffect, useRef
+} from 'react';
 import { AriaDatePickerProps, DateValue, useDatePicker } from 'react-aria';
 import { CalendarState, useDatePickerState } from 'react-stately';
+import { prefixClassName } from '@src/utils';
 import { Box } from '../box';
 import { IconButton } from '../button';
 import { Calendar } from '../calendar';
@@ -37,6 +40,7 @@ export type DatePickerProps = AriaDatePickerProps<DateValue> & {
   contentStyle?: CSS;
   portalTarget?: Element | null | undefined;
   calendarContainerCSS?: CalendarControlProps['containerCSS'];
+  popoverContentProps?: ComponentProps<typeof PopoverContent>;
 } & CalendarControlProps;
 
 export const DatePicker = ({
@@ -50,6 +54,7 @@ export const DatePicker = ({
   contentStyle,
   portalTarget,
   containerCSS,
+  popoverContentProps,
   calendarContainerCSS,
   onDaySelect,
   onMonthSelect,
@@ -97,30 +102,33 @@ export const DatePicker = ({
       )}
 
       <Popover open={state.isOpen} onOpenChange={state.toggle}>
-        <PopoverTrigger asChild>
+        <Box
+          {...groupProps}
+          className={prefixClassName('datepicker__field-container')}
+          ref={ref}
+          css={{
+            display: 'inline-flex',
+            width: 'auto',
+            background: '$black50',
+            border: 'none',
+            padding: '$4 $6',
+            borderRadius: '$lg',
+            justifyContent: 'space-between'
+          }}
+        >
           <Box
-            {...groupProps}
-            ref={ref}
             css={{
-              display: 'inline-flex',
-              width: 'auto',
-              background: '$black50',
-              border: 'none',
-              padding: '$4 $6',
-              borderRadius: '$lg'
+              position: 'relative',
+              transition: 'all 200ms',
+              display: 'flex',
+              alignItems: 'center'
             }}
+            className={prefixClassName('datepicker__field')}
+            ref={ref}
           >
-            <Box
-              css={{
-                position: 'relative',
-                transition: 'all 200ms',
-                display: 'flex',
-                alignItems: 'center'
-              }}
-              ref={ref}
-            >
-              <DateField {...fieldProps} />
-            </Box>
+            <DateField {...fieldProps} />
+          </Box>
+          <PopoverTrigger asChild>
             <IconButton
               {...buttonProps}
               onClick={state.open}
@@ -133,11 +141,15 @@ export const DatePicker = ({
               type="button"
               icon={<CalendarIcon />}
             />
-          </Box>
-        </PopoverTrigger>
+          </PopoverTrigger>
+        </Box>
         <PopoverWrapper enablePortal={enablePortal} portalTarget={portalTarget}>
           <PopoverContent
             {...dialogProps}
+            align="end"
+            sideOffset={10}
+            alignOffset={-12}
+            {...popoverContentProps}
             css={{
               width: 'auto',
               padding: '0',
