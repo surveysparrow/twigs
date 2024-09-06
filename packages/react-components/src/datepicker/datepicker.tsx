@@ -146,6 +146,9 @@ export const DatePicker = ({
         <PopoverWrapper enablePortal={enablePortal} portalTarget={portalTarget}>
           <PopoverContent
             {...dialogProps}
+            align="end"
+            sideOffset={10}
+            alignOffset={-12}
             {...popoverContentProps}
             css={{
               width: 'auto',
