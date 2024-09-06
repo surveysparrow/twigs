@@ -28,6 +28,10 @@ export default {
     variant: {
       control: 'select',
       options: ['default', 'filled']
+    },
+    menuPlacement: {
+      control: 'select',
+      options: ['auto', 'bottom', 'top']
     }
   }
 };
@@ -43,6 +47,10 @@ const Template = (args) => (
     {...args}
     options={options}
     dropdownIndicatorIcon={<SearchIcon />}
+    // adding margin top to test the top placement of the menu
+    css={{
+      marginTop: '200px'
+    }}
   />
 );
 export const Default = Template.bind({});

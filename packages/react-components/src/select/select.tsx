@@ -196,6 +196,7 @@ type SelectBaseProps = {
   dropdownIndicatorPosition?: 'left' | 'right';
   label?: string;
   requiredIndicator?: boolean;
+  menuPlacement?: 'auto' | 'bottom' | 'top';
 };
 
 const DropdownIndicator = (props, dropdownIndicatorIcon) => {
