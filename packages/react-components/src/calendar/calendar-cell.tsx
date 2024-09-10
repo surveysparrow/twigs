@@ -43,8 +43,8 @@ export const CalendarCell = ({
   return (
     <DayContainer
       {...cellProps}
-      data-selection-start={isSelectionStart}
-      data-selection-end={isSelectionEnd}
+      data-selection-start={isSelectionStart && !isOutsideMonth}
+      data-selection-end={isSelectionEnd && !isOutsideMonth}
       data-in-range={isRangeCalendar && isSelected}
     >
       <Day
