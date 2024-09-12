@@ -1,0 +1,31 @@
+name: Publish twigs-react package to pkg.pr.new
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "Branch to deploy"
+        required: true
+        default: "main"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.branch }}
+
+      - name: Build and Test
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: yarn
+      - run: yarn build:components
+
+      - name: Publish to pkg.pr.new
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: cd packages/react-components && yarn publish-pkg-pr-new
