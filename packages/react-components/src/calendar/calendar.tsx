@@ -65,14 +65,19 @@ export const Calendar = ({
   const [currentCalendarView, setCurrentCalendarView] = useState<
     keyof typeof CALENDAR_VIEW
   >(CALENDAR_VIEW.GRID);
-  const [localDateValue, setLocalDateValue] = useState<DateValue>(today(getLocalTimeZone()));
+  const [localDateValue, setLocalDateValue] = useState<DateValue>(
+    today(getLocalTimeZone())
+  );
   const dateValue = props.value ?? localDateValue;
 
   const { locale } = useLocale();
   const state = useCalendarState({
+    defaultValue: dateValue,
     ...props,
     locale,
-    value: dateValue,
+    ...(props.value && {
+      value: props.value
+    }),
     createCalendar
   });
 
@@ -117,14 +122,15 @@ export const Calendar = ({
     state
   );
 
-  const contextValue = useMemo(() => ({
-    size
-  }), [size]);
+  const contextValue = useMemo(
+    () => ({
+      size
+    }),
+    [size]
+  );
 
   return (
-    <CalendarContext.Provider
-      value={contextValue}
-    >
+    <CalendarContext.Provider value={contextValue}>
       <Box
         {...calendarProps}
         css={{
