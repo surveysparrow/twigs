@@ -5,7 +5,7 @@ on:
       branch:
         description: "Branch to deploy"
         required: true
-        default: "main"
+        default: "master"
 
 jobs:
   build:
