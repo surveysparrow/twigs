@@ -73,7 +73,7 @@ export const CalendarYearsView = ({
       const nextYear = years[index + 1];
       if (nextYear && !state.isInvalid(nextYear)) {
         const focusedDate = state.focusedDate.set({
-          month: nextYear.year
+          year: nextYear.year
         });
         state.setFocusedDate(focusedDate);
         const nextButton = e.currentTarget
@@ -91,7 +91,7 @@ export const CalendarYearsView = ({
       const prevYear = years[index - 1];
       if (prevYear && !state.isInvalid(prevYear)) {
         const focusedDate = state.focusedDate.set({
-          month: prevYear.year
+          year: prevYear.year
         });
 
         state.setFocusedDate(focusedDate);
@@ -105,6 +105,13 @@ export const CalendarYearsView = ({
         }
       }
     }
+  };
+
+  const getButtonTabIndex = (index: number, year: number) => {
+    if (dateValue?.year) {
+      return dateValue.year === year ? 0 : -1;
+    }
+    return index === 0 ? 0 : -1;
   };
 
   return (
@@ -187,15 +194,15 @@ export const CalendarYearsView = ({
         {years.map((date, i) => (
           <Button
             key={date.year}
-            color={dateValue.year === date.year ? 'default' : 'bright'}
+            color={dateValue?.year === date.year ? 'default' : 'bright'}
             data-yearId={date.year}
-            tabIndex={dateValue.year === date.year ? 0 : -1}
+            tabIndex={getButtonTabIndex(i, date.year)}
             disabled={state.isInvalid(date)}
             css={{
               padding: '$6',
               height:
                 CALENDAR_SIZE_TO_YEAR_MONTH_BTN_HEIGHT[calendarContext.size],
-              ...(dateValue.year === date.year && {
+              ...(dateValue?.year === date.year && {
                 color: '$secondary600'
               })
             }}
