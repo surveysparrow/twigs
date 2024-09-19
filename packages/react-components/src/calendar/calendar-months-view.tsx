@@ -68,7 +68,7 @@ export const CalendarMonthsView = ({
       if (!containerRef.current) return;
 
       const currentMonth = containerRef.current.querySelector(
-        `button[data-month-id="${dateValue.month}"]`
+        `button[data-month-id="${dateValue?.month}"]`
       ) as HTMLButtonElement;
 
       if (currentMonth) {
@@ -122,6 +122,13 @@ export const CalendarMonthsView = ({
     }
   };
 
+  const getButtonTabIndex = (index: number, month: number) => {
+    if (dateValue?.month) {
+      return dateValue.month === month ? 0 : -1;
+    }
+    return index === 0 ? 0 : -1;
+  };
+
   return (
     <Box
       css={{
@@ -154,15 +161,15 @@ export const CalendarMonthsView = ({
         {months.map((month, i) => (
           <Button
             key={month.label}
-            color={dateValue.month === month.date.month ? 'default' : 'bright'}
+            color={dateValue?.month === month.date.month ? 'default' : 'bright'}
             data-month-id={month.date.month}
-            tabIndex={dateValue.month === month.date.month ? 0 : -1}
+            tabIndex={getButtonTabIndex(i, month.date.month)}
             disabled={state.isInvalid(month.date)}
             css={{
               padding: '$6',
               height:
                 CALENDAR_SIZE_TO_YEAR_MONTH_BTN_HEIGHT[calendarContext.size],
-              ...(dateValue.month === month.date.month && {
+              ...(dateValue?.month === month.date.month && {
                 color: '$secondary600'
               })
             }}

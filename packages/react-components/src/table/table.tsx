@@ -125,7 +125,7 @@ export const Th = ({ children, ...props }: ComponentProps<typeof StyledTh>) => {
 };
 
 export type TableProps = ComponentProps<typeof StyledTable> & {
-  border: TdProps['border'];
+  border?: TdProps['border'];
 };
 
 export const Table = ({
