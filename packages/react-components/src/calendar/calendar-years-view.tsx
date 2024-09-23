@@ -121,7 +121,7 @@ export const CalendarYearsView = ({
 
   const isNextButtonDisabled = () => {
     if (!state.maxValue) return false;
-    return state.maxValue.year > years.at(-1)!.year;
+    return state.maxValue.year < years.at(-1)!.year;
   };
 
   const isButtonDisabled = (year: number) => {
