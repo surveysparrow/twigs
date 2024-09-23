@@ -113,7 +113,7 @@ export const Td = forwardRef<
 export const Th = forwardRef<
   HTMLTableCellElement,
   ComponentProps<typeof StyledTh>
->(({ children, ...props }) => {
+>(({ children, ...props }, ref) => {
   const context = useContext(TableContext);
 
   let { border } = props;
@@ -126,7 +126,7 @@ export const Th = forwardRef<
   }
 
   return (
-    <StyledTh border={border} {...props}>
+    <StyledTh border={border} {...props} ref={ref}>
       {children}
     </StyledTh>
   );
@@ -137,10 +137,10 @@ export type TableProps = ComponentProps<typeof StyledTable> & {
 };
 
 export const Table = forwardRef<HTMLTableElement, TableProps>(
-  ({ children, border, ...props }) => {
+  ({ children, border, ...props }, ref) => {
     return (
       <TableContext.Provider value={{ border }}>
-        <StyledTable {...props}>{children}</StyledTable>
+        <StyledTable {...props} ref={ref}>{children}</StyledTable>
       </TableContext.Provider>
     );
   }
