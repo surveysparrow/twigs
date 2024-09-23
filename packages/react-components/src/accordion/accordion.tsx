@@ -21,7 +21,7 @@ const StyledTrigger = styled(AccordionPrimitive.Trigger, {
   paddingInlineEnd: '$8',
   paddingTop: '$2',
   paddingBottom: '$2',
-  [`[data-state=open] & ${StyledChevron}`]: {
+  [`[data-state=open] > & ${StyledChevron}`]: {
     transform: 'rotate(180deg)'
   },
   '&:hover': {
