@@ -129,6 +129,45 @@ export const CalendarMonthsView = ({
     return index === 0 ? 0 : -1;
   };
 
+  const isButtonDisabled = (date: CalendarDate) => {
+    if (!state.minValue && !state.maxValue) return false;
+    if (
+      state.minValue
+      && date.year === state.minValue.year
+      && date.month < state.minValue.month
+    ) {
+      return true;
+    }
+    if (
+      state.maxValue
+      && date.year === state.maxValue.year
+      && date.month > state.maxValue.month
+    ) {
+      return true;
+    }
+    return false;
+  };
+
+  const handleMonthSelect = (date: CalendarDate) => {
+    let updatedDate = date.set({});
+
+    if (state.isInvalid(date)) {
+      if (state.minValue && date.day < state.minValue.day) {
+        updatedDate = updatedDate.set({ day: state.minValue.day });
+      } else if (state.maxValue && date.day > state.maxValue.day) {
+        updatedDate = updatedDate.set({ day: state.maxValue.day });
+      }
+    }
+    if (!range) {
+      (state as CalendarState).selectDate(updatedDate);
+    }
+    state.setFocusedDate(updatedDate);
+    if (onMonthSelect) {
+      onMonthSelect(updatedDate);
+    }
+    setCurrentCalendarView(CALENDAR_VIEW.GRID);
+  };
+
   return (
     <Box
       css={{
@@ -164,7 +203,7 @@ export const CalendarMonthsView = ({
             color={dateValue?.month === month.date.month ? 'default' : 'bright'}
             data-month-id={month.date.month}
             tabIndex={getButtonTabIndex(i, month.date.month)}
-            disabled={state.isInvalid(month.date)}
+            disabled={isButtonDisabled(month.date)}
             css={{
               padding: '$6',
               height:
@@ -175,16 +214,7 @@ export const CalendarMonthsView = ({
             }}
             onKeyDown={(e) => handleKeyDown(e, i)}
             size={calendarContext.size}
-            onClick={() => {
-              if (!range) {
-                (state as CalendarState).selectDate(month.date);
-              }
-              state.setFocusedDate(month.date);
-              if (onMonthSelect) {
-                onMonthSelect(month.date);
-              }
-              setCurrentCalendarView(CALENDAR_VIEW.GRID);
-            }}
+            onClick={() => handleMonthSelect(month.date)}
           >
             {month.label}
           </Button>
