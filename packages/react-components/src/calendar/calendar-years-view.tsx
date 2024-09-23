@@ -114,6 +114,96 @@ export const CalendarYearsView = ({
     return index === 0 ? 0 : -1;
   };
 
+  const isPrevButtonDisabled = () => {
+    if (!state.minValue) return false;
+    return state.minValue.year > years[0].year;
+  };
+
+  const isNextButtonDisabled = () => {
+    if (!state.maxValue) return false;
+    return state.maxValue.year > years.at(-1)!.year;
+  };
+
+  const isButtonDisabled = (year: number) => {
+    if (state.maxValue && year > state.maxValue.year) {
+      return true;
+    }
+    if (state.minValue && year < state.minValue.year) {
+      return true;
+    }
+    return false;
+  };
+
+  const handleYearSelect = (date: CalendarDate) => {
+    if (state.isInvalid(date)) {
+      let updatedDate = date.set({});
+      /**
+       * Check if the selected date is less than the min date
+       */
+      if (
+        state.minValue
+        && state.minValue.year === date.year
+        && (date.month < state.minValue.month
+          || (date.month === state.minValue.month
+            && date.day < state.minValue.day))
+      ) {
+        updatedDate = updatedDate.set({
+          year: state.minValue.year,
+          month: state.minValue.month,
+          day: state.minValue.day
+        });
+      } else if (
+        /**
+         * Check if the selected date is greater than the max date
+         */
+        state.maxValue
+        && date.year === state.maxValue.year
+        && (date.month > state.maxValue.month
+          || (date.month === state.maxValue.month
+            && date.day > state.maxValue.day))
+      ) {
+        updatedDate = updatedDate.set({
+          year: state.maxValue.year,
+          month: state.maxValue.month,
+          day: state.maxValue.day
+        });
+      } else {
+        // This condition should not be hit, but just in case
+        // eslint-disable-next-line no-lonely-if
+        if (state.minValue) {
+          updatedDate = updatedDate.set({
+            year: state.minValue.year,
+            month: state.minValue.month,
+            day: state.minValue.day
+          });
+        } else if (state.maxValue) {
+          updatedDate = updatedDate.set({
+            year: state.maxValue.year,
+            month: state.maxValue.month,
+            day: state.maxValue.day
+          });
+        }
+      }
+      if (!range) {
+        (state as CalendarState).selectDate(updatedDate);
+      }
+      state.setFocusedDate(updatedDate);
+      if (onYearSelect) {
+        onYearSelect(updatedDate);
+      }
+      setCurrentCalendarView(CALENDAR_VIEW.MONTH);
+      return;
+    }
+    setCurrentCalendarView(CALENDAR_VIEW.GRID);
+    if (!range) {
+      (state as CalendarState).selectDate(date);
+    }
+    state.setFocusedDate(date);
+    if (onYearSelect) {
+      onYearSelect(date);
+    }
+  };
+
   return (
     <Box
       css={{
@@ -136,9 +226,7 @@ export const CalendarYearsView = ({
             icon={<ChevronLeftIcon />}
             color="bright"
             size="lg"
-            disabled={state.isInvalid(
-              state.focusedDate.set({ year: currentYearInView - numYears })
-            )}
+            disabled={isPrevButtonDisabled()}
             onClick={() => {
               setCurrentYearInView((prev) => prev - numYears);
             }}
@@ -178,9 +266,7 @@ export const CalendarYearsView = ({
             icon={<ChevronRightIcon />}
             color="bright"
             size="lg"
-            disabled={state.isInvalid(
-              state.focusedDate.set({ year: currentYearInView + numYears })
-            )}
+            disabled={isNextButtonDisabled()}
             onClick={() => {
               setCurrentYearInView((prev) => prev + numYears);
             }}
@@ -195,9 +281,9 @@ export const CalendarYearsView = ({
           <Button
             key={date.year}
             color={dateValue?.year === date.year ? 'default' : 'bright'}
-            data-yearId={date.year}
+            data-year-id={date.year}
             tabIndex={getButtonTabIndex(i, date.year)}
-            disabled={state.isInvalid(date)}
+            disabled={isButtonDisabled(date.year)}
             css={{
               padding: '$6',
               height:
@@ -208,16 +294,7 @@ export const CalendarYearsView = ({
             }}
             onKeyDown={(e) => handleKeyDown(e, i)}
             size={calendarContext.size}
-            onClick={() => {
-              setCurrentCalendarView(CALENDAR_VIEW.GRID);
-              if (!range) {
-                (state as CalendarState).selectDate(date);
-              }
-              state.setFocusedDate(date);
-              if (onYearSelect) {
-                onYearSelect(date);
-              }
-            }}
+            onClick={() => handleYearSelect(date)}
           >
             {date.year}
           </Button>
