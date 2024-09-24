@@ -4,14 +4,15 @@ import { config } from '@src/stitches.config';
 import { CSS } from '@stitches/react';
 import {
   Dialog,
+  DialogBody,
   DialogClose,
   DialogContent,
-  DialogDescription,
+  DialogFooter,
+  DialogHeader,
   DialogRootProps,
   DialogTitle
 } from '../dialog';
 import { Button, IconButton } from '../../button';
-import { Flex } from '../../flex';
 import { Box } from '../../box';
 import { prefixClassName } from '../../utils';
 
@@ -57,37 +58,39 @@ export const DefaultModal = ({
       <DialogContent css={{ ...css }}>
         {children ?? (
           <>
-            <DialogTitle
+            <DialogHeader
               css={{
-                paddingRight: 'calc($20 + $12 + $6)',
+                display: 'flex',
+                alignItems: 'center',
                 position: 'relative'
               }}
             >
-              {title}
+              <DialogTitle
+                css={{
+                  paddingRight: 'calc($20 + $12 + $6)'
+                }}
+              >
+                {title}
+              </DialogTitle>
               {closeButton && (
                 <Box
                   css={{
                     position: 'absolute',
-                    top: '50%',
-                    right: '0',
-                    transform: 'translate(0,-50%)'
+                    top: '$8',
+                    right: '$12'
                   }}
                 >
                   {closeButton}
                 </Box>
               )}
-            </DialogTitle>
-            <DialogDescription
-              css={{
-                paddingTop: '$6',
-                paddingBottom: '$6'
-              }}
-            >
+            </DialogHeader>
+            <DialogBody>
               {content}
-            </DialogDescription>
+            </DialogBody>
             {footer ?? (
-              <Flex
+              <DialogFooter
                 css={{
+                  display: 'flex',
                   justifyContent: 'flex-end'
                 }}
               >
@@ -96,7 +99,7 @@ export const DefaultModal = ({
                     {labels?.action}
                   </Button>
                 </ActionWrapper>
-              </Flex>
+              </DialogFooter>
             )}
           </>
         )}
