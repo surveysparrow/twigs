@@ -49,6 +49,9 @@ const AccordionItem = styled(AccordionPrimitive.Item, {
   '&:focus-within': {
     position: 'relative',
     zIndex: 1
+  },
+  [`[data-disabled]`]: {
+    opacity: '0.5'
   }
 });
 
