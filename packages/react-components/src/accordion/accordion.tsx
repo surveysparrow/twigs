@@ -24,7 +24,7 @@ const StyledTrigger = styled(AccordionPrimitive.Trigger, {
   [`[data-state=open] > & ${StyledChevron}`]: {
     transform: 'rotate(180deg)'
   },
-  '&:hover': {
+  '&:hover:not([data-disabled])': {
     backgroundColorOpacity: ['$primary500', 0.04]
   },
   '&:focus-visible': {
@@ -50,8 +50,10 @@ const AccordionItem = styled(AccordionPrimitive.Item, {
     position: 'relative',
     zIndex: 1
   },
-  [`[data-disabled]`]: {
-    opacity: '0.5'
+  '&[data-disabled]': {
+    background: '$white900',
+    opacity: '0.4',
+    color: '$neutral800'
   }
 });
 
