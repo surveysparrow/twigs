@@ -132,7 +132,7 @@ export const Th = forwardRef<
   );
 });
 
-export type TableProps = ComponentProps<typeof StyledTable> & {
+export type TableProps = Omit<ComponentProps<typeof StyledTable>, 'border'> & {
   border?: TdProps['border'];
 };
 
@@ -140,7 +140,9 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(
   ({ children, border, ...props }, ref) => {
     return (
       <TableContext.Provider value={{ border }}>
-        <StyledTable {...props} ref={ref}>{children}</StyledTable>
+        <StyledTable {...props} ref={ref}>
+          {children}
+        </StyledTable>
       </TableContext.Provider>
     );
   }
