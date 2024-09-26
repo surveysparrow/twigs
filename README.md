@@ -39,3 +39,14 @@ $ yarn storybook
 3. To delete all node_modules folders (even from subpackages), `npx lerna clean -y`
 
 4. If you'd like to run command against one package alone, run `npx lerna run build --scope=package-name`
+
+## Contributors
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
