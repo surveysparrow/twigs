@@ -1,4 +1,22 @@
 {
   "projectName": "twigs",
-  "projectOwner": "surveysparrow"
+  "projectOwner": "surveysparrow",
+  "files": [
+    "README.md"
+  ],
+  "commitType": "docs",
+  "commitConvention": "angular",
+  "contributorsPerLine": 7,
+  "contributors": [
+    {
+      "login": "justin-ss",
+      "name": "Justin George",
+      "avatar_url": "https://avatars.githubusercontent.com/u/105047491?v=4",
+      "profile": "https://github.com/justin-ss",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    }
+  ]
 }
