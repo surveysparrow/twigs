@@ -56,6 +56,9 @@ $ yarn storybook
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/meenakshi-ss"><img src="https://avatars.githubusercontent.com/u/160723712?v=4?s=100" width="100px;" alt="Meenakshi Sundaram"/><br /><sub><b>Meenakshi Sundaram</b></sub></a><br /><a href="#code-meenakshi-ss" title="Code">💻</a> <a href="#bug-meenakshi-ss" title="Bug reports">🐛</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/ss-oliver-paul"><img src="https://avatars.githubusercontent.com/u/158561360?v=4?s=100" width="100px;" alt="Oliver Paul"/><br /><sub><b>Oliver Paul</b></sub></a><br /><a href="#infra-ss-oliver-paul" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/ragulcs-sparrow"><img src="https://avatars.githubusercontent.com/u/163504861?v=4?s=100" width="100px;" alt="ragulcs-sparrow"/><br /><sub><b>ragulcs-sparrow</b></sub></a><br /><a href="#code-ragulcs-sparrow" title="Code">💻</a> <a href="#bug-ragulcs-sparrow" title="Bug reports">🐛</a></td>
+    </tr>
   </tbody>
 </table>
 

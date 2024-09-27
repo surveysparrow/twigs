@@ -83,6 +83,16 @@
       "contributions": [
         "infra"
       ]
+    },
+    {
+      "login": "ragulcs-sparrow",
+      "name": "ragulcs-sparrow",
+      "avatar_url": "https://avatars.githubusercontent.com/u/163504861?v=4",
+      "profile": "https://github.com/ragulcs-sparrow",
+      "contributions": [
+        "code",
+        "bug"
+      ]
     }
   ]
 }
