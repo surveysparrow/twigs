@@ -45,6 +45,13 @@ $ yarn storybook
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/justin-ss"><img src="https://avatars.githubusercontent.com/u/105047491?v=4?s=100" width="100px;" alt="Justin George"/><br /><sub><b>Justin George</b></sub></a><br /><a href="#code-justin-ss" title="Code">💻</a> <a href="#doc-justin-ss" title="Documentation">📖</a></td>
+    </tr>
+  </tbody>
+</table>
 
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
