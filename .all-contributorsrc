@@ -74,6 +74,15 @@
         "code",
         "bug"
       ]
+    },
+    {
+      "login": "ss-oliver-paul",
+      "name": "Oliver Paul",
+      "avatar_url": "https://avatars.githubusercontent.com/u/158561360?v=4",
+      "profile": "https://github.com/ss-oliver-paul",
+      "contributions": [
+        "infra"
+      ]
     }
   ]
 }

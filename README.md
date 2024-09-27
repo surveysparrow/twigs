@@ -54,6 +54,7 @@ $ yarn storybook
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/shettyMegh9"><img src="https://avatars.githubusercontent.com/u/130285592?v=4?s=100" width="100px;" alt="Meghanath S Shetty"/><br /><sub><b>Meghanath S Shetty</b></sub></a><br /><a href="#code-shettyMegh9" title="Code">💻</a> <a href="#bug-shettyMegh9" title="Bug reports">🐛</a></td>
       <td align="center" valign="top" width="14.28%"><a href="http://www.pratosh.ml/"><img src="https://avatars.githubusercontent.com/u/76246084?v=4?s=100" width="100px;" alt="Pratosh"/><br /><sub><b>Pratosh</b></sub></a><br /><a href="#code-Pratosh22" title="Code">💻</a> <a href="#bug-Pratosh22" title="Bug reports">🐛</a> <a href="#doc-Pratosh22" title="Documentation">📖</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/meenakshi-ss"><img src="https://avatars.githubusercontent.com/u/160723712?v=4?s=100" width="100px;" alt="Meenakshi Sundaram"/><br /><sub><b>Meenakshi Sundaram</b></sub></a><br /><a href="#code-meenakshi-ss" title="Code">💻</a> <a href="#bug-meenakshi-ss" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/ss-oliver-paul"><img src="https://avatars.githubusercontent.com/u/158561360?v=4?s=100" width="100px;" alt="Oliver Paul"/><br /><sub><b>Oliver Paul</b></sub></a><br /><a href="#infra-ss-oliver-paul" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
     </tr>
   </tbody>
 </table>
