@@ -31,6 +31,17 @@
         "example",
         "maintenance"
       ]
+    },
+    {
+      "login": "maneeshp97",
+      "name": "Maneesh P",
+      "avatar_url": "https://avatars.githubusercontent.com/u/158666689?v=4",
+      "profile": "https://github.com/maneeshp97",
+      "contributions": [
+        "code",
+        "maintenance",
+        "doc"
+      ]
     }
   ]
 }
