@@ -19,6 +19,18 @@
         "ideas",
         "mentoring"
       ]
+    },
+    {
+      "login": "akzhysparrow",
+      "name": "akzhysparrow",
+      "avatar_url": "https://avatars.githubusercontent.com/u/157568762?v=4",
+      "profile": "https://github.com/akzhysparrow",
+      "contributions": [
+        "code",
+        "doc",
+        "example",
+        "maintenance"
+      ]
     }
   ]
 }
