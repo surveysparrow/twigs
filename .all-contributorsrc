@@ -53,6 +53,17 @@
         "code",
         "bug"
       ]
+    },
+    {
+      "login": "Pratosh22",
+      "name": "Pratosh",
+      "avatar_url": "https://avatars.githubusercontent.com/u/76246084?v=4",
+      "profile": "http://www.pratosh.ml/",
+      "contributions": [
+        "code",
+        "bug",
+        "doc"
+      ]
     }
   ]
 }
