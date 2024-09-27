@@ -59,6 +59,7 @@ $ yarn storybook
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/ragulcs-sparrow"><img src="https://avatars.githubusercontent.com/u/163504861?v=4?s=100" width="100px;" alt="ragulcs-sparrow"/><br /><sub><b>ragulcs-sparrow</b></sub></a><br /><a href="#code-ragulcs-sparrow" title="Code">💻</a> <a href="#bug-ragulcs-sparrow" title="Bug reports">🐛</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/abhaysparrow"><img src="https://avatars.githubusercontent.com/u/174322002?v=4?s=100" width="100px;" alt="abhaysparrow"/><br /><sub><b>abhaysparrow</b></sub></a><br /><a href="#code-abhaysparrow" title="Code">💻</a> <a href="#bug-abhaysparrow" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/tmbalagan"><img src="https://avatars.githubusercontent.com/u/23442723?v=4?s=100" width="100px;" alt="Balamurugan "/><br /><sub><b>Balamurugan </b></sub></a><br /><a href="#code-tmbalagan" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
