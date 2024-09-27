@@ -43,6 +43,16 @@
         "doc",
         "review"
       ]
+    },
+    {
+      "login": "shettyMegh9",
+      "name": "Meghanath S Shetty",
+      "avatar_url": "https://avatars.githubusercontent.com/u/130285592?v=4",
+      "profile": "https://github.com/shettyMegh9",
+      "contributions": [
+        "code",
+        "bug"
+      ]
     }
   ]
 }
