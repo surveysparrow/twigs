@@ -7,7 +7,8 @@ export default {
   component: Accordion,
   title: 'Data Display/Accordion',
   args: {
-    type: 'single'
+    type: 'single',
+    disabled: false
   },
   argTypes: {
     type: {

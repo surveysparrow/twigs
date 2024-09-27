@@ -32,6 +32,9 @@ const StyledTrigger = styled(AccordionPrimitive.Trigger, {
     $$shadowColor: '$colors$primary300',
     outlineColor:
       'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
+  },
+  '&[data-disabled]': {
+    cursor: 'not-allowed'
   }
 });
 
@@ -51,9 +54,7 @@ const AccordionItem = styled(AccordionPrimitive.Item, {
     zIndex: 1
   },
   '&[data-disabled]': {
-    background: '$white900',
-    opacity: '0.4',
-    color: '$neutral800'
+    opacity: '0.4'
   }
 });
 
