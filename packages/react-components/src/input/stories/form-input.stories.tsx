@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from '@src/button';
 import { FormInput } from '../form-input';
 
 export default {
@@ -49,4 +50,27 @@ const Template = (args) => {
   );
 };
 
+const TemplateWithInfo = (args) => {
+  const [value, setValue] = React.useState('');
+  return (
+    <FormInput
+      {...args}
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+      info="Input info"
+      label="Label"
+      counterSideElement={(
+        <Button variant="ghost" color="primary">
+          Label
+        </Button>
+      )}
+      maxLength={100}
+      showCount
+      placeholder="Placeholder"
+    />
+  );
+};
+
 export const Default = Template.bind({});
+
+export const WithInfo = TemplateWithInfo.bind({});
