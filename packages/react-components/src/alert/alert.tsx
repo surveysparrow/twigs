@@ -207,7 +207,7 @@ export const Alert: FunctionComponent<AlertProps> = React.forwardRef(
               <StyledCloseButton
                 icon={<CloseIcon />}
                 aria-label="close"
-                color="default"
+                color={variant === 'filled' ? 'light' : 'default'}
                 {...(onClose && { onClick: onClose })}
               />
             )
