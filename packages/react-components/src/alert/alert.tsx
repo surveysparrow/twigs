@@ -108,7 +108,7 @@ const StyledAlert = styled(Box, {
           color: 'currentColor !important'
         }
       }
-    },
+    }
   },
   compoundVariants: [
     {
