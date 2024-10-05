@@ -107,6 +107,9 @@ const StyledAlert = styled(Box, {
         [`${StyledAlertIcon} svg`]: {
           color: 'currentColor !important'
         }
+      },
+      default: {
+        unset: 'none'
       }
     }
   },
@@ -146,7 +149,8 @@ const StyledAlert = styled(Box, {
   ],
   defaultVariants: {
     size: 'sm',
-    status: STATUSES.info.name
+    status: STATUSES.info.name,
+    variant: 'default'
   }
 });
 
@@ -156,7 +160,7 @@ export type AlertProps = {
   onClose?: React.MouseEventHandler<HTMLButtonElement>
   status: 'info' | 'error' | 'success' | 'warning',
   icon?: React.ReactElement,
-  variant?: string
+  variant?: 'default' | 'filled'
 } & ComponentProps<typeof StyledAlert>
 
 export const Alert: FunctionComponent<AlertProps> = React.forwardRef(
@@ -167,7 +171,7 @@ export const Alert: FunctionComponent<AlertProps> = React.forwardRef(
     status = 'info',
     children,
     icon,
-    variant,
+    variant = 'default',
     ...rest
   }: AlertProps, ref) => {
     const ValidAlertIcon = icon || STATUSES[status]?.icon;
