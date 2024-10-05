@@ -102,10 +102,10 @@ const StyledAlert = styled(Box, {
     variant: {
       filled: {
         backgroundColor: 'currentColor',
-        color: 'currentColor',
+        color: '$white900',
         border: 'none',
         [`${StyledAlertIcon} svg`]: {
-          color: 'currentColor !important'
+          color: '$white900'
         }
       },
       default: {
@@ -118,32 +118,28 @@ const StyledAlert = styled(Box, {
       status: STATUSES.success.name,
       variant: 'filled',
       css: {
-        backgroundColor: '$positive500',
-        color: '$white900'
+        backgroundColor: '$positive500'
       }
     },
     {
       status: STATUSES.info.name,
       variant: 'filled',
       css: {
-        backgroundColor: '$accent500',
-        color: '$white900'
+        backgroundColor: '$accent500'
       }
     },
     {
       status: STATUSES.warning.name,
       variant: 'filled',
       css: {
-        backgroundColor: '$warning500',
-        color: '$white900'
+        backgroundColor: '$warning500'
       }
     },
     {
       status: STATUSES.error.name,
       variant: 'filled',
       css: {
-        backgroundColor: '$negative600',
-        color: '$white900'
+        backgroundColor: '$negative600'
       }
     }
   ],
