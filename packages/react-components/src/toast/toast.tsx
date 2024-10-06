@@ -109,7 +109,7 @@ const StyledViewport = styled(ToastPrimitive.Viewport, {
         }
       }
     }
-  },
+  }
 });
 
 const StyledIcon = styled(Flex, {
