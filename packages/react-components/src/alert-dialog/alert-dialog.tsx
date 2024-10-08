@@ -14,17 +14,22 @@ const contentShow = keyframes({
 });
 
 const StyledTitle = styled(AlertDialogPrimitive.Title, {
+  display: 'flex',
+  alignItems: 'center',
   margin: 0,
   color: '$neutral900',
   fontSize: '$lg',
+  lineHeight: '$lg',
   fontWeight: '$7',
-  padding: '$12',
+  minHeight: '$18',
+  padding: '$8 $12',
   borderBottom: '$borderWidths$xs solid $neutral200'
 });
 
 const StyledDescription = styled(AlertDialogPrimitive.Description, {
   color: '$neutral900',
   fontSize: '$md',
+  lineHeight: '$md',
   padding: '$12',
   paddingBottom: 0
 });
@@ -40,7 +45,7 @@ const StyledOverlay = styled(AlertDialogPrimitive.Overlay, {
 });
 
 const StyledContent = styled(AlertDialogPrimitive.Content, {
-  backgroundColor: 'white',
+  backgroundColor: '$white900',
   borderRadius: '$2xl',
   boxShadow:
     'hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px',
@@ -61,7 +66,8 @@ const StyledContent = styled(AlertDialogPrimitive.Content, {
 
 const StyledActions = styled(Grid, {
   gridTemplateColumns: '1fr 1fr',
-  padding: '$12'
+  padding: '$12',
+  gap: '$6 !important'
 });
 
 type ContentProps = {
