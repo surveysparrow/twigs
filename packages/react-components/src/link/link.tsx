@@ -1,8 +1,7 @@
 import { Slot } from '@radix-ui/react-slot';
 import { CSS } from '@stitches/react';
 import React, {
-  ComponentProps, ForwardedRef,
-  ReactNode, Ref
+  ComponentProps, ForwardedRef, ReactNode, Ref
 } from 'react';
 import { config, styled } from '../stitches.config';
 
@@ -28,19 +27,16 @@ type SlotLinkProps = {
   css?: BaseLinkProps['css'];
   asChild?: boolean;
   children?: ReactNode;
-}
+};
 
 export type LinkProps = BaseLinkProps & {
   asChild?: boolean;
 };
 
-const LinkComponent = <
-  TProps extends LinkProps,
-  TRef extends HTMLElement
->(
-    props: TProps & SlotLinkProps,
-    ref: ForwardedRef<TRef>
-  ) => {
+const LinkComponent = <TProps extends LinkProps, TRef extends HTMLElement>(
+  props: TProps & SlotLinkProps,
+  ref: ForwardedRef<TRef>
+) => {
   const { asChild, children, ...rest } = props;
   const RootComp = asChild ? StyledSlot : StyledAnchor;
   return (

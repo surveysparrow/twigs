@@ -26,8 +26,6 @@ export default {
 };
 
 const Template = (args) => {
-  return (
-    <Pagination {...args} />
-  );
+  return <Pagination {...args} />;
 };
 export const Default = Template.bind({});

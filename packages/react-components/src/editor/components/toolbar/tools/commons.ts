@@ -1,7 +1,10 @@
 import { $setBlocksType } from '@lexical/selection';
 import { IconButtonBaseProps } from '@src/button';
 import {
-  $createParagraphNode, $getSelection, $isRangeSelection, LexicalEditor
+  $createParagraphNode,
+  $getSelection,
+  $isRangeSelection,
+  LexicalEditor
 } from 'lexical';
 import { ReactNode } from 'react';
 
