@@ -114,13 +114,14 @@ const StyledContent = styled(DialogPrimitive.Content, {
 
 type ContentProps = {
   children?: ReactNode;
+  overlayClassName?:string;
 } & ComponentProps<typeof StyledContent>;
 
-const Content = ({ children, ...props }: ContentProps) => {
+const Content = ({ children, overlayClassName, ...props }: ContentProps) => {
   const dialogContext = useContext(DialogContext);
   return (
     <DialogPrimitive.Portal>
-      <StyledOverlay />
+      <StyledOverlay {...(overlayClassName && { className: overlayClassName })} />
       <StyledContent {...dialogContext} {...props}>
         {children}
       </StyledContent>
