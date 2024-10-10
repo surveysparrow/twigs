@@ -103,7 +103,7 @@ const StyledChip = styled(Box, {
   },
   variants: {
     size: {
-      lg: {
+      xl: {
         height: '$10',
         fontSize: '$md',
         fontWeight: '$5',
@@ -129,7 +129,7 @@ const StyledChip = styled(Box, {
           height: '$5'
         }
       },
-      md: {
+      lg: {
         height: '$8',
         fontSize: '$sm',
         fontWeight: '$5',
@@ -155,7 +155,7 @@ const StyledChip = styled(Box, {
           height: '$5'
         }
       },
-      sm: {
+      md: {
         height: '$6',
         fontSize: '$xs',
         fontWeight: '$5',
@@ -181,7 +181,7 @@ const StyledChip = styled(Box, {
           height: '$4'
         }
       },
-      xs: {
+      sm: {
         height: '$5',
         fontSize: '$xs',
         fontWeight: '$5',
@@ -207,7 +207,7 @@ const StyledChip = styled(Box, {
           height: '$4'
         }
       },
-      '2xs': {
+      xs: {
         height: '$4',
         fontSize: '$xs',
         fontWeight: '$5',
@@ -234,7 +234,7 @@ const StyledChip = styled(Box, {
           height: '14px'
         }
       },
-      '3xs': {
+      '2xs': {
         height: '$3',
         fontSize: '$xxs',
         fontWeight: '$7',
