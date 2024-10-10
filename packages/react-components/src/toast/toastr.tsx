@@ -28,10 +28,10 @@ export const Toastr: FunctionComponent<ToastProviderProps & { maxToasts?: number
       {...rest}
     >
       {toasts.map(({
-        id, title, description, action, ...props
+        id, title, description, action, position, ...props
       }) => {
         return (
-          <Toast key={id} {...props}>
+          <Toast key={id} position={position} {...props}>
             <>
               <ToastContent>
                 {title && <ToastTitle>{title}</ToastTitle>}
