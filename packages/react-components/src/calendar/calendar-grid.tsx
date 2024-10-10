@@ -61,12 +61,13 @@ export const CalendarGrid = ({
           </Week>
         ))}
       </WeekContainer>
-      <Box css={{
-        padding: '$8 0',
-        ...(calendarContext.size === 'lg' && {
-          paddingBottom: '$4'
-        })
-      }}
+      <Box
+        css={{
+          padding: '$8 0',
+          ...(calendarContext.size === 'lg' && {
+            paddingBottom: '$4'
+          })
+        }}
       >
         {[...new Array(weeksInMonth).keys()].map((weekIndex, index) => (
           // eslint-disable-next-line react/no-array-index-key

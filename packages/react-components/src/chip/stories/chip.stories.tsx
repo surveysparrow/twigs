@@ -52,19 +52,13 @@ const Template = (args) => <Chip {...args}>Template</Chip>;
 export const Default = Template.bind({});
 
 export const WithLeftElement = (args) => (
-  <Chip
-    {...args}
-    leftElement={<TickCircleFillIcon />}
-  >
+  <Chip {...args} leftElement={<TickCircleFillIcon />}>
     Template
   </Chip>
 );
 
 export const WithRightElement = (args) => (
-  <Chip
-    {...args}
-    rightElement={<ChevronDownIcon />}
-  >
+  <Chip {...args} rightElement={<ChevronDownIcon />}>
     Template
   </Chip>
 );

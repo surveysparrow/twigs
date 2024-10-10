@@ -4,10 +4,7 @@ import { CSS } from '@stitches/react';
 import {
   ComponentProps, ReactNode, useEffect, useRef
 } from 'react';
-import {
-  AriaDatePickerProps, DateValue,
-  useDatePicker
-} from 'react-aria';
+import { AriaDatePickerProps, DateValue, useDatePicker } from 'react-aria';
 import { CalendarState, useDatePickerState } from 'react-stately';
 import { Box } from '../box';
 import { IconButton } from '../button';

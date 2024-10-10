@@ -10,10 +10,10 @@ const SeparatorRoot = styled(SeparatorPrimitive.Root, {
 });
 
 export type SeparatorProps = {
-   orientation: 'horizontal' | 'vertical';
-   decorative?: boolean;
-   ref?: React.Ref<HTMLDivElement>;
-   css?: CSS<typeof config>;
+  orientation: 'horizontal' | 'vertical';
+  decorative?: boolean;
+  ref?: React.Ref<HTMLDivElement>;
+  css?: CSS<typeof config>;
 } & React.ComponentProps<typeof SeparatorPrimitive.Root>;
 
 export const Separator = forwardRef<HTMLDivElement, SeparatorProps>(

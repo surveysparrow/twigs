@@ -1,8 +1,6 @@
 import React from 'react';
 import { Button } from '../../button';
-import {
-  TooltipProvider, Tooltip
-} from '../tooltip';
+import { TooltipProvider, Tooltip } from '../tooltip';
 
 export default {
   component: Tooltip,
@@ -35,11 +33,7 @@ export default {
 
 const Template = (args) => (
   <TooltipProvider delayDuration={0}>
-    <Tooltip
-      side="top"
-      align="end"
-      {...args}
-    >
+    <Tooltip side="top" align="end" {...args}>
       <Button color="default" size="lg">
         tooltip button
       </Button>

@@ -2,12 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { useTable } from 'react-table';
 import {
-  Table,
-  Tbody,
-  Thead,
-  Th,
-  Tr,
-  Td
+  Table, Tbody, Thead, Th, Tr, Td
 } from '../index';
 import 'jest';
 import '@testing-library/jest-dom';
@@ -85,11 +80,7 @@ const data = [
 
 const TableComponent = () => {
   const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow
+    getTableProps, getTableBodyProps, headerGroups, rows, prepareRow
   } = useTable({
     columns,
     data
@@ -100,9 +91,7 @@ const TableComponent = () => {
         {headerGroups.map((headerGroup) => (
           <Tr {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map((column) => (
-              <Th {...column.getHeaderProps()}>
-                {column.render('Header')}
-              </Th>
+              <Th {...column.getHeaderProps()}>{column.render('Header')}</Th>
             ))}
           </Tr>
         ))}
@@ -113,11 +102,7 @@ const TableComponent = () => {
           return (
             <Tr {...row.getRowProps()}>
               {row.cells.map((cell) => {
-                return (
-                  <Td {...cell.getCellProps()}>
-                    {cell.render('Cell')}
-                  </Td>
-                );
+                return <Td {...cell.getCellProps()}>{cell.render('Cell')}</Td>;
               })}
             </Tr>
           );
@@ -129,8 +114,6 @@ const TableComponent = () => {
 
 describe('Table', () => {
   it('renders without crashing', () => {
-    render(
-      <TableComponent />
-    );
+    render(<TableComponent />);
   });
 });

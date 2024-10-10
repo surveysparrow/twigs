@@ -1,6 +1,11 @@
 import React from 'react';
 import {
-  Dialog, DialogTitle, DialogDescription, DialogClose, DialogTrigger, DialogContent
+  Dialog,
+  DialogTitle,
+  DialogDescription,
+  DialogClose,
+  DialogTrigger,
+  DialogContent
 } from '../dialog';
 import { Box } from '../../box';
 import { Button, IconButton } from '../../button';
@@ -64,30 +69,16 @@ const Template = (args) => {
       </DialogTrigger>
       <DialogContent css={{ paddingBottom: '$20' }} {...args}>
         <DialogTitle>Edit profile</DialogTitle>
-        <DialogDescription
-          css={{ color: '$neutral600', fontSize: '$sm' }}
-        >
+        <DialogDescription css={{ color: '$neutral600', fontSize: '$sm' }}>
           Make changes to your profile here. Click save when done.
         </DialogDescription>
         <Box css={{ marginBottom: '$12' }}>
-          <FormLabel css={{ marginBottom: '$8' }}>
-            Name
-          </FormLabel>
-          <Input
-            size="md"
-            id="name"
-            defaultValue="Pedro Duarte"
-          />
+          <FormLabel css={{ marginBottom: '$8' }}>Name</FormLabel>
+          <Input size="md" id="name" defaultValue="Pedro Duarte" />
         </Box>
         <Box css={{ marginBottom: '$25' }}>
-          <FormLabel css={{ marginBottom: '$8' }}>
-            Username
-          </FormLabel>
-          <Input
-            size="md"
-            id="username"
-            defaultValue="@peduarte"
-          />
+          <FormLabel css={{ marginBottom: '$8' }}>Username</FormLabel>
+          <Input size="md" id="username" defaultValue="@peduarte" />
         </Box>
         <Flex justifyContent="flex-end" css={{ justifyContent: 'flex-end' }}>
           <DialogClose asChild>
@@ -96,9 +87,7 @@ const Template = (args) => {
             </Button>
           </DialogClose>
         </Flex>
-        <Box
-          css={{ position: 'absolute', top: '10px', right: '10px' }}
-        >
+        <Box css={{ position: 'absolute', top: '10px', right: '10px' }}>
           <DialogClose asChild>
             <IconButton
               icon={<CloseIcon />}

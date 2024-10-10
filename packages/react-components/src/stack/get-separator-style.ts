@@ -7,7 +7,7 @@ const stackDirections = [
   'row-reverse',
   'column-reverse'
 ] as const;
-type StackDirection = typeof stackDirections[number];
+type StackDirection = (typeof stackDirections)[number];
 
 interface Options {
   gap: string;

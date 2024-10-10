@@ -42,10 +42,7 @@ const Template = (args) => (
 );
 
 const VStackTemplate = (args) => (
-  <VStack
-    {...args}
-    divider={<Separator orientation="horizontal" />}
-  >
+  <VStack {...args} divider={<Separator orientation="horizontal" />}>
     <Box
       css={{
         width: 100,

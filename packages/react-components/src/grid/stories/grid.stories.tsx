@@ -15,20 +15,23 @@ export default {
 
 const Template: ComponentStory<typeof Grid> = (args) => (
   <Grid {...args}>
-    <Box css={{
-      height: 100,
-      backgroundColor: 'yellow'
-    }}
+    <Box
+      css={{
+        height: 100,
+        backgroundColor: 'yellow'
+      }}
     />
-    <Box css={{
-      height: 100,
-      backgroundColor: 'orange'
-    }}
+    <Box
+      css={{
+        height: 100,
+        backgroundColor: 'orange'
+      }}
     />
-    <Box css={{
-      height: 100,
-      backgroundColor: 'green'
-    }}
+    <Box
+      css={{
+        height: 100,
+        backgroundColor: 'green'
+      }}
     />
   </Grid>
 );

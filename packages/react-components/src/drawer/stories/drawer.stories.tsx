@@ -32,10 +32,7 @@ export const Default = () => {
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
   return (
     <>
-      <Drawer
-        isOpen={isDrawerOpen}
-        onClose={() => setIsDrawerOpen(false)}
-      >
+      <Drawer isOpen={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
         <DrawerHeader>
           <Heading size="h4">Edit Profile</Heading>
         </DrawerHeader>
@@ -54,15 +51,16 @@ export const Default = () => {
         </DrawerBody>
         <DrawerFooter>
           <Flex justifyContent="flex-end" gap="10px" css={{ width: '100%' }}>
-            <Button size="xl" color="default"> Cancel </Button>
+            <Button size="xl" color="default">
+              {' '}
+              Cancel
+              {' '}
+            </Button>
             <Button size="xl"> Save </Button>
           </Flex>
         </DrawerFooter>
       </Drawer>
-      <Button
-        ref={paneButtonRef}
-        onClick={() => setIsDrawerOpen(true)}
-      >
+      <Button ref={paneButtonRef} onClick={() => setIsDrawerOpen(true)}>
         Open Drawer
       </Button>
     </>

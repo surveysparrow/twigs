@@ -1,5 +1,9 @@
 import React, {
-  ReactNode, ComponentProps, ReactElement, createContext, useContext
+  ReactNode,
+  ComponentProps,
+  ReactElement,
+  createContext,
+  useContext
 } from 'react';
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import { Flex } from '../flex';
@@ -7,21 +11,39 @@ import { styled, keyframes } from '../stitches.config';
 
 const ChevronRightIcon = () => {
   return (
-    <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M1.33325 8.33332L4.66658 4.99999L1.33325 1.66666" stroke="#6A6A6A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    <svg
+      width="6"
+      height="10"
+      viewBox="0 0 6 10"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M1.33325 8.33332L4.66658 4.99999L1.33325 1.66666"
+        stroke="#6A6A6A"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 };
 
 type DropdownContextType = {
-  size: 'md' | 'sm'
-}
+  size: 'md' | 'sm';
+};
 
 const DropdownContext = createContext<DropdownContextType>({
   size: 'md' // Default Value
 });
 
-const DropdownProvider = ({ children, size = 'md' }: { children: ReactNode, size?: 'md' | 'sm' }) => {
+const DropdownProvider = ({
+  children,
+  size = 'md'
+}: {
+  children: ReactNode;
+  size?: 'md' | 'sm';
+}) => {
   return (
     <DropdownContext.Provider value={{ size }}>
       {children}
@@ -207,9 +229,9 @@ const StyledContent = styled(DropdownMenuPrimitive.Content, {
 });
 
 type ContentProps = ComponentProps<typeof StyledContent> & {
-  children: ReactNode,
-  showArrow?: boolean
-}
+  children: ReactNode;
+  showArrow?: boolean;
+};
 
 const Content = ({ children, showArrow, ...props }: ContentProps) => {
   const size = useContext(DropdownContext);
@@ -224,11 +246,11 @@ const Content = ({ children, showArrow, ...props }: ContentProps) => {
 };
 
 type DropdownRootProps = {
-  children : ReactNode,
-  size?: 'sm' | 'md'
+  children: ReactNode;
+  size?: 'sm' | 'md';
 } & ComponentProps<typeof DropdownMenuPrimitive.Root>;
 
-const DropdownRoot = ({ children, ...props }:DropdownRootProps) => {
+const DropdownRoot = ({ children, ...props }: DropdownRootProps) => {
   return (
     <DropdownProvider size={props.size}>
       <DropdownMenuPrimitive.Root {...props}>

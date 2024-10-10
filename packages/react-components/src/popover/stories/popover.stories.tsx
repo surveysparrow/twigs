@@ -1,7 +1,11 @@
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import {
-  Popover, PopoverTrigger, PopoverArrow, PopoverClose, PopoverContent
+  Popover,
+  PopoverTrigger,
+  PopoverArrow,
+  PopoverClose,
+  PopoverContent
 } from '../popover';
 import { Button } from '../../button';
 
@@ -21,9 +25,7 @@ export default {
 const Template: ComponentStory<typeof Popover> = (args) => (
   <Popover {...args}>
     <PopoverTrigger asChild>
-      <Button>
-        Trigger the popover
-      </Button>
+      <Button>Trigger the popover</Button>
     </PopoverTrigger>
     <PopoverContent>
       Hello there

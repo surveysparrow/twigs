@@ -75,23 +75,14 @@ const StyledStep = styled('button', {
 });
 
 type StepperCountProps = {
-  completed: boolean,
-  label: number
+  completed: boolean;
+  label: number;
 };
 
 const StepperCount = ({ completed, label }: StepperCountProps) => {
   return (
     <StyledCounter>
-      {
-        completed
-          ? (
-            <TickIcon
-              size={14}
-              color="#fff"
-            />
-          )
-          : label
-      }
+      {completed ? <TickIcon size={14} color="#fff" /> : label}
     </StyledCounter>
   );
 };

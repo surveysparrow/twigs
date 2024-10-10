@@ -5,7 +5,5 @@ import { render } from '@testing-library/react';
 import { DatePicker } from '../index';
 
 test('DatePicker renders without crashing', () => {
-  render(
-    <DatePicker label="Choose a nice day" />
-  );
+  render(<DatePicker label="Choose a nice day" />);
 });

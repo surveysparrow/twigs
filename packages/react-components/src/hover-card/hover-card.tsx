@@ -27,7 +27,8 @@ const StyledHoverCardContent = styled(HoverCardPrimitive.Content, {
   padding: '$4',
   width: 300,
   backgroundColor: '$white900',
-  boxShadow: 'hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px',
+  boxShadow:
+    'hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px',
   animationDuration: '400ms',
   animationTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
   willChange: 'transform, opacity',
@@ -44,18 +45,18 @@ export const StyledHoverCardArrow = styled(HoverCardPrimitive.Arrow, {
 
 export type HoverCardContentProps = {
   children?: ReactElement | ReactElement[];
-  arrow?: boolean
-} & ComponentProps<typeof StyledHoverCardContent>
+  arrow?: boolean;
+} & ComponentProps<typeof StyledHoverCardContent>;
 
-const Content = ({ children, arrow = true, ...props }: HoverCardContentProps) => {
+const Content = ({
+  children,
+  arrow = true,
+  ...props
+}: HoverCardContentProps) => {
   return (
     <HoverCardPrimitive.Portal>
       <StyledHoverCardContent {...props}>
-        {
-          arrow
-            ? <StyledHoverCardArrow data-testid="hover-card-arrow" />
-            : null
-        }
+        {arrow ? <StyledHoverCardArrow data-testid="hover-card-arrow" /> : null}
         {children}
       </StyledHoverCardContent>
     </HoverCardPrimitive.Portal>

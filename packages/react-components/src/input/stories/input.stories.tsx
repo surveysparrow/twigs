@@ -1,5 +1,8 @@
 import React from 'react';
-import { TickCircleFillIcon, UserCircleIcon } from '@sparrowengg/twigs-react-icons';
+import {
+  TickCircleFillIcon,
+  UserCircleIcon
+} from '@sparrowengg/twigs-react-icons';
 import { Input } from '../input';
 import { IconButton } from '../../button';
 
@@ -27,25 +30,14 @@ export default {
   }
 };
 
-const Template = (args) => (
-  <Input
-    {...args}
-    placeholder="Placeholder"
-  />
-);
+const Template = (args) => <Input {...args} placeholder="Placeholder" />;
 
 const TemplateWithLeftIcon = (args) => (
-  <Input
-    leftIcon={<UserCircleIcon />}
-    {...args}
-  />
+  <Input leftIcon={<UserCircleIcon />} {...args} />
 );
 
 const TemplateWithRightIcon = (args) => (
-  <Input
-    rightIcon={<UserCircleIcon />}
-    {...args}
-  />
+  <Input rightIcon={<UserCircleIcon />} {...args} />
 );
 
 const TemplateWithRightElement = (args) => (

@@ -5,12 +5,12 @@ import { Avatar } from './avatar';
 type OmitAvatarProps = 'isAnonymous' | 'src' | 'name';
 
 export type AvatarGroupProps = {
-  limit?: number | null,
-  limitExceededLabel?:string,
-  children: React.ReactElement[]
-} & Omit<ComponentProps<typeof Avatar>, OmitAvatarProps>
-  & React.HTMLAttributes<HTMLDivElement> & {
-    as?: React.ElementType
+  limit?: number | null;
+  limitExceededLabel?: string;
+  children: React.ReactElement[];
+} & Omit<ComponentProps<typeof Avatar>, OmitAvatarProps> &
+  React.HTMLAttributes<HTMLDivElement> & {
+    as?: React.ElementType;
   };
 
 const AvatarOverlay = styled('div', {
@@ -178,57 +178,63 @@ const StyledAvatarGroup = styled('div', {
   }
 });
 
-export const AvatarGroup: FunctionComponent<AvatarGroupProps> = React.forwardRef(({
-  limit = 0, limitExceededLabel, size, children, rounded, ...rest
-}: AvatarGroupProps, ref) => {
-  const avatars = children || [];
-  const avatarCount = avatars.length || 0;
-  const avatarLimit = limit || avatarCount;
-  const extraAvatarsCount = avatarCount - avatarLimit;
+export const AvatarGroup: FunctionComponent<AvatarGroupProps> = React.forwardRef(
+  (
+    {
+      limit = 0,
+      limitExceededLabel,
+      size,
+      children,
+      rounded,
+      ...rest
+    }: AvatarGroupProps,
+    ref
+  ) => {
+    const avatars = children || [];
+    const avatarCount = avatars.length || 0;
+    const avatarLimit = limit || avatarCount;
+    const extraAvatarsCount = avatarCount - avatarLimit;
 
-  const renderAvatars = avatars.slice(0, avatarLimit)
-    .map((child: React.ReactElement, index: number): React.ReactNode => {
-      const isFirstChild = index === 0;
-      const childProps = {
-        size,
-        rounded,
-        ...child.props
-      };
-      return (
-        <AvatarNestedItem size={size} isFirst={isFirstChild} key={child.key}>
-          {React.cloneElement(child, childProps)}
-        </AvatarNestedItem>
-      );
-    });
+    const renderAvatars = avatars
+      .slice(0, avatarLimit)
+      .map((child: React.ReactElement, index: number): React.ReactNode => {
+        const isFirstChild = index === 0;
+        const childProps = {
+          size,
+          rounded,
+          ...child.props
+        };
+        return (
+          <AvatarNestedItem
+            size={size}
+            isFirst={isFirstChild}
+            key={child.key}
+          >
+            {React.cloneElement(child, childProps)}
+          </AvatarNestedItem>
+        );
+      });
 
-  return (
-    <StyledAvatarGroup
-      ref={ref}
-      {...rest}
-      role="group"
-      rounded={rounded}
-    >
-      {renderAvatars}
+    return (
+      <StyledAvatarGroup ref={ref} {...rest} role="group" rounded={rounded}>
+        {renderAvatars}
 
-      {
-        extraAvatarsCount > 0
-          ? (
-            <AvatarNestedItem size={size}>
-              <Avatar
-                src={avatars[avatarCount! - extraAvatarsCount].props.src}
-                name={avatars[avatarCount! - extraAvatarsCount].props.name}
-                size={size}
-                rounded={rounded}
-              >
-                <AvatarOverlay />
-                <AvatarOverlayText size={size}>
-                  {limitExceededLabel || `+${extraAvatarsCount}` }
-                </AvatarOverlayText>
-              </Avatar>
-            </AvatarNestedItem>
-          )
-          : null
-      }
-    </StyledAvatarGroup>
-  );
-});
+        {extraAvatarsCount > 0 ? (
+          <AvatarNestedItem size={size}>
+            <Avatar
+              src={avatars[avatarCount! - extraAvatarsCount].props.src}
+              name={avatars[avatarCount! - extraAvatarsCount].props.name}
+              size={size}
+              rounded={rounded}
+            >
+              <AvatarOverlay />
+              <AvatarOverlayText size={size}>
+                {limitExceededLabel || `+${extraAvatarsCount}`}
+              </AvatarOverlayText>
+            </Avatar>
+          </AvatarNestedItem>
+        ) : null}
+      </StyledAvatarGroup>
+    );
+  }
+);

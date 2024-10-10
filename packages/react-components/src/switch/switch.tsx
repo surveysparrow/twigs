@@ -68,20 +68,17 @@ const StyledSwitch = styled(SwitchPrimitive.Root, {
 type OmitProps = 'onCheckedChange' | 'onChange';
 
 export type SwitchProps = {
-  disabled?: boolean,
-  checked?: boolean,
+  disabled?: boolean;
+  checked?: boolean;
   // eslint-disable-next-line no-unused-vars
-  onChange?: (checked: boolean) => void,
-  required?: boolean
+  onChange?: (checked: boolean) => void;
+  required?: boolean;
 } & Omit<ComponentProps<typeof StyledSwitch>, OmitProps>;
 
 export const Switch: FunctionComponent<SwitchProps> = React.forwardRef(
-  (
-    {
-      checked, disabled, onChange, required, ...rest
-    }: SwitchProps,
-    ref
-  ) => {
+  ({
+    checked, disabled, onChange, required, ...rest
+  }: SwitchProps, ref) => {
     return (
       <StyledSwitch
         ref={ref}

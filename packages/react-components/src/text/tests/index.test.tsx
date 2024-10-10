@@ -10,9 +10,7 @@ describe('Text', () => {
   });
 
   it('renders text correctly', () => {
-    const { getByTestId } = render(
-      <Text>Simple Text</Text>
-    );
+    const { getByTestId } = render(<Text>Simple Text</Text>);
     const text = getByTestId('text');
 
     expect(text).toHaveTextContent('Simple Text');

@@ -24,7 +24,9 @@ describe('FormInput', () => {
   });
 
   it('prints character count', () => {
-    const result = render(<FormInput maxLength={100} showCount defaultValue="Input" id="input" />);
+    const result = render(
+      <FormInput maxLength={100} showCount defaultValue="Input" id="input" />
+    );
     const charNode = result.container.querySelector('#input-char-count');
     expect(charNode).toBeInTheDocument();
     const charText = screen.getByText('5/100');

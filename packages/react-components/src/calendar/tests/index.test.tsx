@@ -5,13 +5,9 @@ import { render } from '@testing-library/react';
 import { Calendar, CalendarRange } from '../index';
 
 test('Calendar renders without crashing', () => {
-  render(
-    <Calendar />
-  );
+  render(<Calendar />);
 });
 
 test('CalendarRange renders without crashing', () => {
-  render(
-    <CalendarRange />
-  );
+  render(<CalendarRange />);
 });

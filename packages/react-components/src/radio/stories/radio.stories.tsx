@@ -14,8 +14,12 @@ export default {
 
 const Template = (args) => (
   <RadioGroup defaultValue="default" aria-label="View density" {...args}>
-    <Radio size="sm" value="default" {...args}>Default</Radio>
-    <Radio size="sm" value="comfortable" id="r2" {...args}>Comfortable</Radio>
+    <Radio size="sm" value="default" {...args}>
+      Default
+    </Radio>
+    <Radio size="sm" value="comfortable" id="r2" {...args}>
+      Comfortable
+    </Radio>
   </RadioGroup>
 );
 export const Default = Template.bind({});

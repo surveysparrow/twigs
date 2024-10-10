@@ -87,7 +87,9 @@ const TypeaheadMenuItem = ({
 
 export type EditorLookupDropdownBaseProps = {
   triggerFunction: (text: string) => MenuTextMatch | null;
-  getResults: (text: string | null) => Promise<TypeaheadMenuData[]> | TypeaheadMenuData[];
+  getResults: (
+    text: string | null
+  ) => Promise<TypeaheadMenuData[]> | TypeaheadMenuData[];
   $createNode?: (data: TypeaheadOption) => TextNode;
   suggestionsListLength?: number;
   renderMenu?: (args: {
@@ -98,7 +100,10 @@ export type EditorLookupDropdownBaseProps = {
     menuOptions: TypeaheadOption[];
   }) => ReactPortal | React.JSX.Element | null;
   renderMenuItemContent?: (props: RenderMenuItemContentProps) => ReactNode;
-  onMenuItemSelect?: (option: TypeaheadOption, closeMenu?: () => void) => void | boolean;
+  onMenuItemSelect?: (
+    option: TypeaheadOption,
+    closeMenu?: () => void
+  ) => void | boolean;
 };
 
 const defaultMenuRender = ({

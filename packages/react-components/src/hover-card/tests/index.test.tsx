@@ -14,13 +14,9 @@ describe('Hover card', () => {
   it('renders with arrow', () => {
     render(
       <HoverCard defaultOpen>
-        <HoverCardTrigger>
-          Trigger
-        </HoverCardTrigger>
+        <HoverCardTrigger>Trigger</HoverCardTrigger>
         <HoverCardContent>
-          <>
-            Hover card  content
-          </>
+          <>Hover card content</>
         </HoverCardContent>
       </HoverCard>
     );
@@ -31,13 +27,9 @@ describe('Hover card', () => {
   it('renders without arrow', () => {
     render(
       <HoverCard defaultOpen>
-        <HoverCardTrigger>
-          Trigger
-        </HoverCardTrigger>
+        <HoverCardTrigger>Trigger</HoverCardTrigger>
         <HoverCardContent arrow={false}>
-          <>
-            Hover card  content
-          </>
+          <>Hover card content</>
         </HoverCardContent>
       </HoverCard>
     );

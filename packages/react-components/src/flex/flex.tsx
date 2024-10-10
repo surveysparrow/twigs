@@ -18,44 +18,49 @@ export type FlexProps = {
   basis?: React.CSSProperties['flexBasis'];
 } & BoxProps;
 
-export const Flex: FunctionComponent<FlexProps> = React.forwardRef(({
-  children,
-  flexDirection,
-  justifyContent,
-  justifyItems,
-  alignContent,
-  alignItems,
-  gap,
-  wrap,
-  shrink,
-  css,
-  grow,
-  flow,
-  basis,
-  ...rest
-}: FlexProps, ref) => {
-  return (
-    <StyledBox
-      css={{
-        display: 'flex',
-        flexDirection,
-        justifyContent,
-        justifyItems,
-        alignContent,
-        alignItems,
-        gap,
-        flexShrink: shrink,
-        flexWrap: wrap,
-        flexGrow: grow,
-        flexFlow: flow,
-        flexBasis: basis,
-        ...css
-      }}
-      data-testid="flex"
-      {...rest}
-      ref={ref}
-    >
-      {children}
-    </StyledBox>
-  );
-});
+export const Flex: FunctionComponent<FlexProps> = React.forwardRef(
+  (
+    {
+      children,
+      flexDirection,
+      justifyContent,
+      justifyItems,
+      alignContent,
+      alignItems,
+      gap,
+      wrap,
+      shrink,
+      css,
+      grow,
+      flow,
+      basis,
+      ...rest
+    }: FlexProps,
+    ref
+  ) => {
+    return (
+      <StyledBox
+        css={{
+          display: 'flex',
+          flexDirection,
+          justifyContent,
+          justifyItems,
+          alignContent,
+          alignItems,
+          gap,
+          flexShrink: shrink,
+          flexWrap: wrap,
+          flexGrow: grow,
+          flexFlow: flow,
+          flexBasis: basis,
+          ...css
+        }}
+        data-testid="flex"
+        {...rest}
+        ref={ref}
+      >
+        {children}
+      </StyledBox>
+    );
+  }
+);

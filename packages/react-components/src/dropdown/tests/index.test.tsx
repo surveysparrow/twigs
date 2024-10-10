@@ -90,13 +90,13 @@ describe('Dropdown', () => {
             </DropdownMenuSubContent>
           </DropdownMenuSub>
           <DropdownMenuSeparator />
-          <DropdownMenuCheckboxItem checked onCheckedChange={() => { }}>
+          <DropdownMenuCheckboxItem checked onCheckedChange={() => {}}>
             <DropdownMenuItemIndicator>
               <TickIcon />
             </DropdownMenuItemIndicator>
             Show Bookmarks
           </DropdownMenuCheckboxItem>
-          <DropdownMenuCheckboxItem checked onCheckedChange={() => { }}>
+          <DropdownMenuCheckboxItem checked onCheckedChange={() => {}}>
             <DropdownMenuItemIndicator>
               <TickIcon />
             </DropdownMenuItemIndicator>
@@ -104,7 +104,7 @@ describe('Dropdown', () => {
           </DropdownMenuCheckboxItem>
           <DropdownMenuSeparator />
           <DropdownMenuLabel>People</DropdownMenuLabel>
-          <DropdownMenuRadioGroup value="Maneesh" onValueChange={() => { }}>
+          <DropdownMenuRadioGroup value="Maneesh" onValueChange={() => {}}>
             <DropdownMenuRadioItem value="pedro">
               <DropdownMenuItemIndicator>
                 <TickIcon />

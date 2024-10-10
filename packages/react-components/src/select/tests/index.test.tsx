@@ -12,9 +12,7 @@ const options = [
 
 describe('Select', () => {
   it('renders without crashing', () => {
-    render(
-      <Select options={options} />
-    );
+    render(<Select options={options} />);
   });
 
   it('renders label when label prop is provided', () => {
@@ -25,10 +23,10 @@ describe('Select', () => {
   });
 
   it('separator is present', () => {
-    const { container } = render(
-      <Select options={options} showSeparator />
+    const { container } = render(<Select options={options} showSeparator />);
+    const separator = container.querySelector(
+      '.twigs-select__indicator-separator'
     );
-    const separator = container.querySelector('.twigs-select__indicator-separator');
     expect(separator).toBeVisible();
   });
 });

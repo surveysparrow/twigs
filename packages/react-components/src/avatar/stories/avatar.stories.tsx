@@ -28,7 +28,5 @@ export default {
   }
 } as ComponentMeta<typeof AvatarComponent>;
 
-const Template = (args) => (
-  <AvatarComponent {...args} />
-);
+const Template = (args) => <AvatarComponent {...args} />;
 export const Avatar = Template.bind({});

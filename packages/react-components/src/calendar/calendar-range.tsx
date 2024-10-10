@@ -268,7 +268,9 @@ const CalendarSingleSection = ({
               offset: calendarOffset
             })}
             containerCSS={{
-              maxWidth: `calc(7 * ${CALENDAR_SIZE_TO_DAY_BTN_SIZE[calendarContext.size]})`,
+              maxWidth: `calc(7 * ${
+                CALENDAR_SIZE_TO_DAY_BTN_SIZE[calendarContext.size]
+              })`,
               boxSizing: 'content-box',
               padding: '0 $8 0 $8'
             }}

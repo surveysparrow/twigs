@@ -22,7 +22,8 @@ const StyledInput = styled('input', {
     $$shadowColor: '$colors$primary300',
     outline: 'none',
     background: '$white900',
-    boxShadow: 'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
+    boxShadow:
+      'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
   },
   '&:disabled': {
     color: '$neutral700',
@@ -85,7 +86,9 @@ const StyledInput = styled('input', {
   }
 });
 
-function getInputPadding(size: string | ({ '@initial'?: 'sm' | 'md' | 'lg' | 'xl' })) {
+function getInputPadding(
+  size: string | { '@initial'?: 'sm' | 'md' | 'lg' | 'xl' }
+) {
   switch (size) {
     case 'lg':
       return '$20';
@@ -103,14 +106,17 @@ export interface InputBaseProps {
   rightIcon?: ReactElement;
   rightElement?: ReactElement;
   leftElement?: ReactElement;
-  errorBorder?:boolean;
+  errorBorder?: boolean;
   // eslint-disable-next-line no-unused-vars
-  onChange?: (e: React.ChangeEvent<HTMLInputElement> | React.FormEvent<HTMLInputElement>) => void
+  onChange?: (
+    e: React.ChangeEvent<HTMLInputElement> | React.FormEvent<HTMLInputElement>
+  ) => void;
 }
 
-export type InputProps = InputBaseProps & ComponentProps<typeof StyledInput> &
+export type InputProps = InputBaseProps &
+  ComponentProps<typeof StyledInput> &
   React.HTMLAttributes<HTMLInputElement> & {
-    as?: React.ElementType
+    as?: React.ElementType;
   };
 
 const IconContainer = styled(Box, {
@@ -186,91 +192,93 @@ export const errorBorderStyles = {
   '&:focus,&:active': {
     $$shadowColor: '$colors$primary300',
     borderBottom: '0',
-    boxShadow: '$colors$negative500 0px 1.5px 0px 0px,rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
+    boxShadow:
+      '$colors$negative500 0px 1.5px 0px 0px,rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
   }
 };
 
-export const Input: FunctionComponent<InputProps> = React.forwardRef(({
-  size = 'md',
-  leftIcon,
-  rightIcon,
-  css,
-  rightElement,
-  leftElement,
-  errorBorder = false,
-  ...rest
-}: InputProps, ref) => {
-  const inputPaddingValue = getInputPadding(size);
-  if (leftIcon || rightIcon || rightElement || leftElement) {
-    return (
-      <Box
-        css={{
-          display: 'flex',
-          alignItems: 'center',
-          position: 'relative',
-          ...css
-        }}
-      >
-        {leftIcon && (
-          <IconContainer
-            size={size}
-            css={{
-              left: size === 'md' ? '$4' : '$6'
-            }}
-          >
-            {React.cloneElement(leftIcon)}
-          </IconContainer>
-        )}
-
-        {
-          leftElement
-          && (
-            <AddonContainer
-              position="left"
+export const Input: FunctionComponent<InputProps> = React.forwardRef(
+  (
+    {
+      size = 'md',
+      leftIcon,
+      rightIcon,
+      css,
+      rightElement,
+      leftElement,
+      errorBorder = false,
+      ...rest
+    }: InputProps,
+    ref
+  ) => {
+    const inputPaddingValue = getInputPadding(size);
+    if (leftIcon || rightIcon || rightElement || leftElement) {
+      return (
+        <Box
+          css={{
+            display: 'flex',
+            alignItems: 'center',
+            position: 'relative',
+            ...css
+          }}
+        >
+          {leftIcon && (
+            <IconContainer
+              size={size}
+              css={{
+                left: size === 'md' ? '$4' : '$6'
+              }}
             >
+              {React.cloneElement(leftIcon)}
+            </IconContainer>
+          )}
+
+          {leftElement && (
+            <AddonContainer position="left">
               {React.cloneElement(leftElement)}
             </AddonContainer>
-          )
-        }
+          )}
 
-        <StyledInput
-          ref={ref}
-          size={size}
-          data-testid="input"
-          css={{
-            ...(leftIcon && { paddingInlineStart: inputPaddingValue }),
-            ...(rightIcon && { paddingInlineEnd: inputPaddingValue }),
-            ...(errorBorder && {
-              ...errorBorderStyles
-            })
-          }}
-          {...rest}
-        />
-        {rightIcon && (
-          <IconContainer
+          <StyledInput
+            ref={ref}
             size={size}
+            data-testid="input"
             css={{
-              right: size === 'md' ? '$4' : '$6'
+              ...(leftIcon && { paddingInlineStart: inputPaddingValue }),
+              ...(rightIcon && { paddingInlineEnd: inputPaddingValue }),
+              ...(errorBorder && {
+                ...errorBorderStyles
+              })
             }}
-          >
-            {React.cloneElement(rightIcon)}
-          </IconContainer>
-        )}
-
-        {
-          rightElement
-          && (
-            <AddonContainer
-              position="right"
+            {...rest}
+          />
+          {rightIcon && (
+            <IconContainer
+              size={size}
+              css={{
+                right: size === 'md' ? '$4' : '$6'
+              }}
             >
+              {React.cloneElement(rightIcon)}
+            </IconContainer>
+          )}
+
+          {rightElement && (
+            <AddonContainer position="right">
               {React.cloneElement(rightElement)}
             </AddonContainer>
-          )
-        }
-      </Box>
+          )}
+        </Box>
+      );
+    }
+    return (
+      <StyledInput
+        ref={ref}
+        size={size}
+        data-testid="input"
+        {...rest}
+        css={{ ...css, ...(errorBorder && { ...errorBorderStyles }) }}
+      />
     );
   }
-  return (
-    <StyledInput ref={ref} size={size} data-testid="input" {...rest} css={{ ...css, ...(errorBorder && { ...errorBorderStyles }) }} />
-  );
-});
+);

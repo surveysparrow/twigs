@@ -34,15 +34,13 @@ export default {
 const Template = (args) => (
   // eslint-disable-next-line react/destructuring-assignment
   <AvatarGroup {...args}>
-    {
-      [...Array(10)].map((_, i) => (
-        <Avatar
-          // eslint-disable-next-line react/no-array-index-key
-          key={i}
-          src={`https://i.pravatar.cc/150?img=${i}`}
-        />
-      ))
-    }
+    {[...Array(10)].map((_, i) => (
+      <Avatar
+        // eslint-disable-next-line react/no-array-index-key
+        key={i}
+        src={`https://i.pravatar.cc/150?img=${i}`}
+      />
+    ))}
   </AvatarGroup>
 );
 export const AvatarGrouped = Template.bind({});

@@ -18,17 +18,17 @@ export default {
 };
 
 const Template = (args) => {
-  return (
-    <LineLoader {...args} />
-  );
+  return <LineLoader {...args} />;
 };
 
 const App = (args) => {
   return (
-    <Box css={{
-      padding: '$4',
-      backgroundColor: (!args.color || args.color === 'ghost') ? '$black500' : 'transparent'
-    }}
+    <Box
+      css={{
+        padding: '$4',
+        backgroundColor:
+          !args.color || args.color === 'ghost' ? '$black500' : 'transparent'
+      }}
     >
       <Template {...args} />
     </Box>

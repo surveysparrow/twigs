@@ -10,9 +10,7 @@ describe('Flex', () => {
   });
 
   it('renders flex correctly', () => {
-    const { getByTestId } = render(
-      <Flex>Simple Flex</Flex>
-    );
+    const { getByTestId } = render(<Flex>Simple Flex</Flex>);
     const flex = getByTestId('flex');
 
     expect(flex).toHaveTextContent('Simple Flex');

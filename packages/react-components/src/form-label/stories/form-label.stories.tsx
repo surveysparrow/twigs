@@ -11,13 +11,8 @@ export default {
     requiredIndicator: {
       control: 'boolean'
     }
-
   }
 };
 
-const Template = (args) => (
-  <FormLabel {...args}>
-    Email address
-  </FormLabel>
-);
+const Template = (args) => <FormLabel {...args}>Email address</FormLabel>;
 export const Default = Template.bind({});

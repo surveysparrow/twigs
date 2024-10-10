@@ -6,6 +6,6 @@ import { Checkbox } from '../index';
 
 describe('Checkbox', () => {
   it('renders without crashing', () => {
-    render(<Checkbox onChange={() => { }} required={false} disabled={false} />);
+    render(<Checkbox onChange={() => {}} required={false} disabled={false} />);
   });
 });

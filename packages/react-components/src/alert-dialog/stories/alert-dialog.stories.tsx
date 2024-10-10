@@ -25,8 +25,8 @@ const Template = (args) => (
       <>
         <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
         <AlertDialogDescription>
-          This action cannot be undone. This will permanently delete your account and remove your
-          data from our servers.
+          This action cannot be undone. This will permanently delete your
+          account and remove your data from our servers.
         </AlertDialogDescription>
         <AlertDialogActions>
           <AlertDialogCancel asChild>
@@ -35,7 +35,9 @@ const Template = (args) => (
             </Button>
           </AlertDialogCancel>
           <AlertDialogAction asChild>
-            <Button color="error" size="lg">Yes, delete account</Button>
+            <Button color="error" size="lg">
+              Yes, delete account
+            </Button>
           </AlertDialogAction>
         </AlertDialogActions>
       </>

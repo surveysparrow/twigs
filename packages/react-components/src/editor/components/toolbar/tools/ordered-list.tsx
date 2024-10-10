@@ -1,6 +1,4 @@
-import {
-  INSERT_ORDERED_LIST_COMMAND
-} from '@lexical/list';
+import { INSERT_ORDERED_LIST_COMMAND } from '@lexical/list';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { OrderedListIcon } from '@sparrowengg/twigs-react-icons';
 import { IconButton } from '@src/button';

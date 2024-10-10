@@ -1,6 +1,9 @@
 import React, { useEffect, useMemo, useRef } from 'react';
 import {
-  theme as stichesTheme, defaultTheme, createTheme, globalStyles
+  theme as stichesTheme,
+  defaultTheme,
+  createTheme,
+  globalStyles
 } from '../stitches.config';
 
 export const ThemeContext = React.createContext<any>(null);

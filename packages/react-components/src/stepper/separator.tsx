@@ -24,6 +24,10 @@ const Arrow = () => (
   </svg>
 );
 
-const Separator = () => (<StyledSeparator><Arrow /></StyledSeparator>);
+const Separator = () => (
+  <StyledSeparator>
+    <Arrow />
+  </StyledSeparator>
+);
 
 export { Separator };

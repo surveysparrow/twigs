@@ -26,11 +26,7 @@ export const CodeBlockIcon = React.forwardRef<SVGSVGElement, IconProps>(
         </g>
         <defs>
           <clipPath id="clip0_103_16454">
-            <path
-              fill="#fff"
-              d="M0 0H20V20H0z"
-              transform="translate(2 2)"
-            />
+            <path fill="#fff" d="M0 0H20V20H0z" transform="translate(2 2)" />
           </clipPath>
         </defs>
       </svg>

@@ -1,6 +1,4 @@
-import {
-  INSERT_UNORDERED_LIST_COMMAND
-} from '@lexical/list';
+import { INSERT_UNORDERED_LIST_COMMAND } from '@lexical/list';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { UnorderedListIcon } from '@sparrowengg/twigs-react-icons';
 import { IconButton } from '@src/button';

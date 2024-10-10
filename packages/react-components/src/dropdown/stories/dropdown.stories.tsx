@@ -30,29 +30,17 @@ const Template = (args) => {
   return (
     <DropdownMenu {...args}>
       <DropdownMenuTrigger asChild>
-        <Button
-          size="lg"
-          color="primary"
-          aria-label="Customise options"
-        >
+        <Button size="lg" color="primary" aria-label="Customise options">
           More Options
         </Button>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent
-        showArrow={false}
-        align="end"
-        sideOffset={5}
-      >
+      <DropdownMenuContent showArrow={false} align="end" sideOffset={5}>
         <DropdownMenuItem>New Tab</DropdownMenuItem>
         <DropdownMenuItem>New Window</DropdownMenuItem>
-        <DropdownMenuItem disabled>
-          New Private Window
-        </DropdownMenuItem>
+        <DropdownMenuItem disabled>New Private Window</DropdownMenuItem>
         <DropdownMenuSub>
-          <DropdownMenuSubTrigger>
-            More Tools
-          </DropdownMenuSubTrigger>
+          <DropdownMenuSubTrigger>More Tools</DropdownMenuSubTrigger>
           <DropdownMenuSubContent sideOffset={2} alignOffset={-5}>
             <DropdownMenuItem>Save Page As…</DropdownMenuItem>
             <DropdownMenuItem>Create Shortcut…</DropdownMenuItem>
@@ -62,30 +50,19 @@ const Template = (args) => {
           </DropdownMenuSubContent>
         </DropdownMenuSub>
         <DropdownMenuSeparator />
-        <DropdownMenuCheckboxItem
-          checked
-          onCheckedChange={() => { }}
-        >
+        <DropdownMenuCheckboxItem checked onCheckedChange={() => {}}>
           Show Bookmarks
         </DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem
-          checked
-          onCheckedChange={() => { }}
-        >
+        <DropdownMenuCheckboxItem checked onCheckedChange={() => {}}>
           Show Full URLs
         </DropdownMenuCheckboxItem>
         <DropdownMenuSeparator />
         <DropdownMenuLabel>People</DropdownMenuLabel>
-        <DropdownMenuRadioGroup
-          value="Maneesh"
-          onValueChange={() => { }}
-        >
+        <DropdownMenuRadioGroup value="Maneesh" onValueChange={() => {}}>
           <DropdownMenuRadioItem value="pedro">
             Pedro Duarte
           </DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="colm">
-            Colm Tuite
-          </DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="colm">Colm Tuite</DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>
