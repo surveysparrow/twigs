@@ -153,10 +153,10 @@ const StyledItemIndicator = styled(DropdownMenuPrimitive.ItemIndicator, {
 const contentStyles = {
   minWidth: 234,
   backgroundColor: 'white',
-  padding: '$6 0',
-  borderRadius: '$lg',
-  boxShadow: '$sm',
-  border: '$borderWidths$xs solid $colors$neutral300',
+  padding: '$4 0',
+  borderRadius: '$xl',
+  boxShadow: '0px 1px 1px 0px rgba(0, 0, 0, 0.06), 0px 2px 5px 0px rgba(0, 0, 0, 0.06), 0px 8px 12px 0px rgba(0, 0, 0, 0.06)',
+  border: '0.5px solid $colors$black300',
   '@media (prefers-reduced-motion: no-preference)': {
     animationDuration: '400ms',
     animationTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
