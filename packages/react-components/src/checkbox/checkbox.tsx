@@ -30,6 +30,7 @@ const StyledCheckbox = styled(CheckboxPrimitive.Root, {
   justifyContent: 'center',
   border: '$borderWidths$xs solid $neutral700',
   transition: 'all $transitions$2',
+  cursor: 'pointer',
 
   '&:disabled': {
     cursor: 'not-allowed',
