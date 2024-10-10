@@ -98,11 +98,55 @@ const StyledAlert = styled(Box, {
           color: '$warning600'
         }
       }
+    },
+    variant: {
+      filled: {
+        backgroundColor: 'currentColor',
+        color: '$white900',
+        border: 'none',
+        [`${StyledAlertIcon} svg`]: {
+          color: '$white900'
+        }
+      },
+      default: {
+        unset: 'none'
+      }
     }
   },
+  compoundVariants: [
+    {
+      status: STATUSES.success.name,
+      variant: 'filled',
+      css: {
+        backgroundColor: '$positive500'
+      }
+    },
+    {
+      status: STATUSES.info.name,
+      variant: 'filled',
+      css: {
+        backgroundColor: '$accent500'
+      }
+    },
+    {
+      status: STATUSES.warning.name,
+      variant: 'filled',
+      css: {
+        backgroundColor: '$warning500'
+      }
+    },
+    {
+      status: STATUSES.error.name,
+      variant: 'filled',
+      css: {
+        backgroundColor: '$negative600'
+      }
+    }
+  ],
   defaultVariants: {
     size: 'sm',
-    status: STATUSES.info.name
+    status: STATUSES.info.name,
+    variant: 'default'
   }
 });
 
@@ -112,6 +156,7 @@ export type AlertProps = {
   onClose?: React.MouseEventHandler<HTMLButtonElement>
   status: 'info' | 'error' | 'success' | 'warning',
   icon?: React.ReactElement,
+  variant?: 'default' | 'filled'
 } & ComponentProps<typeof StyledAlert>
 
 export const Alert: FunctionComponent<AlertProps> = React.forwardRef(
@@ -122,6 +167,7 @@ export const Alert: FunctionComponent<AlertProps> = React.forwardRef(
     status = 'info',
     children,
     icon,
+    variant = 'default',
     ...rest
   }: AlertProps, ref) => {
     const ValidAlertIcon = icon || STATUSES[status]?.icon;
@@ -135,6 +181,7 @@ export const Alert: FunctionComponent<AlertProps> = React.forwardRef(
         ref={ref}
         size={size}
         status={status}
+        variant={variant}
         {...rest}
       >
         <StyledAlertIcon
@@ -160,7 +207,7 @@ export const Alert: FunctionComponent<AlertProps> = React.forwardRef(
               <StyledCloseButton
                 icon={<CloseIcon />}
                 aria-label="close"
-                color="default"
+                color={variant === 'filled' ? 'light' : 'default'}
                 {...(onClose && { onClick: onClose })}
               />
             )
