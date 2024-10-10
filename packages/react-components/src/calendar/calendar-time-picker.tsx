@@ -146,7 +146,7 @@ export const CalendarTimePicker = ({
     const updatedTime = timeState.set({
       hour: timeValue.pm
         ? 12 + (parseInt(timeValue.hour, 10) % 12)
-        : parseInt(timeValue.hour, 10),
+        : parseInt(timeValue.hour, 10) % 12,
       minute: parseInt(timeValue.minute, 10)
     });
     if (onChange) {
