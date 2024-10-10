@@ -346,8 +346,10 @@ export const globalStyles = globalCss({
   '*': {
     margin: 0,
     padding: 0,
-    fontFamily: '$body',
     '-webkit-font-smoothing': 'antialiased'
+  },
+  'html, body, textarea, input, button, select, p, a': {
+    fontFamily: '$body'
   },
   '*, :before, :after': { boxSizing: 'border-box' }
 });

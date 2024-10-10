@@ -86,7 +86,7 @@ export const FormatTool = ({
           className="twigs-editor-tool-button"
         />
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
+      <DropdownMenuContent className="twigs-editor-toolbar__format-options">
         <DropdownMenuItem onClick={formatParagraph}>
           {paragraph}
         </DropdownMenuItem>
