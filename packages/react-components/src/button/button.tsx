@@ -6,10 +6,10 @@ import { ScaleValue } from '@stitches/react';
 import { config, keyframes, styled } from '../stitches.config';
 import { ButtonSideElement } from './side-element';
 import {
+  BUTTON_CLASSNAMES,
   getLoaderIconSizeFromButtonProps,
   getLoaderVariantFromButtonVariant
 } from './utils';
-import { prefixClassName } from '../utils';
 
 const loadingBlink = keyframes({
   '50%': {
@@ -37,9 +37,6 @@ const StyledButton = styled('button', {
     opacity: 0.4,
     cursor: 'not-allowed'
   },
-  '&:active:hover': {
-    opacity: '0.8'
-  },
   '&:focus, &:active': {
     outline: 'none'
   },
@@ -48,9 +45,7 @@ const StyledButton = styled('button', {
     boxShadow:
       'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
   },
-  [`&.${prefixClassName('button--loading')} .${prefixClassName(
-    'button__content'
-  )}`]: {
+  [`&.${BUTTON_CLASSNAMES.loading} .${BUTTON_CLASSNAMES.content}`]: {
     animation: `${loadingBlink} 1.5s cubic-bezier(0.51, 0, 0, 1) infinite`
   },
   variants: {
@@ -61,7 +56,7 @@ const StyledButton = styled('button', {
         fontSize: '$lg',
         lineHeight: '$lg',
         height: '$16',
-        [`& .${prefixClassName('button__icon-container > *')}`]: {
+        [`& .${BUTTON_CLASSNAMES.iconBox}`]: {
           width: '$6',
           height: '$6'
         }
@@ -72,7 +67,7 @@ const StyledButton = styled('button', {
         fontSize: '$lg',
         lineHeight: '$lg',
         height: '$12',
-        [`& .${prefixClassName('button__icon-container > *')}`]: {
+        [`& .${BUTTON_CLASSNAMES.iconBox}`]: {
           width: '$6',
           height: '$6'
         }
@@ -83,7 +78,7 @@ const StyledButton = styled('button', {
         fontSize: '$md',
         lineHeight: '$md',
         height: '$10',
-        [`& .${prefixClassName('button__icon-container > *')}`]: {
+        [`& .${BUTTON_CLASSNAMES.iconBox}`]: {
           width: '$5',
           height: '$5'
         }
@@ -94,7 +89,7 @@ const StyledButton = styled('button', {
         fontSize: '$sm',
         lineHeight: '$md',
         height: '$8',
-        [`& .${prefixClassName('button__icon-container > *')}`]: {
+        [`& .${BUTTON_CLASSNAMES.iconBox}`]: {
           width: '$5',
           height: '$5'
         }
@@ -105,7 +100,7 @@ const StyledButton = styled('button', {
         fontSize: '$sm',
         lineHeight: '$sm',
         height: '$6',
-        [`& .${prefixClassName('button__icon-container > *')}`]: {
+        [`& .${BUTTON_CLASSNAMES.iconBox}`]: {
           width: '$4',
           height: '$4'
         }
@@ -116,7 +111,7 @@ const StyledButton = styled('button', {
         fontSize: '$xs',
         lineHeight: '$xs',
         height: '$5',
-        [`& .${prefixClassName('button__icon-container > *')}`]: {
+        [`& .${BUTTON_CLASSNAMES.iconBox}`]: {
           width: '$2',
           height: '$2'
         }
@@ -127,7 +122,7 @@ const StyledButton = styled('button', {
         fontSize: '$xxs',
         lineHeight: '$xxs',
         height: '$4',
-        [`& .${prefixClassName('button__icon-container > *')}`]: {
+        [`& .${BUTTON_CLASSNAMES.iconBox}`]: {
           width: '$2',
           height: '$2'
         }
@@ -137,12 +132,17 @@ const StyledButton = styled('button', {
       default: {
         backgroundColorOpacity: ['$secondary500', 0.08],
         color: '$secondary500',
-        [`&:hover:not(:disabled), &:active:not(:disabled), &.${prefixClassName('button--loading')}`]: {
+        [`&:hover:not(:disabled), &.${BUTTON_CLASSNAMES.loading}`]: {
           color: '$secondary600',
-          backgroundColorOpacity: ['$secondary500', 0.08]
+          backgroundColorOpacity: ['$secondary500', 0.15]
+        },
+        '&:active:not(:disabled)': {
+          color: '$secondary700',
+          backgroundColorOpacity: ['$secondary500', 0.2]
         },
         '&:focus': {
-          color: '$secondary600'
+          color: '$secondary600',
+          backgroundColorOpacity: ['$secondary500', 0.15]
         }
       },
       primary: {
@@ -151,7 +151,7 @@ const StyledButton = styled('button', {
         '&:hover:not(:disabled), &:focus': {
           background: '$primary500'
         },
-        [`&:active:not(:disabled), &.${prefixClassName('button--loading')}`]: {
+        [`&:active:not(:disabled), &.${BUTTON_CLASSNAMES.loading}`]: {
           background: '$primary700'
         }
       },
@@ -161,7 +161,7 @@ const StyledButton = styled('button', {
         '&:hover:not(:disabled), &:focus': {
           background: '$secondary600'
         },
-        [`&:active:not(:disabled), &.${prefixClassName('button--loading')}`]: {
+        [`&:active:not(:disabled), &.${BUTTON_CLASSNAMES.loading}`]: {
           background: '$secondary800'
         }
       },
@@ -170,11 +170,11 @@ const StyledButton = styled('button', {
         color: '$secondary500',
         '&:hover:not(:disabled), &:focus': {
           color: '$secondary600',
-          background: '$neutral50'
+          background: '$black50'
         },
-        [`&:active:not(:disabled), &.${prefixClassName('button--loading')}`]: {
-          color: '$secondary600',
-          background: '$neutral100'
+        [`&:active:not(:disabled), &.${BUTTON_CLASSNAMES.loading}`]: {
+          color: '$secondary700',
+          background: '$black100'
         }
       },
       light: {
@@ -183,18 +183,19 @@ const StyledButton = styled('button', {
         '&:hover:not(:disabled), &:focus': {
           background: '$white300'
         },
-        [`&:active:not(:disabled), &.${prefixClassName('button--loading')}`]: {
+        [`&:active:not(:disabled), &.${BUTTON_CLASSNAMES.loading}`]: {
           background: '$white400'
         }
       },
       error: {
         background: '$negative100',
         color: '$negative600',
-        '&:hover:not(:disabled)': {
+        '&:hover:not(:disabled), &:focus': {
           background: '$negative200'
         },
-        [`&:active:not(:disabled), &.${prefixClassName('button--loading')}`]: {
-          background: '$negative300'
+        [`&:active:not(:disabled), &.${BUTTON_CLASSNAMES.loading}`]: {
+          background: '$negative300',
+          color: '$negative700'
         }
       }
     },
@@ -301,7 +302,7 @@ const StyledButton = styled('button', {
         '&:hover:not(:disabled), &:focus': {
           color: '$primary700'
         },
-        [`&:active:not(:disabled), &.${prefixClassName('button--loading')}`]: {
+        [`&:active:not(:disabled), &.${BUTTON_CLASSNAMES.loading}`]: {
           color: '$primary800',
           backgroundColorOpacity: ['$primary500', 0.15]
         }
@@ -319,7 +320,7 @@ const StyledButton = styled('button', {
           color: '$primary600',
           background: '$white900'
         },
-        [`&:active:not(:disabled), &.${prefixClassName('button--loading')}`]: {
+        [`&:active:not(:disabled), &.${BUTTON_CLASSNAMES.loading}`]: {
           borderColorOpacity: ['$primary500', 0.9],
           color: '$primary700',
           background: '$white900'
@@ -336,7 +337,7 @@ const StyledButton = styled('button', {
           color: '$secondary600',
           backgroundColorOpacity: ['$secondary500', 0.08]
         },
-        [`&:active:not(:disabled), &.${prefixClassName('button--loading')}`]: {
+        [`&:active:not(:disabled), &.${BUTTON_CLASSNAMES.loading}`]: {
           color: '$secondary700',
           backgroundColorOpacity: ['$secondary500', 0.15]
         }
@@ -355,7 +356,7 @@ const StyledButton = styled('button', {
           color: '$secondary600',
           background: '$white900'
         },
-        [`&:active:not(:disabled), &.${prefixClassName('button--loading')}`]: {
+        [`&:active:not(:disabled), &.${BUTTON_CLASSNAMES.loading}`]: {
           borderColorOpacity: ['$secondary800', 0.8],
           color: '$secondary800',
           background: '$white900'
@@ -374,7 +375,7 @@ const StyledButton = styled('button', {
           background: 'transparent',
           borderColorOpacity: ['$white500', 0.3]
         },
-        [`&:active:not(:disabled), &.${prefixClassName('button--loading')}`]: {
+        [`&:active:not(:disabled), &.${BUTTON_CLASSNAMES.loading}`]: {
           background: 'transparent',
           borderColorOpacity: ['$white700', 0.7]
         }
@@ -389,7 +390,7 @@ const StyledButton = styled('button', {
         '&:hover:not(:disabled), &:focus, &:active:not(:disabled)': {
           color: '$neutral900'
         },
-        [`&:active:not(:disabled), &.${prefixClassName('button--loading')}`]: {
+        [`&:active:not(:disabled), &.${BUTTON_CLASSNAMES.loading}`]: {
           backgroundColorOpacity: ['$black500', 0.08]
         },
         '&:hover:not(:disabled), &:focus': {
@@ -403,7 +404,7 @@ const StyledButton = styled('button', {
       css: {
         background: 'transparent',
         color: '$white900',
-        [`&:active:not(:disabled), &.${prefixClassName('button--loading')}`]: {
+        [`&:active:not(:disabled), &.${BUTTON_CLASSNAMES.loading}`]: {
           backgroundColorOpacity: ['$white400', 0.2]
         },
         '&:hover:not(:disabled), &:focus': {
@@ -420,7 +421,7 @@ const StyledButton = styled('button', {
         '&:hover:not(:disabled), &:focus': {
           background: '$negative100'
         },
-        [`&:active:not(:disabled), &.${prefixClassName('button--loading')}`]: {
+        [`&:active:not(:disabled), &.${BUTTON_CLASSNAMES.loading}`]: {
           background: '$negative200'
         }
       }
@@ -438,7 +439,7 @@ const StyledButton = styled('button', {
           color: '$negative700',
           background: '$white900'
         },
-        [`&:active:not(:disabled), &.${prefixClassName('button--loading')}`]: {
+        [`&:active:not(:disabled), &.${BUTTON_CLASSNAMES.loading}`]: {
           borderColor: '$negative600',
           color: '$negative800',
           background: '$white900'
@@ -451,7 +452,7 @@ const StyledButton = styled('button', {
       css: {
         width: '$16',
         height: '$16',
-        [`& .${prefixClassName('button__icon-container > *')}`]: {
+        [`& .${BUTTON_CLASSNAMES.iconBox}`]: {
           width: '$8',
           height: '$8'
         }
@@ -463,7 +464,7 @@ const StyledButton = styled('button', {
       css: {
         width: '$12',
         height: '$12',
-        [`& .${prefixClassName('button__icon-container > *')}`]: {
+        [`& .${BUTTON_CLASSNAMES.iconBox}`]: {
           width: '$8',
           height: '$8'
         }
@@ -475,7 +476,7 @@ const StyledButton = styled('button', {
       css: {
         width: '$10',
         height: '$10',
-        [`& .${prefixClassName('button__icon-container > *')}`]: {
+        [`& .${BUTTON_CLASSNAMES.iconBox}`]: {
           width: '$6',
           height: '$6'
         }
@@ -487,7 +488,7 @@ const StyledButton = styled('button', {
       css: {
         width: '$8',
         height: '$8',
-        [`& .${prefixClassName('button__icon-container > *')}`]: {
+        [`& .${BUTTON_CLASSNAMES.iconBox}`]: {
           width: '$5',
           height: '$5'
         }
@@ -499,7 +500,7 @@ const StyledButton = styled('button', {
       css: {
         width: '$6',
         height: '$6',
-        [`& .${prefixClassName('button__icon-container > *')}`]: {
+        [`& .${BUTTON_CLASSNAMES.iconBox}`]: {
           width: '$4',
           height: '$4'
         }
@@ -511,7 +512,7 @@ const StyledButton = styled('button', {
       css: {
         width: '$5',
         height: '$5',
-        [`& .${prefixClassName('button__icon-container > *')}`]: {
+        [`& .${BUTTON_CLASSNAMES.iconBox}`]: {
           width: '$3',
           height: '$3'
         }
@@ -523,9 +524,9 @@ const StyledButton = styled('button', {
       css: {
         width: '$4',
         height: '$4',
-        [`& .${prefixClassName('button__icon-container > *')}`]: {
-          width: '$2',
-          height: '$2'
+        [`& .${BUTTON_CLASSNAMES.iconBox}`]: {
+          width: '14px',
+          height: '14px'
         }
       }
     },
@@ -697,8 +698,8 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
         data-testid="button"
         onClick={onClick}
         className={clsx(className, {
-          [`${prefixClassName('button--loading')}`]: !!loading,
-          [`${prefixClassName('button--disabled')}`]: disabled
+          [`${BUTTON_CLASSNAMES.loading}`]: !!loading,
+          [`${BUTTON_CLASSNAMES.disabled}`]: disabled
         })}
         {...rest}
       >
@@ -727,7 +728,7 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
           />
         )}
 
-        <span className={`${prefixClassName('button__content')}`}>
+        <span className={BUTTON_CLASSNAMES.content}>
           {children}
         </span>
 

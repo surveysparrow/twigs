@@ -34,17 +34,14 @@ const StyledSplitButtonContainer = styled(Box, {
   whiteSpace: 'nowrap'
 });
 
-const StyledPrimaryButton = styled(Box, {
-  'button,a': {
-    borderEndEndRadius: 0,
-    borderStartEndRadius: 0
-  }
-});
-
 const StyledSecondaryButton = styled(Box, {
   'button,a': {
     borderEndStartRadius: 0,
-    borderStartStartRadius: 0
+    borderStartStartRadius: 0,
+
+    '&:not(:disabled):hover, &:active, &:focus': {
+      borderLeftColor: 'transparent'
+    }
   },
   variants: {
     color: {
@@ -56,6 +53,22 @@ const StyledSecondaryButton = styled(Box, {
       secondary: {
         'button,a': {
           borderLeft: '1.5px solid $secondary600'
+        }
+      },
+      default: {
+        'button,a': {
+          borderLeft: '1.5px solid $secondary500',
+          borderColorOpacity: ['$secondary500', 0.15]
+        }
+      },
+      light: {
+        'button,a': {
+          borderLeft: '1.5px solid $white300'
+        }
+      },
+      error: {
+        'button,a': {
+          borderLeft: '1.5px solid $negative200'
         }
       }
     },
@@ -96,6 +109,17 @@ const StyledSecondaryButton = styled(Box, {
         }
       }
     }
+  }
+});
+
+const StyledPrimaryButton = styled(Box, {
+  'button,a': {
+    borderEndEndRadius: 0,
+    borderStartEndRadius: 0
+  },
+  [`&:has(button:not(:disabled):hover, button:active, button:focus) + ${StyledSecondaryButton} button,
+    &:has(a:not(:disabled):hover, a:active, a:focus) + ${StyledSecondaryButton} a`]: {
+    borderLeftColor: 'transparent'
   }
 });
 

@@ -2,6 +2,7 @@ import React, {
   ComponentProps, FunctionComponent, isValidElement, ReactElement
 } from 'react';
 import { Button } from './button';
+import { styled } from '../stitches.config';
 
 type OmitProps = 'leftIcon' | 'rightIcon' | 'isIcon';
 
@@ -10,7 +11,21 @@ export interface IconButtonBaseProps {
   'aria-label'?: string
 }
 
-type IconButtonProps = IconButtonBaseProps & Omit<ComponentProps<typeof Button>, OmitProps> &
+const StyledIconButton = styled(Button, {
+  variants: {
+    shape: {
+      round: {
+        borderRadius: '$round'
+      },
+      squircle: {}
+    }
+  },
+  defaultVariants: {
+    shape: 'squircle'
+  }
+});
+
+type IconButtonProps = IconButtonBaseProps & Omit<ComponentProps<typeof StyledIconButton>, OmitProps> &
   React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 export const IconButton: FunctionComponent<IconButtonProps> = React.forwardRef(
@@ -23,7 +38,7 @@ export const IconButton: FunctionComponent<IconButtonProps> = React.forwardRef(
     const element = icon || children;
     const validElement = isValidElement(element) ? element : null;
     return (
-      <Button
+      <StyledIconButton
         ref={ref}
         aria-label={ariaLabel}
         icon={validElement as ReactElement}
