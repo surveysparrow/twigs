@@ -1,10 +1,11 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import * as ToastPrimitive from '@radix-ui/react-toast';
 import {
-  AlertFillIcon, TickCircleFillIcon, InfoIcon
+  AlertFillIcon, TickCircleFillIcon,
+  InfoIcon
 } from '@sparrowengg/twigs-react-icons';
 import { CircleLoader } from '../loader/circle';
-import { styled, keyframes } from '../stitches.config';
+import { styled, keyframes, hexToRgba } from '../stitches.config';
 import { Flex } from '../flex';
 import { Box } from '../box';
 
@@ -62,7 +63,7 @@ const StyledViewport = styled(ToastPrimitive.Viewport, {
   display: 'flex',
   flexDirection: 'column',
   gap: '$space$5',
-  width: 406,
+  minWidth: 400,
   maxWidth: '100vw',
   margin: 0,
   listStyle: 'none',
@@ -199,8 +200,8 @@ const StyledViewport = styled(ToastPrimitive.Viewport, {
 
 const StyledIcon = styled(Flex, {
   gridArea: 'icon',
-  height: '100%',
-  width: '$10',
+  width: '$6',
+  height: '$6',
   alignItems: 'center',
   justifyContent: 'center'
 });
@@ -236,9 +237,8 @@ const Icon = ({ children, variant = 'success', ...props }: IconProps) => {
 };
 
 const StyledTitle = styled(ToastPrimitive.Title, {
-  gridArea: 'title',
-  fontWeight: '$5',
-  color: '$white900',
+  fontWeight: '$7',
+  lineHeight: '$sm',
   fontSize: '$sm'
 });
 
@@ -248,13 +248,26 @@ const StyledDescription = styled(ToastPrimitive.Description, {
   color: '$white900',
   fontSize: '$sm'
 });
+// eslint-disable-next-line max-len
+const defaultBoxShadow = `0px 56px 70px 30px ${hexToRgba('$white900', 0.9)}, 0px 10px 20px 0px ${hexToRgba('$accent500', 0.15)}, 0px 2px 5px 0px ${hexToRgba('$accent500', 0.06)}, 0px 1px 1px 0px ${hexToRgba('$accent500', 0.06)}`;
+
+// eslint-disable-next-line max-len
+const successBoxShadow = `0px 56px 70px 30px ${hexToRgba('$white900', 0.7)}, 0px 10px 20px 0px ${hexToRgba('$accent700', 0.15)}, 0px 2px 5px 0px ${hexToRgba('$accent700', 0.06)}, 0px 1px 1px 0px ${hexToRgba('$accent700', 0.06)}`;
+
+// eslint-disable-next-line max-len
+const errorBoxShadow = `0px 56px 70px 30px ${hexToRgba('$white900', 0.9)}, 0px 10px 20px 0px ${hexToRgba('$negative700', 0.15)}, 0px 2px 5px 0px ${hexToRgba('$negative700', 0.06)}, 0px 1px 1px 0px ${hexToRgba('$negative700', 0.06)}`;
+
+// eslint-disable-next-line max-len
+const warningBoxShadow = `0px 56px 70px 30px ${hexToRgba('$white900', 0.9)}, 0px 10px 20px 0px ${hexToRgba('$warning700', 0.15)}, 0px 2px 5px 0px ${hexToRgba('$warning700', 0.06)}, 0px 1px 1px 0px ${hexToRgba('$warning700', 0.06)}`;
 
 const StyledToast = styled(ToastPrimitive.Root, {
   backgroundColor: '$neutral900',
   borderRadius: '$xl',
   display: 'flex',
-  border: '$borderWidths$xs solid $black300',
-  padding: '$8 $6',
+  borderWidth: '.5px',
+  borderStyle: 'solid',
+  borderColorOpacity: ['$secondary500', 0.4],
+  padding: '$8',
   overflow: 'hidden',
   '&:focus, &:active': {
     outline: 'none'
@@ -266,7 +279,8 @@ const StyledToast = styled(ToastPrimitive.Root, {
   variants: {
     variant: {
       default: {
-        background: '$accent100',
+        background: '$accent50',
+        boxShadow: defaultBoxShadow,
         [`& ${StyledIcon} svg`]: {
           color: '$accent500'
         },
@@ -278,9 +292,10 @@ const StyledToast = styled(ToastPrimitive.Root, {
         }
       },
       success: {
-        background: '$accent700',
+        background: '$accent500',
+        boxShadow: successBoxShadow,
         [`& ${StyledIcon} svg`]: {
-          color: '$primary400'
+          color: '$accent100'
         },
         [`& ${StyledTitle}`]: {
           color: '$white900'
@@ -291,6 +306,7 @@ const StyledToast = styled(ToastPrimitive.Root, {
       },
       error: {
         background: '$negative600',
+        boxShadow: errorBoxShadow,
         [`& ${StyledIcon} svg`]: {
           color: '$white900'
         },
@@ -303,6 +319,8 @@ const StyledToast = styled(ToastPrimitive.Root, {
       },
       warning: {
         background: '$warning200',
+        boxShadow: warningBoxShadow,
+
         [`& ${StyledIcon} svg`]: {
           color: '$black700'
         },
@@ -348,7 +366,7 @@ const StyledToastWrapper = styled(Box, {
   minWidth: '100%',
   gridTemplateAreas: '"icon content action" "icon content action"',
   gridTemplateColumns: 'max-content auto max-content',
-  columnGap: '$8',
+  columnGap: '$4',
   alignItems: 'center'
 });
 
@@ -391,8 +409,7 @@ const StyledContent = styled(Flex, {
   height: '100%',
   flexDirection: 'column',
   justifyContent: 'center',
-  // padding: '$8 0',
-  gap: '$4',
+  gap: '$2',
   overflow: 'hidden'
 });
 
