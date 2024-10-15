@@ -12,23 +12,25 @@ import { Select } from "@sparrowengg/twigs-react";
 Select component is powered by [react-select](https://react-select.com/home). API options supported by react-select will be supported in Twigs as well.
 :::
 
-### Usage 
+### Usage
 
 <SelectSnippet />
 
 ### Props
-| Property                  | Description                                                        | Type           | Default |
-|---------------------------|--------------------------------------------------------------------|----------------|---------|
-| placeholder               |                                                                    | string         |         |
-| isClearable               | Is the select value clearable                                      | boolean        | false   |
-| isSearchable              | Whether to enable search functionality                             | boolean        | true    |
-| isMulti                   | Support multiple selected options                                  | boolean        | false   |
-| disabled                  |                                                                    | boolean        | false    |
-| size                      |                                                                    | `sm` `md` `lg` `xl`    | md      |
-| label                     |                                                                    | string         |         |
-| variant                   |                                                                    | `default` `filled` | default |
-| showSeparator             | Show a line separator between option and dropdown indicator        | boolean        | false   |
-| isAsync                   |                                                                    | boolean        | false   |
-| isCreatable               | Ability to create option from the select, if option is not present | boolean        | false   |
-| dropdownIndicatorIcon     |                                                                    |                |         |
-| dropdownIndicatorPosition |                                                                    |                |         |
+
+| Property                  | Description                                                                                | Type                    | Default |
+| ------------------------- | ------------------------------------------------------------------------------------------ | ----------------------- | ------- |
+| placeholder               |                                                                                            | string                  |         |
+| isClearable               | Is the select value clearable                                                              | boolean                 | false   |
+| isSearchable              | Whether to enable search functionality                                                     | boolean                 | true    |
+| isMulti                   | Support multiple selected options                                                          | boolean                 | false   |
+| disabled                  |                                                                                            | boolean                 | false   |
+| size                      |                                                                                            | `sm` `md` `lg` `xl`     | md      |
+| label                     |                                                                                            | string                  |         |
+| variant                   |                                                                                            | `default` `filled`      | default |
+| showSeparator             | Show a line separator between option and dropdown indicator                                | boolean                 | false   |
+| isAsync                   |                                                                                            | boolean                 | false   |
+| isCreatable               | Ability to create option from the select, if option is not present                         | boolean                 | false   |
+| dropdownIndicatorIcon     |                                                                                            |                         |         |
+| dropdownIndicatorPosition |                                                                                            |                         |         |
+| info                      | Adds an info icon with a tooltip beside the label. Label has to provided for this to work. | `string` \| `ReactNode` |         |
