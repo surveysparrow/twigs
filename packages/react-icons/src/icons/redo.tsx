@@ -8,11 +8,11 @@ export const RedoIcon = React.forwardRef<SVGSVGElement, IconProps>(
     return (
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        width={size}
-        height={size}
         fill="none"
         viewBox="0 0 32 32"
         {...rest}
+        width={size}
+        height={size}
         ref={ref}
       >
         <path
