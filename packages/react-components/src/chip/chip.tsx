@@ -72,6 +72,7 @@ const CLASSNAMES = {
   addonElementStart: prefixClassName('addon-element--start'),
   addonElementEnd: prefixClassName('addon-element--end'),
   chip: prefixClassName('chip'),
+  chipContent: prefixClassName('chip__content'),
   chipWithAddonStart: `${prefixClassName('chip')}--with-addon-start`,
   chipWithAddonEnd: `${prefixClassName('chip')}--with-addon-end`
 };
@@ -265,9 +266,10 @@ const StyledChip = styled(Box, {
     color: {
       default: {
         color: '$neutral900',
+        backgroundColor: '$neutral100',
 
         [`& ${StyledChipContent}`]: {
-          background: '$neutral100'
+          backgroundColor: 'inherit'
         },
 
         [`& ${StyledCloseButton}`]: {
@@ -284,9 +286,10 @@ const StyledChip = styled(Box, {
       },
       primary: {
         color: '$primary700',
+        backgroundColorOpacity: ['$primary500', 0.15],
 
         [`& ${StyledChipContent}`]: {
-          backgroundColorOpacity: ['$primary500', 0.15]
+          backgroundColor: 'inherit'
         },
 
         [`& ${StyledCloseButton}`]: {
@@ -303,8 +306,10 @@ const StyledChip = styled(Box, {
       },
       secondary: {
         color: '$secondary700',
+        backgroundColorOpacity: ['$secondary500', 0.08],
+
         [`& ${StyledChipContent}`]: {
-          backgroundColorOpacity: ['$secondary500', 0.08]
+          backgroundColor: 'inherit'
         },
 
         [`& ${StyledCloseButton}`]: {
@@ -321,8 +326,10 @@ const StyledChip = styled(Box, {
       },
       error: {
         color: '$negative700',
+        backgroundColor: '$negative100',
+
         [`& ${StyledChipContent}`]: {
-          background: '$negative100'
+          backgroundColor: 'inherit'
         },
 
         [`& ${StyledCloseButton}`]: {
@@ -339,8 +346,10 @@ const StyledChip = styled(Box, {
       },
       warning: {
         color: '$warning700',
+        backgroundColor: '$warning100',
+
         [`& ${StyledChipContent}`]: {
-          background: '$warning100'
+          backgroundColor: 'inherit'
         },
 
         [`& ${StyledCloseButton}`]: {
@@ -357,8 +366,10 @@ const StyledChip = styled(Box, {
       },
       success: {
         color: '$positive600',
+        backgroundColor: '$positive100',
+
         [`& ${StyledChipContent}`]: {
-          background: '$positive100'
+          backgroundColor: 'inherit'
         },
 
         [`& ${StyledCloseButton}`]: {
@@ -375,8 +386,10 @@ const StyledChip = styled(Box, {
       },
       accent: {
         color: '$accent500',
+        backgroundColor: '$accent100',
+
         [`& ${StyledChipContent}`]: {
-          background: '$accent100'
+          backgroundColor: 'inherit'
         },
 
         [`& ${StyledCloseButton}`]: {
@@ -560,18 +573,24 @@ const StyledChip = styled(Box, {
       selectable: true,
       css: {
         color: '$secondary800',
+        backgroundColorOpacity: ['$primary500', 0.1],
+
         [`& ${StyledChipContent}`]: {
-          backgroundColorOpacity: ['$primary500', 0.1]
+          backgroundColor: 'inherit'
         },
 
         '&:hover': {
+          backgroundColorOpacity: ['$primary500', 0.15],
+
           [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$primary500', 0.15]
+            backgroundColor: 'inherit'
           }
         },
         '&.active': {
+          backgroundColorOpacity: ['$primary500', 0.2],
+
           [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$primary500', 0.2]
+            backgroundColor: 'inherit'
           }
         }
       }
@@ -581,18 +600,21 @@ const StyledChip = styled(Box, {
       variant: 'solid',
       selectable: true,
       css: {
+        backgroundColorOpacity: ['$secondary500', 0.1],
         [`& ${StyledChipContent}`]: {
-          backgroundColorOpacity: ['$secondary500', 0.1]
+          backgroundColor: 'inherit'
         },
 
         '&:hover': {
+          backgroundColorOpacity: ['$secondary500', 0.15],
           [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$secondary500', 0.15]
+            backgroundColor: 'inherit'
           }
         },
         '&.active': {
+          backgroundColorOpacity: ['$secondary500', 0.2],
           [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$secondary500', 0.2]
+            backgroundColor: 'inherit'
           }
         }
       }
@@ -602,18 +624,21 @@ const StyledChip = styled(Box, {
       variant: 'solid',
       selectable: true,
       css: {
+        backgroundColorOpacity: ['$black900', 0.1],
         [`& ${StyledChipContent}`]: {
-          backgroundColorOpacity: ['$black900', 0.1]
+          backgroundColor: 'inherit'
         },
 
         '&:hover': {
+          backgroundColorOpacity: ['$black900', 0.15],
           [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$black900', 0.15]
+            backgroundColor: 'inherit'
           }
         },
         '&.active': {
+          backgroundColorOpacity: ['$black900', 0.2],
           [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$black900', 0.2]
+            backgroundColor: 'inherit'
           }
         }
       }
@@ -623,18 +648,21 @@ const StyledChip = styled(Box, {
       variant: 'solid',
       selectable: true,
       css: {
+        backgroundColorOpacity: ['$accent500', 0.1],
         [`& ${StyledChipContent}`]: {
-          backgroundColorOpacity: ['$accent500', 0.1]
+          backgroundColor: 'inherit'
         },
 
         '&:hover': {
+          backgroundColorOpacity: ['$accent500', 0.15],
           [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$accent500', 0.15]
+            backgroundColor: 'inherit'
           }
         },
         '&.active': {
+          backgroundColorOpacity: ['$accent500', 0.2],
           [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$accent500', 0.2]
+            backgroundColor: 'inherit'
           }
         }
       }
@@ -644,18 +672,21 @@ const StyledChip = styled(Box, {
       variant: 'solid',
       selectable: true,
       css: {
+        backgroundColorOpacity: ['$positive500', 0.1],
         [`& ${StyledChipContent}`]: {
-          backgroundColorOpacity: ['$positive500', 0.1]
+          backgroundColor: 'inherit'
         },
 
         '&:hover': {
+          backgroundColorOpacity: ['$positive500', 0.15],
           [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$positive500', 0.15]
+            backgroundColor: 'inherit'
           }
         },
         '&.active': {
+          backgroundColorOpacity: ['$positive500', 0.2],
           [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$positive500', 0.2]
+            backgroundColor: 'inherit'
           }
         }
       }
@@ -665,18 +696,21 @@ const StyledChip = styled(Box, {
       variant: 'solid',
       selectable: true,
       css: {
+        backgroundColorOpacity: ['$warning600', 0.1],
         [`& ${StyledChipContent}`]: {
-          backgroundColorOpacity: ['$warning600', 0.1]
+          backgroundColor: 'inherit'
         },
 
         '&:hover': {
+          backgroundColorOpacity: ['$warning600', 0.15],
           [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$warning600', 0.15]
+            backgroundColor: 'inherit'
           }
         },
         '&.active': {
+          backgroundColorOpacity: ['$warning600', 0.2],
           [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$warning600', 0.2]
+            backgroundColor: 'inherit'
           }
         }
       }
@@ -686,18 +720,21 @@ const StyledChip = styled(Box, {
       variant: 'solid',
       selectable: true,
       css: {
+        backgroundColorOpacity: ['$negative600', 0.1],
         [`& ${StyledChipContent}`]: {
-          backgroundColorOpacity: ['$negative600', 0.1]
+          backgroundColor: 'inherit'
         },
 
         '&:hover': {
+          backgroundColorOpacity: ['$negative600', 0.15],
           [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$negative600', 0.15]
+            backgroundColor: 'inherit'
           }
         },
         '&.active': {
+          backgroundColorOpacity: ['$negative600', 0.2],
           [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$negative600', 0.2]
+            backgroundColor: 'inherit'
           }
         }
       }
@@ -709,15 +746,16 @@ const StyledChip = styled(Box, {
       selectable: true,
       css: {
         '&:hover': {
+          backgroundColorOpacity: ['$primary500', 0.05],
           [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$primary500', 0.05]
+            backgroundColor: 'inherit'
           }
         },
         '&.active': {
           borderColor: '$primary400',
-
+          backgroundColorOpacity: ['$primary500', 0.1],
           [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$primary500', 0.1]
+            backgroundColor: 'inherit'
           }
         }
       }
@@ -728,15 +766,16 @@ const StyledChip = styled(Box, {
       selectable: true,
       css: {
         '&:hover': {
+          backgroundColorOpacity: ['$secondary500', 0.05],
           [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$secondary500', 0.05]
+            backgroundColor: 'inherit'
           }
         },
         '&.active': {
           borderColor: '$secondary400',
-
+          backgroundColorOpacity: ['$secondary500', 0.1],
           [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$secondary500', 0.1]
+            backgroundColor: 'inherit'
           }
         }
       }
@@ -747,15 +786,16 @@ const StyledChip = styled(Box, {
       selectable: true,
       css: {
         '&:hover': {
+          backgroundColorOpacity: ['$black900', 0.05],
           [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$black900', 0.05]
+            backgroundColor: 'inherit'
           }
         },
         '&.active': {
           borderColor: '$black400',
-
+          backgroundColorOpacity: ['$black900', 0.1],
           [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$black900', 0.1]
+            backgroundColor: 'inherit'
           }
         }
       }
@@ -766,15 +806,16 @@ const StyledChip = styled(Box, {
       selectable: true,
       css: {
         '&:hover': {
+          backgroundColorOpacity: ['$negative600', 0.05],
           [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$negative600', 0.05]
+            backgroundColor: 'inherit'
           }
         },
         '&.active': {
           borderColor: '$negative400',
-
+          backgroundColorOpacity: ['$negative600', 0.1],
           [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$negative600', 0.1]
+            backgroundColor: 'inherit'
           }
         }
       }
@@ -785,15 +826,16 @@ const StyledChip = styled(Box, {
       selectable: true,
       css: {
         '&:hover': {
+          backgroundColorOpacity: ['$warning600', 0.05],
           [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$warning600', 0.05]
+            backgroundColorOpacity: 'inherit'
           }
         },
         '&.active': {
           borderColor: '$warning400',
-
+          backgroundColorOpacity: ['$warning600', 0.1],
           [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$warning600', 0.1]
+            backgroundColor: 'inherit'
           }
         }
       }
@@ -804,15 +846,16 @@ const StyledChip = styled(Box, {
       selectable: true,
       css: {
         '&:hover': {
+          backgroundColorOpacity: ['$positive500', 0.05],
           [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$positive500', 0.05]
+            backgroundColor: 'inherit'
           }
         },
         '&.active': {
           borderColor: '$positive400',
-
+          backgroundColorOpacity: ['$positive500', 0.1],
           [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$positive500', 0.1]
+            backgroundColor: 'inherit'
           }
         }
       }
@@ -823,15 +866,16 @@ const StyledChip = styled(Box, {
       selectable: true,
       css: {
         '&:hover': {
+          backgroundColorOpacity: ['$accent500', 0.05],
           [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$accent500', 0.05]
+            backgroundColor: 'inherit'
           }
         },
         '&.active': {
           borderColor: '$accent400',
-
+          backgroundColorOpacity: ['$accent500', 0.1],
           [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$accent500', 0.1]
+            backgroundColor: 'inherit'
           }
         }
       }
@@ -921,7 +965,7 @@ export const Chip: FunctionComponent<ChipProps> = React.forwardRef(
           }
         }}
       >
-        <StyledChipContent>
+        <StyledChipContent className={CLASSNAMES.chipContent}>
           {leftElement && (
             <SideElementContainer
               className={CLASSNAMES.addonElementStart}
