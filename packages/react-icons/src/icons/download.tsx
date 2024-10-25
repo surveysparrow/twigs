@@ -37,7 +37,6 @@ export const DownloadIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeLinejoin="round"
         />
       </svg>
-
     );
   }
 );

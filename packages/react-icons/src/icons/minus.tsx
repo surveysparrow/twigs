@@ -15,7 +15,13 @@ export const MinusIcon = React.forwardRef<SVGSVGElement, IconProps>(
         height={size}
         ref={ref}
       >
-        <path d="M24 16H8" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
+        <path
+          d="M24 16H8"
+          stroke={color}
+          strokeWidth={strokeWidth}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
       </svg>
     );
   }
