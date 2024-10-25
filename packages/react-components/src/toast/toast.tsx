@@ -109,91 +109,6 @@ const StyledViewport = styled(ToastPrimitive.Viewport, {
         }
       }
     }
-  },
-  variants: {
-    position: {
-      'top-left': {
-        top: '0',
-        left: '0',
-        paddingTop: '$12',
-        paddingLeft: '$12',
-        '& li': {
-          '@media (prefers-reduced-motion: no-preference)': {
-            '&[data-state="open"]': {
-              animation: `${slideInFromLeft} 150ms cubic-bezier(0.16, 1, 0.3, 1)`
-            }
-          }
-        }
-      },
-      'top-center': {
-        top: '0',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        paddingTop: '$12',
-        '& li': {
-          '@media (prefers-reduced-motion: no-preference)': {
-            '&[data-state="open"]': {
-              animation: `${slideInFromTop} 150ms cubic-bezier(0.16, 1, 0.3, 1)`
-            }
-          }
-        }
-      },
-      'top-right': {
-        top: '0',
-        right: '0',
-        paddingTop: '$12',
-        paddingRight: '$12',
-        '& li': {
-          '@media (prefers-reduced-motion: no-preference)': {
-            '&[data-state="open"]': {
-              animation: `${slideInFromRight} 150ms cubic-bezier(0.16, 1, 0.3, 1)`
-            }
-          }
-        }
-      },
-      'bottom-left': {
-        bottom: '0',
-        left: '0',
-        paddingBottom: '$12',
-        paddingLeft: '$12',
-        '& li': {
-          '@media (prefers-reduced-motion: no-preference)': {
-            '&[data-state="open"]': {
-              animation: `${slideInFromLeft} 150ms cubic-bezier(0.16, 1, 0.3, 1)`
-            }
-          }
-        }
-      },
-      'bottom-center': {
-        bottom: '0',
-        left: '50%',
-        paddingBottom: '$12',
-        transform: 'translateX(-50%)',
-        '& li': {
-          '@media (prefers-reduced-motion: no-preference)': {
-            '&[data-state="open"]': {
-              animation: `${slideInFromBottom} 150ms cubic-bezier(0.16, 1, 0.3, 1)`
-            }
-          }
-        }
-      },
-      'bottom-right': {
-        bottom: '0',
-        right: '0',
-        paddingBottom: '$12',
-        paddingRight: '$12',
-        '& li': {
-          '@media (prefers-reduced-motion: no-preference)': {
-            '&[data-state="open"]': {
-              animation: `${slideInFromRight} 150ms cubic-bezier(0.16, 1, 0.3, 1)`
-            }
-          }
-        }
-      }
-    }
-  },
-  defaultVariants: {
-    position: 'bottom-center'
   }
 });
 
@@ -352,24 +267,133 @@ const StyledToastWrapper = styled(Box, {
   alignItems: 'center'
 });
 
+const ToastContainer = styled(Box, {
+  variants: {
+    position: {
+      'top-left': {
+        '& + [role="region"] > ol': {
+          top: '0',
+          left: '0',
+          paddingTop: '$12',
+          paddingLeft: '$12',
+          '& li': {
+            '@media (prefers-reduced-motion: no-preference)': {
+              '&[data-state="open"]': {
+                animation: `${slideInFromLeft} 150ms cubic-bezier(0.16, 1, 0.3, 1)`
+              }
+            }
+          }
+        }
+      },
+      'top-center': {
+        '& + [role="region"] > ol': {
+          top: '0',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          paddingTop: '$12',
+          '& li': {
+            '@media (prefers-reduced-motion: no-preference)': {
+              '&[data-state="open"]': {
+                animation: `${slideInFromTop} 150ms cubic-bezier(0.16, 1, 0.3, 1)`
+              }
+            }
+          }
+        }
+      },
+      'top-right': {
+        '& + [role="region"] > ol': {
+          top: '0',
+          right: '0',
+          paddingTop: '$12',
+          paddingRight: '$12',
+          '& li': {
+            '@media (prefers-reduced-motion: no-preference)': {
+              '&[data-state="open"]': {
+                animation: `${slideInFromRight} 150ms cubic-bezier(0.16, 1, 0.3, 1)`
+              }
+            }
+          }
+        }
+      },
+      'bottom-left': {
+        '& + [role="region"] > ol': {
+          bottom: '0',
+          left: '0',
+          paddingBottom: '$12',
+          paddingLeft: '$12',
+          '& li': {
+            '@media (prefers-reduced-motion: no-preference)': {
+              '&[data-state="open"]': {
+                animation: `${slideInFromLeft} 150ms cubic-bezier(0.16, 1, 0.3, 1)`
+              }
+            }
+          }
+        }
+      },
+      'bottom-center': {
+        '& + [role="region"] > ol': {
+          bottom: '0',
+          left: '50%',
+          paddingBottom: '$12',
+          transform: 'translateX(-50%)',
+          '& li': {
+            '@media (prefers-reduced-motion: no-preference)': {
+              '&[data-state="open"]': {
+                animation: `${slideInFromBottom} 150ms cubic-bezier(0.16, 1, 0.3, 1)`
+              }
+            }
+          }
+        }
+      },
+      'bottom-right': {
+        '& + [role="region"] > ol': {
+          bottom: '0',
+          right: '0',
+          paddingBottom: '$12',
+          paddingRight: '$12',
+          '& li': {
+            '@media (prefers-reduced-motion: no-preference)': {
+              '&[data-state="open"]': {
+                animation: `${slideInFromRight} 150ms cubic-bezier(0.16, 1, 0.3, 1)`
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  defaultVariants: {
+    position: 'bottom-center'
+  }
+});
+
 interface ToastBaseProps {
   children?: React.ReactNode;
   variant?: string;
   icon?: ReactElement;
+  position?:
+    | 'top-left'
+    | 'top-center'
+    | 'top-right'
+    | 'bottom-left'
+    | 'bottom-center'
+    | 'bottom-right';
 }
 
 export type ToastProps = ToastBaseProps & React.ComponentProps<typeof StyledToast>;
 
 const ToastWrapper: FunctionComponent<ToastProps> = ({
-  children, icon, variant = 'default', ...props
+  children, icon, variant = 'default', position = 'bottom-center', ...props
 }) => {
   return (
-    <StyledToast data-testid="toast" variant={variant} {...props}>
-      <StyledToastWrapper>
-        <Icon variant={variant}>{icon && React.cloneElement(icon)}</Icon>
-        {children}
-      </StyledToastWrapper>
-    </StyledToast>
+    <ToastContainer position={position}>
+      <StyledToast data-testid="toast" variant={variant} {...props}>
+        <StyledToastWrapper>
+          <Icon variant={variant}>{icon && React.cloneElement(icon)}</Icon>
+          {children}
+        </StyledToastWrapper>
+      </StyledToast>
+    </ToastContainer>
   );
 };
 
