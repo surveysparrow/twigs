@@ -39,10 +39,6 @@ const options = [
 ];
 
 const Template = (args) => (
-  <Select
-    {...args}
-    options={options}
-    dropdownIndicatorIcon={<SearchIcon />}
-  />
+  <Select {...args} options={options} dropdownIndicatorIcon={<SearchIcon />} />
 );
 export const Default = Template.bind({});

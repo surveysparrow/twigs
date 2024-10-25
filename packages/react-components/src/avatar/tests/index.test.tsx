@@ -9,7 +9,9 @@ import { AvatarBadge } from '../avatar-badge';
 
 const getFallbackInitials = (name: string): string => {
   const [firstName, lastName] = name.split(' ');
-  return `${firstName ? firstName.charAt(0).toUpperCase() : ''}${lastName ? lastName.charAt(0).toUpperCase() : ''}`;
+  return `${firstName ? firstName.charAt(0).toUpperCase() : ''}${
+    lastName ? lastName.charAt(0).toUpperCase() : ''
+  }`;
 };
 
 const FALLBACK_TEXT = 'Adam Smith';

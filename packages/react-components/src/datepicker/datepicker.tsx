@@ -1,12 +1,11 @@
-import { getLocalTimeZone, today } from '@internationalized/date';
 import { CalendarIcon } from '@sparrowengg/twigs-react-icons';
+import { prefixClassName } from '@src/utils';
 import { CSS } from '@stitches/react';
 import {
   ComponentProps, ReactNode, useEffect, useRef
 } from 'react';
 import { AriaDatePickerProps, DateValue, useDatePicker } from 'react-aria';
 import { CalendarState, useDatePickerState } from 'react-stately';
-import { prefixClassName } from '@src/utils';
 import { Box } from '../box';
 import { IconButton } from '../button';
 import { Calendar } from '../calendar';
@@ -61,7 +60,7 @@ export const DatePicker = ({
   onYearSelect,
   ...props
 }: DatePickerProps) => {
-  const dateValue = props.value ?? today(getLocalTimeZone());
+  const dateValue = props.value;
   const state = useDatePickerState({
     shouldCloseOnSelect: false,
     ...props,
@@ -160,6 +159,7 @@ export const DatePicker = ({
           >
             <Calendar
               {...calendarProps}
+              value={props.value}
               showFooter={showFooter}
               showTimePicker={showTimePicker}
               showTimezonePicker={showTimezonePicker}
@@ -179,6 +179,7 @@ export const DatePicker = ({
               onMonthSelect={onMonthSelect}
               onYearSelect={onYearSelect}
               containerCSS={calendarContainerCSS}
+              onChange={props.onChange}
             />
           </PopoverContent>
         </PopoverWrapper>

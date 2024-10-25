@@ -3,9 +3,7 @@ import { UserCircleIcon, AlertFillIcon } from '@sparrowengg/twigs-react-icons';
 import { ToastProviderProps } from '@radix-ui/react-toast';
 import { Button } from '../../button';
 import { Flex } from '../../flex';
-import {
-  Toast, ToastAction, ToastProps
-} from '../toast';
+import { Toast, ToastAction, ToastProps } from '../toast';
 import { toast } from '../../hooks/use-toast';
 import { Toastr } from '../toastr';
 
@@ -29,9 +27,10 @@ export default {
   }
 };
 
-const Template = (
-  { variant: storyVariant, maxToasts }: ToastProps & ToastProviderProps & { maxToasts: number }
-) => {
+const Template = ({
+  variant: storyVariant,
+  maxToasts
+}: ToastProps & ToastProviderProps & { maxToasts: number }) => {
   const [variant, setVariant] = useState<typeof storyVariant>(storyVariant);
   const [maxToastsState, setMaxToastsState] = useState<number>(maxToasts);
   const timerRef = useRef(0);
@@ -62,10 +61,14 @@ const Template = (
         onClick={() => {
           toast({
             icon: <UserCircleIcon />,
-            variant: (storyVariant || 'default' as any),
+            variant: storyVariant || ('default' as any),
             title: messages[variant!] || 'Default message',
             description: 'There was a problem with your request.',
-            action: <ToastAction altText="Try again" asChild><Button color="light"> Close </Button></ToastAction>
+            action: (
+              <ToastAction altText="Try again" asChild>
+                <Button color="light"> Close </Button>
+              </ToastAction>
+            )
           });
         }}
       >
@@ -75,10 +78,13 @@ const Template = (
   );
 };
 
-const ToastrPromise = ({ variant: storyVariant } : { variant:string }) => {
-  const ResolvePromise = () => new Promise<{ title: string, description: string }>((resolve) => {
+const ToastrPromise = ({ variant: storyVariant }: { variant: string }) => {
+  const ResolvePromise = () => new Promise<{ title: string; description: string }>((resolve) => {
     setTimeout(() => {
-      resolve({ title: 'Success!', description: 'Record created successfully' });
+      resolve({
+        title: 'Success!',
+        description: 'Record created successfully'
+      });
     }, 2000);
   });
 
@@ -105,7 +111,7 @@ const ToastrPromise = ({ variant: storyVariant } : { variant:string }) => {
               },
               success: (p) => ({
                 title: `${p.title}`,
-                variant: (storyVariant || 'default' as any),
+                variant: storyVariant || ('default' as any),
                 description: `${p.description}`,
                 action: (
                   <ToastAction altText="Try again" asChild>
@@ -115,7 +121,7 @@ const ToastrPromise = ({ variant: storyVariant } : { variant:string }) => {
               }),
               error: (p) => ({
                 title: `Error while creating record: ${p.title}`,
-                variant: (storyVariant || 'error' as any),
+                variant: storyVariant || ('error' as any),
                 action: (
                   <ToastAction altText="Try again" asChild>
                     <Button color="light"> Close </Button>
@@ -146,7 +152,7 @@ const ToastrPromise = ({ variant: storyVariant } : { variant:string }) => {
               }),
               error: ({ data }) => ({
                 title: `Error while creating record: ${data}`,
-                variant: (storyVariant || 'error' as any),
+                variant: storyVariant || ('error' as any),
                 icon: <AlertFillIcon />,
                 action: (
                   <ToastAction altText="Try again" asChild>

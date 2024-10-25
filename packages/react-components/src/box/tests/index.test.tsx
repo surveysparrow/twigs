@@ -10,9 +10,7 @@ describe('Box', () => {
   });
 
   it('renders box correctly', () => {
-    const { getByTestId } = render(
-      <Box>Simple Box</Box>
-    );
+    const { getByTestId } = render(<Box>Simple Box</Box>);
     const box = getByTestId('box');
 
     expect(box).toHaveTextContent('Simple Box');

@@ -1,4 +1,6 @@
-import { ComponentProps, createContext, useContext } from 'react';
+import {
+  ComponentProps, createContext, forwardRef, useContext
+} from 'react';
 import { styled } from '../stitches.config';
 
 export const StyledTable = styled('table', {});
@@ -95,17 +97,23 @@ const TableContext = createContext<{
   border?: TdProps['border'];
 }>({});
 
-export const Td = ({ children, ...props }: ComponentProps<typeof StyledTd>) => {
+export const Td = forwardRef<
+  HTMLTableCellElement,
+  ComponentProps<typeof StyledTd>
+>(({ children, ...props }, ref) => {
   const context = useContext(TableContext);
 
   return (
-    <StyledTd border={context.border} {...props}>
+    <StyledTd border={context.border} {...props} ref={ref}>
       {children}
     </StyledTd>
   );
-};
+});
 
-export const Th = ({ children, ...props }: ComponentProps<typeof StyledTh>) => {
+export const Th = forwardRef<
+  HTMLTableCellElement,
+  ComponentProps<typeof StyledTh>
+>(({ children, ...props }, ref) => {
   const context = useContext(TableContext);
 
   let { border } = props;
@@ -118,24 +126,24 @@ export const Th = ({ children, ...props }: ComponentProps<typeof StyledTh>) => {
   }
 
   return (
-    <StyledTh border={border} {...props}>
+    <StyledTh border={border} {...props} ref={ref}>
       {children}
     </StyledTh>
   );
+});
+
+export type TableProps = Omit<ComponentProps<typeof StyledTable>, 'border'> & {
+  border?: TdProps['border'];
 };
 
-export type TableProps = ComponentProps<typeof StyledTable> & {
-  border: TdProps['border'];
-};
-
-export const Table = ({
-  children,
-  border,
-  ...props
-}: TableProps) => {
-  return (
-    <TableContext.Provider value={{ border }}>
-      <StyledTable {...props}>{children}</StyledTable>
-    </TableContext.Provider>
-  );
-};
+export const Table = forwardRef<HTMLTableElement, TableProps>(
+  ({ children, border, ...props }, ref) => {
+    return (
+      <TableContext.Provider value={{ border }}>
+        <StyledTable {...props} ref={ref}>
+          {children}
+        </StyledTable>
+      </TableContext.Provider>
+    );
+  }
+);

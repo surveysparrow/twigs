@@ -1,6 +1,9 @@
 import React, { useRef } from 'react';
 import {
-  AriaTimeFieldProps, TimeValue, useLocale, useTimeField
+  AriaTimeFieldProps,
+  TimeValue,
+  useLocale,
+  useTimeField
 } from 'react-aria';
 import { DateSegment, useTimeFieldState } from 'react-stately';
 import { Box } from '../box';
@@ -25,10 +28,11 @@ export const TimePicker = (props: AriaTimeFieldProps<TimeValue>) => {
         flexDirection: 'column'
       }}
     >
-      {
-        props.label
-        && <FormLabel {...labelProps} css={{ mb: '3px' }}>{props.label}</FormLabel>
-      }
+      {props.label && (
+        <FormLabel {...labelProps} css={{ mb: '3px' }}>
+          {props.label}
+        </FormLabel>
+      )}
       <Flex
         {...fieldProps}
         className="field"
