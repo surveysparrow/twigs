@@ -1,5 +1,9 @@
 import React, {
-  ReactNode, ComponentProps, ReactElement, createContext, useContext
+  ReactNode,
+  ComponentProps,
+  ReactElement,
+  createContext,
+  useContext
 } from 'react';
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import { Flex } from '../flex';
@@ -7,21 +11,39 @@ import { styled, keyframes } from '../stitches.config';
 
 const ChevronRightIcon = () => {
   return (
-    <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M1.33325 8.33332L4.66658 4.99999L1.33325 1.66666" stroke="#6A6A6A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    <svg
+      width="6"
+      height="10"
+      viewBox="0 0 6 10"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M1.33325 8.33332L4.66658 4.99999L1.33325 1.66666"
+        stroke="#6A6A6A"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 };
 
 type DropdownContextType = {
-  size: 'md' | 'sm'
-}
+  size: 'md' | 'sm';
+};
 
 const DropdownContext = createContext<DropdownContextType>({
   size: 'md' // Default Value
 });
 
-const DropdownProvider = ({ children, size = 'md' }: { children: ReactNode, size?: 'md' | 'sm' }) => {
+const DropdownProvider = ({
+  children,
+  size = 'md'
+}: {
+  children: ReactNode;
+  size?: 'md' | 'sm';
+}) => {
   return (
     <DropdownContext.Provider value={{ size }}>
       {children}
@@ -153,10 +175,10 @@ const StyledItemIndicator = styled(DropdownMenuPrimitive.ItemIndicator, {
 const contentStyles = {
   minWidth: 234,
   backgroundColor: 'white',
-  padding: '$6 0',
-  borderRadius: '$lg',
-  boxShadow: '$sm',
-  border: '$borderWidths$xs solid $colors$neutral300',
+  padding: '$4 0',
+  borderRadius: '$xl',
+  boxShadow: '0px 1px 1px 0px rgba(0, 0, 0, 0.06), 0px 2px 5px 0px rgba(0, 0, 0, 0.06), 0px 8px 12px 0px rgba(0, 0, 0, 0.06)',
+  border: '0.5px solid $colors$black300',
   '@media (prefers-reduced-motion: no-preference)': {
     animationDuration: '400ms',
     animationTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
@@ -207,9 +229,9 @@ const StyledContent = styled(DropdownMenuPrimitive.Content, {
 });
 
 type ContentProps = ComponentProps<typeof StyledContent> & {
-  children: ReactNode,
-  showArrow?: boolean
-}
+  children: ReactNode;
+  showArrow?: boolean;
+};
 
 const Content = ({ children, showArrow, ...props }: ContentProps) => {
   const size = useContext(DropdownContext);
@@ -224,11 +246,11 @@ const Content = ({ children, showArrow, ...props }: ContentProps) => {
 };
 
 type DropdownRootProps = {
-  children : ReactNode,
-  size?: 'sm' | 'md'
+  children: ReactNode;
+  size?: 'sm' | 'md';
 } & ComponentProps<typeof DropdownMenuPrimitive.Root>;
 
-const DropdownRoot = ({ children, ...props }:DropdownRootProps) => {
+const DropdownRoot = ({ children, ...props }: DropdownRootProps) => {
   return (
     <DropdownProvider size={props.size}>
       <DropdownMenuPrimitive.Root {...props}>

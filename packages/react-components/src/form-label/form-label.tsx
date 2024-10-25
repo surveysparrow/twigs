@@ -42,7 +42,10 @@ export const FormLabel: FunctionComponent<
 > = ({
   children, requiredIndicator = false, as, ...rest
 }: FormLabelProps) => {
-  if (!isValidElement(requiredIndicator) && typeof requiredIndicator !== 'boolean') {
+  if (
+    !isValidElement(requiredIndicator)
+    && typeof requiredIndicator !== 'boolean'
+  ) {
     throw Error('requiredIndicator is not a valid component');
   }
   return (

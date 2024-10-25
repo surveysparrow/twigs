@@ -7,8 +7,6 @@ export default {
 };
 
 const Template = (args) => (
-  <FormHelperText {...args}>
-    Enter a strong password
-  </FormHelperText>
+  <FormHelperText {...args}>Enter a strong password</FormHelperText>
 );
 export const Default = Template.bind({});

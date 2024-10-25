@@ -161,9 +161,7 @@ describe('Dialogs Manager', () => {
   });
 
   it('opens multiple alert dialogs and closes them all', async () => {
-    const {
-      getByText, queryByRole, queryAllByRole
-    } = render(
+    const { getByText, queryByRole, queryAllByRole } = render(
       <div>
         <button
           type="button"

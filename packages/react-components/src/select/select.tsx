@@ -1,8 +1,4 @@
-import React, {
-  ComponentProps,
-  ReactElement,
-  useMemo
-} from 'react';
+import React, { ComponentProps, ReactElement, useMemo } from 'react';
 import ReactSelect, {
   SelectInstance,
   GroupBase,
@@ -186,7 +182,10 @@ const selectStyles = {
 export const StyledSelect = styled(ReactSelect, selectStyles);
 export const StyledAsyncSelect = styled(AsyncSelect, selectStyles);
 export const StyledCreatableSelect = styled(CreatableSelect, selectStyles);
-export const StyledCreatableAsyncSelect = styled(AsyncCreatableSelect, selectStyles);
+export const StyledCreatableAsyncSelect = styled(
+  AsyncCreatableSelect,
+  selectStyles
+);
 
 type SelectBaseProps = {
   showSeparator?: boolean;

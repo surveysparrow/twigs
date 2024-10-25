@@ -1,7 +1,9 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import * as ToastPrimitive from '@radix-ui/react-toast';
 import {
-  AlertFillIcon, TickCircleFillIcon, InfoIcon
+  AlertFillIcon,
+  TickCircleFillIcon,
+  InfoIcon
 } from '@sparrowengg/twigs-react-icons';
 import { CircleLoader } from '../loader/circle';
 import { styled, keyframes } from '../stitches.config';
@@ -222,16 +224,11 @@ const Icon = ({ children, variant = 'success', ...props }: IconProps) => {
   return variant === 'loading' ? (
     children || (
       <StyledIcon>
-        <CircleLoader
-          size="xl"
-          color="accent"
-        />
+        <CircleLoader size="xl" color="accent" />
       </StyledIcon>
     )
   ) : (
-    <StyledIcon {...props}>
-      {children || <>{iconMap[variant]()}</>}
-    </StyledIcon>
+    <StyledIcon {...props}>{children || <>{iconMap[variant]()}</>}</StyledIcon>
   );
 };
 
@@ -261,7 +258,8 @@ const StyledToast = styled(ToastPrimitive.Root, {
   },
   '&:focus-visible': {
     $$shadowColor: '$colors$primary300',
-    boxShadow: 'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
+    boxShadow:
+      'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
   },
   variants: {
     variant: {
@@ -358,10 +356,14 @@ interface ToastBaseProps {
   icon?: ReactElement;
 }
 
-export type ToastProps = ToastBaseProps & React.ComponentProps<typeof StyledToast>;
+export type ToastProps = ToastBaseProps &
+  React.ComponentProps<typeof StyledToast>;
 
 const ToastWrapper: FunctionComponent<ToastProps> = ({
-  children, icon, variant = 'default', ...props
+  children,
+  icon,
+  variant = 'default',
+  ...props
 }) => {
   return (
     <StyledToast data-testid="toast" variant={variant} {...props}>
@@ -373,13 +375,24 @@ const ToastWrapper: FunctionComponent<ToastProps> = ({
   );
 };
 
-export type ToastProviderProps = React.ComponentProps<typeof StyledViewport> & ToastPrimitive.ToastProviderProps;
+export type ToastProviderProps = React.ComponentProps<typeof StyledViewport> &
+  ToastPrimitive.ToastProviderProps;
 
 const Provider: FunctionComponent<ToastProviderProps> = ({
-  duration, label, swipeDirection, swipeThreshold, children, ...rest
+  duration,
+  label,
+  swipeDirection,
+  swipeThreshold,
+  children,
+  ...rest
 }: ToastProviderProps) => {
   return (
-    <ToastPrimitive.Provider duration={duration} label={label} swipeDirection={swipeDirection} swipeThreshold={swipeThreshold}>
+    <ToastPrimitive.Provider
+      duration={duration}
+      label={label}
+      swipeDirection={swipeDirection}
+      swipeThreshold={swipeThreshold}
+    >
       {children}
       <StyledViewport {...rest} />
     </ToastPrimitive.Provider>
@@ -400,7 +413,8 @@ type ContentBaseProps = {
   children: React.ReactNode;
 };
 
-type ContentProps = ContentBaseProps & React.ComponentProps<typeof StyledContent>;
+type ContentProps = ContentBaseProps &
+  React.ComponentProps<typeof StyledContent>;
 
 const Content = ({ children, ...props }: ContentProps) => {
   return <StyledContent {...props}>{children}</StyledContent>;
