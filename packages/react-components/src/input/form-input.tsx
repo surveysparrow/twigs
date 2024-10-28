@@ -3,23 +3,30 @@ import {
   FunctionComponent,
   ReactElement,
   ReactNode,
-  useId
+  useId,
+  useMemo
 } from 'react';
 import { Box } from '../box';
 import { Flex } from '../flex';
 import { FormHelperText } from '../form-helper-text';
 import { FormLabel } from '../form-label';
-import { FormLabelCounter } from '../form-label/form-label-counter';
 import { styled } from '../stitches.config';
 import { Input, InputProps } from './input';
+import { Text } from '../text';
 
 export type FormInputProps = {
   label?: string;
   showCount?: boolean;
   error?: string;
   requiredIndicator?: boolean | ReactElement;
-  counterSideElement?: ReactNode;
   info?: string | ReactNode;
+  renderCounter?: ({
+    length,
+    maxLength
+  }: {
+    length: number;
+    maxLength?: number;
+  }) => ReactNode;
 } & InputProps;
 
 export const StyledError = styled(FormHelperText, {
@@ -38,14 +45,38 @@ export const FormInput: FunctionComponent<FormInputProps> = forwardRef(
       defaultValue,
       maxLength,
       requiredIndicator,
-      counterSideElement,
       id,
+      renderCounter,
       ...rest
     }: FormInputProps,
     ref
   ) => {
     const mergedValue = value || defaultValue;
     const inputId = id || `form-input-${useId()}`;
+
+    const counterElement = useMemo(() => {
+      if (!showCount) return null;
+
+      if (renderCounter) {
+        return renderCounter({
+          length: mergedValue?.toString().length || 0,
+          maxLength
+        });
+      }
+
+      return (
+        <Text
+          css={{
+            color: '$neutral700',
+            ...(!label ? { marginLeft: 'auto' } : {})
+          }}
+          id={`${inputId}-char-count`}
+        >
+          {mergedValue?.toString().length || 0}
+          {maxLength ? `/${maxLength}` : null}
+        </Text>
+      );
+    }, [showCount, label, mergedValue, maxLength, inputId, renderCounter]);
 
     return (
       <Box>
@@ -65,14 +96,7 @@ export const FormInput: FunctionComponent<FormInputProps> = forwardRef(
               {label}
             </FormLabel>
           ) : null}
-          <FormLabelCounter
-            counterSideElement={counterSideElement}
-            inputId={inputId}
-            label={label}
-            maxLength={maxLength}
-            mergedValue={mergedValue}
-            showCount={showCount}
-          />
+          {counterElement}
         </Flex>
         <Input
           value={value}

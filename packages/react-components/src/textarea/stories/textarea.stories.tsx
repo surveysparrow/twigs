@@ -1,5 +1,5 @@
-import React from 'react';
 import { Button } from '@src/button';
+import React from 'react';
 import { Textarea } from '../textarea';
 
 export default {
@@ -70,9 +70,31 @@ const WithInfoIconAndCounterButton = (args) => {
       value={value}
       onChange={(e) => setValue(e.target.value)}
       info="Textarea info goes here"
-      counterSideElement={<Button variant="ghost" color="primary">Label</Button>}
       maxLength={100}
       showCount
+      {...args}
+    />
+  );
+};
+
+const TemplateWithCounterReplaced = (args) => {
+  const [value, setValue] = React.useState('');
+
+  return (
+    <Textarea
+      rows={10}
+      label="Label"
+      placeholder="Placeholder"
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+      info="Textarea info goes here"
+      maxLength={100}
+      showCount
+      renderCounter={() => (
+        <Button color="primary" variant="ghost">
+          Button
+        </Button>
+      )}
       {...args}
     />
   );
@@ -81,3 +103,5 @@ const WithInfoIconAndCounterButton = (args) => {
 export const Default = Template.bind({});
 
 export const WithInfo = WithInfoIconAndCounterButton.bind({});
+
+export const WithCounterReplaced = TemplateWithCounterReplaced.bind({});

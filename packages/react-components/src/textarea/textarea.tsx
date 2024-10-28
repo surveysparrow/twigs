@@ -4,14 +4,15 @@ import {
   ReactElement,
   ReactNode,
   forwardRef,
-  useId
+  useId,
+  useMemo
 } from 'react';
 import { Box } from '../box';
 import { Flex } from '../flex';
 import { FormLabel } from '../form-label';
-import { FormLabelCounter } from '../form-label/form-label-counter';
 import { StyledError, errorBorderStyles } from '../input';
 import { styled } from '../stitches.config';
+import { Text } from '..';
 
 const StyledTextarea = styled('textarea', {
   width: '100%',
@@ -110,9 +111,15 @@ interface TextareaBaseProps {
   showCount?: boolean;
   error?: string;
   requiredIndicator?: boolean | ReactElement;
-  counterSideElement?: ReactNode;
   errorBorder?: boolean;
   info?: string | ReactNode;
+  renderCounter?: ({
+    length,
+    maxLength
+  }: {
+    length: number;
+    maxLength?: number;
+  }) => ReactNode;
 }
 
 export type TextareaProps = TextareaBaseProps &
@@ -129,7 +136,6 @@ export const Textarea: FunctionComponent<TextareaProps> = forwardRef(
       error,
       maxLength,
       requiredIndicator,
-      counterSideElement,
       css,
       value,
       defaultValue,
@@ -137,12 +143,38 @@ export const Textarea: FunctionComponent<TextareaProps> = forwardRef(
       info,
       rows,
       id,
+      renderCounter,
       ...rest
     }: TextareaProps,
     ref
   ) => {
     const inputId = id || `form-input-${useId()}`;
     const mergedValue = value || defaultValue;
+
+    const counterElement = useMemo(() => {
+      if (!showCount) return null;
+
+      if (renderCounter) {
+        return renderCounter({
+          length: mergedValue?.toString().length || 0,
+          maxLength
+        });
+      }
+
+      return (
+        <Text
+          css={{
+            color: '$neutral700',
+            ...(!label ? { marginLeft: 'auto' } : {})
+          }}
+          data-testid="textarea-char-count"
+        >
+          {mergedValue?.toString().length || 0}
+          {maxLength ? `/${maxLength}` : null}
+        </Text>
+      );
+    }, [showCount, label, mergedValue, maxLength, inputId, renderCounter]);
+
     return (
       <Box>
         <Flex
@@ -160,14 +192,7 @@ export const Textarea: FunctionComponent<TextareaProps> = forwardRef(
               {label}
             </FormLabel>
           ) : null}
-          <FormLabelCounter
-            counterSideElement={counterSideElement}
-            inputId={inputId}
-            label={label}
-            maxLength={maxLength}
-            mergedValue={mergedValue}
-            showCount={showCount}
-          />
+          {counterElement}
         </Flex>
         <StyledTextarea
           value={value}
