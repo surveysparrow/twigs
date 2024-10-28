@@ -2,7 +2,7 @@ import React, { FunctionComponent, ReactElement } from 'react';
 import * as ToastPrimitive from '@radix-ui/react-toast';
 import {
   AlertFillIcon, TickCircleFillIcon,
-  InfoIcon
+  InfoFillIcon
 } from '@sparrowengg/twigs-react-icons';
 import { CircleLoader } from '../loader/circle';
 import { styled, keyframes, hexToRgba } from '../stitches.config';
@@ -11,7 +11,7 @@ import { Box } from '../box';
 
 const StyledTickIcon = styled(TickCircleFillIcon);
 const StyledErrorIcon = styled(AlertFillIcon);
-const StyledWarningIcon = styled(InfoIcon);
+const StyledWarningIcon = styled(InfoFillIcon);
 
 const hide = keyframes({
   '0%': { opacity: 1 },
