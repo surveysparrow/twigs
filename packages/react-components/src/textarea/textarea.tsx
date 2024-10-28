@@ -12,7 +12,7 @@ import { Flex } from '../flex';
 import { FormLabel } from '../form-label';
 import { StyledError, errorBorderStyles } from '../input';
 import { styled } from '../stitches.config';
-import { Text } from '..';
+import { Text } from '../text';
 
 const StyledTextarea = styled('textarea', {
   width: '100%',
