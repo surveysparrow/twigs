@@ -1,7 +1,15 @@
-import { ChevronLeftIcon, ChevronRightIcon, EllipsisHorizontalIcon } from '@sparrowengg/twigs-react-icons';
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  EllipsisHorizontalIcon
+} from '@sparrowengg/twigs-react-icons';
 import React, {
   ComponentProps,
-  FunctionComponent, SyntheticEvent, useEffect, useId, useState
+  FunctionComponent,
+  SyntheticEvent,
+  useEffect,
+  useId,
+  useState
 } from 'react';
 import { styled } from '../stitches.config';
 import { Box } from '../box';
@@ -14,17 +22,17 @@ const StyledList = styled('ul', {
   gap: '$2'
 });
 
-type ButtonSizeType = Pick<ComponentProps<typeof Button>, 'size'>
+type ButtonSizeType = Pick<ComponentProps<typeof Button>, 'size'>;
 
 export type PaginationProps = {
-  total: number,
-  itemsPerPage: number,
-  activePage: number,
-  siblingCount?: number,
+  total: number;
+  itemsPerPage: number;
+  activePage: number;
+  siblingCount?: number;
   // eslint-disable-next-line no-unused-vars
-  onChange?: (event: SyntheticEvent, page: number) => void,
-  size?: ButtonSizeType['size']
-}
+  onChange?: (event: SyntheticEvent, page: number) => void;
+  size?: ButtonSizeType['size'];
+};
 
 const DOTS = 'DOTS';
 
@@ -47,7 +55,10 @@ export const Pagination: FunctionComponent<PaginationProps> = ({
   const [page, setPage] = useState<number>(activePage);
 
   const paginationRange = usePagination({
-    totalItems: total, itemsPerPage, activePage: page, siblingCount
+    totalItems: total,
+    itemsPerPage,
+    activePage: page,
+    siblingCount
   });
 
   const changeActivePage = (event: SyntheticEvent, newPage: number) => {
@@ -65,11 +76,7 @@ export const Pagination: FunctionComponent<PaginationProps> = ({
   const isNextDisabled = page === paginationRange?.[paginationRange?.length - 1] || total === 0;
 
   return (
-    <Box
-      as="nav"
-      aria-label="pagination"
-      {...rest}
-    >
+    <Box as="nav" aria-label="pagination" {...rest}>
       <StyledList>
         <li>
           <IconButton
@@ -83,41 +90,39 @@ export const Pagination: FunctionComponent<PaginationProps> = ({
             type="button"
           />
         </li>
-        {
-          paginationRange?.map((pageNumber, index) => {
-            if (pageNumber === DOTS) {
-              return (
-                // eslint-disable-next-line react/no-array-index-key
-                <li key={`pagination-dots-${keyId}-${index}`}>
-                  <IconButton
-                    as="span"
-                    icon={<EllipsisHorizontalIcon />}
-                    color="bright"
-                    size={size}
-                    css={{
-                      cursor: 'default',
-                      pointerEvents: 'none'
-                    }}
-                  />
-                </li>
-              );
-            }
+        {paginationRange?.map((pageNumber, index) => {
+          if (pageNumber === DOTS) {
             return (
-              <li key={`pagination-${keyId}-page-${pageNumber}`}>
-                <Button
-                  onClick={(event: SyntheticEvent) => changeActivePage(event, Number(pageNumber))}
-                  aria-label={`Page ${pageNumber}`}
-                  color={page === pageNumber ? 'default' : 'bright'}
-                  aria-current={page === pageNumber}
-                  type="button"
+              // eslint-disable-next-line react/no-array-index-key
+              <li key={`pagination-dots-${keyId}-${index}`}>
+                <IconButton
+                  as="span"
+                  icon={<EllipsisHorizontalIcon />}
+                  color="bright"
                   size={size}
-                >
-                  {pageNumber}
-                </Button>
+                  css={{
+                    cursor: 'default',
+                    pointerEvents: 'none'
+                  }}
+                />
               </li>
             );
-          })
-        }
+          }
+          return (
+            <li key={`pagination-${keyId}-page-${pageNumber}`}>
+              <Button
+                onClick={(event: SyntheticEvent) => changeActivePage(event, Number(pageNumber))}
+                aria-label={`Page ${pageNumber}`}
+                color={page === pageNumber ? 'default' : 'bright'}
+                aria-current={page === pageNumber}
+                type="button"
+                size={size}
+              >
+                {pageNumber}
+              </Button>
+            </li>
+          );
+        })}
         <li>
           <IconButton
             icon={<ChevronRightIcon />}

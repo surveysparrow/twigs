@@ -14,7 +14,9 @@ import {
   HashTagNode,
   HashTagPlugin,
   EditorLookupDropdownBase,
-  ConvertSelectionToLinkOnPastePlugin
+  ConvertSelectionToLinkOnPastePlugin,
+  EmojiNode,
+  EmojiPlugin
 } from "@sparrowengg/twigs-react";
 
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
@@ -59,6 +61,8 @@ const ReactLiveScope = {
   UserIcon: twigsIconLoader("UserIcon"),
   DownloadIcon: twigsIconLoader("DownloadIcon"),
   EmailIcon: twigsIconLoader("EmailIcon"),
+  ChevronDownIcon: twigsIconLoader("ChevronDownIcon"),
+  TickCircleFillIcon: twigsIconLoader("TickCircleFillIcon"),
   Chip: twigsComponentLoader("Chip"),
   Avatar: twigsComponentLoader("Avatar"),
   AvatarBadge: twigsComponentLoader("AvatarBadge"),
@@ -67,6 +71,7 @@ const ReactLiveScope = {
   DatePicker: twigsComponentLoader("DatePicker"),
   CalendarRange: twigsComponentLoader("CalendarRange"),
   Alert: twigsComponentLoader("Alert"),
+  AlertDescription: twigsComponentLoader("AlertDescription"),
   Toastr: twigsComponentLoader("Toastr"),
   toast: twigsComponentLoader("toast"),
   ToastAction: twigsComponentLoader("ToastAction"),
@@ -129,7 +134,9 @@ const ReactLiveScope = {
   Tr: twigsComponentLoader("Tr"),
   Editor,
   MentionsPlugin,
+  EmojiPlugin,
   MentionNode,
+  EmojiNode,
   HashTagPlugin,
   HashTagNode,
   BoldTool,

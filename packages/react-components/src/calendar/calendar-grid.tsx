@@ -1,4 +1,5 @@
 import {
+  CalendarDate,
   DateDuration,
   endOfMonth,
   getWeeksInMonth
@@ -19,12 +20,14 @@ type CalendarGridType = {
   state: RangeCalendarState | CalendarState;
   offset?: DateDuration;
   containerCSS?: CSS<typeof config>;
+  onDaySelect?: (date: CalendarDate) => void;
 };
 
 export const CalendarGrid = ({
   state,
   offset = {},
-  containerCSS = {}
+  containerCSS = {},
+  onDaySelect
 }: CalendarGridType) => {
   const { locale } = useLocale();
   const id = useId();
@@ -58,12 +61,13 @@ export const CalendarGrid = ({
           </Week>
         ))}
       </WeekContainer>
-      <Box css={{
-        padding: '$8 0',
-        ...(calendarContext.size === 'lg' && {
-          paddingBottom: '$4'
-        })
-      }}
+      <Box
+        css={{
+          padding: '$8 0',
+          ...(calendarContext.size === 'lg' && {
+            paddingBottom: '$4'
+          })
+        }}
       >
         {[...new Array(weeksInMonth).keys()].map((weekIndex, index) => (
           // eslint-disable-next-line react/no-array-index-key
@@ -76,6 +80,7 @@ export const CalendarGrid = ({
                   state={state}
                   date={date}
                   currentMonth={startDate}
+                  onDaySelect={onDaySelect}
                 />
               ) : null))}
           </DaysContainer>

@@ -5,17 +5,14 @@ import {
   ToastDescription,
   ToastProvider,
   ToastProviderProps,
-  ToastTitle,
-  ToastViewport
+  ToastTitle
 } from './toast';
 import { useToast } from '../hooks/use-toast';
 
-export const Toastr: FunctionComponent<ToastProviderProps & { maxToasts?: number }> = ({
-  duration,
-  swipeDirection,
-  swipeThreshold,
-  maxToasts,
-  ...rest
+export const Toastr: FunctionComponent<
+  ToastProviderProps & { maxToasts?: number }
+> = ({
+  duration, swipeDirection, swipeThreshold, maxToasts, ...rest
 }) => {
   const { toasts } = useToast({
     maxToasts
@@ -45,7 +42,6 @@ export const Toastr: FunctionComponent<ToastProviderProps & { maxToasts?: number
           </Toast>
         );
       })}
-      <ToastViewport />
     </ToastProvider>
   );
 };

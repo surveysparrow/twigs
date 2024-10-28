@@ -114,7 +114,9 @@ type SliderBaseProps = {
   labelPlacement?: 'top' | 'bottom';
 };
 
-export type SliderProps = RadixSlider.SliderProps & ComponentProps<typeof StyledRoot> & SliderBaseProps;
+export type SliderProps = RadixSlider.SliderProps &
+  ComponentProps<typeof StyledRoot> &
+  SliderBaseProps;
 
 export const Slider = ({ labelPlacement = 'top', ...props }: SliderProps) => {
   const TrackAndRange = useCallback(() => {
@@ -144,7 +146,11 @@ export const Slider = ({ labelPlacement = 'top', ...props }: SliderProps) => {
 
     const Comp = props.components?.Thumb ?? StyledThumb;
     return <Comp />;
-  }, [props.components?.ThumbLeft, props.components?.ThumbRight, props.components?.Thumb]);
+  }, [
+    props.components?.ThumbLeft,
+    props.components?.ThumbRight,
+    props.components?.Thumb
+  ]);
 
   const RenderLabel = useCallback(
     (labelProps: FlexProps) => {

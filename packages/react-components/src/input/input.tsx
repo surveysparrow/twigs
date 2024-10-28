@@ -129,6 +129,21 @@ const StyledInput = styled('input', {
   }
 });
 
+function getInputPadding(
+  size: string | { '@initial'?: 'sm' | 'md' | 'lg' | 'xl' }
+) {
+  switch (size) {
+    case 'lg':
+      return '$20';
+    case 'md':
+      return '$14';
+    case 'sm':
+      return '$14';
+    default:
+      return '$22';
+  }
+}
+
 export interface InputBaseProps {
   leftIcon?: ReactElement;
   rightIcon?: ReactElement;
@@ -282,9 +297,9 @@ export const errorBorderStyles = {
   },
   '&:focus,&:active': {
     $$shadowColor: '$colors$primary300',
-    borderBottomWidth: '0',
+    borderBottom: '0',
     boxShadow:
-      '$colors$negative500 0px 1px 0px 0px,rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
+      '$colors$negative500 0px 1.5px 0px 0px,rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
   }
 };
 
@@ -302,6 +317,7 @@ export const Input: FunctionComponent<InputProps> = React.forwardRef(
     }: InputProps,
     ref
   ) => {
+    const inputPaddingValue = getInputPadding(size);
     if (leftIcon || rightIcon || rightElement || leftElement) {
       return (
         <Box
@@ -330,6 +346,8 @@ export const Input: FunctionComponent<InputProps> = React.forwardRef(
             size={size}
             data-testid="input"
             css={{
+              ...(leftIcon && { paddingInlineStart: inputPaddingValue }),
+              ...(rightIcon && { paddingInlineEnd: inputPaddingValue }),
               ...(errorBorder && {
                 ...errorBorderStyles
               })

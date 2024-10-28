@@ -1,7 +1,9 @@
 import {
   CalendarDateTime,
   ZonedDateTime,
-  toCalendarDateTime
+  getLocalTimeZone,
+  toCalendarDateTime,
+  today
 } from '@internationalized/date';
 import { ChevronDownIcon } from '@sparrowengg/twigs-react-icons';
 import React, {
@@ -39,7 +41,8 @@ export const CalendarTimePicker = ({
 
   const timeState = useMemo(() => {
     if (!value) {
-      const timeObj = toCalendarDateTime(calendarState!.value);
+      const calendarDate = calendarState?.value ?? today(getLocalTimeZone());
+      const timeObj = toCalendarDateTime(calendarDate);
       return timeObj;
     }
     if (value instanceof CalendarDateTime || value instanceof ZonedDateTime) {
@@ -47,7 +50,7 @@ export const CalendarTimePicker = ({
     }
 
     return toCalendarDateTime(value);
-  }, [value]);
+  }, [value, calendarState]);
 
   const hoursInTwelveHourFormat = timeState.hour % 12 || 12;
   const initialHours = hoursInTwelveHourFormat.toString().padStart(2, '0');
@@ -108,7 +111,7 @@ export const CalendarTimePicker = ({
       }
       case 'ArrowLeft': {
         e.preventDefault();
-        if (parentColumn && parentColumn.previousElementSibling) {
+        if (parentColumn?.previousElementSibling) {
           const prevColumn = parentColumn.previousElementSibling.querySelector(
             '[data-is-selected="true"]'
           ) as HTMLButtonElement | null;
@@ -122,7 +125,7 @@ export const CalendarTimePicker = ({
       }
       case 'ArrowRight': {
         e.preventDefault();
-        if (parentColumn && parentColumn.nextElementSibling) {
+        if (parentColumn?.nextElementSibling) {
           const nextColumn = parentColumn.nextElementSibling.querySelector(
             '[data-is-selected="true"]'
           ) as HTMLButtonElement | null;
@@ -142,8 +145,8 @@ export const CalendarTimePicker = ({
   const handleApply = () => {
     const updatedTime = timeState.set({
       hour: timeValue.pm
-        ? parseInt(timeValue.hour, 10) + 12
-        : parseInt(timeValue.hour, 10),
+        ? 12 + (parseInt(timeValue.hour, 10) % 12)
+        : parseInt(timeValue.hour, 10) % 12,
       minute: parseInt(timeValue.minute, 10)
     });
     if (onChange) {

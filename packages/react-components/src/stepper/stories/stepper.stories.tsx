@@ -17,39 +17,21 @@ const Template = (args) => {
 
   return (
     <>
-      <Stepper
-        activeStep={activeStep}
-        {...args}
-        onChange={setActiveStep}
-      >
-        <StepperItem
-          label="Registration"
-        >
+      <Stepper activeStep={activeStep} {...args} onChange={setActiveStep}>
+        <StepperItem label="Registration"> Step 1</StepperItem>
+        <StepperItem label="Account settings" allowClick={false}>
           {' '}
-          Step 1
+          For this tab, allowClick is set to false. So, TabsTrigger is not
+          focusable and clickable.
         </StepperItem>
-        <StepperItem
-          label="Account settings"
-          allowClick={false}
-        >
-          {' '}
-          For this tab, allowClick is set to false. So, TabsTrigger is not focusable and clickable.
-        </StepperItem>
-        <StepperItem
-          label="Confirm"
-          allowClick
-        >
+        <StepperItem label="Confirm" allowClick>
           {' '}
           Step 3
         </StepperItem>
       </Stepper>
       <Flex alignItems="center" gap="$4">
-        <Button onClick={prevStep}>
-          Previous
-        </Button>
-        <Button onClick={nextStep}>
-          Next
-        </Button>
+        <Button onClick={prevStep}>Previous</Button>
+        <Button onClick={nextStep}>Next</Button>
       </Flex>
     </>
   );
@@ -88,10 +70,7 @@ const App = () => {
             </Flex>
           ),
           Step: ({
-            children,
-            active,
-            completed,
-            position
+            children, active, completed, position
           }) => (
             <Button
               // eslint-disable-next-line no-nested-ternary
@@ -129,10 +108,7 @@ const App = () => {
           Step 3
         </StepperItem>
       </Stepper>
-      <Flex
-        alignItems="center"
-        gap="$4"
-      >
+      <Flex alignItems="center" gap="$4">
         <Button onClick={prevStep} variant="outline">
           Previous
         </Button>

@@ -11,12 +11,24 @@ describe('Form Label', () => {
   });
   it('prints label with required indicator', () => {
     render(<FormLabel requiredIndicator>FormLabel</FormLabel>);
-    const requiredIndicatorNode = screen.getByTestId('label-required-indicator');
+    const requiredIndicatorNode = screen.getByTestId(
+      'label-required-indicator'
+    );
     expect(requiredIndicatorNode).toBeInTheDocument();
   });
   it('prints label with required custom indicator', () => {
-    render(<FormLabel requiredIndicator={<Text data-testid="label-required-custom-indicator">(required)</Text>}>FormLabel</FormLabel>);
-    const requiredIndicatorNode = screen.getByTestId('label-required-custom-indicator');
+    render(
+      <FormLabel
+        requiredIndicator={
+          <Text data-testid="label-required-custom-indicator">(required)</Text>
+        }
+      >
+        FormLabel
+      </FormLabel>
+    );
+    const requiredIndicatorNode = screen.getByTestId(
+      'label-required-custom-indicator'
+    );
     expect(requiredIndicatorNode).toBeInTheDocument();
   });
 });

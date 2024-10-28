@@ -1,20 +1,27 @@
-import React from 'react';
 import {
   Table, Tbody, Td, Th, Thead, Tr
 } from '../table';
 
 export default {
   component: Table,
-  title: 'Data Display/Table'
+  title: 'Data Display/Table',
+  argTypes: {
+    border: {
+      control: 'select',
+      options: ['horizontal', 'vertical', 'both']
+    }
+  }
 };
 
 const Template = (args) => (
   <Table {...args}>
     <Thead>
-      <Th>Name</Th>
-      <Th>Company</Th>
-      <Th>Department</Th>
-      <Th>Joined on</Th>
+      <Tr>
+        <Th>Name</Th>
+        <Th>Company</Th>
+        <Th>Department</Th>
+        <Th>Joined on</Th>
+      </Tr>
     </Thead>
     <Tbody>
       <Tr>
@@ -32,4 +39,5 @@ const Template = (args) => (
     </Tbody>
   </Table>
 );
+
 export const Default = Template.bind({});

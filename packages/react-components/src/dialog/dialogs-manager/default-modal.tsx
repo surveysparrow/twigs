@@ -26,6 +26,7 @@ export type DefaultInfoDialogProps = {
   };
   closeButton?: ReactNode;
   css?: CSS<typeof config>;
+  closeOnPrimaryAction?: boolean;
   onPrimaryAction?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onClose?: () => void;
 };
@@ -39,6 +40,7 @@ export const DefaultModal = ({
   labels = {
     action: 'Close'
   },
+  closeOnPrimaryAction = true,
   closeButton = DefaultCloseButton,
   css,
   onClose,
@@ -89,17 +91,31 @@ export const DefaultModal = ({
                   justifyContent: 'flex-end'
                 }}
               >
-                <DialogClose asChild>
+                <ActionWrapper closeOnPrimaryAction={closeOnPrimaryAction}>
                   <Button size="lg" color="default" onClick={onPrimaryAction}>
                     {labels?.action}
                   </Button>
-                </DialogClose>
+                </ActionWrapper>
               </Flex>
             )}
           </>
         )}
       </DialogContent>
     </Dialog>
+  );
+};
+
+const ActionWrapper = ({
+  children,
+  closeOnPrimaryAction
+}: {
+  children: ReactNode;
+  closeOnPrimaryAction?: boolean;
+}) => {
+  return closeOnPrimaryAction ? (
+    <DialogClose asChild>{children}</DialogClose>
+  ) : (
+    <>{children}</>
   );
 };
 

@@ -196,16 +196,18 @@ const StyledAvatar = styled(AvatarPrimitive.Root, {
 
 const getFallbackInitials = (name: string): string => {
   const [firstName, lastName] = name.split(' ');
-  return `${firstName ? firstName.charAt(0).toUpperCase() : ''}${lastName ? lastName.charAt(0).toUpperCase() : ''}`;
+  return `${firstName ? firstName.charAt(0).toUpperCase() : ''}${
+    lastName ? lastName.charAt(0).toUpperCase() : ''
+  }`;
 };
 
 export interface AvatarBaseProps {
-  src?: string,
-  fallbackDelay?: number,
-  name?: string
+  src?: string;
+  fallbackDelay?: number;
+  name?: string;
 }
 
-type AvatarProps = AvatarBaseProps & ComponentProps<typeof StyledAvatar>
+type AvatarProps = AvatarBaseProps & ComponentProps<typeof StyledAvatar>;
 
 export const Avatar: FunctionComponent<AvatarProps> = React.forwardRef(
   ({

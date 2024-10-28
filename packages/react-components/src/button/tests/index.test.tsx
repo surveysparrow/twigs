@@ -44,9 +44,7 @@ describe('Button', () => {
       button.querySelector(`.${config.prefix}-button__icon-container`)
     ).not.toBe(null);
 
-    expect(
-      button.querySelector(`.${config.prefix}-button__loader`)
-    ).toBe(null);
+    expect(button.querySelector(`.${config.prefix}-button__loader`)).toBe(null);
 
     rerender(
       <Button color="primary" leftIcon={<TickCircleFillIcon />} loading>
@@ -54,8 +52,8 @@ describe('Button', () => {
       </Button>
     );
 
-    expect(
-      button.querySelector(`.${config.prefix}-button__loader`)
-    ).not.toBe(null);
+    expect(button.querySelector(`.${config.prefix}-button__loader`)).not.toBe(
+      null
+    );
   });
 });

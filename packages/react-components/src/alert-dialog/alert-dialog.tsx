@@ -66,7 +66,7 @@ const StyledActions = styled(Grid, {
 
 type ContentProps = {
   children?: ReactNode;
-} & ComponentProps<typeof StyledContent>
+} & ComponentProps<typeof StyledContent>;
 
 const Content = ({ children, ...props }: ContentProps) => {
   return (

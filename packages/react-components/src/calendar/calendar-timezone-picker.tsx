@@ -1,9 +1,9 @@
+import { ZonedDateTime, toZoned } from '@internationalized/date';
 import { ChevronDownIcon, SearchIcon } from '@sparrowengg/twigs-react-icons';
 import { getCountriesForTimezone } from 'countries-and-timezones';
 import {
-  useId, useMemo, useRef, useState
+  KeyboardEvent, useId, useMemo, useRef, useState
 } from 'react';
-import { ZonedDateTime, toZoned } from '@internationalized/date';
 import { DateValue } from 'react-aria';
 import { CalendarState } from 'react-stately';
 import { Box } from '../box';
@@ -13,8 +13,8 @@ import { Input } from '../input';
 import { Popover, PopoverContent, PopoverTrigger } from '../popover';
 import { styled } from '../stitches.config';
 import { Text } from '../text';
-import { FieldButton } from './calendar-commons';
 import { CalendarProps } from './calendar';
+import { FieldButton } from './calendar-commons';
 import { useCalendarContext } from './calendar-utils';
 
 export const CalendarTimezonePicker = ({
@@ -49,7 +49,7 @@ export const CalendarTimezonePicker = ({
     }
 
     return toZoned(value, selectedTimezoneValue);
-  }, []);
+  }, [value, calendarState]);
 
   const timeZoneList = useMemo(() => {
     try {
@@ -96,6 +96,50 @@ export const CalendarTimezonePicker = ({
     );
   }, [selectedTimezoneValue, timeZoneList]);
 
+  const handleSearchInputKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      const firstElement = listRef.current?.querySelector(
+        'button[role="menuitem"]'
+      ) as HTMLButtonElement | null;
+      if (firstElement) {
+        firstElement.setAttribute('tabindex', '0');
+        firstElement.focus();
+      }
+    }
+  };
+
+  const handleSearchListKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'ArrowDown') {
+      const nextListItem = e.currentTarget.parentElement
+        ?.nextElementSibling as HTMLButtonElement;
+      if (nextListItem) {
+        e.preventDefault();
+        const nextButton = nextListItem.querySelector(
+          'button[role="menuitem"]'
+        ) as HTMLButtonElement;
+
+        e.currentTarget.setAttribute('tabindex', '-1');
+        nextButton.setAttribute('tabindex', '0');
+        nextButton.focus();
+      }
+    } else if (e.key === 'ArrowUp') {
+      const prevListItem = e.currentTarget.parentElement
+        ?.previousElementSibling as HTMLButtonElement;
+      if (prevListItem) {
+        e.preventDefault();
+
+        const prevButton = prevListItem.querySelector(
+          'button[role="menuitem"]'
+        ) as HTMLButtonElement;
+
+        e.currentTarget.setAttribute('tabindex', '-1');
+        prevButton.setAttribute('tabindex', '0');
+        prevButton.focus();
+      }
+    }
+  };
+
   return (
     <Popover
       open={popoverOpen}
@@ -132,18 +176,7 @@ export const CalendarTimezonePicker = ({
             onChange={(e) => {
               setSearchString(e.target.value);
             }}
-            onKeyDown={(e) => {
-              if (e.key === 'ArrowDown') {
-                e.preventDefault();
-                const firstElement = listRef.current?.querySelector(
-                  'button[role="menuitem"]'
-                ) as HTMLButtonElement | null;
-                if (firstElement) {
-                  firstElement.setAttribute('tabindex', '0');
-                  firstElement.focus();
-                }
-              }
-            }}
+            onKeyDown={handleSearchInputKeyDown}
           />
         </Box>
         {selectedTimezoneObject && (
@@ -188,42 +221,20 @@ export const CalendarTimezonePicker = ({
                   padding: '$3 $6',
                   cursor: 'pointer'
                 }}
-                onKeyDown={(e) => {
-                  if (e.key === 'ArrowDown') {
-                    const nextListItem = e.currentTarget.parentElement
-                      ?.nextElementSibling as HTMLButtonElement;
-                    if (nextListItem) {
-                      e.preventDefault();
-                      const nextButton = nextListItem.querySelector(
-                        'button[role="menuitem"]'
-                      ) as HTMLButtonElement;
-
-                      e.currentTarget.setAttribute('tabindex', '-1');
-                      nextButton.setAttribute('tabindex', '0');
-                      nextButton.focus();
-                    }
-                  } else if (e.key === 'ArrowUp') {
-                    const prevListItem = e.currentTarget.parentElement
-                      ?.previousElementSibling as HTMLButtonElement;
-                    if (prevListItem) {
-                      e.preventDefault();
-
-                      const prevButton = prevListItem.querySelector(
-                        'button[role="menuitem"]'
-                      ) as HTMLButtonElement;
-
-                      e.currentTarget.setAttribute('tabindex', '-1');
-                      prevButton.setAttribute('tabindex', '0');
-                      prevButton.focus();
-                    }
-                  }
-                }}
+                onKeyDown={handleSearchListKeyDown}
                 onClick={() => {
                   setSelectedTimezoneValue(timeZone.timeZone);
                   setPopoverOpen(false);
-                  const updatedZonedTime = toZoned(
-                    timeZoneState,
-                    timeZone.timeZone
+                  const updatedZonedTime = new ZonedDateTime(
+                    timeZoneState.year,
+                    timeZoneState.month,
+                    timeZoneState.day,
+                    timeZone.timeZone,
+                    0,
+                    timeZoneState.hour,
+                    timeZoneState.minute,
+                    timeZoneState.second,
+                    timeZoneState.millisecond
                   );
                   if (onChange) {
                     onChange(updatedZonedTime);

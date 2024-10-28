@@ -1,5 +1,9 @@
 import { CalendarIcon } from '@sparrowengg/twigs-react-icons';
-import { ReactNode, useEffect, useRef } from 'react';
+import { prefixClassName } from '@src/utils';
+import { CSS } from '@stitches/react';
+import {
+  ComponentProps, ReactNode, useEffect, useRef
+} from 'react';
 import { AriaDatePickerProps, DateValue, useDatePicker } from 'react-aria';
 import { CalendarState, useDatePickerState } from 'react-stately';
 import { Box } from '../box';
@@ -12,7 +16,12 @@ import {
 } from '../calendar/calendar-utils';
 import { FormLabel } from '../form-label';
 import { usePrevious } from '../hooks/use-previous';
-import { Popover, PopoverContent, PopoverTrigger } from '../popover';
+import {
+  Popover,
+  PopoverContent,
+  PopoverPortal,
+  PopoverTrigger
+} from '../popover';
 import { DateField } from './date-field';
 
 export type DatePickerProps = AriaDatePickerProps<DateValue> & {
@@ -26,6 +35,11 @@ export type DatePickerProps = AriaDatePickerProps<DateValue> & {
     state: CalendarState,
     setPopoverOpen: (isOpen: boolean) => void
   ) => ReactNode;
+  enablePortal?: boolean;
+  contentStyle?: CSS;
+  portalTarget?: Element | null | undefined;
+  calendarContainerCSS?: CalendarControlProps['containerCSS'];
+  popoverContentProps?: ComponentProps<typeof PopoverContent>;
 } & CalendarControlProps;
 
 export const DatePicker = ({
@@ -35,11 +49,22 @@ export const DatePicker = ({
   renderFooter,
   footerAction,
   footerActionText,
+  enablePortal = false,
+  contentStyle,
+  portalTarget,
+  containerCSS,
+  popoverContentProps,
+  calendarContainerCSS,
+  onDaySelect,
+  onMonthSelect,
+  onYearSelect,
   ...props
 }: DatePickerProps) => {
+  const dateValue = props.value;
   const state = useDatePickerState({
     shouldCloseOnSelect: false,
-    ...props
+    ...props,
+    value: dateValue
   });
 
   const ref = useRef(null);
@@ -65,7 +90,8 @@ export const DatePicker = ({
       css={{
         position: 'relative',
         display: 'inline-flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        ...containerCSS
       }}
     >
       {props.label && (
@@ -75,30 +101,33 @@ export const DatePicker = ({
       )}
 
       <Popover open={state.isOpen} onOpenChange={state.toggle}>
-        <PopoverTrigger asChild>
+        <Box
+          {...groupProps}
+          className={prefixClassName('datepicker__field-container')}
+          ref={ref}
+          css={{
+            display: 'inline-flex',
+            width: 'auto',
+            background: '$black50',
+            border: 'none',
+            padding: '$4 $6',
+            borderRadius: '$lg',
+            justifyContent: 'space-between'
+          }}
+        >
           <Box
-            {...groupProps}
-            ref={ref}
             css={{
-              display: 'inline-flex',
-              width: 'auto',
-              background: '$black50',
-              border: 'none',
-              padding: '$4 $6',
-              borderRadius: '$lg'
+              position: 'relative',
+              transition: 'all 200ms',
+              display: 'flex',
+              alignItems: 'center'
             }}
+            className={prefixClassName('datepicker__field')}
+            ref={ref}
           >
-            <Box
-              css={{
-                position: 'relative',
-                transition: 'all 200ms',
-                display: 'flex',
-                alignItems: 'center'
-              }}
-              ref={ref}
-            >
-              <DateField {...fieldProps} />
-            </Box>
+            <DateField {...fieldProps} />
+          </Box>
+          <PopoverTrigger asChild>
             <IconButton
               {...buttonProps}
               onClick={state.open}
@@ -111,37 +140,69 @@ export const DatePicker = ({
               type="button"
               icon={<CalendarIcon />}
             />
-          </Box>
-        </PopoverTrigger>
-        <PopoverContent
-          {...dialogProps}
-          css={{
-            width: 'auto',
-            padding: '0',
-            maxWidth: CALENDAR_SIZE_TO_WIDTH[props.size || 'lg'],
-            borderRadius: CALENDAR_SIZE_TO_BORDER_RADIUS[props.size || 'lg']
-          }}
-        >
-          <Calendar
-            {...calendarProps}
-            showFooter={showFooter}
-            showTimePicker={showTimePicker}
-            showTimezonePicker={showTimezonePicker}
-            renderFooter={
-              renderFooter
-                ? (calendarState) => renderFooter(calendarState, state.setOpen)
-                : undefined
-            }
-            footerAction={
-              footerAction
-                ? (calendarState) => footerAction(calendarState, state.setOpen)
-                : undefined
-            }
-            footerActionText={footerActionText}
-            size={props.size}
-          />
-        </PopoverContent>
+          </PopoverTrigger>
+        </Box>
+        <PopoverWrapper enablePortal={enablePortal} portalTarget={portalTarget}>
+          <PopoverContent
+            {...dialogProps}
+            align="end"
+            sideOffset={10}
+            alignOffset={-12}
+            {...popoverContentProps}
+            css={{
+              width: 'auto',
+              padding: '0',
+              maxWidth: CALENDAR_SIZE_TO_WIDTH[props.size || 'lg'],
+              borderRadius: CALENDAR_SIZE_TO_BORDER_RADIUS[props.size || 'lg'],
+              ...contentStyle
+            }}
+          >
+            <Calendar
+              {...calendarProps}
+              value={props.value}
+              showFooter={showFooter}
+              showTimePicker={showTimePicker}
+              showTimezonePicker={showTimezonePicker}
+              renderFooter={
+                renderFooter
+                  ? (calendarState) => renderFooter(calendarState, state.setOpen)
+                  : undefined
+              }
+              footerAction={
+                footerAction
+                  ? (calendarState) => footerAction(calendarState, state.setOpen)
+                  : undefined
+              }
+              footerActionText={footerActionText}
+              size={props.size}
+              onDaySelect={onDaySelect}
+              onMonthSelect={onMonthSelect}
+              onYearSelect={onYearSelect}
+              containerCSS={calendarContainerCSS}
+              onChange={props.onChange}
+            />
+          </PopoverContent>
+        </PopoverWrapper>
       </Popover>
     </Box>
   );
+};
+
+const PopoverWrapper = ({
+  enablePortal,
+  portalTarget,
+  children
+}: {
+  enablePortal: boolean;
+  portalTarget: Element | null | undefined;
+  children: ReactNode;
+}) => {
+  if (enablePortal) {
+    return (
+      <PopoverPortal {...(portalTarget && { container: portalTarget })}>
+        {children}
+      </PopoverPortal>
+    );
+  }
+  return children;
 };
