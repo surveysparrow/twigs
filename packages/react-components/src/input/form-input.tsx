@@ -92,11 +92,11 @@ export const FormInput: FunctionComponent<FormInputProps> = forwardRef(
               requiredIndicator={requiredIndicator}
               id={`${inputId}-label`}
               info={info}
+              rightAddon={counterElement}
             >
               {label}
             </FormLabel>
           ) : null}
-          {counterElement}
         </Flex>
         <Input
           value={value}

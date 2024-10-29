@@ -188,11 +188,11 @@ export const Textarea: FunctionComponent<TextareaProps> = forwardRef(
               htmlFor={id}
               requiredIndicator={requiredIndicator}
               info={info}
+              rightAddon={counterElement}
             >
               {label}
             </FormLabel>
           ) : null}
-          {counterElement}
         </Flex>
         <StyledTextarea
           value={value}

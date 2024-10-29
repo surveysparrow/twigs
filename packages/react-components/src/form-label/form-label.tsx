@@ -16,6 +16,7 @@ export type FormLabelProps = React.HTMLAttributes<HTMLLabelElement> & {
   as?: React.ElementType;
   requiredIndicator?: ReactElement | boolean;
   info?: string | ReactNode;
+  rightAddon?: ReactNode;
 };
 
 const StyledFormLabel = styled(LabelPrimitive.Root, {
@@ -66,6 +67,7 @@ export const FormLabel: FunctionComponent<
   requiredIndicator = false,
   info,
   as,
+  rightAddon,
   ...rest
 }: FormLabelProps) => {
   if (
@@ -75,31 +77,39 @@ export const FormLabel: FunctionComponent<
     throw Error('requiredIndicator is not a valid component');
   }
   return (
-    <Flex gap="$1" alignItems="center">
-      <StyledFormLabel as={as} {...rest}>
-        {children}
-      </StyledFormLabel>
-      {requiredIndicator === true ? (
-        <StyledText data-testid="label-required-indicator">*</StyledText>
-      ) : null}
-      {typeof requiredIndicator !== 'boolean'
-        ? React.cloneElement(requiredIndicator)
-        : null}
-      {info && (
-        <>
-          {typeof info === 'string' ? (
-            <TooltipProvider>
-              <Tooltip content={info}>
-                <IconContainer>
-                  <InfoIcon />
-                </IconContainer>
-              </Tooltip>
-            </TooltipProvider>
-          ) : (
-            info
-          )}
-        </>
-      )}
+    <Flex
+      justifyContent="space-between"
+      css={{
+        flex: '1 1 auto'
+      }}
+    >
+      <Flex gap="$1" alignItems="center">
+        <StyledFormLabel as={as} {...rest}>
+          {children}
+        </StyledFormLabel>
+        {requiredIndicator === true ? (
+          <StyledText data-testid="label-required-indicator">*</StyledText>
+        ) : null}
+        {typeof requiredIndicator !== 'boolean'
+          ? React.cloneElement(requiredIndicator)
+          : null}
+        {info && (
+          <>
+            {typeof info === 'string' ? (
+              <TooltipProvider>
+                <Tooltip content={info}>
+                  <IconContainer>
+                    <InfoIcon />
+                  </IconContainer>
+                </Tooltip>
+              </TooltipProvider>
+            ) : (
+              info
+            )}
+          </>
+        )}
+      </Flex>
+      {rightAddon}
     </Flex>
   );
 };
