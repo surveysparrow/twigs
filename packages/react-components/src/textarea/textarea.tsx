@@ -182,7 +182,7 @@ export const Textarea: FunctionComponent<TextareaProps> = forwardRef(
           justifyContent="space-between"
           css={{ marginBottom: '$2' }}
         >
-          {label ? (
+          {(label || counterElement) && (
             <FormLabel
               size={size === 'xl' ? 'sm' : 'xs'}
               htmlFor={id}
@@ -192,7 +192,7 @@ export const Textarea: FunctionComponent<TextareaProps> = forwardRef(
             >
               {label}
             </FormLabel>
-          ) : null}
+          )}
         </Flex>
         <StyledTextarea
           value={value}

@@ -71,6 +71,7 @@ export const FormInput: FunctionComponent<FormInputProps> = forwardRef(
             ...(!label ? { marginLeft: 'auto' } : {})
           }}
           id={`${inputId}-char-count`}
+          data-testid="form-input-char-count"
         >
           {mergedValue?.toString().length || 0}
           {maxLength ? `/${maxLength}` : null}
@@ -85,7 +86,7 @@ export const FormInput: FunctionComponent<FormInputProps> = forwardRef(
           justifyContent="space-between"
           {...((showCount || label) && { css: { marginBottom: '$2' } })}
         >
-          {label ? (
+          {(label || counterElement) && (
             <FormLabel
               as="label"
               htmlFor={inputId}
@@ -96,7 +97,7 @@ export const FormInput: FunctionComponent<FormInputProps> = forwardRef(
             >
               {label}
             </FormLabel>
-          ) : null}
+          )}
         </Flex>
         <Input
           value={value}
