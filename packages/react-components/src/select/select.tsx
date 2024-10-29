@@ -22,7 +22,7 @@ const selectStyles: CSS<typeof config> = {
     cursor: 'not-allowed'
   },
   '& .twigs-select__control': {
-    background: '$black50',
+    backgroundColorOpacity: ['$secondary500', 0.06],
     borderColor: 'transparent',
     '&:hover': {
       borderColor: '$neutral200',
@@ -36,7 +36,15 @@ const selectStyles: CSS<typeof config> = {
         'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
     },
     '&.twigs-select__control--is-disabled': {
-      backgroundColorOpacity: ['$neutral500', 0.06]
+      backgroundColorOpacity: ['$neutral500', 0.06],
+      opacity: 0.6
+    },
+    '&--menu-is-open': {
+      '.twigs-select__value-container--has-value': {
+        '.twigs-select__single-value': {
+          color: '$neutral600'
+        }
+      }
     }
   },
   '& .twigs-select__value-container, & .twigs-select__placeholder, &.twigs-select__single-value, &.twigs-select__input':
@@ -55,14 +63,21 @@ const selectStyles: CSS<typeof config> = {
     paddingLeft: '$0',
     paddingRight: '$0'
   },
-  '&.twigs-select--dropdown-left .twigs-select__value-container': {
-    paddingLeft: '$2'
+  '&.twigs-select--dropdown-indicator-left': {
+    '& .twigs-select__control': {
+      paddingRight: '$14'
+    }
   },
-  '&.twigs-select--dropdown-right .twigs-select__value-container': {
-    paddingRight: '$2'
+  '&.twigs-select--dropdown-indicator-left .twigs-select__value-container': {
+    paddingLeft: '$1'
+  },
+  '&.twigs-select--dropdown-indicator-right .twigs-select__value-container': {
+    paddingRight: '$1'
   },
   '& .twigs-select__indicator': {
     padding: '0',
+    color: '$neutral600',
+
     '&.twigs-select__clear-indicator': {
       padding: '0 $4'
     },
@@ -84,6 +99,9 @@ const selectStyles: CSS<typeof config> = {
   '& .twigs-select__single-value': {
     color: '$neutral900',
     lineHeight: '$sm'
+  },
+  '& .twigs-select__multi-value': {
+    marginTop: 0
   },
   '& .twigs-select__multi-value__label': {
     fontSize: '100%'
@@ -117,6 +135,11 @@ const selectStyles: CSS<typeof config> = {
   '& .twigs-select--hide-indicator': {
     '& .twigs-select__indicator': {
       display: 'none'
+    }
+  },
+  '& .twigs-select__clear-indicator': {
+    '&:hover': {
+      color: '$neutral800'
     }
   },
   variants: {
@@ -181,7 +204,7 @@ const selectStyles: CSS<typeof config> = {
           fontSize: '$xs',
           padding: '0 $4'
         },
-        '&.twigs-select--dropdown-right .twigs-select__value-container': {
+        '&.twigs-select--dropdown-indicator-right .twigs-select__value-container': {
           paddingRight: '$1'
         },
         '& .twigs-select__value-container, & .twigs-select__input-container': {
@@ -214,7 +237,18 @@ const selectStyles: CSS<typeof config> = {
         }
       },
       filled: {
-        borderColor: 'transparent'
+        borderColor: 'transparent',
+
+        '& .twigs-select__control': {
+          '&--is-disabled': {
+            border: '1px solid $neutral200'
+          },
+          '&:hover, &:focus, &:active': {
+            borderWidth: '$xs',
+            borderStyle: 'solid',
+            borderColor: '$neutral400'
+          }
+        }
       }
     }
   },
@@ -241,7 +275,7 @@ type SelectBaseProps = {
   label?: string;
   requiredIndicator?: boolean;
   info?: string | ReactNode;
-  topRightElement?: ReactNode;
+  labelRightAddon?: ReactNode;
 };
 
 const DropdownIndicator = (props, dropdownIndicatorIcon) => {
@@ -274,7 +308,7 @@ export const Select = React.forwardRef<
       label,
       info,
       requiredIndicator,
-      topRightElement,
+      labelRightAddon,
       ...props
     },
     ref
@@ -329,8 +363,8 @@ export const Select = React.forwardRef<
         }}
         classNamePrefix="twigs-select"
         className={clsx(props.className, {
-          'twigs-select--dropdown-left': dropdownIndicatorPosition === 'left',
-          'twigs-select--dropdown-right': dropdownIndicatorPosition === 'right',
+          'twigs-select--dropdown-indicator-left': dropdownIndicatorPosition === 'left',
+          'twigs-select--dropdown-indicator-right': dropdownIndicatorPosition === 'right',
           'twigs-select--is-multi': props.isMulti
         })}
         theme={(theme) => ({ ...theme, borderRadius: 10 })}
@@ -341,10 +375,13 @@ export const Select = React.forwardRef<
         {label ? (
           <Box>
             <Flex justifyContent="space-between" css={{ marginBottom: '$2' }}>
-              <FormLabel requiredIndicator={requiredIndicator} info={info}>
+              <FormLabel
+                requiredIndicator={requiredIndicator}
+                info={info}
+                rightAddon={labelRightAddon}
+              >
                 {label}
               </FormLabel>
-              {topRightElement}
             </Flex>
             {SelectElement}
           </Box>
