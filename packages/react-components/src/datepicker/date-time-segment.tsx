@@ -36,7 +36,7 @@ export const DateTimeSegment = ({ segment, state }: DateTimeSegmentProps) => {
     >
       <Text
         size="md"
-        weight="bold"
+        weight="medium"
         css={{
           color: '$neutral800'
         }}
