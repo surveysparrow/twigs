@@ -64,7 +64,7 @@ const StyledChipContent = styled('span', {
   alignItems: 'center',
   gap: '$2',
   height: '100%',
-  zIndex: 1,
+  position: 'relative',
   borderRadius: 'inherit',
   backgroundColor: 'inherit'
 });
@@ -97,8 +97,7 @@ const StyledChip = styled(Box, {
     left: 0,
     top: 0,
     borderRadius: 'inherit',
-    backgroundColor: '$white900',
-    zIndex: -1
+    backgroundColor: '$white900'
   },
   [`& .${CLASSNAMES.addonElementEnd}`]: {
     color: '$black600'
@@ -793,6 +792,13 @@ export const Chip: FunctionComponent<ChipProps> = React.forwardRef(
         data-testid="chip"
         tabIndex={0}
         color={color}
+        onClick={handleChange}
+        onKeyDown={(e) => {
+          if (e.key === ' ') {
+            e.preventDefault();
+            handleChange();
+          }
+        }}
         {...props}
         className={clsx(
           CLASSNAMES.chip,
@@ -804,13 +810,6 @@ export const Chip: FunctionComponent<ChipProps> = React.forwardRef(
           },
           props.className
         )}
-        onClick={handleChange}
-        onKeyDown={(e) => {
-          if (e.key === ' ') {
-            e.preventDefault();
-            handleChange();
-          }
-        }}
       >
         <StyledChipContent className={CLASSNAMES.chipContent}>
           {leftElement && (
