@@ -1,4 +1,5 @@
 import { CSS } from '@stitches/react';
+import clsx from 'clsx';
 import React, {
   ReactElement,
   isValidElement,
@@ -23,6 +24,11 @@ const StyledSpan = styled('span', {
   position: 'relative',
   transition:
     'width 300ms cubic-bezier(0.51, 0, 0, 1), margin-right 300ms cubic-bezier(0.51, 0, 0, 1)',
+
+  [`&.${BUTTON_CLASSNAMES.sideElementLoaderHidden} .${BUTTON_CLASSNAMES.loader}`]:
+    {
+      opacity: 0
+    },
 
   [`.${BUTTON_CLASSNAMES.iconContainer}`]: {
     display: 'inline-flex',
@@ -155,7 +161,15 @@ export const ButtonSideElement = ({
   }, [loader, loaderSize, loaderCSS, loaderCSS]);
 
   return (
-    <StyledSpan css={containerStyle} ref={nodeRef}>
+    <StyledSpan
+      css={containerStyle}
+      ref={nodeRef}
+      className={clsx(BUTTON_CLASSNAMES.sideElement, {
+        [`${BUTTON_CLASSNAMES.sideElementIconHidden}`]:
+          !icon || (icon && loading),
+        [`${BUTTON_CLASSNAMES.sideElementLoaderHidden}`]: !loading
+      })}
+    >
       {icon && (
         <CSSTransition
           classNames={BUTTON_CLASSNAMES.iconContainer}
@@ -164,8 +178,7 @@ export const ButtonSideElement = ({
           onEnter={() => {
             requestAnimationFrame(() => {
               if (!nodeRef.current) return;
-              const iconWidth = iconContainerRef.current?.firstElementChild?.clientWidth
-                || 0;
+              const iconWidth = iconContainerRef.current?.firstElementChild?.clientWidth || 0;
               nodeRef.current.style.width = `${iconWidth}px`;
             });
           }}

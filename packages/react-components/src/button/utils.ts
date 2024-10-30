@@ -131,5 +131,8 @@ export const BUTTON_CLASSNAMES = {
   loader: prefixClassName('button__loader'),
   content: prefixClassName('button__content'),
   loading: prefixClassName('button--loading'),
-  disabled: prefixClassName('button--disabled')
+  disabled: prefixClassName('button--disabled'),
+  sideElement: prefixClassName('button__side-element'),
+  sideElementLoaderHidden: prefixClassName('button__side-element--loader-hidden'),
+  sideElementIconHidden: prefixClassName('button__side-element--icon-hidden')
 };
