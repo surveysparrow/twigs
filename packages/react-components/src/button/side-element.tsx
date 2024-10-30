@@ -1,6 +1,10 @@
 import { CSS } from '@stitches/react';
 import React, {
-  ReactElement, isValidElement, useEffect, useMemo, useRef
+  ReactElement,
+  isValidElement,
+  useEffect,
+  useMemo,
+  useRef
 } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import {

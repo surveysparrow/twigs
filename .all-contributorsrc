@@ -1,0 +1,117 @@
+{
+  "projectName": "twigs",
+  "projectOwner": "surveysparrow",
+  "files": [
+    "README.md"
+  ],
+  "commitType": "docs",
+  "commitConvention": "angular",
+  "contributorsPerLine": 7,
+  "contributors": [
+    {
+      "login": "justin-ss",
+      "name": "Justin George",
+      "avatar_url": "https://avatars.githubusercontent.com/u/105047491?v=4",
+      "profile": "https://github.com/justin-ss",
+      "contributions": [
+        "code",
+        "doc",
+        "ideas",
+        "mentoring"
+      ]
+    },
+    {
+      "login": "akzhysparrow",
+      "name": "akzhysparrow",
+      "avatar_url": "https://avatars.githubusercontent.com/u/157568762?v=4",
+      "profile": "https://github.com/akzhysparrow",
+      "contributions": [
+        "code",
+        "doc",
+        "example",
+        "maintenance"
+      ]
+    },
+    {
+      "login": "maneeshp97",
+      "name": "Maneesh P",
+      "avatar_url": "https://avatars.githubusercontent.com/u/158666689?v=4",
+      "profile": "https://github.com/maneeshp97",
+      "contributions": [
+        "code",
+        "maintenance",
+        "doc",
+        "review"
+      ]
+    },
+    {
+      "login": "shettyMegh9",
+      "name": "Meghanath S Shetty",
+      "avatar_url": "https://avatars.githubusercontent.com/u/130285592?v=4",
+      "profile": "https://github.com/shettyMegh9",
+      "contributions": [
+        "code",
+        "bug"
+      ]
+    },
+    {
+      "login": "Pratosh22",
+      "name": "Pratosh",
+      "avatar_url": "https://avatars.githubusercontent.com/u/76246084?v=4",
+      "profile": "http://www.pratosh.ml/",
+      "contributions": [
+        "code",
+        "bug",
+        "doc"
+      ]
+    },
+    {
+      "login": "meenakshi-ss",
+      "name": "Meenakshi Sundaram",
+      "avatar_url": "https://avatars.githubusercontent.com/u/160723712?v=4",
+      "profile": "https://github.com/meenakshi-ss",
+      "contributions": [
+        "code",
+        "bug"
+      ]
+    },
+    {
+      "login": "ss-oliver-paul",
+      "name": "Oliver Paul",
+      "avatar_url": "https://avatars.githubusercontent.com/u/158561360?v=4",
+      "profile": "https://github.com/ss-oliver-paul",
+      "contributions": [
+        "infra"
+      ]
+    },
+    {
+      "login": "ragulcs-sparrow",
+      "name": "ragulcs-sparrow",
+      "avatar_url": "https://avatars.githubusercontent.com/u/163504861?v=4",
+      "profile": "https://github.com/ragulcs-sparrow",
+      "contributions": [
+        "code",
+        "bug"
+      ]
+    },
+    {
+      "login": "abhaysparrow",
+      "name": "abhaysparrow",
+      "avatar_url": "https://avatars.githubusercontent.com/u/174322002?v=4",
+      "profile": "https://github.com/abhaysparrow",
+      "contributions": [
+        "code",
+        "bug"
+      ]
+    },
+    {
+      "login": "tmbalagan",
+      "name": "Balamurugan ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/23442723?v=4",
+      "profile": "https://github.com/tmbalagan",
+      "contributions": [
+        "code"
+      ]
+    }
+  ]
+}

@@ -68,7 +68,7 @@ export const CalendarMonthsView = ({
       if (!containerRef.current) return;
 
       const currentMonth = containerRef.current.querySelector(
-        `button[data-month-id="${dateValue.month}"]`
+        `button[data-month-id="${dateValue?.month}"]`
       ) as HTMLButtonElement;
 
       if (currentMonth) {
@@ -122,6 +122,52 @@ export const CalendarMonthsView = ({
     }
   };
 
+  const getButtonTabIndex = (index: number, month: number) => {
+    if (dateValue?.month) {
+      return dateValue.month === month ? 0 : -1;
+    }
+    return index === 0 ? 0 : -1;
+  };
+
+  const isButtonDisabled = (date: CalendarDate) => {
+    if (!state.minValue && !state.maxValue) return false;
+    if (
+      state.minValue
+      && date.year === state.minValue.year
+      && date.month < state.minValue.month
+    ) {
+      return true;
+    }
+    if (
+      state.maxValue
+      && date.year === state.maxValue.year
+      && date.month > state.maxValue.month
+    ) {
+      return true;
+    }
+    return false;
+  };
+
+  const handleMonthSelect = (date: CalendarDate) => {
+    let updatedDate = date.set({});
+
+    if (state.isInvalid(date)) {
+      if (state.minValue && date.day < state.minValue.day) {
+        updatedDate = updatedDate.set({ day: state.minValue.day });
+      } else if (state.maxValue && date.day > state.maxValue.day) {
+        updatedDate = updatedDate.set({ day: state.maxValue.day });
+      }
+    }
+    if (!range) {
+      (state as CalendarState).selectDate(updatedDate);
+    }
+    state.setFocusedDate(updatedDate);
+    if (onMonthSelect) {
+      onMonthSelect(updatedDate);
+    }
+    setCurrentCalendarView(CALENDAR_VIEW.GRID);
+  };
+
   return (
     <Box
       css={{
@@ -154,30 +200,21 @@ export const CalendarMonthsView = ({
         {months.map((month, i) => (
           <Button
             key={month.label}
-            color={dateValue.month === month.date.month ? 'default' : 'bright'}
+            color={dateValue?.month === month.date.month ? 'default' : 'bright'}
             data-month-id={month.date.month}
-            tabIndex={dateValue.month === month.date.month ? 0 : -1}
-            disabled={state.isInvalid(month.date)}
+            tabIndex={getButtonTabIndex(i, month.date.month)}
+            disabled={isButtonDisabled(month.date)}
             css={{
               padding: '$6',
               height:
                 CALENDAR_SIZE_TO_YEAR_MONTH_BTN_HEIGHT[calendarContext.size],
-              ...(dateValue.month === month.date.month && {
+              ...(dateValue?.month === month.date.month && {
                 color: '$secondary600'
               })
             }}
             onKeyDown={(e) => handleKeyDown(e, i)}
             size={calendarContext.size}
-            onClick={() => {
-              if (!range) {
-                (state as CalendarState).selectDate(month.date);
-              }
-              state.setFocusedDate(month.date);
-              if (onMonthSelect) {
-                onMonthSelect(month.date);
-              }
-              setCurrentCalendarView(CALENDAR_VIEW.GRID);
-            }}
+            onClick={() => handleMonthSelect(month.date)}
           >
             {month.label}
           </Button>

@@ -1,9 +1,6 @@
 import React, { useRef } from 'react';
 import { useDateFieldState } from 'react-stately';
-import {
-  useDateField,
-  useLocale
-} from 'react-aria';
+import { useDateField, useLocale } from 'react-aria';
 import { createCalendar } from '@internationalized/date';
 import { Box } from '../box';
 import { Flex } from '../flex';
@@ -23,16 +20,20 @@ export const DateField = (props) => {
   return (
     <Flex {...fieldProps} ref={ref}>
       {state.segments.map((segment, i) => (
+        <DateTimeSegment
         // eslint-disable-next-line  react/no-array-index-key
-        <DateTimeSegment key={`twigs-datefield-${i}`} segment={segment} state={state} />
+          key={`twigs-datefield-${i}`}
+          segment={segment}
+          state={state}
+        />
       ))}
     </Flex>
   );
 };
 
 type StyledFieldT = {
-  children: React.ReactElement
-}
+  children: React.ReactElement;
+};
 
 export const StyledField = ({ children, ...otherProps }: StyledFieldT) => {
   return (

@@ -6,6 +6,10 @@ import { Alert, AlertDescription } from '../index';
 
 describe('Alert', () => {
   it('renders without crashing', () => {
-    render(<Alert status="success"><AlertDescription> Alert message </AlertDescription></Alert>);
+    render(
+      <Alert status="success">
+        <AlertDescription> Alert message </AlertDescription>
+      </Alert>
+    );
   });
 });

@@ -106,15 +106,20 @@ export const buttonVariantToLoaderVariantMapping: Partial<
   error: 'negative'
 };
 
-export const getLoaderVariantFromButtonVariant = ({ color, variant }: {
-  variant: ButtonProps['variant'],
-  color: ButtonProps['color'],
+export const getLoaderVariantFromButtonVariant = ({
+  color,
+  variant
+}: {
+  variant: ButtonProps['variant'];
+  color: ButtonProps['color'];
 }) => {
   const colorString = color as ButtonColorString;
   const variantString = variant as ButtonVariantString;
 
   if (buttonVariantToLoaderVariantMapping[`${colorString}-${variantString}`]) {
-    return buttonVariantToLoaderVariantMapping[`${colorString}-${variantString}`];
+    return buttonVariantToLoaderVariantMapping[
+      `${colorString}-${variantString}`
+    ];
   }
 
   return buttonVariantToLoaderVariantMapping[colorString];

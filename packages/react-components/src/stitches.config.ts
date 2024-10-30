@@ -15,9 +15,9 @@ export const resetStyles = {
     verticalAlign: 'baseline'
   },
   'article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section':
-    {
-      display: 'block'
-    },
+  {
+    display: 'block'
+  },
   '*[hidden]': {
     display: 'none'
   },
@@ -304,6 +304,8 @@ export const defaultTheme = {
   }
 };
 
+type ThemeColors = `$${keyof typeof defaultTheme.colors}` | (string & {});
+
 export const {
   styled,
   theme,
@@ -312,18 +314,19 @@ export const {
   keyframes,
   config,
   reset,
-  css
+  css,
+  getCssText
 } = createStitches({
   prefix: 'twigs',
   theme: defaultTheme,
   utils: {
-    backgroundColorOpacity: ([value, opacity]: [string, number]) => ({
+    backgroundColorOpacity: ([value, opacity]: [ThemeColors, number]) => ({
       backgroundColor: hexToRgba(value, opacity)
     }),
-    colorOpacity: ([value, opacity]: [string, number]) => ({
+    colorOpacity: ([value, opacity]: [ThemeColors, number]) => ({
       color: hexToRgba(value, opacity)
     }),
-    borderColorOpacity: ([value, opacity]: [string, number]) => ({
+    borderColorOpacity: ([value, opacity]: [ThemeColors, number]) => ({
       borderColor: hexToRgba(value, opacity)
     })
   },
@@ -343,13 +346,15 @@ export const globalStyles = globalCss({
   '*': {
     margin: 0,
     padding: 0,
-    fontFamily: '$body',
     '-webkit-font-smoothing': 'antialiased'
+  },
+  'html, body, textarea, input, button, select, p, a': {
+    fontFamily: '$body'
   },
   '*, :before, :after': { boxSizing: 'border-box' }
 });
 
-function hexToRgba(hex: string, opacity: number) {
+export function hexToRgba(hex: string, opacity: number) {
   const color = theme.colors[hex.replace('$', '')];
   if (!color) return hex;
   const r = parseInt(color.value.substring(1, 3), 16);

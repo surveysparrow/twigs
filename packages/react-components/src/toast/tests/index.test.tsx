@@ -62,14 +62,23 @@ const Component = () => {
   );
 };
 
-const ToastrPromise = ({ variant, isError }: { variant?:string, isError?:boolean }) => {
-  const ResolvePromise = () => new Promise<{ title: string, description: string }>((resolve) => {
+const ToastrPromise = ({
+  variant,
+  isError
+}: {
+  variant?: string;
+  isError?: boolean;
+}) => {
+  const ResolvePromise = () => new Promise<{ title: string; description: string }>((resolve) => {
     setTimeout(() => {
-      resolve({ title: 'Success!', description: 'Record created successfully' });
+      resolve({
+        title: 'Success!',
+        description: 'Record created successfully'
+      });
     }, 1000);
   });
 
-  const RejectPromise = () => new Promise<{ title: string, description: string }>((resolve, reject) => {
+  const RejectPromise = () => new Promise<{ title: string; description: string }>((resolve, reject) => {
     setTimeout(() => {
       // eslint-disable-next-line prefer-promise-reject-errors
       reject({ title: 'Something went wrong' });
@@ -90,7 +99,7 @@ const ToastrPromise = ({ variant, isError }: { variant?:string, isError?:boolean
               },
               success: (p) => ({
                 title: `${p.title}`,
-                variant: (variant || 'default' as any),
+                variant: variant || ('default' as any),
                 description: `${p.description}`,
                 action: (
                   <ToastAction altText="Try again" asChild>
@@ -100,7 +109,7 @@ const ToastrPromise = ({ variant, isError }: { variant?:string, isError?:boolean
               }),
               error: (p) => ({
                 title: `Error while creating record: ${p.title}`,
-                variant: (variant || 'error' as any),
+                variant: variant || ('error' as any),
                 action: (
                   <ToastAction altText="Try again" asChild>
                     <Button color="light"> Close </Button>
@@ -118,9 +127,7 @@ const ToastrPromise = ({ variant, isError }: { variant?:string, isError?:boolean
 };
 
 test('renders toast on click of button', async () => {
-  render(
-    <Component />
-  );
+  render(<Component />);
   const button = screen.getByRole('button');
   fireEvent.click(button);
   await waitFor(() => {
@@ -145,7 +152,9 @@ test('renders error toast on error variant', async () => {
   fireEvent.click(errorButton);
   expect(screen.getByText('Loading...')).toBeInTheDocument();
   await waitFor(() => {
-    expect(screen.getByText('Error while creating record: Something went wrong')).toBeInTheDocument();
+    expect(
+      screen.getByText('Error while creating record: Something went wrong')
+    ).toBeInTheDocument();
   });
 });
 

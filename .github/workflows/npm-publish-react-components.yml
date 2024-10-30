@@ -19,15 +19,15 @@ jobs:
       - name: Build and Test
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 20
       - run: yarn
       - run: yarn build:components
       - run: yarn test
       - name: Publish to npm
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 20
           registry-url: https://registry.npmjs.org/
-      - run: cd packages/react-components && npm publish --provenance
+      - run: cd packages/react-components && npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token_react_components}}

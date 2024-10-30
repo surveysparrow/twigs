@@ -9,7 +9,7 @@ export type TextFormats =
   | 'code';
 
 export const textAlignments = ['left', 'center', 'right', 'justify'] as const;
-export type TextAlignments = typeof textAlignments[number];
+export type TextAlignments = (typeof textAlignments)[number];
 
 export type ToolbarProperties = {
   isBold: boolean;

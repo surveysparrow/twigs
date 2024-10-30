@@ -1,6 +1,10 @@
 import React, { cloneElement, ComponentProps, FunctionComponent } from 'react';
 import {
-  AlertIcon, CloseIcon, InfoIcon, TickCircleIcon, WarningIcon
+  AlertIcon,
+  CloseIcon,
+  InfoIcon,
+  TickCircleIcon,
+  WarningIcon
 } from '@sparrowengg/twigs-react-icons';
 import { styled } from '../stitches.config';
 import { Box } from '../box';
@@ -30,7 +34,6 @@ const StyledAlert = styled(Box, {
   width: '100%',
   borderWidth: '$xs',
   borderStyle: 'solid',
-  borderRadius: '$lg',
   [`${StyledAlertDescription}`]: {
     flex: 1,
     minWidth: 0
@@ -39,35 +42,41 @@ const StyledAlert = styled(Box, {
     size: {
       sm: {
         padding: '$3 $4',
+        borderRadius: '$lg',
         [`${StyledAlertIcon}`]: {
           marginInlineEnd: '$2'
         },
         [`${StyledAlertDescription}`]: {
-          fontSize: '$sm'
+          fontSize: '$sm',
+          lineHeight: '$sm'
         },
         [`${StyledCloseButton}`]: {
           height: '$5',
-          width: '$5'
+          width: '$5',
+          marginInlineStart: '$2'
         }
       },
       md: {
         padding: '$8',
+        borderRadius: '$xl',
         [`${StyledAlertIcon}`]: {
           marginInlineEnd: '$4'
         },
         [`${StyledAlertDescription}`]: {
-          fontSize: '$md'
+          fontSize: '$md',
+          lineHeight: '$md'
         },
         [`${StyledCloseButton}`]: {
           height: '$6',
-          width: '$6'
+          width: '$6',
+          marginInlineStart: '$4'
         }
       }
     },
     status: {
       [STATUSES.success.name]: {
         backgroundColor: '$positive50',
-        borderColor: '$positive100',
+        borderColor: '$positive200',
         [`${StyledAlertIcon} svg`]: {
           color: '$positive500'
         }
@@ -90,7 +99,7 @@ const StyledAlert = styled(Box, {
         backgroundColor: '$warning100',
         borderColor: '$warning200',
         [`${StyledAlertIcon} svg`]: {
-          color: '$warning500'
+          color: '$warning600'
         }
       }
     }
@@ -102,65 +111,49 @@ const StyledAlert = styled(Box, {
 });
 
 export type AlertProps = {
-  children: React.ReactElement,
-  closable?: boolean,
-  onClose?: React.MouseEventHandler<HTMLButtonElement>
-  status: 'info' | 'error' | 'success' | 'warning',
-  icon?: React.ReactElement,
-} & ComponentProps<typeof StyledAlert>
+  children: React.ReactElement;
+  closable?: boolean;
+  onClose?: React.MouseEventHandler<HTMLButtonElement>;
+  status: 'info' | 'error' | 'success' | 'warning';
+  icon?: React.ReactElement;
+} & ComponentProps<typeof StyledAlert>;
 
 export const Alert: FunctionComponent<AlertProps> = React.forwardRef(
-  ({
-    closable,
-    size,
-    onClose,
-    status = 'info',
-    children,
-    icon,
-    ...rest
-  }: AlertProps, ref) => {
+  (
+    {
+      closable,
+      size = 'sm',
+      onClose,
+      status = 'info',
+      children,
+      icon,
+      ...rest
+    }: AlertProps,
+    ref
+  ) => {
     const ValidAlertIcon = icon || STATUSES[status]?.icon;
     if (!ValidAlertIcon) {
       throw new Error(`Invalid status: ${status}`);
     }
 
     return (
-      <StyledAlert
-        role="alert"
-        ref={ref}
-        size={size}
-        status={status}
-        {...rest}
-      >
-        <StyledAlertIcon
-          role="img"
-          aria-label={`${status}-icon`}
-        >
-          {
-            icon
-              ? cloneElement(icon)
-              : (
-                <ValidAlertIcon
-                  size={size === 'sm' ? 20 : 24}
-                  aria-hidden
-                />
-              )
-          }
-
+      <StyledAlert role="alert" ref={ref} size={size} status={status} {...rest}>
+        <StyledAlertIcon role="img" aria-label={`${status}-icon`}>
+          {icon ? (
+            cloneElement(icon)
+          ) : (
+            <ValidAlertIcon size={size === 'sm' ? 20 : 24} aria-hidden />
+          )}
         </StyledAlertIcon>
         {children}
-        {
-          closable
-            ? (
-              <StyledCloseButton
-                icon={<CloseIcon />}
-                aria-label="close"
-                color="default"
-                {...(onClose && { onClick: onClose })}
-              />
-            )
-            : null
-        }
+        {closable ? (
+          <StyledCloseButton
+            icon={<CloseIcon />}
+            aria-label="close"
+            color="default"
+            {...(onClose && { onClick: onClose })}
+          />
+        ) : null}
       </StyledAlert>
     );
   }

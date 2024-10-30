@@ -10,9 +10,7 @@ describe('Heading', () => {
   });
 
   it('renders Heading correctly', () => {
-    const { getByTestId } = render(
-      <Heading>Simple Heading</Heading>
-    );
+    const { getByTestId } = render(<Heading>Simple Heading</Heading>);
     const heading = getByTestId('heading');
 
     expect(heading).toHaveTextContent('Simple Heading');

@@ -20,10 +20,6 @@ export default {
 } as ComponentMeta<typeof Switch>;
 
 const Template: ComponentStory<typeof Switch> = (args) => (
-  <Switch
-    defaultChecked
-    id="s1"
-    {...args}
-  />
+  <Switch defaultChecked id="s1" {...args} />
 );
 export const Default = Template.bind({});

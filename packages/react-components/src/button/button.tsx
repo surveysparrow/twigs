@@ -1,6 +1,4 @@
-import React, {
-  ReactElement, FunctionComponent, ComponentProps
-} from 'react';
+import React, { ReactElement, FunctionComponent, ComponentProps } from 'react';
 import clsx from 'clsx';
 import { ScaleValue } from '@stitches/react';
 import { config, keyframes, styled } from '../stitches.config';
@@ -223,12 +221,10 @@ const StyledButton = styled('button', {
       }
     },
     isLeftIcon: {
-      true: {
-      }
+      true: {}
     },
     isRightIcon: {
-      true: {
-      }
+      true: {}
     }
   },
   compoundVariants: [
@@ -671,16 +667,24 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
     const hasNoIcon = !(leftIcon || rightIcon || icon);
     let buttonLoaderMargin: ScaleValue<'space', typeof config> = '$4';
 
-    if (['lg', 'xl'].includes(rest.size as Extract<ButtonProps['size'], string>)) {
+    if (
+      ['lg', 'xl'].includes(rest.size as Extract<ButtonProps['size'], string>)
+    ) {
       buttonLoaderMargin = '$5';
-    } else if (['xxs', 'xs', 'sm', 'md'].includes(rest.size as Extract<ButtonProps['size'], string>)) {
+    } else if (
+      ['xxs', 'xs', 'sm', 'md'].includes(
+        rest.size as Extract<ButtonProps['size'], string>
+      )
+    ) {
       buttonLoaderMargin = '$1';
     }
 
-    const { size: loaderSize, ...loaderCSS } = getLoaderIconSizeFromButtonProps({
-      buttonSize: rest.size,
-      loaderType: loader
-    });
+    const { size: loaderSize, ...loaderCSS } = getLoaderIconSizeFromButtonProps(
+      {
+        buttonSize: rest.size,
+        loaderType: loader
+      }
+    );
     const loaderColor = getLoaderVariantFromButtonVariant({
       variant: rest.variant ?? 'solid',
       color

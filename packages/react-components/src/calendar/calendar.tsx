@@ -65,18 +65,34 @@ export const Calendar = ({
   const [currentCalendarView, setCurrentCalendarView] = useState<
     keyof typeof CALENDAR_VIEW
   >(CALENDAR_VIEW.GRID);
-  const dateValue = props.value ?? today(getLocalTimeZone());
+  const [localDateValue, setLocalDateValue] = useState<DateValue>(
+    today(getLocalTimeZone())
+  );
+  const dateValue = props.value ?? localDateValue;
+
   const { locale } = useLocale();
   const state = useCalendarState({
+    defaultValue: dateValue,
     ...props,
     locale,
-    value: dateValue,
+    ...(props.value && {
+      value: props.value
+    }),
     createCalendar
   });
 
   const monthFormatter = useDateFormatter({
     month: 'short'
   });
+
+  const handleChange = (value: DateValue) => {
+    if (props.onChange) {
+      setLocalDateValue(value);
+      props.onChange(value);
+    } else {
+      setLocalDateValue(value);
+    }
+  };
 
   useEffect(() => {
     if (
@@ -106,14 +122,15 @@ export const Calendar = ({
     state
   );
 
-  const contextValue = useMemo(() => ({
-    size
-  }), [size]);
+  const contextValue = useMemo(
+    () => ({
+      size
+    }),
+    [size]
+  );
 
   return (
-    <CalendarContext.Provider
-      value={contextValue}
-    >
+    <CalendarContext.Provider value={contextValue}>
       <Box
         {...calendarProps}
         css={{
@@ -145,15 +162,15 @@ export const Calendar = ({
               <TimeAndZonePickerContainer calendarSize={size}>
                 {props.showTimePicker && (
                   <CalendarTimePicker
-                    value={props.value}
-                    onChange={props.onChange}
+                    value={dateValue}
+                    onChange={handleChange}
                     calendarState={state}
                   />
                 )}
                 {props.showTimezonePicker && (
                   <CalendarTimezonePicker
-                    value={props.value}
-                    onChange={props.onChange}
+                    value={dateValue}
+                    onChange={handleChange}
                     calendarState={state}
                   />
                 )}

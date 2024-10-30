@@ -1,5 +1,8 @@
 import React, {
-  ComponentProps, FunctionComponent, isValidElement, ReactElement
+  ComponentProps,
+  FunctionComponent,
+  isValidElement,
+  ReactElement
 } from 'react';
 import { Button } from './button';
 import { styled } from '../stitches.config';
@@ -7,8 +10,8 @@ import { styled } from '../stitches.config';
 type OmitProps = 'leftIcon' | 'rightIcon' | 'isIcon';
 
 export interface IconButtonBaseProps {
-  icon: ReactElement,
-  'aria-label'?: string
+  icon: ReactElement;
+  'aria-label'?: string;
 }
 
 const StyledIconButton = styled(Button, {

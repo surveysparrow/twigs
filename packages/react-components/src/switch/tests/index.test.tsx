@@ -12,7 +12,7 @@ describe('Switch', () => {
         id="s1"
         disabled={false}
         checked={false}
-        onChange={() => { }}
+        onChange={() => {}}
         required={false}
       />
     );
