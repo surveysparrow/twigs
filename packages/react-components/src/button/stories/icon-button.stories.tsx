@@ -21,7 +21,7 @@ export default {
     },
     shape: {
       control: 'select',
-      options: ['round', 'squircle']
+      options: ['round', 'default']
     },
     disabled: {
       control: 'boolean'

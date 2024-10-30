@@ -20,11 +20,11 @@ const StyledIconButton = styled(Button, {
       round: {
         borderRadius: '$round'
       },
-      squircle: {}
+      default: {}
     }
   },
   defaultVariants: {
-    shape: 'squircle'
+    shape: 'default'
   }
 });
 
