@@ -72,7 +72,7 @@ const StyledButton = styled('button', {
       },
       lg: {
         padding: '$4 $8',
-        borderRadius: '$xl',
+        borderRadius: '$lg',
         fontSize: '$md',
         lineHeight: '$md',
         height: '$10',
