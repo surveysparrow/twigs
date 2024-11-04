@@ -665,14 +665,12 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
     ref
   ) => {
     const hasNoIcon = !(leftIcon || rightIcon || icon);
-    let buttonLoaderMargin: ScaleValue<'space', typeof config> = '$4';
+    let buttonLoaderMargin: ScaleValue<'space', typeof config> = '$2';
 
-    if (
-      ['lg', 'xl'].includes(rest.size as Extract<ButtonProps['size'], string>)
-    ) {
-      buttonLoaderMargin = '$5';
+    if (rest.size === '2xl') {
+      buttonLoaderMargin = '$4';
     } else if (
-      ['xxs', 'xs', 'sm', 'md'].includes(
+      ['xxs', 'xs', 'sm'].includes(
         rest.size as Extract<ButtonProps['size'], string>
       )
     ) {
@@ -732,9 +730,7 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
           />
         )}
 
-        <span className={BUTTON_CLASSNAMES.content}>
-          {children}
-        </span>
+        <span className={BUTTON_CLASSNAMES.content}>{children}</span>
 
         {rightIcon && (
           <ButtonSideElement
