@@ -91,6 +91,7 @@ export { PlayOutlineIcon } from './play-outline';
 export { PlusIcon } from './plus';
 export { PrintIcon } from './print';
 export { QuestionCircleIcon } from './question-circle';
+export { RedoIcon } from './redo';
 export { RefreshIcon } from './refresh';
 export { ResetIcon } from './reset';
 export { RocketIcon } from './rocket';

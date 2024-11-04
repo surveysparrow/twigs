@@ -5,6 +5,8 @@ import React, {
   ReactNode
 } from 'react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
+import { prefixClassName } from '@src/utils';
+import clsx from 'clsx';
 import { keyframes, styled } from '../stitches.config';
 
 const overlayShow = keyframes({
@@ -114,13 +116,14 @@ const StyledContent = styled(DialogPrimitive.Content, {
 
 type ContentProps = {
   children?: ReactNode;
+  overlayClassName?:string;
 } & ComponentProps<typeof StyledContent>;
 
-const Content = ({ children, ...props }: ContentProps) => {
+const Content = ({ children, overlayClassName, ...props }: ContentProps) => {
   const dialogContext = useContext(DialogContext);
   return (
     <DialogPrimitive.Portal>
-      <StyledOverlay />
+      <StyledOverlay className={clsx(prefixClassName('dialog__overlay'), overlayClassName)} />
       <StyledContent {...dialogContext} {...props}>
         {children}
       </StyledContent>

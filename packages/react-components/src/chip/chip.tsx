@@ -64,14 +64,16 @@ const StyledChipContent = styled('span', {
   alignItems: 'center',
   gap: '$2',
   height: '100%',
-  zIndex: 1,
-  borderRadius: 'inherit'
+  position: 'relative',
+  borderRadius: 'inherit',
+  backgroundColor: 'inherit'
 });
 
 const CLASSNAMES = {
   addonElementStart: prefixClassName('addon-element--start'),
   addonElementEnd: prefixClassName('addon-element--end'),
   chip: prefixClassName('chip'),
+  chipContent: prefixClassName('chip__content'),
   chipWithAddonStart: `${prefixClassName('chip')}--with-addon-start`,
   chipWithAddonEnd: `${prefixClassName('chip')}--with-addon-end`
 };
@@ -95,8 +97,7 @@ const StyledChip = styled(Box, {
     left: 0,
     top: 0,
     borderRadius: 'inherit',
-    backgroundColor: '$white900',
-    zIndex: -1
+    backgroundColor: '$white900'
   },
   [`& .${CLASSNAMES.addonElementEnd}`]: {
     color: '$black600'
@@ -265,10 +266,7 @@ const StyledChip = styled(Box, {
     color: {
       default: {
         color: '$neutral900',
-
-        [`& ${StyledChipContent}`]: {
-          background: '$neutral100'
-        },
+        backgroundColor: '$neutral100',
 
         [`& ${StyledCloseButton}`]: {
           color: '$neutral500'
@@ -284,10 +282,7 @@ const StyledChip = styled(Box, {
       },
       primary: {
         color: '$primary700',
-
-        [`& ${StyledChipContent}`]: {
-          backgroundColorOpacity: ['$primary500', 0.15]
-        },
+        backgroundColorOpacity: ['$primary500', 0.15],
 
         [`& ${StyledCloseButton}`]: {
           color: '$primary500'
@@ -303,9 +298,7 @@ const StyledChip = styled(Box, {
       },
       secondary: {
         color: '$secondary700',
-        [`& ${StyledChipContent}`]: {
-          backgroundColorOpacity: ['$secondary500', 0.08]
-        },
+        backgroundColorOpacity: ['$secondary500', 0.08],
 
         [`& ${StyledCloseButton}`]: {
           color: '$secondary400'
@@ -321,9 +314,7 @@ const StyledChip = styled(Box, {
       },
       error: {
         color: '$negative700',
-        [`& ${StyledChipContent}`]: {
-          background: '$negative100'
-        },
+        backgroundColor: '$negative100',
 
         [`& ${StyledCloseButton}`]: {
           color: '$negative600'
@@ -339,9 +330,7 @@ const StyledChip = styled(Box, {
       },
       warning: {
         color: '$warning700',
-        [`& ${StyledChipContent}`]: {
-          background: '$warning100'
-        },
+        backgroundColor: '$warning100',
 
         [`& ${StyledCloseButton}`]: {
           color: '$warning700'
@@ -357,9 +346,7 @@ const StyledChip = styled(Box, {
       },
       success: {
         color: '$positive600',
-        [`& ${StyledChipContent}`]: {
-          background: '$positive100'
-        },
+        backgroundColor: '$positive100',
 
         [`& ${StyledCloseButton}`]: {
           color: '$positive600'
@@ -375,9 +362,7 @@ const StyledChip = styled(Box, {
       },
       accent: {
         color: '$accent500',
-        [`& ${StyledChipContent}`]: {
-          background: '$accent100'
-        },
+        backgroundColor: '$accent100',
 
         [`& ${StyledCloseButton}`]: {
           color: '$accent500'
@@ -405,11 +390,7 @@ const StyledChip = styled(Box, {
         backgroundColor: '$white900',
         borderWidth: '1px',
         borderStyle: 'solid',
-        color: '$secondary800',
-
-        [`& ${StyledChipContent}`]: {
-          backgroundColor: '$white900'
-        }
+        color: '$secondary800'
       },
       solid: {
         unset: 'none'
@@ -454,6 +435,7 @@ const StyledChip = styled(Box, {
       variant: 'outline',
       css: {
         borderColorOpacity: ['$black900', 0.15],
+        backgroundColor: '$white900',
         color: '$secondary900',
 
         [`& ${StyledCloseButton}`]: {
@@ -462,9 +444,6 @@ const StyledChip = styled(Box, {
         [`&.closable ${StyledCloseButton}:hover, 
           &.closable ${StyledCloseButton}:focus-within`]: {
           color: '$black600'
-        },
-        [`& ${StyledChipContent}`]: {
-          backgroundColor: '$white900'
         }
       }
     },
@@ -473,13 +452,11 @@ const StyledChip = styled(Box, {
       variant: 'outline',
       css: {
         borderColorOpacity: ['$primary500', 0.2],
+        backgroundColor: '$white900',
         color: '$secondary800',
 
         [`& ${StyledCloseButton}`]: {
           color: '$primary500'
-        },
-        [`& ${StyledChipContent}`]: {
-          backgroundColor: '$white900'
         }
       }
     },
@@ -488,12 +465,10 @@ const StyledChip = styled(Box, {
       variant: 'outline',
       css: {
         borderColorOpacity: ['$secondary500', 0.2],
+        backgroundColor: '$white900',
         color: '$secondary800',
         [`& ${StyledCloseButton}`]: {
           color: '$secondary500'
-        },
-        [`& ${StyledChipContent}`]: {
-          backgroundColor: '$white900'
         }
       }
     },
@@ -502,12 +477,10 @@ const StyledChip = styled(Box, {
       variant: 'outline',
       css: {
         borderColorOpacity: ['$positive500', 0.2],
+        backgroundColor: '$white900',
         color: '$secondary800',
         [`& ${StyledCloseButton}`]: {
           color: '$positive500'
-        },
-        [`& ${StyledChipContent}`]: {
-          backgroundColor: '$white900'
         }
       }
     },
@@ -516,12 +489,10 @@ const StyledChip = styled(Box, {
       variant: 'outline',
       css: {
         borderColorOpacity: ['$warning500', 0.2],
+        backgroundColor: '$white900',
         color: '$secondary800',
         [`& ${StyledCloseButton}`]: {
           color: '$warning500'
-        },
-        [`& ${StyledChipContent}`]: {
-          backgroundColor: '$white900'
         }
       }
     },
@@ -530,12 +501,10 @@ const StyledChip = styled(Box, {
       variant: 'outline',
       css: {
         borderColorOpacity: ['$negative500', 0.2],
+        backgroundColor: '$white900',
         color: '$secondary800',
         [`& ${StyledCloseButton}`]: {
           color: '$negative500'
-        },
-        [`& ${StyledChipContent}`]: {
-          backgroundColor: '$white900'
         }
       }
     },
@@ -543,13 +512,11 @@ const StyledChip = styled(Box, {
       color: 'accent',
       variant: 'outline',
       css: {
-        color: '$secondary800',
         borderColorOpacity: ['$accent500', 0.2],
+        backgroundColor: '$white900',
+        color: '$secondary800',
         [`& ${StyledCloseButton}`]: {
           color: '$accent500'
-        },
-        [`& ${StyledChipContent}`]: {
-          backgroundColor: '$white900'
         }
       }
     },
@@ -560,19 +527,13 @@ const StyledChip = styled(Box, {
       selectable: true,
       css: {
         color: '$secondary800',
-        [`& ${StyledChipContent}`]: {
-          backgroundColorOpacity: ['$primary500', 0.1]
-        },
+        backgroundColorOpacity: ['$primary500', 0.1],
 
         '&:hover': {
-          [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$primary500', 0.15]
-          }
+          backgroundColorOpacity: ['$primary500', 0.15]
         },
         '&.active': {
-          [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$primary500', 0.2]
-          }
+          backgroundColorOpacity: ['$primary500', 0.2]
         }
       }
     },
@@ -581,19 +542,13 @@ const StyledChip = styled(Box, {
       variant: 'solid',
       selectable: true,
       css: {
-        [`& ${StyledChipContent}`]: {
-          backgroundColorOpacity: ['$secondary500', 0.1]
-        },
+        backgroundColorOpacity: ['$secondary500', 0.1],
 
         '&:hover': {
-          [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$secondary500', 0.15]
-          }
+          backgroundColorOpacity: ['$secondary500', 0.15]
         },
         '&.active': {
-          [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$secondary500', 0.2]
-          }
+          backgroundColorOpacity: ['$secondary500', 0.2]
         }
       }
     },
@@ -602,19 +557,13 @@ const StyledChip = styled(Box, {
       variant: 'solid',
       selectable: true,
       css: {
-        [`& ${StyledChipContent}`]: {
-          backgroundColorOpacity: ['$black900', 0.1]
-        },
+        backgroundColorOpacity: ['$black900', 0.1],
 
         '&:hover': {
-          [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$black900', 0.15]
-          }
+          backgroundColorOpacity: ['$black900', 0.15]
         },
         '&.active': {
-          [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$black900', 0.2]
-          }
+          backgroundColorOpacity: ['$black900', 0.2]
         }
       }
     },
@@ -623,19 +572,13 @@ const StyledChip = styled(Box, {
       variant: 'solid',
       selectable: true,
       css: {
-        [`& ${StyledChipContent}`]: {
-          backgroundColorOpacity: ['$accent500', 0.1]
-        },
+        backgroundColorOpacity: ['$accent500', 0.1],
 
         '&:hover': {
-          [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$accent500', 0.15]
-          }
+          backgroundColorOpacity: ['$accent500', 0.15]
         },
         '&.active': {
-          [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$accent500', 0.2]
-          }
+          backgroundColorOpacity: ['$accent500', 0.2]
         }
       }
     },
@@ -644,19 +587,13 @@ const StyledChip = styled(Box, {
       variant: 'solid',
       selectable: true,
       css: {
-        [`& ${StyledChipContent}`]: {
-          backgroundColorOpacity: ['$positive500', 0.1]
-        },
+        backgroundColorOpacity: ['$positive500', 0.1],
 
         '&:hover': {
-          [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$positive500', 0.15]
-          }
+          backgroundColorOpacity: ['$positive500', 0.15]
         },
         '&.active': {
-          [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$positive500', 0.2]
-          }
+          backgroundColorOpacity: ['$positive500', 0.2]
         }
       }
     },
@@ -665,19 +602,13 @@ const StyledChip = styled(Box, {
       variant: 'solid',
       selectable: true,
       css: {
-        [`& ${StyledChipContent}`]: {
-          backgroundColorOpacity: ['$warning600', 0.1]
-        },
+        backgroundColorOpacity: ['$warning600', 0.1],
 
         '&:hover': {
-          [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$warning600', 0.15]
-          }
+          backgroundColorOpacity: ['$warning600', 0.15]
         },
         '&.active': {
-          [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$warning600', 0.2]
-          }
+          backgroundColorOpacity: ['$warning600', 0.2]
         }
       }
     },
@@ -686,19 +617,13 @@ const StyledChip = styled(Box, {
       variant: 'solid',
       selectable: true,
       css: {
-        [`& ${StyledChipContent}`]: {
-          backgroundColorOpacity: ['$negative600', 0.1]
-        },
+        backgroundColorOpacity: ['$negative600', 0.1],
 
         '&:hover': {
-          [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$negative600', 0.15]
-          }
+          backgroundColorOpacity: ['$negative600', 0.15]
         },
         '&.active': {
-          [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$negative600', 0.2]
-          }
+          backgroundColorOpacity: ['$negative600', 0.2]
         }
       }
     },
@@ -709,16 +634,11 @@ const StyledChip = styled(Box, {
       selectable: true,
       css: {
         '&:hover': {
-          [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$primary500', 0.05]
-          }
+          backgroundColorOpacity: ['$primary500', 0.05]
         },
         '&.active': {
           borderColor: '$primary400',
-
-          [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$primary500', 0.1]
-          }
+          backgroundColorOpacity: ['$primary500', 0.1]
         }
       }
     },
@@ -728,16 +648,11 @@ const StyledChip = styled(Box, {
       selectable: true,
       css: {
         '&:hover': {
-          [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$secondary500', 0.05]
-          }
+          backgroundColorOpacity: ['$secondary500', 0.05]
         },
         '&.active': {
           borderColor: '$secondary400',
-
-          [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$secondary500', 0.1]
-          }
+          backgroundColorOpacity: ['$secondary500', 0.1]
         }
       }
     },
@@ -747,16 +662,11 @@ const StyledChip = styled(Box, {
       selectable: true,
       css: {
         '&:hover': {
-          [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$black900', 0.05]
-          }
+          backgroundColorOpacity: ['$black900', 0.05]
         },
         '&.active': {
           borderColor: '$black400',
-
-          [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$black900', 0.1]
-          }
+          backgroundColorOpacity: ['$black900', 0.1]
         }
       }
     },
@@ -766,16 +676,11 @@ const StyledChip = styled(Box, {
       selectable: true,
       css: {
         '&:hover': {
-          [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$negative600', 0.05]
-          }
+          backgroundColorOpacity: ['$negative600', 0.05]
         },
         '&.active': {
           borderColor: '$negative400',
-
-          [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$negative600', 0.1]
-          }
+          backgroundColorOpacity: ['$negative600', 0.1]
         }
       }
     },
@@ -785,16 +690,11 @@ const StyledChip = styled(Box, {
       selectable: true,
       css: {
         '&:hover': {
-          [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$warning600', 0.05]
-          }
+          backgroundColorOpacity: ['$warning600', 0.05]
         },
         '&.active': {
           borderColor: '$warning400',
-
-          [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$warning600', 0.1]
-          }
+          backgroundColorOpacity: ['$warning600', 0.1]
         }
       }
     },
@@ -804,16 +704,11 @@ const StyledChip = styled(Box, {
       selectable: true,
       css: {
         '&:hover': {
-          [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$positive500', 0.05]
-          }
+          backgroundColorOpacity: ['$positive500', 0.05]
         },
         '&.active': {
           borderColor: '$positive400',
-
-          [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$positive500', 0.1]
-          }
+          backgroundColorOpacity: ['$positive500', 0.1]
         }
       }
     },
@@ -823,16 +718,11 @@ const StyledChip = styled(Box, {
       selectable: true,
       css: {
         '&:hover': {
-          [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$accent500', 0.05]
-          }
+          backgroundColorOpacity: ['$accent500', 0.05]
         },
         '&.active': {
           borderColor: '$accent400',
-
-          [`${StyledChipContent}`]: {
-            backgroundColorOpacity: ['$accent500', 0.1]
-          }
+          backgroundColorOpacity: ['$accent500', 0.1]
         }
       }
     }
@@ -902,6 +792,13 @@ export const Chip: FunctionComponent<ChipProps> = React.forwardRef(
         data-testid="chip"
         tabIndex={0}
         color={color}
+        onClick={handleChange}
+        onKeyDown={(e) => {
+          if (e.key === ' ') {
+            e.preventDefault();
+            handleChange();
+          }
+        }}
         {...props}
         className={clsx(
           CLASSNAMES.chip,
@@ -913,15 +810,8 @@ export const Chip: FunctionComponent<ChipProps> = React.forwardRef(
           },
           props.className
         )}
-        onClick={handleChange}
-        onKeyDown={(e) => {
-          if (e.key === ' ') {
-            e.preventDefault();
-            handleChange();
-          }
-        }}
       >
-        <StyledChipContent>
+        <StyledChipContent className={CLASSNAMES.chipContent}>
           {leftElement && (
             <SideElementContainer
               className={CLASSNAMES.addonElementStart}

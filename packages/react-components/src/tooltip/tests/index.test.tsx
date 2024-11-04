@@ -25,12 +25,7 @@ const Component = () => {
           alignItems: 'center'
         }}
       >
-        <Tooltip
-          open
-          side="top"
-          align="end"
-          content="Tooltip content"
-        >
+        <Tooltip open side="top" align="end" content="Tooltip content">
           <Button color="default" size="lg">
             tooltip button
           </Button>

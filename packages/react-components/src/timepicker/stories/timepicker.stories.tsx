@@ -18,11 +18,6 @@ export default {
 } as ComponentMeta<typeof TimePicker>;
 
 const Template = (args) => {
-  return (
-    <TimePicker
-      {...args}
-      label="Enter time"
-    />
-  );
+  return <TimePicker {...args} label="Enter time" />;
 };
 export const Default = Template.bind({});

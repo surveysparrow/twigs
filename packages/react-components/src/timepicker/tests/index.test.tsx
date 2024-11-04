@@ -5,7 +5,5 @@ import { render } from '@testing-library/react';
 import { TimePicker } from '../index';
 
 test('renders without crashing', () => {
-  render(
-    <TimePicker label="What time works for you?" />
-  );
+  render(<TimePicker label="What time works for you?" />);
 });

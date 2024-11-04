@@ -5,9 +5,9 @@ import { Box } from '../box';
 import { Text } from '../text';
 
 type DateTimeSegmentProps = {
-  segment: DateSegment,
-  state: DateFieldState
-}
+  segment: DateSegment;
+  state: DateFieldState;
+};
 
 export const DateTimeSegment = ({ segment, state }: DateTimeSegmentProps) => {
   const ref = useRef(null);
@@ -25,7 +25,10 @@ export const DateTimeSegment = ({ segment, state }: DateTimeSegmentProps) => {
         textAlign: 'center',
         color: '$black900',
         borderRadius: '$xs',
-        minWidth: segment.maxValue != null ? `${String(segment.maxValue).length}ch` : 'auto',
+        minWidth:
+          segment.maxValue != null
+            ? `${String(segment.maxValue).length}ch`
+            : 'auto',
         '&:focus': {
           background: '$black100'
         }
@@ -33,7 +36,7 @@ export const DateTimeSegment = ({ segment, state }: DateTimeSegmentProps) => {
     >
       <Text
         size="md"
-        weight="bold"
+        weight="medium"
         css={{
           color: '$neutral800'
         }}
