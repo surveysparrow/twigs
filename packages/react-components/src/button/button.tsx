@@ -110,8 +110,8 @@ const StyledButton = styled('button', {
         lineHeight: '$xs',
         height: '$5',
         [`& .${BUTTON_CLASSNAMES.iconBox}`]: {
-          width: '$2',
-          height: '$2'
+          width: '14px',
+          height: '14px'
         }
       },
       xxs: {
@@ -121,8 +121,8 @@ const StyledButton = styled('button', {
         lineHeight: '$xxs',
         height: '$4',
         [`& .${BUTTON_CLASSNAMES.iconBox}`]: {
-          width: '$2',
-          height: '$2'
+          width: '14px',
+          height: '14px'
         }
       }
     },
