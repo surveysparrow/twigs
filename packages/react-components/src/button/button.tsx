@@ -49,7 +49,7 @@ const StyledButton = styled('button', {
   variants: {
     size: {
       '2xl': {
-        padding: '$9 $12',
+        padding: '$9 $14',
         borderRadius: '$2xl',
         fontSize: '$lg',
         lineHeight: '$lg',
@@ -82,7 +82,7 @@ const StyledButton = styled('button', {
         }
       },
       md: {
-        padding: '$3 $5',
+        padding: '$3 $6',
         borderRadius: '$lg',
         fontSize: '$sm',
         lineHeight: '$md',
@@ -96,6 +96,7 @@ const StyledButton = styled('button', {
         padding: '$1 $4',
         borderRadius: '$sm',
         fontSize: '$sm',
+        fontWeight: '$5',
         lineHeight: '$sm',
         height: '$6',
         [`& .${BUTTON_CLASSNAMES.iconBox}`]: {
@@ -107,6 +108,7 @@ const StyledButton = styled('button', {
         padding: '$1 $3',
         borderRadius: '$sm',
         fontSize: '$xs',
+        fontWeight: '$5',
         lineHeight: '$xs',
         height: '$5',
         [`& .${BUTTON_CLASSNAMES.iconBox}`]: {
@@ -192,7 +194,7 @@ const StyledButton = styled('button', {
           background: '$negative200'
         },
         [`&:active:not(:disabled), &.${BUTTON_CLASSNAMES.loading}`]: {
-          background: '$negative300',
+          background: '$negative200',
           color: '$negative700'
         }
       }
@@ -312,12 +314,12 @@ const StyledButton = styled('button', {
         borderColorOpacity: ['$primary500', 0.4],
         borderStyle: 'solid',
         '&:hover:not(:disabled), &:focus': {
-          borderColorOpacity: ['$primary500', 0.8],
+          borderColorOpacity: ['$primary500', 0.6],
           color: '$primary600',
           background: '$white900'
         },
         [`&:active:not(:disabled), &.${BUTTON_CLASSNAMES.loading}`]: {
-          borderColorOpacity: ['$primary500', 0.9],
+          borderColorOpacity: ['$primary500', 0.8],
           color: '$primary700',
           background: '$white900'
         }
@@ -345,15 +347,15 @@ const StyledButton = styled('button', {
       css: {
         color: '$secondary500',
         background: '$white900',
-        borderColorOpacity: ['$secondary400', 0.2],
+        borderColorOpacity: ['$secondary500', 0.2],
         borderStyle: 'solid',
         '&:hover:not(:disabled), &:focus': {
-          borderColorOpacity: ['$secondary600', 0.4],
+          borderColorOpacity: ['$secondary500', 0.4],
           color: '$secondary600',
           background: '$white900'
         },
         [`&:active:not(:disabled), &.${BUTTON_CLASSNAMES.loading}`]: {
-          borderColorOpacity: ['$secondary800', 0.8],
+          borderColorOpacity: ['$secondary500', 0.8],
           color: '$secondary800',
           background: '$white900'
         }
@@ -530,98 +532,98 @@ const StyledButton = styled('button', {
       isLeftIcon: true,
       size: '2xl',
       css: {
-        padding: '$9 $12 $9 $10'
+        paddingLeft: '$10'
       }
     },
     {
       isLeftIcon: true,
       size: 'xl',
       css: {
-        padding: '$5 $10 $5 $8'
+        paddingLeft: '$8'
       }
     },
     {
       isLeftIcon: true,
       size: 'lg',
       css: {
-        padding: '$4 $8 $4 $6'
+        paddingLeft: '$6'
       }
     },
     {
       isLeftIcon: true,
       size: 'md',
       css: {
-        padding: '$3 $5 $3 $4'
+        paddingLeft: '$4'
       }
     },
     {
       isLeftIcon: true,
       size: 'sm',
       css: {
-        padding: '$1 $4 $1 $3'
+        paddingLeft: '$3'
       }
     },
     {
       isLeftIcon: true,
       size: 'xs',
       css: {
-        padding: '$1 $3 $1 $2'
+        paddingLeft: '$2'
       }
     },
     {
       isLeftIcon: true,
       size: 'xxs',
       css: {
-        padding: '1px $2 1px $1'
+        paddingLeft: '$1'
       }
     },
     {
       isRightIcon: true,
       size: '2xl',
       css: {
-        padding: '$9 $10 $9 $12'
+        paddingRight: '$10'
       }
     },
     {
       isRightIcon: true,
       size: 'xl',
       css: {
-        padding: '$5 $8 $5 $10'
+        paddingRight: '$8'
       }
     },
     {
       isRightIcon: true,
       size: 'lg',
       css: {
-        padding: '$4 $6 $4 $8'
+        paddingRight: '$6'
       }
     },
     {
       isRightIcon: true,
       size: 'md',
       css: {
-        padding: '$3 $4 $3 $5'
+        paddingRight: '$4'
       }
     },
     {
       isRightIcon: true,
       size: 'sm',
       css: {
-        padding: '$1 $3 $1 $4'
+        paddingRight: '$3'
       }
     },
     {
       isRightIcon: true,
       size: 'xs',
       css: {
-        padding: '$1 $2 $1 $3'
+        paddingRight: '$2'
       }
     },
     {
       isRightIcon: true,
       size: 'xxs',
       css: {
-        padding: '1px $1 1px $2'
+        paddingRight: '$1'
       }
     }
   ],
