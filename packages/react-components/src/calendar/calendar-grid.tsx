@@ -45,7 +45,7 @@ export const CalendarGrid = ({
   );
 
   // Get the number of weeks in the month so we can render the proper number of rows.
-  const weeksInMonth = getWeeksInMonth(state.visibleRange.start, locale);
+  const weeksInMonth = getWeeksInMonth(startDate, locale);
 
   return (
     <GridContainer
