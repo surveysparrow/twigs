@@ -18,10 +18,7 @@ export const useCascaderValue = () => {
   }
 
   return {
-    data: context.data,
-    selectionPath: context.selectionPath,
-    listingSelectionPath,
-    flattenedData: context.flattenedData,
-    setSelectionPath: context.setSelectionPath
+    ...context,
+    listingSelectionPath
   };
 };

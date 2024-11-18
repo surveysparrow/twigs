@@ -1,4 +1,6 @@
+import { get } from 'lodash-es';
 import { CascaderOption } from './cascader';
+import { SelectionPath } from './cascader-provider';
 
 export const recursiveFind = (
   data: CascaderOption[],
@@ -20,6 +22,59 @@ export const recursiveFind = (
   }
 
   return null;
+};
+
+export const buildSelectionPath = (
+  data: CascaderOption[],
+  value: string
+): SelectionPath[] => {
+  let pathString = '';
+  const path: SelectionPath[] = [];
+
+  const traverse = (options: CascaderOption[], parentPath: string) => {
+    for (let i = 0; i < options.length; i++) {
+      const item = options[i];
+
+      const p = parentPath ? `${parentPath}.options[${i}]` : `[${i}]`;
+
+      if (item.value === value) {
+        pathString = p;
+        return;
+      }
+
+      if (item.options) {
+        traverse(item.options, p);
+      }
+    }
+  };
+
+  traverse(data, '');
+
+  if (!pathString) {
+    return path;
+  }
+
+  let lastDotIndex = pathString.indexOf('.');
+  lastDotIndex = lastDotIndex === -1 ? pathString.length : lastDotIndex;
+  let loop = true;
+  while (loop) {
+    if (lastDotIndex === pathString.length) {
+      loop = false;
+    }
+    const pathStringSlice = pathString.substring(0, lastDotIndex);
+    console.log(pathStringSlice);
+    const pathData = get(data, pathStringSlice);
+
+    path.push({
+      path: pathStringSlice,
+      value: pathData.value
+    });
+
+    lastDotIndex = pathString.indexOf('.', lastDotIndex + 1);
+    lastDotIndex = lastDotIndex === -1 ? pathString.length : lastDotIndex;
+  }
+
+  return path;
 };
 
 export interface FlattenedData {

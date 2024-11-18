@@ -1,5 +1,9 @@
 import React, {
-  ReactNode, createContext, useMemo, useState
+  ReactNode,
+  createContext,
+  useMemo,
+  useRef,
+  useState
 } from 'react';
 import { CascaderOption } from './cascader';
 import { FlattenedData, flattenDataWithPath } from './cascader-utils';
@@ -11,24 +15,47 @@ export interface SelectionPath {
 
 export const CascaderContext = createContext<{
   data: CascaderOption[];
+  currentValue: { label: string; value: string };
   selectionPath: SelectionPath[];
+  popoverOpen: boolean;
+  handleChange:(value: CascaderOption) => void;
+  setPopoverOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setSelectionPath: React.Dispatch<React.SetStateAction<SelectionPath[]>>;
   flattenedData: FlattenedData[];
-}>({
-  data: [],
-  selectionPath: [],
-  flattenedData: [],
-  setSelectionPath: () => {}
-});
+  shouldFocusFirstItemInList: boolean;
+  setShouldFocusFirstItemInList: (value: boolean) => void;
+    }>({
+      data: [],
+      currentValue: { label: '', value: '' },
+      selectionPath: [],
+      flattenedData: [],
+      handleChange: () => {},
+      setSelectionPath: () => {},
+      popoverOpen: false,
+      setPopoverOpen: () => {},
+      shouldFocusFirstItemInList: false,
+      setShouldFocusFirstItemInList: () => {}
+    });
 
 export const CascaderProvider = ({
   data,
-  children
+  children,
+  currentValue,
+  handleChange
 }: {
   children: ReactNode;
   data: CascaderOption[];
+  currentValue: { label: string; value: string };
+  handleChange: (value: CascaderOption) => void;
 }) => {
   const [selectionPath, setSelectionPath] = useState<SelectionPath[]>([]);
+  const [popoverOpen, setPopoverOpen] = useState(false);
+
+  const shouldFocusFirstItemInList = useRef(false);
+
+  const setShouldFocusFirstItemInList = (value: boolean) => {
+    shouldFocusFirstItemInList.current = value;
+  };
 
   const flattenedData = useMemo(() => {
     return flattenDataWithPath(data);
@@ -36,9 +63,28 @@ export const CascaderProvider = ({
 
   const providerValue = useMemo(
     () => ({
-      data, selectionPath, flattenedData, setSelectionPath
+      data,
+      popoverOpen,
+      currentValue,
+      handleChange,
+      selectionPath,
+      flattenedData,
+      setPopoverOpen,
+      setSelectionPath,
+      shouldFocusFirstItemInList: shouldFocusFirstItemInList.current,
+      setShouldFocusFirstItemInList
     }),
-    [data, selectionPath, setSelectionPath]
+    [
+      data,
+      popoverOpen,
+      currentValue,
+      handleChange,
+      selectionPath,
+      setPopoverOpen,
+      setSelectionPath,
+      shouldFocusFirstItemInList,
+      setShouldFocusFirstItemInList
+    ]
   );
 
   return (
