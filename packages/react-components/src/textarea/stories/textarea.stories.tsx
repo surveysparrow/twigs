@@ -1,3 +1,4 @@
+import { Button } from '@src/button';
 import React from 'react';
 import { Textarea } from '../textarea';
 
@@ -16,6 +17,10 @@ export default {
     variant: {
       control: 'select',
       options: ['default', 'filled']
+    },
+    size: {
+      control: 'select',
+      options: ['sm', 'md', 'lg', 'xl']
     },
     errorBorder: {
       control: 'boolean'
@@ -54,4 +59,49 @@ const Template = (args) => {
   );
 };
 
+const WithInfoIconAndCounterButton = (args) => {
+  const [value, setValue] = React.useState('');
+
+  return (
+    <Textarea
+      rows={10}
+      label="Label"
+      placeholder="Placeholder"
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+      info="Textarea info goes here"
+      maxLength={100}
+      showCount
+      {...args}
+    />
+  );
+};
+
+const TemplateWithCounterReplaced = (args) => {
+  const [value, setValue] = React.useState('');
+
+  return (
+    <Textarea
+      rows={10}
+      label="Label"
+      placeholder="Placeholder"
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+      info="Textarea info goes here"
+      maxLength={100}
+      showCount
+      renderCounter={() => (
+        <Button color="primary" variant="ghost">
+          Button
+        </Button>
+      )}
+      {...args}
+    />
+  );
+};
+
 export const Default = Template.bind({});
+
+export const WithInfo = WithInfoIconAndCounterButton.bind({});
+
+export const WithCounterReplaced = TemplateWithCounterReplaced.bind({});
