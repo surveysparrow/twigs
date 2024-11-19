@@ -126,6 +126,7 @@ export const getLoaderVariantFromButtonVariant = ({
 };
 
 export const BUTTON_CLASSNAMES = {
+  button: prefixClassName('button'),
   iconContainer: prefixClassName('button__icon-container'),
   iconBox: prefixClassName('button__icon-box'),
   loader: prefixClassName('button__loader'),

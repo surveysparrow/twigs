@@ -6,6 +6,7 @@ import React, {
 } from 'react';
 import { Button } from './button';
 import { styled } from '../stitches.config';
+import { BUTTON_CLASSNAMES } from './utils';
 
 type OmitProps = 'leftIcon' | 'rightIcon' | 'isIcon';
 
@@ -18,7 +19,9 @@ const StyledIconButton = styled(Button, {
   variants: {
     shape: {
       round: {
-        borderRadius: '$round'
+        [`&.${BUTTON_CLASSNAMES.button}`]: {
+          borderRadius: '$round'
+        }
       },
       default: {}
     }
@@ -28,7 +31,8 @@ const StyledIconButton = styled(Button, {
   }
 });
 
-type IconButtonProps = IconButtonBaseProps & Omit<ComponentProps<typeof StyledIconButton>, OmitProps> &
+type IconButtonProps = IconButtonBaseProps &
+  Omit<ComponentProps<typeof StyledIconButton>, OmitProps> &
   React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 export const IconButton: FunctionComponent<IconButtonProps> = React.forwardRef(

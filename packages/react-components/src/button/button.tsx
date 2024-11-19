@@ -701,7 +701,7 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
         disabled={disabled}
         data-testid="button"
         onClick={onClick}
-        className={clsx(className, {
+        className={clsx(className, BUTTON_CLASSNAMES.button, {
           [`${BUTTON_CLASSNAMES.loading}`]: !!loading,
           [`${BUTTON_CLASSNAMES.disabled}`]: disabled
         })}
