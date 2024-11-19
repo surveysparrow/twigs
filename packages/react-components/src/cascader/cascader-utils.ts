@@ -62,7 +62,6 @@ export const buildSelectionPath = (
       loop = false;
     }
     const pathStringSlice = pathString.substring(0, lastDotIndex);
-    console.log(pathStringSlice);
     const pathData = get(data, pathStringSlice);
 
     path.push({

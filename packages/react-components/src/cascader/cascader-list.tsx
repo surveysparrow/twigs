@@ -65,17 +65,15 @@ export const CascaderList = forwardRef<CascaderListRef>((_, ref) => {
 
   useEffect(() => {
     if (containerRef.current) {
-      const selectedItem = containerRef.current.querySelector(
-        '[data-is-selected="true"]'
-      ) as HTMLElement | null;
+      requestAnimationFrame(() => {
+        const selectedItem = containerRef.current!.querySelector(
+          '[data-is-selected="true"]'
+        ) as HTMLElement | null;
 
-      if (selectedItem) {
-        requestAnimationFrame(() => {
-          selectedItem.scrollIntoView({
-            behavior: 'instant'
-          });
-        });
-      }
+        if (selectedItem) {
+          selectedItem.scrollIntoView();
+        }
+      });
     }
   }, []);
 
@@ -129,10 +127,21 @@ const ListContainer = ({
       containerRef.current.querySelector('li')?.focus();
       setShouldFocusFirstItemInList(false);
     }
+    if (containerRef.current) {
+      const parent = containerRef.current.parentNode as HTMLElement;
+      const elementLeft = containerRef.current.getBoundingClientRect().left;
+      const parentRight = parent.getBoundingClientRect().width;
+
+      if (
+        parentRight < elementLeft + (containerRef.current.getBoundingClientRect().width / 2)
+      ) {
+        containerRef.current.scrollIntoView();
+      }
+    }
   }, []);
 
   return (
-    <StyledUl {...props} ref={containerRef}>
+    <StyledUl {...props} ref={containerRef} role="group" tabIndex={-1}>
       {children}
     </StyledUl>
   );

@@ -5,11 +5,15 @@ import { FormInput } from '../input';
 import { Popover, PopoverContent, PopoverTrigger } from '../popover';
 import { styled } from '../stitches.config';
 import { Text } from '../text';
+import { CascaderBreadCrumb } from './cascader-breadcrumb';
 import { CascaderFooter } from './cascader-footer';
 import { CascaderList, CascaderListRef } from './cascader-list';
-import { CascaderSearchList } from './cascader-searchlist';
-import { useCascaderValue } from './use-value';
+import {
+  CascaderSearchList,
+  CascaderSearchListRef
+} from './cascader-searchlist';
 import { buildSelectionPath } from './cascader-utils';
+import { useCascaderValue } from './use-value';
 
 const StyledPopoverTrigger = styled(PopoverTrigger, {
   position: 'absolute',
@@ -26,20 +30,24 @@ export const CascaderContent = () => {
 
   const {
     data,
-    currentValue,
     popoverOpen,
+    currentValue,
     handleChange,
     setPopoverOpen,
     setSelectionPath
   } = useCascaderValue();
 
   const cascaderListRef = useRef<CascaderListRef | null>(null);
+  const cascaderSearchListRef = useRef<CascaderSearchListRef | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     if (popoverOpen && currentValue.value) {
       const path = buildSelectionPath(data, currentValue.value);
       setSelectionPath(path);
+    } else if (!popoverOpen) {
+      setSelectionPath([]);
+      setSearchValue('');
     }
   }, [popoverOpen]);
 
@@ -62,6 +70,8 @@ export const CascaderContent = () => {
               e.preventDefault();
               if (cascaderListRef.current) {
                 cascaderListRef.current.focusFirstItem();
+              } else if (cascaderSearchListRef.current) {
+                cascaderSearchListRef.current.focusFirstItem();
               }
             }
           }}
@@ -90,14 +100,11 @@ export const CascaderContent = () => {
             ) : undefined
           }
         />
+        {!(inputFocused || popoverOpen) && <CascaderBreadCrumb />}
         <Popover
           open={popoverOpen}
           onOpenChange={(open) => {
             setPopoverOpen(open);
-            if (!open) {
-              setSelectionPath([]);
-              setSearchValue('');
-            }
           }}
           modal
         >
@@ -121,6 +128,7 @@ export const CascaderContent = () => {
           >
             {searchValue ? (
               <CascaderSearchList
+                ref={cascaderSearchListRef}
                 searchValue={searchValue}
                 handleChange={(val) => {
                   handleChange(val);

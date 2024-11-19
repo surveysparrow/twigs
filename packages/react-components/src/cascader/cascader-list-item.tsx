@@ -55,7 +55,6 @@ export const CascaderListItem = ({
   const hasOptions = option.options?.length;
 
   const handleSelection = () => {
-    setShouldFocusFirstItemInList(true);
     if (pathIndex === 0) {
       setSelectionPath([
         {
@@ -111,6 +110,7 @@ export const CascaderListItem = ({
             firstLi?.focus();
           }
         } else {
+          setShouldFocusFirstItemInList(true);
           handleSelection();
         }
 
@@ -165,6 +165,8 @@ export const CascaderListItem = ({
     }
   };
 
+  const inSelection = selectionPath[pathIndex]?.value === option.value;
+
   return (
     <StyledItem
       key={option.value}
@@ -172,11 +174,14 @@ export const CascaderListItem = ({
       onKeyDown={handleKeyDown}
       highlight={highlight}
       data-is-selected={isSelected}
-      data-in-selection={selectionPath[pathIndex]?.value === option.value}
+      data-in-selection={inSelection}
       tabIndex={
         isSelected || selectionPath.at(-1)?.value === option.value ? 0 : -1
       }
       data-value={option.value}
+      role="treeitem"
+      aria-selected={selectionPath.at(-1)?.value === option.value}
+      aria-expanded={hasOptions && inSelection ? 'true' : 'false'}
     >
       <Flex
         alignItems="center"

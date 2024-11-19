@@ -1,41 +1,50 @@
 import React, {
   ReactNode,
   createContext,
+  useEffect,
   useMemo,
   useRef,
   useState
 } from 'react';
 import { CascaderOption } from './cascader';
-import { FlattenedData, flattenDataWithPath } from './cascader-utils';
+import {
+  FlattenedData,
+  buildSelectionPath,
+  flattenDataWithPath
+} from './cascader-utils';
 
 export interface SelectionPath {
   value: string;
   path: string;
 }
 
-export const CascaderContext = createContext<{
+export type CascaderContextType = {
   data: CascaderOption[];
   currentValue: { label: string; value: string };
   selectionPath: SelectionPath[];
   popoverOpen: boolean;
-  handleChange:(value: CascaderOption) => void;
+  handleChange: (value: CascaderOption) => void;
   setPopoverOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setSelectionPath: React.Dispatch<React.SetStateAction<SelectionPath[]>>;
   flattenedData: FlattenedData[];
   shouldFocusFirstItemInList: boolean;
   setShouldFocusFirstItemInList: (value: boolean) => void;
-    }>({
-      data: [],
-      currentValue: { label: '', value: '' },
-      selectionPath: [],
-      flattenedData: [],
-      handleChange: () => {},
-      setSelectionPath: () => {},
-      popoverOpen: false,
-      setPopoverOpen: () => {},
-      shouldFocusFirstItemInList: false,
-      setShouldFocusFirstItemInList: () => {}
-    });
+  currentValueSelectionPath: SelectionPath[];
+};
+
+export const CascaderContext = createContext<CascaderContextType>({
+  data: [],
+  currentValue: { label: '', value: '' },
+  selectionPath: [],
+  flattenedData: [],
+  handleChange: () => {},
+  setSelectionPath: () => {},
+  popoverOpen: false,
+  setPopoverOpen: () => {},
+  shouldFocusFirstItemInList: false,
+  setShouldFocusFirstItemInList: () => {},
+  currentValueSelectionPath: []
+});
 
 export const CascaderProvider = ({
   data,
@@ -49,6 +58,10 @@ export const CascaderProvider = ({
   handleChange: (value: CascaderOption) => void;
 }) => {
   const [selectionPath, setSelectionPath] = useState<SelectionPath[]>([]);
+  const [currentValueSelectionPath, setCurrentValueSelectionPath] = useState<
+    SelectionPath[]
+  >([]);
+
   const [popoverOpen, setPopoverOpen] = useState(false);
 
   const shouldFocusFirstItemInList = useRef(false);
@@ -61,6 +74,13 @@ export const CascaderProvider = ({
     return flattenDataWithPath(data);
   }, [data]);
 
+  useEffect(() => {
+    if (currentValue.value) {
+      const path = buildSelectionPath(data, currentValue.value);
+      setCurrentValueSelectionPath(path);
+    }
+  }, [currentValue]);
+
   const providerValue = useMemo(
     () => ({
       data,
@@ -71,6 +91,7 @@ export const CascaderProvider = ({
       flattenedData,
       setPopoverOpen,
       setSelectionPath,
+      currentValueSelectionPath,
       shouldFocusFirstItemInList: shouldFocusFirstItemInList.current,
       setShouldFocusFirstItemInList
     }),
@@ -82,6 +103,7 @@ export const CascaderProvider = ({
       selectionPath,
       setPopoverOpen,
       setSelectionPath,
+      currentValueSelectionPath,
       shouldFocusFirstItemInList,
       setShouldFocusFirstItemInList
     ]
