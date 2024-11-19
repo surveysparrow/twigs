@@ -1,4 +1,5 @@
 import { CSS } from '@stitches/react';
+import { prefixClassName } from '@src/utils';
 import { ButtonBaseProps, ButtonProps } from './button';
 import { CircleLoaderProps, LineLoaderProps } from '../loader';
 import { config } from '../stitches.config';
@@ -122,4 +123,17 @@ export const getLoaderVariantFromButtonVariant = ({
   }
 
   return buttonVariantToLoaderVariantMapping[colorString];
+};
+
+export const BUTTON_CLASSNAMES = {
+  button: prefixClassName('button'),
+  iconContainer: prefixClassName('button__icon-container'),
+  iconBox: prefixClassName('button__icon-box'),
+  loader: prefixClassName('button__loader'),
+  content: prefixClassName('button__content'),
+  loading: prefixClassName('button--loading'),
+  disabled: prefixClassName('button--disabled'),
+  sideElement: prefixClassName('button__side-element'),
+  sideElementLoaderHidden: prefixClassName('button__side-element--loader-hidden'),
+  sideElementIconHidden: prefixClassName('button__side-element--icon-hidden')
 };
