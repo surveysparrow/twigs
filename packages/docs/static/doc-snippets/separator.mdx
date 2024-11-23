@@ -1,0 +1,30 @@
+---
+imports: import { Separator } from "@sparrowengg/twigs-react";
+---
+
+```jsx live play=separator
+<Flex
+  css={{
+    height: "$5",
+    alignItems: "center"
+  }}
+>
+  <Text>Blog</Text>
+  <Separator
+    orientation="vertical"
+    css={{
+      margin: "0 $5",
+      background: "$neutral400"
+    }}
+  />
+  <Text>Docs</Text>
+  <Separator
+    orientation="vertical"
+    css={{
+      margin: "0 $5",
+      background: "$neutral400"
+    }}
+  />
+  <Text>Source</Text>
+</Flex>
+```
