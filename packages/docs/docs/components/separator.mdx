@@ -1,0 +1,23 @@
+import CodeBlock from "@theme/CodeBlock";
+import SeparatorSnippet, {
+  frontMatter as SeparatorSnippetFrontMatter
+} from "@site/static/doc-snippets/separator.mdx";
+
+# Separator
+
+### Import
+
+<CodeBlock language="jsx">
+  {SeparatorSnippetFrontMatter.imports}
+</CodeBlock>
+
+### Usage
+
+<SeparatorSnippet />
+
+### Props
+
+| Property    | Description                                        | Type                    | Default  |
+| ----------- | -------------------------------------------------- | ----------------------- | -------- |
+| orientation | Orientation of the separator                       | `vertical` `horizontal` | horizontal |
+| decorative  | Removes element from accessibility tree when true. | boolean                 | false    |
