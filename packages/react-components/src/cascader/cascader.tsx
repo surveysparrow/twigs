@@ -6,6 +6,7 @@ import { recursiveFind } from './cascader-utils';
 export interface CascaderOption {
   label: string;
   value: string;
+  disabled?: boolean;
   options?: CascaderOption[];
 }
 

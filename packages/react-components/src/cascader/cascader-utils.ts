@@ -1,6 +1,6 @@
 import { get } from 'lodash-es';
 import { CascaderOption } from './cascader';
-import { SelectionPath } from './cascader-provider';
+import { FocusedItem, SelectionPath } from './cascader-provider';
 
 export const recursiveFind = (
   data: CascaderOption[],
@@ -131,4 +131,20 @@ export const flattenDataWithPath = (
   });
 
   return flattened;
+};
+
+export const convertSelectionPathToFocusedItem = (selectionPath: SelectionPath[]): FocusedItem | null => {
+  const lastPath = selectionPath.at(-1);
+  if (!lastPath) {
+    return null;
+  }
+
+  const objectPath = lastPath.path.substring(0, lastPath.path.lastIndexOf('['));
+  const index = parseInt(lastPath.path.substring(lastPath.path.lastIndexOf('[') + 1, lastPath.path.lastIndexOf(']')), 10);
+
+  return {
+    value: lastPath.value,
+    itemIndex: index,
+    objectPath
+  };
 };

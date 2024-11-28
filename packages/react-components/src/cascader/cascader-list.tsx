@@ -1,11 +1,5 @@
 import { get } from 'lodash-es';
-import {
-  ComponentProps,
-  forwardRef,
-  useEffect,
-  useImperativeHandle,
-  useRef
-} from 'react';
+import { ComponentProps, useEffect, useRef } from 'react';
 import { Flex } from '../flex';
 import { styled } from '../stitches.config';
 import { CascaderListItem } from './cascader-list-item';
@@ -24,44 +18,12 @@ const StyledUl = styled('ul', {
   }
 });
 
-export interface CascaderListRef {
-  focusFirstItem: () => void;
-}
-
-export const CascaderList = forwardRef<CascaderListRef>((_, ref) => {
+export const CascaderList = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const {
     data, currentValue, selectionPath, listingSelectionPath
   } = useCascaderValue();
-
-  const focusFirstItem = () => {
-    if (containerRef.current) {
-      const selectedItem = containerRef.current.querySelector(
-        '[data-is-selected="true"]'
-      ) as HTMLElement | null;
-
-      if (selectedItem) {
-        selectedItem.focus();
-        return;
-      }
-
-      const firstItem = containerRef.current.querySelector(
-        'ul li'
-      ) as HTMLElement | null;
-      if (firstItem) {
-        firstItem.focus();
-      }
-    }
-  };
-
-  useImperativeHandle(
-    ref,
-    () => ({
-      focusFirstItem
-    }),
-    []
-  );
 
   useEffect(() => {
     if (containerRef.current) {
@@ -81,7 +43,8 @@ export const CascaderList = forwardRef<CascaderListRef>((_, ref) => {
     <Flex
       ref={containerRef}
       css={{
-        overflow: 'auto'
+        overflow: 'auto',
+        maxHeight: '320px'
       }}
     >
       <ListContainer withRightBorder={selectionPath.length > 0}>
@@ -113,27 +76,23 @@ export const CascaderList = forwardRef<CascaderListRef>((_, ref) => {
       ))}
     </Flex>
   );
-});
+};
 
 const ListContainer = ({
   children,
   ...props
 }: ComponentProps<typeof StyledUl>) => {
-  const { shouldFocusFirstItemInList, setShouldFocusFirstItemInList } = useCascaderValue();
   const containerRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
-    if (shouldFocusFirstItemInList && containerRef.current) {
-      containerRef.current.querySelector('li')?.focus();
-      setShouldFocusFirstItemInList(false);
-    }
     if (containerRef.current) {
       const parent = containerRef.current.parentNode as HTMLElement;
       const elementLeft = containerRef.current.getBoundingClientRect().left;
       const parentRight = parent.getBoundingClientRect().width;
 
       if (
-        parentRight < elementLeft + (containerRef.current.getBoundingClientRect().width / 2)
+        parentRight
+        < elementLeft + containerRef.current.getBoundingClientRect().width / 2
       ) {
         containerRef.current.scrollIntoView();
       }

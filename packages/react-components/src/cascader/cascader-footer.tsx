@@ -9,7 +9,7 @@ export const CascaderFooter = ({
 }: {
   handleChange: (value: CascaderOption) => void;
 }) => {
-  const { data, selectionPath, setPopoverOpen } = useCascaderValue();
+  const { data, selectionPath, closePopover } = useCascaderValue();
 
   return (
     <Flex
@@ -26,7 +26,7 @@ export const CascaderFooter = ({
         variant="ghost"
         color="default"
         onClick={() => {
-          setPopoverOpen(false);
+          closePopover();
         }}
       >
         Cancel

@@ -1,82 +1,47 @@
-import React, {
-  Fragment, ReactNode, useEffect, useRef
+import {
+  Fragment, ReactNode
 } from 'react';
 import { Box } from '../box';
-import { FlattenedData } from './cascader-utils';
 import { styled } from '../stitches.config';
 import { Text } from '../text';
+import { FlattenedData } from './cascader-utils';
 
 const StyledLi = styled('li', {
   padding: '$3 $6',
   color: '$neutral800',
   height: '32px',
-  outlineColor: '$primary500',
-  outlineOffset: '-1px',
   cursor: 'pointer',
+
+  '&:focus-visible': {
+    outlineWidth: '1px'
+  },
 
   '&:hover': {
     backgroundColorOpacity: ['$primary500', 0.1]
   },
 
-  '&:focus-visible': {
-    outlineWidth: '1px'
+  variants: {
+    focused: {
+      true: {
+        outline: '1px solid $colors$primary500',
+        backgroundColorOpacity: ['$primary500', 0.1],
+        outlineOffset: '-1px'
+      }
+    }
   }
 });
 
 export const CascaderSearchListItem = ({
   item,
-  isFirst,
+  isFocused,
   searchString,
   onClick
 }: {
   onClick: () => void;
+  isFocused: boolean;
   item: FlattenedData;
   searchString: string;
-  isFirst?: boolean;
 }) => {
-  const liRef = useRef<HTMLLIElement>(null);
-
-  useEffect(() => {
-    if (isFirst) {
-      liRef.current?.setAttribute('tabIndex', '0');
-    } else {
-      liRef.current?.setAttribute('tabIndex', '-1');
-    }
-  }, []);
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLLIElement>) => {
-    switch (e.key) {
-      case 'ArrowDown': {
-        const nextSibling = liRef.current
-          ?.nextElementSibling as HTMLLIElement | null;
-        if (nextSibling) {
-          liRef.current?.removeAttribute('tabIndex');
-          nextSibling.setAttribute('tabIndex', '0');
-          nextSibling.focus();
-        }
-        break;
-      }
-      case 'ArrowUp': {
-        const previousSibling = liRef.current
-          ?.previousElementSibling as HTMLLIElement | null;
-        if (previousSibling) {
-          liRef.current?.setAttribute('tabIndex', '-1');
-          previousSibling.setAttribute('tabIndex', '0');
-          previousSibling.focus();
-        }
-        break;
-      }
-      case 'Enter':
-      case ' ': {
-        onClick();
-        break;
-      }
-      default: {
-        break;
-      }
-    }
-  };
-
   return (
     <StyledLi
       css={{
@@ -84,9 +49,8 @@ export const CascaderSearchListItem = ({
         color: '$neutral800'
       }}
       onClick={onClick}
-      ref={liRef}
-      onKeyDown={handleKeyDown}
       role="option"
+      focused={isFocused}
     >
       <ItemContent item={item} searchString={searchString} />
     </StyledLi>
@@ -166,6 +130,19 @@ const Word = ({ children }: { children: ReactNode }) => (
 const highLight = (text: string, searchValue: string) => {
   const searchIndex = text.toLowerCase().indexOf(searchValue.toLowerCase());
 
+  let paddingRight = '0';
+  let paddingLeft = '0';
+
+  if (searchIndex === 0 || text[searchIndex - 1] === ' ') {
+    paddingLeft = '$1';
+  }
+  if (
+    searchIndex + searchValue.length === text.length
+    || text[searchIndex + searchValue.length] === ' '
+  ) {
+    paddingRight = '$1';
+  }
+
   return (
     <Word>
       {text.slice(0, searchIndex)}
@@ -174,7 +151,9 @@ const highLight = (text: string, searchValue: string) => {
         css={{
           fontWeight: '$5',
           backgroundColor: '$primary100',
-          borderRadius: '$md'
+          borderRadius: '$md',
+          paddingLeft,
+          paddingRight
         }}
       >
         {text.slice(searchIndex, searchIndex + searchValue.length)}

@@ -29,6 +29,12 @@ const StyledItem = styled('li', {
       'previous-selection': {
         backgroundColorOpacity: ['$primary500', 0.06]
       }
+    },
+    focused: {
+      true: {
+        outline: '1px solid $colors$primary500',
+        backgroundColorOpacity: ['$primary500', 0.1]
+      }
     }
   }
 });
@@ -45,10 +51,12 @@ export const CascaderListItem = ({
   isSelected: boolean;
 }) => {
   const {
+    focusedItem,
     selectionPath,
     handleChange,
-    setPopoverOpen,
-    setShouldFocusFirstItemInList,
+    focusNextRow,
+    focusNextColumn,
+    closePopover,
     setSelectionPath
   } = useCascaderValue();
 
@@ -59,7 +67,7 @@ export const CascaderListItem = ({
       setSelectionPath([
         {
           value: option.value,
-          path: `${itemIndex}`
+          path: `[${itemIndex}]`
         }
       ]);
     } else {
@@ -91,7 +99,10 @@ export const CascaderListItem = ({
   const handleKeyDown = (e: KeyboardEvent<HTMLLIElement>) => {
     switch (e.key) {
       case 'ArrowRight': {
+        e.preventDefault();
         if (!hasOptions) break;
+
+        focusNextColumn();
 
         const selectionPathValues = selectionPath.map((item) => item.value);
 
@@ -110,13 +121,13 @@ export const CascaderListItem = ({
             firstLi?.focus();
           }
         } else {
-          setShouldFocusFirstItemInList(true);
           handleSelection();
         }
 
         break;
       }
       case 'ArrowLeft': {
+        e.preventDefault();
         const currentElement = e.currentTarget as HTMLLIElement;
         const parentElement = currentElement.parentElement as HTMLUListElement;
 
@@ -136,6 +147,10 @@ export const CascaderListItem = ({
         break;
       }
       case 'ArrowDown': {
+        e.preventDefault();
+
+        focusNextRow();
+
         const currentElement = e.currentTarget as HTMLLIElement;
         if (currentElement.nextElementSibling) {
           (currentElement.nextElementSibling as HTMLLIElement).focus();
@@ -143,6 +158,7 @@ export const CascaderListItem = ({
         break;
       }
       case 'ArrowUp': {
+        e.preventDefault();
         const currentElement = e.currentTarget as HTMLLIElement;
         if (currentElement.previousElementSibling) {
           (currentElement.previousElementSibling as HTMLLIElement).focus();
@@ -156,7 +172,7 @@ export const CascaderListItem = ({
       case 'Enter': {
         handleSelection();
         handleChange(option);
-        setPopoverOpen(false);
+        closePopover();
         break;
       }
       default: {
@@ -175,13 +191,11 @@ export const CascaderListItem = ({
       highlight={highlight}
       data-is-selected={isSelected}
       data-in-selection={inSelection}
-      tabIndex={
-        isSelected || selectionPath.at(-1)?.value === option.value ? 0 : -1
-      }
       data-value={option.value}
       role="treeitem"
       aria-selected={selectionPath.at(-1)?.value === option.value}
       aria-expanded={hasOptions && inSelection ? 'true' : 'false'}
+      focused={focusedItem?.value === option.value}
     >
       <Flex
         alignItems="center"

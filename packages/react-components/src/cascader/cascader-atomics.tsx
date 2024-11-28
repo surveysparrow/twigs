@@ -1,8 +1,10 @@
 import { get } from 'lodash-es';
+import { ReactNode } from 'react';
 import { Box } from '../box';
 import { Flex } from '../flex';
 import { Text } from '../text';
 import { useCascaderValue } from './use-value';
+import { PopoverPortal } from '..';
 
 export const CascaderBreadCrumb = () => {
   const { data, currentValueSelectionPath } = useCascaderValue();
@@ -32,4 +34,36 @@ export const CascaderBreadCrumb = () => {
       })}
     </Flex>
   );
+};
+
+export const CascaderInputValue = ({ children }: { children?: ReactNode }) => {
+  return (
+    <Box
+      css={{
+        marginLeft: '$5'
+      }}
+    >
+      <Text
+        css={{
+          color: '$neutral900'
+        }}
+      >
+        {children}
+      </Text>
+    </Box>
+  );
+};
+
+export const PopoverContentWrapper = ({
+  children,
+  portalTarget
+}: {
+  children: ReactNode;
+  portalTarget?: HTMLElement;
+}) => {
+  if (portalTarget) {
+    return <PopoverPortal container={portalTarget}>{children}</PopoverPortal>;
+  }
+
+  return children;
 };
