@@ -17,6 +17,8 @@ import React, {
   useState
 } from 'react';
 import { createPortal } from 'react-dom';
+import { CSS } from '@stitches/react';
+import { config } from '@src/stitches.config';
 
 export type TypeaheadMenuData = {
   value: string;
@@ -104,6 +106,7 @@ export type EditorLookupDropdownBaseProps = {
     option: TypeaheadOption,
     closeMenu?: () => void
   ) => void | boolean;
+  css?: CSS<typeof config>;
 };
 
 const defaultMenuRender = ({
@@ -113,7 +116,8 @@ const defaultMenuRender = ({
   anchorElementRef,
   menuOptions,
   selectedIndex,
-  editor
+  editor,
+  css
 }: {
   anchorElementRef: React.MutableRefObject<HTMLElement | null>;
   selectOptionAndCleanUp: (option: TypeaheadOption) => void;
@@ -122,6 +126,7 @@ const defaultMenuRender = ({
   menuOptions: TypeaheadOption[];
   editor: LexicalEditor;
   renderMenuItemContent?: EditorLookupDropdownBaseProps['renderMenuItemContent'];
+  css?: CSS<typeof config>;
 }) => {
   if (anchorElementRef.current && menuOptions.length) {
     return createPortal(
@@ -147,6 +152,7 @@ const defaultMenuRender = ({
               editor.focus();
               return false;
             }}
+            css={css}
           >
             {menuOptions.map((option, i: number) => (
               <TypeaheadMenuItem
@@ -181,7 +187,8 @@ export const EditorLookupDropdownBase = ({
   renderMenu,
   onMenuItemSelect,
   renderMenuItemContent,
-  suggestionsListLength = 5
+  suggestionsListLength = 5,
+  css
 }: EditorLookupDropdownBaseProps) => {
   const [editor] = useLexicalComposerContext();
 
@@ -257,7 +264,8 @@ export const EditorLookupDropdownBase = ({
           anchorElementRef,
           setHighlightedIndex,
           renderMenuItemContent,
-          selectOptionAndCleanUp
+          selectOptionAndCleanUp,
+          css
         });
       }}
     />

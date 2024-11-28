@@ -68,6 +68,7 @@ export { ImageIcon } from './image';
 export { ImagePlusIcon } from './image-plus';
 export { IncognitoIcon } from './incognito';
 export { InfoIcon } from './info';
+export { InfoFillIcon } from './info-fill';
 export { InfoPlusIcon } from './info-plus';
 export { ItalicsIcon } from './italics';
 export { KeyIcon } from './key';
