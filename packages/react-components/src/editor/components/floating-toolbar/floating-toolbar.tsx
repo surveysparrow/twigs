@@ -48,7 +48,7 @@ type CustomTool = {
   renderComponent: (props: ToolProps) => ReactNode;
 };
 
-export type FloatingToolbarTools = DefaultFloatingToolbarTools[] | CustomTool[];
+export type FloatingToolbarTools = (DefaultFloatingToolbarTools | CustomTool)[];
 
 const defaultTools: DefaultFloatingToolbarTools[] = [
   'bold',
@@ -252,7 +252,8 @@ const FloatingToolbarContainer = ({
           }}
         >
           {tools.map((_item, i) => {
-            if (_item.component) {
+            // @ts-ignore
+            if (typeof _item === 'object' && _item.renderComponent) {
               const item = _item as CustomTool;
               return (
                 // eslint-disable-next-line react/no-array-index-key
