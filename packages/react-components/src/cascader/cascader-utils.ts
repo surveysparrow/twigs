@@ -133,18 +133,76 @@ export const flattenDataWithPath = (
   return flattened;
 };
 
-export const convertSelectionPathToFocusedItem = (selectionPath: SelectionPath[]): FocusedItem | null => {
+export const convertSelectionPathToFocusedItem = (
+  selectionPath: SelectionPath[]
+): FocusedItem | null => {
   const lastPath = selectionPath.at(-1);
   if (!lastPath) {
     return null;
   }
 
   const objectPath = lastPath.path.substring(0, lastPath.path.lastIndexOf('['));
-  const index = parseInt(lastPath.path.substring(lastPath.path.lastIndexOf('[') + 1, lastPath.path.lastIndexOf(']')), 10);
+  const index = parseInt(
+    lastPath.path.substring(
+      lastPath.path.lastIndexOf('[') + 1,
+      lastPath.path.lastIndexOf(']')
+    ),
+    10
+  );
 
   return {
     value: lastPath.value,
     itemIndex: index,
     objectPath
   };
+};
+
+export const makeBreadcrumbFromValue = (
+  value: string,
+  data: CascaderOption[]
+) => {
+  const path: { label: string; value: string }[] = [];
+
+  const buildArray = (
+    cascaderData: CascaderOption[],
+    searchValue: string
+  ): CascaderOption | null => {
+    for (let i = 0; i < cascaderData.length; i++) {
+      const item = cascaderData[i];
+
+      path.push({
+        label: item.label,
+        value: item.value
+      });
+
+      if (item.value === searchValue) {
+        return item;
+      }
+
+      if (item.options) {
+        const found = buildArray(item.options, searchValue);
+        if (found) {
+          return found;
+        }
+      }
+
+      path.pop();
+    }
+
+    return null;
+  };
+
+  buildArray(data, value);
+
+  return path;
+};
+
+export const stringSearchFlattenedData = (
+  data: FlattenedData[],
+  searchValue: string
+): FlattenedData[] => {
+  const searchString = searchValue.toLowerCase();
+  const found = data.filter((item) => item.label.toLowerCase().includes(searchString));
+
+  return found;
 };

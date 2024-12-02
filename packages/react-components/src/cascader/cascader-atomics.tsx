@@ -1,10 +1,11 @@
 import { get } from 'lodash-es';
 import { ReactNode } from 'react';
+import { prefixClassName } from '@src/utils';
 import { Box } from '../box';
 import { Flex } from '../flex';
 import { Text } from '../text';
 import { useCascaderValue } from './use-value';
-import { PopoverPortal } from '..';
+import { PopoverPortal } from '../popover';
 
 export const CascaderBreadCrumb = () => {
   const { data, currentValueSelectionPath } = useCascaderValue();
@@ -13,7 +14,7 @@ export const CascaderBreadCrumb = () => {
   }
 
   return (
-    <Flex>
+    <Flex className={prefixClassName('cascader__breadcrumb')}>
       {currentValueSelectionPath.slice(0, -1).map((path, index) => {
         return (
           <Text
@@ -22,10 +23,17 @@ export const CascaderBreadCrumb = () => {
               color: '$neutral800'
             }}
             key={path.value}
+            className={prefixClassName('cascader__breadcrumb-item')}
           >
             {get(data, path.path)?.label}
             {index < currentValueSelectionPath.length - 2 && (
-              <Box as="span" css={{ padding: '0 $1' }}>
+              <Box
+                as="span"
+                css={{ padding: '0 $1' }}
+                className={prefixClassName(
+                  'cascader__breadcrumb-item-separator'
+                )}
+              >
                 {'>'}
               </Box>
             )}
@@ -42,6 +50,7 @@ export const CascaderInputValue = ({ children }: { children?: ReactNode }) => {
       css={{
         marginLeft: '$5'
       }}
+      className={prefixClassName('cascader__input-value')}
     >
       <Text
         css={{

@@ -1,5 +1,6 @@
 import { ChevronRightIcon } from '@sparrowengg/twigs-react-icons';
-import { KeyboardEvent, useMemo } from 'react';
+import React, { KeyboardEvent, useMemo } from 'react';
+import { prefixClassName } from '@src/utils';
 import { Flex } from '../flex';
 import { styled } from '../stitches.config';
 import { Text } from '../text';
@@ -54,10 +55,10 @@ export const CascaderListItem = ({
     focusedItem,
     selectionPath,
     handleChange,
-    focusNextRow,
-    focusNextColumn,
     closePopover,
-    setSelectionPath
+    setSelectionPath,
+    setFocusedItem,
+    getInputRef
   } = useCascaderValue();
 
   const hasOptions = option.options?.length;
@@ -70,6 +71,12 @@ export const CascaderListItem = ({
           path: `[${itemIndex}]`
         }
       ]);
+      setFocusedItem({
+        value: option.value,
+        itemIndex,
+        objectPath: '',
+        isMouseClick: true
+      });
     } else {
       setSelectionPath([
         ...selectionPath.slice(0, pathIndex),
@@ -78,7 +85,22 @@ export const CascaderListItem = ({
           path: `${selectionPath[pathIndex - 1].path}.options[${itemIndex}]`
         }
       ]);
+      setFocusedItem({
+        value: option.value,
+        itemIndex,
+        objectPath: `${selectionPath[pathIndex - 1].path}.options`,
+        isMouseClick: true
+      });
     }
+  };
+
+  const handleClick = (e: React.MouseEvent<HTMLLIElement>) => {
+    e.preventDefault();
+    const input = getInputRef();
+    if (input) {
+      input.focus();
+    }
+    handleSelection();
   };
 
   const highlight = useMemo(() => {
@@ -98,73 +120,6 @@ export const CascaderListItem = ({
 
   const handleKeyDown = (e: KeyboardEvent<HTMLLIElement>) => {
     switch (e.key) {
-      case 'ArrowRight': {
-        e.preventDefault();
-        if (!hasOptions) break;
-
-        focusNextColumn();
-
-        const selectionPathValues = selectionPath.map((item) => item.value);
-
-        if (selectionPathValues.includes(option.value)) {
-          const currentElement = e.currentTarget as HTMLLIElement;
-          const parentElement = currentElement.parentElement as HTMLUListElement;
-          const parentsNextSibling = parentElement.nextElementSibling as HTMLUListElement | null;
-
-          const liInSelection = parentsNextSibling?.querySelector(
-            '[data-in-selection="true"]'
-          ) as HTMLLIElement | null;
-          if (liInSelection) {
-            liInSelection.focus();
-          } else {
-            const firstLi = parentsNextSibling?.firstElementChild as HTMLLIElement | null;
-            firstLi?.focus();
-          }
-        } else {
-          handleSelection();
-        }
-
-        break;
-      }
-      case 'ArrowLeft': {
-        e.preventDefault();
-        const currentElement = e.currentTarget as HTMLLIElement;
-        const parentElement = currentElement.parentElement as HTMLUListElement;
-
-        const parentsPreviousSibling = parentElement.previousElementSibling as HTMLUListElement | null;
-        if (parentsPreviousSibling) {
-          const activeLi = parentsPreviousSibling.querySelector(
-            '[data-in-selection="true"]'
-          ) as HTMLLIElement | null;
-          if (activeLi) {
-            activeLi.focus();
-          } else {
-            (
-              parentsPreviousSibling.lastElementChild as HTMLLIElement | null
-            )?.focus();
-          }
-        }
-        break;
-      }
-      case 'ArrowDown': {
-        e.preventDefault();
-
-        focusNextRow();
-
-        const currentElement = e.currentTarget as HTMLLIElement;
-        if (currentElement.nextElementSibling) {
-          (currentElement.nextElementSibling as HTMLLIElement).focus();
-        }
-        break;
-      }
-      case 'ArrowUp': {
-        e.preventDefault();
-        const currentElement = e.currentTarget as HTMLLIElement;
-        if (currentElement.previousElementSibling) {
-          (currentElement.previousElementSibling as HTMLLIElement).focus();
-        }
-        break;
-      }
       case ' ': {
         handleSelection();
         break;
@@ -186,7 +141,7 @@ export const CascaderListItem = ({
   return (
     <StyledItem
       key={option.value}
-      onClick={handleSelection}
+      onClick={handleClick}
       onKeyDown={handleKeyDown}
       highlight={highlight}
       data-is-selected={isSelected}
@@ -195,7 +150,8 @@ export const CascaderListItem = ({
       role="treeitem"
       aria-selected={selectionPath.at(-1)?.value === option.value}
       aria-expanded={hasOptions && inSelection ? 'true' : 'false'}
-      focused={focusedItem?.value === option.value}
+      focused={focusedItem?.value === option.value && !focusedItem.isMouseClick}
+      className={prefixClassName('cascader__list-item')}
     >
       <Flex
         alignItems="center"
@@ -203,9 +159,17 @@ export const CascaderListItem = ({
         css={{
           width: '100%'
         }}
+        className={prefixClassName('cascader__list-item-content')}
       >
-        <Text>{option.label}</Text>
-        {hasOptions && <ChevronRightIcon size={20} />}
+        <Text className={prefixClassName('cascader__list-item-text')}>
+          {option.label}
+        </Text>
+        {hasOptions && (
+          <ChevronRightIcon
+            size={20}
+            className={prefixClassName('cascader__list-item-icon')}
+          />
+        )}
       </Flex>
     </StyledItem>
   );

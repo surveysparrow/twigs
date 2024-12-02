@@ -1,6 +1,5 @@
-import {
-  Fragment, ReactNode
-} from 'react';
+import { prefixClassName } from '@src/utils';
+import { Fragment, ReactNode } from 'react';
 import { Box } from '../box';
 import { styled } from '../stitches.config';
 import { Text } from '../text';
@@ -33,6 +32,7 @@ const StyledLi = styled('li', {
 
 export const CascaderSearchListItem = ({
   item,
+  index,
   isFocused,
   searchString,
   onClick
@@ -41,6 +41,7 @@ export const CascaderSearchListItem = ({
   isFocused: boolean;
   item: FlattenedData;
   searchString: string;
+  index: number;
 }) => {
   return (
     <StyledLi
@@ -51,6 +52,8 @@ export const CascaderSearchListItem = ({
       onClick={onClick}
       role="option"
       focused={isFocused}
+      className={prefixClassName('cascader__search-list-item')}
+      data-index={index}
     >
       <ItemContent item={item} searchString={searchString} />
     </StyledLi>
@@ -66,7 +69,7 @@ export const ItemContent = ({
 }) => {
   if (item.objectPath.length === 1) {
     return (
-      <Text>
+      <Text className={prefixClassName('cascader__search-list-text')}>
         {highLight(item.label, searchString)}
         {item.hasOptions && (
           <>
@@ -79,7 +82,7 @@ export const ItemContent = ({
   }
   if (item.objectPath.length > 3) {
     return (
-      <Text>
+      <Text className={prefixClassName('cascader__search-list-text')}>
         <Word>
           {item.objectPath[0].label}
           ...
@@ -100,7 +103,7 @@ export const ItemContent = ({
   }
 
   return (
-    <Text>
+    <Text className={prefixClassName('cascader__search-list-text')}>
       {item.objectPath.slice(0, -1).map(({ label, value }) => (
         <Fragment key={value}>
           <Word>{label}</Word>
@@ -121,7 +124,14 @@ export const ItemContent = ({
   );
 };
 
-const BreadCrumbSeparator = () => <Box as="span">{' > '}</Box>;
+const BreadCrumbSeparator = () => (
+  <Box
+    as="span"
+    className={prefixClassName('cascader__search-list-item-separator')}
+  >
+    {' > '}
+  </Box>
+);
 
 const Word = ({ children }: { children: ReactNode }) => (
   <Box as="span">{children}</Box>
@@ -148,6 +158,7 @@ const highLight = (text: string, searchValue: string) => {
       {text.slice(0, searchIndex)}
       <Box
         as="span"
+        className={prefixClassName('cascader__search-list-highlighted-text')}
         css={{
           fontWeight: '$5',
           backgroundColor: '$primary100',

@@ -3,6 +3,7 @@ import React, {
   ReactNode,
   createContext,
   useEffect,
+  useId,
   useMemo,
   useRef,
   useState
@@ -23,9 +24,11 @@ export type FocusedItem = {
   itemIndex: number;
   objectPath: string;
   value: string;
+  isMouseClick?: boolean;
 };
 
 export type CascaderContextType = {
+  id: string;
   data: CascaderOption[];
   currentValue: { label: string; value: string };
   selectionPath: SelectionPath[];
@@ -33,10 +36,11 @@ export type CascaderContextType = {
   focusedItem: FocusedItem | null;
   flattenedData: FlattenedData[];
   currentValueSelectionPath: SelectionPath[];
-  getPopoverOpenOnFocusLocked: () => boolean;
   closePopover: () => void;
   clearFocus: () => void;
   setFocusedItem: React.Dispatch<React.SetStateAction<FocusedItem | null>>;
+  setInputRef: (ref: HTMLInputElement) => void;
+  getInputRef: () => HTMLInputElement | null;
   focusNextRow: () => void;
   focusNextColumn: () => void;
   focusPreviousRow: () => void;
@@ -47,6 +51,7 @@ export type CascaderContextType = {
 };
 
 export const CascaderContext = createContext<CascaderContextType>({
+  id: '',
   data: [],
   focusedItem: null,
   currentValue: { label: '', value: '' },
@@ -54,7 +59,8 @@ export const CascaderContext = createContext<CascaderContextType>({
   flattenedData: [],
   popoverOpen: false,
   currentValueSelectionPath: [],
-  getPopoverOpenOnFocusLocked: () => false,
+  setInputRef: () => {},
+  getInputRef: () => null,
   setFocusedItem: () => {},
   handleChange: () => {},
   clearFocus: () => {},
@@ -84,16 +90,20 @@ export const CascaderProvider = ({
   >([]);
   const [focusedItem, setFocusedItem] = useState<FocusedItem | null>(null);
   const [popoverOpen, setPopoverOpen] = useState(false);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
-  const popoverOpenOnFocusLocked = useRef(false);
+  const id = useId();
+
+  const setInputRef = (ref: HTMLInputElement) => {
+    inputRef.current = ref;
+  };
+
+  const getInputRef = () => {
+    return inputRef.current;
+  };
 
   const closePopover = () => {
     setPopoverOpen(false);
-    popoverOpenOnFocusLocked.current = true;
-
-    setTimeout(() => {
-      popoverOpenOnFocusLocked.current = false;
-    }, 100);
   };
 
   const flattenedData = useMemo(() => {
@@ -214,8 +224,11 @@ export const CascaderProvider = ({
 
   const providerValue = useMemo(
     () => ({
+      id,
       data,
       clearFocus,
+      setInputRef,
+      getInputRef,
       focusedItem,
       popoverOpen,
       currentValue,
@@ -230,12 +243,14 @@ export const CascaderProvider = ({
       setSelectionPath,
       focusPreviousRow,
       focusPreviousColumn,
-      getPopoverOpenOnFocusLocked: () => popoverOpenOnFocusLocked.current,
       currentValueSelectionPath
     }),
     [
+      id,
       data,
       clearFocus,
+      setInputRef,
+      getInputRef,
       focusedItem,
       popoverOpen,
       currentValue,

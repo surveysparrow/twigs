@@ -1,5 +1,6 @@
 import { get } from 'lodash-es';
 import { ComponentProps, useEffect, useRef } from 'react';
+import { prefixClassName } from '@src/utils';
 import { Flex } from '../flex';
 import { styled } from '../stitches.config';
 import { CascaderListItem } from './cascader-list-item';
@@ -46,6 +47,7 @@ export const CascaderList = () => {
         overflow: 'auto',
         maxHeight: '320px'
       }}
+      className={prefixClassName('cascader__data')}
     >
       <ListContainer withRightBorder={selectionPath.length > 0}>
         {data?.map((option, i) => (
@@ -89,18 +91,22 @@ const ListContainer = ({
       const parent = containerRef.current.parentNode as HTMLElement;
       const elementLeft = containerRef.current.getBoundingClientRect().left;
       const parentRight = parent.getBoundingClientRect().width;
+      const containerWidth = containerRef.current.getBoundingClientRect().width;
 
-      if (
-        parentRight
-        < elementLeft + containerRef.current.getBoundingClientRect().width / 2
-      ) {
+      if (parentRight < elementLeft + containerWidth / 2) {
         containerRef.current.scrollIntoView();
       }
     }
   }, []);
 
   return (
-    <StyledUl {...props} ref={containerRef} role="group" tabIndex={-1}>
+    <StyledUl
+      {...props}
+      ref={containerRef}
+      role="group"
+      tabIndex={-1}
+      className={prefixClassName('cascader__data-list')}
+    >
       {children}
     </StyledUl>
   );

@@ -1,7 +1,10 @@
 import { ChevronDownIcon } from '@sparrowengg/twigs-react-icons';
+import { prefixClassName } from '@src/utils';
+import clsx from 'clsx';
 import { get } from 'lodash-es';
 import React, {
-  useEffect, useId, useRef, useState
+  useEffect,
+  useMemo, useRef, useState
 } from 'react';
 import { Box } from '../box';
 import { FormInput } from '../input';
@@ -21,7 +24,8 @@ import {
 } from './cascader-searchlist';
 import {
   buildSelectionPath,
-  convertSelectionPathToFocusedItem
+  convertSelectionPathToFocusedItem,
+  makeBreadcrumbFromValue
 } from './cascader-utils';
 import { useCascaderValue } from './use-value';
 
@@ -36,14 +40,13 @@ const StyledPopoverTrigger = styled(PopoverTrigger, {
 
 export const CascaderContent = () => {
   const [searchValue, setSearchValue] = useState('');
-  const id = useId();
 
   const {
+    id,
     data,
     popoverOpen,
     currentValue,
     focusedItem,
-    getPopoverOpenOnFocusLocked,
     clearFocus,
     handleChange,
     focusNextRow,
@@ -53,7 +56,8 @@ export const CascaderContent = () => {
     setSelectionPath,
     setPopoverOpen,
     setFocusedItem,
-    closePopover
+    closePopover,
+    setInputRef
   } = useCascaderValue();
 
   const cascaderSearchListRef = useRef<CascaderSearchListRef | null>(null);
@@ -77,6 +81,9 @@ export const CascaderContent = () => {
     switch (e.key) {
       case 'ArrowDown': {
         e.preventDefault();
+        if (!popoverOpen) {
+          setPopoverOpen(true);
+        }
         focusNextRow();
         break;
       }
@@ -156,6 +163,10 @@ export const CascaderContent = () => {
   };
 
   useEffect(() => {
+    if (inputRef.current) {
+      setInputRef(inputRef.current);
+    }
+
     const handleEscapeKey = (e: KeyboardEvent) => {
       const target = e.target as HTMLElement;
       if (e.key === 'Escape' && target.closest(`[data-cascader-id="${id}"]`)) {
@@ -179,13 +190,82 @@ export const CascaderContent = () => {
     };
   }, []);
 
+  const focusedItemInfo = useMemo(() => {
+    if (focusedItem) {
+      const arrPath = makeBreadcrumbFromValue(focusedItem.value, data);
+      const breadcrumb = arrPath.map((item) => item.label).join(' > ');
+      const totalItems = focusedItem.objectPath
+        ? get(data, focusedItem.objectPath)!.length
+        : data.length;
+      const itemPosition = focusedItem.itemIndex + 1;
+      const hasOptions = get(data, focusedItem.objectPath)?.[
+        focusedItem.itemIndex
+      ];
+      const hasParent = focusedItem.objectPath.length > 0;
+
+      return {
+        breadcrumb,
+        label: arrPath.at(-1)!.label,
+        totalItems,
+        itemPosition,
+        hasOptions,
+        hasParent
+      };
+    }
+
+    return null;
+  }, [focusedItem?.value]);
+
   return (
-    <Box data-cascader-id={id}>
+    <Box data-cascader-id={id} className={prefixClassName('cascader')}>
       <Box
         css={{
           position: 'relative'
         }}
+        className={prefixClassName('cascader__container')}
       >
+        <Box
+          as="span"
+          css={{
+            width: 1,
+            height: 1,
+            position: 'absolute',
+            opacity: 0,
+            overflow: 'hidden',
+            pointerEvents: 'none'
+          }}
+          aria-live="polite"
+          aria-relevant="additions text"
+          aria-atomic="true"
+          role="log"
+          id={`cascader-${id}-live-region`}
+        >
+          {popoverOpen && focusedItemInfo && !searchValue && (
+            <>
+              {focusedItemInfo.hasParent && (
+                <span>{focusedItemInfo.breadcrumb}</span>
+              )}
+              <span>
+                {`${focusedItemInfo.label}, ${focusedItemInfo.itemPosition} of ${focusedItemInfo.totalItems}`}
+              </span>
+              <span>
+                {`
+                Press Up and Down arrow keys to navigate up an down
+                ${
+                  focusedItemInfo.hasOptions
+                    ? ', Right Arrow key to open sub options'
+                    : ''
+                }
+                ${
+                  focusedItemInfo.hasParent
+                    ? ', Left arrow key to go back to parent item'
+                    : ''
+                }
+                . Press Space or Enter to select option and close list. Press Escape to close list without selecting`}
+              </span>
+            </>
+          )}
+        </Box>
         <FormInput
           ref={inputRef}
           label="Label"
@@ -201,8 +281,8 @@ export const CascaderContent = () => {
           }}
           autoComplete="off"
           onKeyDown={handleInputKeyDown}
-          onFocus={() => {
-            if (!getPopoverOpenOnFocusLocked()) {
+          onClick={() => {
+            if (!popoverOpen) {
               setPopoverOpen(true);
             }
           }}
@@ -211,10 +291,40 @@ export const CascaderContent = () => {
               <CascaderInputValue>{currentValue?.label}</CascaderInputValue>
             ) : undefined
           }
+          role="combobox"
+          aria-haspopup="true"
+          aria-expanded={popoverOpen}
+          autoCorrect="off"
+          aria-autocomplete="list"
+          className={clsx(prefixClassName('cascader__input'), {
+            'focused-state': popoverOpen
+          })}
+          {...(!popoverOpen && {
+            'aria-describedby': `cascader-${id}-input-description`
+          })}
         />
+        {!popoverOpen && (
+          <Box
+            as="span"
+            css={{
+              width: 0,
+              height: 0,
+              position: 'absolute',
+              opacity: 0,
+              pointerEvents: 'none'
+            }}
+            id={`cascader-${id}-input-description`}
+          >
+            Cascader is focused, type to search. Press Down Arrow to open list.
+          </Box>
+        )}
         {!popoverOpen && <CascaderBreadCrumb />}
         <Popover open={popoverOpen}>
-          <StyledPopoverTrigger tabIndex={-1} aria-hidden="true">
+          <StyledPopoverTrigger
+            tabIndex={-1}
+            aria-hidden="true"
+            className={prefixClassName('cascader__popover-trigger')}
+          >
             Open options
           </StyledPopoverTrigger>
           <PopoverContentWrapper>
@@ -238,6 +348,7 @@ export const CascaderContent = () => {
                 marginTop: '$2',
                 backgroundColor: '$white900'
               }}
+              className={prefixClassName('cascader__popover-content')}
             >
               {searchValue ? (
                 <CascaderSearchList
