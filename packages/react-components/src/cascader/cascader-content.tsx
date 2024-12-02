@@ -2,15 +2,13 @@ import { ChevronDownIcon } from '@sparrowengg/twigs-react-icons';
 import { prefixClassName } from '@src/utils';
 import clsx from 'clsx';
 import { get } from 'lodash-es';
-import React, {
-  useEffect,
-  useMemo, useRef, useState
-} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Box } from '../box';
 import { FormInput } from '../input';
 import { Popover, PopoverContent, PopoverTrigger } from '../popover';
 import { styled } from '../stitches.config';
 import { CascaderOption } from './cascader';
+import { CascaderAriaLive } from './cascader-aria-live';
 import {
   CascaderBreadCrumb,
   CascaderInputValue,
@@ -24,8 +22,7 @@ import {
 } from './cascader-searchlist';
 import {
   buildSelectionPath,
-  convertSelectionPathToFocusedItem,
-  makeBreadcrumbFromValue
+  convertSelectionPathToFocusedItem
 } from './cascader-utils';
 import { useCascaderValue } from './use-value';
 
@@ -47,6 +44,7 @@ export const CascaderContent = () => {
     popoverOpen,
     currentValue,
     focusedItem,
+    componentProps,
     clearFocus,
     handleChange,
     focusNextRow,
@@ -190,32 +188,6 @@ export const CascaderContent = () => {
     };
   }, []);
 
-  const focusedItemInfo = useMemo(() => {
-    if (focusedItem) {
-      const arrPath = makeBreadcrumbFromValue(focusedItem.value, data);
-      const breadcrumb = arrPath.map((item) => item.label).join(' > ');
-      const totalItems = focusedItem.objectPath
-        ? get(data, focusedItem.objectPath)!.length
-        : data.length;
-      const itemPosition = focusedItem.itemIndex + 1;
-      const hasOptions = get(data, focusedItem.objectPath)?.[
-        focusedItem.itemIndex
-      ];
-      const hasParent = focusedItem.objectPath.length > 0;
-
-      return {
-        breadcrumb,
-        label: arrPath.at(-1)!.label,
-        totalItems,
-        itemPosition,
-        hasOptions,
-        hasParent
-      };
-    }
-
-    return null;
-  }, [focusedItem?.value]);
-
   return (
     <Box data-cascader-id={id} className={prefixClassName('cascader')}>
       <Box
@@ -224,51 +196,11 @@ export const CascaderContent = () => {
         }}
         className={prefixClassName('cascader__container')}
       >
-        <Box
-          as="span"
-          css={{
-            width: 1,
-            height: 1,
-            position: 'absolute',
-            opacity: 0,
-            overflow: 'hidden',
-            pointerEvents: 'none'
-          }}
-          aria-live="polite"
-          aria-relevant="additions text"
-          aria-atomic="true"
-          role="log"
-          id={`cascader-${id}-live-region`}
-        >
-          {popoverOpen && focusedItemInfo && !searchValue && (
-            <>
-              {focusedItemInfo.hasParent && (
-                <span>{focusedItemInfo.breadcrumb}</span>
-              )}
-              <span>
-                {`${focusedItemInfo.label}, ${focusedItemInfo.itemPosition} of ${focusedItemInfo.totalItems}`}
-              </span>
-              <span>
-                {`
-                Press Up and Down arrow keys to navigate up an down
-                ${
-                  focusedItemInfo.hasOptions
-                    ? ', Right Arrow key to open sub options'
-                    : ''
-                }
-                ${
-                  focusedItemInfo.hasParent
-                    ? ', Left arrow key to go back to parent item'
-                    : ''
-                }
-                . Press Space or Enter to select option and close list. Press Escape to close list without selecting`}
-              </span>
-            </>
-          )}
-        </Box>
+        <CascaderAriaLive searchValue={searchValue} />
         <FormInput
           ref={inputRef}
-          label="Label"
+          label={componentProps.label || 'Select an option'}
+          placeholder={componentProps.placeholder || 'Search'}
           rightIcon={<ChevronDownIcon />}
           value={searchValue}
           onChange={(e) => {
@@ -315,7 +247,8 @@ export const CascaderContent = () => {
             }}
             id={`cascader-${id}-input-description`}
           >
-            Cascader is focused, type to search. Press Down Arrow to open list.
+            {componentProps.inputAriaDescription
+              ?? 'Cascader is focused, type to search. Press Down Arrow to open list.'}
           </Box>
         )}
         {!popoverOpen && <CascaderBreadCrumb />}

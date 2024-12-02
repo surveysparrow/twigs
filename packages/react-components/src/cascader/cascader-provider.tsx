@@ -36,6 +36,21 @@ export type CascaderContextType = {
   focusedItem: FocusedItem | null;
   flattenedData: FlattenedData[];
   currentValueSelectionPath: SelectionPath[];
+  componentProps: {
+    label?: string;
+    placeholder?: string;
+    inputAriaDescription?: string;
+    ariaLiveContent?: (
+      data: {
+        breadcrumb: string;
+        label: string;
+        totalItems: any;
+        itemPosition: number;
+        hasOptions: boolean;
+        hasParent: boolean;
+      } | null
+    ) => ReactNode;
+  };
   closePopover: () => void;
   clearFocus: () => void;
   setFocusedItem: React.Dispatch<React.SetStateAction<FocusedItem | null>>;
@@ -59,6 +74,7 @@ export const CascaderContext = createContext<CascaderContextType>({
   flattenedData: [],
   popoverOpen: false,
   currentValueSelectionPath: [],
+  componentProps: {},
   setInputRef: () => {},
   getInputRef: () => null,
   setFocusedItem: () => {},
@@ -77,12 +93,14 @@ export const CascaderProvider = ({
   data,
   children,
   currentValue,
+  componentProps = {},
   handleChange
 }: {
   children: ReactNode;
   data: CascaderOption[];
   currentValue: { label: string; value: string };
   handleChange: (value: CascaderOption) => void;
+  componentProps?: CascaderContextType['componentProps'];
 }) => {
   const [selectionPath, setSelectionPath] = useState<SelectionPath[]>([]);
   const [currentValueSelectionPath, setCurrentValueSelectionPath] = useState<
@@ -237,6 +255,7 @@ export const CascaderProvider = ({
       handleChange,
       selectionPath,
       flattenedData,
+      componentProps,
       setFocusedItem,
       setPopoverOpen,
       focusNextColumn,
@@ -259,6 +278,7 @@ export const CascaderProvider = ({
       handleChange,
       selectionPath,
       flattenedData,
+      componentProps,
       setFocusedItem,
       setPopoverOpen,
       focusNextColumn,

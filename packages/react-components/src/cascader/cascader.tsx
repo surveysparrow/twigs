@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { CascaderContent } from './cascader-content';
-import { CascaderProvider } from './cascader-provider';
+import { CascaderContextType, CascaderProvider } from './cascader-provider';
 import { recursiveFind } from './cascader-utils';
 
 export interface CascaderOption {
@@ -10,18 +10,22 @@ export interface CascaderOption {
   options?: CascaderOption[];
 }
 
-export interface CascaderProps {
+export type CascaderProps = {
   data: CascaderOption[];
   value?: string | { label: string; value: string };
   defaultValue?: string | { label: string; value: string };
   onChange?: (value: CascaderOption) => void;
-}
+} & CascaderContextType['componentProps'];
 
 export const Cascader = ({
   data,
   value,
+  label,
+  placeholder,
   defaultValue,
-  onChange
+  inputAriaDescription,
+  onChange,
+  ariaLiveContent
 }: CascaderProps) => {
   const [localValue, setLocalValue] = useState(defaultValue ?? '');
 
@@ -40,9 +44,17 @@ export const Cascader = ({
     return { value: '', label: '' };
   }, [data, localValue, value]);
 
+  const componentProps = useMemo(
+    () => ({
+      label, placeholder, inputAriaDescription, ariaLiveContent
+    }),
+    [label, placeholder, inputAriaDescription, ariaLiveContent]
+  );
+
   return (
     <CascaderProvider
       data={data}
+      componentProps={componentProps}
       currentValue={selectedValue}
       handleChange={(val) => {
         setLocalValue(val.value);
