@@ -37,7 +37,9 @@ export const CascaderSearchList = forwardRef<
   CascaderSearchListRef,
   CascaderSearchListProps
 >(({ searchValue, handleChange }, ref) => {
-  const { id, data, flattenedData } = useCascaderValue();
+  const {
+    id, data, rootNode, flattenedData
+  } = useCascaderValue();
 
   const containerRef = useRef<HTMLUListElement>(null);
   const [focusedIndex, setFocusedIndex] = useState(0);
@@ -101,7 +103,7 @@ export const CascaderSearchList = forwardRef<
 
   const focusedItemBreadcrumb = useMemo(() => {
     const item = searchResults[focusedIndex];
-    const path = makeBreadcrumbFromValue(item.value, data);
+    const path = makeBreadcrumbFromValue(item.value, rootNode!);
 
     return {
       breadcrumb: path.map(({ label }) => label).join(' > '),

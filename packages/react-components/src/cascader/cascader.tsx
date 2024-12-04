@@ -10,12 +10,14 @@ export interface CascaderOption {
   options?: CascaderOption[];
 }
 
+type ComponentProps = CascaderContextType['componentProps'];
+
 export type CascaderProps = {
   data: CascaderOption[];
   value?: string | { label: string; value: string };
   defaultValue?: string | { label: string; value: string };
   onChange?: (value: CascaderOption) => void;
-} & CascaderContextType['componentProps'];
+} & ComponentProps;
 
 export const Cascader = ({
   data,
@@ -23,6 +25,7 @@ export const Cascader = ({
   label,
   placeholder,
   defaultValue,
+  popoverPortal,
   inputAriaDescription,
   onChange,
   ariaLiveContent
@@ -44,18 +47,22 @@ export const Cascader = ({
     return { value: '', label: '' };
   }, [data, localValue, value]);
 
-  const componentProps = useMemo(
+  const componentProps: ComponentProps = useMemo(
     () => ({
-      label, placeholder, inputAriaDescription, ariaLiveContent
+      label,
+      placeholder,
+      inputAriaDescription,
+      ariaLiveContent,
+      popoverPortal
     }),
-    [label, placeholder, inputAriaDescription, ariaLiveContent]
+    [label, placeholder, inputAriaDescription, ariaLiveContent, popoverPortal]
   );
 
   return (
     <CascaderProvider
       data={data}
       componentProps={componentProps}
-      currentValue={selectedValue}
+      value={selectedValue}
       handleChange={(val) => {
         setLocalValue(val.value);
         if (onChange) {

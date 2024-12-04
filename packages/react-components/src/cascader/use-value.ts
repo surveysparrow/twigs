@@ -1,6 +1,4 @@
-import { get } from 'lodash-es';
 import { useContext } from 'react';
-import { CascaderOption } from './cascader';
 import { CascaderContext } from './cascader-provider';
 
 export const useCascaderValue = () => {
@@ -8,12 +6,9 @@ export const useCascaderValue = () => {
 
   let listingSelectionPath = context.selectionPath;
 
-  const lastItem = get(
-    context.data,
-    context.selectionPath[context.selectionPath.length - 1]?.path
-  ) as CascaderOption;
+  const lastItem = context.rootNode?.findNode(listingSelectionPath.at(-1)?.value);
 
-  if (!lastItem?.options) {
+  if (!lastItem?.getChildren().length) {
     listingSelectionPath = context.selectionPath.slice(0, -1);
   }
 

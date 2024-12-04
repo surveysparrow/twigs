@@ -1,6 +1,5 @@
-import { get } from 'lodash-es';
-import { ComponentProps, useEffect, useRef } from 'react';
 import { prefixClassName } from '@src/utils';
+import { ComponentProps, useEffect, useRef } from 'react';
 import { Flex } from '../flex';
 import { styled } from '../stitches.config';
 import { CascaderListItem } from './cascader-list-item';
@@ -23,7 +22,7 @@ export const CascaderList = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const {
-    data, currentValue, selectionPath, listingSelectionPath
+    rootNode, value, selectionPath, listingSelectionPath
   } = useCascaderValue();
 
   useEffect(() => {
@@ -50,30 +49,33 @@ export const CascaderList = () => {
       className={prefixClassName('cascader__data')}
     >
       <ListContainer withRightBorder={selectionPath.length > 0}>
-        {data?.map((option, i) => (
+        {rootNode?.getChildren().map((option, i) => (
           <CascaderListItem
             key={option.value}
             option={option}
             itemIndex={i}
             pathIndex={0}
-            isSelected={currentValue?.value === option.value}
+            isSelected={value?.value === option.value}
           />
         ))}
       </ListContainer>
       {listingSelectionPath.map((sPath, pathIndex) => (
         <ListContainer
-          key={`${sPath.path}`}
+          key={`${sPath.value}`}
           withRightBorder={pathIndex < selectionPath.length - 1}
         >
-          {get(data, sPath.path)?.options?.map((option, j) => (
-            <CascaderListItem
-              key={option.value}
-              option={option}
-              itemIndex={j}
-              pathIndex={pathIndex + 1}
-              isSelected={currentValue?.value === option.value}
-            />
-          ))}
+          {rootNode
+            ?.findNode(sPath.value)
+            ?.getChildren()
+            ?.map((option, j) => (
+              <CascaderListItem
+                key={option.value}
+                option={option}
+                itemIndex={j}
+                pathIndex={pathIndex + 1}
+                isSelected={value?.value === option.value}
+              />
+            ))}
         </ListContainer>
       ))}
     </Flex>

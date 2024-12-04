@@ -1,6 +1,7 @@
-import { get } from 'lodash-es';
 import { CascaderOption } from './cascader';
-import { FocusedItem, SelectionPath } from './cascader-provider';
+import { CascaderNode } from './cascader-node';
+import { SelectionPath } from './cascader-provider';
+import { CascaderRootNode } from './cascader-root-node';
 
 export const recursiveFind = (
   data: CascaderOption[],
@@ -25,52 +26,17 @@ export const recursiveFind = (
 };
 
 export const buildSelectionPath = (
-  data: CascaderOption[],
-  value: string
+  node?: CascaderNode | null
 ): SelectionPath[] => {
-  let pathString = '';
   const path: SelectionPath[] = [];
 
-  const traverse = (options: CascaderOption[], parentPath: string) => {
-    for (let i = 0; i < options.length; i++) {
-      const item = options[i];
-
-      const p = parentPath ? `${parentPath}.options[${i}]` : `[${i}]`;
-
-      if (item.value === value) {
-        pathString = p;
-        return;
-      }
-
-      if (item.options) {
-        traverse(item.options, p);
-      }
-    }
-  };
-
-  traverse(data, '');
-
-  if (!pathString) {
-    return path;
-  }
-
-  let lastDotIndex = pathString.indexOf('.');
-  lastDotIndex = lastDotIndex === -1 ? pathString.length : lastDotIndex;
-  let loop = true;
-  while (loop) {
-    if (lastDotIndex === pathString.length) {
-      loop = false;
-    }
-    const pathStringSlice = pathString.substring(0, lastDotIndex);
-    const pathData = get(data, pathStringSlice);
-
-    path.push({
-      path: pathStringSlice,
-      value: pathData.value
+  let currentNode: CascaderNode | undefined | null = node;
+  while (currentNode && !currentNode.isRoot) {
+    path.unshift({
+      value: currentNode.value,
+      label: currentNode.label
     });
-
-    lastDotIndex = pathString.indexOf('.', lastDotIndex + 1);
-    lastDotIndex = lastDotIndex === -1 ? pathString.length : lastDotIndex;
+    currentNode = currentNode.getParent();
   }
 
   return path;
@@ -133,66 +99,29 @@ export const flattenDataWithPath = (
   return flattened;
 };
 
-export const convertSelectionPathToFocusedItem = (
-  selectionPath: SelectionPath[]
-): FocusedItem | null => {
-  const lastPath = selectionPath.at(-1);
-  if (!lastPath) {
-    return null;
-  }
-
-  const objectPath = lastPath.path.substring(0, lastPath.path.lastIndexOf('['));
-  const index = parseInt(
-    lastPath.path.substring(
-      lastPath.path.lastIndexOf('[') + 1,
-      lastPath.path.lastIndexOf(']')
-    ),
-    10
-  );
-
-  return {
-    value: lastPath.value,
-    itemIndex: index,
-    objectPath
-  };
-};
-
 export const makeBreadcrumbFromValue = (
   value: string,
-  data: CascaderOption[]
+  rootNode: CascaderRootNode
 ) => {
-  const path: { label: string; value: string }[] = [];
+  const path: SelectionPath[] = [];
 
-  const buildArray = (
-    cascaderData: CascaderOption[],
-    searchValue: string
-  ): CascaderOption | null => {
-    for (let i = 0; i < cascaderData.length; i++) {
-      const item = cascaderData[i];
+  const node = rootNode.findNode(value);
 
-      path.push({
-        label: item.label,
-        value: item.value
-      });
+  if (!node) return path;
 
-      if (item.value === searchValue) {
-        return item;
-      }
+  path.push({
+    value: node.value,
+    label: node.label
+  });
 
-      if (item.options) {
-        const found = buildArray(item.options, searchValue);
-        if (found) {
-          return found;
-        }
-      }
-
-      path.pop();
-    }
-
-    return null;
-  };
-
-  buildArray(data, value);
+  let currentNode: CascaderNode | null = node.getParent();
+  while (currentNode) {
+    path.unshift({
+      value: currentNode.value,
+      label: currentNode.label
+    });
+    currentNode = currentNode.getParent();
+  }
 
   return path;
 };

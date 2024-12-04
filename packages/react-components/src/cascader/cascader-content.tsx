@@ -1,13 +1,11 @@
 import { ChevronDownIcon } from '@sparrowengg/twigs-react-icons';
 import { prefixClassName } from '@src/utils';
 import clsx from 'clsx';
-import { get } from 'lodash-es';
 import React, { useEffect, useRef, useState } from 'react';
 import { Box } from '../box';
 import { FormInput } from '../input';
 import { Popover, PopoverContent, PopoverTrigger } from '../popover';
 import { styled } from '../stitches.config';
-import { CascaderOption } from './cascader';
 import { CascaderAriaLive } from './cascader-aria-live';
 import {
   CascaderBreadCrumb,
@@ -20,10 +18,6 @@ import {
   CascaderSearchList,
   CascaderSearchListRef
 } from './cascader-searchlist';
-import {
-  buildSelectionPath,
-  convertSelectionPathToFocusedItem
-} from './cascader-utils';
 import { useCascaderValue } from './use-value';
 
 const StyledPopoverTrigger = styled(PopoverTrigger, {
@@ -40,9 +34,9 @@ export const CascaderContent = () => {
 
   const {
     id,
-    data,
+    value,
+    rootNode,
     popoverOpen,
-    currentValue,
     focusedItem,
     componentProps,
     clearFocus,
@@ -51,7 +45,7 @@ export const CascaderContent = () => {
     focusNextColumn,
     focusPreviousRow,
     focusPreviousColumn,
-    setSelectionPath,
+    setSelectedNode,
     setPopoverOpen,
     setFocusedItem,
     closePopover,
@@ -62,13 +56,18 @@ export const CascaderContent = () => {
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
-    if (popoverOpen && currentValue.value) {
-      const path = buildSelectionPath(data, currentValue.value);
-      setSelectionPath(path);
-      setFocusedItem(convertSelectionPathToFocusedItem(path));
+    if (popoverOpen && value?.value) {
+      const node = rootNode?.findNode(value.value);
+      if (node) {
+        setSelectedNode(node);
+        setFocusedItem({
+          node,
+          isMouseClick: false
+        });
+      }
     } else if (!popoverOpen) {
       clearFocus();
-      setSelectionPath([]);
+      setSelectedNode(null);
       setSearchValue('');
     }
   }, [popoverOpen]);
@@ -106,15 +105,10 @@ export const CascaderContent = () => {
         if (!popoverOpen) {
           setPopoverOpen(true);
         }
-        if (focusedItem) {
-          const parentObj = focusedItem.objectPath
-            ? get(data, focusedItem.objectPath)
-            : (data as CascaderOption[]);
-          const item = parentObj[focusedItem.itemIndex];
-
+        if (focusedItem.node) {
           handleChange({
-            label: item.label,
-            value: item.value
+            label: focusedItem.node.label,
+            value: focusedItem.node.value
           });
 
           closePopover();
@@ -174,7 +168,10 @@ export const CascaderContent = () => {
 
     const handleOutsideClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      if (!target.closest(`[data-cascader-id="${id}"]`)) {
+      if (
+        !target.closest(`[data-cascader-id="${id}"]`)
+        || !target.closest(`[data-cascader-popovercontent="${id}"]`)
+      ) {
         closePopover();
       }
     };
@@ -200,7 +197,9 @@ export const CascaderContent = () => {
         <FormInput
           ref={inputRef}
           label={componentProps.label || 'Select an option'}
-          placeholder={componentProps.placeholder || 'Search'}
+          placeholder={
+            value?.value ? '' : componentProps.placeholder || 'Search'
+          }
           rightIcon={<ChevronDownIcon />}
           value={searchValue}
           onChange={(e) => {
@@ -220,7 +219,7 @@ export const CascaderContent = () => {
           }}
           leftElement={
             !popoverOpen ? (
-              <CascaderInputValue>{currentValue?.label}</CascaderInputValue>
+              <CascaderInputValue>{value?.label}</CascaderInputValue>
             ) : undefined
           }
           role="combobox"
@@ -260,8 +259,9 @@ export const CascaderContent = () => {
           >
             Open options
           </StyledPopoverTrigger>
-          <PopoverContentWrapper>
+          <PopoverContentWrapper portalTarget={componentProps.popoverPortal}>
             <PopoverContent
+              data-cascader-popovercontent={id}
               onOpenAutoFocus={(e) => {
                 e.preventDefault();
                 if (inputRef.current) {

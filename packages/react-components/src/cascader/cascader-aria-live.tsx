@@ -1,40 +1,36 @@
-import { get } from 'lodash-es';
 import { useMemo } from 'react';
 import { Box } from '../box';
-import { makeBreadcrumbFromValue } from './cascader-utils';
+import { buildSelectionPath } from './cascader-utils';
 import { useCascaderValue } from './use-value';
 
 export const CascaderAriaLive = ({ searchValue }: { searchValue: string }) => {
   const {
-    id, data, popoverOpen, focusedItem, componentProps
+    id, popoverOpen, focusedItem, componentProps
   } = useCascaderValue();
 
   const focusedItemInfo = useMemo(() => {
-    if (focusedItem) {
-      const arrPath = makeBreadcrumbFromValue(focusedItem.value, data);
+    const focusedNode = focusedItem?.node;
+    if (focusedNode) {
+      const arrPath = buildSelectionPath(focusedNode);
       const breadcrumb = arrPath.map((item) => item.label).join(' > ');
-      const parentObject = focusedItem.objectPath
-        ? get(data, focusedItem.objectPath)
-        : data;
-      const totalItems = parentObject!.length;
-      const itemPosition = focusedItem.itemIndex + 1;
-
-      const hasOptions = parentObject?.[focusedItem.itemIndex]?.options?.length! > 0;
-
-      const hasParent = focusedItem.objectPath.length > 0;
+      const parentChildren = focusedNode.getParent()?.getChildren();
+      const itemPosition = parentChildren?.findIndex((item) => item.value === focusedNode.value)!
+        + 1;
 
       return {
         breadcrumb,
         label: arrPath.at(-1)!.label,
-        totalItems,
+        totalItems: parentChildren?.length || 0,
         itemPosition,
-        hasOptions,
-        hasParent
+        hasOptions: focusedNode.getChildren().length > 0,
+        hasParent:
+          focusedNode.getParent() !== null
+          && focusedNode.getParent()?.isRoot === false
       };
     }
 
     return null;
-  }, [focusedItem?.value]);
+  }, [focusedItem?.node]);
 
   return (
     <Box

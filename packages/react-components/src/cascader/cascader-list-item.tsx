@@ -1,10 +1,10 @@
 import { ChevronRightIcon } from '@sparrowengg/twigs-react-icons';
-import React, { KeyboardEvent, useMemo } from 'react';
 import { prefixClassName } from '@src/utils';
+import React, { KeyboardEvent, useMemo } from 'react';
 import { Flex } from '../flex';
 import { styled } from '../stitches.config';
 import { Text } from '../text';
-import { CascaderOption } from './cascader';
+import { CascaderNode } from './cascader-node';
 import { useCascaderValue } from './use-value';
 
 const StyledItem = styled('li', {
@@ -46,52 +46,33 @@ export const CascaderListItem = ({
   itemIndex,
   isSelected
 }: {
-  option: CascaderOption;
+  option: CascaderNode;
   pathIndex: number;
   itemIndex: number;
   isSelected: boolean;
 }) => {
   const {
+    rootNode,
     focusedItem,
     selectionPath,
     handleChange,
     closePopover,
-    setSelectionPath,
+    setSelectedNode,
     setFocusedItem,
     getInputRef
   } = useCascaderValue();
 
-  const hasOptions = option.options?.length;
+  const hasOptions = option.getChildren()?.length > 0;
 
-  const handleSelection = () => {
-    if (pathIndex === 0) {
-      setSelectionPath([
-        {
-          value: option.value,
-          path: `[${itemIndex}]`
-        }
-      ]);
-      setFocusedItem({
-        value: option.value,
-        itemIndex,
-        objectPath: '',
-        isMouseClick: true
-      });
-    } else {
-      setSelectionPath([
-        ...selectionPath.slice(0, pathIndex),
-        {
-          value: option.value,
-          path: `${selectionPath[pathIndex - 1].path}.options[${itemIndex}]`
-        }
-      ]);
-      setFocusedItem({
-        value: option.value,
-        itemIndex,
-        objectPath: `${selectionPath[pathIndex - 1].path}.options`,
-        isMouseClick: true
-      });
-    }
+  const handleSelection = (isMouseClick = false) => {
+    const node = rootNode?.findNode(option.value);
+    if (!node) return;
+
+    setSelectedNode(node);
+    setFocusedItem({
+      node,
+      isMouseClick
+    });
   };
 
   const handleClick = (e: React.MouseEvent<HTMLLIElement>) => {
@@ -100,7 +81,7 @@ export const CascaderListItem = ({
     if (input) {
       input.focus();
     }
-    handleSelection();
+    handleSelection(true);
   };
 
   const highlight = useMemo(() => {
@@ -150,7 +131,7 @@ export const CascaderListItem = ({
       role="treeitem"
       aria-selected={selectionPath.at(-1)?.value === option.value}
       aria-expanded={hasOptions && inSelection ? 'true' : 'false'}
-      focused={focusedItem?.value === option.value && !focusedItem.isMouseClick}
+      focused={focusedItem?.node?.value === option.value && !focusedItem.isMouseClick}
       className={prefixClassName('cascader__list-item')}
     >
       <Flex

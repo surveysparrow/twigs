@@ -1,4 +1,3 @@
-import { get } from 'lodash-es';
 import React, {
   ReactNode,
   createContext,
@@ -9,6 +8,8 @@ import React, {
   useState
 } from 'react';
 import { CascaderOption } from './cascader';
+import { CascaderNode } from './cascader-node';
+import { CascaderRootNode } from './cascader-root-node';
 import {
   FlattenedData,
   buildSelectionPath,
@@ -17,29 +18,30 @@ import {
 
 export interface SelectionPath {
   value: string;
-  path: string;
+  label: string;
 }
 
 export type FocusedItem = {
-  itemIndex: number;
-  objectPath: string;
-  value: string;
+  node: CascaderNode | null;
   isMouseClick?: boolean;
 };
 
 export type CascaderContextType = {
   id: string;
   data: CascaderOption[];
-  currentValue: { label: string; value: string };
+  value?: { label: string; value: string };
   selectionPath: SelectionPath[];
   popoverOpen: boolean;
-  focusedItem: FocusedItem | null;
+  focusedItem: FocusedItem;
   flattenedData: FlattenedData[];
-  currentValueSelectionPath: SelectionPath[];
+  valueSelectionPath: SelectionPath[];
+  selectedNode: CascaderNode | null;
+  rootNode: CascaderRootNode | null;
   componentProps: {
     label?: string;
     placeholder?: string;
     inputAriaDescription?: string;
+    popoverPortal?: HTMLElement;
     ariaLiveContent?: (
       data: {
         breadcrumb: string;
@@ -53,7 +55,7 @@ export type CascaderContextType = {
   };
   closePopover: () => void;
   clearFocus: () => void;
-  setFocusedItem: React.Dispatch<React.SetStateAction<FocusedItem | null>>;
+  setFocusedItem: React.Dispatch<React.SetStateAction<FocusedItem>>;
   setInputRef: (ref: HTMLInputElement) => void;
   getInputRef: () => HTMLInputElement | null;
   focusNextRow: () => void;
@@ -62,19 +64,21 @@ export type CascaderContextType = {
   focusPreviousColumn: () => void;
   handleChange: (value: CascaderOption) => void;
   setPopoverOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setSelectionPath: React.Dispatch<React.SetStateAction<SelectionPath[]>>;
+  setSelectedNode: React.Dispatch<React.SetStateAction<CascaderNode | null>>;
 };
 
 export const CascaderContext = createContext<CascaderContextType>({
   id: '',
   data: [],
-  focusedItem: null,
-  currentValue: { label: '', value: '' },
+  focusedItem: { node: null, isMouseClick: false },
+  rootNode: null,
+  value: { label: '', value: '' },
   selectionPath: [],
   flattenedData: [],
   popoverOpen: false,
-  currentValueSelectionPath: [],
+  valueSelectionPath: [],
   componentProps: {},
+  selectedNode: null,
   setInputRef: () => {},
   getInputRef: () => null,
   setFocusedItem: () => {},
@@ -85,29 +89,31 @@ export const CascaderContext = createContext<CascaderContextType>({
   focusPreviousRow: () => {},
   focusNextColumn: () => {},
   focusPreviousColumn: () => {},
-  setSelectionPath: () => {},
+  setSelectedNode: () => {},
   setPopoverOpen: () => {}
 });
 
 export const CascaderProvider = ({
   data,
+  value,
   children,
-  currentValue,
   componentProps = {},
   handleChange
 }: {
   children: ReactNode;
   data: CascaderOption[];
-  currentValue: { label: string; value: string };
-  handleChange: (value: CascaderOption) => void;
+  value: { label: string; value: string };
+  handleChange: (updatedValue: CascaderOption) => void;
   componentProps?: CascaderContextType['componentProps'];
 }) => {
-  const [selectionPath, setSelectionPath] = useState<SelectionPath[]>([]);
-  const [currentValueSelectionPath, setCurrentValueSelectionPath] = useState<
-    SelectionPath[]
-  >([]);
-  const [focusedItem, setFocusedItem] = useState<FocusedItem | null>(null);
+  const [selectedNode, setSelectedNode] = useState<CascaderNode | null>(null);
+
+  const [focusedItem, setFocusedItem] = useState<FocusedItem>({
+    node: null,
+    isMouseClick: false
+  });
   const [popoverOpen, setPopoverOpen] = useState(false);
+  const [rootNode, setRootNode] = useState<CascaderRootNode | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const id = useId();
@@ -129,163 +135,154 @@ export const CascaderProvider = ({
   }, [data]);
 
   useEffect(() => {
-    if (currentValue.value) {
-      const path = buildSelectionPath(data, currentValue.value);
-      setCurrentValueSelectionPath(path);
-    }
-  }, [currentValue]);
+    const tree = new CascaderRootNode();
+
+    const traverse = (options: CascaderOption[], parentNode: CascaderNode) => {
+      for (let i = 0; i < options.length; i++) {
+        const item = options[i];
+
+        const node = tree.createNode(item.value, item.label);
+
+        if (i === 0) {
+          node.setPrevNode(null);
+        } else {
+          const prevNode = parentNode.getLastChild();
+          if (prevNode) {
+            prevNode.setNextNode(node);
+          }
+          node.setPrevNode(prevNode);
+        }
+
+        parentNode.appendChild(node);
+
+        if (item.options) {
+          traverse(item.options, node);
+        }
+      }
+    };
+
+    traverse(data, tree);
+
+    setRootNode(tree);
+  }, [data]);
 
   const focusNextRow = () => {
-    if (focusedItem) {
-      const parentObject: CascaderOption[] = focusedItem.objectPath === ''
-        ? data
-        : get(data, focusedItem.objectPath);
-
-      if (focusedItem.itemIndex !== parentObject.length - 1) {
+    if (focusedItem.node) {
+      if (focusedItem.node.nextNode) {
         setFocusedItem({
-          itemIndex: focusedItem.itemIndex + 1,
-          value: parentObject[focusedItem.itemIndex + 1].value,
-          objectPath: focusedItem.objectPath
+          node: focusedItem.node.nextNode,
+          isMouseClick: false
         });
       }
-    } else if (selectionPath.length === 0 && data.length > 0) {
+    } else if (data.length > 0) {
       setFocusedItem({
-        value: data[0].value,
-        itemIndex: 0,
-        objectPath: ''
+        node: rootNode?.children[0] || null,
+        isMouseClick: false
       });
     }
   };
 
   const focusPreviousRow = () => {
-    if (focusedItem) {
-      const parentObject: CascaderOption[] = focusedItem.objectPath === ''
-        ? data
-        : get(data, focusedItem.objectPath);
-
-      if (focusedItem.itemIndex !== 0) {
-        setFocusedItem({
-          itemIndex: focusedItem.itemIndex - 1,
-          value: parentObject[focusedItem.itemIndex - 1].value,
-          objectPath: focusedItem.objectPath
-        });
-      }
+    if (focusedItem.node && focusedItem.node.prevNode) {
+      setFocusedItem({
+        node: focusedItem.node.prevNode,
+        isMouseClick: false
+      });
     }
   };
 
   const focusNextColumn = () => {
-    if (focusedItem) {
-      const parentObject: CascaderOption[] = focusedItem.objectPath === ''
-        ? data
-        : get(data, focusedItem.objectPath);
-      const option = parentObject[focusedItem.itemIndex];
-
-      if (option.options && option.options.length > 0) {
-        const nextPath = `${focusedItem.objectPath}[${focusedItem.itemIndex}]`;
-
-        if (selectionPath.at(-1)?.path !== nextPath) {
-          setSelectionPath([
-            ...selectionPath,
-            {
-              value: option.value,
-              path: nextPath
-            }
-          ]);
-        }
-
+    if (focusedItem.node) {
+      const firstChild = focusedItem.node.getFirstChild();
+      if (firstChild) {
+        setSelectedNode(focusedItem.node);
         setFocusedItem({
-          value: option.options[0].value,
-          itemIndex: 0,
-          objectPath: `${focusedItem.objectPath}[${focusedItem.itemIndex}].options`
+          node: firstChild,
+          isMouseClick: false
         });
       }
     }
   };
 
   const focusPreviousColumn = () => {
-    if (focusedItem) {
-      if (focusedItem.objectPath === '') {
-        return;
+    if (focusedItem.node) {
+      const parent = focusedItem.node.getParent();
+      if (parent && !parent.isRoot) {
+        setSelectedNode(parent);
+        setFocusedItem({
+          node: parent,
+          isMouseClick: false
+        });
       }
-
-      const previousOptionPath = focusedItem.objectPath.substring(
-        0,
-        focusedItem.objectPath.lastIndexOf('.options')
-      );
-      const prevItemIndexMarker = previousOptionPath.match(/\[(\d+)\]$/);
-
-      if (!prevItemIndexMarker) {
-        return;
-      }
-
-      const prevObjectPath = previousOptionPath.substring(
-        0,
-        prevItemIndexMarker.index
-      );
-      const prevItemIndex = Number(prevItemIndexMarker[1]);
-
-      const parentObj = prevObjectPath === '' ? data : get(data, prevObjectPath);
-      const option = parentObj[prevItemIndex];
-
-      setSelectionPath(selectionPath.slice(0, -1));
-      setFocusedItem({
-        value: option.value,
-        itemIndex: prevItemIndex,
-        objectPath: prevObjectPath
-      });
     }
   };
 
   const clearFocus = () => {
-    setFocusedItem(null);
+    setFocusedItem({
+      node: null,
+      isMouseClick: false
+    });
   };
+
+  const selectionPath = useMemo(() => {
+    return buildSelectionPath(selectedNode);
+  }, [selectedNode]);
+
+  const valueSelectionPath = useMemo(() => {
+    const node = rootNode?.findNode(value.value);
+    return buildSelectionPath(node);
+  }, [value]);
 
   const providerValue = useMemo(
     () => ({
       id,
       data,
+      value,
+      rootNode,
       clearFocus,
       setInputRef,
       getInputRef,
       focusedItem,
       popoverOpen,
-      currentValue,
       closePopover,
       focusNextRow,
       handleChange,
+      selectedNode,
       selectionPath,
       flattenedData,
       componentProps,
       setFocusedItem,
       setPopoverOpen,
       focusNextColumn,
-      setSelectionPath,
+      setSelectedNode,
       focusPreviousRow,
-      focusPreviousColumn,
-      currentValueSelectionPath
+      valueSelectionPath,
+      focusPreviousColumn
     }),
     [
       id,
       data,
+      value,
+      rootNode,
       clearFocus,
       setInputRef,
       getInputRef,
       focusedItem,
       popoverOpen,
-      currentValue,
       closePopover,
       focusNextRow,
       handleChange,
+      selectedNode,
       selectionPath,
       flattenedData,
       componentProps,
       setFocusedItem,
       setPopoverOpen,
       focusNextColumn,
-      setSelectionPath,
+      setSelectedNode,
       focusPreviousRow,
-      focusPreviousColumn,
-      currentValueSelectionPath
+      valueSelectionPath,
+      focusPreviousColumn
     ]
   );
 

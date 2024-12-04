@@ -1,21 +1,20 @@
-import { get } from 'lodash-es';
-import { ReactNode } from 'react';
 import { prefixClassName } from '@src/utils';
+import { ReactNode } from 'react';
 import { Box } from '../box';
 import { Flex } from '../flex';
+import { PopoverPortal } from '../popover';
 import { Text } from '../text';
 import { useCascaderValue } from './use-value';
-import { PopoverPortal } from '../popover';
 
 export const CascaderBreadCrumb = () => {
-  const { data, currentValueSelectionPath } = useCascaderValue();
-  if (currentValueSelectionPath.length === 0) {
+  const { valueSelectionPath } = useCascaderValue();
+  if (valueSelectionPath.length === 0) {
     return null;
   }
 
   return (
     <Flex className={prefixClassName('cascader__breadcrumb')}>
-      {currentValueSelectionPath.slice(0, -1).map((path, index) => {
+      {valueSelectionPath.slice(0, -1).map((path, index) => {
         return (
           <Text
             size="sm"
@@ -25,8 +24,8 @@ export const CascaderBreadCrumb = () => {
             key={path.value}
             className={prefixClassName('cascader__breadcrumb-item')}
           >
-            {get(data, path.path)?.label}
-            {index < currentValueSelectionPath.length - 2 && (
+            {path.label}
+            {index < valueSelectionPath.length - 2 && (
               <Box
                 as="span"
                 css={{ padding: '0 $1' }}
