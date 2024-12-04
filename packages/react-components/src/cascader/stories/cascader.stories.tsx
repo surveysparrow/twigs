@@ -146,7 +146,7 @@ const Template = (args) => (
         options: [
           {
             label: 'Northeast',
-            value: 'northeast',
+            value: 'usa-northeast',
             options: [
               {
                 label: 'New York',
@@ -200,7 +200,7 @@ const Template = (args) => (
           },
           {
             label: 'South',
-            value: 'south',
+            value: 'usa-south',
             options: [
               {
                 label: 'Texas',
@@ -254,7 +254,7 @@ const Template = (args) => (
           },
           {
             label: 'West',
-            value: 'west',
+            value: 'usa-west',
             options: [
               {
                 label: 'California',
@@ -318,7 +318,7 @@ const Template = (args) => (
           },
           {
             label: 'Midwest',
-            value: 'midwest',
+            value: 'usa-midwest',
             options: [
               {
                 label: 'Illinois',
