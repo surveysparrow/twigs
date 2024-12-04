@@ -169,8 +169,10 @@ export const CascaderContent = () => {
     const handleOutsideClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       if (
-        !target.closest(`[data-cascader-id="${id}"]`)
-        || !target.closest(`[data-cascader-popovercontent="${id}"]`)
+        !(
+          target.closest(`[data-cascader-id="${id}"]`)
+          || target.closest(`[data-cascader-popovercontent="${id}"]`)
+        )
       ) {
         closePopover();
       }
