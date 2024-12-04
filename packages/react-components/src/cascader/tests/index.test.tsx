@@ -68,12 +68,7 @@ describe('Cascader', () => {
   it('responds correctly to mouse navigation', () => {
     const {
       container, queryByText, queryByRole, queryByPlaceholderText
-    } = render(
-      <>
-        <div>Outside</div>
-        <Cascader placeholder="Search" data={data} />
-      </>
-    );
+    } = render(<Cascader placeholder="Search" data={data} />);
     const input = queryByPlaceholderText('Search');
     expect(input).toBeInTheDocument();
 
@@ -103,5 +98,44 @@ describe('Cascader', () => {
     const breadcrumb = container.querySelector('.twigs-cascader__breadcrumb');
     expect(breadcrumb).toBeInTheDocument();
     expect(breadcrumb?.textContent).toBe('India>South');
+  });
+
+  it('lists search results correctly', () => {
+    const {
+      queryAllByRole,
+      queryByText,
+      container,
+      queryByRole,
+      queryByPlaceholderText
+    } = render(<Cascader placeholder="Search" data={data} />);
+    const input = queryByPlaceholderText('Search');
+    expect(input).toBeInTheDocument();
+    fireEvent.change(input!, { target: { value: 'sa' } });
+
+    expect(queryByRole('dialog')).toBeInTheDocument();
+
+    const searchValues = [
+      'USA',
+      'Saket',
+      'San Francisco',
+      'Massachusetts',
+      'Amritsar'
+    ];
+    const options = queryAllByRole('option');
+
+    expect(options).toHaveLength(searchValues.length);
+
+    const SF = options.find((o) => o.textContent?.includes(searchValues[2]));
+    expect(SF).toBeInTheDocument();
+
+    fireEvent.click(SF!);
+
+    expect(queryByRole('dialog')).not.toBeInTheDocument();
+
+    expect(queryByText(searchValues[2])).toBeInTheDocument();
+
+    const breadcrumb = container.querySelector('.twigs-cascader__breadcrumb');
+    expect(breadcrumb).toBeInTheDocument();
+    expect(breadcrumb?.textContent).toBe('USA>West>California');
   });
 });
