@@ -1,0 +1,28 @@
+import CascaderSnippet from "@site/static/doc-snippets/cascader.mdx";
+
+# Cascader
+
+Cascader is a dropdown menu for selecting a value from a list of options that can be nested.
+
+### Import
+
+```jsx
+import { Cascader } from "@sparrowengg/twigs-react";
+```
+
+### Usage
+
+<CascaderSnippet />
+
+### Props
+
+| Property             | Description                                              | Type                                                                                                                                                                      | Default |
+| -------------------- | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| data                 | Data source for Cascader                                 | `{ label: string; value: string; options?: Option[]}[]`                                                                                                                   |         |
+| onChange             | Callback function for changes                            | `(value: Option, selectionPath: Option[]) => void`                                                                                                                        |         |
+| value                | Selected value                                           | `Option`                                                                                                                                                                  |         |
+| placeholder          | Input placeholder text                                   | `string`                                                                                                                                                                  |         |
+| label                | Label for the input field                                | `string`                                                                                                                                                                  |         |
+| popoverPortal        | Portal for the popover                                   | `HTMLElement`                                                                                                                                                             |         |
+| inputAriaDescription | Aria description for the input field                     | `string`                                                                                                                                                                  |         |
+| ariaLiveContent      | Function used to render content inside aria-live element | `ariaLiveContent?: (data: { breadcrumb: string; label: string; totalItems: any; itemPosition: number; hasOptions: boolean; hasParent: boolean; } ⏐ null ) => ReactNode;` |         |
