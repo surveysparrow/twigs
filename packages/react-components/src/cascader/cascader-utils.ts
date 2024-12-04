@@ -42,6 +42,38 @@ export const buildSelectionPath = (
   return path;
 };
 
+export const buildTree = (data: CascaderOption[]) => {
+  const tree = new CascaderRootNode();
+
+  const traverse = (options: CascaderOption[], parentNode: CascaderNode) => {
+    for (let i = 0; i < options.length; i++) {
+      const item = options[i];
+
+      const node = tree.createNode(item.value, item.label);
+
+      if (i === 0) {
+        node.setPrevNode(null);
+      } else {
+        const prevNode = parentNode.getLastChild();
+        if (prevNode) {
+          prevNode.setNextNode(node);
+        }
+        node.setPrevNode(prevNode);
+      }
+
+      parentNode.appendChild(node);
+
+      if (item.options) {
+        traverse(item.options, node);
+      }
+    }
+  };
+
+  traverse(data, tree);
+
+  return tree;
+};
+
 export interface FlattenedData {
   label: string;
   value: string;
@@ -99,7 +131,7 @@ export const flattenDataWithPath = (
   return flattened;
 };
 
-export const makeBreadcrumbFromValue = (
+export const buildBreadcrumbFromValue = (
   value: string,
   rootNode: CascaderRootNode
 ) => {

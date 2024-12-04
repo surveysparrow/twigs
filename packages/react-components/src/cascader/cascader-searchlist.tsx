@@ -13,7 +13,7 @@ import { CascaderSearchListItem } from './cascader-searchlist-item';
 import { useCascaderValue } from './use-value';
 import { styled } from '../stitches.config';
 import {
-  makeBreadcrumbFromValue,
+  buildBreadcrumbFromValue,
   stringSearchFlattenedData
 } from './cascader-utils';
 
@@ -103,7 +103,7 @@ export const CascaderSearchList = forwardRef<
 
   const focusedItemBreadcrumb = useMemo(() => {
     const item = searchResults[focusedIndex];
-    const path = makeBreadcrumbFromValue(item.value, rootNode!);
+    const path = buildBreadcrumbFromValue(item.value, rootNode!);
 
     return {
       breadcrumb: path.map(({ label }) => label).join(' > '),

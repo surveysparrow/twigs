@@ -13,6 +13,7 @@ import { CascaderRootNode } from './cascader-root-node';
 import {
   FlattenedData,
   buildSelectionPath,
+  buildTree,
   flattenDataWithPath
 } from './cascader-utils';
 
@@ -135,34 +136,7 @@ export const CascaderProvider = ({
   }, [data]);
 
   useEffect(() => {
-    const tree = new CascaderRootNode();
-
-    const traverse = (options: CascaderOption[], parentNode: CascaderNode) => {
-      for (let i = 0; i < options.length; i++) {
-        const item = options[i];
-
-        const node = tree.createNode(item.value, item.label);
-
-        if (i === 0) {
-          node.setPrevNode(null);
-        } else {
-          const prevNode = parentNode.getLastChild();
-          if (prevNode) {
-            prevNode.setNextNode(node);
-          }
-          node.setPrevNode(prevNode);
-        }
-
-        parentNode.appendChild(node);
-
-        if (item.options) {
-          traverse(item.options, node);
-        }
-      }
-    };
-
-    traverse(data, tree);
-
+    const tree = buildTree(data);
     setRootNode(tree);
   }, [data]);
 
@@ -183,7 +157,7 @@ export const CascaderProvider = ({
   };
 
   const focusPreviousRow = () => {
-    if (focusedItem.node && focusedItem.node.prevNode) {
+    if (focusedItem.node?.prevNode) {
       setFocusedItem({
         node: focusedItem.node.prevNode,
         isMouseClick: false
@@ -231,7 +205,7 @@ export const CascaderProvider = ({
   const valueSelectionPath = useMemo(() => {
     const node = rootNode?.findNode(value.value);
     return buildSelectionPath(node);
-  }, [value]);
+  }, [rootNode, value]);
 
   const providerValue = useMemo(
     () => ({
