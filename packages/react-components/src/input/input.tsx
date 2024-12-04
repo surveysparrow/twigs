@@ -36,6 +36,15 @@ const StyledInput = styled('input', {
       boxShadow: 'none'
     }
   },
+  '&.focused-state': {
+    borderWidth: '$xs',
+    borderStyle: 'solid',
+    borderColorOpacity: ['$secondary500', 0.4],
+    $$shadowColor: '$colors$primary300',
+    background: '$white900',
+    boxShadow:
+      'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
+  },
   variants: {
     size: {
       xl: {
