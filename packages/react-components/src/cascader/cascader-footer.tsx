@@ -1,14 +1,15 @@
 import { Button } from '../button';
 import { Flex } from '../flex';
 import { CascaderOption } from './cascader';
+import { SelectionPath } from './cascader-provider';
 import { useCascaderValue } from './use-value';
 
 export const CascaderFooter = ({
   handleChange
 }: {
-  handleChange: (value: CascaderOption) => void;
+  handleChange: (value: CascaderOption, selectionPath: SelectionPath[]) => void;
 }) => {
-  const { selectionPath, closePopover } = useCascaderValue();
+  const { selectionPath, selectedNode, closePopover } = useCascaderValue();
 
   return (
     <Flex
@@ -34,10 +35,11 @@ export const CascaderFooter = ({
         size="md"
         variant="ghost"
         color="primary"
+        disabled={!selectedNode}
         onClick={() => {
           if (selectionPath.length > 0) {
             const selectedItem = selectionPath[selectionPath.length - 1];
-            handleChange(selectedItem);
+            handleChange(selectedItem, selectionPath);
           }
         }}
       >

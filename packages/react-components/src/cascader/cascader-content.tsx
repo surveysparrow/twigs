@@ -19,6 +19,7 @@ import {
   CascaderSearchListRef
 } from './cascader-searchlist';
 import { useCascaderValue } from './use-value';
+import { buildSelectionPath } from './cascader-utils';
 
 const StyledPopoverTrigger = styled(PopoverTrigger, {
   position: 'absolute',
@@ -106,10 +107,13 @@ export const CascaderContent = () => {
           setPopoverOpen(true);
         }
         if (focusedItem.node) {
-          handleChange({
-            label: focusedItem.node.label,
-            value: focusedItem.node.value
-          });
+          handleChange(
+            {
+              label: focusedItem.node.label,
+              value: focusedItem.node.value
+            },
+            buildSelectionPath(rootNode?.findNode(focusedItem.node.value))
+          );
 
           closePopover();
         }
@@ -188,7 +192,11 @@ export const CascaderContent = () => {
   }, []);
 
   return (
-    <Box data-cascader-id={id} className={prefixClassName('cascader')}>
+    <Box
+      data-cascader-id={id}
+      className={prefixClassName('cascader')}
+      css={componentProps.css}
+    >
       <Box
         css={{
           position: 'relative'
@@ -289,8 +297,8 @@ export const CascaderContent = () => {
                 <CascaderSearchList
                   ref={cascaderSearchListRef}
                   searchValue={searchValue}
-                  handleChange={(val) => {
-                    handleChange(val);
+                  handleChange={(val, selPath) => {
+                    handleChange(val, selPath);
                     closePopover();
                     setSearchValue('');
                   }}
@@ -299,8 +307,8 @@ export const CascaderContent = () => {
                 <>
                   <CascaderList />
                   <CascaderFooter
-                    handleChange={(val) => {
-                      handleChange(val);
+                    handleChange={(val, selPath) => {
+                      handleChange(val, selPath);
                       closePopover();
                     }}
                   />

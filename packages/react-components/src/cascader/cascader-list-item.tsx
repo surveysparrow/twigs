@@ -6,6 +6,7 @@ import { styled } from '../stitches.config';
 import { Text } from '../text';
 import { CascaderNode } from './cascader-node';
 import { useCascaderValue } from './use-value';
+import { buildSelectionPath } from './cascader-utils';
 
 const StyledItem = styled('li', {
   padding: '$3 $6',
@@ -107,7 +108,10 @@ export const CascaderListItem = ({
       }
       case 'Enter': {
         handleSelection();
-        handleChange(option);
+        handleChange(
+          option,
+          buildSelectionPath(rootNode?.findNode(option.value))
+        );
         closePopover();
         break;
       }
@@ -131,7 +135,9 @@ export const CascaderListItem = ({
       role="treeitem"
       aria-selected={selectionPath.at(-1)?.value === option.value}
       aria-expanded={hasOptions && inSelection ? 'true' : 'false'}
-      focused={focusedItem?.node?.value === option.value && !focusedItem.isMouseClick}
+      focused={
+        focusedItem?.node?.value === option.value && !focusedItem.isMouseClick
+      }
       className={prefixClassName('cascader__list-item')}
     >
       <Flex

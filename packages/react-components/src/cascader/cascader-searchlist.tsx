@@ -14,8 +14,10 @@ import { useCascaderValue } from './use-value';
 import { styled } from '../stitches.config';
 import {
   buildBreadcrumbFromValue,
+  buildSelectionPath,
   stringSearchFlattenedData
 } from './cascader-utils';
+import { SelectionPath } from './cascader-provider';
 
 const StyledUl = styled('ul', {
   maxHeight: '320px',
@@ -30,7 +32,7 @@ export interface CascaderSearchListRef {
 
 interface CascaderSearchListProps {
   searchValue: string;
-  handleChange: (value: CascaderOption) => void;
+  handleChange: (value: CascaderOption, selectionPath: SelectionPath[]) => void;
 }
 
 export const CascaderSearchList = forwardRef<
@@ -62,7 +64,10 @@ export const CascaderSearchList = forwardRef<
   };
 
   const handleSelect = () => {
-    handleChange(searchResults[focusedIndex]);
+    handleChange(
+      searchResults[focusedIndex],
+      buildSelectionPath(rootNode?.findNode(searchResults[focusedIndex].value))
+    );
   };
 
   useImperativeHandle(
@@ -120,7 +125,10 @@ export const CascaderSearchList = forwardRef<
     >
       {searchResults.map((item, i) => (
         <CascaderSearchListItem
-          onClick={() => handleChange({ label: item.label, value: item.value })}
+          onClick={() => handleChange(
+            { label: item.label, value: item.value },
+            buildSelectionPath(rootNode?.findNode(item.value))
+          )}
           item={item}
           searchString={searchValue}
           isFocused={i === focusedIndex}

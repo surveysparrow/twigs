@@ -1,4 +1,5 @@
 import React, {
+  ComponentProps,
   ReactNode,
   createContext,
   useEffect,
@@ -7,6 +8,7 @@ import React, {
   useRef,
   useState
 } from 'react';
+import { Box } from '../box';
 import { CascaderOption } from './cascader';
 import { CascaderNode } from './cascader-node';
 import { CascaderRootNode } from './cascader-root-node';
@@ -43,6 +45,7 @@ export type CascaderContextType = {
     placeholder?: string;
     inputAriaDescription?: string;
     popoverPortal?: HTMLElement;
+    css?: ComponentProps<typeof Box>['css'];
     ariaLiveContent?: (
       data: {
         breadcrumb: string;
@@ -63,7 +66,7 @@ export type CascaderContextType = {
   focusNextColumn: () => void;
   focusPreviousRow: () => void;
   focusPreviousColumn: () => void;
-  handleChange: (value: CascaderOption) => void;
+  handleChange: (value: CascaderOption, selectionPath: SelectionPath[]) => void;
   setPopoverOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setSelectedNode: React.Dispatch<React.SetStateAction<CascaderNode | null>>;
 };
@@ -104,7 +107,10 @@ export const CascaderProvider = ({
   children: ReactNode;
   data: CascaderOption[];
   value: { label: string; value: string };
-  handleChange: (updatedValue: CascaderOption) => void;
+  handleChange: (
+    updatedValue: CascaderOption,
+    selectionPath: SelectionPath[]
+  ) => void;
   componentProps?: CascaderContextType['componentProps'];
 }) => {
   const [selectedNode, setSelectedNode] = useState<CascaderNode | null>(null);

@@ -5,6 +5,7 @@ export * from './accordion';
 export * from './box';
 export * from './button';
 export * from './calendar';
+export * from './cascader';
 export * from './checkbox';
 export * from './chip';
 export * from './datepicker';

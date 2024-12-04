@@ -1,12 +1,15 @@
 import { useMemo, useState } from 'react';
 import { CascaderContent } from './cascader-content';
-import { CascaderContextType, CascaderProvider } from './cascader-provider';
+import {
+  CascaderContextType,
+  CascaderProvider,
+  SelectionPath
+} from './cascader-provider';
 import { recursiveFind } from './cascader-utils';
 
 export interface CascaderOption {
   label: string;
   value: string;
-  disabled?: boolean;
   options?: CascaderOption[];
 }
 
@@ -16,10 +19,11 @@ export type CascaderProps = {
   data: CascaderOption[];
   value?: string | { label: string; value: string };
   defaultValue?: string | { label: string; value: string };
-  onChange?: (value: CascaderOption) => void;
+  onChange?: (value: CascaderOption, selectionPath: SelectionPath[]) => void;
 } & ComponentProps;
 
 export const Cascader = ({
+  css,
   data,
   value,
   label,
@@ -49,13 +53,21 @@ export const Cascader = ({
 
   const componentProps: ComponentProps = useMemo(
     () => ({
+      css,
       label,
       placeholder,
-      inputAriaDescription,
+      popoverPortal,
       ariaLiveContent,
-      popoverPortal
+      inputAriaDescription
     }),
-    [label, placeholder, inputAriaDescription, ariaLiveContent, popoverPortal]
+    [
+      css,
+      label,
+      placeholder,
+      popoverPortal,
+      ariaLiveContent,
+      inputAriaDescription
+    ]
   );
 
   return (
@@ -63,10 +75,10 @@ export const Cascader = ({
       data={data}
       componentProps={componentProps}
       value={selectedValue}
-      handleChange={(val) => {
+      handleChange={(val, selectionPath) => {
         setLocalValue(val.value);
         if (onChange) {
-          onChange(val);
+          onChange(val, selectionPath);
         }
       }}
     >
