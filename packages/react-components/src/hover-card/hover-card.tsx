@@ -23,12 +23,13 @@ const slideLeftAndFade = keyframes({
 });
 
 const StyledHoverCardContent = styled(HoverCardPrimitive.Content, {
-  borderRadius: '$md',
   padding: '$4',
   width: 300,
   backgroundColor: '$white900',
   boxShadow:
-    'hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px',
+            '0px 8px 12px 0px #0000000F, 0px 2px 5px 0px #0000000F, 0px 1px 1px 0px #0000000F',
+  border: '0.5px solid #00000026',
+  borderRadius: '$xl',
   animationDuration: '400ms',
   animationTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
   willChange: 'transform, opacity',
@@ -65,4 +66,5 @@ const Content = ({
 
 export const HoverCard = HoverCardPrimitive.Root;
 export const HoverCardTrigger = HoverCardPrimitive.Trigger;
+export const HoverCardPortal = HoverCardPrimitive.Portal;
 export const HoverCardContent = Content;
