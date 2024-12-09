@@ -1,7 +1,7 @@
 import { ChevronRightIcon } from '@sparrowengg/twigs-react-icons';
 import { prefixClassName } from '@src/utils';
 import React, { KeyboardEvent, useMemo } from 'react';
-import { CircleLoader } from '..';
+import { CircleLoader } from '../loader';
 import { Flex } from '../flex';
 import { styled } from '../stitches.config';
 import { Text } from '../text';
