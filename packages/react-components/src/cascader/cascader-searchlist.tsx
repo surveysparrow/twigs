@@ -184,6 +184,7 @@ export const CascaderSearchList = forwardRef<
           searchString={searchValue}
           isFocused={i === focusedIndex}
           index={i}
+          key={item.value}
         />
       ))}
       {searchResultsLoading && (
