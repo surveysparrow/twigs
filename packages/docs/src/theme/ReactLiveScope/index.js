@@ -31,6 +31,7 @@ const ReactLiveScope = {
   Input: twigsComponentLoader("Input"),
   Textarea: twigsComponentLoader("Textarea"),
   Checkbox: twigsComponentLoader("Checkbox"),
+  Cascader: twigsComponentLoader("Cascader"),
   Radio: twigsComponentLoader("Radio"),
   Select: twigsComponentLoader("Select"),
   FormInput: twigsComponentLoader("FormInput"),
