@@ -22,7 +22,7 @@ export const CascaderAriaLive = ({ searchValue }: { searchValue: string }) => {
         label: arrPath.at(-1)!.label,
         totalItems: parentChildren?.length || 0,
         itemPosition,
-        hasOptions: focusedNode.getChildren().length > 0,
+        hasOptions: focusedNode.getChildren().length > 0 || focusedNode.shouldFetchOptions,
         hasParent:
           focusedNode.getParent() !== null
           && focusedNode.getParent()?.isRoot === false

@@ -7,9 +7,13 @@ import { Text } from '../text';
 import { useCascaderValue } from './use-value';
 
 export const CascaderBreadCrumb = () => {
-  const { valueSelectionPath } = useCascaderValue();
+  const { value, valueSelectionPath, componentProps } = useCascaderValue();
   if (valueSelectionPath.length === 0) {
     return null;
+  }
+
+  if (componentProps.renderBreadCrumb) {
+    return componentProps.renderBreadCrumb(value ?? null, valueSelectionPath);
   }
 
   return (
@@ -44,6 +48,12 @@ export const CascaderBreadCrumb = () => {
 };
 
 export const CascaderInputValue = ({ children }: { children?: ReactNode }) => {
+  const { componentProps, value, valueSelectionPath } = useCascaderValue();
+
+  if (componentProps.renderValue) {
+    return componentProps.renderValue(value ?? null, valueSelectionPath);
+  }
+
   return (
     <Box
       css={{
@@ -51,13 +61,17 @@ export const CascaderInputValue = ({ children }: { children?: ReactNode }) => {
       }}
       className={prefixClassName('cascader__input-value')}
     >
-      <Text
-        css={{
-          color: '$neutral900'
-        }}
-      >
-        {children}
-      </Text>
+      {componentProps.renderValueText ? (
+        componentProps.renderValueText(value ?? null, valueSelectionPath)
+      ) : (
+        <Text
+          css={{
+            color: '$neutral900'
+          }}
+        >
+          {children}
+        </Text>
+      )}
     </Box>
   );
 };

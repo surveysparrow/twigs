@@ -3,7 +3,7 @@ import { Fragment, ReactNode } from 'react';
 import { Box } from '../box';
 import { styled } from '../stitches.config';
 import { Text } from '../text';
-import { FlattenedData } from './cascader-utils';
+import { CascaderNode } from './cascader-node';
 
 const StyledLi = styled('li', {
   padding: '$3 $6',
@@ -26,6 +26,17 @@ const StyledLi = styled('li', {
         backgroundColorOpacity: ['$primary500', 0.1],
         outlineOffset: '-1px'
       }
+    },
+    disabled: {
+      true: {
+        cursor: 'not-allowed',
+        pointerEvents: 'none',
+        opacity: 0.6,
+
+        '&:hover': {
+          backgroundColor: 'transparent'
+        }
+      }
     }
   }
 });
@@ -39,7 +50,7 @@ export const CascaderSearchListItem = ({
 }: {
   onClick: () => void;
   isFocused: boolean;
-  item: FlattenedData;
+  item: CascaderNode;
   searchString: string;
   index: number;
 }) => {
@@ -54,6 +65,7 @@ export const CascaderSearchListItem = ({
       focused={isFocused}
       className={prefixClassName('cascader__search-list-item')}
       data-index={index}
+      disabled={item.disabled}
     >
       <ItemContent item={item} searchString={searchString} />
     </StyledLi>
@@ -64,14 +76,14 @@ export const ItemContent = ({
   item,
   searchString
 }: {
-  item: FlattenedData;
+  item: CascaderNode;
   searchString: string;
 }) => {
-  if (item.objectPath.length === 1) {
+  if (!item.getParent()) {
     return (
       <Text className={prefixClassName('cascader__search-list-text')}>
         {highLight(item.label, searchString)}
-        {item.hasOptions && (
+        {(item.shouldFetchOptions || item.getChildren().length > 0) && (
           <>
             <BreadCrumbSeparator />
             ...
@@ -80,19 +92,25 @@ export const ItemContent = ({
       </Text>
     );
   }
-  if (item.objectPath.length > 3) {
+
+  const ancestors = item.getAncestors();
+
+  if (ancestors.length > 2) {
     return (
       <Text className={prefixClassName('cascader__search-list-text')}>
         <Word>
-          {item.objectPath[0].label}
+          {ancestors[0].label}
+        </Word>
+        <BreadCrumbSeparator />
+        <Word>
           ...
         </Word>
         <BreadCrumbSeparator />
         {highLight(
-          item.objectPath[item.objectPath.length - 1].label,
+          item.label,
           searchString
         )}
-        {item.hasOptions && (
+        {(item.shouldFetchOptions || item.getChildren().length > 0) && (
           <>
             <BreadCrumbSeparator />
             ...
@@ -104,17 +122,17 @@ export const ItemContent = ({
 
   return (
     <Text className={prefixClassName('cascader__search-list-text')}>
-      {item.objectPath.slice(0, -1).map(({ label, value }) => (
+      {ancestors.map(({ label, value }) => (
         <Fragment key={value}>
           <Word>{label}</Word>
           <BreadCrumbSeparator />
         </Fragment>
       ))}
       {highLight(
-        item.objectPath[item.objectPath.length - 1].label,
+        item.label,
         searchString
       )}
-      {item.hasOptions && (
+      {(item.shouldFetchOptions || item.getChildren().length > 0) && (
         <>
           <BreadCrumbSeparator />
           ...

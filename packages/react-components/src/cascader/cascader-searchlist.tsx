@@ -1,27 +1,40 @@
+import { prefixClassName } from '@src/utils';
+import { debounce } from 'lodash-es';
 import {
   forwardRef,
+  useCallback,
   useEffect,
   useImperativeHandle,
   useMemo,
   useRef,
   useState
 } from 'react';
-import { prefixClassName } from '@src/utils';
 import { createPortal } from 'react-dom';
-import { CascaderOption } from './cascader';
-import { CascaderSearchListItem } from './cascader-searchlist-item';
-import { useCascaderValue } from './use-value';
 import { styled } from '../stitches.config';
+import { CascaderOption } from './cascader';
+import { CascaderItem } from './cascader-provider';
+import { CascaderSearchListItem } from './cascader-searchlist-item';
 import {
   buildBreadcrumbFromValue,
   buildSelectionPath,
-  stringSearchFlattenedData
+  stringSearchFlattenedNodes
 } from './cascader-utils';
-import { SelectionPath } from './cascader-provider';
+import { useCascaderValue } from './use-value';
 
 const StyledUl = styled('ul', {
   maxHeight: '320px',
   overflowY: 'auto'
+});
+
+const StyledLoadingIndicator = styled('li', {
+  padding: '$3 $6',
+  height: '32px',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  color: '$neutral800',
+  fontSize: '$sm',
+  lineHeight: '$sm'
 });
 
 export interface CascaderSearchListRef {
@@ -32,7 +45,7 @@ export interface CascaderSearchListRef {
 
 interface CascaderSearchListProps {
   searchValue: string;
-  handleChange: (value: CascaderOption, selectionPath: SelectionPath[]) => void;
+  handleChange: (value: CascaderOption, selectionPath: CascaderItem[]) => void;
 }
 
 export const CascaderSearchList = forwardRef<
@@ -40,32 +53,67 @@ export const CascaderSearchList = forwardRef<
   CascaderSearchListProps
 >(({ searchValue, handleChange }, ref) => {
   const {
-    id, data, rootNode, flattenedData
+    id, data, componentProps, rootNode
   } = useCascaderValue();
 
   const containerRef = useRef<HTMLUListElement>(null);
   const [focusedIndex, setFocusedIndex] = useState(0);
+  const [searchResultsLoading, setSearchResultsLoading] = useState(false);
 
   const searchResults = useMemo(() => {
     setFocusedIndex(0);
-    return stringSearchFlattenedData(flattenedData, searchValue);
-  }, [flattenedData, searchValue]);
+    return stringSearchFlattenedNodes(rootNode, searchValue);
+  }, [rootNode, searchValue]);
+
+  const fetchResults = useCallback(
+    debounce(
+      (
+        searchString: string,
+        fetchSearchResults = componentProps.fetchSearchOptions
+      ) => {
+        setSearchResultsLoading(true);
+        fetchSearchResults(searchString).finally(() => {
+          setSearchResultsLoading(false);
+        });
+      }
+    ),
+    []
+  );
+
+  useEffect(() => {
+    if (searchValue.trim() && componentProps.fetchSearchOptions) {
+      fetchResults(searchValue, componentProps.fetchSearchOptions);
+    }
+  }, [searchValue, componentProps.fetchSearchOptions]);
 
   const focusNextItem = () => {
-    if (focusedIndex < searchResults.length - 1) {
-      setFocusedIndex(focusedIndex + 1);
+    let nextIndex = focusedIndex + 1;
+    let nextItem = searchResults[nextIndex];
+    while (nextItem && nextItem.disabled) {
+      nextItem = searchResults[nextIndex + 1];
+      nextIndex++;
+    }
+    if (nextItem) {
+      setFocusedIndex(nextIndex);
     }
   };
 
   const focusPreviousItem = () => {
-    if (focusedIndex > 0) {
-      setFocusedIndex(focusedIndex - 1);
+    let prevIndex = focusedIndex - 1;
+    let prevItem = searchResults[prevIndex];
+    while (prevItem && prevItem.disabled) {
+      prevItem = searchResults[prevIndex - 1];
+      prevIndex--;
+    }
+    if (prevItem) {
+      setFocusedIndex(prevIndex);
     }
   };
 
   const handleSelect = () => {
+    if (searchResults[focusedIndex].disabled) return;
     handleChange(
-      searchResults[focusedIndex],
+      searchResults[focusedIndex].getData(),
       buildSelectionPath(rootNode?.findNode(searchResults[focusedIndex].value))
     );
   };
@@ -125,16 +173,27 @@ export const CascaderSearchList = forwardRef<
     >
       {searchResults.map((item, i) => (
         <CascaderSearchListItem
-          onClick={() => handleChange(
-            { label: item.label, value: item.value },
-            buildSelectionPath(rootNode?.findNode(item.value))
-          )}
+          onClick={() => {
+            if (item.disabled) return;
+            handleChange(
+              item.getData(),
+              buildSelectionPath(rootNode?.findNode(item.value))
+            );
+          }}
           item={item}
           searchString={searchValue}
           isFocused={i === focusedIndex}
           index={i}
         />
       ))}
+      {searchResultsLoading && (
+        <StyledLoadingIndicator
+          role="presentation"
+          className={prefixClassName('cascader__search-loading-indicator')}
+        >
+          {componentProps.searchLoadingIndicator}
+        </StyledLoadingIndicator>
+      )}
       {liveElement
         && searchResults.length > 0
         && createPortal(

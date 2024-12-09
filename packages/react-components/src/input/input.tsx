@@ -1,4 +1,5 @@
 import React, { ReactElement, FunctionComponent, ComponentProps } from 'react';
+import { prefixClassName } from '@src/utils';
 import { Box } from '../box';
 import { styled } from '../stitches.config';
 
@@ -243,7 +244,10 @@ export const Input: FunctionComponent<InputProps> = React.forwardRef(
           )}
 
           {leftElement && (
-            <AddonContainer position="left">
+            <AddonContainer
+              position="left"
+              className={prefixClassName('input__addon--left')}
+            >
               {React.cloneElement(leftElement)}
             </AddonContainer>
           )}
@@ -273,7 +277,10 @@ export const Input: FunctionComponent<InputProps> = React.forwardRef(
           )}
 
           {rightElement && (
-            <AddonContainer position="right">
+            <AddonContainer
+              position="right"
+              className={prefixClassName('input__addon--right')}
+            >
               {React.cloneElement(rightElement)}
             </AddonContainer>
           )}

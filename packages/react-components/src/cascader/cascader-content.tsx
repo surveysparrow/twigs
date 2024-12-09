@@ -199,7 +199,11 @@ export const CascaderContent = () => {
     >
       <Box
         css={{
-          position: 'relative'
+          position: 'relative',
+
+          '.twigs-input__addon--left': {
+            pointerEvents: 'none'
+          }
         }}
         className={prefixClassName('cascader__container')}
       >

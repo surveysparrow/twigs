@@ -1,5 +1,4 @@
 import React, {
-  ComponentProps,
   ReactNode,
   createContext,
   useEffect,
@@ -8,18 +7,19 @@ import React, {
   useRef,
   useState
 } from 'react';
-import { Box } from '../box';
-import { CascaderOption } from './cascader';
+import { CascaderComponentProps, CascaderOption } from './cascader';
 import { CascaderNode } from './cascader-node';
 import { CascaderRootNode } from './cascader-root-node';
 import {
-  FlattenedData,
   buildSelectionPath,
   buildTree,
-  flattenDataWithPath
+  findNextFocusableColumnNode,
+  findNextFocusableRowNode,
+  findPrevFocusableColumnNode,
+  findPrevFocusableRowNode
 } from './cascader-utils';
 
-export interface SelectionPath {
+export interface CascaderItem {
   value: string;
   label: string;
 }
@@ -32,31 +32,14 @@ export type FocusedItem = {
 export type CascaderContextType = {
   id: string;
   data: CascaderOption[];
-  value?: { label: string; value: string };
-  selectionPath: SelectionPath[];
+  value?: CascaderItem;
+  selectionPath: CascaderItem[];
   popoverOpen: boolean;
   focusedItem: FocusedItem;
-  flattenedData: FlattenedData[];
-  valueSelectionPath: SelectionPath[];
+  valueSelectionPath: CascaderItem[];
   selectedNode: CascaderNode | null;
   rootNode: CascaderRootNode | null;
-  componentProps: {
-    label?: string;
-    placeholder?: string;
-    inputAriaDescription?: string;
-    popoverPortal?: HTMLElement;
-    css?: ComponentProps<typeof Box>['css'];
-    ariaLiveContent?: (
-      data: {
-        breadcrumb: string;
-        label: string;
-        totalItems: any;
-        itemPosition: number;
-        hasOptions: boolean;
-        hasParent: boolean;
-      } | null
-    ) => ReactNode;
-  };
+  componentProps: CascaderComponentProps;
   closePopover: () => void;
   clearFocus: () => void;
   setFocusedItem: React.Dispatch<React.SetStateAction<FocusedItem>>;
@@ -66,7 +49,8 @@ export type CascaderContextType = {
   focusNextColumn: () => void;
   focusPreviousRow: () => void;
   focusPreviousColumn: () => void;
-  handleChange: (value: CascaderOption, selectionPath: SelectionPath[]) => void;
+  fetchDataForNode: (node: CascaderNode) => Promise<void>;
+  handleChange: (value: CascaderOption, selectionPath: CascaderItem[]) => void;
   setPopoverOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setSelectedNode: React.Dispatch<React.SetStateAction<CascaderNode | null>>;
 };
@@ -78,7 +62,6 @@ export const CascaderContext = createContext<CascaderContextType>({
   rootNode: null,
   value: { label: '', value: '' },
   selectionPath: [],
-  flattenedData: [],
   popoverOpen: false,
   valueSelectionPath: [],
   componentProps: {},
@@ -94,7 +77,8 @@ export const CascaderContext = createContext<CascaderContextType>({
   focusNextColumn: () => {},
   focusPreviousColumn: () => {},
   setSelectedNode: () => {},
-  setPopoverOpen: () => {}
+  setPopoverOpen: () => {},
+  fetchDataForNode: async () => {}
 });
 
 export const CascaderProvider = ({
@@ -109,7 +93,7 @@ export const CascaderProvider = ({
   value: { label: string; value: string };
   handleChange: (
     updatedValue: CascaderOption,
-    selectionPath: SelectionPath[]
+    selectionPath: CascaderItem[]
   ) => void;
   componentProps?: CascaderContextType['componentProps'];
 }) => {
@@ -122,6 +106,7 @@ export const CascaderProvider = ({
   const [popoverOpen, setPopoverOpen] = useState(false);
   const [rootNode, setRootNode] = useState<CascaderRootNode | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const rootNodeRef = useRef<CascaderRootNode | null>(rootNode);
 
   const id = useId();
 
@@ -137,35 +122,43 @@ export const CascaderProvider = ({
     setPopoverOpen(false);
   };
 
-  const flattenedData = useMemo(() => {
-    return flattenDataWithPath(data);
-  }, [data]);
-
   useEffect(() => {
-    const tree = buildTree(data);
+    const tree = buildTree(data, rootNodeRef.current);
     setRootNode(tree);
   }, [data]);
 
   const focusNextRow = () => {
     if (focusedItem.node) {
-      if (focusedItem.node.nextNode) {
+      const nextRow = findNextFocusableRowNode(focusedItem.node);
+      if (nextRow) {
         setFocusedItem({
-          node: focusedItem.node.nextNode,
+          node: nextRow,
           isMouseClick: false
         });
       }
     } else if (data.length > 0) {
+      let nextRow: CascaderNode | null = rootNode?.children[0] ?? null;
+
+      if (nextRow && nextRow.disabled) {
+        nextRow = findNextFocusableRowNode(nextRow);
+      }
+
+      if (!nextRow) return;
+
       setFocusedItem({
-        node: rootNode?.children[0] || null,
+        node: nextRow,
         isMouseClick: false
       });
     }
   };
 
   const focusPreviousRow = () => {
-    if (focusedItem.node?.prevNode) {
+    if (focusedItem.node) {
+      const prevNode = findPrevFocusableRowNode(focusedItem.node);
+      if (!prevNode) return;
+
       setFocusedItem({
-        node: focusedItem.node.prevNode,
+        node: prevNode,
         isMouseClick: false
       });
     }
@@ -173,21 +166,31 @@ export const CascaderProvider = ({
 
   const focusNextColumn = () => {
     if (focusedItem.node) {
-      const firstChild = focusedItem.node.getFirstChild();
-      if (firstChild) {
+      const nextNode = findNextFocusableColumnNode(focusedItem.node);
+      if (nextNode) {
         setSelectedNode(focusedItem.node);
         setFocusedItem({
-          node: firstChild,
+          node: nextNode,
           isMouseClick: false
         });
+      } else if (
+        focusedItem.node.shouldFetchOptions
+        && !focusedItem.node.dataFetched
+      ) {
+        setSelectedNode(focusedItem.node);
+        setFocusedItem({
+          node: focusedItem.node,
+          isMouseClick: false
+        });
+        fetchDataForNode(focusedItem.node);
       }
     }
   };
 
   const focusPreviousColumn = () => {
     if (focusedItem.node) {
-      const parent = focusedItem.node.getParent();
-      if (parent && !parent.isRoot) {
+      const parent = findPrevFocusableColumnNode(focusedItem.node);
+      if (parent) {
         setSelectedNode(parent);
         setFocusedItem({
           node: parent,
@@ -203,6 +206,30 @@ export const CascaderProvider = ({
       isMouseClick: false
     });
   };
+
+  const fetchDataForNode = async (node: CascaderNode) => {
+    if (!componentProps.fetchOptions) return;
+
+    node.setLoading(true);
+
+    try {
+      await componentProps.fetchOptions({
+        label: node.label,
+        value: node.value,
+        ...node.options
+      });
+      node.setDataFetched(true);
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(error);
+    } finally {
+      node.setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    rootNodeRef.current = rootNode;
+  }, [rootNode]);
 
   const selectionPath = useMemo(() => {
     return buildSelectionPath(selectedNode);
@@ -229,12 +256,12 @@ export const CascaderProvider = ({
       handleChange,
       selectedNode,
       selectionPath,
-      flattenedData,
       componentProps,
       setFocusedItem,
       setPopoverOpen,
       focusNextColumn,
       setSelectedNode,
+      fetchDataForNode,
       focusPreviousRow,
       valueSelectionPath,
       focusPreviousColumn
@@ -254,12 +281,12 @@ export const CascaderProvider = ({
       handleChange,
       selectedNode,
       selectionPath,
-      flattenedData,
       componentProps,
       setFocusedItem,
       setPopoverOpen,
       focusNextColumn,
       setSelectedNode,
+      fetchDataForNode,
       focusPreviousRow,
       valueSelectionPath,
       focusPreviousColumn

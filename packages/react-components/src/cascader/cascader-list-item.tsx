@@ -1,12 +1,13 @@
 import { ChevronRightIcon } from '@sparrowengg/twigs-react-icons';
 import { prefixClassName } from '@src/utils';
 import React, { KeyboardEvent, useMemo } from 'react';
+import { CircleLoader } from '..';
 import { Flex } from '../flex';
 import { styled } from '../stitches.config';
 import { Text } from '../text';
 import { CascaderNode } from './cascader-node';
-import { useCascaderValue } from './use-value';
 import { buildSelectionPath } from './cascader-utils';
+import { useCascaderValue } from './use-value';
 
 const StyledItem = styled('li', {
   padding: '$3 $6',
@@ -37,6 +38,16 @@ const StyledItem = styled('li', {
         outline: '1px solid $colors$primary500',
         backgroundColorOpacity: ['$primary500', 0.1]
       }
+    },
+    disabled: {
+      true: {
+        cursor: 'not-allowed',
+        opacity: 0.6,
+
+        '&:hover': {
+          backgroundColor: 'transparent'
+        }
+      }
     }
   }
 });
@@ -60,20 +71,25 @@ export const CascaderListItem = ({
     closePopover,
     setSelectedNode,
     setFocusedItem,
-    getInputRef
+    getInputRef,
+    fetchDataForNode
   } = useCascaderValue();
+  const node = rootNode?.findNode(option.value);
 
   const hasOptions = option.getChildren()?.length > 0;
 
-  const handleSelection = (isMouseClick = false) => {
-    const node = rootNode?.findNode(option.value);
-    if (!node) return;
+  const handleSelection = async (isMouseClick = false) => {
+    if (!node || node.disabled) return;
 
     setSelectedNode(node);
     setFocusedItem({
       node,
       isMouseClick
     });
+
+    if (node.shouldFetchOptions && !node.dataFetched) {
+      fetchDataForNode(node);
+    }
   };
 
   const handleClick = (e: React.MouseEvent<HTMLLIElement>) => {
@@ -109,7 +125,7 @@ export const CascaderListItem = ({
       case 'Enter': {
         handleSelection();
         handleChange(
-          option,
+          option.getData(),
           buildSelectionPath(rootNode?.findNode(option.value))
         );
         closePopover();
@@ -139,6 +155,7 @@ export const CascaderListItem = ({
         focusedItem?.node?.value === option.value && !focusedItem.isMouseClick
       }
       className={prefixClassName('cascader__list-item')}
+      disabled={option.disabled}
     >
       <Flex
         alignItems="center"
@@ -151,11 +168,17 @@ export const CascaderListItem = ({
         <Text className={prefixClassName('cascader__list-item-text')}>
           {option.label}
         </Text>
-        {hasOptions && (
-          <ChevronRightIcon
-            size={20}
-            className={prefixClassName('cascader__list-item-icon')}
-          />
+        {node?.loading ? (
+          <CircleLoader color="secondary" />
+        ) : (
+          <>
+            {(hasOptions || node?.shouldFetchOptions) && (
+              <ChevronRightIcon
+                size={20}
+                className={prefixClassName('cascader__list-item-icon')}
+              />
+            )}
+          </>
         )}
       </Flex>
     </StyledItem>

@@ -26,8 +26,8 @@ export const CascaderList = () => {
   } = useCascaderValue();
 
   useEffect(() => {
-    if (containerRef.current) {
-      requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      if (containerRef.current) {
         const selectedItem = containerRef.current!.querySelector(
           '[data-is-selected="true"]'
         ) as HTMLElement | null;
@@ -35,8 +35,8 @@ export const CascaderList = () => {
         if (selectedItem) {
           selectedItem.scrollIntoView();
         }
-      });
-    }
+      }
+    });
   }, []);
 
   return (

@@ -1,15 +1,21 @@
 import { Button } from '../button';
 import { Flex } from '../flex';
 import { CascaderOption } from './cascader';
-import { SelectionPath } from './cascader-provider';
+import { CascaderItem } from './cascader-provider';
 import { useCascaderValue } from './use-value';
 
 export const CascaderFooter = ({
   handleChange
 }: {
-  handleChange: (value: CascaderOption, selectionPath: SelectionPath[]) => void;
+  handleChange: (value: CascaderOption, selectionPath: CascaderItem[]) => void;
 }) => {
-  const { selectionPath, selectedNode, closePopover } = useCascaderValue();
+  const {
+    selectionPath,
+    componentProps,
+    getInputRef,
+    selectedNode,
+    closePopover
+  } = useCascaderValue();
 
   return (
     <Flex
@@ -25,11 +31,20 @@ export const CascaderFooter = ({
         size="md"
         variant="ghost"
         color="default"
+        onKeyDown={(e) => {
+          if (e.key === 'Tab' && e.shiftKey) {
+            e.preventDefault();
+            const input = getInputRef();
+            if (input) {
+              input.focus();
+            }
+          }
+        }}
         onClick={() => {
           closePopover();
         }}
       >
-        Cancel
+        {componentProps.cancelButtonText}
       </Button>
       <Button
         size="md"
@@ -37,13 +52,12 @@ export const CascaderFooter = ({
         color="primary"
         disabled={!selectedNode}
         onClick={() => {
-          if (selectionPath.length > 0) {
-            const selectedItem = selectionPath[selectionPath.length - 1];
-            handleChange(selectedItem, selectionPath);
+          if (selectedNode) {
+            handleChange(selectedNode.getData(), selectionPath);
           }
         }}
       >
-        Choose
+        {componentProps.chooseButtonText}
       </Button>
     </Flex>
   );

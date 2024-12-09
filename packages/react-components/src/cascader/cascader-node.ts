@@ -1,3 +1,8 @@
+export interface CascaderNodeOptions {
+  disabled?: boolean;
+  shouldFetchOptions?: boolean;
+}
+
 export class CascaderNode {
   value: string;
 
@@ -5,7 +10,7 @@ export class CascaderNode {
 
   children: CascaderNode[] = [];
 
-  parent?: CascaderNode;
+  parent: CascaderNode | null = null;
 
   prevNode: CascaderNode | null = null;
 
@@ -13,10 +18,51 @@ export class CascaderNode {
 
   isRoot = false;
 
-  constructor(value: string, label: string, children: CascaderNode[]) {
+  disabled = false;
+
+  shouldFetchOptions = false;
+
+  dataFetched = false;
+
+  loading = false;
+
+  options: Record<string, any> = {};
+
+  constructor(
+    value: string,
+    label: string,
+    options: CascaderNodeOptions,
+    children: CascaderNode[]
+  ) {
     this.value = value;
     this.label = label;
     this.children = children;
+
+    const { disabled, shouldFetchOptions, ...otherOptions } = options;
+    this.disabled = disabled ?? false;
+    this.shouldFetchOptions = shouldFetchOptions ?? false;
+    this.options = otherOptions;
+  }
+
+  getData() {
+    return {
+      label: this.label,
+      value: this.value,
+      ...this.options
+    };
+  }
+
+  resetWithProperties({
+    parent
+  }: {
+    parent: CascaderNode | null;
+  }) {
+    this.children = [];
+    if (parent) {
+      this.setParent(parent);
+    }
+
+    return this;
   }
 
   setParent(parent: CascaderNode) {
@@ -24,6 +70,7 @@ export class CascaderNode {
   }
 
   getParent() {
+    if (this.parent?.isRoot) return null;
     return this.parent ?? null;
   }
 
@@ -47,8 +94,28 @@ export class CascaderNode {
     return this.children;
   }
 
+  getAncestors() {
+    let ancestors: CascaderNode[] = [];
+    let parent = this.getParent();
+
+    while (parent) {
+      ancestors = [parent, ...ancestors];
+      parent = parent.getParent();
+    }
+
+    return ancestors;
+  }
+
   appendChild(child: CascaderNode) {
     child.setParent(this);
     this.children.push(child);
+  }
+
+  setDataFetched(fetched = true) {
+    this.dataFetched = fetched;
+  }
+
+  setLoading(loading = true) {
+    this.loading = loading;
   }
 }

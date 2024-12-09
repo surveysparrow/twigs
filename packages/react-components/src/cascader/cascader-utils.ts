@@ -1,6 +1,6 @@
 import { CascaderOption } from './cascader';
 import { CascaderNode } from './cascader-node';
-import { SelectionPath } from './cascader-provider';
+import { CascaderItem } from './cascader-provider';
 import { CascaderRootNode } from './cascader-root-node';
 
 export const recursiveFind = (
@@ -27,8 +27,8 @@ export const recursiveFind = (
 
 export const buildSelectionPath = (
   node?: CascaderNode | null
-): SelectionPath[] => {
-  const path: SelectionPath[] = [];
+): CascaderItem[] => {
+  const path: CascaderItem[] = [];
 
   let currentNode: CascaderNode | undefined | null = node;
   while (currentNode && !currentNode.isRoot) {
@@ -42,14 +42,24 @@ export const buildSelectionPath = (
   return path;
 };
 
-export const buildTree = (data: CascaderOption[]) => {
+export const buildTree = (
+  data: CascaderOption[],
+  existingRoot?: CascaderRootNode | null
+) => {
   const tree = new CascaderRootNode();
 
   const traverse = (options: CascaderOption[], parentNode: CascaderNode) => {
     for (let i = 0; i < options.length; i++) {
       const item = options[i];
-
-      const node = tree.createNode(item.value, item.label);
+      const existingNode = existingRoot?.findNode(item.value);
+      const node = existingNode
+        ? tree.resetNodeWithProperties(existingNode, {
+          parent: parentNode
+        })
+        : tree.createNode(item.value, item.label, {
+          disabled: item.disabled,
+          shouldFetchOptions: item.shouldFetchOptions
+        });
 
       if (i === 0) {
         node.setPrevNode(null);
@@ -74,68 +84,65 @@ export const buildTree = (data: CascaderOption[]) => {
   return tree;
 };
 
-export interface FlattenedData {
-  label: string;
-  value: string;
-  objectPath: { label: string; value: string }[];
-  path: string;
-  hasOptions: boolean;
-}
+export const findNextFocusableRowNode = (
+  node: CascaderNode
+): CascaderNode | null => {
+  let { nextNode } = node;
 
-export const flattenDataWithPath = (
-  data: CascaderOption[]
-): FlattenedData[] => {
-  const flattened: FlattenedData[] = [];
+  while (nextNode && nextNode.disabled) {
+    nextNode = nextNode.nextNode;
+  }
 
-  const traverse = (
-    options: CascaderOption[],
-    {
-      objectPath,
-      path
-    }: { objectPath: FlattenedData['objectPath']; path: string }
-  ) => {
-    for (let i = 0; i < options.length; i++) {
-      const item = options[i];
+  return nextNode;
+};
 
-      const p = path ? `${path}.[${i}]` : `[${i}]`;
-      const objPath = [
-        ...objectPath,
-        {
-          label: item.label,
-          value: item.value
-        }
-      ];
+export const findPrevFocusableRowNode = (
+  node: CascaderNode
+): CascaderNode | null => {
+  let { prevNode } = node;
 
-      flattened.push({
-        label: item.label,
-        value: item.value,
-        objectPath: objPath,
-        path: p,
-        hasOptions: !!item.options?.length
-      });
+  while (prevNode && prevNode.disabled) {
+    prevNode = prevNode.prevNode;
+  }
 
-      if (item.options) {
-        traverse(item.options, {
-          objectPath: objPath,
-          path: p
-        });
-      }
-    }
-  };
+  return prevNode;
+};
 
-  traverse(data, {
-    path: '',
-    objectPath: []
-  });
+export const findNextFocusableColumnNode = (
+  node: CascaderNode
+): CascaderNode | null => {
+  const children = node.getChildren();
 
-  return flattened;
+  if (!children.length) {
+    return null;
+  }
+
+  let nextNode: CascaderNode | null = children[0];
+
+  while (nextNode && nextNode.disabled) {
+    nextNode = nextNode.nextNode;
+  }
+
+  return nextNode;
+};
+
+export const findPrevFocusableColumnNode = (
+  node: CascaderNode
+): CascaderNode | null => {
+  const parent = node.getParent();
+
+  if (!parent || parent.isRoot) {
+    return null;
+  }
+
+  return parent;
 };
 
 export const buildBreadcrumbFromValue = (
   value: string,
   rootNode: CascaderRootNode
 ) => {
-  const path: SelectionPath[] = [];
+  const path: CascaderItem[] = [];
 
   const node = rootNode.findNode(value);
 
@@ -158,12 +165,15 @@ export const buildBreadcrumbFromValue = (
   return path;
 };
 
-export const stringSearchFlattenedData = (
-  data: FlattenedData[],
+export const stringSearchFlattenedNodes = (
+  rootNode: CascaderRootNode | null,
   searchValue: string
-): FlattenedData[] => {
+) => {
+  if (!rootNode) return [];
   const searchString = searchValue.toLowerCase();
-  const found = data.filter((item) => item.label.toLowerCase().includes(searchString));
+  const allNodes = rootNode.getFlattenedNodes();
+
+  const found = allNodes.filter((node) => node.label.toLowerCase().includes(searchString));
 
   return found;
 };

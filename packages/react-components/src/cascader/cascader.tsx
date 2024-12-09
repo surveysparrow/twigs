@@ -1,26 +1,65 @@
-import { useMemo, useState } from 'react';
-import { CascaderContent } from './cascader-content';
 import {
-  CascaderContextType,
-  CascaderProvider,
-  SelectionPath
-} from './cascader-provider';
+  ComponentProps, ReactNode, useMemo, useState
+} from 'react';
+import { Box } from '../box';
+import { CascaderContent } from './cascader-content';
+import { CascaderItem, CascaderProvider } from './cascader-provider';
 import { recursiveFind } from './cascader-utils';
 
-export interface CascaderOption {
+export type CascaderOption = {
   label: string;
   value: string;
   options?: CascaderOption[];
-}
+  shouldFetchOptions?: boolean;
+  disabled?: boolean;
+} & Record<string, any>;
 
-type ComponentProps = CascaderContextType['componentProps'];
+export type CascaderComponentProps = {
+  label?: string;
+  placeholder?: string;
+  inputAriaDescription?: string;
+  popoverPortal?: HTMLElement;
+  css?: ComponentProps<typeof Box>['css'];
+  cancelButtonText?: string;
+  chooseButtonText?: string;
+  fetchOptions?: (
+    data: {
+      value: string;
+      label: string;
+    } & Record<string, any>
+  ) => Promise<void | any>;
+  fetchSearchOptions?: (searchString: string) => Promise<void | any>;
+  renderValue?: (
+    value: CascaderItem | null,
+    selectionPath: CascaderItem[]
+  ) => ReactNode;
+  renderValueText?: (
+    value: CascaderItem | null,
+    selectionPath: CascaderItem[]
+  ) => ReactNode;
+  renderBreadCrumb?: (
+    data: CascaderItem | null,
+    selectionPath: CascaderItem[]
+  ) => ReactNode;
+  ariaLiveContent?: (
+    data: {
+      breadcrumb: string;
+      label: string;
+      totalItems: any;
+      itemPosition: number;
+      hasOptions: boolean;
+      hasParent: boolean;
+    } | null
+  ) => ReactNode;
+  searchLoadingIndicator?: ReactNode;
+};
 
 export type CascaderProps = {
   data: CascaderOption[];
   value?: string | { label: string; value: string };
   defaultValue?: string | { label: string; value: string };
-  onChange?: (value: CascaderOption, selectionPath: SelectionPath[]) => void;
-} & ComponentProps;
+  onChange?: (value: CascaderOption, selectionPath: CascaderItem[]) => void;
+} & CascaderComponentProps;
 
 export const Cascader = ({
   css,
@@ -30,7 +69,15 @@ export const Cascader = ({
   placeholder,
   defaultValue,
   popoverPortal,
+  fetchOptions,
+  renderValue,
+  renderValueText,
+  renderBreadCrumb,
+  fetchSearchOptions,
   inputAriaDescription,
+  cancelButtonText = 'Cancel',
+  chooseButtonText = 'Choose',
+  searchLoadingIndicator = 'Loading Results...',
   onChange,
   ariaLiveContent
 }: CascaderProps) => {
@@ -51,22 +98,38 @@ export const Cascader = ({
     return { value: '', label: '' };
   }, [data, localValue, value]);
 
-  const componentProps: ComponentProps = useMemo(
+  const componentProps: CascaderComponentProps = useMemo(
     () => ({
       css,
       label,
       placeholder,
+      renderValue,
+      fetchOptions,
       popoverPortal,
+      renderValueText,
       ariaLiveContent,
-      inputAriaDescription
+      renderBreadCrumb,
+      cancelButtonText,
+      chooseButtonText,
+      fetchSearchOptions,
+      inputAriaDescription,
+      searchLoadingIndicator
     }),
     [
       css,
       label,
+      renderValue,
       placeholder,
+      fetchOptions,
       popoverPortal,
+      renderValueText,
       ariaLiveContent,
-      inputAriaDescription
+      renderBreadCrumb,
+      cancelButtonText,
+      chooseButtonText,
+      fetchSearchOptions,
+      inputAriaDescription,
+      searchLoadingIndicator
     ]
   );
 
