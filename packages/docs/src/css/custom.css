@@ -194,3 +194,9 @@ h3 {
   background: var(--ifm-menu-link-sublist-icon) center / 1.5rem !important;
   opacity: .8;
 }
+
+@media (min-width: 769px) {
+  .DocSearch-Button-Container {
+    width: 200px;
+  }
+}

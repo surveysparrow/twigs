@@ -56,7 +56,6 @@ const config = {
   ],
   plugins: [
     '@docusaurus/theme-live-codeblock',
-    require.resolve('docusaurus-lunr-search')
     // [
     //   require.resolve("@cmfcmf/docusaurus-search-local"),
     //   {
@@ -67,6 +66,12 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      algolia: {
+        appId: 'EUAZA1XCAD',
+        apiKey: '8f6939b34eb48d311e4a3820d6dbf955',
+        indexName: 'twigs-surveysparrow',
+        contextualSearch: true,
+      },
       // Replace with your project's social card
       image: 'https://static.surveysparrow.com/public-api/surveysparrow-developer-documenation.jpg',
       navbar: {
