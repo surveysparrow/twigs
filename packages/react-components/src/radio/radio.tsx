@@ -112,19 +112,20 @@ const StyledLabelContainer = styled('label', {
 export type RadioProps = {
   disabled?: boolean;
   required?: boolean;
+  containerRef?: React.RefObject<HTMLDivElement>;
 } & Omit<ComponentProps<typeof StyledRadio>, OmitProps>;
 
 export const Radio: FunctionComponent<RadioProps> = React.forwardRef<
   React.ElementRef<typeof StyledRadio>,
   RadioProps
 >(({
-  disabled, value, required, children, id, ...rest
+  disabled, value, required, children, id, containerRef, ...rest
 }, ref) => {
   const generatedId = useId();
   const uniqueId = id || generatedId;
 
   return (
-    <Flex alignItems="center">
+    <Flex alignItems="center" ref={containerRef}>
       <StyledRadio
         ref={ref}
         disabled={disabled}
