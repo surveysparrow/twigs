@@ -1,4 +1,3 @@
-import { CSS } from '@stitches/react';
 import React, {
   ComponentProps, ReactElement, useEffect, useMemo
 } from 'react';
@@ -12,9 +11,9 @@ import AsyncCreatableSelect from 'react-select/async-creatable';
 import CreatableSelect from 'react-select/creatable';
 import { Box } from '../box';
 import { FormLabel } from '../form-label';
-import { config, globalCss, styled } from '../stitches.config';
+import { globalCss, styled } from '../stitches.config';
 
-const selectStyles: CSS<typeof config> = {
+const selectStyles = {
   transition: 'all $transitions$2',
   '&--is-disabled': {
     cursor: 'not-allowed'
