@@ -1,13 +1,18 @@
-import React, { FunctionComponent, ReactElement, isValidElement } from 'react';
 import * as LabelPrimitive from '@radix-ui/react-label';
 import { ComponentProps } from '@stitches/react';
-import { styled } from '../stitches.config';
+import React, {
+  ReactElement,
+  forwardRef,
+  isValidElement
+} from 'react';
 import { Flex } from '../flex';
+import { styled } from '../stitches.config';
 import { Text } from '../text';
 
 export type FormLabelProps = React.HTMLAttributes<HTMLLabelElement> & {
   as?: React.ElementType;
   requiredIndicator?: ReactElement | boolean;
+  containerRef?: React.RefObject<HTMLDivElement>;
 };
 
 const StyledFormLabel = styled(LabelPrimitive.Root, {
@@ -37,11 +42,13 @@ const StyledText = styled(Text, {
   paddingTop: '$1'
 });
 
-export const FormLabel: FunctionComponent<
+// FormLabelProps & ComponentProps<typeof StyledFormLabel>
+export const FormLabel = forwardRef<
+  HTMLLabelElement,
   FormLabelProps & ComponentProps<typeof StyledFormLabel>
-> = ({
-  children, requiredIndicator = false, as, ...rest
-}: FormLabelProps) => {
+>(({
+  children, requiredIndicator = false, as, containerRef, ...rest
+}, ref) => {
   if (
     !isValidElement(requiredIndicator)
     && typeof requiredIndicator !== 'boolean'
@@ -49,8 +56,8 @@ export const FormLabel: FunctionComponent<
     throw Error('requiredIndicator is not a valid component');
   }
   return (
-    <Flex gap="$1">
-      <StyledFormLabel as={as} {...rest}>
+    <Flex gap="$1" ref={containerRef}>
+      <StyledFormLabel as={as} {...rest} ref={ref}>
         {children}
       </StyledFormLabel>
       {requiredIndicator === true ? (
@@ -61,4 +68,4 @@ export const FormLabel: FunctionComponent<
         : null}
     </Flex>
   );
-};
+});
