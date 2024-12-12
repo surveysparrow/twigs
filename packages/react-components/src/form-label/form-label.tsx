@@ -1,10 +1,6 @@
 import * as LabelPrimitive from '@radix-ui/react-label';
 import { ComponentProps } from '@stitches/react';
-import React, {
-  ReactElement,
-  forwardRef,
-  isValidElement
-} from 'react';
+import React, { ReactElement, forwardRef, isValidElement } from 'react';
 import { Flex } from '../flex';
 import { styled } from '../stitches.config';
 import { Text } from '../text';
@@ -12,7 +8,7 @@ import { Text } from '../text';
 export type FormLabelProps = React.HTMLAttributes<HTMLLabelElement> & {
   as?: React.ElementType;
   requiredIndicator?: ReactElement | boolean;
-  containerRef?: React.RefObject<HTMLDivElement>;
+  containerRef?: React.Ref<HTMLDivElement>;
 };
 
 const StyledFormLabel = styled(LabelPrimitive.Root, {
