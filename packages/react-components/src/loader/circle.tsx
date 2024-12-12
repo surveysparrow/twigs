@@ -127,7 +127,7 @@ const StyledContainer = styled(Box, {
 export type CircleLoaderProps = VariantProps<typeof StyledContainer> &
   React.HTMLAttributes<HTMLDivElement> & {
     css?: CSS<typeof config>;
-    containerRef?: React.RefObject<HTMLDivElement>;
+    containerRef?: React.Ref<HTMLDivElement>;
   };
 
 export const CircleLoader: FunctionComponent<CircleLoaderProps> = ({
