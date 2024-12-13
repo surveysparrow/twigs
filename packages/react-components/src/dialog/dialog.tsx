@@ -117,12 +117,15 @@ const StyledContent = styled(DialogPrimitive.Content, {
 type ContentProps = {
   children?: ReactNode;
   overlayClassName?:string;
+  portalContainer?: HTMLElement;
 } & ComponentProps<typeof StyledContent>;
 
-const Content = ({ children, overlayClassName, ...props }: ContentProps) => {
+const Content = ({
+  children, portalContainer, overlayClassName, ...props
+}: ContentProps) => {
   const dialogContext = useContext(DialogContext);
   return (
-    <DialogPrimitive.Portal>
+    <DialogPrimitive.Portal container={portalContainer}>
       <StyledOverlay className={clsx(prefixClassName('dialog__overlay'), overlayClassName)} />
       <StyledContent {...dialogContext} {...props}>
         {children}

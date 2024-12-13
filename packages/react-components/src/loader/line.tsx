@@ -83,7 +83,7 @@ const StyledContainer = styled(Box, {
 export type LineLoaderProps = VariantProps<typeof StyledContainer> &
   React.HTMLAttributes<HTMLDivElement> & {
     css?: CSS<typeof config>;
-    containerRef?: React.RefObject<HTMLDivElement>;
+    containerRef?: React.Ref<HTMLDivElement>;
   };
 
 export const LineLoader: FunctionComponent<LineLoaderProps> = ({

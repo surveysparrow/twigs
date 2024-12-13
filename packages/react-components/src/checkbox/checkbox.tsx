@@ -124,7 +124,7 @@ export type CheckboxBaseProps = {
   onChange?: (checked: boolean | 'indeterminate') => void;
   required?: boolean;
   disabled?: boolean;
-  containerRef?: React.RefObject<HTMLDivElement>;
+  containerRef?: React.Ref<HTMLDivElement>;
 };
 
 export type CheckboxProps = CheckboxBaseProps &
