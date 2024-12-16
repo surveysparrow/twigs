@@ -4,7 +4,7 @@ import { Image } from '../image';
 
 export default {
   component: Image,
-  title: 'Layout/Image',
+  title: 'Data Display/Image',
   argTypes: {
     alt: {
       control: 'text'
