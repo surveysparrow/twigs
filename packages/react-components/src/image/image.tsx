@@ -7,11 +7,11 @@ const StyledImage = styled('img');
 
 type StyledImageProps = ComponentProps<typeof StyledImage>;
 
-export type ImgProps = Omit<StyledImageProps, 'alt'> & {
+export type ImageProps = Omit<StyledImageProps, 'alt'> & {
   alt: string;
 };
 
-export const Img = (props: ImgProps) => {
+export const Image = (props: ImageProps) => {
   return (
     <StyledImage
       {...props}

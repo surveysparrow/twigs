@@ -1,10 +1,10 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
-import { Img } from '../img';
+import { Image } from '../image';
 
 export default {
-  component: Img,
-  title: 'Layout/Img',
+  component: Image,
+  title: 'Layout/Image',
   argTypes: {
     alt: {
       control: 'text'
@@ -14,9 +14,9 @@ export default {
       defaultValue: 'https://via.placeholder.com/150'
     }
   }
-} as ComponentMeta<typeof Img>;
+} as ComponentMeta<typeof Image>;
 
-const Template: ComponentStory<typeof Img> = (args) => (
-  <Img {...args} src={args?.src || 'https://via.placeholder.com/150'} />
+const Template: ComponentStory<typeof Image> = (args) => (
+  <Image {...args} src={args?.src || 'https://via.placeholder.com/150'} />
 );
 export const Default = Template.bind({});
