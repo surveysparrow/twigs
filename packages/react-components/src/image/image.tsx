@@ -15,7 +15,7 @@ export const Image = (props: ImageProps) => {
   return (
     <StyledImage
       {...props}
-      className={clsx(prefixClassName('img'), props.className)}
+      className={clsx(prefixClassName('image'), props.className)}
     />
   );
 };
