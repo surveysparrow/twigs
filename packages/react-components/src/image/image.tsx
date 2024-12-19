@@ -7,8 +7,9 @@ const StyledImage = styled('img');
 
 type StyledImageProps = ComponentProps<typeof StyledImage>;
 
-export type ImageProps = Omit<StyledImageProps, 'alt'> & {
+export type ImageProps = Omit<StyledImageProps, 'alt' | 'src'> & {
   alt: string;
+  src: string;
 };
 
 export const Image = forwardRef<HTMLImageElement, ImageProps>(
