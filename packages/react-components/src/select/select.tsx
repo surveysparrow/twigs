@@ -1,5 +1,10 @@
+import { CSS } from '@stitches/react';
+import clsx from 'clsx';
 import React, {
-  ComponentProps, ReactElement, useEffect, useMemo
+  ComponentProps, ReactElement,
+  ReactNode,
+  useEffect,
+  useMemo
 } from 'react';
 import ReactSelect, {
   GroupBase,
@@ -10,16 +15,17 @@ import AsyncSelect from 'react-select/async';
 import AsyncCreatableSelect from 'react-select/async-creatable';
 import CreatableSelect from 'react-select/creatable';
 import { Box } from '../box';
+import { Flex } from '../flex';
 import { FormLabel } from '../form-label';
-import { globalCss, styled } from '../stitches.config';
+import { config, globalCss, styled } from '../stitches.config';
 
-const selectStyles = {
+const selectStyles: CSS<typeof config> = {
   transition: 'all $transitions$2',
   '&--is-disabled': {
     cursor: 'not-allowed'
   },
   '& .twigs-select__control': {
-    background: '$black50',
+    backgroundColorOpacity: ['$secondary500', 0.06],
     borderColor: 'transparent',
     '&:hover': {
       borderColor: '$neutral200',
@@ -33,7 +39,15 @@ const selectStyles = {
         'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
     },
     '&.twigs-select__control--is-disabled': {
-      backgroundColorOpacity: ['$neutral500', 0.06]
+      backgroundColorOpacity: ['$neutral500', 0.06],
+      opacity: 0.6
+    },
+    '&--menu-is-open': {
+      '.twigs-select__value-container--has-value': {
+        '.twigs-select__single-value': {
+          color: '$neutral600'
+        }
+      }
     }
   },
   '& .twigs-select__value-container, & .twigs-select__placeholder, &.twigs-select__single-value, &.twigs-select__input':
@@ -43,11 +57,33 @@ const selectStyles = {
   '& .twigs-select__placeholder': {
     color: '$neutral600'
   },
+  '& .twigs-select__indicators': {
+    height: '100%'
+  },
   '& .twigs-select__value-container': {
-    color: '$neutral900'
+    height: '100%',
+    color: '$neutral900',
+    paddingLeft: '$0',
+    paddingRight: '$0'
+  },
+  '&.twigs-select--dropdown-indicator-left': {
+    '& .twigs-select__control': {
+      paddingRight: '$14'
+    }
+  },
+  '&.twigs-select--dropdown-indicator-left .twigs-select__value-container': {
+    paddingLeft: '$1'
+  },
+  '&.twigs-select--dropdown-indicator-right .twigs-select__value-container': {
+    paddingRight: '$1'
   },
   '& .twigs-select__indicator': {
-    padding: '0 $4',
+    padding: '0',
+    color: '$neutral600',
+
+    '&.twigs-select__clear-indicator': {
+      padding: '0 $4'
+    },
     '& svg': {
       width: '$4',
       height: '$4'
@@ -66,6 +102,9 @@ const selectStyles = {
   '& .twigs-select__single-value': {
     color: '$neutral900',
     lineHeight: '$sm'
+  },
+  '& .twigs-select__multi-value': {
+    marginTop: 0
   },
   '& .twigs-select__multi-value__label': {
     fontSize: '100%'
@@ -101,14 +140,26 @@ const selectStyles = {
       display: 'none'
     }
   },
+  '& .twigs-select__clear-indicator': {
+    '&:hover': {
+      color: '$neutral800'
+    }
+  },
   variants: {
     size: {
       xl: {
         '& .twigs-select__control': {
           height: '$12',
           minHeight: '$12',
-          borderRadius: '$lg',
-          fontSize: '$md'
+          borderRadius: '$xl',
+          fontSize: '$md',
+          padding: '0 $6'
+        },
+        '& .twigs-select__indicator': {
+          '& svg': {
+            width: '$5',
+            height: '$5'
+          }
         },
         '& .twigs-select__multi-value__label': {
           padding: '$4'
@@ -119,7 +170,14 @@ const selectStyles = {
           height: '$10',
           minHeight: '$10',
           borderRadius: '$lg',
-          fontSize: '$md'
+          fontSize: '$sm',
+          padding: '0 $6'
+        },
+        '& .twigs-select__indicator': {
+          '& svg': {
+            width: '$5',
+            height: '$5'
+          }
         },
         '& .twigs-select__multi-value__label': {
           padding: '$3'
@@ -134,7 +192,8 @@ const selectStyles = {
           height: '$8',
           minHeight: '$8',
           borderRadius: '$lg',
-          fontSize: '$sm'
+          fontSize: '$sm',
+          padding: '0 $4'
         },
         '& .twigs-select__multi-value__label': {
           padding: '$2'
@@ -144,8 +203,12 @@ const selectStyles = {
         '& .twigs-select__control': {
           height: '$6',
           minHeight: '$6',
-          borderRadius: '$md',
-          fontSize: '$sm'
+          borderRadius: '$sm',
+          fontSize: '$xs',
+          padding: '0 $4'
+        },
+        '&.twigs-select--dropdown-indicator-right .twigs-select__value-container': {
+          paddingRight: '$1'
         },
         '& .twigs-select__value-container, & .twigs-select__input-container': {
           paddingTop: 0,
@@ -153,6 +216,12 @@ const selectStyles = {
         },
         '& .twigs-select__multi-value__label': {
           padding: '$1'
+        },
+        '& .twigs-select__indicator': {
+          '& svg': {
+            width: '14px',
+            height: '14px'
+          }
         }
       }
     },
@@ -162,16 +231,27 @@ const selectStyles = {
           background: '$white900',
           borderWidth: '$xs',
           borderStyle: 'solid',
-          borderColor: '$neutral200',
+          borderColor: '$black300',
           '&:hover, &:focus, &:active': {
             borderWidth: '$xs',
             borderStyle: 'solid',
-            borderColor: '$neutral300'
+            borderColor: '$neutral400'
           }
         }
       },
       filled: {
-        borderColor: 'transparent'
+        borderColor: 'transparent',
+
+        '& .twigs-select__control': {
+          '&--is-disabled': {
+            border: '1px solid $neutral200'
+          },
+          '&:hover, &:focus, &:active': {
+            borderWidth: '$xs',
+            borderStyle: 'solid',
+            borderColor: '$neutral400'
+          }
+        }
       }
     }
   },
@@ -201,6 +281,8 @@ type SelectBaseProps = {
   dropdownIndicatorPosition?: 'left' | 'right';
   label?: string;
   requiredIndicator?: boolean;
+  info?: string | ReactNode;
+  labelRightAddon?: ReactNode;
 };
 
 const DropdownIndicator = (props, dropdownIndicatorIcon) => {
@@ -231,7 +313,9 @@ export const Select = React.forwardRef<
       styles,
       dropdownIndicatorPosition = 'right',
       label,
+      info,
       requiredIndicator,
+      labelRightAddon,
       ...props
     },
     ref
@@ -291,6 +375,11 @@ export const Select = React.forwardRef<
           ...components
         }}
         classNamePrefix="twigs-select"
+        className={clsx(props.className, {
+          'twigs-select--dropdown-indicator-left': dropdownIndicatorPosition === 'left',
+          'twigs-select--dropdown-indicator-right': dropdownIndicatorPosition === 'right',
+          'twigs-select--is-multi': props.isMulti
+        })}
         theme={(theme) => ({ ...theme, borderRadius: 10 })}
       />
     );
@@ -298,12 +387,15 @@ export const Select = React.forwardRef<
       <>
         {label ? (
           <Box>
-            <FormLabel
-              css={{ marginBottom: '$2' }}
-              requiredIndicator={requiredIndicator}
-            >
-              {label}
-            </FormLabel>
+            <Flex justifyContent="space-between" css={{ marginBottom: '$2' }}>
+              <FormLabel
+                requiredIndicator={requiredIndicator}
+                info={info}
+                rightAddon={labelRightAddon}
+              >
+                {label}
+              </FormLabel>
+            </Flex>
             {SelectElement}
           </Box>
         ) : (
