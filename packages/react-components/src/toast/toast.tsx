@@ -244,16 +244,16 @@ const StyledDescription = styled(ToastPrimitive.Description, {
   fontSize: '$sm'
 });
 // eslint-disable-next-line max-len
-const defaultBoxShadow = `0px 56px 70px 30px ${hexToRgba('$white900', 0.9)}, 0px 10px 20px 0px ${hexToRgba('$accent500', 0.15)}, 0px 2px 5px 0px ${hexToRgba('$accent500', 0.06)}, 0px 1px 1px 0px ${hexToRgba('$accent500', 0.06)}`;
+const defaultBoxShadow = `0px 56px 70px 30px ${hexToRgba('$white900', 0.4)}, 0px 10px 20px 0px ${hexToRgba('$accent500', 0.15)}, 0px 2px 5px 0px ${hexToRgba('$accent500', 0.06)}, 0px 1px 1px 0px ${hexToRgba('$accent500', 0.06)}`;
 
 // eslint-disable-next-line max-len
-const successBoxShadow = `0px 56px 70px 30px ${hexToRgba('$white900', 0.7)}, 0px 10px 20px 0px ${hexToRgba('$accent700', 0.15)}, 0px 2px 5px 0px ${hexToRgba('$accent700', 0.06)}, 0px 1px 1px 0px ${hexToRgba('$accent700', 0.06)}`;
+const successBoxShadow = `0px 56px 70px 30px ${hexToRgba('$white900', 0.4)}, 0px 10px 20px 0px ${hexToRgba('$accent700', 0.15)}, 0px 2px 5px 0px ${hexToRgba('$accent700', 0.06)}, 0px 1px 1px 0px ${hexToRgba('$accent700', 0.06)}`;
 
 // eslint-disable-next-line max-len
-const errorBoxShadow = `0px 56px 70px 30px ${hexToRgba('$white900', 0.9)}, 0px 10px 20px 0px ${hexToRgba('$negative700', 0.15)}, 0px 2px 5px 0px ${hexToRgba('$negative700', 0.06)}, 0px 1px 1px 0px ${hexToRgba('$negative700', 0.06)}`;
+const errorBoxShadow = `0px 56px 70px 30px ${hexToRgba('$white900', 0.4)}, 0px 10px 20px 0px ${hexToRgba('$negative700', 0.15)}, 0px 2px 5px 0px ${hexToRgba('$negative700', 0.06)}, 0px 1px 1px 0px ${hexToRgba('$negative700', 0.06)}`;
 
 // eslint-disable-next-line max-len
-const warningBoxShadow = `0px 56px 70px 30px ${hexToRgba('$white900', 0.9)}, 0px 10px 20px 0px ${hexToRgba('$warning700', 0.15)}, 0px 2px 5px 0px ${hexToRgba('$warning700', 0.06)}, 0px 1px 1px 0px ${hexToRgba('$warning700', 0.06)}`;
+const warningBoxShadow = `0px 56px 70px 30px ${hexToRgba('$white900', 0.4)}, 0px 10px 20px 0px ${hexToRgba('$warning700', 0.15)}, 0px 2px 5px 0px ${hexToRgba('$warning700', 0.06)}, 0px 1px 1px 0px ${hexToRgba('$warning700', 0.06)}`;
 
 const StyledToast = styled(ToastPrimitive.Root, {
   backgroundColor: '$neutral900',
