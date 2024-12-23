@@ -1,12 +1,12 @@
+import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import React, {
-  FunctionComponent,
   ComponentProps,
   ReactNode,
+  forwardRef,
   useId
 } from 'react';
-import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
-import { styled } from '../stitches.config';
 import { Flex } from '../flex';
+import { styled } from '../stitches.config';
 
 const TickIcon = () => {
   return (
@@ -124,6 +124,7 @@ export type CheckboxBaseProps = {
   onChange?: (checked: boolean | 'indeterminate') => void;
   required?: boolean;
   disabled?: boolean;
+  containerRef?: React.Ref<HTMLDivElement>;
 };
 
 export type CheckboxProps = CheckboxBaseProps &
@@ -133,19 +134,20 @@ export type CheckboxProps = CheckboxBaseProps &
     as?: React.ElementType;
   };
 
-export const Checkbox: FunctionComponent<CheckboxProps> = ({
+export const Checkbox = forwardRef<HTMLButtonElement, CheckboxProps>(({
   checked,
   disabled,
   required,
   onChange,
   children,
   id,
+  containerRef,
   ...rest
-}) => {
+}, ref) => {
   const isIndeterminate = checked === 'indeterminate';
   const uniqueId = id || useId();
   return (
-    <Flex alignItems="center">
+    <Flex alignItems="center" ref={containerRef}>
       <StyledCheckbox
         checked={checked}
         onCheckedChange={onChange}
@@ -154,6 +156,7 @@ export const Checkbox: FunctionComponent<CheckboxProps> = ({
         id={uniqueId}
         {...(isIndeterminate && { 'data-state': 'indeterminate' })}
         {...rest}
+        ref={ref}
       >
         <StyledIndicator
           {...(isIndeterminate && { 'data-state': 'indeterminate' })}
@@ -171,4 +174,4 @@ export const Checkbox: FunctionComponent<CheckboxProps> = ({
       )}
     </Flex>
   );
-};
+});

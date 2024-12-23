@@ -19,6 +19,10 @@ export default {
       control: 'select',
       options: ['solid', 'ghost', 'outline']
     },
+    shape: {
+      control: 'select',
+      options: ['round', 'default']
+    },
     disabled: {
       control: 'boolean'
     },

@@ -1,4 +1,7 @@
-import { TickCircleFillIcon } from '@sparrowengg/twigs-react-icons';
+import {
+  ChevronDownIcon,
+  TickCircleFillIcon
+} from '@sparrowengg/twigs-react-icons';
 import React from 'react';
 import { Button } from '../button';
 
@@ -36,16 +39,29 @@ export default {
 const Template = (args) => <Button {...args}>Submit</Button>;
 export const Buttons = Template.bind({});
 
-const ButtonWithIconR = (args) => (
+const TemplateButtonWithRightIcon = (args) => (
   <Button {...args} rightIcon={<TickCircleFillIcon />}>
     Submit
   </Button>
 );
-export const ButtonWithRightIcon = ButtonWithIconR.bind({});
+export const ButtonWithRightIcon = TemplateButtonWithRightIcon.bind({});
 
-const ButtonWithIconL = (args) => (
+const TemplateButtonWithLeftIcon = (args) => (
   <Button {...args} leftIcon={<TickCircleFillIcon />}>
     Submit
   </Button>
 );
-export const ButtonWithLeftIcon = ButtonWithIconL.bind({});
+
+export const ButtonWithLeftIcon = TemplateButtonWithLeftIcon.bind({});
+
+const TemplateButtonWithLeftAndRightIcon = (args) => (
+  <Button
+    {...args}
+    leftIcon={<TickCircleFillIcon />}
+    rightIcon={<ChevronDownIcon />}
+  >
+    Submit
+  </Button>
+);
+
+export const ButtonWithLeftAndRightIcon = TemplateButtonWithLeftAndRightIcon.bind({});

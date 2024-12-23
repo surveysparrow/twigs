@@ -1,3 +1,5 @@
+import { CSS } from '@stitches/react';
+import clsx from 'clsx';
 import React, {
   ReactElement,
   isValidElement,
@@ -5,17 +7,16 @@ import React, {
   useMemo,
   useRef
 } from 'react';
-import { CSS } from '@stitches/react';
 import { CSSTransition } from 'react-transition-group';
-import { config, styled } from '../stitches.config';
 import {
   CircleLoader,
   CircleLoaderProps,
   LineLoader,
   LineLoaderProps
 } from '../loader';
+import { config, styled } from '../stitches.config';
 import { ButtonBaseProps } from './button';
-import { prefixClassName } from '../utils';
+import { BUTTON_CLASSNAMES } from './utils';
 
 const StyledSpan = styled('span', {
   display: 'inline-flex',
@@ -24,16 +25,28 @@ const StyledSpan = styled('span', {
   transition:
     'width 300ms cubic-bezier(0.51, 0, 0, 1), margin-right 300ms cubic-bezier(0.51, 0, 0, 1)',
 
-  [`.${prefixClassName('button__icon-container')}`]: {
+  [`&.${BUTTON_CLASSNAMES.sideElementLoaderHidden} .${BUTTON_CLASSNAMES.loader}`]:
+    {
+      opacity: 0
+    },
+
+  [`.${BUTTON_CLASSNAMES.iconContainer}`]: {
     display: 'inline-flex',
 
-    svg: {
-      flexShrink: 0
+    [`.${BUTTON_CLASSNAMES.iconBox}`]: {
+      display: 'block',
+      flexShrink: 0,
+
+      '& > *': {
+        width: '100%',
+        height: '100%',
+        display: 'block'
+      }
     }
   },
 
-  [`.${prefixClassName('button__icon-container')},
-    .${prefixClassName('button__loader')}`]: {
+  [`.${BUTTON_CLASSNAMES.iconContainer},
+    .${BUTTON_CLASSNAMES.loader}`]: {
     transition: 'opacity 300ms cubic-bezier(0.51, 0, 0, 1)',
     position: 'absolute',
     left: 0,
@@ -41,15 +54,15 @@ const StyledSpan = styled('span', {
     margin: 'auto'
   },
 
-  [`& .${prefixClassName('button__icon-container-enter-done')},
-    & .${prefixClassName('button__loader-enter-done')},
-    & .${prefixClassName('button__icon-container-exit-active')},
-    & .${prefixClassName('button__loader-exit-active')}`]: {
+  [`& .${BUTTON_CLASSNAMES.iconContainer}-enter-done,
+    & .${BUTTON_CLASSNAMES.loader}-enter-done,
+    & .${BUTTON_CLASSNAMES.iconContainer}-exit-active,
+    & .${BUTTON_CLASSNAMES.loader}-exit-active`]: {
     opacity: 1
   },
 
-  [`& .${prefixClassName('button__icon-container-exit-done')},
-    & .${prefixClassName('button__loader-exit-done')}`]: {
+  [`& .${BUTTON_CLASSNAMES.iconContainer}-exit-done,
+    & .${BUTTON_CLASSNAMES.loader}-exit-done`]: {
     opacity: 0
   }
 });
@@ -74,6 +87,11 @@ export const ButtonSideElement = ({
   const nodeRef = useRef<HTMLSpanElement>(null);
   const loaderContainerRef = useRef<HTMLDivElement>(null);
   const iconContainerRef = useRef<HTMLDivElement>(null);
+  const loadingRef = useRef(loading);
+
+  useEffect(() => {
+    loadingRef.current = loading;
+  }, [loading]);
 
   useEffect(() => {
     requestAnimationFrame(() => {
@@ -81,10 +99,30 @@ export const ButtonSideElement = ({
         const nodeWidth = loading
           ? loaderContainerRef.current?.clientWidth
           : iconContainerRef.current?.firstElementChild?.clientWidth || 0;
+
         nodeRef.current.style.width = `${nodeWidth}px`;
       }
     });
   }, []);
+
+  useEffect(() => {
+    const resizeObserver = new ResizeObserver((entries) => {
+      if (entries[0] && !loadingRef.current) {
+        const { width } = entries[0].contentRect;
+        if (nodeRef.current) {
+          nodeRef.current.style.width = `${width}px`;
+        }
+      }
+    });
+
+    if (iconContainerRef.current?.firstElementChild) {
+      resizeObserver.observe(iconContainerRef.current.firstElementChild);
+    }
+
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, [icon]);
 
   const loaderComponent = useMemo(() => {
     switch (loader) {
@@ -92,7 +130,7 @@ export const ButtonSideElement = ({
         return (
           <LineLoader
             size={loaderSize as LineLoaderProps['size']}
-            className={`${prefixClassName('button__loader')}`}
+            className={BUTTON_CLASSNAMES.loader}
             css={loaderCSS}
             containerRef={loaderContainerRef}
             color={loaderColor}
@@ -103,7 +141,7 @@ export const ButtonSideElement = ({
         return (
           <CircleLoader
             size={loaderSize}
-            className={`${prefixClassName('button__loader')}`}
+            className={BUTTON_CLASSNAMES.loader}
             css={loaderCSS}
             containerRef={loaderContainerRef}
             color={loaderColor}
@@ -123,17 +161,24 @@ export const ButtonSideElement = ({
   }, [loader, loaderSize, loaderCSS, loaderCSS]);
 
   return (
-    <StyledSpan css={containerStyle} ref={nodeRef}>
+    <StyledSpan
+      css={containerStyle}
+      ref={nodeRef}
+      className={clsx(BUTTON_CLASSNAMES.sideElement, {
+        [`${BUTTON_CLASSNAMES.sideElementIconHidden}`]:
+          !icon || (icon && loading),
+        [`${BUTTON_CLASSNAMES.sideElementLoaderHidden}`]: !loading
+      })}
+    >
       {icon && (
         <CSSTransition
-          classNames={`${prefixClassName('button__icon-container')}`}
+          classNames={BUTTON_CLASSNAMES.iconContainer}
           in={!loading}
           nodeRef={iconContainerRef}
           onEnter={() => {
             requestAnimationFrame(() => {
               if (!nodeRef.current) return;
-              const iconWidth = iconContainerRef.current?.querySelector('svg')?.clientWidth
-                || 0;
+              const iconWidth = iconContainerRef.current?.firstElementChild?.clientWidth || 0;
               nodeRef.current.style.width = `${iconWidth}px`;
             });
           }}
@@ -146,14 +191,16 @@ export const ButtonSideElement = ({
         >
           <div
             ref={iconContainerRef}
-            className={`${prefixClassName('button__icon-container')}`}
+            className={BUTTON_CLASSNAMES.iconContainer}
           >
-            {React.cloneElement(icon)}
+            <span className={BUTTON_CLASSNAMES.iconBox}>
+              {React.cloneElement(icon)}
+            </span>
           </div>
         </CSSTransition>
       )}
       <CSSTransition
-        classNames={`${prefixClassName('button__loader')}`}
+        classNames={BUTTON_CLASSNAMES.loader}
         in={loading}
         nodeRef={loaderContainerRef}
         onEnter={() => {

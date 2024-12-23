@@ -1,14 +1,14 @@
+import * as LabelPrimitive from '@radix-ui/react-label';
+import { InfoIcon } from '@sparrowengg/twigs-react-icons';
+import { ComponentProps } from '@stitches/react';
 import React, {
-  FunctionComponent,
   ReactElement,
   ReactNode,
+  forwardRef,
   isValidElement
 } from 'react';
-import * as LabelPrimitive from '@radix-ui/react-label';
-import { ComponentProps } from '@stitches/react';
-import { InfoIcon } from '@sparrowengg/twigs-react-icons';
-import { styled } from '../stitches.config';
 import { Flex } from '../flex';
+import { styled } from '../stitches.config';
 import { Text } from '../text';
 import { Tooltip, TooltipProvider } from '../tooltip';
 
@@ -17,6 +17,7 @@ export type FormLabelProps = React.HTMLAttributes<HTMLLabelElement> & {
   requiredIndicator?: ReactElement | boolean;
   info?: string | ReactNode;
   rightAddon?: ReactNode;
+  containerRef?: React.Ref<HTMLDivElement>;
 };
 
 const StyledFormLabel = styled(LabelPrimitive.Root, {
@@ -60,16 +61,13 @@ const IconContainer = styled('span', {
   }
 });
 
-export const FormLabel: FunctionComponent<
+// FormLabelProps & ComponentProps<typeof StyledFormLabel>
+export const FormLabel = forwardRef<
+  HTMLLabelElement,
   FormLabelProps & ComponentProps<typeof StyledFormLabel>
-> = ({
-  children,
-  requiredIndicator = false,
-  info,
-  as,
-  rightAddon,
-  ...rest
-}: FormLabelProps) => {
+>(({
+  children, requiredIndicator = false, info, as, rightAddon, containerRef, ...rest
+}, ref) => {
   if (
     !isValidElement(requiredIndicator)
     && typeof requiredIndicator !== 'boolean'
@@ -82,9 +80,10 @@ export const FormLabel: FunctionComponent<
       css={{
         flex: '1 1 auto'
       }}
+      ref={containerRef}
     >
       <Flex gap="$1" alignItems="center">
-        <StyledFormLabel as={as} {...rest}>
+        <StyledFormLabel as={as} {...rest} ref={ref}>
           {children}
         </StyledFormLabel>
         {requiredIndicator === true ? (
@@ -112,4 +111,4 @@ export const FormLabel: FunctionComponent<
       {rightAddon}
     </Flex>
   );
-};
+});

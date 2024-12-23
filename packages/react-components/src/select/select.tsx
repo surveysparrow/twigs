@@ -1,6 +1,10 @@
 import { CSS } from '@stitches/react';
+import clsx from 'clsx';
 import React, {
-  ComponentProps, ReactElement, ReactNode, useMemo
+  ComponentProps, ReactElement,
+  ReactNode,
+  useEffect,
+  useMemo
 } from 'react';
 import ReactSelect, {
   GroupBase,
@@ -10,11 +14,10 @@ import ReactSelect, {
 import AsyncSelect from 'react-select/async';
 import AsyncCreatableSelect from 'react-select/async-creatable';
 import CreatableSelect from 'react-select/creatable';
-import clsx from 'clsx';
 import { Box } from '../box';
 import { Flex } from '../flex';
 import { FormLabel } from '../form-label';
-import { config, styled } from '../stitches.config';
+import { config, globalCss, styled } from '../stitches.config';
 
 const selectStyles: CSS<typeof config> = {
   transition: 'all $transitions$2',
@@ -258,6 +261,10 @@ const selectStyles: CSS<typeof config> = {
   }
 };
 
+const portalStyles = globalCss({
+  '.twigs-select__menu-portal': selectStyles
+});
+
 export const StyledSelect = styled(ReactSelect, selectStyles);
 export const StyledAsyncSelect = styled(AsyncSelect, selectStyles);
 export const StyledCreatableSelect = styled(CreatableSelect, selectStyles);
@@ -313,6 +320,12 @@ export const Select = React.forwardRef<
     },
     ref
   ) => {
+    useEffect(() => {
+      if (props.menuPortalTarget) {
+        portalStyles();
+      }
+    }, [props.menuPortalTarget]);
+
     const customStyles = useMemo(() => {
       const isIconLeftPositioned = dropdownIndicatorPosition === 'left';
       return {
