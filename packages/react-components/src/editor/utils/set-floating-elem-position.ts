@@ -27,10 +27,10 @@ export function setFloatingElemPosition(
 
   if (top < editorScrollerRect.top) {
     // adjusted height for link element if the element is at top
-    top +=
-      floatingElemRect.height +
-      targetRect.height +
-      verticalGap * (isLink ? 8 : 2);
+    top
+      += floatingElemRect.height
+      + targetRect.height
+      + verticalGap * (isLink ? 8 : 2);
   }
 
   if (left + floatingElemRect.width > editorScrollerRect.right) {

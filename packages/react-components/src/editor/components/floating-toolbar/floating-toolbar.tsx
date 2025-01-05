@@ -9,7 +9,7 @@ import {
   $isTextNode,
   COMMAND_PRIORITY_LOW,
   LexicalEditor,
-  SELECTION_CHANGE_COMMAND,
+  SELECTION_CHANGE_COMMAND
 } from 'lexical';
 import { $isLinkNode } from '@lexical/link';
 import React, {
@@ -94,8 +94,8 @@ const FloatingToolbarContainer = ({
 
   function mouseMoveListener(e: MouseEvent) {
     if (
-      popupCharStylesEditorRef?.current &&
-      (e.buttons === 1 || e.buttons === 3)
+      popupCharStylesEditorRef?.current
+      && (e.buttons === 1 || e.buttons === 3)
     ) {
       if (popupCharStylesEditorRef.current.style.pointerEvents !== 'none') {
         const x = e.clientX;
@@ -142,11 +142,11 @@ const FloatingToolbarContainer = ({
 
     const rootElement = editor.getRootElement();
     if (
-      selection !== null &&
-      nativeSelection !== null &&
-      !nativeSelection.isCollapsed &&
-      rootElement !== null &&
-      rootElement.contains(nativeSelection.anchorNode)
+      selection !== null
+      && nativeSelection !== null
+      && !nativeSelection.isCollapsed
+      && rootElement !== null
+      && rootElement.contains(nativeSelection.anchorNode)
     ) {
       const rangeRect = getDOMRangeRect(nativeSelection, rootElement);
 
@@ -313,10 +313,10 @@ function useFloatingTextFormatToolbar({
       const rootElement = editor.getRootElement();
 
       if (
-        nativeSelection !== null &&
-        (!$isRangeSelection(selection) ||
-          rootElement === null ||
-          !rootElement.contains(nativeSelection.anchorNode))
+        nativeSelection !== null
+        && (!$isRangeSelection(selection)
+          || rootElement === null
+          || !rootElement.contains(nativeSelection.anchorNode))
       ) {
         setIsText(false);
         return;
