@@ -25,6 +25,7 @@ export const LinkTooltip = ({
   return createPortal(
     <Box
       ref={containerRef}
+      className="link-tooltip"
       css={{
         position: 'absolute',
         left: 0,
@@ -40,6 +41,7 @@ export const LinkTooltip = ({
       }}
     >
       <Box
+        className="link-tooltip-icon"
         css={{
           flexShrink: 0,
 
@@ -51,6 +53,7 @@ export const LinkTooltip = ({
         <LinkIcon color="#fff" size={16} />
       </Box>
       <Link
+        className="link-tooltip-link"
         css={{
           color: '$white900',
           textDecoration: 'underline',
@@ -65,6 +68,7 @@ export const LinkTooltip = ({
         {linkUrl}
       </Link>
       <Box
+        className="link-tooltip-actions"
         css={{
           display: 'flex',
           borderLeft: '1px solid $white600',

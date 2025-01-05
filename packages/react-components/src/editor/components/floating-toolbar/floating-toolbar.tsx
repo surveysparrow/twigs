@@ -9,8 +9,9 @@ import {
   $isTextNode,
   COMMAND_PRIORITY_LOW,
   LexicalEditor,
-  SELECTION_CHANGE_COMMAND
+  SELECTION_CHANGE_COMMAND,
 } from 'lexical';
+import { $isLinkNode } from '@lexical/link';
 import React, {
   Fragment,
   ReactNode,
@@ -79,20 +80,22 @@ const FloatingToolbarContainer = ({
   anchorElem,
   children,
   tools = defaultTools,
-  containerProps
+  containerProps,
+  isLink
 }: {
   editor: LexicalEditor;
   anchorElem: HTMLElement;
   children?: ReactNode;
   tools?: FloatingToolbarTools;
   containerProps?: BoxProps;
+  isLink?: boolean;
 }): React.JSX.Element => {
   const popupCharStylesEditorRef = useRef<HTMLDivElement | null>(null);
 
   function mouseMoveListener(e: MouseEvent) {
     if (
-      popupCharStylesEditorRef?.current
-      && (e.buttons === 1 || e.buttons === 3)
+      popupCharStylesEditorRef?.current &&
+      (e.buttons === 1 || e.buttons === 3)
     ) {
       if (popupCharStylesEditorRef.current.style.pointerEvents !== 'none') {
         const x = e.clientX;
@@ -139,17 +142,22 @@ const FloatingToolbarContainer = ({
 
     const rootElement = editor.getRootElement();
     if (
-      selection !== null
-      && nativeSelection !== null
-      && !nativeSelection.isCollapsed
-      && rootElement !== null
-      && rootElement.contains(nativeSelection.anchorNode)
+      selection !== null &&
+      nativeSelection !== null &&
+      !nativeSelection.isCollapsed &&
+      rootElement !== null &&
+      rootElement.contains(nativeSelection.anchorNode)
     ) {
       const rangeRect = getDOMRangeRect(nativeSelection, rootElement);
 
-      setFloatingElemPosition(rangeRect, popupCharStylesEditorElem, anchorElem);
+      setFloatingElemPosition(
+        rangeRect,
+        popupCharStylesEditorElem,
+        anchorElem,
+        isLink
+      );
     }
-  }, [editor, anchorElem]);
+  }, [editor, anchorElem, isLink]);
 
   useEffect(() => {
     const scrollerElem = anchorElem.parentElement;
@@ -292,6 +300,7 @@ function useFloatingTextFormatToolbar({
   containerProps?: BoxProps;
 }) {
   const [isText, setIsText] = useState(false);
+  const [isLink, setIsLink] = useState(false);
 
   const updatePopup = useCallback(() => {
     editor.getEditorState().read(() => {
@@ -304,10 +313,10 @@ function useFloatingTextFormatToolbar({
       const rootElement = editor.getRootElement();
 
       if (
-        nativeSelection !== null
-        && (!$isRangeSelection(selection)
-          || rootElement === null
-          || !rootElement.contains(nativeSelection.anchorNode))
+        nativeSelection !== null &&
+        (!$isRangeSelection(selection) ||
+          rootElement === null ||
+          !rootElement.contains(nativeSelection.anchorNode))
       ) {
         setIsText(false);
         return;
@@ -317,6 +326,13 @@ function useFloatingTextFormatToolbar({
         return;
       }
       const node = getSelectedNode(selection);
+
+      const parent = node.getParent();
+      if ($isLinkNode(parent) || $isLinkNode(node)) {
+        setIsLink(true);
+      } else {
+        setIsLink(false);
+      }
 
       if (selection.getTextContent() !== '') {
         setIsText($isTextNode(node) || $isParagraphNode(node));
@@ -361,6 +377,7 @@ function useFloatingTextFormatToolbar({
       anchorElem={anchorElem}
       tools={tools}
       containerProps={containerProps}
+      isLink={isLink}
     >
       {children}
     </FloatingToolbarContainer>,
