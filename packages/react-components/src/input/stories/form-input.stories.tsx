@@ -1,5 +1,5 @@
 import { UserIcon } from '@sparrowengg/twigs-react-icons';
-import { Button } from '@src/button';
+import { FormLabelButton } from '@src/form-label';
 import React from 'react';
 import { FormInput } from '../form-input';
 
@@ -80,9 +80,9 @@ const TemplateWithCounterReplaced = (args) => {
       showCount
       placeholder="Placeholder"
       renderCounter={() => (
-        <Button color="primary" variant="ghost">
+        <FormLabelButton>
           Button
-        </Button>
+        </FormLabelButton>
       )}
     />
   );
