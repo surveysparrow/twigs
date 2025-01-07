@@ -151,6 +151,8 @@ export const Textarea: FunctionComponent<TextareaProps> = forwardRef(
     const inputId = id || `form-input-${useId()}`;
     const mergedValue = value || defaultValue;
 
+    const labelSize = size === 'xl' ? 'sm' : 'sm';
+
     const counterElement = useMemo(() => {
       if (!showCount) return null;
 
@@ -168,12 +170,21 @@ export const Textarea: FunctionComponent<TextareaProps> = forwardRef(
             ...(!label ? { marginLeft: 'auto' } : {})
           }}
           data-testid="textarea-char-count"
+          size={labelSize}
         >
           {mergedValue?.toString().length || 0}
           {maxLength ? `/${maxLength}` : null}
         </Text>
       );
-    }, [showCount, label, mergedValue, maxLength, inputId, renderCounter]);
+    }, [
+      showCount,
+      label,
+      mergedValue,
+      maxLength,
+      inputId,
+      labelSize,
+      renderCounter
+    ]);
 
     return (
       <Box>
@@ -184,7 +195,7 @@ export const Textarea: FunctionComponent<TextareaProps> = forwardRef(
         >
           {(label || counterElement) && (
             <FormLabel
-              size={size === 'xl' ? 'sm' : 'xs'}
+              size={labelSize}
               htmlFor={id}
               requiredIndicator={requiredIndicator}
               info={info}
