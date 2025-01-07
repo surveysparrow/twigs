@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { Text, TextProps } from '../text';
+import { styled } from '../stitches.config';
 
 export type FormHelperTextProps = TextProps & {
   as?: React.ElementType;
@@ -21,3 +22,17 @@ export const FormHelperText: FunctionComponent<FormHelperTextProps> = ({
     </Text>
   );
 };
+
+export const FormInputHelperText = styled(FormHelperText, {
+  marginTop: '$2',
+  variants: {
+    color: {
+      error: {
+        color: '$negative500 !important'
+      },
+      info: {
+        color: '$neutral700 !important'
+      }
+    }
+  }
+});
