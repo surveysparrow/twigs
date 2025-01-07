@@ -8,11 +8,11 @@ import {
 } from 'react';
 import { Box } from '../box';
 import { Flex } from '../flex';
-import { FormHelperText } from '../form-helper-text';
+import { FormHelperText, FormInputHelperText } from '../form-helper-text';
 import { FormLabel } from '../form-label';
 import { styled } from '../stitches.config';
-import { Input, InputProps } from './input';
 import { Text } from '../text';
+import { Input, InputProps } from './input';
 
 export type FormInputProps = {
   label?: string;
@@ -33,20 +33,6 @@ export type FormInputProps = {
 export const StyledError = styled(FormHelperText, {
   color: '$negative500 !important',
   marginTop: '$2'
-});
-
-const StyledHelper = styled(FormHelperText, {
-  marginTop: '$2',
-  variants: {
-    color: {
-      error: {
-        color: '$negative500 !important'
-      },
-      info: {
-        color: '$neutral700 !important'
-      }
-    }
-  }
 });
 
 export const FormInput: FunctionComponent<FormInputProps> = forwardRef(
@@ -138,9 +124,9 @@ export const FormInput: FunctionComponent<FormInputProps> = forwardRef(
           {...rest}
         />
         {error || helperText ? (
-          <StyledHelper size="xs" color={error ? 'error' : 'info'}>
+          <FormInputHelperText size={labelSize} color={error ? 'error' : 'info'}>
             {error || helperText}
-          </StyledHelper>
+          </FormInputHelperText>
         ) : null}
       </Box>
     );
