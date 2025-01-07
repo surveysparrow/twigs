@@ -19,6 +19,7 @@ export type FormInputProps = {
   showCount?: boolean;
   error?: string;
   requiredIndicator?: boolean | ReactElement;
+  helperText?: string;
   info?: string | ReactNode;
   renderCounter?: ({
     length,
@@ -34,6 +35,20 @@ export const StyledError = styled(FormHelperText, {
   marginTop: '$2'
 });
 
+const StyledHelper = styled(FormHelperText, {
+  marginTop: '$2',
+  variants: {
+    color: {
+      error: {
+        color: '$negative500 !important'
+      },
+      info: {
+        color: '$neutral700 !important'
+      }
+    }
+  }
+});
+
 export const FormInput: FunctionComponent<FormInputProps> = forwardRef(
   (
     {
@@ -45,6 +60,7 @@ export const FormInput: FunctionComponent<FormInputProps> = forwardRef(
       defaultValue,
       maxLength,
       requiredIndicator,
+      helperText,
       id,
       renderCounter,
       ...rest
@@ -53,6 +69,8 @@ export const FormInput: FunctionComponent<FormInputProps> = forwardRef(
   ) => {
     const mergedValue = value || defaultValue;
     const inputId = id || `form-input-${useId()}`;
+
+    const labelSize = rest.size === 'xl' ? 'sm' : 'xs';
 
     const counterElement = useMemo(() => {
       if (!showCount) return null;
@@ -72,12 +90,21 @@ export const FormInput: FunctionComponent<FormInputProps> = forwardRef(
           }}
           id={`${inputId}-char-count`}
           data-testid="form-input-char-count"
+          size={labelSize}
         >
           {mergedValue?.toString().length || 0}
           {maxLength ? `/${maxLength}` : null}
         </Text>
       );
-    }, [showCount, label, mergedValue, maxLength, inputId, renderCounter]);
+    }, [
+      showCount,
+      label,
+      mergedValue,
+      maxLength,
+      inputId,
+      labelSize,
+      renderCounter
+    ]);
 
     return (
       <Box>
@@ -94,6 +121,7 @@ export const FormInput: FunctionComponent<FormInputProps> = forwardRef(
               id={`${inputId}-label`}
               info={info}
               rightAddon={counterElement}
+              size={labelSize}
             >
               {label}
             </FormLabel>
@@ -109,7 +137,11 @@ export const FormInput: FunctionComponent<FormInputProps> = forwardRef(
           id={inputId}
           {...rest}
         />
-        {error ? <StyledError size="xs">{error}</StyledError> : null}
+        {error || helperText ? (
+          <StyledHelper size="xs" color={error ? 'error' : 'info'}>
+            {error || helperText}
+          </StyledHelper>
+        ) : null}
       </Box>
     );
   }
