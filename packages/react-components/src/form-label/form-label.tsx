@@ -2,6 +2,7 @@ import * as LabelPrimitive from '@radix-ui/react-label';
 import { InfoIcon } from '@sparrowengg/twigs-react-icons';
 import { ComponentProps } from '@stitches/react';
 import React, {
+  FunctionComponent,
   ReactElement,
   ReactNode,
   forwardRef,
@@ -11,6 +12,7 @@ import { Flex } from '../flex';
 import { styled } from '../stitches.config';
 import { Text } from '../text';
 import { Tooltip, TooltipProvider } from '../tooltip';
+import { Button, ButtonProps } from '../button';
 
 export type FormLabelProps = React.HTMLAttributes<HTMLLabelElement> & {
   as?: React.ElementType;
@@ -49,8 +51,6 @@ const StyledText = styled(Text, {
 
 const IconContainer = styled('span', {
   svg: {
-    width: '14px',
-    height: '14px',
     color: '$neutral800',
     display: 'block',
 
@@ -58,57 +58,108 @@ const IconContainer = styled('span', {
       fill: 'rgba(0, 0, 0, 0.08)',
       stroke: 'none'
     }
+  },
+  variants: {
+    size: {
+      xs: {
+        svg: {
+          width: '14px',
+          height: '14px'
+        }
+      },
+      sm: {
+        svg: {
+          width: '16px',
+          height: '16px'
+        }
+      }
+    }
   }
 });
+
+export const FormLabelButton: FunctionComponent<ButtonProps> = forwardRef(
+  (props, ref) => {
+    return (
+      <Button
+        variant="ghost"
+        color="primary"
+        {...props}
+        css={{
+          padding: 0,
+
+          '&:hover:not(:disabled)': {
+            backgroundColor: 'transparent',
+            color: '$primary700'
+          }
+        }}
+        ref={ref}
+      />
+    );
+  }
+);
 
 // FormLabelProps & ComponentProps<typeof StyledFormLabel>
 export const FormLabel = forwardRef<
   HTMLLabelElement,
   FormLabelProps & ComponentProps<typeof StyledFormLabel>
->(({
-  children, requiredIndicator = false, info, as, rightAddon, containerRef, ...rest
-}, ref) => {
-  if (
-    !isValidElement(requiredIndicator)
-    && typeof requiredIndicator !== 'boolean'
-  ) {
-    throw Error('requiredIndicator is not a valid component');
-  }
-  return (
-    <Flex
-      justifyContent="space-between"
-      css={{
-        flex: '1 1 auto'
-      }}
-      ref={containerRef}
-    >
-      <Flex gap="$1" alignItems="center">
-        <StyledFormLabel as={as} {...rest} ref={ref}>
-          {children}
-        </StyledFormLabel>
-        {requiredIndicator === true ? (
-          <StyledText data-testid="label-required-indicator">*</StyledText>
-        ) : null}
-        {typeof requiredIndicator !== 'boolean'
-          ? React.cloneElement(requiredIndicator)
-          : null}
-        {info && (
-          <>
-            {typeof info === 'string' ? (
-              <TooltipProvider>
-                <Tooltip content={info}>
-                  <IconContainer>
-                    <InfoIcon />
-                  </IconContainer>
-                </Tooltip>
-              </TooltipProvider>
-            ) : (
-              info
-            )}
-          </>
-        )}
+>(
+  (
+    {
+      children,
+      requiredIndicator = false,
+      info,
+      as,
+      rightAddon,
+      containerRef,
+      ...rest
+    },
+    ref
+  ) => {
+    if (
+      !isValidElement(requiredIndicator)
+      && typeof requiredIndicator !== 'boolean'
+    ) {
+      throw Error('requiredIndicator is not a valid component');
+    }
+
+    return (
+      <Flex
+        justifyContent="space-between"
+        css={{
+          flex: '1 1 auto'
+        }}
+        ref={containerRef}
+      >
+        <Flex gap="$1" alignItems="center">
+          <StyledFormLabel as={as} {...rest} ref={ref}>
+            {children}
+          </StyledFormLabel>
+          {requiredIndicator === true ? (
+            <StyledText data-testid="label-required-indicator" size={rest.size}>
+              *
+            </StyledText>
+          ) : null}
+          {typeof requiredIndicator !== 'boolean'
+            ? React.cloneElement(requiredIndicator)
+            : null}
+          {info && (
+            <>
+              {typeof info === 'string' ? (
+                <TooltipProvider>
+                  <Tooltip content={info}>
+                    <IconContainer size={rest.size}>
+                      <InfoIcon />
+                    </IconContainer>
+                  </Tooltip>
+                </TooltipProvider>
+              ) : (
+                info
+              )}
+            </>
+          )}
+        </Flex>
+        {rightAddon}
       </Flex>
-      {rightAddon}
-    </Flex>
-  );
-});
+    );
+  }
+);
