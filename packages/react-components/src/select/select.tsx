@@ -1,7 +1,7 @@
-import { CSS } from '@stitches/react';
 import clsx from 'clsx';
 import React, {
-  ComponentProps, ReactElement,
+  ComponentProps,
+  ReactElement,
   ReactNode,
   useEffect,
   useMemo
@@ -17,9 +17,10 @@ import CreatableSelect from 'react-select/creatable';
 import { Box } from '../box';
 import { Flex } from '../flex';
 import { FormLabel } from '../form-label';
-import { config, globalCss, styled } from '../stitches.config';
+import { globalCss, styled } from '../stitches.config';
+import { FormInputHelperText } from '../form-helper-text';
 
-const selectStyles: CSS<typeof config> = {
+const selectStyles = {
   transition: 'all $transitions$2',
   '&--is-disabled': {
     cursor: 'not-allowed'
@@ -207,9 +208,10 @@ const selectStyles: CSS<typeof config> = {
           fontSize: '$xs',
           padding: '0 $4'
         },
-        '&.twigs-select--dropdown-indicator-right .twigs-select__value-container': {
-          paddingRight: '$1'
-        },
+        '&.twigs-select--dropdown-indicator-right .twigs-select__value-container':
+          {
+            paddingRight: '$1'
+          },
         '& .twigs-select__value-container, & .twigs-select__input-container': {
           paddingTop: 0,
           paddingBottom: 0
@@ -283,6 +285,8 @@ type SelectBaseProps = {
   requiredIndicator?: boolean;
   info?: string | ReactNode;
   labelRightAddon?: ReactNode;
+  error?: string;
+  helperText?: string;
 };
 
 const DropdownIndicator = (props, dropdownIndicatorIcon) => {
@@ -314,6 +318,8 @@ export const Select = React.forwardRef<
       dropdownIndicatorPosition = 'right',
       label,
       info,
+      error,
+      helperText,
       requiredIndicator,
       labelRightAddon,
       ...props
@@ -376,27 +382,43 @@ export const Select = React.forwardRef<
         }}
         classNamePrefix="twigs-select"
         className={clsx(props.className, {
-          'twigs-select--dropdown-indicator-left': dropdownIndicatorPosition === 'left',
-          'twigs-select--dropdown-indicator-right': dropdownIndicatorPosition === 'right',
+          'twigs-select--dropdown-indicator-left':
+            dropdownIndicatorPosition === 'left',
+          'twigs-select--dropdown-indicator-right':
+            dropdownIndicatorPosition === 'right',
           'twigs-select--is-multi': props.isMulti
         })}
         theme={(theme) => ({ ...theme, borderRadius: 10 })}
       />
     );
+
+    const labelSize = props.size === 'xl' ? 'sm' : 'xs';
+
     return (
       <>
-        {label ? (
+        {label || error || helperText ? (
           <Box>
-            <Flex justifyContent="space-between" css={{ marginBottom: '$2' }}>
-              <FormLabel
-                requiredIndicator={requiredIndicator}
-                info={info}
-                rightAddon={labelRightAddon}
-              >
-                {label}
-              </FormLabel>
-            </Flex>
+            {label && (
+              <Flex justifyContent="space-between" css={{ marginBottom: '$2' }}>
+                <FormLabel
+                  requiredIndicator={requiredIndicator}
+                  info={info}
+                  size={labelSize}
+                  rightAddon={labelRightAddon}
+                >
+                  {label}
+                </FormLabel>
+              </Flex>
+            )}
             {SelectElement}
+            {error || helperText ? (
+              <FormInputHelperText
+                size={labelSize}
+                color={error ? 'error' : 'info'}
+              >
+                {error || helperText}
+              </FormInputHelperText>
+            ) : null}
           </Box>
         ) : (
           SelectElement
