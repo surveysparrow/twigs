@@ -7,10 +7,11 @@ import {
   useId,
   useMemo
 } from 'react';
+import { FormInputHelperText } from '../form-helper-text';
 import { Box } from '../box';
 import { Flex } from '../flex';
 import { FormLabel } from '../form-label';
-import { StyledError, errorBorderStyles } from '../input';
+import { errorBorderStyles } from '../input';
 import { styled } from '../stitches.config';
 import { Text } from '../text';
 
@@ -113,6 +114,7 @@ interface TextareaBaseProps {
   requiredIndicator?: boolean | ReactElement;
   errorBorder?: boolean;
   info?: string | ReactNode;
+  helperText?: string;
   renderCounter?: ({
     length,
     maxLength
@@ -136,6 +138,7 @@ export const Textarea: FunctionComponent<TextareaProps> = forwardRef(
       error,
       maxLength,
       requiredIndicator,
+      helperText,
       css,
       value,
       defaultValue,
@@ -223,7 +226,11 @@ export const Textarea: FunctionComponent<TextareaProps> = forwardRef(
           variant={variant}
           {...rest}
         />
-        {error ? <StyledError size="xs">{error}</StyledError> : null}
+        {error || helperText ? (
+          <FormInputHelperText size={labelSize} color={error ? 'error' : 'info'}>
+            {error || helperText}
+          </FormInputHelperText>
+        ) : null}
       </Box>
     );
   }
