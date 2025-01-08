@@ -8,6 +8,7 @@ import { Box } from '@src/box';
 import { IconButton } from '@src/button';
 import { Link } from '@src/link';
 import { createPortal } from 'react-dom';
+import { prefixClassName } from '@src/utils';
 
 export const LinkTooltip = ({
   linkUrl,
@@ -25,7 +26,7 @@ export const LinkTooltip = ({
   return createPortal(
     <Box
       ref={containerRef}
-      className="link-tooltip"
+      className={prefixClassName('link-tooltip')}
       css={{
         position: 'absolute',
         left: 0,
@@ -41,7 +42,7 @@ export const LinkTooltip = ({
       }}
     >
       <Box
-        className="link-tooltip__icon"
+        className={prefixClassName('link-tooltip__icon')}
         css={{
           flexShrink: 0,
 
@@ -53,7 +54,7 @@ export const LinkTooltip = ({
         <LinkIcon color="#fff" size={16} />
       </Box>
       <Link
-        className="link-tooltip__link"
+        className={prefixClassName('link-tooltip__link')}
         css={{
           color: '$white900',
           textDecoration: 'underline',
@@ -68,7 +69,7 @@ export const LinkTooltip = ({
         {linkUrl}
       </Link>
       <Box
-        className="link-tooltip__actions"
+        className={prefixClassName('link-tooltip__actions')}
         css={{
           display: 'flex',
           borderLeft: '1px solid $white600',
