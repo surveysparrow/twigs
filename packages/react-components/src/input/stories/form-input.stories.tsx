@@ -80,7 +80,7 @@ const TemplateWithCounterReplaced = (args) => {
       showCount
       placeholder="Placeholder"
       renderCounter={() => (
-        <FormLabelButton>
+        <FormLabelButton size={args.size === 'xl' ? 'sm' : 'xs'}>
           Button
         </FormLabelButton>
       )}
