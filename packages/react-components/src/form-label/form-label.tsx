@@ -12,7 +12,6 @@ import { Flex } from '../flex';
 import { styled } from '../stitches.config';
 import { Text } from '../text';
 import { Tooltip, TooltipProvider } from '../tooltip';
-import { Button, ButtonProps } from '../button';
 
 export type FormLabelProps = React.HTMLAttributes<HTMLLabelElement> & {
   as?: React.ElementType;
@@ -41,6 +40,36 @@ const StyledFormLabel = styled(LabelPrimitive.Root, {
   },
   defaultVariants: {
     size: 'sm'
+  }
+});
+
+const StyledFormLabelButton = styled('button', {
+  backgroundColor: 'transparent',
+  border: 'none',
+  padding: 0,
+  color: '$primary500',
+  fontWeight: '$5',
+  cursor: 'pointer',
+
+  '&:hover': {
+    color: '$primary700'
+  },
+
+  variants: {
+    size: {
+      sm: {
+        fontSize: '$sm',
+        lineHeight: '$sm'
+      },
+      xs: {
+        fontSize: '$xs',
+        lineHeight: '$xs'
+      }
+    }
+  },
+
+  defaultVariants: {
+    size: 'xs'
   }
 });
 
@@ -77,28 +106,12 @@ const IconContainer = styled('span', {
   }
 });
 
-export const FormLabelButton: FunctionComponent<ButtonProps> = forwardRef(
-  (props, ref) => {
-    return (
-      <Button
-        variant="ghost"
-        color="primary"
-        {...props}
-        css={{
-          padding: 0,
+export const FormLabelButton: FunctionComponent<
+  ComponentProps<typeof StyledFormLabelButton>
+> = forwardRef((props, ref) => {
+  return <StyledFormLabelButton type="button" {...props} ref={ref} />;
+});
 
-          '&:hover:not(:disabled)': {
-            backgroundColor: 'transparent',
-            color: '$primary700'
-          }
-        }}
-        ref={ref}
-      />
-    );
-  }
-);
-
-// FormLabelProps & ComponentProps<typeof StyledFormLabel>
 export const FormLabel = forwardRef<
   HTMLLabelElement,
   FormLabelProps & ComponentProps<typeof StyledFormLabel>

@@ -24,7 +24,7 @@ export const FormHelperText: FunctionComponent<FormHelperTextProps> = ({
 };
 
 export const FormInputHelperText = styled(FormHelperText, {
-  marginTop: '$2',
+  marginTop: '$1',
   variants: {
     color: {
       error: {
