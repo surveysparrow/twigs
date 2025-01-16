@@ -138,6 +138,7 @@ interface DrawerBaseProps {
   size?: 'sm' | 'md' | 'lg';
   placement?: 'top' | 'left' | 'right' | 'bottom';
   finalFocusRef?: React.RefObject<HTMLButtonElement>;
+  portalContainer?: HTMLElement;
 }
 
 export type DrawerProps = DrawerBaseProps & ComponentProps<typeof StyledDrawer>;
@@ -149,6 +150,7 @@ export const Drawer = ({
   onClose,
   finalFocusRef,
   children,
+  portalContainer,
   ...props
 }: DrawerProps) => {
   const bodyRef = useRef(document.querySelector('body'));
@@ -194,7 +196,7 @@ export const Drawer = ({
   }
 
   return (
-    <Portal.Root className="drawer-portal">
+    <Portal.Root className="drawer-portal" container={portalContainer}>
       <StyledDrawerContainer>
         <StyledDrawerBackdrop
           className={clsx({

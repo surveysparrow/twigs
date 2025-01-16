@@ -3,18 +3,18 @@ import {
   ChevronRightIcon,
   EllipsisHorizontalIcon
 } from '@sparrowengg/twigs-react-icons';
-import React, {
+import {
   ComponentProps,
-  FunctionComponent,
   SyntheticEvent,
+  forwardRef,
   useEffect,
   useId,
   useState
 } from 'react';
-import { styled } from '../stitches.config';
 import { Box } from '../box';
 import { Button, IconButton } from '../button';
 import { usePagination } from '../hooks';
+import { styled } from '../stitches.config';
 
 const StyledList = styled('ul', {
   display: 'flex',
@@ -42,7 +42,7 @@ const DOTS = 'DOTS';
  * @param activePage currently focused page
  * @param onChange returns click event and active page number
  */
-export const Pagination: FunctionComponent<PaginationProps> = ({
+export const Pagination = forwardRef<HTMLDivElement, PaginationProps>(({
   total,
   itemsPerPage,
   activePage,
@@ -50,7 +50,7 @@ export const Pagination: FunctionComponent<PaginationProps> = ({
   onChange,
   size = 'sm',
   ...rest
-}: PaginationProps) => {
+}, ref) => {
   const keyId = useId();
   const [page, setPage] = useState<number>(activePage);
 
@@ -76,7 +76,7 @@ export const Pagination: FunctionComponent<PaginationProps> = ({
   const isNextDisabled = page === paginationRange?.[paginationRange?.length - 1] || total === 0;
 
   return (
-    <Box as="nav" aria-label="pagination" {...rest}>
+    <Box as="nav" aria-label="pagination" {...rest} ref={ref}>
       <StyledList>
         <li>
           <IconButton
@@ -138,4 +138,4 @@ export const Pagination: FunctionComponent<PaginationProps> = ({
       </StyledList>
     </Box>
   );
-};
+});

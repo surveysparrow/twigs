@@ -1,7 +1,11 @@
 import * as RadixSlider from '@radix-ui/react-slider';
 import { ComponentProps } from '@stitches/react';
 import {
-  ElementType, ReactNode, isValidElement, useCallback
+  ElementType,
+  ReactNode,
+  forwardRef,
+  isValidElement,
+  useCallback
 } from 'react';
 import { styled } from '../stitches.config';
 import { Box } from '../box';
@@ -118,71 +122,80 @@ export type SliderProps = RadixSlider.SliderProps &
   ComponentProps<typeof StyledRoot> &
   SliderBaseProps;
 
-export const Slider = ({ labelPlacement = 'top', ...props }: SliderProps) => {
-  const TrackAndRange = useCallback(() => {
-    const RangeComp = props.components?.Range ?? StyledRange;
-    const TrackComp = props.components?.Track ?? StyledTrack;
+export const Slider = forwardRef<HTMLDivElement, SliderProps>(
+  ({ labelPlacement = 'top', ...props }, ref) => {
+    const TrackAndRange = useCallback(() => {
+      const RangeComp = props.components?.Range ?? StyledRange;
+      const TrackComp = props.components?.Track ?? StyledTrack;
+
+      return (
+        <TrackComp>
+          <RangeComp />
+        </TrackComp>
+      );
+    }, [props.components?.Range, props.components?.Track]);
+
+    const RenderThumb = useCallback(() => {
+      const val = props.value ?? props.defaultValue;
+      if (Array.isArray(val) && val.length > 1) {
+        const Left = props.components?.ThumbLeft ?? props.components?.Thumb ?? StyledThumb;
+        const Right = props.components?.ThumbRight
+          ?? props.components?.Thumb
+          ?? StyledThumb;
+
+        return (
+          <>
+            <Left />
+            <Right />
+          </>
+        );
+      }
+
+      const Comp = props.components?.Thumb ?? StyledThumb;
+      return <Comp />;
+    }, [
+      props.components?.ThumbLeft,
+      props.components?.ThumbRight,
+      props.components?.Thumb
+    ]);
+
+    const RenderLabel = useCallback(
+      (labelProps: FlexProps) => {
+        if (!props.labels?.left && !props.labels?.right) return null;
+
+        return (
+          <Flex justifyContent="space-between" {...labelProps}>
+            <LabelText value={props.labels?.left} />
+            <LabelText value={props.labels?.right} />
+          </Flex>
+        );
+      },
+      [props.labels?.left, props.labels?.right]
+    );
 
     return (
-      <TrackComp>
-        <RangeComp />
-      </TrackComp>
+      <Box
+        css={{
+          display: 'inline-flex',
+          flexDirection: 'column',
+          width: '100%'
+        }}
+        ref={ref}
+      >
+        {labelPlacement === 'top' && (
+          <RenderLabel css={{ marginBottom: '$3' }} />
+        )}
+        <StyledRoot defaultValue={[0]} max={100} step={1} {...props}>
+          <TrackAndRange />
+          <RenderThumb />
+        </StyledRoot>
+        {labelPlacement === 'bottom' && (
+          <RenderLabel css={{ marginTop: '$3' }} />
+        )}
+      </Box>
     );
-  }, [props.components?.Range, props.components?.Track]);
-
-  const RenderThumb = useCallback(() => {
-    const val = props.value ?? props.defaultValue;
-    if (Array.isArray(val) && val.length > 1) {
-      const Left = props.components?.ThumbLeft ?? props.components?.Thumb ?? StyledThumb;
-      const Right = props.components?.ThumbRight ?? props.components?.Thumb ?? StyledThumb;
-
-      return (
-        <>
-          <Left />
-          <Right />
-        </>
-      );
-    }
-
-    const Comp = props.components?.Thumb ?? StyledThumb;
-    return <Comp />;
-  }, [
-    props.components?.ThumbLeft,
-    props.components?.ThumbRight,
-    props.components?.Thumb
-  ]);
-
-  const RenderLabel = useCallback(
-    (labelProps: FlexProps) => {
-      if (!props.labels?.left && !props.labels?.right) return null;
-
-      return (
-        <Flex justifyContent="space-between" {...labelProps}>
-          <LabelText value={props.labels?.left} />
-          <LabelText value={props.labels?.right} />
-        </Flex>
-      );
-    },
-    [props.labels?.left, props.labels?.right]
-  );
-
-  return (
-    <Box
-      css={{
-        display: 'inline-flex',
-        flexDirection: 'column',
-        width: '100%'
-      }}
-    >
-      {labelPlacement === 'top' && <RenderLabel css={{ marginBottom: '$3' }} />}
-      <StyledRoot defaultValue={[0]} max={100} step={1} {...props}>
-        <TrackAndRange />
-        <RenderThumb />
-      </StyledRoot>
-      {labelPlacement === 'bottom' && <RenderLabel css={{ marginTop: '$3' }} />}
-    </Box>
-  );
-};
+  }
+);
 
 const LabelText = ({ value }: { value?: ReactNode | string }) => {
   if (!value) return null;
