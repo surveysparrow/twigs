@@ -23,7 +23,8 @@ import { useCascaderValue } from './use-value';
 
 const StyledUl = styled('ul', {
   maxHeight: '320px',
-  overflowY: 'auto'
+  overflowY: 'auto',
+  paddingTop: '$5'
 });
 
 const StyledLoadingIndicator = styled('li', {
