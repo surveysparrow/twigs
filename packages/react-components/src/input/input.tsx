@@ -1,4 +1,5 @@
 import React, { ReactElement, FunctionComponent, ComponentProps } from 'react';
+import { prefixClassName } from '@src/utils';
 import { Box } from '../box';
 import { styled } from '../stitches.config';
 
@@ -35,6 +36,15 @@ const StyledInput = styled('input', {
     '&:hover': {
       boxShadow: 'none'
     }
+  },
+  '&.focused-state': {
+    borderWidth: '$xs',
+    borderStyle: 'solid',
+    borderColorOpacity: ['$secondary500', 0.4],
+    $$shadowColor: '$colors$primary300',
+    background: '$white900',
+    boxShadow:
+      'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
   },
   variants: {
     size: {
@@ -234,7 +244,10 @@ export const Input: FunctionComponent<InputProps> = React.forwardRef(
           )}
 
           {leftElement && (
-            <AddonContainer position="left">
+            <AddonContainer
+              position="left"
+              className={prefixClassName('input__addon--left')}
+            >
               {React.cloneElement(leftElement)}
             </AddonContainer>
           )}
@@ -264,7 +277,10 @@ export const Input: FunctionComponent<InputProps> = React.forwardRef(
           )}
 
           {rightElement && (
-            <AddonContainer position="right">
+            <AddonContainer
+              position="right"
+              className={prefixClassName('input__addon--right')}
+            >
               {React.cloneElement(rightElement)}
             </AddonContainer>
           )}
