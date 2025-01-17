@@ -7,7 +7,7 @@ type OmitAvatarProps = 'isAnonymous' | 'src' | 'name';
 export type AvatarGroupProps = {
   limit?: number | null;
   limitExceededLabel?: string;
-  children: React.ReactElement[];
+  children: React.ReactElement | React.ReactElement[];
 } & Omit<ComponentProps<typeof Avatar>, OmitAvatarProps> &
   React.HTMLAttributes<HTMLDivElement> & {
     as?: React.ElementType;
@@ -190,7 +190,10 @@ export const AvatarGroup: FunctionComponent<AvatarGroupProps> = React.forwardRef
     }: AvatarGroupProps,
     ref
   ) => {
-    const avatars = children || [];
+    let avatars = children || [];
+    if (!Array.isArray(avatars)) {
+      avatars = [avatars];
+    }
     const avatarCount = avatars.length || 0;
     const avatarLimit = limit || avatarCount;
     const extraAvatarsCount = avatarCount - avatarLimit;

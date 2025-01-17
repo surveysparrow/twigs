@@ -311,6 +311,7 @@ const StyledButton = styled('button', {
       variant: 'outline',
       css: {
         color: '$primary500',
+        background: '$white900',
         borderColorOpacity: ['$primary500', 0.4],
         borderStyle: 'solid',
         '&:hover:not(:disabled), &:focus': {
