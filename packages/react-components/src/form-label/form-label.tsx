@@ -148,7 +148,13 @@ export const FormLabel = forwardRef<
             {children}
           </StyledFormLabel>
           {requiredIndicator === true ? (
-            <StyledText data-testid="label-required-indicator" size={rest.size}>
+            <StyledText
+              data-testid="label-required-indicator"
+              size={rest.size}
+              css={{
+                lineHeight: '1'
+              }}
+            >
               *
             </StyledText>
           ) : null}
