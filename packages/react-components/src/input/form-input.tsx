@@ -124,7 +124,13 @@ export const FormInput: FunctionComponent<FormInputProps> = forwardRef(
           {...rest}
         />
         {error || helperText ? (
-          <FormInputHelperText size={labelSize} color={error ? 'error' : 'info'}>
+          <FormInputHelperText
+            size={labelSize}
+            color={error ? 'error' : 'info'}
+            css={{
+              marginTop: ['lg', 'xl'].includes(rest.size as string) ? '$2' : '$1'
+            }}
+          >
             {error || helperText}
           </FormInputHelperText>
         ) : null}
