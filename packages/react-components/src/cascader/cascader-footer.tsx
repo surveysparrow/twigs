@@ -1,3 +1,4 @@
+import { prefixClassName } from '@src/utils';
 import { Button } from '../button';
 import { Flex } from '../flex';
 import { CascaderOption } from './cascader';
@@ -23,9 +24,11 @@ export const CascaderFooter = ({
       justifyContent="space-between"
       css={{
         padding: '$4 $6',
+        paddingBottom: '0',
         width: '100%',
         borderTop: '1px solid $colors$neutral100'
       }}
+      className={prefixClassName('cascader__footer')}
     >
       <Button
         size="md"

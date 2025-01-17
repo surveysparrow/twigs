@@ -1,8 +1,9 @@
 import { ChevronRightIcon } from '@sparrowengg/twigs-react-icons';
 import { prefixClassName } from '@src/utils';
 import React, { KeyboardEvent, useMemo } from 'react';
-import { CircleLoader } from '../loader';
+import { Box } from '../box';
 import { Flex } from '../flex';
+import { CircleLoader } from '../loader';
 import { styled } from '../stitches.config';
 import { Text } from '../text';
 import { CascaderNode } from './cascader-node';
@@ -14,9 +15,10 @@ const StyledItem = styled('li', {
   height: '32px',
   outlineColor: '$primary500',
   outlineOffset: '-1px',
+  cursor: 'default',
 
   '&:hover': {
-    backgroundColorOpacity: ['$primary500', 0.1]
+    backgroundColorOpacity: ['$secondary500', 0.1]
   },
 
   '&:focus-visible': {
@@ -165,7 +167,12 @@ export const CascaderListItem = ({
         }}
         className={prefixClassName('cascader__list-item-content')}
       >
-        <Text className={prefixClassName('cascader__list-item-text')}>
+        <Text
+          className={prefixClassName('cascader__list-item-text')}
+          css={{
+            color: '$neutral900'
+          }}
+        >
           {option.label}
         </Text>
         {node?.loading ? (
@@ -173,10 +180,16 @@ export const CascaderListItem = ({
         ) : (
           <>
             {(hasOptions || node?.shouldFetchOptions) && (
-              <ChevronRightIcon
-                size={20}
-                className={prefixClassName('cascader__list-item-icon')}
-              />
+              <Box
+                css={{
+                  color: inSelection ? '$neutral800' : '$neutral300'
+                }}
+              >
+                <ChevronRightIcon
+                  size={20}
+                  className={prefixClassName('cascader__list-item-icon')}
+                />
+              </Box>
             )}
           </>
         )}

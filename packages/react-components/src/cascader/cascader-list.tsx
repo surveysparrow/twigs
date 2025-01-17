@@ -8,6 +8,8 @@ import { useCascaderValue } from './use-value';
 const StyledUl = styled('ul', {
   flex: 1,
   minWidth: '260px',
+  paddingTop: '$5',
+  position: 'relative',
 
   variants: {
     withRightBorder: {

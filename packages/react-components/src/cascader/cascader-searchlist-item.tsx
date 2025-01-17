@@ -22,9 +22,7 @@ const StyledLi = styled('li', {
   variants: {
     focused: {
       true: {
-        outline: '1px solid $colors$primary500',
-        backgroundColorOpacity: ['$primary500', 0.1],
-        outlineOffset: '-1px'
+        backgroundColorOpacity: ['$primary500', 0.1]
       }
     },
     disabled: {

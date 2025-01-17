@@ -9,6 +9,7 @@ import { styled } from '../stitches.config';
 import { CascaderAriaLive } from './cascader-aria-live';
 import {
   CascaderBreadCrumb,
+  CascaderClearButton,
   CascaderInputValue,
   PopoverContentWrapper
 } from './cascader-atomics';
@@ -18,8 +19,8 @@ import {
   CascaderSearchList,
   CascaderSearchListRef
 } from './cascader-searchlist';
-import { useCascaderValue } from './use-value';
 import { buildSelectionPath } from './cascader-utils';
+import { useCascaderValue } from './use-value';
 
 const StyledPopoverTrigger = styled(PopoverTrigger, {
   position: 'absolute',
@@ -63,7 +64,7 @@ export const CascaderContent = () => {
         setSelectedNode(node);
         setFocusedItem({
           node,
-          isMouseClick: false
+          isMouseClick: true
         });
       }
     } else if (!popoverOpen) {
@@ -217,6 +218,7 @@ export const CascaderContent = () => {
           rightIcon={<ChevronDownIcon />}
           value={searchValue}
           onChange={(e) => {
+            e.currentTarget.classList.remove('cursor-hidden');
             if (!popoverOpen) {
               setPopoverOpen(true);
             } else if (e.target.value === '') {
@@ -232,8 +234,22 @@ export const CascaderContent = () => {
             }
           }}
           leftElement={
-            !popoverOpen ? (
-              <CascaderInputValue>{value?.label}</CascaderInputValue>
+            !searchValue ? (
+              <CascaderInputValue textVariant={popoverOpen ? 'light' : 'dark'}>
+                {value?.label}
+              </CascaderInputValue>
+            ) : undefined
+          }
+          rightElement={
+            popoverOpen && value?.value ? (
+              <CascaderClearButton
+                onClick={() => {
+                  inputRef.current?.focus();
+                  requestAnimationFrame(() => {
+                    handleChange({ value: '', label: '' }, []);
+                  });
+                }}
+              />
             ) : undefined
           }
           role="combobox"
@@ -247,6 +263,14 @@ export const CascaderContent = () => {
           {...(!popoverOpen && {
             'aria-describedby': `cascader-${id}-input-description`
           })}
+          onFocus={(e) => {
+            e.currentTarget.classList.remove('cursor-hidden');
+          }}
+          css={{
+            '.cursor-hidden': {
+              color: 'transparent'
+            }
+          }}
         />
         {!popoverOpen && (
           <Box
@@ -291,9 +315,11 @@ export const CascaderContent = () => {
               css={{
                 width: 'var(--radix-popover-trigger-width)',
                 padding: '$5 0',
+                paddingTop: 0,
                 borderRadius: '$xl',
                 marginTop: '$2',
-                backgroundColor: '$white900'
+                backgroundColor: '$white900',
+                border: '1px solid $colors$black300'
               }}
               className={prefixClassName('cascader__popover-content')}
             >
@@ -305,6 +331,9 @@ export const CascaderContent = () => {
                     handleChange(val, selPath);
                     closePopover();
                     setSearchValue('');
+                    setTimeout(() => {
+                      inputRef.current?.classList.add('cursor-hidden');
+                    }, 50);
                   }}
                 />
               ) : (
@@ -314,6 +343,9 @@ export const CascaderContent = () => {
                     handleChange={(val, selPath) => {
                       handleChange(val, selPath);
                       closePopover();
+                      setTimeout(() => {
+                        inputRef.current?.classList.add('cursor-hidden');
+                      }, 50);
                     }}
                   />
                 </>

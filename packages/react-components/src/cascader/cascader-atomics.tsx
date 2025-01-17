@@ -1,10 +1,25 @@
+import { CloseIcon } from '@sparrowengg/twigs-react-icons';
 import { prefixClassName } from '@src/utils';
-import { ReactNode } from 'react';
+import { ComponentProps, ReactNode } from 'react';
 import { Box } from '../box';
 import { Flex } from '../flex';
 import { PopoverPortal } from '../popover';
+import { styled } from '../stitches.config';
 import { Text } from '../text';
 import { useCascaderValue } from './use-value';
+
+const StyledClearButton = styled('button', {
+  color: '$neutral800',
+  width: '$5',
+  height: '$5',
+  border: 'none',
+  cursor: 'pointer',
+  display: 'flex',
+  alignItems: 'center',
+  marginRight: '$12',
+  justifyContent: 'center',
+  backgroundColor: 'transparent'
+});
 
 export const CascaderBreadCrumb = () => {
   const { value, valueSelectionPath, componentProps } = useCascaderValue();
@@ -17,7 +32,12 @@ export const CascaderBreadCrumb = () => {
   }
 
   return (
-    <Flex className={prefixClassName('cascader__breadcrumb')}>
+    <Flex
+      className={prefixClassName('cascader__breadcrumb')}
+      css={{
+        marginTop: '$2'
+      }}
+    >
       {valueSelectionPath.slice(0, -1).map((path, index) => {
         return (
           <Text
@@ -47,7 +67,13 @@ export const CascaderBreadCrumb = () => {
   );
 };
 
-export const CascaderInputValue = ({ children }: { children?: ReactNode }) => {
+export const CascaderInputValue = ({
+  children,
+  textVariant = 'dark'
+}: {
+  children?: ReactNode;
+  textVariant?: 'light' | 'dark';
+}) => {
   const { componentProps, value, valueSelectionPath } = useCascaderValue();
 
   if (componentProps.renderValue) {
@@ -66,13 +92,23 @@ export const CascaderInputValue = ({ children }: { children?: ReactNode }) => {
       ) : (
         <Text
           css={{
-            color: '$neutral900'
+            color: textVariant === 'dark' ? '$neutral900' : '$neutral500'
           }}
         >
           {children}
         </Text>
       )}
     </Box>
+  );
+};
+
+export const CascaderClearButton = (
+  props: ComponentProps<typeof StyledClearButton>
+) => {
+  return (
+    <StyledClearButton type="button" {...props}>
+      <CloseIcon />
+    </StyledClearButton>
   );
 };
 
