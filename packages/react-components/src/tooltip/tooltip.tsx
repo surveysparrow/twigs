@@ -85,7 +85,7 @@ interface TooltipBaseProps {
 }
 
 export type TooltipProps = TooltipBaseProps &
-  ComponentProps<typeof StyledContent> &
+  Omit<ComponentProps<typeof StyledContent>, 'content'> &
   ComponentProps<typeof TooltipPrimitive.Root>;
 
 export const Tooltip = ({
