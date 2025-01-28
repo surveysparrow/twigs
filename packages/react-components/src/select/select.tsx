@@ -16,9 +16,9 @@ import AsyncCreatableSelect from 'react-select/async-creatable';
 import CreatableSelect from 'react-select/creatable';
 import { Box } from '../box';
 import { Flex } from '../flex';
+import { FormHelperText } from '../form-helper-text';
 import { FormLabel } from '../form-label';
 import { globalCss, styled } from '../stitches.config';
-import { FormInputHelperText } from '../form-helper-text';
 
 const selectStyles = {
   transition: 'all $transitions$2',
@@ -412,12 +412,20 @@ export const Select = React.forwardRef<
             )}
             {SelectElement}
             {error || helperText ? (
-              <FormInputHelperText
-                size={labelSize}
-                color={error ? 'error' : 'info'}
+              <Box
+                css={{
+                  marginTop: ['lg', 'xl'].includes(props.size as string)
+                    ? '$2'
+                    : '$1'
+                }}
               >
-                {error || helperText}
-              </FormInputHelperText>
+                <FormHelperText
+                  size={labelSize}
+                  color={error ? 'error' : 'info'}
+                >
+                  {error || helperText}
+                </FormHelperText>
+              </Box>
             ) : null}
           </Box>
         ) : (

@@ -7,9 +7,9 @@ import {
   useId,
   useMemo
 } from 'react';
-import { FormInputHelperText } from '../form-helper-text';
 import { Box } from '../box';
 import { Flex } from '../flex';
+import { FormHelperText } from '../form-helper-text';
 import { FormLabel } from '../form-label';
 import { errorBorderStyles } from '../input';
 import { styled } from '../stitches.config';
@@ -154,7 +154,7 @@ export const Textarea: FunctionComponent<TextareaProps> = forwardRef(
     const inputId = id || `form-input-${useId()}`;
     const mergedValue = value || defaultValue;
 
-    const labelSize = size === 'xl' ? 'sm' : 'sm';
+    const labelSize = size === 'xl' ? 'sm' : 'xs';
 
     const counterElement = useMemo(() => {
       if (!showCount) return null;
@@ -227,9 +227,18 @@ export const Textarea: FunctionComponent<TextareaProps> = forwardRef(
           {...rest}
         />
         {error || helperText ? (
-          <FormInputHelperText size={labelSize} color={error ? 'error' : 'info'}>
-            {error || helperText}
-          </FormInputHelperText>
+          <Box
+            css={{
+              marginTop: ['lg', 'xl'].includes(size as string) ? '$2' : '$1'
+            }}
+          >
+            <FormHelperText
+              size={labelSize}
+              color={error ? 'error' : 'info'}
+            >
+              {error || helperText}
+            </FormHelperText>
+          </Box>
         ) : null}
       </Box>
     );

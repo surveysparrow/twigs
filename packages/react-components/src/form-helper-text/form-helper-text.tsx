@@ -1,8 +1,26 @@
-import React, { FunctionComponent } from 'react';
-import { Text, TextProps } from '../text';
+import React, { ComponentProps, FunctionComponent } from 'react';
 import { styled } from '../stitches.config';
+import { Text } from '../text';
 
-export type FormHelperTextProps = TextProps & {
+const StyledFormHelperText = styled(Text, {
+  color: '$neutral700',
+  fontWeight: '$4',
+  variants: {
+    color: {
+      error: {
+        color: '$negative500'
+      },
+      info: {
+        color: '$neutral700'
+      }
+    }
+  },
+  defaultVariants: {
+    color: 'info'
+  }
+});
+
+export type FormHelperTextProps = ComponentProps<typeof StyledFormHelperText> & {
   as?: React.ElementType;
 };
 
@@ -12,27 +30,13 @@ export const FormHelperText: FunctionComponent<FormHelperTextProps> = ({
   ...rest
 }: FormHelperTextProps) => {
   return (
-    <Text
+    <StyledFormHelperText
       size="xs"
-      css={{ color: '$neutral700', fontWeight: '$4', ...css }}
+      css={css}
       data-testid="helper-text"
       {...rest}
     >
       {children}
-    </Text>
+    </StyledFormHelperText>
   );
 };
-
-export const FormInputHelperText = styled(FormHelperText, {
-  marginTop: '$1',
-  variants: {
-    color: {
-      error: {
-        color: '$negative500 !important'
-      },
-      info: {
-        color: '$neutral700 !important'
-      }
-    }
-  }
-});

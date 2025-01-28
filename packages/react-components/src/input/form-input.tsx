@@ -8,7 +8,7 @@ import {
 } from 'react';
 import { Box } from '../box';
 import { Flex } from '../flex';
-import { FormHelperText, FormInputHelperText } from '../form-helper-text';
+import { FormHelperText } from '../form-helper-text';
 import { FormLabel } from '../form-label';
 import { styled } from '../stitches.config';
 import { Text } from '../text';
@@ -124,15 +124,17 @@ export const FormInput: FunctionComponent<FormInputProps> = forwardRef(
           {...rest}
         />
         {error || helperText ? (
-          <FormInputHelperText
-            size={labelSize}
-            color={error ? 'error' : 'info'}
+          <Box
             css={{
-              marginTop: ['lg', 'xl'].includes(rest.size as string) ? '$2' : '$1'
+              marginTop: ['lg', 'xl'].includes(rest.size as string)
+                ? '$2'
+                : '$1'
             }}
           >
-            {error || helperText}
-          </FormInputHelperText>
+            <FormHelperText size={labelSize} color={error ? 'error' : 'info'}>
+              {error || helperText}
+            </FormHelperText>
+          </Box>
         ) : null}
       </Box>
     );
