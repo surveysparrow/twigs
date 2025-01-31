@@ -85,7 +85,7 @@ interface TooltipBaseProps {
 }
 
 export type TooltipProps = TooltipBaseProps &
-  ComponentProps<typeof StyledContent> &
+  Omit<ComponentProps<typeof StyledContent>, 'content'> &
   ComponentProps<typeof TooltipPrimitive.Root>;
 
 export const Tooltip = ({
@@ -96,6 +96,8 @@ export const Tooltip = ({
   size,
   open,
   defaultOpen,
+  delayDuration,
+  disableHoverableContent,
   onOpenChange,
   ...props
 }: TooltipProps) => {
@@ -104,6 +106,8 @@ export const Tooltip = ({
       open={open}
       defaultOpen={defaultOpen}
       onOpenChange={onOpenChange}
+      delayDuration={delayDuration}
+      disableHoverableContent={disableHoverableContent}
     >
       <TooltipPrimitive.Trigger asChild>{children}</TooltipPrimitive.Trigger>
       {content ? (

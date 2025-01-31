@@ -15,9 +15,9 @@ export const resetStyles = {
     verticalAlign: 'baseline'
   },
   'article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section':
-    {
-      display: 'block'
-    },
+  {
+    display: 'block'
+  },
   '*[hidden]': {
     display: 'none'
   },
@@ -354,7 +354,7 @@ export const globalStyles = globalCss({
   '*, :before, :after': { boxSizing: 'border-box' }
 });
 
-function hexToRgba(hex: string, opacity: number) {
+export function hexToRgba(hex: string, opacity: number) {
   const color = theme.colors[hex.replace('$', '')];
   if (!color) return hex;
   const r = parseInt(color.value.substring(1, 3), 16);

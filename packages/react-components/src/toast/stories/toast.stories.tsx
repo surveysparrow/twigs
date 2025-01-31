@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { UserCircleIcon, AlertFillIcon } from '@sparrowengg/twigs-react-icons';
+import { useState, useEffect, useRef } from 'react';
+import { AlertFillIcon } from '@sparrowengg/twigs-react-icons';
 import { ToastProviderProps } from '@radix-ui/react-toast';
 import { Button } from '../../button';
 import { Flex } from '../../flex';
@@ -13,7 +13,7 @@ export default {
   argTypes: {
     duration: {
       control: 'number',
-      defaultValue: 5000
+      defaultValue: Infinity
     },
     variant: {
       control: 'select',
@@ -27,48 +27,36 @@ export default {
   }
 };
 
+const messages = {
+  default: 'Default message',
+  success: 'Success message',
+  error: 'Error message',
+  warning: 'Warning message'
+};
+
 const Template = ({
-  variant: storyVariant,
+  variant,
   maxToasts
 }: ToastProps & ToastProviderProps & { maxToasts: number }) => {
-  const [variant, setVariant] = useState<typeof storyVariant>(storyVariant);
   const [maxToastsState, setMaxToastsState] = useState<number>(maxToasts);
   const timerRef = useRef(0);
 
   useEffect(() => {
-    setVariant(storyVariant);
-  }, [storyVariant]);
-
-  useEffect(() => {
     setMaxToastsState(maxToasts);
   }, [maxToasts]);
-
-  const messages = {
-    success: 'Record saved successfully',
-    error: 'Something went wrong',
-    warning: 'Please check the form',
-    default: 'Default message'
-  };
 
   useEffect(() => {
     return () => clearTimeout(timerRef.current);
   }, []);
   return (
     <>
-      <Toastr duration={10000} maxToasts={maxToastsState} />
+      <Toastr duration={Infinity} maxToasts={maxToastsState} />
       <Button
         variant="outline"
         onClick={() => {
           toast({
-            icon: <UserCircleIcon />,
-            variant: storyVariant || ('default' as any),
-            title: messages[variant!] || 'Default message',
-            description: 'There was a problem with your request.',
-            action: (
-              <ToastAction altText="Try again" asChild>
-                <Button color="light"> Close </Button>
-              </ToastAction>
-            )
+            variant: variant || ('default' as any),
+            title: messages[variant!] || 'Default message'
           });
         }}
       >

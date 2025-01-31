@@ -1,7 +1,10 @@
-import React, { ComponentProps, FunctionComponent, useId } from 'react';
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
-import { styled } from '../stitches.config';
+import React, {
+  ComponentProps, FunctionComponent,
+  useId
+} from 'react';
 import { Flex } from '../flex';
+import { styled } from '../stitches.config';
 
 const StyledRadioGroup = styled(RadioGroupPrimitive.Root, {
   display: 'flex',
@@ -112,19 +115,20 @@ const StyledLabelContainer = styled('label', {
 export type RadioProps = {
   disabled?: boolean;
   required?: boolean;
+  containerRef?: React.Ref<HTMLDivElement>;
 } & Omit<ComponentProps<typeof StyledRadio>, OmitProps>;
 
 export const Radio: FunctionComponent<RadioProps> = React.forwardRef<
   React.ElementRef<typeof StyledRadio>,
   RadioProps
 >(({
-  disabled, value, required, children, id, ...rest
+  disabled, value, required, children, id, containerRef, ...rest
 }, ref) => {
   const generatedId = useId();
   const uniqueId = id || generatedId;
 
   return (
-    <Flex alignItems="center">
+    <Flex alignItems="center" ref={containerRef}>
       <StyledRadio
         ref={ref}
         disabled={disabled}

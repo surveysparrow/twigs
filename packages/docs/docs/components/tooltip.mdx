@@ -17,12 +17,12 @@ You should wrap your application with `TooltipProvider` to make sure that the to
 ```jsx
 function App() {
   return (
-      // highlight-start
+    // highlight-start
     <TooltipProvider delayDuration={0}>
       // highlight-end
       <App />
     </TooltipProvider>
-  )
+  );
 }
 ```
 
@@ -33,7 +33,7 @@ function App() {
 ```jsx
 // highlight-start
 <Tooltip content="Tooltip content">
-// highlight-end
+  // highlight-end
   <Button> Hover me </Button>
 </Tooltip>
 ```
@@ -41,14 +41,18 @@ function App() {
 ### Props
 
 #### TooltipProvider
+
 | Property          | Description                                                                       | Type   | Default |
-|-------------------|-----------------------------------------------------------------------------------|--------|---------|
+| ----------------- | --------------------------------------------------------------------------------- | ------ | ------- |
 | delayDuration     | The duration from when the mouse enters a tooltip trigger until the tooltip opens | number | 700     |
 | skipDelayDuration | time a user has to enter another trigger without incurring a delay again          | number | 300     |
 
 #### Tooltip
-| Property | Description                                 | Type                  | Default |
-|----------|---------------------------------------------|-----------------------|---------|
-| side     | position of tooltip                         | `bottom` `left` `right` `top` | top     |
-| content  | Content inside tooltip                      | string,JSX            |         |
-| align    | The preferred alignment against the trigger | `start` `center` `end`      | start   |
+
+| Property                | Description                                                                       | Type                          | Default |
+| ----------------------- | --------------------------------------------------------------------------------- | ----------------------------- | ------- |
+| side                    | position of tooltip                                                               | `bottom` `left` `right` `top` | top     |
+| content                 | Content inside tooltip                                                            | string,JSX                    |         |
+| align                   | The preferred alignment against the trigger                                       | `start` `center` `end`        | start   |
+| delayDuration           | The duration from when the mouse enters a tooltip trigger until the tooltip opens | number                        | 700     |
+| disableHoverableContent | Prevents TooltipContent from remaining open when hovering                         | `boolean`                     | false   |
