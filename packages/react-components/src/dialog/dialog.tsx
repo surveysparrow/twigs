@@ -58,8 +58,8 @@ const StyledOverlay = styled(DialogPrimitive.Overlay, {
 });
 
 const StyledContent = styled(DialogPrimitive.Content, {
-  backgroundColor: 'white',
-  borderRadius: 6,
+  backgroundColor: '$white900',
+  borderRadius: '$2xl',
   boxShadow:
     'hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px',
   position: 'fixed',
@@ -68,7 +68,6 @@ const StyledContent = styled(DialogPrimitive.Content, {
   transform: 'translate(-50%, -50%)',
   maxHeight: '80vh',
   maxWidth: '95vw',
-  padding: '$12',
   zIndex: 999,
   '@media (prefers-reduced-motion: no-preference)': {
     animation: `${contentShow} 150ms cubic-bezier(0.16, 1, 0.3, 1)`
@@ -153,21 +152,81 @@ const DialogRoot = ({
   );
 };
 
+const StyledHeader = styled('header', {
+  minHeight: '$18',
+  padding: '$8 $12',
+  borderBottom: '$borderWidths$xs solid $colors$neutral200'
+});
+
+type HeaderProps = {
+  children?: ReactNode;
+} & ComponentProps<typeof StyledHeader>;
+
+const Header = ({ children, ...props }: HeaderProps) => {
+  return <StyledHeader {...props}>{children}</StyledHeader>;
+};
+
+const StyledBody = styled('div', {
+  padding: '$8 $12'
+});
+
+type BodyProps = {
+  children?: ReactNode;
+} & ComponentProps<typeof StyledBody>;
+
+const Body = ({ children, ...props }: BodyProps) => {
+  return <StyledBody {...props}>{children}</StyledBody>;
+};
+
+const StyledFooter = styled('footer', {
+  height: '$18',
+  padding: '$8 $12'
+});
+
+type FooterProps = {
+  children?: ReactNode;
+} & ComponentProps<typeof StyledFooter>;
+
+const Footer = ({ children, ...props }: FooterProps) => {
+  return <StyledFooter {...props}>{children}</StyledFooter>;
+};
+
 const StyledTitle = styled(DialogPrimitive.Title, {
   margin: 0,
-  fontWeight: 500,
-  fontSize: '$lg'
+  fontWeight: '$7',
+  fontSize: '$lg',
+  color: '$neutral900',
+  variants: {
+    size: {
+      md: {
+        fontSize: '$md',
+        lineHeight: '$md'
+      },
+      lg: {
+        fontSize: '$lg',
+        lineHeight: '$lg'
+      }
+    }
+  },
+  defaultVariants: {
+    size: 'lg'
+  }
 });
 
 const StyledDescription = styled(DialogPrimitive.Description, {
-  margin: '$5 0 $10',
-  fontSize: '$md'
+  margin: 0,
+  color: '$neutral700',
+  fontSize: '$xs',
+  lineHeight: '$xxs'
 });
 
 // Exports
 export const Dialog = DialogRoot;
 export const DialogTrigger = DialogPrimitive.Trigger;
 export const DialogContent = Content;
+export const DialogHeader = Header;
 export const DialogTitle = StyledTitle;
 export const DialogDescription = StyledDescription;
+export const DialogBody = Body;
+export const DialogFooter = Footer;
 export const DialogClose = DialogPrimitive.Close;
