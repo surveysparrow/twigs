@@ -66,7 +66,11 @@ export const LinkTooltip = ({
         }}
         target="_blank"
         referrerPolicy="no-referrer"
-        href={https ? `https://${linkUrl}` : linkUrl}
+        href={
+          https && !linkUrl.startsWith('https://')
+            ? `https://${linkUrl}`
+            : linkUrl
+        }
       >
         {linkUrl}
       </Link>
