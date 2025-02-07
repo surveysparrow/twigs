@@ -1,15 +1,19 @@
-import React, {
+import {
   ComponentProps,
+  FunctionComponent,
   ReactElement,
+  ReactNode,
   forwardRef,
-  FunctionComponent
+  useId,
+  useMemo
 } from 'react';
-import { styled } from '../stitches.config';
-import { StyledError, errorBorderStyles } from '../input';
 import { Box } from '../box';
 import { Flex } from '../flex';
+import { FormHelperText } from '../form-helper-text';
 import { FormLabel } from '../form-label';
-import { Text } from '../text/text';
+import { errorBorderStyles } from '../input';
+import { styled } from '../stitches.config';
+import { Text } from '../text';
 
 const StyledTextarea = styled('textarea', {
   width: '100%',
@@ -40,7 +44,7 @@ const StyledTextarea = styled('textarea', {
     cursor: 'not-allowed',
     borderWidth: '$xs',
     borderStyle: 'solid',
-    borderColorOpacity: ['$neutral500', 0.25],
+    borderColor: '$neutral200',
     '&:hover': {
       boxShadow: 'none'
     }
@@ -62,20 +66,38 @@ const StyledTextarea = styled('textarea', {
         resize: 'none'
       }
     },
+    size: {
+      sm: {
+        padding: '$2 $4',
+        borderRadius: '$sm'
+      },
+      md: {
+        padding: '$3 $4',
+        borderRadius: '$lg'
+      },
+      lg: {
+        padding: '$4 $6',
+        borderRadius: '$lg'
+      },
+      xl: {
+        padding: '$6',
+        borderRadius: '$xl'
+      }
+    },
     variant: {
       default: {
         background: '$white900',
         borderWidth: '$xs',
         borderStyle: 'solid',
-        borderColor: '$neutral200',
+        borderColorOpacity: ['$black900', 0.15],
         '&:hover:not(:disabled), &:focus, &:active:not(:disabled)': {
           borderWidth: '$xs',
           borderStyle: 'solid',
-          borderColor: '$neutral300'
+          borderColor: '$neutral400'
         }
       },
       filled: {
-        background: '$black50'
+        backgroundColorOpacity: ['$secondary500', 0.06]
       }
     }
   },
@@ -91,6 +113,15 @@ interface TextareaBaseProps {
   error?: string;
   requiredIndicator?: boolean | ReactElement;
   errorBorder?: boolean;
+  info?: string | ReactNode;
+  helperText?: string;
+  renderCounter?: ({
+    length,
+    maxLength
+  }: {
+    length: number;
+    maxLength?: number;
+  }) => ReactNode;
 }
 
 export type TextareaProps = TextareaBaseProps &
@@ -107,15 +138,57 @@ export const Textarea: FunctionComponent<TextareaProps> = forwardRef(
       error,
       maxLength,
       requiredIndicator,
+      helperText,
       css,
       value,
       defaultValue,
+      size,
+      info,
       rows,
+      id,
+      renderCounter,
       ...rest
     }: TextareaProps,
     ref
   ) => {
+    const inputId = id || `form-input-${useId()}`;
     const mergedValue = value || defaultValue;
+
+    const labelSize = size === 'xl' ? 'sm' : 'xs';
+
+    const counterElement = useMemo(() => {
+      if (!showCount) return null;
+
+      if (renderCounter) {
+        return renderCounter({
+          length: mergedValue?.toString().length || 0,
+          maxLength
+        });
+      }
+
+      return (
+        <Text
+          css={{
+            color: '$neutral700',
+            ...(!label ? { marginLeft: 'auto' } : {})
+          }}
+          data-testid="textarea-char-count"
+          size={labelSize}
+        >
+          {mergedValue?.toString().length || 0}
+          {maxLength ? `/${maxLength}` : null}
+        </Text>
+      );
+    }, [
+      showCount,
+      label,
+      mergedValue,
+      maxLength,
+      inputId,
+      labelSize,
+      renderCounter
+    ]);
+
     return (
       <Box>
         <Flex
@@ -123,23 +196,17 @@ export const Textarea: FunctionComponent<TextareaProps> = forwardRef(
           justifyContent="space-between"
           css={{ marginBottom: '$2' }}
         >
-          {label ? (
-            <FormLabel htmlFor={rest.id} requiredIndicator={requiredIndicator}>
+          {(label || counterElement) && (
+            <FormLabel
+              size={labelSize}
+              htmlFor={id}
+              requiredIndicator={requiredIndicator}
+              info={info}
+              rightAddon={counterElement}
+            >
               {label}
             </FormLabel>
-          ) : null}
-          {showCount ? (
-            <Text
-              css={{
-                color: '$neutral700',
-                ...(!label ? { marginLeft: 'auto' } : {})
-              }}
-              data-testid="textarea-char-count"
-            >
-              {mergedValue?.toString().length || 0}
-              {maxLength ? `/${maxLength}` : null}
-            </Text>
-          ) : null}
+          )}
         </Flex>
         <StyledTextarea
           value={value}
@@ -159,7 +226,20 @@ export const Textarea: FunctionComponent<TextareaProps> = forwardRef(
           variant={variant}
           {...rest}
         />
-        {error ? <StyledError size="xs">{error}</StyledError> : null}
+        {error || helperText ? (
+          <Box
+            css={{
+              marginTop: ['lg', 'xl'].includes(size as string) ? '$2' : '$1'
+            }}
+          >
+            <FormHelperText
+              size={labelSize}
+              color={error ? 'error' : 'info'}
+            >
+              {error || helperText}
+            </FormHelperText>
+          </Box>
+        ) : null}
       </Box>
     );
   }

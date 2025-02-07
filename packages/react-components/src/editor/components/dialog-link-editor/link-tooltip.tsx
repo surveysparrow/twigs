@@ -15,13 +15,15 @@ export const LinkTooltip = ({
   anchorElem,
   containerRef,
   handleEdit,
-  handleDelete
+  handleDelete,
+  https
 }: {
   anchorElem: HTMLElement;
   containerRef: React.RefObject<HTMLDivElement>;
   linkUrl: string;
   handleEdit: () => void;
   handleDelete: () => void;
+  https: boolean;
 }) => {
   return createPortal(
     <Box
@@ -64,7 +66,11 @@ export const LinkTooltip = ({
         }}
         target="_blank"
         referrerPolicy="no-referrer"
-        href={linkUrl}
+        href={
+          https && !linkUrl.startsWith('https://')
+            ? `https://${linkUrl}`
+            : linkUrl
+        }
       >
         {linkUrl}
       </Link>

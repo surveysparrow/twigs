@@ -1,5 +1,5 @@
 import { $setBlocksType } from '@lexical/selection';
-import { IconButtonBaseProps } from '@src/button';
+import { IconButtonProps } from '@src/button';
 import {
   $createParagraphNode,
   $getSelection,
@@ -16,7 +16,7 @@ export type RenderButtonProps = {
 
 export type ToolbarButtonProps = {
   renderButton?: (props: RenderButtonProps) => ReactNode;
-  buttonProps?: IconButtonBaseProps;
+  buttonProps?: IconButtonProps;
 };
 
 export const formatParagraph = (editor: LexicalEditor) => {

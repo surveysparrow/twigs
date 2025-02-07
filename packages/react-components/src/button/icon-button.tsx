@@ -31,7 +31,7 @@ const StyledIconButton = styled(Button, {
   }
 });
 
-type IconButtonProps = IconButtonBaseProps &
+export type IconButtonProps = IconButtonBaseProps &
   Omit<ComponentProps<typeof StyledIconButton>, OmitProps> &
   React.ButtonHTMLAttributes<HTMLButtonElement>;
 
