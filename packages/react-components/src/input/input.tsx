@@ -1,6 +1,15 @@
-import React, { ReactElement, FunctionComponent, ComponentProps } from 'react';
+import { prefixClassName } from '@src/utils';
+import clsx from 'clsx';
+import React, { ComponentProps, FunctionComponent, ReactElement } from 'react';
 import { Box } from '../box';
 import { styled } from '../stitches.config';
+
+const CLASSNAMES = {
+  inputContainer: prefixClassName('input-container'),
+  input: prefixClassName('input'),
+  inputWithLeftIcon: prefixClassName('input--with-left-icon'),
+  inputWithRightIcon: prefixClassName('input--with-right-icon')
+};
 
 const StyledInput = styled('input', {
   width: '100%',
@@ -16,7 +25,7 @@ const StyledInput = styled('input', {
     background: '$white900',
     borderWidth: '$xs',
     borderStyle: 'solid',
-    borderColorOpacity: ['$secondary500', 0.4]
+    borderColor: '$neutral400'
   },
   '&:focus, &:active:not(:disabled)': {
     $$shadowColor: '$colors$primary300',
@@ -27,11 +36,13 @@ const StyledInput = styled('input', {
   },
   '&:disabled': {
     color: '$neutral700',
-    backgroundColorOpacity: ['$neutral500', 0.06],
+    backgroundColorOpacity: ['$secondary500', 0.06],
     cursor: 'not-allowed',
     borderWidth: '$xs',
     borderStyle: 'solid',
-    borderColorOpacity: ['$neutral500', 0.25],
+    borderColor: '$neutral200',
+    opacity: 0.6,
+
     '&:hover': {
       boxShadow: 'none'
     }
@@ -40,27 +51,59 @@ const StyledInput = styled('input', {
     size: {
       xl: {
         height: '$12',
-        borderRadius: '$lg',
+        borderRadius: '$xl',
         padding: '$6',
-        fontSize: '$md'
+        fontSize: '$md',
+
+        [`&.${CLASSNAMES.inputWithLeftIcon}`]: {
+          paddingInlineStart: '$18'
+        },
+
+        [`&.${CLASSNAMES.inputWithRightIcon}`]: {
+          paddingInlineEnd: '$18'
+        }
       },
       lg: {
         height: '$10',
         borderRadius: '$lg',
         padding: '$5 $6',
-        fontSize: '$sm'
+        fontSize: '$sm',
+
+        [`&.${CLASSNAMES.inputWithLeftIcon}`]: {
+          paddingInlineStart: '$18'
+        },
+
+        [`&.${CLASSNAMES.inputWithRightIcon}`]: {
+          paddingInlineEnd: '$18'
+        }
       },
       md: {
         height: '$8',
-        borderRadius: '$md',
+        borderRadius: '$lg',
         padding: '$3 $4',
-        fontSize: '$sm'
+        fontSize: '$sm',
+
+        [`&.${CLASSNAMES.inputWithLeftIcon}`]: {
+          paddingInlineStart: '$14'
+        },
+
+        [`&.${CLASSNAMES.inputWithRightIcon}`]: {
+          paddingInlineEnd: '$14'
+        }
       },
       sm: {
         height: '$6',
-        borderRadius: '$md',
-        padding: '$3 $4',
-        fontSize: '$xs'
+        borderRadius: '$sm',
+        padding: '$2 $4',
+        fontSize: '$xs',
+
+        [`&.${CLASSNAMES.inputWithLeftIcon}`]: {
+          paddingInlineStart: '$13'
+        },
+
+        [`&.${CLASSNAMES.inputWithRightIcon}`]: {
+          paddingInlineEnd: '$12'
+        }
       }
     },
     variant: {
@@ -68,15 +111,15 @@ const StyledInput = styled('input', {
         background: '$white900',
         borderWidth: '$xs',
         borderStyle: 'solid',
-        borderColor: '$neutral200',
+        borderColorOpacity: ['$black900', 0.15],
         '&:hover:not(:disabled), &:focus, &:active:not(:disabled)': {
           borderWidth: '$xs',
           borderStyle: 'solid',
-          borderColor: '$neutral300'
+          borderColor: '$neutral400'
         }
       },
       filled: {
-        background: '$black50'
+        backgroundColorOpacity: ['$secondary500', 0.06]
       }
     }
   },
@@ -132,19 +175,19 @@ const IconContainer = styled(Box, {
   variants: {
     size: {
       xl: {
-        width: '$6',
-        height: '$6',
+        width: '$5',
+        height: '$5',
         '& svg': {
-          width: 18,
-          height: 18
+          width: '100%',
+          height: '100%'
         }
       },
       lg: {
-        width: '$6',
-        height: '$6',
+        width: '$5',
+        height: '$5',
         '& svg': {
-          width: 18,
-          height: 18
+          width: '100%',
+          height: '100%'
         }
       },
       md: {
@@ -156,15 +199,78 @@ const IconContainer = styled(Box, {
         }
       },
       sm: {
-        width: '$3',
-        height: '$3',
+        width: '14px',
+        height: '14px',
+
         '& svg': {
-          width: '$3',
-          height: '$3'
+          width: '14px',
+          height: '14px'
         }
       }
+    },
+    position: {
+      left: {},
+      right: {}
     }
-  }
+  },
+  compoundVariants: [
+    {
+      position: 'left',
+      size: 'sm',
+      css: {
+        left: '$4'
+      }
+    },
+    {
+      position: 'left',
+      size: 'md',
+      css: {
+        left: '$4'
+      }
+    },
+    {
+      position: 'left',
+      size: 'lg',
+      css: {
+        left: '$6'
+      }
+    },
+    {
+      position: 'left',
+      size: 'xl',
+      css: {
+        left: '$6'
+      }
+    },
+    {
+      position: 'right',
+      size: 'sm',
+      css: {
+        right: '$4'
+      }
+    },
+    {
+      position: 'right',
+      size: 'md',
+      css: {
+        right: '$4'
+      }
+    },
+    {
+      position: 'right',
+      size: 'lg',
+      css: {
+        right: '$6'
+      }
+    },
+    {
+      position: 'right',
+      size: 'xl',
+      css: {
+        right: '$6'
+      }
+    }
+  ]
 });
 
 const AddonContainer = styled(Box, {
@@ -184,16 +290,16 @@ const AddonContainer = styled(Box, {
 });
 
 export const errorBorderStyles = {
-  boxShadow: '$colors$negative500 0px 1.5px 0px 0px',
-  borderBottom: '0',
-  '&:hover': {
-    borderBottom: '0'
+  boxShadow: '$colors$negative500 0px 1px 0px 0px',
+  borderBottomWidth: '0',
+  '&:not(:disabled):hover': {
+    borderBottomWidth: '0'
   },
   '&:focus,&:active': {
     $$shadowColor: '$colors$primary300',
     borderBottom: '0',
     boxShadow:
-      '$colors$negative500 0px 1.5px 0px 0px,rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
+      '$colors$negative500 0px 1px 0px 0px,rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
   }
 };
 
@@ -221,14 +327,10 @@ export const Input: FunctionComponent<InputProps> = React.forwardRef(
             position: 'relative',
             ...css
           }}
+          className={CLASSNAMES.inputContainer}
         >
           {leftIcon && (
-            <IconContainer
-              size={size}
-              css={{
-                left: size === 'md' ? '$4' : '$6'
-              }}
-            >
+            <IconContainer size={size} position="left">
               {React.cloneElement(leftIcon)}
             </IconContainer>
           )}
@@ -251,13 +353,15 @@ export const Input: FunctionComponent<InputProps> = React.forwardRef(
               })
             }}
             {...rest}
+            className={clsx(CLASSNAMES.input, rest.className, {
+              [CLASSNAMES.inputWithLeftIcon]: !!leftIcon,
+              [CLASSNAMES.inputWithRightIcon]: !!rightIcon
+            })}
           />
           {rightIcon && (
             <IconContainer
               size={size}
-              css={{
-                right: size === 'md' ? '$4' : '$6'
-              }}
+              position="right"
             >
               {React.cloneElement(rightIcon)}
             </IconContainer>

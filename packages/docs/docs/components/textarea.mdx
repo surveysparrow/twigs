@@ -10,14 +10,13 @@ import TextareaVariantsSnippet from "@site/static/doc-snippets/textarea-variants
 import { Textarea } from "@sparrowengg/twigs-react";
 ```
 
-### Usage 
+### Usage
 
 <TextareaSnippet />
 
 ### Textarea error
 
 <TextareaErrorSnippet />
-
 
 ### Character count
 
@@ -34,7 +33,7 @@ Using `maxLength` and `showCount` props, you can show the character count of the
 
 ```jsx live play=textarea-character-count
 function CharacterCount() {
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = React.useState("");
   return (
     <Textarea
       label="Description"
@@ -53,18 +52,20 @@ function CharacterCount() {
 
 ## Props
 
-| Property  | Description                            | Type            | Default |
-|-----------|----------------------------------------|-----------------|---------|
-| variant   | style of textzrea                      | `default` `filled` | default |
-| onChange  |                                        | function        |         |   
-| resize    | control the textarea's resize ability  | `both` `vertical` `horizontal` `none` | both |
-| disabled  |                                        | boolean         | false   |
-| css       | Custom styles for textarea                | object          |         |
-| maxLength       | Maximum allowed characters       | number          |         |
-| rows            | Maximum allowed rows             | number          |         |
-| cols            | Maximum allowed cols             | number          |         |
-| errorBorder     | Show error border when there is error              | boolean          |  false     |
-| requiredIndicator       | Show required indicator next to textarea                | boolean, JSX Element        |         |
-| error       | Message for textarea error                | string          |         |
-| maxLength       | Maximum allowed characters                | number          |         |
-| showCount       | Show remaining allowed character length                 | boolean          |         |
+| Property          | Description                                                                                | Type                                                                           | Default |
+| ----------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------- |
+| variant           | style of textarea                                                                          | `default` `filled`                                                             | default |
+| onChange          |                                                                                            | function                                                                       |         |
+| resize            | control the textarea's resize ability                                                      | `both` `vertical` `horizontal` `none`                                           | both    |
+| disabled          |                                                                                            | boolean                                                                        | false   |
+| css               | Custom styles for textarea                                                                 | object                                                                         |         |
+| maxLength         | Maximum allowed characters                                                                 | number                                                                         |         |
+| rows              | Maximum allowed rows                                                                       | number                                                                         |         |
+| cols              | Maximum allowed cols                                                                       | number                                                                         |         |
+| errorBorder       | Show error border when there is error                                                      | boolean                                                                        | false   |
+| requiredIndicator | Show required indicator next to textarea                                                   | boolean, JSX Element                                                           |         |
+| error             | Message for textarea error                                                                 | string                                                                         |         |
+| maxLength         | Maximum allowed characters                                                                 | number                                                                         |         |
+| showCount         | Show remaining allowed character length                                                    | boolean                                                                        |         |
+| info              | Adds an info icon with a tooltip beside the label. Label has to provided for this to work. | `string` \| `ReactNode`                                                        |         |
+| renderCounter     | Replace default counter with a custom one                                                  | `({ length, maxLength}: { length: number; maxLength?: number;}) => ReactNode;` |         |
