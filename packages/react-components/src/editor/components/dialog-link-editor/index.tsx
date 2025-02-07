@@ -289,6 +289,7 @@ function useDialogLinkEditorToolbar(
             setIsUpdate(true);
           }}
           linkUrl={linkUrl}
+          https={options?.anchorOptions?.https || false}
         />
       )}
       {isLinkEditMode && (
@@ -342,6 +343,7 @@ export type DialogLinkEditorOptions = {
     rel?: string;
     target?: string;
     title?: string;
+    https?: boolean;
   };
 };
 
