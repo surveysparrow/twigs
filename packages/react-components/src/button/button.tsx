@@ -146,10 +146,10 @@ const StyledButton = styled('button', {
         }
       },
       primary: {
-        background: '$primary400',
+        background: '$primary500',
         color: '$white900',
         '&:hover:not(:disabled), &:focus': {
-          background: '$primary500'
+          background: '$primary600'
         },
         [`&:active:not(:disabled), &.${BUTTON_CLASSNAMES.loading}`]: {
           background: '$primary700'

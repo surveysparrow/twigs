@@ -52,9 +52,9 @@ const selectStyles = {
     }
   },
   '& .twigs-select__value-container, & .twigs-select__placeholder, &.twigs-select__single-value, &.twigs-select__input':
-    {
-      fontWeight: '$4'
-    },
+  {
+    fontWeight: '$4'
+  },
   '& .twigs-select__placeholder': {
     color: '$neutral600'
   },
@@ -121,7 +121,7 @@ const selectStyles = {
     },
     '&.twigs-select__option--is-selected': {
       color: '$neutral900',
-      background: '$primary100',
+      backgroundColorOpacity: ['$primary500', 0.15],
       '&.twigs-select__option--is-disabled': {
         opacity: 1,
         cursor: 'not-allowed',
@@ -184,9 +184,9 @@ const selectStyles = {
           padding: '$3'
         },
         '& .twigs-select__value-container, & .twigs-select__placeholder, &.twigs-select__single-value, &.twigs-select__input':
-          {
-            fontSize: '$md'
-          }
+        {
+          fontSize: '$md'
+        }
       },
       md: {
         '& .twigs-select__control': {

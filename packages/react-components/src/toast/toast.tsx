@@ -215,10 +215,10 @@ type IconProps = IconBaseProps & React.ComponentProps<typeof StyledIcon>;
 
 const Icon = ({ children, variant = 'success', ...props }: IconProps) => {
   const iconMap = {
-    default: () => <StyledTickIcon />,
-    success: () => <StyledTickIcon />,
-    error: () => <StyledErrorIcon />,
-    warning: () => <StyledWarningIcon />
+    default: () => <StyledTickIcon size={24} />,
+    success: () => <StyledTickIcon size={24} />,
+    error: () => <StyledErrorIcon size={24} />,
+    warning: () => <StyledWarningIcon size={24} />
   };
   return variant === 'loading' ? (
     children || (
@@ -262,7 +262,7 @@ const StyledToast = styled(ToastPrimitive.Root, {
   borderWidth: '.5px',
   borderStyle: 'solid',
   borderColorOpacity: ['$secondary500', 0.4],
-  padding: '$8',
+  padding: '$7 $8',
   overflow: 'hidden',
   '&:focus, &:active': {
     outline: 'none'
