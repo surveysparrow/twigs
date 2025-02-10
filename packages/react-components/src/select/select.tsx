@@ -81,7 +81,7 @@ const selectStyles = {
     },
     '&.twigs-select__option--is-selected': {
       color: '$neutral900',
-      backgroundColorOpacity: ['$primary', 0.15],
+      backgroundColorOpacity: ['$primary500', 0.15],
       '&.twigs-select__option--is-disabled': {
         opacity: 1,
         cursor: 'not-allowed',
