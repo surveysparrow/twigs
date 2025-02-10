@@ -54,16 +54,16 @@ export const defaultTheme = {
     accent700: '#5329D8',
     accent800: '#4622B5',
     accent900: '#3B1E94',
-    primary50: '#F3F9FA',
-    primary100: '#E6F3F4',
-    primary200: '#CEE7EA',
-    primary300: '#9CCFD6',
-    primary400: '#56B0BB',
-    primary500: '#4A9CA6',
-    primary600: '#448E97',
-    primary700: '#3B8088',
-    primary800: '#36737A',
-    primary900: '#2E666D',
+    primary50: '#E6F5F6',
+    primary100: '#B8E1E5',
+    primary200: '#8ACCD2',
+    primary300: '#5CB5BD',
+    primary400: '#2E9CA6',
+    primary500: '#00828D',
+    primary600: '#006B74',
+    primary700: '#00555C',
+    primary800: '#003E43',
+    primary900: '#00272A',
     warning50: '#FFF6EF',
     warning100: '#FEEAC7',
     warning200: '#FDD28A',
@@ -121,9 +121,9 @@ export const defaultTheme = {
     neutral400: '#9E9E9E',
     neutral500: '#919191',
     neutral600: '#848484',
-    neutral700: '#767676',
-    neutral800: '#6A6A6A',
-    neutral900: '#2B2B2B',
+    neutral700: '#757575',
+    neutral800: '#575757',
+    neutral900: '#111111',
     black50: '#0000000A',
     black100: '#00000014',
     black200: '#0000001A',
@@ -366,6 +366,6 @@ export function hexToRgba(hex: string, opacity: number) {
   return `#${((1 << 24) + (r << 16) + (g << 8) + b)
     .toString(16)
     .slice(1)}${Math.round(opacity * 255)
-    .toString(16)
-    .padStart(2, '0')}`;
+      .toString(16)
+      .padStart(2, '0')}`;
 }

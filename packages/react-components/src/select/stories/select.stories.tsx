@@ -5,6 +5,14 @@ import { Select } from '../select';
 export default {
   component: Select,
   title: 'Form/Select',
+  parameters: {
+    docs: {
+      story: {
+        inline: false,
+        iframeHeight: 300
+      }
+    }
+  },
   args: {
     placeholder: 'Select an option',
     isClearable: true,
