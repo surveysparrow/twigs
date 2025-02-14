@@ -15,16 +15,19 @@ import { styled } from '../stitches.config';
 import { Text } from '../text';
 import { CalendarProps } from './calendar';
 import { FieldButton } from './calendar-commons';
-import { useCalendarContext } from './calendar-utils';
+
+export type CalendarTimezonePickerSize = 'sm' | 'md';
 
 export const CalendarTimezonePicker = ({
   value,
   calendarState,
-  onChange
+  onChange,
+  size
 }: {
   value?: DateValue | null;
   calendarState?: CalendarState;
   onChange?: CalendarProps['onChange'];
+  size?: CalendarTimezonePickerSize;
 }) => {
   const [popoverOpen, setPopoverOpen] = useState(false);
   const [searchString, setSearchString] = useState('');
@@ -33,8 +36,6 @@ export const CalendarTimezonePicker = ({
       || calendarState?.timeZone
       || Intl.DateTimeFormat().resolvedOptions().timeZone
   );
-
-  const calendarContext = useCalendarContext();
 
   const listRef = useRef<HTMLUListElement>(null);
   const buttonId = useId();
@@ -148,7 +149,7 @@ export const CalendarTimezonePicker = ({
       <PopoverTrigger asChild>
         <Button
           color="default"
-          size={calendarContext.size === 'lg' ? 'md' : 'sm'}
+          size={size}
           rightIcon={<ChevronDownIcon />}
           id={buttonId}
         >

@@ -165,6 +165,7 @@ export const Calendar = ({
                     value={dateValue}
                     onChange={handleChange}
                     calendarState={state}
+                    size={size === 'lg' ? 'md' : 'sm'}
                   />
                 )}
                 {props.showTimezonePicker && (
@@ -172,6 +173,7 @@ export const Calendar = ({
                     value={dateValue}
                     onChange={handleChange}
                     calendarState={state}
+                    size={size === 'lg' ? 'md' : 'sm'}
                   />
                 )}
               </TimeAndZonePickerContainer>
