@@ -18,7 +18,8 @@ import { styled } from '../stitches.config';
 import { Text } from '../text';
 import { CalendarProps } from './calendar';
 import { FieldButton } from './calendar-commons';
-import { useCalendarContext } from './calendar-utils';
+
+export type CalendarTimePickerSize = 'sm' | 'md';
 
 interface TimeValueState {
   hour: string;
@@ -29,15 +30,15 @@ interface TimeValueState {
 export const CalendarTimePicker = ({
   value,
   calendarState,
-  onChange
+  onChange,
+  size,
 }: {
   value?: DateValue | null;
   calendarState?: CalendarState;
   onChange?: CalendarProps['onChange'];
+  size?: CalendarTimePickerSize;
 }) => {
   const [popoverOpen, setPopoverOpen] = useState(false);
-
-  const calendarContext = useCalendarContext();
 
   const timeState = useMemo(() => {
     if (!value) {
@@ -160,7 +161,7 @@ export const CalendarTimePicker = ({
       <PopoverTrigger asChild>
         <Button
           color="default"
-          size={calendarContext.size === 'lg' ? 'md' : 'sm'}
+          size={size === 'lg' ? 'md' : 'sm'}
           rightIcon={<ChevronDownIcon />}
         >
           {initialHours}
