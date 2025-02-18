@@ -1,11 +1,12 @@
-import { ZonedDateTime, toZoned } from '@internationalized/date';
+import {
+  ZonedDateTime, toZoned, today, getLocalTimeZone
+} from '@internationalized/date';
 import { ChevronDownIcon, SearchIcon } from '@sparrowengg/twigs-react-icons';
 import { getCountriesForTimezone } from 'countries-and-timezones';
 import {
-  KeyboardEvent, useId, useMemo, useRef, useState
+  KeyboardEvent, ReactNode, useId, useMemo, useRef, useState
 } from 'react';
 import { DateValue } from 'react-aria';
-import { CalendarState } from 'react-stately';
 import { Box } from '../box';
 import { Button } from '../button';
 import { Flex } from '../flex';
@@ -18,22 +19,29 @@ import { FieldButton } from './calendar-commons';
 
 export type CalendarTimezonePickerSize = 'sm' | 'md';
 
+type TimeZoneObject = {
+  timeZone: string;
+  offset: string;
+  label: string;
+  countries: Array<{ name: string }>;
+  countryNames: string[];
+};
+
 export const CalendarTimezonePicker = ({
   value,
-  calendarState,
   onChange,
-  size
+  size,
+  renderCustomTrigger
 }: {
   value?: DateValue | null;
-  calendarState?: CalendarState;
   onChange?: CalendarProps['onChange'];
   size?: CalendarTimezonePickerSize;
+  renderCustomTrigger?: (props: { timeZoneObject: TimeZoneObject }) => ReactNode;
 }) => {
   const [popoverOpen, setPopoverOpen] = useState(false);
   const [searchString, setSearchString] = useState('');
   const [selectedTimezoneValue, setSelectedTimezoneValue] = useState<string>(
     (value as ZonedDateTime | null)?.timeZone
-      || calendarState?.timeZone
       || Intl.DateTimeFormat().resolvedOptions().timeZone
   );
 
@@ -42,7 +50,7 @@ export const CalendarTimezonePicker = ({
 
   const timeZoneState = useMemo(() => {
     if (!value) {
-      const timeObj = toZoned(calendarState!.value, selectedTimezoneValue);
+      const timeObj = toZoned(today(getLocalTimeZone()), selectedTimezoneValue);
       return timeObj;
     }
     if (value instanceof ZonedDateTime) {
@@ -50,7 +58,7 @@ export const CalendarTimezonePicker = ({
     }
 
     return toZoned(value, selectedTimezoneValue);
-  }, [value, calendarState]);
+  }, [value]);
 
   const timeZoneList = useMemo(() => {
     try {
@@ -63,13 +71,14 @@ export const CalendarTimezonePicker = ({
 
         const countries = getCountriesForTimezone(timeZone);
         const offset = dateText.split(', ').at(-1)!;
+
         return {
           timeZone,
           offset,
           label: `(${offset}) ${timeZone}`,
           countries,
           countryNames: countries.map((country) => country.name)
-        };
+        } satisfies TimeZoneObject;
       });
       return timeZones;
     } catch (error) {
@@ -147,14 +156,16 @@ export const CalendarTimezonePicker = ({
       onOpenChange={(nextOpenValue) => setPopoverOpen(nextOpenValue)}
     >
       <PopoverTrigger asChild>
-        <Button
-          color="default"
-          size={size}
-          rightIcon={<ChevronDownIcon />}
-          id={buttonId}
-        >
-          {selectedTimezoneObject?.offset}
-        </Button>
+        {renderCustomTrigger ? renderCustomTrigger({ timeZoneObject: selectedTimezoneObject as TimeZoneObject }) : (
+          <Button
+            color="default"
+            size={size}
+            rightIcon={<ChevronDownIcon />}
+            id={buttonId}
+          >
+            {selectedTimezoneObject?.offset}
+          </Button>
+        )}
       </PopoverTrigger>
       <PopoverContent
         css={{

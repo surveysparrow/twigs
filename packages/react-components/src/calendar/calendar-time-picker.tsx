@@ -7,10 +7,10 @@ import {
 } from '@internationalized/date';
 import { ChevronDownIcon } from '@sparrowengg/twigs-react-icons';
 import React, {
+  ReactNode,
   useEffect, useMemo, useRef, useState
 } from 'react';
 import { DateValue } from 'react-aria';
-import { CalendarState } from 'react-stately';
 import { Button } from '../button';
 import { Flex } from '../flex';
 import { Popover, PopoverContent, PopoverTrigger } from '../popover';
@@ -27,22 +27,28 @@ interface TimeValueState {
   pm: boolean;
 }
 
+export type CalendarTimePickerProps = {
+  dateValue?: DateValue | null,
+  onChange?: CalendarProps['onChange'],
+  size?: CalendarTimePickerSize,
+  renderCustomTrigger?: (props: { timeValue: TimeValueState }) => ReactNode;
+};
+
 export const CalendarTimePicker = ({
-  value,
-  calendarState,
+  dateValue,
   onChange,
   size,
-}: {
-  value?: DateValue | null;
-  calendarState?: CalendarState;
-  onChange?: CalendarProps['onChange'];
-  size?: CalendarTimePickerSize;
-}) => {
+  renderCustomTrigger
+}: CalendarTimePickerProps) => {
+  const [localDateValue, setLocalDateValue] = useState<DateValue>(today(getLocalTimeZone()));
+
+  const value = dateValue ?? localDateValue;
+
   const [popoverOpen, setPopoverOpen] = useState(false);
 
   const timeState = useMemo(() => {
     if (!value) {
-      const calendarDate = calendarState?.value ?? today(getLocalTimeZone());
+      const calendarDate = today(getLocalTimeZone());
       const timeObj = toCalendarDateTime(calendarDate);
       return timeObj;
     }
@@ -51,7 +57,7 @@ export const CalendarTimePicker = ({
     }
 
     return toCalendarDateTime(value);
-  }, [value, calendarState]);
+  }, [value]);
 
   const hoursInTwelveHourFormat = timeState.hour % 12 || 12;
   const initialHours = hoursInTwelveHourFormat.toString().padStart(2, '0');
@@ -151,6 +157,7 @@ export const CalendarTimePicker = ({
       minute: parseInt(timeValue.minute, 10)
     });
     if (onChange) {
+      setLocalDateValue(updatedTime);
       onChange(updatedTime);
     }
     setPopoverOpen(false);
@@ -159,17 +166,19 @@ export const CalendarTimePicker = ({
   return (
     <Popover open={popoverOpen} onOpenChange={(open) => setPopoverOpen(open)}>
       <PopoverTrigger asChild>
-        <Button
-          color="default"
-          size={size === 'lg' ? 'md' : 'sm'}
-          rightIcon={<ChevronDownIcon />}
-        >
-          {initialHours}
-          :
-          {initialMinutes}
-          {' '}
-          {timeState.hour >= 12 ? 'PM' : 'AM'}
-        </Button>
+        {renderCustomTrigger ? renderCustomTrigger({ timeValue }) : (
+          <Button
+            color="default"
+            size={size}
+            rightIcon={<ChevronDownIcon />}
+          >
+            {initialHours}
+            :
+            {initialMinutes}
+            {' '}
+            {timeState.hour >= 12 ? 'PM' : 'AM'}
+          </Button>
+        )}
       </PopoverTrigger>
       <PopoverContent
         css={{
