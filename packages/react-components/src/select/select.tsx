@@ -28,7 +28,7 @@ const selectStyles = {
     '&.twigs-select__control--is-focused': {
       background: '$white900',
       borderColor: '$neutral200',
-      $$shadowColor: '$colors$primary300',
+      $$shadowColor: '$colors$primary200',
       boxShadow:
         'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
     },
@@ -81,7 +81,7 @@ const selectStyles = {
     },
     '&.twigs-select__option--is-selected': {
       color: '$neutral900',
-      backgroundColorOpacity: ['$primary500', 0.15],
+      backgroundColorOpacity: ['$primary200', 0.08],
       '&.twigs-select__option--is-disabled': {
         opacity: 1,
         cursor: 'not-allowed',
