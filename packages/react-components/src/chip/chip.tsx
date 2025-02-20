@@ -273,7 +273,7 @@ const StyledChip = styled(Box, {
         },
         [`&.closable ${StyledCloseButton}:hover,
           &.closable ${StyledCloseButton}:focus-within`]: {
-          color: '$neutral700'
+          color: '$neutral800'
         },
 
         [`& .${CLASSNAMES.addonElementStart}`]: {
@@ -282,7 +282,7 @@ const StyledChip = styled(Box, {
       },
       primary: {
         color: '$primary700',
-        backgroundColorOpacity: ['$primary500', 0.15],
+        backgroundColor: '$primary50',
 
         [`& ${StyledCloseButton}`]: {
           color: '$primary400'
