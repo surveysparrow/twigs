@@ -191,7 +191,7 @@ const StyledButton = styled('button', {
         background: '$negative100',
         color: '$negative800',
         '&:hover:not(:disabled), &:focus': {
-          background: '$negative00'
+          background: '$negative200'
         },
         [`&:active:not(:disabled), &.${BUTTON_CLASSNAMES.loading}`]: {
           background: '$negative200',
