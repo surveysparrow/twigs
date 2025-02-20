@@ -58,7 +58,7 @@ const StyledSecondaryButton = styled(Box, {
       default: {
         'button,a': {
           borderLeft: '1.5px solid $secondary400',
-          borderColorOpacity: ['$secondary500', 0.15]
+          borderColorOpacity: ['$secondary500', 0.2]
         }
       },
       light: {

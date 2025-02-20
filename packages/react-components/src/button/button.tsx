@@ -403,10 +403,10 @@ const StyledButton = styled('button', {
         background: 'transparent',
         color: '$white900',
         [`&:active:not(:disabled), &.${BUTTON_CLASSNAMES.loading}`]: {
-          backgroundColorOpacity: ['$white400', 0.2]
+          backgroundColorOpacity: ['$white300', 0.2]
         },
         '&:hover:not(:disabled), &:focus': {
-          backgroundColorOpacity: ['$white300', 0.15]
+          backgroundColorOpacity: ['$white200', 0.15]
         }
       }
     },
