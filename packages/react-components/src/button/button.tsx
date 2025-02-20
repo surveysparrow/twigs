@@ -39,7 +39,7 @@ const StyledButton = styled('button', {
     outline: 'none'
   },
   '&:focus-visible': {
-    $$shadowColor: '$colors$primary300',
+    $$shadowColor: '$colors$primary200',
     boxShadow:
       'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
   },
@@ -131,13 +131,13 @@ const StyledButton = styled('button', {
     color: {
       default: {
         backgroundColorOpacity: ['$secondary500', 0.08],
-        color: '$secondary500',
+        color: '$secondary600',
         [`&:hover:not(:disabled), &.${BUTTON_CLASSNAMES.loading}`]: {
-          color: '$secondary600',
+          color: '$secondary700',
           backgroundColorOpacity: ['$secondary500', 0.15]
         },
         '&:active:not(:disabled)': {
-          color: '$secondary700',
+          color: '$secondary800',
           backgroundColorOpacity: ['$secondary500', 0.2]
         },
         '&:focus': {
@@ -146,10 +146,10 @@ const StyledButton = styled('button', {
         }
       },
       primary: {
-        background: '$primary400',
+        background: '$primary500',
         color: '$white900',
         '&:hover:not(:disabled), &:focus': {
-          background: '$primary500'
+          background: '$primary600'
         },
         [`&:active:not(:disabled), &.${BUTTON_CLASSNAMES.loading}`]: {
           background: '$primary700'
@@ -189,13 +189,13 @@ const StyledButton = styled('button', {
       },
       error: {
         background: '$negative100',
-        color: '$negative600',
+        color: '$negative800',
         '&:hover:not(:disabled), &:focus': {
           background: '$negative200'
         },
         [`&:active:not(:disabled), &.${BUTTON_CLASSNAMES.loading}`]: {
           background: '$negative200',
-          color: '$negative700'
+          color: '$negative900'
         }
       }
     },
@@ -298,10 +298,10 @@ const StyledButton = styled('button', {
           backgroundColorOpacity: ['$primary500', 0.08]
         },
         '&:hover:not(:disabled), &:focus': {
-          color: '$primary700'
+          color: '$primary600'
         },
         [`&:active:not(:disabled), &.${BUTTON_CLASSNAMES.loading}`]: {
-          color: '$primary800',
+          color: '$primary700',
           backgroundColorOpacity: ['$primary500', 0.15]
         }
       }
@@ -331,7 +331,7 @@ const StyledButton = styled('button', {
       variant: 'ghost',
       css: {
         background: 'transparent',
-        color: '$secondary500',
+        color: '$secondary600',
         '&:hover:not(:disabled), &:focus': {
           color: '$secondary600',
           backgroundColorOpacity: ['$secondary500', 0.08]
@@ -404,10 +404,10 @@ const StyledButton = styled('button', {
         background: 'transparent',
         color: '$white900',
         [`&:active:not(:disabled), &.${BUTTON_CLASSNAMES.loading}`]: {
-          backgroundColorOpacity: ['$white400', 0.2]
+          backgroundColorOpacity: ['$white300', 0.2]
         },
         '&:hover:not(:disabled), &:focus': {
-          backgroundColorOpacity: ['$white300', 0.15]
+          backgroundColorOpacity: ['$white200', 0.15]
         }
       }
     },
@@ -415,7 +415,7 @@ const StyledButton = styled('button', {
       color: 'error',
       variant: 'ghost',
       css: {
-        color: '$negative600',
+        color: '$negative800',
         background: 'transparent',
         '&:hover:not(:disabled), &:focus': {
           background: '$negative100'
@@ -429,18 +429,18 @@ const StyledButton = styled('button', {
       color: 'error',
       variant: 'outline',
       css: {
-        color: '$negative600',
+        color: '$negative800',
         background: '$white900',
         borderColor: '$negative200',
         borderStyle: 'solid',
         '&:hover:not(:disabled), &:focus': {
           borderColor: '$negative300',
-          color: '$negative700',
+          color: '$negative800',
           background: '$white900'
         },
         [`&:active:not(:disabled), &.${BUTTON_CLASSNAMES.loading}`]: {
-          borderColor: '$negative600',
-          color: '$negative800',
+          borderColor: '$negative400',
+          color: '$negative900',
           background: '$white900'
         }
       }
