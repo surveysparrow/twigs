@@ -14,7 +14,7 @@ export type ToasterVariants =
 
 type ToastrToast = ToastProps & {
   icon?: React.ReactElement;
-  variant: string;
+  variant?: string;
   id: string;
   title?: React.ReactNode;
   description?: React.ReactNode;
@@ -40,25 +40,25 @@ type ActionType = typeof actionTypes;
 
 type Action =
   | {
-      type: ActionType['ADD_TOAST'];
-      toast: ToastrToast;
-    }
+    type: ActionType['ADD_TOAST'];
+    toast: ToastrToast;
+  }
   | {
-      type: ActionType['UPDATE_TOAST'];
-      toast: Partial<ToastrToast>;
-    }
+    type: ActionType['UPDATE_TOAST'];
+    toast: Partial<ToastrToast>;
+  }
   | {
-      type: ActionType['DISMISS_TOAST'];
-      toastId?: ToastrToast['id'];
-    }
+    type: ActionType['DISMISS_TOAST'];
+    toastId?: ToastrToast['id'];
+  }
   | {
-      type: ActionType['REMOVE_TOAST'];
-      toastId?: ToastrToast['id'];
-    }
+    type: ActionType['REMOVE_TOAST'];
+    toastId?: ToastrToast['id'];
+  }
   | {
-      type: ActionType['UPSERT_TOAST'];
-      toast: ToastrToast;
-    };
+    type: ActionType['UPSERT_TOAST'];
+    toast: ToastrToast;
+  };
 
 interface State {
   toasts: ToastrToast[];
@@ -147,7 +147,7 @@ const addToRemoveQueue = (toastId: string) => {
   toastTimeouts.set(toastId, timeout);
 };
 
-interface Toast extends Omit<ToastrToast, 'id'> {}
+interface Toast extends Omit<ToastrToast, 'id'> { }
 
 function toast({ ...toastProps }: Toast) {
   const id = generareId();
@@ -176,7 +176,7 @@ function toast({ ...toastProps }: Toast) {
     update
   };
 }
-const createHandler = (variant: ToasterVariants) => (args: ToastProps) => {
+const createHandler = (variant: ToasterVariants = 'default') => (args: ToastProps) => {
   const newToast = toast({ ...args, variant });
   dispatch({ type: 'UPSERT_TOAST', toast: { ...newToast, variant } });
   return newToast;

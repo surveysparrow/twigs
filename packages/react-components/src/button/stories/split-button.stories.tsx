@@ -64,16 +64,6 @@ const Secondary = (args) => {
               <IconButton
                 icon={<ChevronDownIcon />}
                 {...args}
-                css={{
-                  // eslint-disable-next-line no-nested-ternary
-                  backgroundColor: isActive
-                    ? args.color === 'primary'
-                      ? '$primary800'
-                      : '$secondary800'
-                    : args.color === 'primary'
-                      ? '$primary400'
-                      : '$secondary500'
-                }}
               />
             </Box>
           </DropdownMenuTrigger>
