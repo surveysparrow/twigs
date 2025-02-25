@@ -207,7 +207,7 @@ export interface AvatarBaseProps {
   name?: string;
 }
 
-type AvatarProps = AvatarBaseProps & ComponentProps<typeof StyledAvatar>;
+export type AvatarProps = AvatarBaseProps & ComponentProps<typeof StyledAvatar>;
 
 export const Avatar: FunctionComponent<AvatarProps> = React.forwardRef(
   ({
