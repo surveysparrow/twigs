@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ComponentProps } from 'react';
 import { HeadingTagType, $createHeadingNode } from '@lexical/rich-text';
 import { $setBlocksType } from '@lexical/selection';
 import {
@@ -29,16 +29,39 @@ const formatMapping = {
   h6: 'Heading 6'
 } as const;
 
-export const FormatTool = ({
-  renderButton
-}: Omit<ToolbarButtonProps, 'renderButton'> & {
+export type FormatToolProps = Omit<ToolbarButtonProps, 'renderButton'> & {
   renderButton?: (
     props: Omit<RenderButtonProps, 'onChange' | 'active'> & {
       onChange: (type: keyof typeof formatMapping) => void;
       active: TextFormats;
     }
   ) => React.ReactNode;
-}) => {
+  dropdownMenuProps?: Partial<ComponentProps<typeof DropdownMenu>>;
+  dropdownMenuTriggerProps?: Partial<
+    ComponentProps<typeof DropdownMenuTrigger>
+  >;
+  dropdownMenuTriggerButtonProps?: Partial<ComponentProps<typeof IconButton>>;
+  dropdownMenuContentProps?: Partial<
+    ComponentProps<typeof DropdownMenuContent>
+  >;
+  dropdownMenuItemProps?:
+    | Partial<ComponentProps<typeof DropdownMenuItem>>
+    | ((args: {
+        type: keyof typeof formatMapping;
+        formatText: (formatType: keyof typeof formatMapping) => void;
+      }) => Partial<ComponentProps<typeof DropdownMenuItem>>);
+  renderDropdownTrigger?: () => React.ReactNode;
+};
+
+export const FormatTool = ({
+  renderButton,
+  dropdownMenuProps,
+  dropdownMenuContentProps,
+  dropdownMenuItemProps,
+  dropdownMenuTriggerProps,
+  dropdownMenuTriggerButtonProps,
+  renderDropdownTrigger
+}: FormatToolProps) => {
   const [editor] = useLexicalComposerContext();
   const [format] = useToolbarStore((state) => state.data.format);
 
@@ -77,22 +100,41 @@ export const FormatTool = ({
   }
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <IconButton
-          icon={<TextFormatIcon />}
-          variant="ghost"
-          color="default"
-          className="twigs-editor-tool-button"
-        />
+    <DropdownMenu {...dropdownMenuProps}>
+      <DropdownMenuTrigger asChild {...dropdownMenuTriggerProps}>
+        {renderDropdownTrigger ? (
+          renderDropdownTrigger()
+        ) : (
+          <IconButton
+            icon={<TextFormatIcon />}
+            variant="ghost"
+            color="default"
+            className="twigs-editor-tool-button"
+            {...dropdownMenuTriggerButtonProps}
+          />
+        )}
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="twigs-editor-toolbar__format-options">
-        <DropdownMenuItem onClick={formatParagraph}>
+      <DropdownMenuContent
+        className="twigs-editor-toolbar__format-options"
+        {...dropdownMenuContentProps}
+      >
+        <DropdownMenuItem
+          onClick={formatParagraph}
+          {...(typeof dropdownMenuItemProps === 'function'
+            ? dropdownMenuItemProps({ type: 'paragraph', formatText })
+            : dropdownMenuItemProps)}
+        >
           {paragraph}
         </DropdownMenuItem>
         {(Object.keys(headings) as unknown as (keyof typeof headings)[]).map(
           (item) => (
-            <DropdownMenuItem onClick={() => formatHeading(item)} key={item}>
+            <DropdownMenuItem
+              onClick={() => formatHeading(item)}
+              key={item}
+              {...(typeof dropdownMenuItemProps === 'function'
+                ? dropdownMenuItemProps({ type: item, formatText })
+                : dropdownMenuItemProps)}
+            >
               {formatMapping[item]}
             </DropdownMenuItem>
           )
