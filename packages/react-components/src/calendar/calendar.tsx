@@ -164,7 +164,6 @@ export const Calendar = ({
                   <CalendarTimePicker
                     value={dateValue}
                     onChange={handleChange}
-                    calendarState={state}
                     size={size === 'lg' ? 'md' : 'sm'}
                   />
                 )}
@@ -172,7 +171,6 @@ export const Calendar = ({
                   <CalendarTimezonePicker
                     value={dateValue}
                     onChange={handleChange}
-                    calendarState={state}
                     size={size === 'lg' ? 'md' : 'sm'}
                   />
                 )}

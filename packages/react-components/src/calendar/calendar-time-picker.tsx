@@ -28,36 +28,36 @@ interface TimeValueState {
 }
 
 export type CalendarTimePickerProps = {
-  dateValue?: DateValue | null,
+  value?: DateValue | null,
   onChange?: CalendarProps['onChange'],
   size?: CalendarTimePickerSize,
   renderCustomTrigger?: (props: { timeValue: TimeValueState }) => ReactNode;
 };
 
 export const CalendarTimePicker = ({
-  dateValue,
+  value,
   onChange,
   size,
   renderCustomTrigger
 }: CalendarTimePickerProps) => {
   const [localDateValue, setLocalDateValue] = useState<DateValue>(today(getLocalTimeZone()));
 
-  const value = dateValue ?? localDateValue;
+  const dateValue = value ?? localDateValue;
 
   const [popoverOpen, setPopoverOpen] = useState(false);
 
   const timeState = useMemo(() => {
-    if (!value) {
+    if (!dateValue) {
       const calendarDate = today(getLocalTimeZone());
       const timeObj = toCalendarDateTime(calendarDate);
       return timeObj;
     }
-    if (value instanceof CalendarDateTime || value instanceof ZonedDateTime) {
-      return value;
+    if (dateValue instanceof CalendarDateTime || dateValue instanceof ZonedDateTime) {
+      return dateValue;
     }
 
-    return toCalendarDateTime(value);
-  }, [value]);
+    return toCalendarDateTime(dateValue);
+  }, [dateValue]);
 
   const hoursInTwelveHourFormat = timeState.hour % 12 || 12;
   const initialHours = hoursInTwelveHourFormat.toString().padStart(2, '0');
