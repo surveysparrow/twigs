@@ -18,8 +18,7 @@ import { styled } from '../stitches.config';
 import { Text } from '../text';
 import { CalendarProps } from './calendar';
 import { FieldButton } from './calendar-commons';
-
-export type CalendarTimePickerSize = 'sm' | 'md';
+import { CalendarSize } from './calendar-utils';
 
 interface TimeValueState {
   hour: string;
@@ -30,7 +29,7 @@ interface TimeValueState {
 export type CalendarTimePickerProps = {
   value?: DateValue | null,
   onChange?: CalendarProps['onChange'],
-  size?: CalendarTimePickerSize,
+  size?: CalendarSize,
   renderCustomTrigger?: (props: { timeValue: TimeValueState }) => ReactNode;
 };
 
@@ -169,7 +168,7 @@ export const CalendarTimePicker = ({
         {renderCustomTrigger ? renderCustomTrigger({ timeValue }) : (
           <Button
             color="default"
-            size={size}
+            size={size === 'lg' ? 'md' : 'sm'}
             rightIcon={<ChevronDownIcon />}
           >
             {initialHours}

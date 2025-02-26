@@ -16,8 +16,7 @@ import { styled } from '../stitches.config';
 import { Text } from '../text';
 import { CalendarProps } from './calendar';
 import { FieldButton } from './calendar-commons';
-
-export type CalendarTimezonePickerSize = 'sm' | 'md';
+import { CalendarSize } from './calendar-utils';
 
 type TimeZoneObject = {
   timeZone: string;
@@ -35,7 +34,7 @@ export const CalendarTimezonePicker = ({
 }: {
   value?: DateValue | null;
   onChange?: CalendarProps['onChange'];
-  size?: CalendarTimezonePickerSize;
+  size?: CalendarSize;
   renderCustomTrigger?: (props: { timeZoneObject: TimeZoneObject }) => ReactNode;
 }) => {
   const [popoverOpen, setPopoverOpen] = useState(false);
@@ -159,7 +158,7 @@ export const CalendarTimezonePicker = ({
         {renderCustomTrigger ? renderCustomTrigger({ timeZoneObject: selectedTimezoneObject as TimeZoneObject }) : (
           <Button
             color="default"
-            size={size}
+            size={size === 'lg' ? 'md' : 'sm'}
             rightIcon={<ChevronDownIcon />}
             id={buttonId}
           >
