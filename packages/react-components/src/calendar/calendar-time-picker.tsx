@@ -7,10 +7,10 @@ import {
 } from '@internationalized/date';
 import { ChevronDownIcon } from '@sparrowengg/twigs-react-icons';
 import React, {
+  ReactNode,
   useEffect, useMemo, useRef, useState
 } from 'react';
 import { DateValue } from 'react-aria';
-import { CalendarState } from 'react-stately';
 import { Button } from '../button';
 import { Flex } from '../flex';
 import { Popover, PopoverContent, PopoverTrigger } from '../popover';
@@ -18,7 +18,7 @@ import { styled } from '../stitches.config';
 import { Text } from '../text';
 import { CalendarProps } from './calendar';
 import { FieldButton } from './calendar-commons';
-import { useCalendarContext } from './calendar-utils';
+import { CalendarSize } from './calendar-utils';
 
 interface TimeValueState {
   hour: string;
@@ -26,31 +26,37 @@ interface TimeValueState {
   pm: boolean;
 }
 
+export type CalendarTimePickerProps = {
+  value?: DateValue | null,
+  onChange?: CalendarProps['onChange'],
+  size?: CalendarSize,
+  renderCustomTrigger?: (props: { timeValue: TimeValueState }) => ReactNode;
+};
+
 export const CalendarTimePicker = ({
   value,
-  calendarState,
-  onChange
-}: {
-  value?: DateValue | null;
-  calendarState?: CalendarState;
-  onChange?: CalendarProps['onChange'];
-}) => {
+  onChange,
+  size,
+  renderCustomTrigger
+}: CalendarTimePickerProps) => {
+  const [localDateValue, setLocalDateValue] = useState<DateValue>(today(getLocalTimeZone()));
+
+  const dateValue = value ?? localDateValue;
+
   const [popoverOpen, setPopoverOpen] = useState(false);
 
-  const calendarContext = useCalendarContext();
-
   const timeState = useMemo(() => {
-    if (!value) {
-      const calendarDate = calendarState?.value ?? today(getLocalTimeZone());
+    if (!dateValue) {
+      const calendarDate = today(getLocalTimeZone());
       const timeObj = toCalendarDateTime(calendarDate);
       return timeObj;
     }
-    if (value instanceof CalendarDateTime || value instanceof ZonedDateTime) {
-      return value;
+    if (dateValue instanceof CalendarDateTime || dateValue instanceof ZonedDateTime) {
+      return dateValue;
     }
 
-    return toCalendarDateTime(value);
-  }, [value, calendarState]);
+    return toCalendarDateTime(dateValue);
+  }, [dateValue]);
 
   const hoursInTwelveHourFormat = timeState.hour % 12 || 12;
   const initialHours = hoursInTwelveHourFormat.toString().padStart(2, '0');
@@ -150,6 +156,7 @@ export const CalendarTimePicker = ({
       minute: parseInt(timeValue.minute, 10)
     });
     if (onChange) {
+      setLocalDateValue(updatedTime);
       onChange(updatedTime);
     }
     setPopoverOpen(false);
@@ -158,17 +165,19 @@ export const CalendarTimePicker = ({
   return (
     <Popover open={popoverOpen} onOpenChange={(open) => setPopoverOpen(open)}>
       <PopoverTrigger asChild>
-        <Button
-          color="default"
-          size={calendarContext.size === 'lg' ? 'md' : 'sm'}
-          rightIcon={<ChevronDownIcon />}
-        >
-          {initialHours}
-          :
-          {initialMinutes}
-          {' '}
-          {timeState.hour >= 12 ? 'PM' : 'AM'}
-        </Button>
+        {renderCustomTrigger ? renderCustomTrigger({ timeValue }) : (
+          <Button
+            color="default"
+            size={size === 'lg' ? 'md' : 'sm'}
+            rightIcon={<ChevronDownIcon />}
+          >
+            {initialHours}
+            :
+            {initialMinutes}
+            {' '}
+            {timeState.hour >= 12 ? 'PM' : 'AM'}
+          </Button>
+        )}
       </PopoverTrigger>
       <PopoverContent
         css={{
