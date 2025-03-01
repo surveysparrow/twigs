@@ -50,6 +50,7 @@ export const CalendarRange = ({
   onDaySelect,
   onMonthSelect,
   onYearSelect,
+  compact = false,
   ...props
 }: AriaRangeCalendarProps<DateValue> &
   CalendarControlProps & {
@@ -58,11 +59,13 @@ export const CalendarRange = ({
     onDaySelect?: (date: DateValue, range: 'start' | 'end') => void;
     onMonthSelect?: (date: DateValue, range: 'start' | 'end') => void;
     onYearSelect?: (date: DateValue, range: 'start' | 'end') => void;
+    compact?: boolean;
   }) => {
   const { locale } = useLocale();
   const state = useRangeCalendarState({
     ...props,
-    visibleDuration: { months: 2 },
+    visibleDuration: compact ? { months: 1 } : { months: 2 },
+    pageBehavior: compact ? 'single' : undefined,
     locale,
     createCalendar
   });
@@ -120,34 +123,38 @@ export const CalendarRange = ({
           ...containerCSS
         }}
       >
-        <Flex
-          {...calendarProps}
-          gap="$8"
-          ref={ref}
-          css={{
-            overflow: 'auto'
-          }}
-        >
-          <CalendarSingleSection
-            state={state}
-            navigationButtonProps={prevButtonProps}
-            sectionName="start"
-            onDaySelect={(date) => onDaySelect?.(date, 'start')}
-            onMonthSelect={(date) => onMonthSelect?.(date, 'start')}
-            onYearSelect={(date) => onYearSelect?.(date, 'start')}
-          />
-          <CalendarSingleSection
-            state={state}
-            calendarOffset={{
-              months: 1
-            }}
-            sectionName="end"
-            navigationButtonProps={nextButtonProps}
-            onDaySelect={(date) => onDaySelect?.(date, 'end')}
-            onMonthSelect={(date) => onMonthSelect?.(date, 'end')}
-            onYearSelect={(date) => onYearSelect?.(date, 'end')}
-          />
-        </Flex>
+        {compact ? (
+          <Flex {...calendarProps} ref={ref} css={{ overflow: 'auto' }}>
+            <CalendarSingleSection
+              state={state}
+              navigationButtonProps={{ prev: prevButtonProps, next: nextButtonProps }}
+              sectionName="end"
+              onDaySelect={(date) => onDaySelect?.(date, 'start')}
+              onMonthSelect={(date) => onMonthSelect?.(date, 'start')}
+              onYearSelect={(date) => onYearSelect?.(date, 'start')}
+            />
+          </Flex>
+        ) : (
+          <Flex {...calendarProps} gap="$8" ref={ref} css={{ overflow: 'auto' }}>
+            <CalendarSingleSection
+              state={state}
+              navigationButtonProps={prevButtonProps}
+              sectionName="start"
+              onDaySelect={(date) => onDaySelect?.(date, 'start')}
+              onMonthSelect={(date) => onMonthSelect?.(date, 'start')}
+              onYearSelect={(date) => onYearSelect?.(date, 'start')}
+            />
+            <CalendarSingleSection
+              state={state}
+              calendarOffset={{ months: 1 }}
+              sectionName="end"
+              navigationButtonProps={nextButtonProps}
+              onDaySelect={(date) => onDaySelect?.(date, 'end')}
+              onMonthSelect={(date) => onMonthSelect?.(date, 'end')}
+              onYearSelect={(date) => onYearSelect?.(date, 'end')}
+            />
+          </Flex>
+        )}
         {showFooter && (
           <>
             {props.renderFooter ? (
@@ -202,7 +209,7 @@ const CalendarSingleSection = ({
   onYearSelect,
   onMonthSelect
 }: {
-  navigationButtonProps: AriaButtonProps<'button'>;
+  navigationButtonProps: AriaButtonProps<'button'> | { prev: AriaButtonProps<'button'>; next: AriaButtonProps<'button'> };
   calendarOffset?: DateDuration;
   sectionName: 'start' | 'end';
   state: RangeCalendarState;
@@ -214,6 +221,7 @@ const CalendarSingleSection = ({
     keyof typeof CALENDAR_VIEW
   >(CALENDAR_VIEW.GRID);
   const calendarContext = useCalendarContext();
+  const compact = 'prev' in navigationButtonProps && 'next' in navigationButtonProps;
 
   return (
     <Box
@@ -242,25 +250,45 @@ const CalendarSingleSection = ({
               width: '100%'
             }}
           >
-            {sectionName === 'end' && <Box />}
-            {sectionName === 'start' && (
-              <CalendarNavigationButton
-                {...navigationButtonProps}
-                icon={<ChevronLeftIcon />}
-              />
+            {compact ? (
+              <>
+                <CalendarNavigationButton
+                  {...navigationButtonProps.prev}
+                  icon={<ChevronLeftIcon />}
+                />
+                <RangeCalendarTitle
+                  timezone={state.timeZone}
+                  value={state.visibleRange[sectionName]}
+                  setCurrentCalendarView={setCurrentCalendarView}
+                />
+                <CalendarNavigationButton
+                  {...navigationButtonProps.next}
+                  icon={<ChevronRightIcon />}
+                />
+              </>
+            ) : (
+              <>
+                {sectionName === 'end' && <Box />}
+                {sectionName === 'start' && (
+                  <CalendarNavigationButton
+                    {...navigationButtonProps}
+                    icon={<ChevronLeftIcon />}
+                  />
+                )}
+                <RangeCalendarTitle
+                  timezone={state.timeZone}
+                  value={state.visibleRange[sectionName]}
+                  setCurrentCalendarView={setCurrentCalendarView}
+                />
+                {sectionName === 'end' && (
+                  <CalendarNavigationButton
+                    {...navigationButtonProps}
+                    icon={<ChevronRightIcon />}
+                  />
+                )}
+                {sectionName === 'start' && <Box />}
+              </>
             )}
-            <RangeCalendarTitle
-              timezone={state.timeZone}
-              value={state.visibleRange[sectionName]}
-              setCurrentCalendarView={setCurrentCalendarView}
-            />
-            {sectionName === 'end' && (
-              <CalendarNavigationButton
-                {...navigationButtonProps}
-                icon={<ChevronRightIcon />}
-              />
-            )}
-            {sectionName === 'start' && <Box />}
           </Flex>
           <CalendarGrid
             state={state}
