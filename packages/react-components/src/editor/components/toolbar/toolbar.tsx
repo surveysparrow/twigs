@@ -31,7 +31,7 @@ type CustomTool = {
   renderComponent: (props: { editor: LexicalEditor }) => ReactNode;
 };
 
-export type ToolbarTools = DefaultToolbarTools[] | CustomTool[];
+export type ToolbarTools = (DefaultToolbarTools | CustomTool)[];
 
 const defaultTools: DefaultToolbarTools[] = [
   'format',
