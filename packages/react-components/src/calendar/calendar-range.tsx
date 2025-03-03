@@ -69,6 +69,7 @@ export const CalendarRange = ({
     locale,
     createCalendar
   });
+  const dateType = state.anchorDate ? 'start' : 'end';
 
   useEffect(() => {
     if (
@@ -129,9 +130,9 @@ export const CalendarRange = ({
               state={state}
               navigationButtonProps={{ prev: prevButtonProps, next: nextButtonProps }}
               sectionName="end"
-              onDaySelect={(date) => onDaySelect?.(date, 'start')}
-              onMonthSelect={(date) => onMonthSelect?.(date, 'start')}
-              onYearSelect={(date) => onYearSelect?.(date, 'start')}
+              onDaySelect={(date) => onDaySelect?.(date, dateType)}
+              onMonthSelect={(date) => onMonthSelect?.(date, dateType)}
+              onYearSelect={(date) => onYearSelect?.(date, dateType)}
             />
           </Flex>
         ) : (
@@ -140,18 +141,18 @@ export const CalendarRange = ({
               state={state}
               navigationButtonProps={prevButtonProps}
               sectionName="start"
-              onDaySelect={(date) => onDaySelect?.(date, 'start')}
-              onMonthSelect={(date) => onMonthSelect?.(date, 'start')}
-              onYearSelect={(date) => onYearSelect?.(date, 'start')}
+              onDaySelect={(date) => onDaySelect?.(date, dateType)}
+              onMonthSelect={(date) => onMonthSelect?.(date, dateType)}
+              onYearSelect={(date) => onYearSelect?.(date, dateType)}
             />
             <CalendarSingleSection
               state={state}
               calendarOffset={{ months: 1 }}
               sectionName="end"
               navigationButtonProps={nextButtonProps}
-              onDaySelect={(date) => onDaySelect?.(date, 'end')}
-              onMonthSelect={(date) => onMonthSelect?.(date, 'end')}
-              onYearSelect={(date) => onYearSelect?.(date, 'end')}
+              onDaySelect={(date) => onDaySelect?.(date, dateType)}
+              onMonthSelect={(date) => onMonthSelect?.(date, dateType)}
+              onYearSelect={(date) => onYearSelect?.(date, dateType)}
             />
           </Flex>
         )}
