@@ -21,6 +21,7 @@ export const EnterIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M11.7111 24L6.61522 18.9042L11.7111 13.8083"
@@ -28,6 +29,7 @@ export const EnterIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
       </svg>
     );

@@ -24,6 +24,7 @@ export const CommentIcon = React.forwardRef<SVGSVGElement, IconProps>(
             strokeWidth={strokeWidth}
             strokeLinecap="round"
             strokeLinejoin="round"
+            vectorEffect="non-scaling-stroke"
           />
           <path
             d="M11 11H23"
@@ -31,6 +32,7 @@ export const CommentIcon = React.forwardRef<SVGSVGElement, IconProps>(
             strokeWidth={strokeWidth}
             strokeLinecap="round"
             strokeLinejoin="round"
+            vectorEffect="non-scaling-stroke"
           />
           <path
             d="M11 17H19"
@@ -38,6 +40,7 @@ export const CommentIcon = React.forwardRef<SVGSVGElement, IconProps>(
             strokeWidth={strokeWidth}
             strokeLinecap="round"
             strokeLinejoin="round"
+            vectorEffect="non-scaling-stroke"
           />
         </g>
         <defs>
