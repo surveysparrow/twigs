@@ -21,6 +21,7 @@ export const DropdownMenuIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M4.66666 22.6667H27.3333"
@@ -28,6 +29,7 @@ export const DropdownMenuIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M4.66666 28H27.3333"
@@ -35,6 +37,7 @@ export const DropdownMenuIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M22 9.66669L20 11.6667L18 9.66669"
@@ -42,6 +45,7 @@ export const DropdownMenuIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
       </svg>
     );

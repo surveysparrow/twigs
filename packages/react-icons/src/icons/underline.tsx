@@ -22,11 +22,17 @@ export const UnderlineIcon = React.forwardRef<SVGSVGElement, IconProps>(
             strokeLinejoin="round"
             strokeWidth={strokeWidth}
             d="M16.167 5.333v5.834a4.167 4.167 0 01-8.334 0V5.333M7 18.667h10H7z"
+            vectorEffect="non-scaling-stroke"
           />
         </g>
         <defs>
           <clipPath id="clip0_103_16446">
-            <path fill="#fff" d="M0 0H20V20H0z" transform="translate(2 2)" />
+            <path
+              fill="#fff"
+              d="M0 0H20V20H0z"
+              transform="translate(2 2)"
+              vectorEffect="non-scaling-stroke"
+            />
           </clipPath>
         </defs>
       </svg>

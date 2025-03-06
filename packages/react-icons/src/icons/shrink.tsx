@@ -21,6 +21,7 @@ export const ShrinkIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M8 18H14V24"
@@ -28,6 +29,7 @@ export const ShrinkIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M26 6L18.5 13.5"
@@ -35,6 +37,7 @@ export const ShrinkIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M6 26L13.5 18.5"
@@ -42,6 +45,7 @@ export const ShrinkIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
       </svg>
     );

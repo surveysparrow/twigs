@@ -21,6 +21,7 @@ export const AlarmClockIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M4.59998 7.74666L8.59998 4.38666"
@@ -28,6 +29,7 @@ export const AlarmClockIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M27.4133 7.75996L23.4133 4.39996"
@@ -35,6 +37,7 @@ export const AlarmClockIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M15.6667 12.576V18.0893L20 20.732"
@@ -42,6 +45,7 @@ export const AlarmClockIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
       </svg>
     );
