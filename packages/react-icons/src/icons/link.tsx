@@ -21,6 +21,7 @@ export const LinkIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M17.6667 12.3333H15C12.7907 12.3333 11 14.124 11 16.3333V21.6667C11 23.876 12.7907 25.6667 15 25.6667H25.6667C27.876 25.6667 29.6667 23.876 29.6667 21.6667V16.3333C29.6667 14.124 27.876 12.3333 25.6667 12.3333"
@@ -28,6 +29,7 @@ export const LinkIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
       </svg>
     );

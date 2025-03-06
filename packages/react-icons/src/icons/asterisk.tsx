@@ -20,18 +20,21 @@ export const AsteriskIcon = React.forwardRef<SVGSVGElement, IconProps>(
           stroke={color}
           strokeWidth={strokeWidth}
           strokeLinecap="round"
+          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M24 11.4944L8.3923 20.5056"
           stroke={color}
           strokeWidth={strokeWidth}
           strokeLinecap="round"
+          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M24 20.5056L8.39231 11.4944"
           stroke={color}
           strokeWidth={strokeWidth}
           strokeLinecap="round"
+          vectorEffect="non-scaling-stroke"
         />
       </svg>
     );
