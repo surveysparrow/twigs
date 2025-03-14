@@ -37,11 +37,10 @@ export interface StackBaseProps {
   gap?: string;
   direction?: Directions | Record<MediaKeys, Directions>;
   divider?: React.ReactElement;
+  css?: Stitches.CSS<typeof config>;
 }
 
-type StackProps = StackBaseProps & { css?: Stitches.CSS<typeof config> };
-
-export const Stack = forwardRef<HTMLDivElement, StackProps>(
+export const Stack = forwardRef<HTMLDivElement, StackBaseProps>(
   (
     {
       children,
