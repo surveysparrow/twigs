@@ -21,6 +21,7 @@ export const Microphone = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M20.6453 17.4974L9.15999 26.1814C8.52857 26.6566 7.64375 26.5952 7.08399 26.0374L5.96399 24.9187C5.40519 24.3586 5.34433 23.4725 5.82132 22.8414L14.504 11.356"
@@ -28,6 +29,7 @@ export const Microphone = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M6.52 25.48L4 28"
@@ -35,6 +37,7 @@ export const Microphone = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
       </svg>
     );

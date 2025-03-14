@@ -21,6 +21,7 @@ export const TextAlignCenterIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeLinejoin="round"
           strokeWidth={strokeWidth}
           d="M2.664 3h10.667M4 6.333h8M2.664 9.667h10.667M5.336 13h5.333"
+          vectorEffect="non-scaling-stroke"
         />
       </svg>
     );

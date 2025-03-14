@@ -21,6 +21,7 @@ export const SaveIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M21.3334 4V9.33333C21.3334 9.68695 21.1929 10.0261 20.9428 10.2761C20.6928 10.5262 20.3536 10.6667 20 10.6667H12C11.6464 10.6667 11.3073 10.5262 11.0572 10.2761C10.8072 10.0261 10.6667 9.68695 10.6667 9.33333V4"
@@ -28,6 +29,7 @@ export const SaveIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M16 23.3333C18.2091 23.3333 20 21.5425 20 19.3333C20 17.1242 18.2091 15.3333 16 15.3333C13.7909 15.3333 12 17.1242 12 19.3333C12 21.5425 13.7909 23.3333 16 23.3333Z"
@@ -35,6 +37,7 @@ export const SaveIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
       </svg>
     );
