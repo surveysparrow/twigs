@@ -36,7 +36,7 @@ export const CascaderDropdownSearchList = ({
     }
 
     const node = selectedNode ?? rootNode;
-    const searchableNodes = node.children;
+    const searchableNodes = node.getChildren();
 
     let filteredNodes: CascaderDropdownNode[] = [];
 
@@ -54,12 +54,12 @@ export const CascaderDropdownSearchList = ({
 
   const onClick = (node: CascaderDropdownNode) => {
     setSearchQuery('');
-    if (node.children.length === 0) {
+    if (node.getChildren().length === 0) {
       handleChange(node);
       return;
     }
     setSelectedNode(node);
-    setFocusedNode(node.children.at(0) ?? null);
+    setFocusedNode(node.getChildren().at(0) ?? null);
   };
 
   const onMouseEnter = (node: CascaderDropdownNode) => {

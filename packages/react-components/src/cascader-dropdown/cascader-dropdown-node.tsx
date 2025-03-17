@@ -1,6 +1,7 @@
 export interface CascaderDropdownNodeOptions {
   disabled?: boolean;
   shouldFetchOptions?: boolean;
+  dataType?: string;
 }
 
 export class CascaderDropdownNode {
@@ -34,6 +35,8 @@ export class CascaderDropdownNode {
 
   valuePath: string = '';
 
+  type: string = '';
+
   constructor(
     value: string | number,
     label: string | number,
@@ -41,7 +44,8 @@ export class CascaderDropdownNode {
     children: CascaderDropdownNode[],
     level: number,
     labelPath: string,
-    valuePath: string
+    valuePath: string,
+    type: string
   ) {
     this.value = value;
     this.label = label;
@@ -50,10 +54,11 @@ export class CascaderDropdownNode {
     const { disabled, shouldFetchOptions, ...otherOptions } = options;
     this.disabled = disabled ?? false;
     this.shouldFetchOptions = shouldFetchOptions ?? false;
-    this.options = otherOptions;
     this.level = level;
     this.labelPath = labelPath;
     this.valuePath = valuePath;
+    this.type = type;
+    this.options = otherOptions;
   }
 
   setParent(node: CascaderDropdownNode | null) {
@@ -86,5 +91,13 @@ export class CascaderDropdownNode {
 
   getValuePath() {
     return this.valuePath;
+  }
+
+  getType() {
+    return this.type;
+  }
+
+  getChildren() {
+    return this.children;
   }
 }

@@ -9,16 +9,21 @@ import { CascaderDropdownList } from './cascader-dropdown-list';
 import { CascaderDropdownBreadcrumb } from './cascader-dropdown-breadcrumb';
 import { CascaderDropdownSearchInput } from './cascader-dropdown-search-input';
 import { CascaderDropdownSearchList } from './cascader-dropdown-search-list';
+import { optionTypes } from './helpers/cascader-dropdown-constants';
 
 export type ResultCacheType = Record<string, CascaderDropdownNode[]>;
 
 export const CascaderDropdownContent = ({ children }: { children: ReactNode }) => {
-  const { popoverOpen, setPopoverOpen, id } = useCascaderDropdownContext();
+  const {
+    popoverOpen, setPopoverOpen, id, selectedNode
+  } = useCascaderDropdownContext();
 
   const [searchQuery, setSearchQuery] = useState('');
   const [resultCache, setResultCache] = useState<ResultCacheType>({});
 
   const [searchFocusedNode, setSearchFocusedNode] = useState<CascaderDropdownNode | null>(null);
+
+  const showValueSelector = selectedNode?.getType() === optionTypes.VALUE_SELECTOR;
 
   return (
     <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
@@ -34,12 +39,14 @@ export const CascaderDropdownContent = ({ children }: { children: ReactNode }) =
       >
         <TooltipProvider delayDuration={0}>
           <CascaderDropdownBreadcrumb />
-          <CascaderDropdownSearchInput
-            searchQuery={searchQuery}
-            setSearchQuery={setSearchQuery}
-            searchFocusedNode={searchFocusedNode}
-            setSearchFocusedNode={setSearchFocusedNode}
-          />
+          {!showValueSelector && (
+            <CascaderDropdownSearchInput
+              searchQuery={searchQuery}
+              setSearchQuery={setSearchQuery}
+              searchFocusedNode={searchFocusedNode}
+              setSearchFocusedNode={setSearchFocusedNode}
+            />
+          )}
           {!searchQuery && <CascaderDropdownList />}
           {searchQuery && (
             <CascaderDropdownSearchList

@@ -16,7 +16,7 @@ export class CascaderDropdownRootNode extends CascaderDropdownNode {
   valuePath: string = '';
 
   constructor() {
-    super('', '', {}, [], 0, '', '');
+    super('', '', {}, [], 0, '', '', '');
   }
 
   createNode({
@@ -25,16 +25,18 @@ export class CascaderDropdownRootNode extends CascaderDropdownNode {
     options,
     level,
     labelPath,
-    valuePath
+    valuePath,
+    type
   }: {
     value: string | number,
     label: string | number,
     options: CascaderDropdownNodeOptions,
     level: number,
     labelPath: string,
-    valuePath: string
+    valuePath: string,
+    type: string,
   }) {
-    const node = new CascaderDropdownNode(value, label, options, [], level, labelPath, valuePath);
+    const node = new CascaderDropdownNode(value, label, options, [], level, labelPath, valuePath, type);
     this.nodeMapping[value] = node;
     this.pathNodeMapping[valuePath] = node;
     this.pathMapping.set(valuePath, labelPath.toLowerCase());

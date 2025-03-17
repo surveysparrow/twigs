@@ -3,11 +3,13 @@ import { useEffect, useRef } from 'react';
 import { prefixClassName } from '@src/utils';
 import { CascaderDropdownItem } from './cascader-dropdown-item';
 import { useCascaderDropdownContext } from './use-value';
+import { optionTypes } from './helpers/cascader-dropdown-constants';
+import CascaderDropdownValueSelector from './cascader-dropdown-value-selector';
 
 export const CascaderDropdownList = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const { rootNode, foldersSelectionPath } = useCascaderDropdownContext();
+  const { rootNode, foldersSelectionPath, selectedNode } = useCascaderDropdownContext();
 
   useEffect(() => {
     if (containerRef.current) {
@@ -15,6 +17,10 @@ export const CascaderDropdownList = () => {
       if (selectedItem) selectedItem.scrollIntoView();
     }
   }, []);
+
+  if (selectedNode?.getType() === optionTypes.VALUE_SELECTOR) {
+    return <CascaderDropdownValueSelector />;
+  }
 
   return (
     <Box

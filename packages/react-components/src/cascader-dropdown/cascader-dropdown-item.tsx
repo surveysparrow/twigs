@@ -5,6 +5,7 @@ import { Box } from '@src/box';
 import { useCascaderDropdownContext } from './use-value';
 import { CascaderDropdownNode } from './cascader-dropdown-node';
 import { StyledItem } from './styled/StyledItem';
+import { optionTypes } from './helpers/cascader-dropdown-constants';
 
 export const CascaderDropdownItem = ({ node }: { node: CascaderDropdownNode }) => {
   const {
@@ -12,12 +13,12 @@ export const CascaderDropdownItem = ({ node }: { node: CascaderDropdownNode }) =
   } = useCascaderDropdownContext();
 
   const selectNode = () => {
-    if (node.children.length === 0) {
+    if (node.getChildren().length === 0 && node.getType() !== optionTypes.VALUE_SELECTOR) {
       handleChange(node);
       return;
     }
     setSelectedNode(node);
-    setFocusedNode(node.children.at(0) ?? node);
+    setFocusedNode(node.getChildren().at(0) ?? node);
   };
 
   const onMouseEnter = () => {
@@ -42,7 +43,7 @@ export const CascaderDropdownItem = ({ node }: { node: CascaderDropdownNode }) =
       }}
     >
       <Text css={{ color: '$neutral900' }} className={prefixClassName('cascader-dropdown__item-text')}>{node.label}</Text>
-      {node.children.length > 0 && (
+      {(node.getChildren().length > 0 || node.getType() === optionTypes.VALUE_SELECTOR) && (
         <Box
           css={{
             lineHeight: '0', color: '$neutral600', minWidth: '$5'

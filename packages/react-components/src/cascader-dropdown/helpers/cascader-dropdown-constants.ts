@@ -2,7 +2,8 @@ export const optionTypes = {
   FOLDER: 'FOLDER',
   ITEM_WITHOUT_OPERATOR: 'ITEM_WITHOUT_OPERATOR',
   ITEM_WITH_OPTIONS: 'ITEM_WITH_OPTIONS',
-  ITEM: 'ITEM'
+  ITEM: 'ITEM',
+  VALUE_SELECTOR: 'VALUE_SELECTOR'
 };
 
 export const dataTypes = {
@@ -12,7 +13,10 @@ export const dataTypes = {
   DATE: 'DATE',
   DATE_RANGE: 'DATE_RANGE',
   SINGLE_SELECT: 'SINGLE_SELECT',
-  MULTI_SELECT: 'MULTI_SELECT'
+  MULTI_SELECT: 'MULTI_SELECT',
+  EMAIL: 'EMAIL',
+  URL: 'URL',
+  DATE_TIME_TIMEZONE: 'DATE_TIME_TIMEZONE'
 };
 
 export type CascaderDropdownValueType = {
@@ -75,6 +79,9 @@ export type CascaderDropdownOperatorType = {
   valuesKey?: string;
   disabled?: boolean;
   shouldFetchOptions?: boolean;
+  type: 'VALUE_SELECTOR';
+  choices?: CascaderDropdownDataValueType[];
+  options?: [];
 };
 
 export type CascaderDropdownDataValueType = {
@@ -86,4 +93,5 @@ export type CascaderDropdownPropertyType =
   CascaderDropdownFolderType
   | CascaderDropdownItemType
   | CascaderDropdownItemWithoutOperatorType
-  | CascaderDropdownItemWithOptionsType;
+  | CascaderDropdownItemWithOptionsType
+  | CascaderDropdownOperatorType;

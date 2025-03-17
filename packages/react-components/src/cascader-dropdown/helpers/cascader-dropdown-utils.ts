@@ -42,11 +42,13 @@ export const buildTree = (data: CascaderDropdownPropertyType[]): CascaderDropdow
         label,
         options: {
           disabled: item.disabled,
-          shouldFetchOptions: item.shouldFetchOptions
+          shouldFetchOptions: item.shouldFetchOptions,
+          ...(item.type === 'VALUE_SELECTOR' ? { dataType: item.dataType, choices: item.choices } : {})
         },
         level: level + 1,
         labelPath: currentLabelPath,
-        valuePath: currentValuePath
+        valuePath: currentValuePath,
+        type: item.type
       });
 
       if (i === 0) {

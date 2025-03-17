@@ -31,13 +31,15 @@ export type CalendarTimePickerProps = {
   onChange?: CalendarProps['onChange'],
   size?: CalendarSize,
   renderCustomTrigger?: (props: { timeValue: TimeValueState }) => ReactNode;
+  className?: string;
 };
 
 export const CalendarTimePicker = ({
   value,
   onChange,
   size,
-  renderCustomTrigger
+  renderCustomTrigger,
+  className
 }: CalendarTimePickerProps) => {
   const [localDateValue, setLocalDateValue] = useState<DateValue>(today(getLocalTimeZone()));
 
@@ -170,6 +172,7 @@ export const CalendarTimePicker = ({
             color="default"
             size={size === 'lg' ? 'md' : 'sm'}
             rightIcon={<ChevronDownIcon />}
+            className={className}
           >
             {initialHours}
             :
