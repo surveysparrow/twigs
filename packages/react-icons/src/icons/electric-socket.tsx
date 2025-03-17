@@ -21,6 +21,7 @@ export const ElectricSocket = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M13.3867 14.3334V11.3334"
@@ -28,6 +29,7 @@ export const ElectricSocket = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M18.6133 14.3334V11.3334"
@@ -35,6 +37,7 @@ export const ElectricSocket = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M21.3333 26.7347C27.2631 23.7848 29.6787 16.5863 26.7288 10.6565C23.7788 4.72679 16.5804 2.31118 10.6506 5.26111C6.57537 7.28848 3.99917 11.4483 3.99997 16C3.99717 19.3132 5.31369 22.4913 7.65867 24.832C9.4036 26.5704 11.7663 27.5465 14.2293 27.5467C15.2069 27.5459 15.9993 26.7536 16 25.776V20.3333"
@@ -42,6 +45,7 @@ export const ElectricSocket = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
       </svg>
     );

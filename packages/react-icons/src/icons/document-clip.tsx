@@ -21,6 +21,7 @@ export const DocumentClipIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M9.33334 10.6667H21.3333"
@@ -28,6 +29,7 @@ export const DocumentClipIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M9.33334 16H14.6667"
@@ -35,6 +37,7 @@ export const DocumentClipIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M9.33334 21.3333H13.3333"
@@ -42,6 +45,7 @@ export const DocumentClipIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M24 24V19.3333C24 18.8029 24.2107 18.2942 24.5858 17.9191C24.9609 17.544 25.4696 17.3333 26 17.3333C26.5304 17.3333 27.0391 17.544 27.4142 17.9191C27.7893 18.2942 28 18.8029 28 19.3333V24C28 25.0609 27.5786 26.0783 26.8284 26.8284C26.0783 27.5786 25.0609 28 24 28C22.9391 28 21.9217 27.5786 21.1716 26.8284C20.4214 26.0783 20 25.0609 20 24V19.9996"
@@ -49,6 +53,7 @@ export const DocumentClipIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
       </svg>
     );
