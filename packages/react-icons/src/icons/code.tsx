@@ -21,7 +21,6 @@ export const CodeIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M24 10.6666L29.3333 16L24 21.3333"
@@ -29,7 +28,6 @@ export const CodeIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M7.99999 21.3333L2.66666 16L7.99999 10.6666"
@@ -37,7 +35,6 @@ export const CodeIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
       </svg>
     );

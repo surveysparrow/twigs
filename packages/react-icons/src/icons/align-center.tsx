@@ -23,7 +23,6 @@ export const AlignCenterIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
         <path
           fillRule="evenodd"
@@ -33,7 +32,6 @@ export const AlignCenterIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M16 5.33334V8.00001"
@@ -41,7 +39,6 @@ export const AlignCenterIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M16 13.3333V18.6667"
@@ -49,7 +46,6 @@ export const AlignCenterIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M16 24V26.6667"
@@ -57,7 +53,6 @@ export const AlignCenterIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
       </svg>
     );

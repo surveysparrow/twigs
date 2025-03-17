@@ -22,7 +22,6 @@ export const CloseCircleIcon = React.forwardRef<SVGSVGElement, IconProps>(
             strokeWidth={strokeWidth}
             strokeLinecap="round"
             strokeLinejoin="round"
-            vectorEffect="non-scaling-stroke"
           />
           <path
             d="M19.7733 19.7733L12.2267 12.2267"
@@ -30,7 +29,6 @@ export const CloseCircleIcon = React.forwardRef<SVGSVGElement, IconProps>(
             strokeWidth={strokeWidth}
             strokeLinecap="round"
             strokeLinejoin="round"
-            vectorEffect="non-scaling-stroke"
           />
           <path
             d="M16 28C9.372 28 4 22.628 4 16C4 9.372 9.372 4 16 4C22.628 4 28 9.372 28 16C28 22.628 22.628 28 16 28Z"
@@ -38,7 +36,6 @@ export const CloseCircleIcon = React.forwardRef<SVGSVGElement, IconProps>(
             strokeWidth={strokeWidth}
             strokeLinecap="round"
             strokeLinejoin="round"
-            vectorEffect="non-scaling-stroke"
           />
         </g>
         <defs>

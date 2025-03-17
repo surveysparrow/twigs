@@ -21,7 +21,6 @@ export const FilterIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M28 8C28 10.2091 22.6274 12 16 12C9.37259 12 4 10.2091 4 8"
@@ -29,7 +28,6 @@ export const FilterIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
       </svg>
     );

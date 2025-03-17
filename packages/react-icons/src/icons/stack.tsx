@@ -22,7 +22,6 @@ export const StackIcon = React.forwardRef<SVGSVGElement, IconProps>(
             strokeWidth={strokeWidth}
             strokeLinecap="round"
             strokeLinejoin="round"
-            vectorEffect="non-scaling-stroke"
           />
           <path
             d="M26.6666 5.33334H5.33331"
@@ -30,7 +29,6 @@ export const StackIcon = React.forwardRef<SVGSVGElement, IconProps>(
             strokeWidth={strokeWidth}
             strokeLinecap="round"
             strokeLinejoin="round"
-            vectorEffect="non-scaling-stroke"
           />
           <path
             d="M26.6666 12H5.33331"
@@ -38,7 +36,6 @@ export const StackIcon = React.forwardRef<SVGSVGElement, IconProps>(
             strokeWidth={strokeWidth}
             strokeLinecap="round"
             strokeLinejoin="round"
-            vectorEffect="non-scaling-stroke"
           />
         </g>
         <defs>

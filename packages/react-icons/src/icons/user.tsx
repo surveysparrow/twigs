@@ -35,7 +35,6 @@ export const UserIcon = React.forwardRef<SVGSVGElement, IconProps>(
             strokeWidth={strokeWidth}
             strokeLinecap="round"
             strokeLinejoin="round"
-            vectorEffect="non-scaling-stroke"
           />
         </g>
         <defs>

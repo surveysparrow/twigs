@@ -22,7 +22,6 @@ export const MobileIcon = React.forwardRef<SVGSVGElement, IconProps>(
             strokeWidth={strokeWidth}
             strokeLinecap="round"
             strokeLinejoin="round"
-            vectorEffect="non-scaling-stroke"
           />
           <path
             d="M13.3322 24.0034H18.6678"
@@ -30,7 +29,6 @@ export const MobileIcon = React.forwardRef<SVGSVGElement, IconProps>(
             strokeWidth={strokeWidth}
             strokeLinecap="round"
             strokeLinejoin="round"
-            vectorEffect="non-scaling-stroke"
           />
           <path
             fillRule="evenodd"
@@ -40,7 +38,6 @@ export const MobileIcon = React.forwardRef<SVGSVGElement, IconProps>(
             strokeWidth={strokeWidth}
             strokeLinecap="round"
             strokeLinejoin="round"
-            vectorEffect="non-scaling-stroke"
           />
         </g>
         <defs>

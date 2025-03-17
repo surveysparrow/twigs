@@ -21,7 +21,6 @@ export const PrintIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M9.33333 22.6667H6.66667C5.19333 22.6667 4 21.4733 4 20V13.3333C4 11.86 5.19333 10.6667 6.66667 10.6667H25.3333C26.8067 10.6667 28 11.86 28 13.3333V20C28 21.4733 26.8067 22.6667 25.3333 22.6667H22.6667"
@@ -29,7 +28,6 @@ export const PrintIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M9.33334 18.4H22.6667V26.6667C22.6667 27.4027 22.0693 28 21.3333 28H10.6667C9.93068 28 9.33334 27.4027 9.33334 26.6667V18.4Z"
@@ -37,7 +35,6 @@ export const PrintIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M9.33334 14.6667H10.6667"
@@ -45,7 +42,6 @@ export const PrintIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
       </svg>
     );

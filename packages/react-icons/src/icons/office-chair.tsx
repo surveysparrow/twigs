@@ -21,7 +21,6 @@ export const OfficeChairIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M18.6667 4H13.3334C11.8606 4 10.6667 5.19391 10.6667 6.66667V14.6667C10.6667 16.1394 11.8606 17.3333 13.3334 17.3333H18.6667C20.1394 17.3333 21.3334 16.1394 21.3334 14.6667V6.66667C21.3334 5.19391 20.1394 4 18.6667 4Z"
@@ -29,7 +28,6 @@ export const OfficeChairIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M28 14.6667H25.3333"
@@ -37,7 +35,6 @@ export const OfficeChairIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M4 14.6667H6.66667"
@@ -45,7 +42,6 @@ export const OfficeChairIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M20.6666 28H11.3333"
@@ -53,7 +49,6 @@ export const OfficeChairIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M16 22.6667V28"
@@ -61,7 +56,6 @@ export const OfficeChairIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M25.3334 14.6667L23.6901 17.9531"
@@ -69,7 +63,6 @@ export const OfficeChairIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M8.30991 17.9531L6.66669 14.6667"
@@ -77,7 +70,6 @@ export const OfficeChairIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
       </svg>
     );

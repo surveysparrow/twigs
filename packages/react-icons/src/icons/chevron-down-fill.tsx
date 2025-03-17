@@ -16,7 +16,6 @@ export const ChevronDownFillIcon = React.forwardRef<SVGSVGElement, IconProps>(
         <path
           d="M15.5736 22.5691C15.8084 22.8064 16.1916 22.8064 16.4264 22.5691L25.3807 13.5221C25.7557 13.1432 25.4873 12.5 24.9543 12.5L7.04573 12.5C6.51268 12.5 6.24431 13.1432 6.61928 13.5221L15.5736 22.5691Z"
           fill={color}
-          vectorEffect="non-scaling-stroke"
         />
       </svg>
     );

@@ -21,7 +21,6 @@ export const DuplicateIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M22.6667 22.6667V24C22.6667 25.0609 22.2452 26.0783 21.4951 26.8284C20.7449 27.5786 19.7275 28 18.6667 28H8C6.93913 28 5.92172 27.5786 5.17157 26.8284C4.42143 26.0783 4 25.0609 4 24V13.3333C4 12.2725 4.42143 11.255 5.17157 10.5049C5.92172 9.75476 6.93913 9.33333 8 9.33333H9.33333"
@@ -29,7 +28,6 @@ export const DuplicateIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M18.6677 16V10.6667"
@@ -37,7 +35,6 @@ export const DuplicateIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M16 13.3323H21.3333"
@@ -45,7 +42,6 @@ export const DuplicateIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
       </svg>
     );

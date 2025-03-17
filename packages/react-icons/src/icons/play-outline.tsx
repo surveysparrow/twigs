@@ -21,7 +21,6 @@ export const PlayOutlineIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M14.588 12.0773L19.764 15.1386C20.4187 15.5253 20.4187 16.4733 19.764 16.86L14.588 19.9213C13.9213 20.316 13.0787 19.8346 13.0787 19.06V12.9386C13.0787 12.164 13.9213 11.6826 14.588 12.0773Z"
@@ -29,7 +28,6 @@ export const PlayOutlineIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
       </svg>
     );

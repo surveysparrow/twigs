@@ -21,7 +21,6 @@ export const OpenBookIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M22.6667 20.3173V4.016C22.6667 3.044 21.6453 2.36533 20.7773 2.80133C18.436 3.97467 16.4627 6.36 16 8.816V28C16.528 25.2013 19.0147 22.4947 21.7747 21.568C22.3107 21.388 22.6667 20.8827 22.6667 20.3173V20.3173Z"
@@ -29,7 +28,6 @@ export const OpenBookIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
       </svg>
     );

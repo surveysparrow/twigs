@@ -21,7 +21,6 @@ export const HappyHomeIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M24.288 27.812H8.28799"
@@ -29,7 +28,6 @@ export const HappyHomeIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M13.6213 14.4787V15.812"
@@ -37,7 +35,6 @@ export const HappyHomeIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M18.9547 14.4787V15.812"
@@ -45,7 +42,6 @@ export const HappyHomeIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M20.9547 20.7293C20.9547 20.7293 19.2053 22.4787 16.288 22.4787C13.3707 22.4787 11.6213 20.7293 11.6213 20.7293"
@@ -53,7 +49,6 @@ export const HappyHomeIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
       </svg>
     );

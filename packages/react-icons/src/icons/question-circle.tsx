@@ -21,7 +21,6 @@ export const QuestionCircleIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M16 17.6667V17.3333C16 16.244 16.6733 15.6533 17.348 15.2C18.0066 14.756 18.6666 14.1773 18.6666 13.1107C18.6666 11.6373 17.4733 10.444 16 10.444C14.5266 10.444 13.3333 11.6373 13.3333 13.1107"
@@ -29,7 +28,6 @@ export const QuestionCircleIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M15.9987 21.3333C15.8147 21.3333 15.6654 21.4827 15.6667 21.6667C15.6667 21.8507 15.816 22 16 22C16.184 22 16.3334 21.8507 16.3334 21.6667C16.3334 21.4827 16.184 21.3333 15.9987 21.3333Z"
@@ -37,7 +35,6 @@ export const QuestionCircleIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
       </svg>
     );

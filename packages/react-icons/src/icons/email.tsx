@@ -21,7 +21,6 @@ export const EmailIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M10.3088 11.9783L15.9149 14.4227C16.2499 14.5687 16.6113 14.6443 16.9767 14.6449C17.3421 14.6454 17.7037 14.5709 18.0391 14.4259L23.6421 12.0032"
@@ -29,7 +28,6 @@ export const EmailIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
       </svg>
     );

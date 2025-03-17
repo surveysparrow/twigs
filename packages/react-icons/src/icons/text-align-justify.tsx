@@ -21,7 +21,6 @@ export const TextAlignJustifyIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeLinecap="round"
           strokeLinejoin="round"
           d="M2.664 3h10.667M2.664 6.333h10.667M2.664 9.667h10.667M2.664 13h10.667"
-          vectorEffect="non-scaling-stroke"
         />
       </svg>
     );

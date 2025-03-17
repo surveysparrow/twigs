@@ -23,7 +23,6 @@ export const HashtagIcon = React.forwardRef<SVGSVGElement, IconProps>(
             strokeMiterlimit="10"
             strokeLinecap="round"
             strokeLinejoin="round"
-            vectorEffect="non-scaling-stroke"
           />
           <path
             d="M25.8274 11.5638H21.1523L21.9129 7"
@@ -32,7 +31,6 @@ export const HashtagIcon = React.forwardRef<SVGSVGElement, IconProps>(
             strokeMiterlimit="10"
             strokeLinecap="round"
             strokeLinejoin="round"
-            vectorEffect="non-scaling-stroke"
           />
           <path
             d="M21.1523 11.5638L19.6751 20.4362H10.6751L12.1523 11.5638H21.1523Z"
@@ -41,7 +39,6 @@ export const HashtagIcon = React.forwardRef<SVGSVGElement, IconProps>(
             strokeMiterlimit="10"
             strokeLinecap="round"
             strokeLinejoin="round"
-            vectorEffect="non-scaling-stroke"
           />
           <path
             d="M6 20.4362H10.6751L9.91446 25"
@@ -50,7 +47,6 @@ export const HashtagIcon = React.forwardRef<SVGSVGElement, IconProps>(
             strokeMiterlimit="10"
             strokeLinecap="round"
             strokeLinejoin="round"
-            vectorEffect="non-scaling-stroke"
           />
           <path
             d="M24.2621 20.4362H19.6751L18.9145 25"
@@ -59,7 +55,6 @@ export const HashtagIcon = React.forwardRef<SVGSVGElement, IconProps>(
             strokeMiterlimit="10"
             strokeLinecap="round"
             strokeLinejoin="round"
-            vectorEffect="non-scaling-stroke"
           />
         </g>
         <defs>

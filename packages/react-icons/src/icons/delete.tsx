@@ -21,7 +21,6 @@ export const DeleteIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M26.6666 9.33334H5.33331"
@@ -29,7 +28,6 @@ export const DeleteIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M11.3333 9.33333V8.66667C11.3333 7.42899 11.825 6.24201 12.7001 5.36684C13.5753 4.49167 14.7623 4 16 4V4C17.2377 4 18.4246 4.49167 19.2998 5.36684C20.175 6.24201 20.6666 7.42899 20.6666 8.66667V9.33333"
@@ -37,7 +35,6 @@ export const DeleteIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M13.3333 21.3333V16"
@@ -45,7 +42,6 @@ export const DeleteIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M18.6667 21.3333V16"
@@ -53,7 +49,6 @@ export const DeleteIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
       </svg>
     );

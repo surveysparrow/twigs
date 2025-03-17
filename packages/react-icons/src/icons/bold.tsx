@@ -21,7 +21,6 @@ export const BoldIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M9.33334 16H18.6667C19.7275 16 20.745 16.4214 21.4951 17.1716C22.2452 17.9217 22.6667 18.9391 22.6667 20C22.6667 21.0609 22.2452 22.0783 21.4951 22.8284C20.745 23.5786 19.7275 24 18.6667 24H9.33334V16Z"
@@ -29,7 +28,6 @@ export const BoldIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
       </svg>
     );

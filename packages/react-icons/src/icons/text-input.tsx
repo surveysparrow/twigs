@@ -24,7 +24,6 @@ export const TextInputIcon = React.forwardRef<SVGSVGElement, IconProps>(
             strokeWidth={strokeWidth}
             strokeLinecap="round"
             strokeLinejoin="round"
-            vectorEffect="non-scaling-stroke"
           />
           <path
             d="M11 20H10C8.895 20 8 19.105 8 18C8 19.105 7.105 20 6 20H5"
@@ -32,7 +31,6 @@ export const TextInputIcon = React.forwardRef<SVGSVGElement, IconProps>(
             strokeWidth={strokeWidth}
             strokeLinecap="round"
             strokeLinejoin="round"
-            vectorEffect="non-scaling-stroke"
           />
           <path
             d="M8 6V18"
@@ -40,7 +38,6 @@ export const TextInputIcon = React.forwardRef<SVGSVGElement, IconProps>(
             strokeWidth={strokeWidth}
             strokeLinecap="round"
             strokeLinejoin="round"
-            vectorEffect="non-scaling-stroke"
           />
           <path
             d="M5 4H6C7.105 4 8 4.895 8 6C8 4.895 8.895 4 10 4H11"
@@ -48,7 +45,6 @@ export const TextInputIcon = React.forwardRef<SVGSVGElement, IconProps>(
             strokeWidth={strokeWidth}
             strokeLinecap="round"
             strokeLinejoin="round"
-            vectorEffect="non-scaling-stroke"
           />
         </g>
         <defs>

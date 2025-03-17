@@ -21,7 +21,6 @@ export const AddColumnIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M21.3333 5.33333V26.6667"
@@ -29,7 +28,6 @@ export const AddColumnIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M10.6667 26.6667V17.3333C10.6667 16.597 10.0697 16 9.33332 16H6.66666C5.93028 16 5.33332 16.597 5.33332 17.3333L5.33332 26.6667C5.33332 27.403 5.93028 28 6.66666 28H9.33332C10.0697 28 10.6667 27.403 10.6667 26.6667Z"
@@ -37,7 +35,6 @@ export const AddColumnIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M8.00001 12L5.33334 9.33333"
@@ -45,7 +42,6 @@ export const AddColumnIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M10.6667 9.33333L8 12"
@@ -53,7 +49,6 @@ export const AddColumnIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M8 4V12"
@@ -61,7 +56,6 @@ export const AddColumnIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
         />
       </svg>
     );
