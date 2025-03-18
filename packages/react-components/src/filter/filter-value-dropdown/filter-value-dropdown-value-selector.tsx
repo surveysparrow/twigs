@@ -9,10 +9,13 @@ import { Flex } from '@src/flex';
 import { Text } from '@src/text';
 import { Checkbox } from '@src/checkbox';
 import { Calendar, CalendarRange } from '@src/calendar';
-import { DateValue, parseDate } from '@internationalized/date';
+import {
+  DateValue, getLocalTimeZone, now, today
+} from '@internationalized/date';
 import { prefixClassName } from '@src/utils';
 import { StyledItem } from '@src/cascader-dropdown/styled/StyledItem';
 import { ChevronRightIcon } from '@sparrowengg/twigs-react-icons';
+import { CascaderDropdownBreadcrumb } from '@src/cascader-dropdown/cascader-dropdown-breadcrumb';
 import { dataTypes } from './helpers/filter-value-dropdown-constants';
 import { useFilterValueDropdownContext } from './use-value';
 
@@ -47,13 +50,28 @@ const FilterValueDropdownValueSelector = () => {
 export default FilterValueDropdownValueSelector;
 
 const DateRangeInput = () => {
-  const [localValue, setLocalValue] = React.useState<{ start: DateValue, end: DateValue }>({
-    start: parseDate('2023-07-12'),
-    end: parseDate('2023-07-20')
-  });
+  const {
+    onApply, onCancel, selectedOperator, hasOperator
+  } = useFilterValueDropdownContext();
+
+  const [localValue, setLocalValue] = React.useState<{ start: DateValue, end: DateValue } | null>(null);
+
+  const onApplyRange = () => {
+    if (!localValue?.start || !localValue?.end) return;
+    const start = localValue.start.toString();
+    const end = localValue.end.toString();
+    onApply({ start, end });
+  };
 
   return (
     <Box>
+      {hasOperator && (
+        <CascaderDropdownBreadcrumb
+          focusNthColumn={onCancel}
+          showBackButton={false}
+          foldersSelectionPath={[{ value: selectedOperator?.value ?? '', label: selectedOperator?.label ?? '' }]}
+        />
+      )}
       <CalendarRange
         onChange={(newDateRange) => setLocalValue({ start: newDateRange.start, end: newDateRange.end })}
         value={localValue}
@@ -157,6 +175,8 @@ const DateRangeInput = () => {
         css={{
           width: '100%', borderRadius: '0 0 $xl $xl', fontSize: '$sm', lineHeight: '$sm'
         }}
+        onClick={onApplyRange}
+        disabled={!localValue?.start || !localValue?.end}
       >
         Apply Range
       </Button>
@@ -165,9 +185,11 @@ const DateRangeInput = () => {
 };
 
 const DateInput = () => {
-  const { selectedOperator } = useFilterValueDropdownContext();
+  const {
+    selectedOperator, onApply, onCancel, hasOperator
+  } = useFilterValueDropdownContext();
 
-  const [localValue, setLocalValue] = useState<DateValue | null>(null);
+  const [localValue, setLocalValue] = useState<DateValue>(selectedOperator?.dataType === dataTypes.DATE_TIME_TIMEZONE ? now(getLocalTimeZone()) : today(getLocalTimeZone()));
 
   const onChange = (newDate: DateValue) => {
     setLocalValue(newDate);
@@ -175,8 +197,19 @@ const DateInput = () => {
 
   const isDateTimeTimezone = selectedOperator?.dataType === dataTypes.DATE_TIME_TIMEZONE;
 
+  const onApplyDate = () => {
+    onApply(localValue.toString());
+  };
+
   return (
     <Box>
+      {hasOperator && (
+        <CascaderDropdownBreadcrumb
+          focusNthColumn={onCancel}
+          showBackButton={false}
+          foldersSelectionPath={[{ value: selectedOperator?.value ?? '', label: selectedOperator?.label ?? '' }]}
+        />
+      )}
       <Calendar
         onChange={onChange}
         value={localValue}
@@ -272,6 +305,7 @@ const DateInput = () => {
         css={{
           width: '100%', borderRadius: '0 0 $xl $xl', fontSize: '$sm', lineHeight: '$sm'
         }}
+        onClick={onApplyDate}
       >
         Apply
       </Button>
@@ -280,7 +314,7 @@ const DateInput = () => {
 };
 
 const SingleLineTextInput = () => {
-  const { selectedOperator } = useFilterValueDropdownContext();
+  const { selectedOperator, onCancel, onApply } = useFilterValueDropdownContext();
 
   const [value, setValue] = useState('');
 
@@ -289,29 +323,29 @@ const SingleLineTextInput = () => {
       <Box css={{ padding: '$4' }}>
         <Input
           size="lg"
-          placeholder={`${selectedOperator?.label}`}
+          placeholder={`${selectedOperator?.label ?? ''}`}
           value={value}
           onChange={(e) => setValue(e.target.value)}
           type={selectedOperator?.dataType === dataTypes.NUMBER ? 'number' : 'text'}
           autoFocus
         />
       </Box>
-      <InputFooter disabled={!value.trim()} />
+      <InputFooter disabled={!value.trim()} onCancel={onCancel} onApply={() => onApply(value)} />
     </Box>
   );
 };
 
-const InputFooter = ({ disabled }: { disabled: boolean }) => {
+const InputFooter = ({ disabled, onCancel, onApply }: { disabled: boolean, onCancel: () => void, onApply: () => void }) => {
   return (
     <Flex justifyContent="space-between" css={{ padding: '$4', borderTop: '1px solid $neutral100' }}>
-      <Button size="md" variant="ghost" color="default">Cancel</Button>
-      <Button size="md" variant="ghost" disabled={disabled}>Apply</Button>
+      <Button size="md" variant="ghost" color="default" onClick={onCancel}>Cancel</Button>
+      <Button size="md" variant="ghost" disabled={disabled} onClick={onApply}>Apply</Button>
     </Flex>
   );
 };
 
 const MultiLineTextInput = () => {
-  const { selectedOperator } = useFilterValueDropdownContext();
+  const { selectedOperator, onCancel, onApply } = useFilterValueDropdownContext();
 
   const [value, setValue] = useState('');
 
@@ -320,74 +354,27 @@ const MultiLineTextInput = () => {
       <Box css={{ padding: '$4' }}>
         <Textarea
           size="lg"
-          placeholder={`${selectedOperator?.label}`}
+          placeholder={`${selectedOperator?.label ?? ''}`}
           value={value}
           onChange={(e) => setValue(e.target.value)}
           rows={4}
           resize="none"
         />
       </Box>
-      <InputFooter disabled={!value.trim()} />
+      <InputFooter disabled={!value.trim()} onCancel={onCancel} onApply={() => onApply(value)} />
     </Box>
   );
 };
 const SingleSelectInput = () => {
-  const { selectedOperator, data } = useFilterValueDropdownContext();
-
-  // const [focusedIndex, setFocusedIndex] = useState<number>(0);
-  // const [searchQuery, setSearchQuery] = useState('');
+  const {
+    selectedOperator, data, onCancel, onApply, hasOperator
+  } = useFilterValueDropdownContext();
 
   const [checkedSet, setCheckedSet] = useState<Set<string>>(new Set());
 
-  // const inputRef = useRef<HTMLInputElement>(null);
-
   const choices = (data.values && selectedOperator?.valuesKey) ? data.values[selectedOperator?.valuesKey] : [];
 
-  // const filteredChoices = choices.filter((choice) => choice.label.toLowerCase().includes(searchQuery.toLowerCase()));
-
   const isMultiSelect = selectedOperator?.dataType === dataTypes.MULTI_SELECT;
-
-  // const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-  //   if (e.key === 'ArrowDown') {
-  //     if (focusedIndex < filteredChoices.length - 1) {
-  //       setFocusedIndex(focusedIndex + 1);
-  //     } else {
-  //       setFocusedIndex(filteredChoices.length - 1);
-  //     }
-  //     e.preventDefault();
-  //   }
-
-  //   if (e.key === 'ArrowUp') {
-  //     if (focusedIndex > 0) {
-  //       setFocusedIndex(focusedIndex - 1);
-  //     } else {
-  //       setFocusedIndex(0);
-  //     }
-  //     e.preventDefault();
-  //   }
-
-  //   if (e.key === 'Enter') {
-  //     if (isMultiSelect) {
-  //       onClick(filteredChoices[focusedIndex].value);
-  //     }
-  //     e.preventDefault();
-  //   }
-  // };
-
-  // const onMouseEnter = (index: number) => {
-  //   setFocusedIndex(index);
-  // };
-
-  // useEffect(() => {
-  //   if (inputRef.current) {
-  //     inputRef.current.focus();
-  //   }
-  // }, []);
-
-  // Reset focused index when search query changes
-  // useEffect(() => {
-  //   setFocusedIndex(0);
-  // }, [searchQuery]);
 
   const onClick = (value: string) => {
     if (isMultiSelect) {
@@ -398,16 +385,28 @@ const SingleSelectInput = () => {
 
         return newSet;
       });
+    } else {
+      onApply(value);
     }
   };
 
   return (
-    <SearchableList
-      choices={choices}
-      isMultiSelect={isMultiSelect}
-      onClick={onClick}
-      checkedSet={checkedSet}
-    />
+    <Box>
+      {!isMultiSelect && hasOperator && (
+        <CascaderDropdownBreadcrumb
+          focusNthColumn={onCancel}
+          showBackButton={false}
+          foldersSelectionPath={[{ value: selectedOperator?.value ?? '', label: selectedOperator?.label ?? '' }]}
+        />
+      )}
+      <SearchableList
+        choices={choices}
+        isMultiSelect={isMultiSelect}
+        onClick={onClick}
+        checkedSet={checkedSet}
+      />
+      {isMultiSelect && <InputFooter disabled={!checkedSet.size} onCancel={onCancel} onApply={() => onApply(Array.from(checkedSet))} />}
+    </Box>
   );
 };
 
@@ -429,7 +428,7 @@ export const SearchableList = ({
   const [focusedIndex, setFocusedIndex] = useState<number>(0);
   const [searchQuery, setSearchQuery] = useState('');
 
-  const filteredChoices = useMemo(() => choices.filter((choice) => choice.label.toLowerCase().includes(searchQuery.toLowerCase())), [choices, searchQuery]);
+  const filteredChoices = useMemo(() => choices.filter((choice) => choice.label?.toLowerCase().includes(searchQuery.toLowerCase())), [choices, searchQuery]);
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'ArrowDown') {

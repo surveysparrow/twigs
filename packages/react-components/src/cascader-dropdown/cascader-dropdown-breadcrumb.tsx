@@ -5,7 +5,6 @@ import { Box } from '@src/box';
 import { Fragment } from 'react';
 import { Tooltip } from '@src/tooltip';
 import { Text } from '@src/text';
-import { useCascaderDropdownContext } from './use-value';
 
 const textWidth = {
   1: 104,
@@ -19,9 +18,17 @@ const letterCount = {
   3: 3
 };
 
-export const CascaderDropdownBreadcrumb = () => {
-  const { foldersSelectionPath, focusNthColumn } = useCascaderDropdownContext();
-
+export const CascaderDropdownBreadcrumb = ({
+  focusNthColumn,
+  focusPreviousColumn = () => {},
+  foldersSelectionPath,
+  showBackButton = true
+}: {
+  focusNthColumn: (index: number) => void,
+  focusPreviousColumn?: () => void,
+  foldersSelectionPath: { value: string, label: string }[],
+  showBackButton?: boolean
+}) => {
   if (foldersSelectionPath.length === 0) return null;
 
   return (
@@ -37,16 +44,18 @@ export const CascaderDropdownBreadcrumb = () => {
       }}
       alignItems="center"
     >
-      <BackButton />
-      <Box
-        css={{
-          width: '1px',
-          height: '$4',
-          backgroundColor: '$secondary100',
-          margin: '0 $4',
-          minWidth: '1px'
-        }}
-      />
+      {showBackButton && <BackButton focusPreviousColumn={focusPreviousColumn} />}
+      {showBackButton && (
+        <Box
+          css={{
+            width: '1px',
+            height: '$4',
+            backgroundColor: '$secondary100',
+            margin: '0 $4',
+            minWidth: '1px'
+          }}
+        />
+      )}
       {foldersSelectionPath.map(({ value, label }, index) => (
         <Fragment key={value}>
           <Tooltip
@@ -96,9 +105,7 @@ export const CascaderDropdownBreadcrumb = () => {
   );
 };
 
-const BackButton = () => {
-  const { focusPreviousColumn } = useCascaderDropdownContext();
-
+const BackButton = ({ focusPreviousColumn }: { focusPreviousColumn: () => void }) => {
   return (
     <Tooltip content="Previous Level" css={{ zIndex: 199 }}>
       <IconButton

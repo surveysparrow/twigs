@@ -6,30 +6,47 @@ import { styled } from '@src/stitches.config';
 import { Text } from '@src/text';
 import { prefixClassName } from '@src/utils';
 import React from 'react';
-import { FilterValueItemType } from './filter-value-dropdown/helpers/filter-value-dropdown-constants';
+import { dataTypes, FilterValueItemType, FilterValueOperatorType } from './filter-value-dropdown/helpers/filter-value-dropdown-constants';
 import { FilterValueDropdown } from './filter-value-dropdown/filter-value-dropdown';
-// import { FilterValueDropdown } from '@src/filter-value-dropdown/filter-value-dropdown';
-// import { FilterValueDropdownOption } from '@src/filter-dropdown';
 
 export type FilterPillProps = {
-  propertyName: string;
   icon?: React.ReactNode;
-  operator: string;
-  value: string;
+  value: FilterPillValueType;
+  setValue: (value: FilterPillValueType) => void;
   hasOperator?: boolean;
   variant?: 'filled' | 'outline';
   conditionData: FilterValueItemType;
 };
 
+export type FilterPillValueType = {
+  operator: FilterValueOperatorType | null;
+  label: string;
+  value: Record<string, any> | null;
+};
+
+const getDisplayValue = (value: FilterPillValueType) => {
+  if (!value.operator) return null;
+  const displayValue = value.value?.[value.operator.dataType];
+  if (typeof displayValue === 'string') return displayValue;
+  if (Array.isArray(displayValue)) return displayValue.join(', ');
+  if (value.operator.dataType === dataTypes.DATE_RANGE && typeof displayValue === 'object' && displayValue !== null) {
+    return `${displayValue.start} - ${displayValue.end}`;
+  }
+  return null;
+};
+
 export const FilterPill = ({
-  propertyName,
   icon,
-  operator,
   value,
-  hasOperator = false,
+  setValue,
+  hasOperator = true,
   variant = 'outline',
   conditionData
 }: FilterPillProps) => {
+  const onChange = (operator: FilterValueOperatorType, newValue: Record<string, any>) => {
+    setValue({ ...value, operator, value: newValue });
+  };
+
   return (
     <StyledFilterPill variant={variant}>
       <Flex alignItems="center" gap="$2" css={{ padding: '3px $2 3px $4' }}>
@@ -50,19 +67,28 @@ export const FilterPill = ({
             {icon}
           </Box>
         )}
-        <Text weight="medium" css={{ color: hasOperator ? '$neutral900' : '$neutral700', maxWidth: '$25' }} truncate>{propertyName}</Text>
+        <Text weight="medium" css={{ color: hasOperator ? '$neutral900' : '$neutral700', maxWidth: '$25' }} truncate>{value.label}</Text>
       </Flex>
 
-      <FilterValueDropdown data={conditionData}>
-        {hasOperator && (
-          <StyledValueButton>
-            <Text css={{ color: '$neutral700', padding: '3px $1 3px $1' }}>{operator ?? 'Choose Condition'}</Text>
-          </StyledValueButton>
-        )}
+      <FilterValueDropdown data={conditionData} onChange={onChange} hasOperator={hasOperator}>
+        <Flex>
+          {hasOperator && !value.operator?.value && (
+            <StyledValueButton>
+              <Text css={{ color: '$neutral700', padding: '3px $4 3px $1' }}>Choose Condition</Text>
+            </StyledValueButton>
+          )}
+          {hasOperator && value.operator?.value && (
+            <StyledValueButton>
+              <Text css={{ color: '$neutral700', padding: '3px $1 3px $1' }}>{value.operator?.label}</Text>
+            </StyledValueButton>
+          )}
+          {(!hasOperator || (hasOperator && value.operator?.value)) && (
+            <StyledValueButton css={{ borderTopRightRadius: '$lg', borderBottomRightRadius: '$lg' }}>
+              <Text css={{ color: '$neutral900', padding: '3px $4 3px $2' }} weight="medium">{getDisplayValue(value) ?? 'Choose Value'}</Text>
+            </StyledValueButton>
+          )}
+        </Flex>
       </FilterValueDropdown>
-      <StyledValueButton css={{ borderTopRightRadius: '$lg', borderBottomRightRadius: '$lg' }}>
-        <Text css={{ color: '$neutral900', padding: '3px $4 3px $2' }} weight="medium">{value ?? 'Choose Value'}</Text>
-      </StyledValueButton>
       <TooltipProvider>
         <Tooltip content="Remove">
           <StyledCloseButton className={prefixClassName('filter-pill__close-button')}>

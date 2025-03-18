@@ -15,7 +15,13 @@ export type ResultCacheType = Record<string, CascaderDropdownNode[]>;
 
 export const CascaderDropdownContent = ({ children }: { children: ReactNode }) => {
   const {
-    popoverOpen, setPopoverOpen, id, selectedNode
+    popoverOpen,
+    setPopoverOpen,
+    id,
+    selectedNode,
+    focusNthColumn,
+    focusPreviousColumn,
+    foldersSelectionPath
   } = useCascaderDropdownContext();
 
   const [searchQuery, setSearchQuery] = useState('');
@@ -38,7 +44,11 @@ export const CascaderDropdownContent = ({ children }: { children: ReactNode }) =
         }}
       >
         <TooltipProvider delayDuration={0}>
-          <CascaderDropdownBreadcrumb />
+          <CascaderDropdownBreadcrumb
+            focusNthColumn={focusNthColumn}
+            focusPreviousColumn={focusPreviousColumn}
+            foldersSelectionPath={foldersSelectionPath as { value: string, label: string }[]}
+          />
           {!showValueSelector && (
             <CascaderDropdownSearchInput
               searchQuery={searchQuery}

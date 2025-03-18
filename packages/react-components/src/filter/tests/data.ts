@@ -73,6 +73,94 @@ export const pillData = {
   }
 } as FilterValueItemType;
 
+export const singleLineTextInputData = {
+  label: 'Full Name',
+  value: 'fullName',
+  operators: [
+    { dataType: dataTypes.SINGLE_LINE_TEXT }
+  ] as FilterValueOperatorType[]
+} as FilterValueItemType;
+
+export const multiLineTextInputData = {
+  label: 'Full Name',
+  value: 'fullName',
+  operators: [
+    { dataType: dataTypes.MULTI_LINE_TEXT }
+  ] as FilterValueOperatorType[]
+} as FilterValueItemType;
+
+export const dateRangeData = {
+  label: 'Full Name',
+  value: 'fullName',
+  operators: [
+    { dataType: dataTypes.DATE_RANGE }
+  ] as FilterValueOperatorType[]
+} as FilterValueItemType;
+
+export const dateData = {
+  label: 'Full Name',
+  value: 'fullName',
+  operators: [
+    { dataType: dataTypes.DATE }
+  ] as FilterValueOperatorType[]
+} as FilterValueItemType;
+
+export const dateTimeTimezoneData = {
+  label: 'Full Name',
+  value: 'fullName',
+  operators: [
+    { dataType: dataTypes.DATE_TIME_TIMEZONE }
+  ] as FilterValueOperatorType[]
+} as FilterValueItemType;
+
+export const numberData = {
+  label: 'Full Name',
+  value: 'fullName',
+  operators: [
+    { dataType: dataTypes.NUMBER }
+  ] as FilterValueOperatorType[]
+} as FilterValueItemType;
+
+export const singleSelectData = {
+  label: 'Location',
+  value: 'location',
+  operators: [
+    { dataType: dataTypes.SINGLE_SELECT, valuesKey: 'location' }
+  ] as FilterValueOperatorType[],
+  values: {
+    location: [
+      {
+        label: 'New York',
+        value: 'new-york'
+      },
+      {
+        label: 'Los Angeles',
+        value: 'los-angeles'
+      }
+    ]
+  }
+} as FilterValueItemType;
+
+export const multiSelectData = {
+  label: 'Languages',
+  value: 'languages',
+  operators: [
+    { dataType: dataTypes.MULTI_SELECT, valuesKey: 'languages' }
+  ] as FilterValueOperatorType[],
+  values: {
+    languages: [
+      {
+        label: 'English',
+        value: 'english'
+      },
+      {
+        label: 'French',
+        value: 'french'
+      }
+    ]
+  }
+} as FilterValueItemType;
+
 // export const pillData = [
 //   {
 //     label: 'equals',

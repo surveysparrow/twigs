@@ -8,6 +8,10 @@ export type FilterValueDropdownContextType = {
   data: FilterValueItemType;
   selectedOperator: FilterValueOperatorType | null;
   setSelectedOperator: (operator: FilterValueOperatorType | null) => void;
+  onChange: (operator: FilterValueOperatorType, newValue: Record<string, any>) => void;
+  onCancel: () => void;
+  onApply: (value: any) => void;
+  hasOperator: boolean;
 };
 
 export const FilterValueDropdownContext = createContext<FilterValueDropdownContextType>({
@@ -18,7 +22,11 @@ export const FilterValueDropdownContext = createContext<FilterValueDropdownConte
     operators: []
   },
   selectedOperator: null,
-  setSelectedOperator: () => {}
+  setSelectedOperator: () => {},
+  onChange: () => {},
+  onCancel: () => {},
+  onApply: () => {},
+  hasOperator: false
 });
 
 export const useFilterValueDropdownContext = () => {

@@ -9,11 +9,12 @@ import { FilterValueOperatorType } from './helpers/filter-value-dropdown-constan
 
 export const FilterValueDropdownContent = ({ children }: { children: ReactNode }) => {
   const {
-    popoverOpen, setPopoverOpen, id, selectedOperator, data, setSelectedOperator
+    popoverOpen, setPopoverOpen, id, selectedOperator, data, setSelectedOperator, onChange
   } = useFilterValueDropdownContext();
 
   const handleOperatorClick = (operator: string, choice: { label: string; value: string }) => {
     setSelectedOperator(choice as FilterValueOperatorType);
+    onChange(choice as FilterValueOperatorType, {});
   };
 
   return (

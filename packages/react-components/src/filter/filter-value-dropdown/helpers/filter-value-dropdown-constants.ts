@@ -11,20 +11,6 @@ export const dataTypes = {
   DATE_TIME_TIMEZONE: 'DATE_TIME_TIMEZONE'
 };
 
-// export type FilterValueItemWithoutOperatorType = {
-//   type: 'ITEM_WITHOUT_OPERATOR';
-//   operator: {
-//     valuesKey?: string;
-//     dataType: keyof typeof dataTypes;
-//   };
-//   values: {
-//     [key: string]: {
-//       label: string;
-//       value: string;
-//     }[];
-//   };
-// };
-
 export type FilterValueOperatorType = {
   label: string;
   value: string;
@@ -43,5 +29,3 @@ export type FilterValueItemType = {
     }[];
   };
 };
-
-// export type FilterValueItemType = FilterValueItemWithoutOperatorType | FilterValueItemWithOperatorType;

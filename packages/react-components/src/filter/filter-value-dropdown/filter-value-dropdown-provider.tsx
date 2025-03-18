@@ -1,5 +1,5 @@
 import {
-  ReactNode, useId, useMemo, useState
+  ReactNode, useEffect, useId, useMemo, useState, useCallback
 } from 'react';
 import { FilterValueDropdownContext, FilterValueDropdownContextType } from './use-value';
 import { FilterValueItemType, FilterValueOperatorType } from './helpers/filter-value-dropdown-constants';
@@ -7,22 +7,44 @@ import { FilterValueItemType, FilterValueOperatorType } from './helpers/filter-v
 export type FilterValueDropdownProviderProps = {
   children: ReactNode;
   data: FilterValueItemType;
+  onChange: (operator: FilterValueOperatorType, newValue: Record<string, any>) => void;
+  hasOperator: boolean;
 };
 
 export const FilterValueDropdownProvider = ({
   children,
-  data
+  data,
+  onChange,
+  hasOperator
 }: FilterValueDropdownProviderProps) => {
   const id = useId();
 
   const [selectedOperator, setSelectedOperator] = useState<FilterValueOperatorType | null>(null);
 
-  // const inputRef = useRef<HTMLInputElement>(null);
   const [popoverOpen, setPopoverOpen] = useState(false);
 
-  // useEffect(() => {
-  //   if (inputRef.current && document.activeElement !== inputRef.current) inputRef.current.focus();
-  // });
+  useEffect(() => {
+    if (!hasOperator) {
+      setSelectedOperator(data.operators[0]);
+    }
+  }, [data, hasOperator]);
+
+  const onCancel = useCallback(() => {
+    if (!hasOperator) {
+      setPopoverOpen(false);
+    } else {
+      setSelectedOperator(null);
+    }
+  }, [hasOperator, setPopoverOpen, setSelectedOperator]);
+
+  const onApply = useCallback((value: any) => {
+    if (selectedOperator && value) {
+      onChange(selectedOperator, {
+        [selectedOperator.dataType]: value
+      });
+      setPopoverOpen(false);
+    }
+  }, [onChange, selectedOperator]);
 
   const providerValue = useMemo<FilterValueDropdownContextType>(() => ({
     id,
@@ -30,8 +52,12 @@ export const FilterValueDropdownProvider = ({
     setPopoverOpen,
     data,
     selectedOperator,
-    setSelectedOperator
-  }), [id, popoverOpen, setPopoverOpen, data, selectedOperator, setSelectedOperator]);
+    setSelectedOperator,
+    onChange,
+    onCancel,
+    onApply,
+    hasOperator
+  }), [id, popoverOpen, setPopoverOpen, data, selectedOperator, setSelectedOperator, onChange, onCancel, onApply, hasOperator]);
 
   return (
     <FilterValueDropdownContext.Provider value={providerValue}>
