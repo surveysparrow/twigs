@@ -6,7 +6,8 @@ import {
 } from '@lexical/react/LexicalTypeaheadMenuPlugin';
 import { Box } from '@src/box';
 import { Button } from '@src/button';
-import { Popover, PopoverContent, PopoverTrigger } from '@src/popover';
+import { config, styled } from '@src/stitches.config';
+import { CSS } from '@stitches/react';
 import { LexicalEditor, TextNode } from 'lexical';
 import React, {
   ReactNode,
@@ -17,8 +18,6 @@ import React, {
   useState
 } from 'react';
 import { createPortal } from 'react-dom';
-import { CSS } from '@stitches/react';
-import { config } from '@src/stitches.config';
 
 export type TypeaheadMenuData = {
   value: string;
@@ -87,6 +86,14 @@ const TypeaheadMenuItem = ({
   );
 };
 
+const StyledUl = styled('ul', {
+  width: '260px',
+  padding: '$4',
+  borderRadius: '$md',
+  backgroundColor: '$white900',
+  boxShadow: 'rgba(14, 18, 22, 0.35) 0px 10px 38px -10px, rgba(14, 18, 22, 0.2) 0px 10px 20px -15px'
+});
+
 export type EditorLookupDropdownBaseProps = {
   triggerFunction: (text: string) => MenuTextMatch | null;
   getResults: (
@@ -116,7 +123,6 @@ const defaultMenuRender = ({
   anchorElementRef,
   menuOptions,
   selectedIndex,
-  editor,
   css
 }: {
   anchorElementRef: React.MutableRefObject<HTMLElement | null>;
@@ -131,47 +137,24 @@ const defaultMenuRender = ({
   if (anchorElementRef.current && menuOptions.length) {
     return createPortal(
       <div className="typeahead-popover dropdown-menu">
-        <Popover open>
-          <PopoverTrigger asChild>
-            <Box
-              as="span"
-              css={{
-                visibility: 'hidden',
-                display: 'block',
-                height: '0px'
+        <StyledUl css={css}>
+          {menuOptions.map((option, i: number) => (
+            <TypeaheadMenuItem
+              index={i}
+              isSelected={selectedIndex === i}
+              onClick={() => {
+                setHighlightedIndex(i);
+                selectOptionAndCleanUp(option);
               }}
-            >
-              -
-            </Box>
-          </PopoverTrigger>
-          <PopoverContent
-            autoFocus={false}
-            sideOffset={10}
-            align="start"
-            onOpenAutoFocus={() => {
-              editor.focus();
-              return false;
-            }}
-            css={css}
-          >
-            {menuOptions.map((option, i: number) => (
-              <TypeaheadMenuItem
-                index={i}
-                isSelected={selectedIndex === i}
-                onClick={() => {
-                  setHighlightedIndex(i);
-                  selectOptionAndCleanUp(option);
-                }}
-                onMouseEnter={() => {
-                  setHighlightedIndex(i);
-                }}
-                key={option.key}
-                option={option}
-                renderMenuItemContent={renderMenuItemContent}
-              />
-            ))}
-          </PopoverContent>
-        </Popover>
+              onMouseEnter={() => {
+                setHighlightedIndex(i);
+              }}
+              key={option.key}
+              option={option}
+              renderMenuItemContent={renderMenuItemContent}
+            />
+          ))}
+        </StyledUl>
       </div>,
       anchorElementRef.current
     );
@@ -237,37 +220,42 @@ export const EditorLookupDropdownBase = ({
     [editor, $createNode]
   );
 
+  const menuRenderFn = useCallback(
+    (
+      anchorElementRef: React.MutableRefObject<HTMLElement | null>,
+      { selectedIndex, selectOptionAndCleanUp, setHighlightedIndex }
+    ) => {
+      if (renderMenu) {
+        return renderMenu({
+          menuOptions,
+          selectedIndex,
+          anchorElementRef,
+          setHighlightedIndex,
+          selectOptionAndCleanUp
+        });
+      }
+
+      return defaultMenuRender({
+        editor,
+        menuOptions,
+        selectedIndex,
+        anchorElementRef,
+        setHighlightedIndex,
+        renderMenuItemContent,
+        selectOptionAndCleanUp,
+        css
+      });
+    },
+    [menuOptions, renderMenu, renderMenuItemContent, css]
+  );
+
   return (
     <LexicalTypeaheadMenuPlugin<TypeaheadOption>
       onQueryChange={setQueryString}
       onSelectOption={onSelectOption}
       triggerFn={triggerFunction}
       options={menuOptions}
-      menuRenderFn={(
-        anchorElementRef,
-        { selectedIndex, selectOptionAndCleanUp, setHighlightedIndex }
-      ) => {
-        if (renderMenu) {
-          return renderMenu({
-            menuOptions,
-            selectedIndex,
-            anchorElementRef,
-            setHighlightedIndex,
-            selectOptionAndCleanUp
-          });
-        }
-
-        return defaultMenuRender({
-          editor,
-          menuOptions,
-          selectedIndex,
-          anchorElementRef,
-          setHighlightedIndex,
-          renderMenuItemContent,
-          selectOptionAndCleanUp,
-          css
-        });
-      }}
+      menuRenderFn={menuRenderFn}
     />
   );
 };
