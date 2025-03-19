@@ -91,6 +91,8 @@ const StyledUl = styled('ul', {
   padding: '$4',
   borderRadius: '$md',
   backgroundColor: '$white900',
+  position: 'relative',
+  zIndex: 1000,
   boxShadow: 'rgba(14, 18, 22, 0.35) 0px 10px 38px -10px, rgba(14, 18, 22, 0.2) 0px 10px 20px -15px'
 });
 
