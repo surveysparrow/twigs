@@ -1,8 +1,6 @@
 import { sleep } from '@src/utils/_sleep';
 import { userEvent } from '@vitest/browser/context';
-import {
-  describe, expect, it
-} from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { cleanup, render } from 'vitest-browser-react';
 import {
   DialogLinkEditor,
@@ -36,9 +34,7 @@ describe('Dialog Link Editor', async () => {
   });
 
   it('should add link', async () => {
-    const {
-      getByText, getByRole, getByLabelText
-    } = render(renderComponent);
+    const { getByText, getByRole, getByLabelText } = render(renderComponent);
     const placeholder = getByText('Start editing');
     expect(placeholder.element()).not.toBeNull();
     const linkButton = getByLabelText('Convert to link').element();
@@ -58,13 +54,14 @@ describe('Dialog Link Editor', async () => {
     await sleep(50);
     const link = getByText('Example');
     expect(link.element()).not.toBeNull();
-    expect(link.element().closest('a')).toHaveAttribute('href', 'https://www.example.com');
+    expect(link.element().closest('a')).toHaveAttribute(
+      'href',
+      'https://www.example.com'
+    );
   });
 
   it('should validate link', async () => {
-    const {
-      getByText, getByRole, getByLabelText
-    } = render(renderComponent);
+    const { getByText, getByRole, getByLabelText } = render(renderComponent);
     const placeholder = getByText('Start editing');
     expect(placeholder.element()).not.toBeNull();
     const linkButton = getByLabelText('Convert to link').element();
@@ -108,7 +105,10 @@ describe('Dialog Link Editor', async () => {
     await sleep(50);
     const link = getByText('Example');
     expect(link.element()).not.toBeNull();
-    expect(link.element().closest('a')).toHaveAttribute('href', 'https://www.example.com');
+    expect(link.element().closest('a')).toHaveAttribute(
+      'href',
+      'https://www.example.com'
+    );
 
     await userEvent.click(link);
 
@@ -119,7 +119,9 @@ describe('Dialog Link Editor', async () => {
     const linkUrlElement = tooltipContainer.querySelector('a');
     expect(linkUrlElement).not.toBeNull();
 
-    const editButton = body.querySelector('.twigs-link-tooltip__actions button');
+    const editButton = body.querySelector(
+      '.twigs-link-tooltip__actions button'
+    );
     expect(editButton).not.toBeNull();
 
     await userEvent.click(editButton!);
@@ -142,7 +144,10 @@ describe('Dialog Link Editor', async () => {
 
     const editedLink = getByText('Edited Example');
     expect(editedLink.element()).not.toBeNull();
-    expect(editedLink.element().closest('a')).toHaveAttribute('href', 'https://www.edited-example.com');
+    expect(editedLink.element().closest('a')).toHaveAttribute(
+      'href',
+      'https://www.edited-example.com'
+    );
   });
 
   it('should delete link', async () => {
@@ -168,7 +173,10 @@ describe('Dialog Link Editor', async () => {
     await sleep(50);
     const link = getByText('Example');
     expect(link.element()).not.toBeNull();
-    expect(link.element().closest('a')).toHaveAttribute('href', 'https://www.example.com');
+    expect(link.element().closest('a')).toHaveAttribute(
+      'href',
+      'https://www.example.com'
+    );
 
     await userEvent.click(link);
 
@@ -179,7 +187,9 @@ describe('Dialog Link Editor', async () => {
     const linkUrlElement = tooltipContainer.querySelector('a');
     expect(linkUrlElement).not.toBeNull();
 
-    const deleteButton = body.querySelector('.twigs-link-tooltip__actions button:nth-child(2)');
+    const deleteButton = body.querySelector(
+      '.twigs-link-tooltip__actions button:nth-child(2)'
+    );
     expect(deleteButton).not.toBeNull();
 
     await userEvent.click(deleteButton!);
