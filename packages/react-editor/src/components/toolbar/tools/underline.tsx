@@ -32,6 +32,7 @@ export const UnderlineTool = ({
       })}
       title={active ? 'Remove underline' : 'Add underline'}
       aria-label={active ? 'Remove underline' : 'Add underline'}
+      data-tool="underline"
       {...buttonProps}
     />
   );

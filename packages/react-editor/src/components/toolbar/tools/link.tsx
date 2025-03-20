@@ -64,6 +64,7 @@ export const LinkTool = ({ renderButton, buttonProps }: ToolbarButtonProps) => {
       onClick={handleClick}
       title={active ? 'Remove link' : 'Convert to link'}
       aria-label={active ? 'Remove link' : 'Convert to link'}
+      data-tool="link"
       {...buttonProps}
     />
   );

@@ -110,6 +110,7 @@ export const FormatTool = ({
             variant="ghost"
             color="default"
             className="twigs-editor-tool-button"
+            data-tool="format"
             {...dropdownMenuTriggerButtonProps}
           />
         )}

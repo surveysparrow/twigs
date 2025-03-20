@@ -55,6 +55,7 @@ export const CodeBlockTool = ({
       icon={<CodeBlockIcon />}
       variant={active ? 'solid' : 'ghost'}
       color="default"
+      data-tool="code-block"
       className={clsx('twigs-editor-tool-button', {
         'twigs-editor-tool-button--active': active
       })}

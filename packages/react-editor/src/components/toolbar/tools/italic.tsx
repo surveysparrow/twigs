@@ -31,6 +31,7 @@ export const ItalicTool = ({
       })}
       onClick={handleClick}
       title={active ? 'Clear italics formatting' : 'Format text to italics'}
+      data-tool="italic"
       aria-label={
         active ? 'Clear italics formatting' : 'Format text to italics'
       }

@@ -44,6 +44,7 @@ export const OrderedListTool = ({
           ? 'Change formatting from ordered list to paragraph'
           : 'Change formatting to ordered list'
       }
+      data-tool="ordered-list"
       {...buttonProps}
     />
   );

@@ -71,6 +71,7 @@ export const TextAlignTool = ({
       aria-label={`Change text alignment from ${alignment} to ${getNextAlignment(
         alignment
       )}`}
+      data-tool="text-align"
       {...buttonProps}
     />
   );

@@ -44,6 +44,7 @@ export const UnorderedListTool = ({
       className={clsx('twigs-editor-tool-button', {
         'twigs-editor-tool-button--active': active
       })}
+      data-tool="unordered-list"
       {...buttonProps}
     />
   );

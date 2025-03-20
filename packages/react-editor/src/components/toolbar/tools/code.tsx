@@ -24,6 +24,7 @@ export const CodeTool = ({ renderButton, buttonProps }: ToolbarButtonProps) => {
       variant={active ? 'solid' : 'ghost'}
       color="default"
       onClick={handleClick}
+      data-tool="code"
       className={clsx('twigs-editor-tool-button', {
         'twigs-editor-tool-button--active': active
       })}

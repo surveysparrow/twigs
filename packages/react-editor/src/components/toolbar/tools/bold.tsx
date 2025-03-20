@@ -26,6 +26,7 @@ export const BoldTool = ({ renderButton, buttonProps }: ToolbarButtonProps) => {
       color="default"
       onClick={handleClick}
       title={active ? 'Clear bold formatting' : 'Format text to bold'}
+      data-tool="bold"
       aria-label={active ? 'Clear bold formatting' : 'Format text to bold'}
       {...buttonProps}
     />
