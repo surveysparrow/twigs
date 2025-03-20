@@ -7,8 +7,10 @@ import {
 import { Editor } from '@src/editor';
 import { sleep } from '@src/utils/_sleep';
 import { userEvent } from '@vitest/browser/context';
-import { describe, expect, it } from 'vitest';
-import { render } from 'vitest-browser-react';
+import {
+  describe, expect, it, afterEach
+} from 'vitest';
+import { render, cleanup } from 'vitest-browser-react';
 import { HeadingTool } from './heading-tool';
 
 const renderComponent = (
@@ -40,6 +42,9 @@ const withCustomTools = (
 );
 
 describe('Floating Toolbar', async () => {
+  afterEach(() => {
+    cleanup();
+  });
   it('should show floating toolbar', async () => {
     const { container, getByText } = render(renderComponent);
     const editor = container.querySelector('[contenteditable]')!;

@@ -1,6 +1,8 @@
 import { sleep } from '@src/utils/_sleep';
 import { userEvent } from '@vitest/browser/context';
-import { describe, expect, it } from 'vitest';
+import {
+  describe, expect, it, afterEach
+} from 'vitest';
 import { cleanup, render } from 'vitest-browser-react';
 import {
   DialogLinkEditor,
@@ -20,6 +22,10 @@ const renderComponent = (
 );
 
 describe('Dialog Link Editor', async () => {
+  afterEach(() => {
+    cleanup();
+  });
+
   it('should show dialog box', async () => {
     const { getByText, getByLabelText } = render(renderComponent);
     const placeholder = getByText('Start editing');

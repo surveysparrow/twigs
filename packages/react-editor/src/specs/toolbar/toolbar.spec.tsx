@@ -3,8 +3,10 @@ import { DialogLinkEditor, EditorToolbar, RichEditor } from '@src/components';
 import { Editor } from '@src/editor';
 import { sleep } from '@src/utils/_sleep';
 import { userEvent } from '@vitest/browser/context';
-import { describe, expect, it } from 'vitest';
-import { render } from 'vitest-browser-react';
+import {
+  describe, expect, it, afterEach
+} from 'vitest';
+import { render, cleanup } from 'vitest-browser-react';
 import {
   CustomAlignTool,
   CustomBoldTool,
@@ -46,6 +48,9 @@ const renderComponentWithCustomTool = (
 );
 
 describe('Toolbar', async () => {
+  afterEach(() => {
+    cleanup();
+  });
   it('should show toolbar', async () => {
     const { container } = render(renderComponent);
     const toolbar = container.querySelector('.twigs-editor-toolbar')!;

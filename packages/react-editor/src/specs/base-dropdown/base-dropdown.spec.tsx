@@ -11,7 +11,7 @@ import { Editor } from '../../editor';
 import { SlashesPlugin } from './Plugin';
 
 describe('Editor Dropdown Base', async () => {
-  it.concurrent('should show options on slash command', async () => {
+  it('should show options on slash command', async () => {
     const { getByText, container } = render(
       <Editor>
         <EditorToolbar />

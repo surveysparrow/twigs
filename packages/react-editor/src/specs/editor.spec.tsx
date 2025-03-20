@@ -1,5 +1,7 @@
-import { describe, expect, it } from 'vitest';
-import { render } from 'vitest-browser-react';
+import {
+  describe, expect, it, afterEach
+} from 'vitest';
+import { render, cleanup } from 'vitest-browser-react';
 import {
   DialogLinkEditor,
   EditorFloatingToolbar,
@@ -9,7 +11,10 @@ import {
 import { Editor } from '../editor';
 
 describe('Editor', async () => {
-  it.concurrent('should render', async () => {
+  afterEach(() => {
+    cleanup();
+  });
+  it('should render', async () => {
     const { getByText } = render(
       <Editor>
         <EditorToolbar />

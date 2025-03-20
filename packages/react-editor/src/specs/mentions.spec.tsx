@@ -1,7 +1,9 @@
 import { sleep } from '@src/utils/_sleep';
 import { userEvent } from '@vitest/browser/context';
-import { describe, expect, it } from 'vitest';
-import { render } from 'vitest-browser-react';
+import {
+  describe, expect, it, afterEach
+} from 'vitest';
+import { render, cleanup } from 'vitest-browser-react';
 import { MentionNode, MentionsPlugin } from '..';
 import {
   DialogLinkEditor,
@@ -35,7 +37,10 @@ const users = [
 ];
 
 describe('Mentions', async () => {
-  it.concurrent('should render', async () => {
+  afterEach(() => {
+    cleanup();
+  });
+  it('should render', async () => {
     const { getByText, getByRole, container } = render(
       <Editor nodes={[MentionNode]}>
         <EditorToolbar />
