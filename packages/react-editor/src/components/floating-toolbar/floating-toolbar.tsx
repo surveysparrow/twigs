@@ -22,6 +22,7 @@ import { createPortal } from 'react-dom';
 import { getDOMRangeRect } from '@src/utils/get-dom-range-rect';
 import { getSelectedNode } from '@src/utils/get-selected-node';
 import { setFloatingElemPosition } from '@src/utils/set-floating-elem-position';
+import { prefixClassName } from '@src/utils/prefix-class-name';
 import { DefaultToolbarTools } from '../toolbar/toolbar';
 import {
   BoldTool,
@@ -197,6 +198,7 @@ const FloatingToolbarContainer = ({
   return (
     <Box
       ref={popupCharStylesEditorRef}
+      className={prefixClassName('floating-toolbar')}
       {...containerProps}
       css={{
         position: 'absolute',
@@ -374,7 +376,7 @@ export const EditorFloatingToolbar = ({
   containerProps
 }: {
   anchorElem?: HTMLElement;
-  tools?: DefaultFloatingToolbarTools[] | CustomTool[];
+  tools?: (DefaultFloatingToolbarTools | CustomTool)[];
   children?: ReactNode;
   containerProps?: BoxProps;
 }) => {
