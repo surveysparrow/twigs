@@ -1,6 +1,7 @@
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { LexicalEditor } from 'lexical';
 import { Flex } from '@sparrowengg/twigs-react';
+import { prefixClassName } from '@src/utils/prefix-class-name';
+import { LexicalEditor } from 'lexical';
 import { Fragment, ReactNode } from 'react';
 import {
   BoldTool,
@@ -77,6 +78,7 @@ export const EditorToolbar = ({
           css={{
             gap: '$1'
           }}
+          className={prefixClassName('editor-toolbar')}
         >
           {tools.map((_item, i) => {
             if ((_item as CustomTool)?.renderComponent) {
