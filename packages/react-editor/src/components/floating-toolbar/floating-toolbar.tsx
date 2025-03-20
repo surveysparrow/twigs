@@ -19,9 +19,9 @@ import React, {
   useState
 } from 'react';
 import { createPortal } from 'react-dom';
-import { getDOMRangeRect } from '../../utils/get-dom-range-rect';
-import { getSelectedNode } from '../../utils/get-selected-node';
-import { setFloatingElemPosition } from '../../utils/set-floating-elem-position';
+import { getDOMRangeRect } from '@src/utils/get-dom-range-rect';
+import { getSelectedNode } from '@src/utils/get-selected-node';
+import { setFloatingElemPosition } from '@src/utils/set-floating-elem-position';
 import { DefaultToolbarTools } from '../toolbar/toolbar';
 import {
   BoldTool,
