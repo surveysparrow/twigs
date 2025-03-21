@@ -49,6 +49,7 @@ export class EmojiNode extends TextNode {
     if (inner === null) {
       return true;
     }
+    // @ts-expect-error
     super.updateDOM(prevNode, inner as HTMLElement, config);
     return false;
   }

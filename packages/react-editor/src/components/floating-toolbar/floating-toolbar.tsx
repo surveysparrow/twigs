@@ -288,7 +288,7 @@ function useFloatingTextFormatToolbar({
 }: {
   editor: LexicalEditor;
   anchorElem: HTMLElement;
-  tools?: DefaultFloatingToolbarTools[] | CustomTool[];
+  tools?: (DefaultFloatingToolbarTools | CustomTool)[];
   children?: ReactNode;
   containerProps?: BoxProps;
 }) {
