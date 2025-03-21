@@ -30,9 +30,7 @@ jobs:
           cache: "npm"
       - name: Yarn install
         run: yarn
-      - name: Change directory
-        run: cd packages/react-editor
       - name: Playwright install
         run: npx playwright install --with-deps chromium
       - name: Test
-        run: yarn test
+        run: cd packages/react-editor && yarn test
