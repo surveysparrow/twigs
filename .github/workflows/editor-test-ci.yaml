@@ -32,5 +32,7 @@ jobs:
         run: yarn
       - name: Playwright install
         run: npx playwright install --with-deps chromium
+      - name: Build modules
+        run: yarn build:modules
       - name: Test
         run: cd packages/react-editor && yarn test
