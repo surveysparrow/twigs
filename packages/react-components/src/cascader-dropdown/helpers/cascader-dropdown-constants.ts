@@ -1,8 +1,4 @@
 export const optionTypes = {
-  FOLDER: 'FOLDER',
-  ITEM_WITHOUT_OPERATOR: 'ITEM_WITHOUT_OPERATOR',
-  ITEM_WITH_OPTIONS: 'ITEM_WITH_OPTIONS',
-  ITEM: 'ITEM',
   VALUE_SELECTOR: 'VALUE_SELECTOR'
 };
 
@@ -19,54 +15,52 @@ export const dataTypes = {
   DATE_TIME_TIMEZONE: 'DATE_TIME_TIMEZONE'
 };
 
-export type CascaderDropdownValueType = {
-  label: string | number;
-  value: string | number;
-}
+// type CascaderDropdownValueType = {
+//   label: string | number;
+//   value: string | number;
+// }
 
-export type CascaderDropdownFolderType = {
-  label: string | number;
-  value: string | number;
-  type: 'FOLDER';
-  subLabel?: string;
-  options: CascaderDropdownPropertyType[];
-  disabled?: boolean;
-  shouldFetchOptions?: boolean;
-};
+// type CascaderDropdownFolderType = {
+//   label: string | number;
+//   value: string | number;
+//   type: 'FOLDER';
+//   subLabel?: string;
+//   options: CascaderDropdownPropertyType[];
+//   disabled?: boolean;
+//   shouldFetchOptions?: boolean;
+// };
 
-export type CascaderDropdownItemWithoutOperatorType = {
-  label: string | number;
-  value: string | number;
-  type: 'ITEM_WITHOUT_OPERATOR';
-  subLabel?: string;
-  operator: {
-    dataType: keyof typeof dataTypes;
-    regex?: string;
-    valuesKey?: string;
-  };
-  values?: Record<string, CascaderDropdownDataValueType[]>;
-  disabled?: boolean;
-  shouldFetchOptions?: boolean;
-};
+// type CascaderDropdownItemWithoutOperatorType = {
+//   label: string | number;
+//   value: string | number;
+//   type: 'ITEM_WITHOUT_OPERATOR';
+//   subLabel?: string;
+//   operator: {
+//     dataType: keyof typeof dataTypes;
+//     regex?: string;
+//     // valuesKey?: string;
+//   };
+//   // values?: Record<string, CascaderDropdownDataValueType[]>;
+//   disabled?: boolean;
+//   shouldFetchOptions?: boolean;
+// };
 
-export type CascaderDropdownItemWithOptionsType = {
-  label: string | number;
-  value: string | number;
-  type: 'ITEM_WITH_OPTIONS';
-  subLabel?: string;
-  options: CascaderDropdownPropertyType[];
-  disabled?: boolean;
-  shouldFetchOptions?: boolean;
-};
+// type CascaderDropdownItemWithOptionsType = {
+//   label: string | number;
+//   value: string | number;
+//   type: 'ITEM_WITH_OPTIONS';
+//   subLabel?: string;
+//   options: CascaderDropdownPropertyType[];
+//   disabled?: boolean;
+//   shouldFetchOptions?: boolean;
+// };
 
 export type CascaderDropdownItemType = {
   label: string | number;
   value: string | number;
-  type: 'ITEM';
   subLabel?: string;
   operators?: CascaderDropdownOperatorType[];
   options?: CascaderDropdownItemType[];
-  values?: Record<string, CascaderDropdownDataValueType[]>;
   disabled?: boolean;
   shouldFetchOptions?: boolean;
 };
@@ -76,7 +70,6 @@ export type CascaderDropdownOperatorType = {
   value: string | number;
   dataType: keyof typeof dataTypes;
   regex?: string;
-  valuesKey?: string;
   disabled?: boolean;
   shouldFetchOptions?: boolean;
   type: 'VALUE_SELECTOR';
@@ -89,9 +82,14 @@ export type CascaderDropdownDataValueType = {
   value: string | number;
 };
 
-export type CascaderDropdownPropertyType =
-  CascaderDropdownFolderType
-  | CascaderDropdownItemType
-  | CascaderDropdownItemWithoutOperatorType
-  | CascaderDropdownItemWithOptionsType
-  | CascaderDropdownOperatorType;
+// export type CascaderDropdownPropertyType =
+//   CascaderDropdownFolderType
+//   | CascaderDropdownItemType
+//   | CascaderDropdownItemWithoutOperatorType
+//   | CascaderDropdownItemWithOptionsType
+//   | CascaderDropdownOperatorType;
+// export type CascaderDropdownPropertyType =
+//   | CascaderDropdownItemType
+//   | CascaderDropdownItemWithoutOperatorType
+//   | CascaderDropdownItemWithOptionsType
+//   | CascaderDropdownOperatorType;

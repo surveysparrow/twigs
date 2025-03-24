@@ -1,7 +1,10 @@
+import { CascaderDropdownDataValueType } from './helpers/cascader-dropdown-constants';
+
 export interface CascaderDropdownNodeOptions {
   disabled?: boolean;
   shouldFetchOptions?: boolean;
   dataType?: string;
+  choices?: CascaderDropdownDataValueType[];
 }
 
 export class CascaderDropdownNode {

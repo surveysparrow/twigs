@@ -3,6 +3,7 @@ import { useCascaderDropdownContext } from './use-value';
 import { Input } from '../input';
 import { CascaderDropdownNode } from './cascader-dropdown-node';
 import { findNextFocusableRowNode, findPrevFocusableRowNode } from './helpers/cascader-dropdown-utils';
+import { optionTypes } from './helpers/cascader-dropdown-constants';
 
 export const CascaderDropdownSearchInput = ({
   searchQuery,
@@ -68,7 +69,7 @@ export const CascaderDropdownSearchInput = ({
     if (e.key === 'Enter') {
       e.preventDefault();
       if (searchFocusedNode) {
-        if (searchFocusedNode.children.length === 0) {
+        if (searchFocusedNode.children.length === 0 && searchFocusedNode.getType() !== optionTypes.VALUE_SELECTOR) {
           handleChange(searchFocusedNode);
         } else {
           setSelectedNode(searchFocusedNode);

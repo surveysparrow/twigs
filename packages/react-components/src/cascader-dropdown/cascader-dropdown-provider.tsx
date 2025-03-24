@@ -2,7 +2,7 @@ import {
   ReactNode, useId, useMemo, useState, useRef,
   useEffect
 } from 'react';
-import { CascaderDropdownPropertyType, CascaderDropdownValueType } from './helpers/cascader-dropdown-constants';
+import { CascaderDropdownPropertyType, CascaderDropdownValueType, optionTypes } from './helpers/cascader-dropdown-constants';
 import { CascaderDropdownContext, CascaderDropdownContextType } from './use-value';
 import {
   buildSelectionPath, buildTree, findNextFocusableRowNode, findPrevFocusableRowNode
@@ -91,7 +91,7 @@ export const CascaderDropdownProvider = ({
   };
 
   const focusNextColumn = () => {
-    if (focusedNode && focusedNode.children.length > 0) {
+    if (focusedNode && (focusedNode.children.length > 0 || focusedNode.getType() === optionTypes.VALUE_SELECTOR)) {
       setFocusedNode(focusedNode.children.at(0) ?? null);
       setSelectedNode(focusedNode);
     }
@@ -106,7 +106,7 @@ export const CascaderDropdownProvider = ({
 
   const selectFocusedNode = () => {
     if (focusedNode) {
-      if (focusedNode.children.length > 0) {
+      if (focusedNode.children.length > 0 || focusedNode.getType() === optionTypes.VALUE_SELECTOR) {
         setFocusedNode(focusedNode.children.at(0) ?? null);
         setSelectedNode(focusedNode);
       } else {

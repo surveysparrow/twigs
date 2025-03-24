@@ -119,7 +119,6 @@ export const CalendarRange = ({
           borderRadius: '$2xl',
           border: '1px solid',
           borderColor: '$neutral300',
-          paddingTop: '$6',
           maxWidth: 'max-content',
           ...containerCSS
         }}
@@ -247,7 +246,10 @@ const CalendarSingleSection = ({
             alignItems="center"
             justifyContent="space-between"
             css={{
-              marginBottom: '$12',
+              margin: '$12 0',
+              ...(calendarContext.size === 'sm' && {
+                margin: '$6 0'
+              }),
               padding: '0 $8',
               width: '100%'
             }}

@@ -1,16 +1,18 @@
 import { Flex } from '@src/flex';
 import { useState } from 'react';
-import { FilterPill, FilterPillValueType } from '../index';
+import { FilterPill, FilterPillValueType, FilterPillWithoutOperator } from '../index';
 import {
-  pillData,
-  singleLineTextInputData,
-  multiLineTextInputData,
-  dateRangeData,
-  dateData,
-  dateTimeTimezoneData,
-  numberData,
-  singleSelectData,
-  multiSelectData
+  // pillData,
+  // singleLineTextInputData,
+  // multiLineTextInputData,
+  // dateRangeData,
+  // dateData,
+  // dateTimeTimezoneData,
+  // numberData,
+  // singleSelectData,
+  // multiSelectData,
+  itemWithOptionsAndOperators,
+  itemWithoutOperators
 } from '../tests/data';
 
 export default {
@@ -38,30 +40,34 @@ const initialValue = {
   value: null
 };
 
-const Template = (args) => {
+const Template = () => {
   const [value, setValue] = useState<FilterPillValueType>(initialValue);
 
-  const [singleLineTextInputValue, setSingleLineTextInputValue] = useState<FilterPillValueType>(initialValue);
-  const [multiLineTextInputValue, setMultiLineTextInputValue] = useState<FilterPillValueType>(initialValue);
-  const [dateRangeValue, setDateRangeValue] = useState<FilterPillValueType>(initialValue);
-  const [dateValue, setDateValue] = useState<FilterPillValueType>(initialValue);
-  const [dateTimeTimezoneValue, setDateTimeTimezoneValue] = useState<FilterPillValueType>(initialValue);
-  const [numberValue, setNumberValue] = useState<FilterPillValueType>(initialValue);
-  const [singleSelectValue, setSingleSelectValue] = useState<FilterPillValueType>(initialValue);
-  const [multiSelectValue, setMultiSelectValue] = useState<FilterPillValueType>(initialValue);
+  // const [singleLineTextInputValue, setSingleLineTextInputValue] = useState<FilterPillValueType>(initialValue);
+  // const [multiLineTextInputValue, setMultiLineTextInputValue] = useState<FilterPillValueType>(initialValue);
+  // const [dateRangeValue, setDateRangeValue] = useState<FilterPillValueType>(initialValue);
+  // const [dateValue, setDateValue] = useState<FilterPillValueType>(initialValue);
+  // const [dateTimeTimezoneValue, setDateTimeTimezoneValue] = useState<FilterPillValueType>(initialValue);
+  // const [numberValue, setNumberValue] = useState<FilterPillValueType>(initialValue);
+  // const [singleSelectValue, setSingleSelectValue] = useState<FilterPillValueType>(initialValue);
+  // const [multiSelectValue, setMultiSelectValue] = useState<FilterPillValueType>(initialValue);
 
   return (
     <Flex css={{ flexWrap: 'wrap' }} gap="$2">
       <FilterPill
-        {...args}
-        operator="is"
+        cascaderDropdownData={itemWithOptionsAndOperators}
         value={value}
         icon={<SurveyIcon />}
-        conditionData={pillData}
         setValue={setValue}
       />
-      <FilterPill
-        {...args}
+      <FilterPillWithoutOperator
+        data={itemWithoutOperators}
+        value={value}
+        icon={<SurveyIcon />}
+        setValue={setValue}
+      />
+      {/* <FilterPill
+
         operator="is"
         hasOperator={false}
         value={singleLineTextInputValue}
@@ -70,7 +76,7 @@ const Template = (args) => {
         setValue={setSingleLineTextInputValue}
       />
       <FilterPill
-        {...args}
+
         operator="is"
         hasOperator={false}
         value={multiLineTextInputValue}
@@ -79,7 +85,7 @@ const Template = (args) => {
         setValue={setMultiLineTextInputValue}
       />
       <FilterPill
-        {...args}
+
         operator="is"
         hasOperator={false}
         value={dateRangeValue}
@@ -88,7 +94,7 @@ const Template = (args) => {
         setValue={setDateRangeValue}
       />
       <FilterPill
-        {...args}
+
         operator="is"
         hasOperator={false}
         value={dateValue}
@@ -97,7 +103,7 @@ const Template = (args) => {
         setValue={setDateValue}
       />
       <FilterPill
-        {...args}
+
         operator="is"
         hasOperator={false}
         value={dateTimeTimezoneValue}
@@ -106,7 +112,7 @@ const Template = (args) => {
         setValue={setDateTimeTimezoneValue}
       />
       <FilterPill
-        {...args}
+
         operator="is"
         hasOperator={false}
         value={numberValue}
@@ -115,7 +121,7 @@ const Template = (args) => {
         setValue={setNumberValue}
       />
       <FilterPill
-        {...args}
+
         operator="is"
         hasOperator={false}
         value={singleSelectValue}
@@ -124,18 +130,18 @@ const Template = (args) => {
         setValue={setSingleSelectValue}
       />
       <FilterPill
-        {...args}
+
         operator="is"
         hasOperator={false}
         value={multiSelectValue}
         icon={<SurveyIcon />}
         conditionData={multiSelectData}
         setValue={setMultiSelectValue}
-      />
-      {/* <FilterPill {...args} conditionData={pillData} value={value} setValue={setValue} hasOperator propertyName="Property Namesdfasdfasdfasdfasdfasdfasdf" icon={<SurveyIcon />} /> */}
-      {/* <FilterPill {...args} conditionData={pillDataWithoutOperator} operator="is" value="value" propertyName="Property Name" icon={<SurveyIcon />} />
-      <FilterPill {...args} conditionData={pillDataWithoutOperator} operator="is" value="value" propertyName="Property Name" icon={<SurveyIcon />} variant="filled" />
-      <FilterPill {...args} conditionData={pillDataWithoutOperator} operator="is" value="value" propertyName="Property Name" variant="filled" /> */}
+      /> */}
+      {/* <FilterPill  conditionData={pillData} value={value} setValue={setValue} hasOperator propertyName="Property Namesdfasdfasdfasdfasdfasdfasdf" icon={<SurveyIcon />} /> */}
+      {/* <FilterPill  conditionData={pillDataWithoutOperator} operator="is" value="value" propertyName="Property Name" icon={<SurveyIcon />} />
+      <FilterPill  conditionData={pillDataWithoutOperator} operator="is" value="value" propertyName="Property Name" icon={<SurveyIcon />} variant="filled" />
+      <FilterPill  conditionData={pillDataWithoutOperator} operator="is" value="value" propertyName="Property Name" variant="filled" /> */}
     </Flex>
   );
 };

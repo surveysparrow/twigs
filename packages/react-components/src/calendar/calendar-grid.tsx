@@ -72,6 +72,9 @@ export const CalendarGrid = ({
           padding: '$8 0',
           ...(calendarContext.size === 'lg' && {
             paddingBottom: '$4'
+          }),
+          ...(calendarContext.size === 'sm' && {
+            padding: '$4 0'
           })
         }}
         className={prefixClassName('calendar__days-container')}

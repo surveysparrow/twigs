@@ -6,16 +6,17 @@ import { styled } from '@src/stitches.config';
 import { Text } from '@src/text';
 import { prefixClassName } from '@src/utils';
 import React from 'react';
-import { dataTypes, FilterValueItemType, FilterValueOperatorType } from './filter-value-dropdown/helpers/filter-value-dropdown-constants';
-import { FilterValueDropdown } from './filter-value-dropdown/filter-value-dropdown';
+import { CascaderDropdown } from '@src/cascader-dropdown';
+import { CascaderDropdownItemType, CascaderDropdownOperatorType } from '@src/cascader-dropdown/helpers/cascader-dropdown-constants';
+import { dataTypes, FilterValueOperatorType } from './filter-value-dropdown/helpers/filter-value-dropdown-constants';
+import FilterPillValueSelector from './filter-pill-value-selector';
 
 export type FilterPillProps = {
   icon?: React.ReactNode;
   value: FilterPillValueType;
   setValue: (value: FilterPillValueType) => void;
-  hasOperator?: boolean;
   variant?: 'filled' | 'outline';
-  conditionData: FilterValueItemType;
+  cascaderDropdownData: CascaderDropdownItemType[];
 };
 
 export type FilterPillValueType = {
@@ -39,9 +40,8 @@ export const FilterPill = ({
   icon,
   value,
   setValue,
-  hasOperator = true,
   variant = 'outline',
-  conditionData
+  cascaderDropdownData
 }: FilterPillProps) => {
   const onChange = (operator: FilterValueOperatorType, newValue: Record<string, any>) => {
     setValue({ ...value, operator, value: newValue });
@@ -67,12 +67,30 @@ export const FilterPill = ({
             {icon}
           </Box>
         )}
-        <Text weight="medium" css={{ color: hasOperator ? '$neutral900' : '$neutral700', maxWidth: '$25' }} truncate>{value.label}</Text>
+        <Text weight="medium" css={{ color: '$neutral900', maxWidth: '$25' }} truncate>{value.label}</Text>
       </Flex>
-
-      <FilterValueDropdown data={conditionData} onChange={onChange} hasOperator={hasOperator}>
+      {/* {!isFilterValueDropdownEnabled && ( */}
+      <CascaderDropdown
+        data={cascaderDropdownData}
+        onChange={console.log}
+      >
         <Flex>
-          {hasOperator && !value.operator?.value && (
+          {!value.operator?.value && (
+            <StyledValueButton>
+              <Text css={{ color: '$neutral700', padding: '3px $4 3px $1' }}>Choose Condition</Text>
+            </StyledValueButton>
+          )}
+          {value.operator?.value && (
+            <StyledValueButton>
+              <Text css={{ color: '$neutral700', padding: '3px $1 3px $1' }}>{value.operator?.label}</Text>
+            </StyledValueButton>
+          )}
+          {value.operator?.value && (
+            <StyledValueButton css={{ borderTopRightRadius: '$lg', borderBottomRightRadius: '$lg' }}>
+              <Text css={{ color: '$neutral900', padding: '3px $4 3px $2' }} weight="medium">{getDisplayValue(value) ?? 'Choose Value'}</Text>
+            </StyledValueButton>
+          )}
+          {/* {hasOperator && !value.operator?.value && (
             <StyledValueButton>
               <Text css={{ color: '$neutral700', padding: '3px $4 3px $1' }}>Choose Condition</Text>
             </StyledValueButton>
@@ -86,9 +104,88 @@ export const FilterPill = ({
             <StyledValueButton css={{ borderTopRightRadius: '$lg', borderBottomRightRadius: '$lg' }}>
               <Text css={{ color: '$neutral900', padding: '3px $4 3px $2' }} weight="medium">{getDisplayValue(value) ?? 'Choose Value'}</Text>
             </StyledValueButton>
-          )}
+          )} */}
         </Flex>
-      </FilterValueDropdown>
+      </CascaderDropdown>
+      {/* {isFilterValueDropdownEnabled && (
+        <FilterPillValueSelector dataType={value.operator?.dataType} choices={value.operator?.choices}>
+          <Flex>
+            {hasOperator && !value.operator?.value && (
+              <StyledValueButton>
+                <Text css={{ color: '$neutral700', padding: '3px $4 3px $1' }}>Choose Condition</Text>
+              </StyledValueButton>
+            )}
+            {hasOperator && value.operator?.value && (
+              <StyledValueButton>
+                <Text css={{ color: '$neutral700', padding: '3px $1 3px $1' }}>{value.operator?.label}</Text>
+              </StyledValueButton>
+            )}
+            {(!hasOperator || (hasOperator && value.operator?.value)) && (
+              <StyledValueButton css={{ borderTopRightRadius: '$lg', borderBottomRightRadius: '$lg' }}>
+                <Text css={{ color: '$neutral900', padding: '3px $4 3px $2' }} weight="medium">{getDisplayValue(value) ?? 'Choose Value'}</Text>
+              </StyledValueButton>
+            )}
+          </Flex>
+        </FilterPillValueSelector>
+      )} */}
+      <TooltipProvider>
+        <Tooltip content="Remove">
+          <StyledCloseButton className={prefixClassName('filter-pill__close-button')}>
+            <CloseCircleFillIcon size={16} />
+          </StyledCloseButton>
+        </Tooltip>
+      </TooltipProvider>
+    </StyledFilterPill>
+  );
+};
+
+type FilterPillWithoutOperatorProps = {
+  icon?: React.ReactNode;
+  value: FilterPillValueType;
+  setValue: (value: FilterPillValueType) => void;
+  variant?: 'filled' | 'outline';
+  data: CascaderDropdownOperatorType;
+};
+export const FilterPillWithoutOperator = ({
+  icon,
+  value,
+  setValue,
+  variant = 'outline',
+  data
+}: FilterPillWithoutOperatorProps) => {
+  const onChange = (operator: FilterValueOperatorType, newValue: Record<string, any>) => {
+    setValue({ ...value, operator, value: newValue });
+  };
+
+  return (
+    <StyledFilterPill variant={variant}>
+      <Flex alignItems="center" gap="$2" css={{ padding: '3px $2 3px $4' }}>
+        {icon && (
+          <Box
+            css={{
+              lineHeight: 0,
+              flexShrink: 0,
+              color: '$neutral800',
+              '&, & svg': {
+                minWidth: '$4',
+                minHeight: '$4',
+                height: '$4',
+                width: '$4'
+              }
+            }}
+          >
+            {icon}
+          </Box>
+        )}
+        <Text weight="medium" css={{ color: '$neutral700', maxWidth: '$25' }} truncate>{value.label}</Text>
+      </Flex>
+      <FilterPillValueSelector dataType={data.dataType} choices={data.choices}>
+        <Flex>
+          <StyledValueButton css={{ borderTopRightRadius: '$lg', borderBottomRightRadius: '$lg' }}>
+            <Text css={{ color: '$neutral900', padding: '3px $4 3px $2' }} weight="medium">{getDisplayValue(value) ?? 'Choose Value'}</Text>
+          </StyledValueButton>
+        </Flex>
+      </FilterPillValueSelector>
       <TooltipProvider>
         <Tooltip content="Remove">
           <StyledCloseButton className={prefixClassName('filter-pill__close-button')}>
@@ -189,3 +286,23 @@ const StyledCloseButton = styled('button', {
     outlineColor: '#F2F5F8'
   }
 });
+
+// <FilterValueDropdown data={conditionData} onChange={onChange} hasOperator={hasOperator}>
+//   <Flex>
+//     {hasOperator && !value.operator?.value && (
+//       <StyledValueButton>
+//         <Text css={{ color: '$neutral700', padding: '3px $4 3px $1' }}>Choose Condition</Text>
+//       </StyledValueButton>
+//     )}
+//     {hasOperator && value.operator?.value && (
+//       <StyledValueButton>
+//         <Text css={{ color: '$neutral700', padding: '3px $1 3px $1' }}>{value.operator?.label}</Text>
+//       </StyledValueButton>
+//     )}
+//     {(!hasOperator || (hasOperator && value.operator?.value)) && (
+//       <StyledValueButton css={{ borderTopRightRadius: '$lg', borderBottomRightRadius: '$lg' }}>
+//         <Text css={{ color: '$neutral900', padding: '3px $4 3px $2' }} weight="medium">{getDisplayValue(value) ?? 'Choose Value'}</Text>
+//       </StyledValueButton>
+//     )}
+//   </Flex>
+// </FilterValueDropdown>

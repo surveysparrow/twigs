@@ -1,11 +1,11 @@
 import {
   dataTypes,
-  optionTypes,
+  // optionTypes,
   CascaderDropdownItemType,
-  CascaderDropdownFolderType,
-  CascaderDropdownPropertyType,
-  CascaderDropdownOperatorType,
-  CascaderDropdownItemWithoutOperatorType
+  // CascaderDropdownItemType,
+  // CascaderDropdownPropertyType,
+  CascaderDropdownOperatorType
+  // CascaderDropdownItemWithoutOperatorType
 } from '../helpers/cascader-dropdown-constants';
 
 export const selectedFilters = [];
@@ -14,12 +14,10 @@ export const properties = [
   {
     label: 'Contact Properties',
     value: 'contactProperties',
-    type: optionTypes.FOLDER,
     options: [
       {
         label: 'Full Name',
         value: 'fullName',
-        type: optionTypes.ITEM,
         subLabel: '5',
         operators: [
           {
@@ -62,7 +60,6 @@ export const properties = [
       {
         label: 'First Name',
         value: 'firstName',
-        type: optionTypes.ITEM,
         operators: [
           {
             label: 'equals',
@@ -104,7 +101,6 @@ export const properties = [
       {
         label: 'Last Name',
         value: 'lastName',
-        type: optionTypes.ITEM,
         operators: [
           {
             label: 'equals',
@@ -146,7 +142,6 @@ export const properties = [
       {
         label: 'Email',
         value: 'email',
-        type: optionTypes.ITEM,
         operators: [
           {
             label: 'equals',
@@ -190,7 +185,6 @@ export const properties = [
       {
         label: 'Phone',
         value: 'phone',
-        type: optionTypes.ITEM,
         subLabel: '7',
         operators: [
           {
@@ -235,7 +229,6 @@ export const properties = [
       {
         label: 'Mobile',
         value: 'mobile',
-        type: optionTypes.ITEM,
         operators: [
           {
             label: 'equals',
@@ -279,7 +272,6 @@ export const properties = [
       {
         label: 'Language',
         value: 'language',
-        type: optionTypes.ITEM,
         operators: [
           {
             label: 'includes',
@@ -317,7 +309,6 @@ export const properties = [
       {
         label: 'Date',
         value: 'date',
-        type: optionTypes.ITEM,
         operators: [
           {
             label: 'is',
@@ -359,7 +350,6 @@ export const properties = [
       {
         label: 'Created At',
         value: 'createdAt',
-        type: optionTypes.ITEM,
         operators: [
           {
             label: 'is',
@@ -399,27 +389,23 @@ export const properties = [
         ]
       }
     ]
-  } as CascaderDropdownFolderType,
+  } as CascaderDropdownItemType,
   {
     label: 'Custom events',
     value: 'customEvents',
-    type: optionTypes.FOLDER,
     options: []
-  } as CascaderDropdownFolderType,
+  } as CascaderDropdownItemType,
   {
     label: 'Visitors Properties',
     value: 'visitorsProperties',
-    type: optionTypes.FOLDER,
     options: [
       {
         label: 'Auto captured',
         value: 'autoCaptured',
-        type: optionTypes.FOLDER,
         options: [
           {
             label: 'Location',
             value: 'location',
-            type: optionTypes.ITEM,
             subLabel: '5',
             operators: [
               {
@@ -453,7 +439,6 @@ export const properties = [
           {
             label: 'IP address',
             value: 'ipAddress',
-            type: optionTypes.ITEM,
             subLabel: 'IPv4',
             operators: [
               {
@@ -506,7 +491,6 @@ export const properties = [
           {
             label: 'Operating System',
             value: 'operatingSystem',
-            type: optionTypes.ITEM,
             operators: [
               {
                 label: 'includes',
@@ -544,12 +528,10 @@ export const properties = [
           {
             label: 'Screen resolution',
             value: 'screenResolution',
-            type: optionTypes.ITEM_WITH_OPTIONS,
             options: [
               {
                 label: 'Width',
                 value: 'width',
-                type: optionTypes.ITEM,
                 subLabel: 'px',
                 operators: [
                   {
@@ -587,7 +569,6 @@ export const properties = [
               {
                 label: 'Height',
                 value: 'height',
-                type: optionTypes.ITEM,
                 subLabel: 'px',
                 operators: [
                   {
@@ -629,20 +610,17 @@ export const properties = [
       {
         label: 'Custom Properties',
         value: 'customProperties',
-        type: optionTypes.FOLDER,
         options: []
       }
     ]
-  } as CascaderDropdownFolderType,
+  } as CascaderDropdownItemType,
   {
     label: 'Variables',
     value: 'variables',
-    type: optionTypes.FOLDER,
     options: [
       {
         label: '$var1',
         value: '$var1',
-        type: optionTypes.ITEM,
         operators: [
           {
             label: 'equals',
@@ -682,17 +660,25 @@ export const properties = [
         ]
       }
     ]
-  } as CascaderDropdownFolderType,
+  } as CascaderDropdownItemType,
   {
     label: 'Smartlists',
     value: 'smartlists',
-    type: optionTypes.ITEM,
     operators: [
       {
         label: 'belongs to',
         value: 'belongs',
         dataType: dataTypes.MULTI_SELECT,
-        valuesKey: 'smartlists'
+        choices: [
+          {
+            label: 'All Contacts',
+            value: 10000121
+          },
+          {
+            label: 'Gmail mails',
+            value: 10000123
+          }
+        ]
       } as CascaderDropdownOperatorType
     ],
     values: {
@@ -711,7 +697,6 @@ export const properties = [
   {
     label: 'Smartlist Without Operator',
     value: 'smartlistWithoutOperator',
-    type: optionTypes.ITEM_WITHOUT_OPERATOR,
     operator: {
       valuesKey: 'smartlists',
       dataType: dataTypes.MULTI_SELECT
@@ -728,16 +713,14 @@ export const properties = [
         }
       ]
     }
-  } as CascaderDropdownItemWithoutOperatorType,
+  } as CascaderDropdownItemType,
   {
     label: 'Date and time',
     value: 'dateAndTime',
-    type: optionTypes.FOLDER,
     options: [
       {
         label: 'Date',
         value: 'date',
-        type: optionTypes.ITEM,
         operators: [
           {
             label: 'is',
@@ -777,37 +760,36 @@ export const properties = [
         ] as CascaderDropdownOperatorType[]
       } as CascaderDropdownItemType
     ]
-  } as CascaderDropdownFolderType,
+  } as CascaderDropdownItemType,
   {
     label: 'Surveys',
     value: 'surveys',
-    type: optionTypes.FOLDER,
     options: [
       {
         label: 'Survey 1',
         value: 'survey1',
-        type: optionTypes.ITEM_WITHOUT_OPERATOR,
-        operator: {
-          valuesKey: 'respondedState',
-          dataType: dataTypes.SINGLE_SELECT
-        },
-        values: {
-          respondedState: [
-            {
-              label: 'Responded',
-              value: 'responded'
-            },
-            {
-              label: 'Partially Responded',
-              value: 'partially-responded'
-            },
-            {
-              label: 'Not Responded',
-              value: 'not-responded'
-            }
-          ]
-        }
+        operators: [
+          {
+            label: 'Responded',
+            value: 'responded',
+            dataType: dataTypes.SINGLE_SELECT,
+            choices: [
+              {
+                label: 'Responded',
+                value: 'responded'
+              },
+              {
+                label: 'Partially Responded',
+                value: 'partially-responded'
+              },
+              {
+                label: 'Not Responded',
+                value: 'not-responded'
+              }
+            ]
+          }
+        ]
       }
     ]
-  } as CascaderDropdownFolderType
-] as CascaderDropdownPropertyType[];
+  } as CascaderDropdownItemType
+] as CascaderDropdownItemType[];

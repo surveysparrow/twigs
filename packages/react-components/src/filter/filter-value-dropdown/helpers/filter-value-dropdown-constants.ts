@@ -15,17 +15,11 @@ export type FilterValueOperatorType = {
   label: string;
   value: string;
   dataType: keyof typeof dataTypes;
-  valuesKey?: string;
+  choices?: { label: string; value: string }[];
 };
 
 export type FilterValueItemType = {
   label?: string;
   value?: string;
-  operators: FilterValueOperatorType[];
-  values?: {
-    [key: string]: {
-      label: string;
-      value: string;
-    }[];
-  };
+  options: FilterValueOperatorType[];
 };

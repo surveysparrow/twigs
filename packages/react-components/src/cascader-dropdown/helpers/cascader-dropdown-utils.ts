@@ -1,6 +1,6 @@
 import { CascaderDropdownNode } from '../cascader-dropdown-node';
 import { CascaderDropdownRootNode } from '../cascader-dropdown-root-node';
-import { CascaderDropdownPropertyType, CascaderDropdownValueType } from './cascader-dropdown-constants';
+import { CascaderDropdownPropertyType, CascaderDropdownValueType, optionTypes } from './cascader-dropdown-constants';
 
 export const recursiveFind = (
   data: CascaderDropdownPropertyType[],
@@ -85,7 +85,7 @@ export const buildSelectionPath = (node: CascaderDropdownNode | null): { selecti
       value: currentNode.value
     });
 
-    if (currentNode.children.length > 0) {
+    if (currentNode.children.length > 0 || currentNode.getType() === optionTypes.VALUE_SELECTOR) {
       foldersSelectionPath.unshift({
         label: currentNode.label,
         value: currentNode.value

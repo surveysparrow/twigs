@@ -314,12 +314,21 @@ const DateInput = () => {
 };
 
 const SingleLineTextInput = () => {
-  const { selectedOperator, onCancel, onApply } = useFilterValueDropdownContext();
+  const {
+    selectedOperator, onCancel, onApply, hasOperator
+  } = useFilterValueDropdownContext();
 
   const [value, setValue] = useState('');
 
   return (
     <Box>
+      {hasOperator && (
+        <CascaderDropdownBreadcrumb
+          focusNthColumn={onCancel}
+          showBackButton={false}
+          foldersSelectionPath={[{ value: selectedOperator?.value ?? '', label: selectedOperator?.label ?? '' }]}
+        />
+      )}
       <Box css={{ padding: '$4' }}>
         <Input
           size="lg"
@@ -345,12 +354,21 @@ const InputFooter = ({ disabled, onCancel, onApply }: { disabled: boolean, onCan
 };
 
 const MultiLineTextInput = () => {
-  const { selectedOperator, onCancel, onApply } = useFilterValueDropdownContext();
+  const {
+    selectedOperator, onCancel, onApply, hasOperator
+  } = useFilterValueDropdownContext();
 
   const [value, setValue] = useState('');
 
   return (
     <Box>
+      {hasOperator && (
+        <CascaderDropdownBreadcrumb
+          focusNthColumn={onCancel}
+          showBackButton={false}
+          foldersSelectionPath={[{ value: selectedOperator?.value ?? '', label: selectedOperator?.label ?? '' }]}
+        />
+      )}
       <Box css={{ padding: '$4' }}>
         <Textarea
           size="lg"

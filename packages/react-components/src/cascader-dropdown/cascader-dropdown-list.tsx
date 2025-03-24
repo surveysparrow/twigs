@@ -9,7 +9,9 @@ import CascaderDropdownValueSelector from './cascader-dropdown-value-selector';
 export const CascaderDropdownList = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const { rootNode, foldersSelectionPath, selectedNode } = useCascaderDropdownContext();
+  const {
+    rootNode, foldersSelectionPath, selectedNode, focusPreviousColumn
+  } = useCascaderDropdownContext();
 
   useEffect(() => {
     if (containerRef.current) {
@@ -19,7 +21,7 @@ export const CascaderDropdownList = () => {
   }, []);
 
   if (selectedNode?.getType() === optionTypes.VALUE_SELECTOR) {
-    return <CascaderDropdownValueSelector />;
+    return <CascaderDropdownValueSelector hasOperator={false} onApply={() => {}} onCancel={focusPreviousColumn} selectedNode={selectedNode} />;
   }
 
   return (
