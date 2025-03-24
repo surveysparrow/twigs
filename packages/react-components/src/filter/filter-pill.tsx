@@ -61,7 +61,6 @@ export const FilterPill = ({
     selectedProperty: CascaderDropdownItemType | CascaderDropdownOperatorType | null,
     selectorValue?: CascaderDropdownValueSelectorType
   }) => {
-    console.log(filterPillData, selectedProperty, selectorValue);
     if (selectedProperty && 'type' in selectedProperty && selectedProperty.type === optionTypes.VALUE_SELECTOR) {
       const newFilterPillData = {
         ...filterPillData,
@@ -147,7 +146,6 @@ export const FilterPillWithoutOperator = ({
   data
 }: FilterPillWithoutOperatorProps) => {
   const onChange = (value: string) => {
-    console.log(value, filterPillData, data);
     const newFilterPillData = {
       ...filterPillData,
       value: {

@@ -136,7 +136,6 @@ const Template = () => {
                 <Group key={groupIndex}>
                   <GroupTitle>When</GroupTitle>
                   {group.filters.map((filter, filterIndex) => {
-                    // console.log("🚀 ~ {group.filters.map ~ filter:", filter)
                     if (filter.property.operators?.length === 1) {
                       return (
                         <FilterPillWithoutOperator
