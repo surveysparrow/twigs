@@ -22,7 +22,8 @@ export const CascaderDropdownContent = ({ children, dropdownContentProps, ...pro
     selectedNode,
     focusNthColumn,
     focusPreviousColumn,
-    foldersSelectionPath
+    foldersSelectionPath,
+    rootNode
   } = useCascaderDropdownContext();
 
   const [searchQuery, setSearchQuery] = useState('');
@@ -51,12 +52,13 @@ export const CascaderDropdownContent = ({ children, dropdownContentProps, ...pro
             focusPreviousColumn={focusPreviousColumn}
             foldersSelectionPath={foldersSelectionPath as { value: string, label: string }[]}
           />
-          {!showValueSelector && (
+          {!showValueSelector && rootNode.getChildren().length > 0 && (
             <CascaderDropdownSearchInput
               searchQuery={searchQuery}
               setSearchQuery={setSearchQuery}
               searchFocusedNode={searchFocusedNode}
               setSearchFocusedNode={setSearchFocusedNode}
+              resultCache={resultCache}
             />
           )}
           {!searchQuery && <CascaderDropdownList />}

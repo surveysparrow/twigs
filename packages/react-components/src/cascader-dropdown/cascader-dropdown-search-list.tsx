@@ -2,6 +2,8 @@ import { Box } from '@src/box';
 import { prefixClassName } from '@src/utils';
 import React, { useMemo } from 'react';
 import { Text } from '@src/text';
+import { Flex } from '@src/flex';
+import { QuestionCircleIcon } from '@sparrowengg/twigs-react-icons';
 import { useCascaderDropdownContext } from './use-value';
 import { CascaderDropdownNode } from './cascader-dropdown-node';
 import { ResultCacheType } from './cascader-dropdown-content';
@@ -28,7 +30,7 @@ export const CascaderDropdownSearchList = ({
   } = useCascaderDropdownContext();
 
   const { results, hasSpace } = useMemo<{ results: CascaderDropdownNode[], hasSpace: boolean }>(() => {
-    const hasSpaceInQuery = searchQuery.includes(' ');
+    const hasSpaceInQuery = searchQuery.includes(' ') && !selectedNode?.getParent();
 
     if (resultCache[searchQuery]) {
       setSearchFocusedNode(resultCache[searchQuery].at(0) ?? null);
@@ -73,6 +75,12 @@ export const CascaderDropdownSearchList = ({
       tabIndex={-1}
       className={prefixClassName('cascader-dropdown__search-list')}
     >
+      {results.length === 0 && (
+        <Flex css={{ height: '112px', color: '$neutral600' }} alignItems="center" justifyContent="center" flexDirection="column" gap="$4">
+          <QuestionCircleIcon size={20} />
+          <Text css={{ color: '$neutral800', marginBottom: '0' }}>No results found!</Text>
+        </Flex>
+      )}
       {results.map((result) => {
         return (
           <CascaderDropdownSearchItem

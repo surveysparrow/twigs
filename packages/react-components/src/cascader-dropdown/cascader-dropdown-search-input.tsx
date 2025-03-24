@@ -2,19 +2,20 @@ import React, { useEffect } from 'react';
 import { useCascaderDropdownContext } from './use-value';
 import { Input } from '../input';
 import { CascaderDropdownNode } from './cascader-dropdown-node';
-import { findNextFocusableRowNode, findPrevFocusableRowNode } from './helpers/cascader-dropdown-utils';
 import { optionTypes } from './helpers/cascader-dropdown-constants';
 
 export const CascaderDropdownSearchInput = ({
   searchQuery,
   setSearchQuery,
   searchFocusedNode,
-  setSearchFocusedNode
+  setSearchFocusedNode,
+  resultCache
 }: {
   searchQuery: string,
   setSearchQuery: (query: string) => void,
   searchFocusedNode: CascaderDropdownNode | null,
-  setSearchFocusedNode: (node: CascaderDropdownNode | null) => void
+  setSearchFocusedNode: (node: CascaderDropdownNode | null) => void,
+  resultCache: Record<string, CascaderDropdownNode[]>
 }) => {
   const {
     inputRef, focusNextRow, focusPreviousRow, focusNextColumn, focusPreviousColumn, setSelectedNode, setFocusedNode, handleChange, selectFocusedNode
@@ -81,16 +82,20 @@ export const CascaderDropdownSearchInput = ({
     }
     if (e.key === 'ArrowDown') {
       e.preventDefault();
-      if (searchFocusedNode) {
-        const nextNode = findNextFocusableRowNode(searchFocusedNode);
-        if (nextNode) setSearchFocusedNode(nextNode);
+      const results = resultCache[searchQuery] || [];
+      if (results.length > 0) {
+        const currentIndex = searchFocusedNode ? results.findIndex((node) => node.value === searchFocusedNode.value) : -1;
+        const nextIndex = currentIndex < results.length - 1 ? currentIndex + 1 : 0;
+        setSearchFocusedNode(results[nextIndex]);
       }
     }
     if (e.key === 'ArrowUp') {
       e.preventDefault();
-      if (searchFocusedNode) {
-        const prevNode = findPrevFocusableRowNode(searchFocusedNode);
-        if (prevNode) setSearchFocusedNode(prevNode);
+      const results = resultCache[searchQuery] || [];
+      if (results.length > 0) {
+        const currentIndex = searchFocusedNode ? results.findIndex((node) => node.value === searchFocusedNode.value) : -1;
+        const prevIndex = currentIndex > 0 ? currentIndex - 1 : results.length - 1;
+        setSearchFocusedNode(results[prevIndex]);
       }
     }
   };

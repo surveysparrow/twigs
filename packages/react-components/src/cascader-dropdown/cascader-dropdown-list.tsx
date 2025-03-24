@@ -1,6 +1,9 @@
 import { Box } from '@src/box';
 import { useEffect, useRef } from 'react';
 import { prefixClassName } from '@src/utils';
+import { QuestionCircleIcon } from '@sparrowengg/twigs-react-icons';
+import { Flex } from '@src/flex';
+import { Text } from '@src/text';
 import { CascaderDropdownItem } from './cascader-dropdown-item';
 import { useCascaderDropdownContext } from './use-value';
 import { optionTypes, initialFilterValueSelectorValue } from './helpers/cascader-dropdown-constants';
@@ -44,6 +47,12 @@ export const CascaderDropdownList = () => {
       tabIndex={-1}
       className={prefixClassName('cascader-dropdown__list')}
     >
+      {rootNode.getChildren().length === 0 && (
+        <Flex css={{ height: '112px', color: '$neutral600' }} alignItems="center" justifyContent="center" flexDirection="column" gap="$4">
+          <QuestionCircleIcon size={20} />
+          <Text css={{ color: '$neutral800', marginBottom: '0' }}>No data to show!</Text>
+        </Flex>
+      )}
       {foldersSelectionPath.length === 0 && rootNode.children.map((child) => (
         <CascaderDropdownItem key={child.value} node={child} />
       ))}
