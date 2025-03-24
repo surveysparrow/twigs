@@ -7,30 +7,39 @@ import { Text } from '@src/text';
 import { prefixClassName } from '@src/utils';
 import React from 'react';
 import { CascaderDropdown } from '@src/cascader-dropdown';
-import { CascaderDropdownItemType, CascaderDropdownOperatorType } from '@src/cascader-dropdown/helpers/cascader-dropdown-constants';
-import { dataTypes, FilterValueOperatorType } from './filter-value-dropdown/helpers/filter-value-dropdown-constants';
+import {
+  CascaderDropdownDataValueType, CascaderDropdownItemType, CascaderDropdownOperatorType, CascaderDropdownValueSelectorType, dataTypes, initialFilterValueSelectorValue, optionTypes
+} from '@src/cascader-dropdown/helpers/cascader-dropdown-constants';
 import FilterPillValueSelector from './filter-pill-value-selector';
+import { FilterType } from './stories/filter.stories';
 
 export type FilterPillProps = {
   icon?: React.ReactNode;
-  value: FilterPillValueType;
-  setValue: (value: FilterPillValueType) => void;
+  filterPillData: FilterType;
+  setFilterPillData: (value: FilterType) => void;
   variant?: 'filled' | 'outline';
   cascaderDropdownData: CascaderDropdownItemType[];
 };
 
-export type FilterPillValueType = {
-  operator: FilterValueOperatorType | null;
+export type FilterValueOperatorType = {
   label: string;
-  value: Record<string, any> | null;
+  value: string;
+  dataType: keyof typeof dataTypes;
+  choices?: { label: string; value: string }[];
 };
 
-const getDisplayValue = (value: FilterPillValueType) => {
-  if (!value.operator) return null;
-  const displayValue = value.value?.[value.operator.dataType];
+export type FilterValueItemType = {
+  label?: string;
+  value?: string;
+  options: FilterValueOperatorType[];
+};
+
+const getDisplayValue = (value: FilterType) => {
+  if (!value.connector) return null;
+  const displayValue = value.value?.[value.connector.dataType];
   if (typeof displayValue === 'string') return displayValue;
   if (Array.isArray(displayValue)) return displayValue.join(', ');
-  if (value.operator.dataType === dataTypes.DATE_RANGE && typeof displayValue === 'object' && displayValue !== null) {
+  if (value.connector.dataType === dataTypes.DATE_RANGE && typeof displayValue === 'object' && displayValue !== null) {
     return `${displayValue.start} - ${displayValue.end}`;
   }
   return null;
@@ -38,13 +47,34 @@ const getDisplayValue = (value: FilterPillValueType) => {
 
 export const FilterPill = ({
   icon,
-  value,
-  setValue,
+  filterPillData,
+  setFilterPillData,
   variant = 'outline',
   cascaderDropdownData
 }: FilterPillProps) => {
-  const onChange = (operator: FilterValueOperatorType, newValue: Record<string, any>) => {
-    setValue({ ...value, operator, value: newValue });
+  const onChange = ({
+    selectedProperty,
+    selectorValue
+  } : {
+    value: CascaderDropdownDataValueType | CascaderDropdownOperatorType,
+    selectionPath: CascaderDropdownDataValueType[],
+    selectedProperty: CascaderDropdownItemType | CascaderDropdownOperatorType | null,
+    selectorValue?: CascaderDropdownValueSelectorType
+  }) => {
+    console.log(filterPillData, selectedProperty, selectorValue);
+    if (selectedProperty && 'type' in selectedProperty && selectedProperty.type === optionTypes.VALUE_SELECTOR) {
+      const newFilterPillData = {
+        ...filterPillData,
+        value: selectorValue ?? initialFilterValueSelectorValue,
+        connector: {
+          dataType: selectedProperty.dataType,
+          label: `${selectedProperty.label}`,
+          value: `${selectedProperty.value}`,
+          type: selectedProperty.type
+        }
+      };
+      setFilterPillData(newFilterPillData);
+    }
   };
 
   return (
@@ -67,67 +97,30 @@ export const FilterPill = ({
             {icon}
           </Box>
         )}
-        <Text weight="medium" css={{ color: '$neutral900', maxWidth: '$25' }} truncate>{value.label}</Text>
+        <Text weight="medium" css={{ color: '$neutral900', maxWidth: '$25' }} truncate>{filterPillData.property.label}</Text>
       </Flex>
-      {/* {!isFilterValueDropdownEnabled && ( */}
       <CascaderDropdown
         data={cascaderDropdownData}
-        onChange={console.log}
+        onChange={onChange}
       >
         <Flex>
-          {!value.operator?.value && (
+          {!filterPillData.connector?.value && (
             <StyledValueButton>
               <Text css={{ color: '$neutral700', padding: '3px $4 3px $1' }}>Choose Condition</Text>
             </StyledValueButton>
           )}
-          {value.operator?.value && (
+          {filterPillData.connector?.value && (
             <StyledValueButton>
-              <Text css={{ color: '$neutral700', padding: '3px $1 3px $1' }}>{value.operator?.label}</Text>
+              <Text css={{ color: '$neutral700', padding: '3px $1 3px $1' }}>{filterPillData.connector?.label}</Text>
             </StyledValueButton>
           )}
-          {value.operator?.value && (
+          {filterPillData.connector?.value && (
             <StyledValueButton css={{ borderTopRightRadius: '$lg', borderBottomRightRadius: '$lg' }}>
-              <Text css={{ color: '$neutral900', padding: '3px $4 3px $2' }} weight="medium">{getDisplayValue(value) ?? 'Choose Value'}</Text>
+              <Text css={{ color: '$neutral900', padding: '3px $4 3px $2' }} weight="medium">{getDisplayValue(filterPillData) ?? 'Choose Value'}</Text>
             </StyledValueButton>
           )}
-          {/* {hasOperator && !value.operator?.value && (
-            <StyledValueButton>
-              <Text css={{ color: '$neutral700', padding: '3px $4 3px $1' }}>Choose Condition</Text>
-            </StyledValueButton>
-          )}
-          {hasOperator && value.operator?.value && (
-            <StyledValueButton>
-              <Text css={{ color: '$neutral700', padding: '3px $1 3px $1' }}>{value.operator?.label}</Text>
-            </StyledValueButton>
-          )}
-          {(!hasOperator || (hasOperator && value.operator?.value)) && (
-            <StyledValueButton css={{ borderTopRightRadius: '$lg', borderBottomRightRadius: '$lg' }}>
-              <Text css={{ color: '$neutral900', padding: '3px $4 3px $2' }} weight="medium">{getDisplayValue(value) ?? 'Choose Value'}</Text>
-            </StyledValueButton>
-          )} */}
         </Flex>
       </CascaderDropdown>
-      {/* {isFilterValueDropdownEnabled && (
-        <FilterPillValueSelector dataType={value.operator?.dataType} choices={value.operator?.choices}>
-          <Flex>
-            {hasOperator && !value.operator?.value && (
-              <StyledValueButton>
-                <Text css={{ color: '$neutral700', padding: '3px $4 3px $1' }}>Choose Condition</Text>
-              </StyledValueButton>
-            )}
-            {hasOperator && value.operator?.value && (
-              <StyledValueButton>
-                <Text css={{ color: '$neutral700', padding: '3px $1 3px $1' }}>{value.operator?.label}</Text>
-              </StyledValueButton>
-            )}
-            {(!hasOperator || (hasOperator && value.operator?.value)) && (
-              <StyledValueButton css={{ borderTopRightRadius: '$lg', borderBottomRightRadius: '$lg' }}>
-                <Text css={{ color: '$neutral900', padding: '3px $4 3px $2' }} weight="medium">{getDisplayValue(value) ?? 'Choose Value'}</Text>
-              </StyledValueButton>
-            )}
-          </Flex>
-        </FilterPillValueSelector>
-      )} */}
       <TooltipProvider>
         <Tooltip content="Remove">
           <StyledCloseButton className={prefixClassName('filter-pill__close-button')}>
@@ -141,20 +134,34 @@ export const FilterPill = ({
 
 type FilterPillWithoutOperatorProps = {
   icon?: React.ReactNode;
-  value: FilterPillValueType;
-  setValue: (value: FilterPillValueType) => void;
+  filterPillData: FilterType;
+  setFilterPillData: (value: FilterType) => void;
   variant?: 'filled' | 'outline';
   data: CascaderDropdownOperatorType;
 };
 export const FilterPillWithoutOperator = ({
   icon,
-  value,
-  setValue,
+  filterPillData,
+  setFilterPillData,
   variant = 'outline',
   data
 }: FilterPillWithoutOperatorProps) => {
-  const onChange = (operator: FilterValueOperatorType, newValue: Record<string, any>) => {
-    setValue({ ...value, operator, value: newValue });
+  const onChange = (value: string) => {
+    console.log(value, filterPillData, data);
+    const newFilterPillData = {
+      ...filterPillData,
+      value: {
+        ...filterPillData.value,
+        [data.dataType]: value
+      },
+      connector: {
+        dataType: data.dataType,
+        label: `${data.label}`,
+        value: `${data.value}`,
+        type: data.type
+      }
+    };
+    setFilterPillData(newFilterPillData);
   };
 
   return (
@@ -177,12 +184,12 @@ export const FilterPillWithoutOperator = ({
             {icon}
           </Box>
         )}
-        <Text weight="medium" css={{ color: '$neutral700', maxWidth: '$25' }} truncate>{value.label}</Text>
+        <Text weight="medium" css={{ color: '$neutral700', maxWidth: '$25' }} truncate>{filterPillData.property.label}</Text>
       </Flex>
-      <FilterPillValueSelector dataType={data.dataType} choices={data.choices}>
+      <FilterPillValueSelector dataType={data.dataType} choices={data.choices} onApply={onChange}>
         <Flex>
           <StyledValueButton css={{ borderTopRightRadius: '$lg', borderBottomRightRadius: '$lg' }}>
-            <Text css={{ color: '$neutral900', padding: '3px $4 3px $2' }} weight="medium">{getDisplayValue(value) ?? 'Choose Value'}</Text>
+            <Text css={{ color: '$neutral900', padding: '3px $4 3px $2' }} weight="medium">{getDisplayValue(filterPillData) ?? 'Choose Value'}</Text>
           </StyledValueButton>
         </Flex>
       </FilterPillValueSelector>
@@ -286,23 +293,3 @@ const StyledCloseButton = styled('button', {
     outlineColor: '#F2F5F8'
   }
 });
-
-// <FilterValueDropdown data={conditionData} onChange={onChange} hasOperator={hasOperator}>
-//   <Flex>
-//     {hasOperator && !value.operator?.value && (
-//       <StyledValueButton>
-//         <Text css={{ color: '$neutral700', padding: '3px $4 3px $1' }}>Choose Condition</Text>
-//       </StyledValueButton>
-//     )}
-//     {hasOperator && value.operator?.value && (
-//       <StyledValueButton>
-//         <Text css={{ color: '$neutral700', padding: '3px $1 3px $1' }}>{value.operator?.label}</Text>
-//       </StyledValueButton>
-//     )}
-//     {(!hasOperator || (hasOperator && value.operator?.value)) && (
-//       <StyledValueButton css={{ borderTopRightRadius: '$lg', borderBottomRightRadius: '$lg' }}>
-//         <Text css={{ color: '$neutral900', padding: '3px $4 3px $2' }} weight="medium">{getDisplayValue(value) ?? 'Choose Value'}</Text>
-//       </StyledValueButton>
-//     )}
-//   </Flex>
-// </FilterValueDropdown>

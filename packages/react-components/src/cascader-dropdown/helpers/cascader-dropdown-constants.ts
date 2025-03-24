@@ -1,5 +1,6 @@
 export const optionTypes = {
-  VALUE_SELECTOR: 'VALUE_SELECTOR'
+  VALUE_SELECTOR: 'VALUE_SELECTOR',
+  ITEM: 'ITEM'
 };
 
 export const dataTypes = {
@@ -15,49 +16,9 @@ export const dataTypes = {
   DATE_TIME_TIMEZONE: 'DATE_TIME_TIMEZONE'
 };
 
-// type CascaderDropdownValueType = {
-//   label: string | number;
-//   value: string | number;
-// }
-
-// type CascaderDropdownFolderType = {
-//   label: string | number;
-//   value: string | number;
-//   type: 'FOLDER';
-//   subLabel?: string;
-//   options: CascaderDropdownPropertyType[];
-//   disabled?: boolean;
-//   shouldFetchOptions?: boolean;
-// };
-
-// type CascaderDropdownItemWithoutOperatorType = {
-//   label: string | number;
-//   value: string | number;
-//   type: 'ITEM_WITHOUT_OPERATOR';
-//   subLabel?: string;
-//   operator: {
-//     dataType: keyof typeof dataTypes;
-//     regex?: string;
-//     // valuesKey?: string;
-//   };
-//   // values?: Record<string, CascaderDropdownDataValueType[]>;
-//   disabled?: boolean;
-//   shouldFetchOptions?: boolean;
-// };
-
-// type CascaderDropdownItemWithOptionsType = {
-//   label: string | number;
-//   value: string | number;
-//   type: 'ITEM_WITH_OPTIONS';
-//   subLabel?: string;
-//   options: CascaderDropdownPropertyType[];
-//   disabled?: boolean;
-//   shouldFetchOptions?: boolean;
-// };
-
 export type CascaderDropdownItemType = {
-  label: string | number;
-  value: string | number;
+  label: string;
+  value: string;
   subLabel?: string;
   operators?: CascaderDropdownOperatorType[];
   options?: CascaderDropdownItemType[];
@@ -66,30 +27,42 @@ export type CascaderDropdownItemType = {
 };
 
 export type CascaderDropdownOperatorType = {
-  label: string | number;
-  value: string | number;
+  label: string;
+  value: string;
   dataType: keyof typeof dataTypes;
   regex?: string;
   disabled?: boolean;
   shouldFetchOptions?: boolean;
   type: 'VALUE_SELECTOR';
   choices?: CascaderDropdownDataValueType[];
-  options?: [];
 };
 
 export type CascaderDropdownDataValueType = {
-  label: string | number;
-  value: string | number;
+  label: string;
+  value: string;
 };
 
-// export type CascaderDropdownPropertyType =
-//   CascaderDropdownFolderType
-//   | CascaderDropdownItemType
-//   | CascaderDropdownItemWithoutOperatorType
-//   | CascaderDropdownItemWithOptionsType
-//   | CascaderDropdownOperatorType;
-// export type CascaderDropdownPropertyType =
-//   | CascaderDropdownItemType
-//   | CascaderDropdownItemWithoutOperatorType
-//   | CascaderDropdownItemWithOptionsType
-//   | CascaderDropdownOperatorType;
+export type CascaderDropdownValueSelectorType = {
+  'NUMBER': number | null;
+  'DATE': string | null;
+  'DATE_RANGE': {
+    start: string | null;
+    end: string | null;
+  } | null;
+  'DATE_TIME_TIMEZONE': string | null;
+  'SINGLE_LINE_TEXT': string | null;
+  'MULTI_LINE_TEXT': string | null;
+  'SINGLE_SELECT': string | null;
+  'MULTI_SELECT': string[] | null;
+}
+
+export const initialFilterValueSelectorValue: CascaderDropdownValueSelectorType = {
+  NUMBER: null,
+  DATE: null,
+  DATE_RANGE: null,
+  DATE_TIME_TIMEZONE: null,
+  SINGLE_LINE_TEXT: null,
+  MULTI_LINE_TEXT: null,
+  SINGLE_SELECT: null,
+  MULTI_SELECT: null
+};

@@ -2,7 +2,9 @@ import {
   ReactNode, useId, useMemo, useState, useRef,
   useEffect
 } from 'react';
-import { CascaderDropdownPropertyType, CascaderDropdownValueType, optionTypes } from './helpers/cascader-dropdown-constants';
+import {
+  CascaderDropdownItemType, CascaderDropdownDataValueType, CascaderDropdownValueSelectorType, optionTypes
+} from './helpers/cascader-dropdown-constants';
 import { CascaderDropdownContext, CascaderDropdownContextType } from './use-value';
 import {
   buildSelectionPath, buildTree, findNextFocusableRowNode, findPrevFocusableRowNode
@@ -11,9 +13,17 @@ import { CascaderDropdownNode } from './cascader-dropdown-node';
 
 export type CascaderDropdownProviderProps = {
   children: ReactNode;
-  data: CascaderDropdownPropertyType[];
-  value: CascaderDropdownValueType;
-  onChange: (node: CascaderDropdownValueType, selectionPath: CascaderDropdownValueType[]) => void;
+  data: CascaderDropdownItemType[];
+  value: CascaderDropdownDataValueType;
+  onChange: ({
+    value,
+    selectionPath,
+    selectorValue
+  }: {
+    value: CascaderDropdownDataValueType,
+    selectionPath: CascaderDropdownDataValueType[],
+    selectorValue?: CascaderDropdownValueSelectorType
+  }) => void;
 };
 
 export const CascaderDropdownProvider = ({
@@ -97,11 +107,15 @@ export const CascaderDropdownProvider = ({
     }
   };
 
-  const handleChange = (node: CascaderDropdownNode) => {
+  const handleChange = (node: CascaderDropdownNode, selectorValue?: CascaderDropdownValueSelectorType) => {
     setSelectedNode(null);
     setFocusedNode(null);
     setPopoverOpen(false);
-    onChange({ label: node.label, value: node.value }, selectionPath.map((item) => ({ label: item.label, value: item.value })));
+    onChange({
+      value: { label: node.label, value: node.value },
+      selectionPath: selectionPath.map((item) => ({ label: item.label, value: item.value })),
+      selectorValue
+    });
   };
 
   const selectFocusedNode = () => {

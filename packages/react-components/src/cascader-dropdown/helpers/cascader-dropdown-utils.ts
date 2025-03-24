@@ -1,11 +1,13 @@
 import { CascaderDropdownNode } from '../cascader-dropdown-node';
 import { CascaderDropdownRootNode } from '../cascader-dropdown-root-node';
-import { CascaderDropdownPropertyType, CascaderDropdownValueType, optionTypes } from './cascader-dropdown-constants';
+import {
+  CascaderDropdownDataValueType, CascaderDropdownItemType, CascaderDropdownOperatorType, optionTypes
+} from './cascader-dropdown-constants';
 
 export const recursiveFind = (
-  data: CascaderDropdownPropertyType[],
-  value: CascaderDropdownValueType
-): CascaderDropdownValueType | null => {
+  data: CascaderDropdownItemType[],
+  value: CascaderDropdownDataValueType
+): CascaderDropdownDataValueType | null => {
   for (let i = 0; i < data.length; i++) {
     const item = data[i];
 
@@ -24,10 +26,10 @@ export const recursiveFind = (
   return null;
 };
 
-export const buildTree = (data: CascaderDropdownPropertyType[]): CascaderDropdownRootNode => {
+export const buildTree = (data: CascaderDropdownItemType[]): CascaderDropdownRootNode => {
   const tree = new CascaderDropdownRootNode();
 
-  const traverse = (options: CascaderDropdownPropertyType[], parentNode: CascaderDropdownNode, valuePath: string, labelPath: string, level: number) => {
+  const traverse = (options: CascaderDropdownItemType[] | CascaderDropdownOperatorType[], parentNode: CascaderDropdownNode, valuePath: string, labelPath: string, level: number) => {
     for (let i = 0; i < options.length; i++) {
       const item = options[i];
 
@@ -43,12 +45,15 @@ export const buildTree = (data: CascaderDropdownPropertyType[]): CascaderDropdow
         options: {
           disabled: item.disabled,
           shouldFetchOptions: item.shouldFetchOptions,
-          ...(item.type === 'VALUE_SELECTOR' ? { dataType: item.dataType, choices: item.choices } : {})
+          ...('dataType' in item ? {
+            dataType: item.dataType,
+            choices: item.choices
+          } : {})
         },
         level: level + 1,
         labelPath: currentLabelPath,
         valuePath: currentValuePath,
-        type: item.type
+        type: 'type' in item ? optionTypes.VALUE_SELECTOR : optionTypes.ITEM
       });
 
       if (i === 0) {
@@ -73,9 +78,9 @@ export const buildTree = (data: CascaderDropdownPropertyType[]): CascaderDropdow
   return tree;
 };
 
-export const buildSelectionPath = (node: CascaderDropdownNode | null): { selectionPath: CascaderDropdownValueType[], foldersSelectionPath: CascaderDropdownValueType[] } => {
-  const selectionPath: CascaderDropdownValueType[] = [];
-  const foldersSelectionPath: CascaderDropdownValueType[] = [];
+export const buildSelectionPath = (node: CascaderDropdownNode | null): { selectionPath: CascaderDropdownDataValueType[], foldersSelectionPath: CascaderDropdownDataValueType[] } => {
+  const selectionPath: CascaderDropdownDataValueType[] = [];
+  const foldersSelectionPath: CascaderDropdownDataValueType[] = [];
 
   let currentNode: CascaderDropdownNode | null = node;
 

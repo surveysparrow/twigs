@@ -8,9 +8,9 @@ export interface CascaderDropdownNodeOptions {
 }
 
 export class CascaderDropdownNode {
-  value: string | number;
+  value: string;
 
-  label: string | number;
+  label: string;
 
   children: CascaderDropdownNode[];
 
@@ -41,8 +41,8 @@ export class CascaderDropdownNode {
   type: string = '';
 
   constructor(
-    value: string | number,
-    label: string | number,
+    value: string,
+    label: string,
     options: CascaderDropdownNodeOptions,
     children: CascaderDropdownNode[],
     level: number,

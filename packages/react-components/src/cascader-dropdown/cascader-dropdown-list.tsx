@@ -3,14 +3,14 @@ import { useEffect, useRef } from 'react';
 import { prefixClassName } from '@src/utils';
 import { CascaderDropdownItem } from './cascader-dropdown-item';
 import { useCascaderDropdownContext } from './use-value';
-import { optionTypes } from './helpers/cascader-dropdown-constants';
+import { optionTypes, initialFilterValueSelectorValue } from './helpers/cascader-dropdown-constants';
 import CascaderDropdownValueSelector from './cascader-dropdown-value-selector';
 
 export const CascaderDropdownList = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const {
-    rootNode, foldersSelectionPath, selectedNode, focusPreviousColumn
+    rootNode, foldersSelectionPath, selectedNode, focusPreviousColumn, handleChange
   } = useCascaderDropdownContext();
 
   useEffect(() => {
@@ -21,7 +21,19 @@ export const CascaderDropdownList = () => {
   }, []);
 
   if (selectedNode?.getType() === optionTypes.VALUE_SELECTOR) {
-    return <CascaderDropdownValueSelector hasOperator={false} onApply={() => {}} onCancel={focusPreviousColumn} selectedNode={selectedNode} />;
+    return (
+      <CascaderDropdownValueSelector
+        hasOperator={false}
+        onApply={(value) => {
+          handleChange(selectedNode, {
+            ...initialFilterValueSelectorValue,
+            [selectedNode.options.dataType]: value
+          });
+        }}
+        onCancel={focusPreviousColumn}
+        selectedNode={selectedNode}
+      />
+    );
   }
 
   return (

@@ -28,8 +28,8 @@ export class CascaderDropdownRootNode extends CascaderDropdownNode {
     valuePath,
     type
   }: {
-    value: string | number,
-    label: string | number,
+    value: string,
+    label: string,
     options: CascaderDropdownNodeOptions,
     level: number,
     labelPath: string,
@@ -44,7 +44,7 @@ export class CascaderDropdownRootNode extends CascaderDropdownNode {
     return node;
   }
 
-  findNode(value?: string | number | null) {
+  findNode(value?: string | null) {
     if (!value) return null;
     return this.nodeMapping[value];
   }

@@ -1,15 +1,27 @@
 import { Popover, PopoverContent, PopoverTrigger } from '@src/popover';
 import { prefixClassName } from '@src/utils';
-import { ReactNode, useId } from 'react';
+import { ReactNode, useId, useState } from 'react';
 import CascaderDropdownValueSelector from '@src/cascader-dropdown/cascader-dropdown-value-selector';
 import { CascaderDropdownNode } from '@src/cascader-dropdown/cascader-dropdown-node';
 import { dataTypes, optionTypes, CascaderDropdownDataValueType } from '@src/cascader-dropdown/helpers/cascader-dropdown-constants';
 
-const FilterPillValueSelector = ({ children, dataType, choices }: { children: ReactNode; dataType: keyof typeof dataTypes; choices?: CascaderDropdownDataValueType[] }) => {
+const FilterPillValueSelector = ({
+  children,
+  dataType,
+  choices,
+  onApply
+}: {
+  children: ReactNode;
+  dataType: keyof typeof dataTypes;
+  choices?: CascaderDropdownDataValueType[];
+  onApply: (value: string) => void;
+}) => {
   const id = useId();
 
+  const [open, setOpen] = useState(false);
+
   return (
-    <Popover>
+    <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild className={prefixClassName('cascader-dropdown__trigger')}>
         {children}
       </PopoverTrigger>
@@ -22,8 +34,13 @@ const FilterPillValueSelector = ({ children, dataType, choices }: { children: Re
       >
         <CascaderDropdownValueSelector
           hasOperator={false}
-          onApply={() => {}}
-          onCancel={() => {}}
+          onApply={(value: string) => {
+            setOpen(false);
+            onApply(value);
+          }}
+          onCancel={() => {
+            setOpen(false);
+          }}
           selectedNode={new CascaderDropdownNode('', '', {
             dataType,
             choices

@@ -3,7 +3,7 @@ import { Button } from '@src/button';
 import { useState } from 'react';
 import { CascaderDropdown } from '../index';
 import { properties } from '../tests/data';
-import { CascaderDropdownValueType } from '../helpers/cascader-dropdown-constants';
+import { CascaderDropdownDataValueType } from '../helpers/cascader-dropdown-constants';
 
 export default {
   component: CascaderDropdown,
@@ -11,7 +11,7 @@ export default {
 };
 
 const Template = (args) => {
-  const [value, setValue] = useState<CascaderDropdownValueType | null>(null);
+  const [value, setValue] = useState<CascaderDropdownDataValueType | null>(null);
 
   return (
     <Flex css={{ flexWrap: 'wrap' }} gap="$2">

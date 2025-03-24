@@ -1,19 +1,19 @@
 import { createContext, useContext, RefObject } from 'react';
-import { CascaderDropdownPropertyType, CascaderDropdownValueType } from './helpers/cascader-dropdown-constants';
+import { CascaderDropdownItemType, CascaderDropdownValueSelectorType, CascaderDropdownDataValueType } from './helpers/cascader-dropdown-constants';
 import { CascaderDropdownRootNode } from './cascader-dropdown-root-node';
 import { CascaderDropdownNode } from './cascader-dropdown-node';
 
 export type CascaderDropdownContextType = {
-  data: CascaderDropdownPropertyType[];
-  value: CascaderDropdownValueType;
+  data: CascaderDropdownItemType[];
+  value: CascaderDropdownDataValueType;
   popoverOpen: boolean;
   setPopoverOpen: (open: boolean) => void;
   id: string;
   rootNode: CascaderDropdownRootNode;
   selectedNode: CascaderDropdownNode | null;
   setSelectedNode: (node: CascaderDropdownNode | null) => void;
-  selectionPath: CascaderDropdownValueType[];
-  foldersSelectionPath: CascaderDropdownValueType[];
+  selectionPath: CascaderDropdownDataValueType[];
+  foldersSelectionPath: CascaderDropdownDataValueType[];
   focusPreviousColumn: () => void;
   focusNthColumn: (index: number) => void;
   focusedNode: CascaderDropdownNode | null;
@@ -22,7 +22,7 @@ export type CascaderDropdownContextType = {
   focusNextRow: () => void;
   focusPreviousRow: () => void;
   focusNextColumn: () => void;
-  handleChange: (node: CascaderDropdownNode) => void;
+  handleChange: (node: CascaderDropdownNode, value?: CascaderDropdownValueSelectorType) => void;
   selectFocusedNode: () => void;
 };
 
