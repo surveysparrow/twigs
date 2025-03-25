@@ -1,11 +1,13 @@
 name: Publish twigs-react-editor package to pkg.pr.new
 on:
-  workflow_dispatch:
-    inputs:
-      branch:
-        description: "Branch to deploy"
-        required: true
-        default: "master"
+  push:
+    branches: ["master"]
+    paths:
+      - "packages/react-editor/**"
+  pull_request:
+    branches: ["master", "releases/**"]
+    paths:
+      - "packages/react-editor/**"
 
 jobs:
   build:
