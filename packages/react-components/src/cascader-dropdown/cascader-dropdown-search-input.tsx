@@ -67,35 +67,42 @@ export const CascaderDropdownSearchInput = ({
   };
 
   const onSearchListKeyboardNavigation = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      if (searchFocusedNode) {
+    switch (e.key) {
+      case 'Enter': {
+        e.preventDefault();
+        if (!searchFocusedNode) return;
         if (searchFocusedNode.children.length === 0 && searchFocusedNode.getType() !== optionTypes.VALUE_SELECTOR) {
           handleChange(searchFocusedNode);
-        } else {
-          setSelectedNode(searchFocusedNode);
-          setFocusedNode(searchFocusedNode.children.at(0) ?? null);
+          setSearchQuery('');
+          setSearchFocusedNode(null);
+          return;
         }
+        setSelectedNode(searchFocusedNode);
+        setFocusedNode(searchFocusedNode.children.at(0) ?? null);
         setSearchQuery('');
         setSearchFocusedNode(null);
+        break;
       }
-    }
-    if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      const results = resultCache[searchQuery] || [];
-      if (results.length > 0) {
+      case 'ArrowDown': {
+        e.preventDefault();
+        const results = resultCache[searchQuery] || [];
+        if (results.length === 0) return;
         const currentIndex = searchFocusedNode ? results.findIndex((node) => node.value === searchFocusedNode.value) : -1;
         const nextIndex = currentIndex < results.length - 1 ? currentIndex + 1 : 0;
         setSearchFocusedNode(results[nextIndex]);
+        break;
       }
-    }
-    if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      const results = resultCache[searchQuery] || [];
-      if (results.length > 0) {
+      case 'ArrowUp': {
+        e.preventDefault();
+        const results = resultCache[searchQuery] || [];
+        if (results.length === 0) return;
         const currentIndex = searchFocusedNode ? results.findIndex((node) => node.value === searchFocusedNode.value) : -1;
         const prevIndex = currentIndex > 0 ? currentIndex - 1 : results.length - 1;
         setSearchFocusedNode(results[prevIndex]);
+        break;
+      }
+      default: {
+        break;
       }
     }
   };

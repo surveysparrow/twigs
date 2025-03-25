@@ -74,13 +74,15 @@ export const itemOperators = [
   {
     label: 'email',
     value: 'email',
-    dataType: dataTypes.EMAIL,
+    dataType: dataTypes.SINGLE_LINE_TEXT,
+    regex: '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$',
     type: optionTypes.VALUE_SELECTOR
   },
   {
     label: 'url',
     value: 'url',
-    dataType: dataTypes.URL,
+    dataType: dataTypes.SINGLE_LINE_TEXT,
+    regex: '^https?://(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,4}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)$',
     type: optionTypes.VALUE_SELECTOR
   }
 ] as CascaderDropdownOperatorType[];

@@ -84,7 +84,6 @@ const Template = () => {
     globalConnector: 'AND',
     filterGroups: []
   });
-  console.log('🚀 ~ Template ~ conditionsData:', conditionsData);
 
   return (
     <Flex css={{ flexWrap: 'wrap' }} gap="$2">

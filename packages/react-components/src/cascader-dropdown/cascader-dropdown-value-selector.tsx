@@ -171,6 +171,18 @@ const SingleLineTextInput = ({
 }: CascaderDropdownValueSelectorProps) => {
   const [value, setValue] = useState('');
 
+  const regex = selectedNode.options.regex ? new RegExp(selectedNode.options.regex) : null;
+  const isRegexValid = regex ? regex.test(value) : true;
+
+  const handleSubmit = () => {
+    if (value.length === 0) return;
+    if (selectedNode.options.dataType === dataTypes.NUMBER) {
+      if (Number.isNaN(Number(value))) return;
+    }
+    if (regex && !isRegexValid) return;
+    onApply(value);
+  };
+
   return (
     <Box>
       {hasOperator && (
@@ -188,9 +200,15 @@ const SingleLineTextInput = ({
           onChange={(e) => setValue(e.target.value)}
           type={selectedNode.options.dataType === dataTypes.NUMBER ? 'number' : 'text'}
           autoFocus
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              handleSubmit();
+            }
+          }}
         />
       </Box>
-      <InputFooter disabled={!value.trim()} onCancel={onCancel} onApply={() => onApply(value)} />
+      <InputFooter disabled={!value.trim() || !isRegexValid} onCancel={onCancel} onApply={handleSubmit} />
     </Box>
   );
 };
@@ -208,6 +226,15 @@ const MultiLineTextInput = ({
   selectedNode, onApply, onCancel, hasOperator
 }: CascaderDropdownValueSelectorProps) => {
   const [value, setValue] = useState('');
+
+  const regex = selectedNode.options.regex ? new RegExp(selectedNode.options.regex) : null;
+  const isRegexValid = regex ? regex.test(value) : true;
+
+  const handleSubmit = () => {
+    if (value.length === 0) return;
+    if (regex && !isRegexValid) return;
+    onApply(value);
+  };
 
   return (
     <Box>
@@ -229,10 +256,11 @@ const MultiLineTextInput = ({
           autoFocus
         />
       </Box>
-      <InputFooter disabled={!value.trim()} onCancel={onCancel} onApply={() => onApply(value)} />
+      <InputFooter disabled={!value.trim() || !isRegexValid} onCancel={onCancel} onApply={handleSubmit} />
     </Box>
   );
 };
+
 const SingleSelectInput = ({
   selectedNode, onCancel, onApply, hasOperator
 }: CascaderDropdownValueSelectorProps) => {

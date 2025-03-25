@@ -45,9 +45,10 @@ export const buildTree = (data: CascaderDropdownItemType[]): CascaderDropdownRoo
         options: {
           disabled: item.disabled,
           shouldFetchOptions: item.shouldFetchOptions,
-          ...('dataType' in item ? {
+          ...('type' in item ? {
             dataType: item.dataType,
-            choices: item.choices
+            choices: item.choices,
+            regex: item.regex
           } : {})
         },
         level: level + 1,

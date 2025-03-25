@@ -1,10 +1,11 @@
-import { CascaderDropdownDataValueType } from './helpers/cascader-dropdown-constants';
+import { CascaderDropdownDataValueType, dataTypes } from './helpers/cascader-dropdown-constants';
 
 export interface CascaderDropdownNodeOptions {
   disabled?: boolean;
   shouldFetchOptions?: boolean;
-  dataType?: string;
+  dataType?: keyof typeof dataTypes;
   choices?: CascaderDropdownDataValueType[];
+  regex?: string;
 }
 
 export class CascaderDropdownNode {
