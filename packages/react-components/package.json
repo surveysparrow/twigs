@@ -43,15 +43,6 @@
   "license": "MIT",
   "homepage": "https://twigs.surveysparrow.com",
   "peerDependencies": {
-    "@lexical/code": ">=0.17.0",
-    "@lexical/html": ">=0.17.0",
-    "@lexical/link": ">=0.17.0",
-    "@lexical/list": ">=0.17.0",
-    "@lexical/react": ">=0.17.0",
-    "@lexical/rich-text": ">=0.17.0",
-    "@lexical/selection": ">=0.17.0",
-    "@lexical/utils": ">=0.17.0",
-    "lexical": ">=0.17.0",
     "react": ">=18.2.0",
     "react-dom": ">=18.2.0"
   },
