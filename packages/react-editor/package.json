@@ -1,5 +1,5 @@
 {
-  "name": "@sparrowengg/twigs-react-editor",
+  "name": "@sparrowengg/twigs-editor-react",
   "version": "0.0.1",
   "description": "Rich text editor built on top of Lexical",
   "module": "dist/es/index.js",

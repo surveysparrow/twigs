@@ -11,12 +11,18 @@ Twigs editor is built on top of Lexical.
 ## Installation
 
 ```
+yarn add @sparrowengg/twigs-editor-react
+```
+
+The editor uses the following packages as peer dependencies, so you need to install them as well.
+
+```
 yarn add lexical @lexical/code @lexical/html @lexical/link @lexical/list @lexical/react @lexical/rich-text @lexical/selection @lexical/utils
 ```
 
 
 ```jsx
-import { Editor } from "@sparrowengg/twigs-react";
+import { Editor } from "@sparrowengg/twigs-editor-react";
 ```
 
 ### Usage
@@ -32,7 +38,7 @@ The editor is not two way binded, so even if you update the `initialEditorState`
 Another method to get / set the editor state is by using the `dataManagementRef` prop. This prop takes a ref object, which can be used to get / set the editor state.
 
 ```tsx
-import { DataManagementPluginHandle } from "@sparrowengg/twigs-react";
+import { DataManagementPluginHandle } from "@sparrowengg/twigs-editor-react";
 
 const Component = () => {
   // DataManagementPluginHandle used for typescript

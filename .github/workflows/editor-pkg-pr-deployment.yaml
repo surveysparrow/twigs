@@ -1,4 +1,4 @@
-name: Publish twigs-react-editor package to pkg.pr.new
+name: Publish twigs-editor-react package to pkg.pr.new
 on:
   push:
     branches: ["master"]
