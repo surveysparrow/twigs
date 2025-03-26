@@ -17,8 +17,9 @@ export type FilterPillProps = {
   icon?: React.ReactNode;
   filterPillData: FilterType;
   setFilterPillData: (value: FilterType) => void;
-  variant?: 'filled' | 'outline';
+  variant?: 'filled' | 'outline' | 'error';
   cascaderDropdownData: CascaderDropdownItemType[];
+  onDelete: () => void;
 };
 
 export type FilterValueOperatorType = {
@@ -50,7 +51,8 @@ export const FilterPill = ({
   filterPillData,
   setFilterPillData,
   variant = 'outline',
-  cascaderDropdownData
+  cascaderDropdownData,
+  onDelete
 }: FilterPillProps) => {
   const onChange = ({
     selectedProperty,
@@ -77,57 +79,79 @@ export const FilterPill = ({
   };
 
   return (
-    <StyledFilterPill variant={variant}>
-      <Flex alignItems="center" gap="$2" css={{ padding: '3px $2 3px $4' }}>
-        {icon && (
-          <Box
-            css={{
-              lineHeight: 0,
-              flexShrink: 0,
-              color: '$neutral800',
-              '&, & svg': {
-                minWidth: '$4',
-                minHeight: '$4',
-                height: '$4',
-                width: '$4'
-              }
-            }}
-          >
-            {icon}
-          </Box>
-        )}
-        <Text weight="medium" css={{ color: '$neutral900', maxWidth: '$25' }} truncate>{filterPillData.property.label}</Text>
-      </Flex>
-      <CascaderDropdown
-        data={cascaderDropdownData}
-        onChange={onChange}
-      >
-        <Flex>
-          {!filterPillData.connector?.value && (
-            <StyledValueButton>
-              <Text css={{ color: '$neutral700', padding: '3px $4 3px $1' }}>Choose Condition</Text>
-            </StyledValueButton>
+    <TooltipProvider delayDuration={0}>
+      <StyledFilterPill variant={variant}>
+        <Flex alignItems="center" gap="$2" css={{ padding: '3px $2 3px $4' }}>
+          {icon && (
+            <Box
+              css={{
+                lineHeight: 0,
+                flexShrink: 0,
+                color: '$neutral800',
+                '&, & svg': {
+                  minWidth: '$4',
+                  minHeight: '$4',
+                  height: '$4',
+                  width: '$4'
+                }
+              }}
+            >
+              {icon}
+            </Box>
           )}
-          {filterPillData.connector?.value && (
-            <StyledValueButton>
-              <Text css={{ color: '$neutral700', padding: '3px $1 3px $1' }}>{filterPillData.connector?.label}</Text>
-            </StyledValueButton>
-          )}
-          {filterPillData.connector?.value && (
-            <StyledValueButton css={{ borderTopRightRadius: '$lg', borderBottomRightRadius: '$lg' }}>
-              <Text css={{ color: '$neutral900', padding: '3px $4 3px $2' }} weight="medium">{getDisplayValue(filterPillData) ?? 'Choose Value'}</Text>
-            </StyledValueButton>
-          )}
+          <Text weight="medium" css={{ color: '$neutral900', maxWidth: '$25' }} truncate>{filterPillData.property.label}</Text>
         </Flex>
-      </CascaderDropdown>
-      <TooltipProvider>
+        <CascaderDropdown
+          data={cascaderDropdownData}
+          onChange={onChange}
+        >
+          <Flex>
+            {!filterPillData.connector?.value && (
+              <StyledValueButton>
+                <Text
+                  css={{
+                    color: '$neutral700',
+                    padding: '3px $4 3px $1',
+                    ...(variant === 'error' && {
+                      color: '$negative700',
+                      fontWeight: '$5'
+                    })
+                  }}
+                >
+                  Choose Condition
+                </Text>
+              </StyledValueButton>
+            )}
+            {filterPillData.connector?.value && (
+              <StyledValueButton>
+                <Text css={{ color: '$neutral700', padding: '3px $1 3px $1' }}>{filterPillData.connector?.label}</Text>
+              </StyledValueButton>
+            )}
+            {filterPillData.connector?.value && (
+              <StyledValueButton css={{ borderTopRightRadius: '$lg', borderBottomRightRadius: '$lg' }}>
+                <Text
+                  css={{
+                    color: '$neutral900',
+                    padding: '3px $4 3px $2',
+                    ...(variant === 'error' && {
+                      color: '$negative700'
+                    })
+                  }}
+                  weight="medium"
+                >
+                  {getDisplayValue(filterPillData) ?? 'Choose Value'}
+                </Text>
+              </StyledValueButton>
+            )}
+          </Flex>
+        </CascaderDropdown>
         <Tooltip content="Remove">
-          <StyledCloseButton className={prefixClassName('filter-pill__close-button')}>
+          <StyledCloseButton className={prefixClassName('filter-pill__close-button')} onClick={() => onDelete()}>
             <CloseCircleFillIcon size={16} />
           </StyledCloseButton>
         </Tooltip>
-      </TooltipProvider>
-    </StyledFilterPill>
+      </StyledFilterPill>
+    </TooltipProvider>
   );
 };
 
@@ -135,15 +159,17 @@ type FilterPillWithoutOperatorProps = {
   icon?: React.ReactNode;
   filterPillData: FilterType;
   setFilterPillData: (value: FilterType) => void;
-  variant?: 'filled' | 'outline';
+  variant?: 'filled' | 'outline' | 'error';
   data: CascaderDropdownOperatorType;
+  onDelete: () => void;
 };
 export const FilterPillWithoutOperator = ({
   icon,
   filterPillData,
   setFilterPillData,
   variant = 'outline',
-  data
+  data,
+  onDelete
 }: FilterPillWithoutOperatorProps) => {
   const onChange = (value: string) => {
     const newFilterPillData = {
@@ -163,42 +189,60 @@ export const FilterPillWithoutOperator = ({
   };
 
   return (
-    <StyledFilterPill variant={variant}>
-      <Flex alignItems="center" gap="$2" css={{ padding: '3px $2 3px $4' }}>
-        {icon && (
-          <Box
-            css={{
-              lineHeight: 0,
-              flexShrink: 0,
-              color: '$neutral800',
-              '&, & svg': {
-                minWidth: '$4',
-                minHeight: '$4',
-                height: '$4',
-                width: '$4'
-              }
-            }}
+    <TooltipProvider delayDuration={0}>
+      <StyledFilterPill variant={variant}>
+        <Flex alignItems="center" gap="$2" css={{ padding: '3px $2 3px $4' }}>
+          {icon && (
+            <Box
+              css={{
+                lineHeight: 0,
+                flexShrink: 0,
+                color: '$neutral800',
+                '&, & svg': {
+                  minWidth: '$4',
+                  minHeight: '$4',
+                  height: '$4',
+                  width: '$4'
+                }
+              }}
+            >
+              {icon}
+            </Box>
+          )}
+          <Text
+            weight="medium"
+            css={{ color: '$neutral700', maxWidth: '$25' }}
+            truncate
           >
-            {icon}
-          </Box>
-        )}
-        <Text weight="medium" css={{ color: '$neutral700', maxWidth: '$25' }} truncate>{filterPillData.property.label}</Text>
-      </Flex>
-      <FilterPillValueSelector dataType={data.dataType} choices={data.choices} onApply={onChange}>
-        <Flex>
-          <StyledValueButton css={{ borderTopRightRadius: '$lg', borderBottomRightRadius: '$lg' }}>
-            <Text css={{ color: '$neutral900', padding: '3px $4 3px $2' }} weight="medium">{getDisplayValue(filterPillData) ?? 'Choose Value'}</Text>
-          </StyledValueButton>
+            {filterPillData.property.label}
+            :
+          </Text>
         </Flex>
-      </FilterPillValueSelector>
-      <TooltipProvider>
+        <FilterPillValueSelector dataType={data.dataType} choices={data.choices} onApply={onChange}>
+          <Flex>
+            <StyledValueButton css={{ borderTopRightRadius: '$lg', borderBottomRightRadius: '$lg' }}>
+              <Text
+                css={{
+                  color: '$neutral900',
+                  padding: '3px $4 3px $2',
+                  ...(variant === 'error' && {
+                    color: '$negative700'
+                  })
+                }}
+                weight="medium"
+              >
+                {getDisplayValue(filterPillData) ?? 'Choose Value'}
+              </Text>
+            </StyledValueButton>
+          </Flex>
+        </FilterPillValueSelector>
         <Tooltip content="Remove">
-          <StyledCloseButton className={prefixClassName('filter-pill__close-button')}>
+          <StyledCloseButton className={prefixClassName('filter-pill__close-button')} onClick={() => onDelete()}>
             <CloseCircleFillIcon size={16} />
           </StyledCloseButton>
         </Tooltip>
-      </TooltipProvider>
-    </StyledFilterPill>
+      </StyledFilterPill>
+    </TooltipProvider>
   );
 };
 
@@ -233,6 +277,14 @@ const StyledFilterPill = styled(Flex, {
       },
       filled: {
         backgroundColor: '$secondary50'
+      },
+      error: {
+        backgroundColorOpacity: ['$negative500', 0.05],
+        borderStyle: 'dashed',
+        borderColor: '$negative400',
+        '&:hover': {
+          borderColor: '$negative400'
+        }
       }
     }
   },

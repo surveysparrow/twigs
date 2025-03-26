@@ -1,6 +1,6 @@
 import { Flex } from '@src/flex';
 import React, {
-  Dispatch, RefAttributes, SetStateAction, useState
+  RefAttributes, useState
 } from 'react';
 import {
   Dialog, DialogClose, DialogBody, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger
@@ -20,6 +20,8 @@ import {
   DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger
 } from '@src/dropdown';
 import { PopoverContentProps } from '@radix-ui/react-popover';
+import { prefixClassName } from '@src/utils/prefix-class-name';
+import { Tooltip, TooltipProvider } from '@src/tooltip';
 import { FilterPill, FilterPillWithoutOperator } from '../index';
 
 export default {
@@ -84,6 +86,93 @@ const Template = () => {
     globalConnector: 'AND',
     filterGroups: []
   });
+  const updateFilters = (group: FilterGroupType, filterPillValue: FilterType, filterIndex: number) => {
+    const newFilters = group.filters.map((loopFilter, loopFilterIndex) => {
+      if (loopFilterIndex === filterIndex) return filterPillValue;
+      return loopFilter;
+    });
+    return {
+      ...group,
+      filters: newFilters
+    };
+  };
+
+  const replaceFilterPillData = (filterPillValue: FilterType, groupIndex: number, filterIndex: number) => {
+    setConditionsData((prev) => ({
+      ...prev,
+      filterGroups: prev.filterGroups.map((loopGroup, loopGroupIndex) => {
+        if (loopGroupIndex !== groupIndex) return loopGroup;
+        return updateFilters(loopGroup, filterPillValue, filterIndex);
+      })
+    }));
+  };
+
+  const addCondition = (selectedProperty: CascaderDropdownItemType | null) => {
+    if (!selectedProperty) return;
+    setConditionsData((prev) => ({
+      ...prev,
+      filterGroups: [
+        ...prev.filterGroups,
+        {
+          filters: [
+            {
+              comparator: 'AND' as ComparatorType,
+              property: selectedProperty,
+              value: initialFilterValueSelectorValue
+            }
+          ]
+        }]
+    }));
+  };
+
+  const insertCondition = (selectedProperty: CascaderDropdownItemType, groupIndex: number, filterIndex: number) => {
+    setConditionsData((prev) => ({
+      ...prev,
+      filterGroups: [
+        ...prev.filterGroups.slice(0, groupIndex),
+        {
+          filters: [
+            ...prev.filterGroups[groupIndex].filters.slice(0, filterIndex + 1),
+            {
+              comparator: 'AND' as ComparatorType,
+              property: selectedProperty,
+              value: initialFilterValueSelectorValue
+            },
+            ...prev.filterGroups[groupIndex].filters.slice(filterIndex + 1)
+          ]
+        },
+        ...prev.filterGroups.slice(groupIndex + 1)
+      ]
+    }));
+  };
+  const filterConditions = (group: FilterGroupType, filterIndex: number) => {
+    return {
+      ...group,
+      filters: group.filters.filter((_, loopFilterIndex) => loopFilterIndex !== filterIndex)
+    };
+  };
+
+  const deleteCondition = (groupIndex: number, filterIndex: number) => {
+    setConditionsData((prev) => {
+      const updatedGroup = filterConditions(prev.filterGroups[groupIndex], filterIndex);
+
+      if (updatedGroup.filters.length === 0) {
+        // Remove the group if it has no filters
+        return {
+          ...prev,
+          filterGroups: prev.filterGroups.filter((_, loopGroupIndex) => loopGroupIndex !== groupIndex)
+        };
+      }
+
+      return {
+        ...prev,
+        filterGroups: prev.filterGroups.map((group, loopGroupIndex) => {
+          if (loopGroupIndex !== groupIndex) return group;
+          return updatedGroup;
+        })
+      };
+    });
+  };
 
   return (
     <Flex css={{ flexWrap: 'wrap' }} gap="$2">
@@ -92,171 +181,133 @@ const Template = () => {
           <Button size="lg">Edit profile</Button>
         </DialogTrigger>
         <DialogContent css={{ overflow: 'visible' }}>
-          <DialogHeader
-            css={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'flex-start',
-              justifyContent: 'center'
-            }}
-          >
-            <DialogTitle size="lg">Exclude conditions</DialogTitle>
-          </DialogHeader>
-          <DialogBody css={{ padding: '$12' }}>
-            <Flex css={{ margin: '0 0 $6 0' }}>
-              <Text size="md" css={{ color: '$neutral900' }}>
-                Exclude recipients who meet
-                <Box as="span" css={{ display: 'inline-block', margin: '0 $2' }}>
-                  <DropdownMenu size="sm">
-                    <DropdownMenuTrigger asChild>
-                      <Button
-                        rightIcon={<ChevronDownIcon />}
-                        size="sm"
-                        variant="ghost"
-                        color="default"
-                        css={{
-                          height: '$7', paddingRight: '0', fontWeight: '$7'
-                        }}
-                      >
-                        {connectorOptionsMap[conditionsData.globalConnector]}
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="start" css={{ zIndex: '1000', minWidth: '100px' }}>
-                      {allAnyOptions.map((option) => (
-                        <DropdownMenuItem
-                          key={option.value}
+          <TooltipProvider delayDuration={0}>
+            <DialogHeader
+              css={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'flex-start',
+                justifyContent: 'center'
+              }}
+            >
+              <DialogTitle size="lg">Exclude conditions</DialogTitle>
+            </DialogHeader>
+            <DialogBody css={{ padding: '$12' }}>
+              <Flex css={{ margin: '0 0 $6 0' }}>
+                <Text size="md" css={{ color: '$neutral900' }}>
+                  Exclude recipients who meet
+                  <Box as="span" css={{ display: 'inline-block', margin: '0 $2' }}>
+                    <DropdownMenu size="sm">
+                      <DropdownMenuTrigger asChild>
+                        <Button
+                          rightIcon={<ChevronDownIcon />}
+                          size="sm"
+                          variant="ghost"
+                          color="default"
                           css={{
-                            cursor: 'pointer',
-                            ...(conditionsData.globalConnector === option.value && {
-                              '&, &:hover': {
-                                backgroundColorOpacity: ['$primary200', 0.08]
-                              }
-                            })
+                            height: '$7', paddingRight: '0', fontWeight: '$7'
                           }}
                         >
-                          {option.label}
-                        </DropdownMenuItem>
-                      ))}
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </Box>
-                of these conditions:
-              </Text>
-            </Flex>
-            <Flex flexDirection="column" gap="$1">
-              {conditionsData.filterGroups.map((group, groupIndex) => (
-                // eslint-disable-next-line react/no-array-index-key
-                <Group key={groupIndex}>
-                  <GroupTitle>When</GroupTitle>
-                  {group.filters.map((filter, filterIndex) => {
-                    if (filter.property.operators?.length === 1) {
-                      return (
-                        <FilterPillWithoutOperator
-                          key={filter.property.operators[0].value}
-                          data={filter.property.operators[0]}
-                          filterPillData={conditionsData.filterGroups[groupIndex].filters[filterIndex]}
-                          setFilterPillData={(filterPillValue: FilterType) => setConditionsData({
-                            ...conditionsData,
-                            filterGroups: conditionsData.filterGroups.map((loopGroup, loopGroupIndex) => {
-                              if (loopGroupIndex === groupIndex) {
-                                return ({
-                                  ...loopGroup,
-                                  filters: loopGroup.filters.map((loopFilter, loopFilterIndex) => {
-                                    if (loopFilterIndex === filterIndex) return filterPillValue;
-                                    return loopFilter;
-                                  })
-                                });
-                              }
-                              return loopGroup;
-                            })
-                          })}
-                          icon={<SurveyIcon />}
-                        />
-                      );
-                    }
-                    return (
-                      <Flex key={filter.property.value} alignItems="center" gap="$1" css={{ '&:hover button': { opacity: '1' } }}>
-                        {filterIndex > 0 && (
-                          <ComparatorDropdown conditionsData={conditionsData} />
-                        )}
-                        <FilterPill
-                          cascaderDropdownData={filter.property.operators ?? []}
-                          filterPillData={conditionsData.filterGroups[groupIndex].filters[filterIndex]}
-                          setFilterPillData={(filterPillValue: FilterType) => setConditionsData({
-                            ...conditionsData,
-                            filterGroups: conditionsData.filterGroups.map((loopGroup, loopGroupIndex) => {
-                              if (loopGroupIndex === groupIndex) {
-                                return ({
-                                  ...loopGroup,
-                                  filters: loopGroup.filters.map((loopFilter, loopFilterIndex) => {
-                                    if (loopFilterIndex === filterIndex) return filterPillValue;
-                                    return loopFilter;
-                                  })
-                                });
-                              }
-                              return loopGroup;
-                            })
-                          })}
-                        />
-                        <AddConditionInGroupButton groupIndex={groupIndex} filterIndex={filterIndex} setConditionsData={setConditionsData} />
-                      </Flex>
-                    );
-                  })}
-                </Group>
-              ))}
-              <Flex alignItems="center" gap="$4">
-                <AddConditionButton
-                  onAdd={({ selectedProperty }: { selectedProperty: CascaderDropdownItemType | null }) => {
-                    if (selectedProperty) {
-                      setConditionsData({
-                        ...conditionsData,
-                        filterGroups: [
-                          ...conditionsData.filterGroups,
-                          {
-                            filters: [
-                              {
-                                comparator: 'AND' as ComparatorType,
-                                // connector: ,
-                                property: selectedProperty,
-                                value: initialFilterValueSelectorValue
-                              }
-                            ]
-                          }]
-                      });
-                    }
-                  }}
-                >
-                  <Button leftIcon={<PlusIcon />} color="secondary" variant="ghost" css={{ height: 'auto', padding: '0' }}>Condition</Button>
-                </AddConditionButton>
-                <Box css={{ width: '100%', borderBottom: '2px dashed $secondary100' }} />
+                          {connectorOptionsMap[conditionsData.globalConnector]}
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="start" css={{ zIndex: '1000', minWidth: '100px' }}>
+                        {allAnyOptions.map((option) => (
+                          <DropdownMenuItem
+                            key={option.value}
+                            css={{
+                              cursor: 'pointer',
+                              ...(conditionsData.globalConnector === option.value && {
+                                '&, &:hover': {
+                                  backgroundColorOpacity: ['$primary200', 0.08]
+                                }
+                              })
+                            }}
+                          >
+                            {option.label}
+                          </DropdownMenuItem>
+                        ))}
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </Box>
+                  of these conditions:
+                </Text>
               </Flex>
-            </Flex>
-          </DialogBody>
-          <DialogFooter>
-            <Flex justifyContent="flex-end" css={{ justifyContent: 'flex-end' }} gap="$4">
+              <Flex flexDirection="column" gap="$1">
+                {conditionsData.filterGroups.map((group, groupIndex) => (
+                  // eslint-disable-next-line react/no-array-index-key
+                  <Group key={groupIndex}>
+                    <GroupTitle>When</GroupTitle>
+                    {group.filters.map((filter, filterIndex) => {
+                      if (filter.property.operators?.length === 1) {
+                        return (
+                          <FilterPillWithoutOperator
+                            key={filter.property.operators[0].value}
+                            data={filter.property.operators[0]}
+                            filterPillData={conditionsData.filterGroups[groupIndex].filters[filterIndex]}
+                            setFilterPillData={(filterPillValue: FilterType) => replaceFilterPillData(filterPillValue, groupIndex, filterIndex)}
+                            icon={<SurveyIcon />}
+                            onDelete={() => deleteCondition(groupIndex, filterIndex)}
+                          />
+                        );
+                      }
+                      return (
+                        <Flex key={filter.property.value} alignItems="center" gap="$1" css={{ [`&:hover .${prefixClassName('add-condition-in-group-button')}`]: { opacity: '1' } }}>
+                          {filterIndex > 0 && (
+                            <ComparatorDropdown conditionsData={conditionsData} />
+                          )}
+                          <FilterPill
+                            cascaderDropdownData={filter.property.operators ?? []}
+                            filterPillData={conditionsData.filterGroups[groupIndex].filters[filterIndex]}
+                            setFilterPillData={(filterPillValue: FilterType) => replaceFilterPillData(filterPillValue, groupIndex, filterIndex)}
+                            onDelete={() => deleteCondition(groupIndex, filterIndex)}
+                          />
+                          <AddConditionInGroupButton insertCondition={(selectedProperty) => insertCondition(selectedProperty, groupIndex, filterIndex)} />
+                        </Flex>
+                      );
+                    })}
+                  </Group>
+                ))}
+                <Flex alignItems="center" gap="$4">
+                  <Tooltip content="Add Filter" side="right">
+                    <AddConditionButton
+                      onAdd={({ selectedProperty }: { selectedProperty: CascaderDropdownItemType | null }) => {
+                        addCondition(selectedProperty);
+                      }}
+                    >
+                      <Button leftIcon={<PlusIcon />} color="secondary" variant="ghost" css={{ height: 'auto', padding: '0' }}>Condition</Button>
+                    </AddConditionButton>
+                  </Tooltip>
+                  <Box css={{ width: '100%', borderBottom: '2px dashed $secondary100' }} />
+                </Flex>
+              </Flex>
+            </DialogBody>
+            <DialogFooter>
+              <Flex justifyContent="flex-end" css={{ justifyContent: 'flex-end' }} gap="$4">
+                <DialogClose asChild>
+                  <Button size="lg" color="default">
+                    Cancel
+                  </Button>
+                </DialogClose>
+                <DialogClose asChild>
+                  <Button size="lg" color="primary">
+                    Save
+                  </Button>
+                </DialogClose>
+              </Flex>
+            </DialogFooter>
+            <Box css={{ position: 'absolute', top: '$8', right: '$8' }}>
               <DialogClose asChild>
-                <Button size="lg" color="default">
-                  Cancel
-                </Button>
+                <IconButton
+                  size="lg"
+                  icon={<CloseIcon />}
+                  variant="ghost"
+                  aria-label="Close"
+                  color="default"
+                />
               </DialogClose>
-              <DialogClose asChild>
-                <Button size="lg" color="primary">
-                  Save
-                </Button>
-              </DialogClose>
-            </Flex>
-          </DialogFooter>
-          <Box css={{ position: 'absolute', top: '$8', right: '$8' }}>
-            <DialogClose asChild>
-              <IconButton
-                size="lg"
-                icon={<CloseIcon />}
-                variant="ghost"
-                aria-label="Close"
-                color="default"
-              />
-            </DialogClose>
-          </Box>
+            </Box>
+          </TooltipProvider>
         </DialogContent>
       </Dialog>
     </Flex>
@@ -287,27 +338,6 @@ const GroupTitle = ({ children }: { children: React.ReactNode }) => {
     </Flex>
   );
 };
-
-// const AddConditionGroup = ({ onAdd }: { onAdd: ({ selectedProperty }: { selectedProperty: CascaderDropdownItemType | null }) => void }) => {
-//   // const onChange = ({
-//   //   // value,
-//   //   // selectionPath,
-//   //   selectedProperty
-//   //   // selectorValue
-//   // } : {
-//   //   value: CascaderDropdownDataValueType | CascaderDropdownOperatorType,
-//   //   selectionPath: CascaderDropdownDataValueType[],
-//   //   selectedProperty: CascaderDropdownItemType | null,
-//   //   selectorValue?: CascaderDropdownValueSelectorType
-//   // }) => {
-//   //   onAdd({ selectedProperty });
-//   // };
-
-//   return (
-//     <CascaderDropdown data={properties} dropdownContentProps={{ align: 'start' }} onChange={onChange}>
-//     </CascaderDropdown>
-//   );
-// };
 
 const AddConditionButton = ({ children, onAdd, dropdownContentProps }: {
   children: React.ReactNode,
@@ -374,39 +404,19 @@ const ComparatorDropdown = ({ conditionsData }: { conditionsData: ConditionsData
 };
 
 const AddConditionInGroupButton = ({
-  groupIndex,
-  filterIndex,
-  setConditionsData
+  insertCondition
 }: {
-  groupIndex: number,
-  filterIndex: number,
-  setConditionsData: Dispatch<SetStateAction<ConditionsDataType>>
+  insertCondition: (selectedProperty: CascaderDropdownItemType) => void
 }) => {
   const handleAddCondition = ({ selectedProperty }: { selectedProperty: CascaderDropdownItemType | null }) => {
     if (!selectedProperty) return;
-    setConditionsData((prev) => ({
-      ...prev,
-      filterGroups: [
-        ...prev.filterGroups.slice(0, groupIndex),
-        {
-          filters: [
-            ...prev.filterGroups[groupIndex].filters.slice(0, filterIndex + 1),
-            {
-              comparator: 'AND' as ComparatorType,
-              property: selectedProperty,
-              value: initialFilterValueSelectorValue
-            },
-            ...prev.filterGroups[groupIndex].filters.slice(filterIndex + 1)
-          ]
-        },
-        ...prev.filterGroups.slice(groupIndex + 1)
-      ]
-    }));
+    insertCondition(selectedProperty);
   };
 
   return (
     <AddConditionButton onAdd={handleAddCondition}>
       <IconButton
+        className={prefixClassName('add-condition-in-group-button')}
         size="md"
         css={{
           height: '$6',
