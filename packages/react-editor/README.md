@@ -1,6 +1,6 @@
 # Welcome to twigs-editor ⚡️
 
-Rich test editor from [SurveySparrow](https://surveysparrow.com). Built on top of lexical.
+RichText editor from [SurveySparrow](https://surveysparrow.com). Built on top of lexical.
 
 ## Installation
 
