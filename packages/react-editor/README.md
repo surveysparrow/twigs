@@ -1,33 +1,38 @@
-# Welcome to twigs ⚡️
+# Welcome to twigs-editor ⚡️
 
-In house component library for [SurveySparrow](https://surveysparrow.com).
-
-## Features
-
-1. Themeable
-2. Customisable
-3. Fully accessible
+Rich test editor from [SurveySparrow](https://surveysparrow.com). Built on top of lexical.
 
 ## Installation
 
 ```
-npm i @sparrowengg/twigs-react;
+npm i @sparrowengg/twigs-editor-react;
 
-yarn add @sparrowengg/twigs-react;
+yarn add @sparrowengg/twigs-editor-react;
+```
+
+
+The editor uses the following packages as peer dependencies, so you need to install them as well.
+
+```
+yarn add lexical @lexical/code @lexical/html @lexical/link @lexical/list @lexical/react @lexical/rich-text @lexical/selection @lexical/utils
 ```
 
 ## Usage
 
 ```
-import { Box, Avatar, AvatarImage, AvatarFallback } from '@sparrowengg/twigs-react';
-
-<Box css={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
-  <Avatar size="lg">
-     <AvatarImage
-       src="https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&w=128&h=128&dpr=2&q=80"
-       alt="John Doe"
-      />
-     <AvatarFallback delayMs={600}>JD</AvatarFallback>
-   </Avatar>
-</Box>
+<Editor>
+  <EditorToolbar
+    tools={[
+      "format",
+      "bold",
+      "italic",
+      "underline",
+      "code",
+      "ordered-list",
+      "unordered-list",
+      "codeblock",
+    ]}
+  />
+  <RichEditor />
+</Editor>
 ```
