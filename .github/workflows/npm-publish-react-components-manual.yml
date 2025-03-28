@@ -1,14 +1,11 @@
-# This workflow will run tests using node and then publish a package to npm when a release is created with the tag twigs-react@
-
-name: Publish react components
+# This workflow will run tests using node and then publish a package
+name: Publish react components manually
 
 on:
-  release:
-    types: [created]
+  workflow_dispatch:
 
 jobs:
   build-test-and-publish:
-    if: ${{ startsWith(github.ref_name, 'twigs-react@') }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
