@@ -1,5 +1,4 @@
-# This workflow will run tests using node and then publish a package to npm when a release is created with the tag twigs-react@
-
+# This workflow will run tests using node and then publish a package
 name: Publish react components manually
 
 on:
