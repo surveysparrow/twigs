@@ -1,11 +1,11 @@
-name: Publish twigs-react package to pkg.pr.new
+name: Publish twigs packages to pkg.pr.new
 on:
-  workflow_dispatch:
-    inputs:
-      branch:
-        description: "Branch to deploy"
-        required: true
-        default: "master"
+  pull_request:
+    branches: ["master", "releases/**"]
+    paths:
+      - "packages/react-editor/**"
+      - "packages/react-components/**"
+      - "packages/react-icons/**"
 
 jobs:
   build:
@@ -17,15 +17,15 @@ jobs:
         with:
           ref: ${{ github.event.inputs.branch }}
 
-      - name: Build and Test
+      - name: Build
         uses: actions/setup-node@v4
         with:
           node-version: 20
       - run: yarn
-      - run: yarn build:components
+      - run: yarn build:editor
 
       - name: Publish to pkg.pr.new
         uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: cd packages/react-components && yarn publish-pkg-pr-new
+      - run: npx pkg-pr-new publish './packages/*'
