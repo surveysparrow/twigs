@@ -1,8 +1,8 @@
 import React from "react";
 import { twigsComponentLoader, twigsIconLoader } from "./twigs-loader";
+import { dialogs, DialogsManager } from "@sparrowengg/twigs-react";
+
 import {
-  dialogs,
-  DialogsManager,
   Editor,
   MentionNode,
   MentionsPlugin,
@@ -17,7 +17,7 @@ import {
   ConvertSelectionToLinkOnPastePlugin,
   EmojiNode,
   EmojiPlugin,
-} from "@sparrowengg/twigs-react";
+} from "@sparrowengg/twigs-editor-react";
 
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { $getSelection, $isTextNode } from "lexical";
