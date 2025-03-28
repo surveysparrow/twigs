@@ -5,7 +5,7 @@ import { CalendarState } from 'react-stately';
 import { config } from '../stitches.config';
 import { TextProps } from '../text';
 
-export type CalendarSize = 'lg' | 'md';
+export type CalendarSize = 'lg' | 'md' | 'sm';
 
 export type CalendarControlProps = {
   showTimezonePicker?: boolean;
@@ -36,7 +36,8 @@ export const CALENDAR_SIZE_TO_YEAR_MONTH_BTN_HEIGHT: Record<
   CSS<typeof config>['height']
 > = {
   lg: '$20',
-  md: '$14'
+  md: '$14',
+  sm: '$14'
 };
 
 export const CALENDAR_SIZE_TO_FONT_SIZE: Record<
@@ -44,12 +45,14 @@ export const CALENDAR_SIZE_TO_FONT_SIZE: Record<
   TextProps['size']
 > = {
   lg: 'md',
-  md: 'sm'
+  md: 'sm',
+  sm: 'sm'
 };
 
 export const CALENDAR_SIZE_TO_WIDTH: Record<CalendarSize, number> = {
   lg: 340,
-  md: 260
+  md: 260,
+  sm: 260
 };
 
 export const CALENDAR_SIZE_TO_BORDER_RADIUS: Record<
@@ -57,7 +60,8 @@ export const CALENDAR_SIZE_TO_BORDER_RADIUS: Record<
   CSS<typeof config>['borderRadius']
 > = {
   lg: '$2xl',
-  md: '$xl'
+  md: '$xl',
+  sm: '$lg'
 };
 
 export const CALENDAR_SIZE_TO_DAY_BTN_SIZE: Record<
@@ -65,5 +69,6 @@ export const CALENDAR_SIZE_TO_DAY_BTN_SIZE: Record<
   CSS<typeof config>['width']
 > = {
   lg: '$10',
-  md: '$8'
+  md: '$8',
+  sm: '$8'
 };

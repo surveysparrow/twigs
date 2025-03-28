@@ -20,6 +20,7 @@ import {
   useLocale
 } from 'react-aria';
 import { useCalendarState } from 'react-stately';
+import { prefixClassName } from '@src/utils';
 import { Box } from '../box';
 import { Button } from '../button';
 import { Text } from '../text';
@@ -139,13 +140,15 @@ export const Calendar = ({
           ...containerCSS
         }}
         ref={ref}
+        className={prefixClassName('calendar')}
       >
         {currentCalendarView === CALENDAR_VIEW.GRID && (
           <>
-            <CalendarHeader calendarSize={size}>
+            <CalendarHeader calendarSize={size} className={prefixClassName('calendar__header')}>
               <CalendarNavigationButton
                 {...prevButtonProps}
                 icon={<ChevronLeftIcon />}
+                className={prefixClassName('calendar__nav-button--prev')}
               />
               <CalendarTitle
                 value={state.focusedDate}
@@ -155,6 +158,7 @@ export const Calendar = ({
               <CalendarNavigationButton
                 {...nextButtonProps}
                 icon={<ChevronRightIcon />}
+                className={prefixClassName('calendar__nav-button--next')}
               />
             </CalendarHeader>
             <CalendarGrid state={state} onDaySelect={onDaySelect} />
@@ -165,6 +169,7 @@ export const Calendar = ({
                     value={dateValue}
                     onChange={handleChange}
                     size={size}
+                    className={prefixClassName('calendar__time-picker')}
                   />
                 )}
                 {props.showTimezonePicker && (
@@ -172,6 +177,7 @@ export const Calendar = ({
                     value={dateValue}
                     onChange={handleChange}
                     size={size}
+                    className={prefixClassName('calendar__timezone-picker')}
                   />
                 )}
               </TimeAndZonePickerContainer>
@@ -197,7 +203,7 @@ export const Calendar = ({
             {props.renderFooter ? (
               props.renderFooter(state)
             ) : (
-              <FooterContainer calendarSize={size}>
+              <FooterContainer calendarSize={size} className={prefixClassName('calendar__footer')}>
                 <Text
                   weight="bold"
                   css={{
@@ -223,6 +229,7 @@ export const Calendar = ({
                   onClick={() => {
                     if (footerAction) footerAction(state);
                   }}
+                  className={prefixClassName('calendar__footer-button')}
                 >
                   {footerActionText}
                 </Button>
