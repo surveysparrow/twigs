@@ -8,6 +8,7 @@ import { CSS } from '@stitches/react';
 import { useId } from 'react';
 import { useCalendarGrid, useLocale } from 'react-aria';
 import { CalendarState, RangeCalendarState } from 'react-stately';
+import { prefixClassName } from '@src/utils';
 import { Box } from '../box';
 import { config } from '../stitches.config';
 import { CalendarCell } from './calendar-cell';
@@ -52,11 +53,16 @@ export const CalendarGrid = ({
       calendarSize={calendarContext.size}
       {...gridProps}
       css={containerCSS}
+      className={prefixClassName('calendar__container')}
     >
-      <WeekContainer {...headerProps} calendarSize={calendarContext.size}>
+      <WeekContainer
+        {...headerProps}
+        calendarSize={calendarContext.size}
+        className={prefixClassName('calendar__week-container')}
+      >
         {weekDays.map((day, index) => (
           // eslint-disable-next-line react/no-array-index-key
-          <Week key={`twigs-calendar-grid-${day}-${startDate}-${id}-${index}`}>
+          <Week key={`twigs-calendar-grid-${day}-${startDate}-${id}-${index}`} className={prefixClassName('calendar__week')}>
             {day.substring(0, 2)}
           </Week>
         ))}
@@ -66,12 +72,19 @@ export const CalendarGrid = ({
           padding: '$8 0',
           ...(calendarContext.size === 'lg' && {
             paddingBottom: '$4'
+          }),
+          ...(calendarContext.size === 'sm' && {
+            padding: '$4 0'
           })
         }}
+        className={prefixClassName('calendar__days-container')}
       >
         {[...new Array(weeksInMonth).keys()].map((weekIndex, index) => (
-          // eslint-disable-next-line react/no-array-index-key
-          <DaysContainer key={`weekIndex-${startDate}-${id}-${index}`}>
+          <DaysContainer
+            // eslint-disable-next-line react/no-array-index-key
+            key={`weekIndex-${startDate}-${id}-${index}`}
+            className={prefixClassName('calendar__days-container--week')}
+          >
             {state
               .getDatesInWeek(weekIndex, startDate)
               .map((date) => (date ? (

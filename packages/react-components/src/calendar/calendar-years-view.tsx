@@ -5,6 +5,7 @@ import {
 } from '@sparrowengg/twigs-react-icons';
 import React, { useId, useMemo, useState } from 'react';
 import { CalendarState, RangeCalendarState } from 'react-stately';
+import { prefixClassName } from '@src/utils';
 import { Box } from '../box';
 import { Button, IconButton } from '../button';
 import { Flex } from '../flex';
@@ -209,12 +210,14 @@ export const CalendarYearsView = ({
       css={{
         minWidth: CALENDAR_SIZE_TO_WIDTH[calendarContext.size]
       }}
+      className={prefixClassName('calendar__years-view')}
     >
       <CalendarHeader
         calendarSize={calendarContext.size}
         css={{
           borderBottom: '1px solid $neutral100'
         }}
+        className={prefixClassName('calendar__years-view-header')}
       >
         <Flex
           css={{
@@ -230,6 +233,7 @@ export const CalendarYearsView = ({
             onClick={() => {
               setCurrentYearInView((prev) => prev - numYears);
             }}
+            className={prefixClassName('calendar__years-view-nav-button--prev')}
           />
           <Flex
             flexDirection="column"
@@ -270,12 +274,14 @@ export const CalendarYearsView = ({
             onClick={() => {
               setCurrentYearInView((prev) => prev + numYears);
             }}
+            className={prefixClassName('calendar__years-view-nav-button--next')}
           />
         </Flex>
       </CalendarHeader>
       <MonthYearGridContainer
         calendarSize={calendarContext.size}
         id={yearsContainerId}
+        className={prefixClassName('calendar__years-view-grid')}
       >
         {years.map((date, i) => (
           <Button
@@ -295,6 +301,7 @@ export const CalendarYearsView = ({
             onKeyDown={(e) => handleKeyDown(e, i)}
             size={calendarContext.size}
             onClick={() => handleYearSelect(date)}
+            className={prefixClassName('calendar__years-view-button')}
           >
             {date.year}
           </Button>

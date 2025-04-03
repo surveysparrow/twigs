@@ -4,6 +4,7 @@ import React, {
 } from 'react';
 import { useDateFormatter } from 'react-aria';
 import { CalendarState, RangeCalendarState } from 'react-stately';
+import { prefixClassName } from '@src/utils';
 import { Box } from '../box';
 import { Button } from '../button';
 import { Text } from '../text';
@@ -173,6 +174,7 @@ export const CalendarMonthsView = ({
       css={{
         minWidth: CALENDAR_SIZE_TO_WIDTH[calendarContext.size]
       }}
+      className={prefixClassName('calendar__months-view')}
     >
       <CalendarHeader
         calendarSize={calendarContext.size}
@@ -180,6 +182,7 @@ export const CalendarMonthsView = ({
           borderBottom: '1px solid $neutral100',
           justifyContent: 'center'
         }}
+        className={prefixClassName('calendar__months-view-header')}
       >
         <Text
           size={CALENDAR_SIZE_TO_FONT_SIZE[calendarContext.size]}
@@ -196,6 +199,7 @@ export const CalendarMonthsView = ({
         ref={containerRef}
         id={monthsContainerId}
         calendarSize={calendarContext.size}
+        className={prefixClassName('calendar__months-view-grid')}
       >
         {months.map((month, i) => (
           <Button
@@ -215,6 +219,7 @@ export const CalendarMonthsView = ({
             onKeyDown={(e) => handleKeyDown(e, i)}
             size={calendarContext.size}
             onClick={() => handleMonthSelect(month.date)}
+            className={prefixClassName('calendar__months-view-button')}
           >
             {month.label}
           </Button>
