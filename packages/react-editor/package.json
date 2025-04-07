@@ -1,6 +1,6 @@
 {
   "name": "@sparrowengg/twigs-editor-react",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Rich text editor built on top of Lexical",
   "module": "dist/es/index.js",
   "main": "dist/cjs/index.js",
@@ -49,6 +49,8 @@
     "@lexical/rich-text": ">=0.27.2",
     "@lexical/selection": ">=0.27.2",
     "@lexical/utils": ">=0.27.2",
+    "@sparrowengg/twigs-react": ">=0.36.0",
+    "@sparrowengg/twigs-react-icons": ">=0.3.5",
     "lexical": ">=0.27.2",
     "react": ">=18.2.0",
     "react-dom": ">=18.2.0"
