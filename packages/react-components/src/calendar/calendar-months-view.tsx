@@ -18,7 +18,7 @@ import {
   CALENDAR_SIZE_TO_WIDTH,
   CALENDAR_SIZE_TO_YEAR_MONTH_BTN_HEIGHT,
   useCalendarContext,
-  useCalenderNavigationContext
+  useCalendarNavigationContext
 } from './calendar-utils';
 
 export const CalendarMonthsView = ({
@@ -41,7 +41,7 @@ export const CalendarMonthsView = ({
   const monthsContainerId = useId();
 
   const calendarContext = useCalendarContext();
-  const { handleCalenderNavigation } = useCalenderNavigationContext();
+  const { handleCalendarNavigation } = useCalendarNavigationContext();
   const dateValue = useMemo(() => {
     if (range && (state as RangeCalendarState).value?.[range]) {
       return (state as RangeCalendarState).value[range];
@@ -171,7 +171,7 @@ export const CalendarMonthsView = ({
       onMonthSelect(updatedDate);
     }
     setCurrentCalendarView(CALENDAR_VIEW.GRID);
-    handleCalenderNavigation(null);
+    handleCalendarNavigation(null);
   };
 
   const isPrevButtonDisabled = () => {

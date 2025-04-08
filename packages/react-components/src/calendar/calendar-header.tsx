@@ -6,9 +6,9 @@ import { Flex } from '../flex';
 import { styled } from '../stitches.config';
 import { CALENDAR_VIEW } from './calendar';
 import {
-  CalenderSectionNameType,
+  CalendarSectionNameType,
   useCalendarContext,
-  useCalenderNavigationContext
+  useCalendarNavigationContext
 } from './calendar-utils';
 
 type ButtonType = {
@@ -105,13 +105,13 @@ export const RangeCalendarTitle = ({
   value: DateValue;
   timezone: string;
   setCurrentCalendarView: (view: keyof typeof CALENDAR_VIEW) => void;
-  sectionName: CalenderSectionNameType;
+  sectionName: CalendarSectionNameType;
 }) => {
   const calendarContext = useCalendarContext();
   const formatMonth = useDateFormatter({
     month: 'long'
   });
-  const { handleCalenderNavigation } = useCalenderNavigationContext();
+  const { handleCalendarNavigation } = useCalendarNavigationContext();
 
   return (
     <Flex gap="$2">
@@ -121,7 +121,7 @@ export const RangeCalendarTitle = ({
         size={calendarContext.size}
         onClick={() => {
           setCurrentCalendarView(CALENDAR_VIEW.YEAR);
-          handleCalenderNavigation({
+          handleCalendarNavigation({
             isEnabled: true,
             sectionName
           });
@@ -135,7 +135,7 @@ export const RangeCalendarTitle = ({
         size={calendarContext.size}
         onClick={() => {
           setCurrentCalendarView(CALENDAR_VIEW.MONTH);
-          handleCalenderNavigation({
+          handleCalendarNavigation({
             isEnabled: true,
             sectionName
           });
