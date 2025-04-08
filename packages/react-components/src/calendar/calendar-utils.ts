@@ -73,16 +73,16 @@ export const CALENDER_SECTION_NAMES = {
   end: 'end'
 } as const;
 
-export type CalenderSectionNamesType = keyof typeof CALENDER_SECTION_NAMES;
+export type CalenderSectionNameType = keyof typeof CALENDER_SECTION_NAMES;
 
 export const CalenderNavigationContext = createContext<{
   calenderNavigationEnabled: {
     isEnabled: boolean;
-    sectionName: CalenderSectionNamesType;
+    sectionName: CalenderSectionNameType;
   } | null;
   handleCalenderNavigation:(values: {
     isEnabled: boolean;
-    sectionName: CalenderSectionNamesType;
+    sectionName: CalenderSectionNameType;
   } | null) => void;
     }>({
       calenderNavigationEnabled: null,

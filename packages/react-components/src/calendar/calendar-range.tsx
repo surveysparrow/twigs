@@ -41,7 +41,7 @@ import {
   useCalendarContext,
   useCalenderNavigationContext,
   CALENDER_SECTION_NAMES,
-  CalenderSectionNamesType
+  CalenderSectionNameType
 } from './calendar-utils';
 import { CalendarYearsView } from './calendar-years-view';
 
@@ -60,9 +60,9 @@ export const CalendarRange = ({
   CalendarControlProps & {
     footerAction?: (state: RangeCalendarState) => void;
     renderFooter?: (state: RangeCalendarState) => ReactNode;
-    onDaySelect?: (date: DateValue, range: CalenderSectionNamesType) => void;
-    onMonthSelect?: (date: DateValue, range: CalenderSectionNamesType) => void;
-    onYearSelect?: (date: DateValue, range: CalenderSectionNamesType) => void;
+    onDaySelect?: (date: DateValue, range: CalenderSectionNameType) => void;
+    onMonthSelect?: (date: DateValue, range: CalenderSectionNameType) => void;
+    onYearSelect?: (date: DateValue, range: CalenderSectionNameType) => void;
     compact?: boolean;
   }) => {
   const { locale } = useLocale();
@@ -118,12 +118,12 @@ export const CalendarRange = ({
 
   const [calenderNavigationEnabled, setCalenderNavigationEnabled] = useState<{
     isEnabled: boolean;
-    sectionName: CalenderSectionNamesType;
+    sectionName: CalenderSectionNameType;
   } | null>(null);
 
   const handleCalenderNavigation = (values: {
     isEnabled: boolean;
-    sectionName: CalenderSectionNamesType;
+    sectionName: CalenderSectionNameType;
   } | null) => {
     setCalenderNavigationEnabled(values);
   };
@@ -231,7 +231,7 @@ const CalendarSingleSection = ({
 }: {
   navigationButtonProps: AriaButtonProps<'button'> | { prev: AriaButtonProps<'button'>; next: AriaButtonProps<'button'> };
   calendarOffset?: DateDuration;
-  sectionName: CalenderSectionNamesType;
+  sectionName: CalenderSectionNameType;
   state: RangeCalendarState;
   onDaySelect?: (date: DateValue) => void;
   onMonthSelect?: (date: DateValue) => void;

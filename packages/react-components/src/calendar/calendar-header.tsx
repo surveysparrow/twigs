@@ -6,7 +6,7 @@ import { Flex } from '../flex';
 import { styled } from '../stitches.config';
 import { CALENDAR_VIEW } from './calendar';
 import {
-  CalenderSectionNamesType,
+  CalenderSectionNameType,
   useCalendarContext,
   useCalenderNavigationContext
 } from './calendar-utils';
@@ -105,7 +105,7 @@ export const RangeCalendarTitle = ({
   value: DateValue;
   timezone: string;
   setCurrentCalendarView: (view: keyof typeof CALENDAR_VIEW) => void;
-  sectionName: CalenderSectionNamesType;
+  sectionName: CalenderSectionNameType;
 }) => {
   const calendarContext = useCalendarContext();
   const formatMonth = useDateFormatter({
