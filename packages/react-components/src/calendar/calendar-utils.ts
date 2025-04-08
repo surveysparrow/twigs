@@ -67,3 +67,28 @@ export const CALENDAR_SIZE_TO_DAY_BTN_SIZE: Record<
   lg: '$10',
   md: '$8'
 };
+
+export const CALENDER_SECTION_NAMES = {
+  start: 'start',
+  end: 'end'
+} as const;
+
+export type CalenderSectionNamesType = keyof typeof CALENDER_SECTION_NAMES;
+
+export const CalenderNavigationContext = createContext<{
+  calenderNavigationEnabled: {
+    isEnabled: boolean;
+    sectionName: CalenderSectionNamesType;
+  } | null;
+  handleCalenderNavigation:(values: {
+    isEnabled: boolean;
+    sectionName: CalenderSectionNamesType;
+  } | null) => void;
+    }>({
+      calenderNavigationEnabled: null,
+      handleCalenderNavigation: () => {}
+    });
+
+export const useCalenderNavigationContext = () => {
+  return useContext(CalenderNavigationContext);
+};

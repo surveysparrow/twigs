@@ -194,7 +194,7 @@ export const CalendarYearsView = ({
       setCurrentCalendarView(CALENDAR_VIEW.MONTH);
       return;
     }
-    setCurrentCalendarView(CALENDAR_VIEW.GRID);
+    setCurrentCalendarView(CALENDAR_VIEW.MONTH);
     if (!range) {
       (state as CalendarState).selectDate(date);
     }
@@ -243,16 +243,7 @@ export const CalendarYearsView = ({
               size={CALENDAR_SIZE_TO_FONT_SIZE[calendarContext.size]}
               weight="bold"
               css={{
-                color: '$neutral800'
-              }}
-            >
-              Choose Year
-            </Text>
-            <Text
-              size={CALENDAR_SIZE_TO_FONT_SIZE[calendarContext.size]}
-              weight="bold"
-              css={{
-                color: '$neutral900',
+                color: '$neutral800',
                 padding: '0 $6'
               }}
             >

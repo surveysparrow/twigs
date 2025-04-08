@@ -37,14 +37,18 @@ import {
   CALENDAR_SIZE_TO_WIDTH,
   CalendarContext,
   CalendarControlProps,
-  useCalendarContext
+  CalenderNavigationContext,
+  useCalendarContext,
+  useCalenderNavigationContext,
+  CALENDER_SECTION_NAMES,
+  CalenderSectionNamesType
 } from './calendar-utils';
 import { CalendarYearsView } from './calendar-years-view';
 
 export const CalendarRange = ({
   size = 'lg',
   showFooter = true,
-  footerActionText = 'Apply',
+  footerActionText = 'Select',
   containerCSS,
   footerAction,
   onDaySelect,
@@ -56,20 +60,20 @@ export const CalendarRange = ({
   CalendarControlProps & {
     footerAction?: (state: RangeCalendarState) => void;
     renderFooter?: (state: RangeCalendarState) => ReactNode;
-    onDaySelect?: (date: DateValue, range: 'start' | 'end') => void;
-    onMonthSelect?: (date: DateValue, range: 'start' | 'end') => void;
-    onYearSelect?: (date: DateValue, range: 'start' | 'end') => void;
+    onDaySelect?: (date: DateValue, range: CalenderSectionNamesType) => void;
+    onMonthSelect?: (date: DateValue, range: CalenderSectionNamesType) => void;
+    onYearSelect?: (date: DateValue, range: CalenderSectionNamesType) => void;
     compact?: boolean;
   }) => {
   const { locale } = useLocale();
   const state = useRangeCalendarState({
     ...props,
     visibleDuration: compact ? { months: 1 } : { months: 2 },
-    pageBehavior: compact ? 'single' : undefined,
+    pageBehavior: 'single',
     locale,
     createCalendar
   });
-  const dateType = state.anchorDate ? 'start' : 'end';
+  const dateType = state.anchorDate ? CALENDER_SECTION_NAMES.start : CALENDER_SECTION_NAMES.end;
 
   useEffect(() => {
     if (
@@ -112,51 +116,64 @@ export const CalendarRange = ({
     year: 'numeric'
   });
 
+  const [calenderNavigationEnabled, setCalenderNavigationEnabled] = useState<{
+    isEnabled: boolean;
+    sectionName: CalenderSectionNamesType;
+  } | null>(null);
+
+  const handleCalenderNavigation = (values: {
+    isEnabled: boolean;
+    sectionName: CalenderSectionNamesType;
+  } | null) => {
+    setCalenderNavigationEnabled(values);
+  };
+
   return (
     <CalendarContext.Provider value={contextProviderValue}>
-      <Box
-        css={{
-          borderRadius: '$2xl',
-          border: '1px solid',
-          borderColor: '$neutral300',
-          paddingTop: '$6',
-          maxWidth: 'max-content',
-          ...containerCSS
-        }}
-      >
-        {compact ? (
-          <Flex {...calendarProps} ref={ref} css={{ overflow: 'auto' }}>
-            <CalendarSingleSection
-              state={state}
-              navigationButtonProps={{ prev: prevButtonProps, next: nextButtonProps }}
-              sectionName="end"
-              onDaySelect={(date) => onDaySelect?.(date, dateType)}
-              onMonthSelect={(date) => onMonthSelect?.(date, dateType)}
-              onYearSelect={(date) => onYearSelect?.(date, dateType)}
-            />
-          </Flex>
-        ) : (
-          <Flex {...calendarProps} gap="$8" ref={ref} css={{ overflow: 'auto' }}>
-            <CalendarSingleSection
-              state={state}
-              navigationButtonProps={prevButtonProps}
-              sectionName="start"
-              onDaySelect={(date) => onDaySelect?.(date, dateType)}
-              onMonthSelect={(date) => onMonthSelect?.(date, dateType)}
-              onYearSelect={(date) => onYearSelect?.(date, dateType)}
-            />
-            <CalendarSingleSection
-              state={state}
-              calendarOffset={{ months: 1 }}
-              sectionName="end"
-              navigationButtonProps={nextButtonProps}
-              onDaySelect={(date) => onDaySelect?.(date, dateType)}
-              onMonthSelect={(date) => onMonthSelect?.(date, dateType)}
-              onYearSelect={(date) => onYearSelect?.(date, dateType)}
-            />
-          </Flex>
-        )}
-        {showFooter && (
+      <CalenderNavigationContext.Provider value={{ calenderNavigationEnabled, handleCalenderNavigation }}>
+        <Box
+          css={{
+            borderRadius: '$2xl',
+            border: '1px solid',
+            borderColor: '$neutral300',
+            paddingTop: calenderNavigationEnabled?.isEnabled ? '0' : '$6',
+            maxWidth: 'max-content',
+            ...containerCSS
+          }}
+        >
+          {compact ? (
+            <Flex {...calendarProps} ref={ref} css={{ overflow: 'auto' }}>
+              <CalendarSingleSection
+                state={state}
+                navigationButtonProps={{ prev: prevButtonProps, next: nextButtonProps }}
+                sectionName={CALENDER_SECTION_NAMES.end}
+                onDaySelect={(date) => onDaySelect?.(date, dateType)}
+                onMonthSelect={(date) => onMonthSelect?.(date, dateType)}
+                onYearSelect={(date) => onYearSelect?.(date, dateType)}
+              />
+            </Flex>
+          ) : (
+            <Flex {...calendarProps} gap="$8" ref={ref} css={{ overflow: 'auto' }}>
+              <CalendarSingleSection
+                state={state}
+                navigationButtonProps={prevButtonProps}
+                sectionName={CALENDER_SECTION_NAMES.start}
+                onDaySelect={(date) => onDaySelect?.(date, dateType)}
+                onMonthSelect={(date) => onMonthSelect?.(date, dateType)}
+                onYearSelect={(date) => onYearSelect?.(date, dateType)}
+              />
+              <CalendarSingleSection
+                state={state}
+                calendarOffset={{ months: 1 }}
+                sectionName={CALENDER_SECTION_NAMES.end}
+                navigationButtonProps={nextButtonProps}
+                onDaySelect={(date) => onDaySelect?.(date, dateType)}
+                onMonthSelect={(date) => onMonthSelect?.(date, dateType)}
+                onYearSelect={(date) => onYearSelect?.(date, dateType)}
+              />
+            </Flex>
+          )}
+          {showFooter && (
           <>
             {props.renderFooter ? (
               props.renderFooter(state)
@@ -170,19 +187,20 @@ export const CalendarRange = ({
                   padding: '$6 $8'
                 }}
               >
-                <Text
-                  weight="bold"
-                  css={{
-                    color: '$neutral700'
-                  }}
-                >
-                  {state.value?.start
-                    && state.value?.end
-                    && formatter.formatRange(
-                      state.value.start.toDate(state.timeZone),
-                      state.value.end.toDate(state.timeZone)
-                    )}
-                </Text>
+                {state.value?.start
+                    && state.value?.end && (
+                    <Text
+                      weight="medium"
+                      css={{
+                        color: '$neutral700'
+                      }}
+                    >
+                      {formatter.formatRange(
+                        state.value.start.toDate(state.timeZone),
+                        state.value.end.toDate(state.timeZone)
+                      )}
+                    </Text>
+                )}
                 <Button
                   size="lg"
                   color="primary"
@@ -195,8 +213,9 @@ export const CalendarRange = ({
               </Flex>
             )}
           </>
-        )}
-      </Box>
+          )}
+        </Box>
+      </CalenderNavigationContext.Provider>
     </CalendarContext.Provider>
   );
 };
@@ -212,7 +231,7 @@ const CalendarSingleSection = ({
 }: {
   navigationButtonProps: AriaButtonProps<'button'> | { prev: AriaButtonProps<'button'>; next: AriaButtonProps<'button'> };
   calendarOffset?: DateDuration;
-  sectionName: 'start' | 'end';
+  sectionName: CalenderSectionNamesType;
   state: RangeCalendarState;
   onDaySelect?: (date: DateValue) => void;
   onMonthSelect?: (date: DateValue) => void;
@@ -223,6 +242,10 @@ const CalendarSingleSection = ({
   >(CALENDAR_VIEW.GRID);
   const calendarContext = useCalendarContext();
   const compact = 'prev' in navigationButtonProps && 'next' in navigationButtonProps;
+  const { calenderNavigationEnabled } = useCalenderNavigationContext();
+  if (calenderNavigationEnabled?.isEnabled && calenderNavigationEnabled?.sectionName !== sectionName) {
+    return null;
+  }
 
   return (
     <Box
@@ -260,6 +283,7 @@ const CalendarSingleSection = ({
                 <RangeCalendarTitle
                   timezone={state.timeZone}
                   value={state.visibleRange[sectionName]}
+                  sectionName={sectionName}
                   setCurrentCalendarView={setCurrentCalendarView}
                 />
                 <CalendarNavigationButton
@@ -269,8 +293,8 @@ const CalendarSingleSection = ({
               </>
             ) : (
               <>
-                {sectionName === 'end' && <Box />}
-                {sectionName === 'start' && (
+                {sectionName === CALENDER_SECTION_NAMES.end && <Box />}
+                {sectionName === CALENDER_SECTION_NAMES.start && (
                   <CalendarNavigationButton
                     {...navigationButtonProps}
                     icon={<ChevronLeftIcon />}
@@ -279,15 +303,16 @@ const CalendarSingleSection = ({
                 <RangeCalendarTitle
                   timezone={state.timeZone}
                   value={state.visibleRange[sectionName]}
+                  sectionName={sectionName}
                   setCurrentCalendarView={setCurrentCalendarView}
                 />
-                {sectionName === 'end' && (
+                {sectionName === CALENDER_SECTION_NAMES.end && (
                   <CalendarNavigationButton
                     {...navigationButtonProps}
                     icon={<ChevronRightIcon />}
                   />
                 )}
-                {sectionName === 'start' && <Box />}
+                {sectionName === CALENDER_SECTION_NAMES.start && <Box />}
               </>
             )}
           </Flex>

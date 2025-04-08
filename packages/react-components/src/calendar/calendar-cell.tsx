@@ -53,6 +53,13 @@ export const CalendarCell = ({
         isHidden={isOutsideMonth}
         isSelected={isSelected}
         size={calendarContext.size}
+        css={{
+          // Added z index so the hover state is not overlapping with the selected state
+          '&:focus': {
+            zIndex: 2,
+            position: 'relative'
+          }
+        }}
         onClick={(e) => {
           buttonProps?.onClick?.(e);
           if (onDaySelect) {

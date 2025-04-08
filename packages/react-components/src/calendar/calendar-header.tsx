@@ -5,7 +5,11 @@ import { Button, IconButton } from '../button';
 import { Flex } from '../flex';
 import { styled } from '../stitches.config';
 import { CALENDAR_VIEW } from './calendar';
-import { useCalendarContext } from './calendar-utils';
+import {
+  CalenderSectionNamesType,
+  useCalendarContext,
+  useCalenderNavigationContext
+} from './calendar-utils';
 
 type ButtonType = {
   icon: React.ReactElement;
@@ -95,16 +99,19 @@ export const CalendarTitle = ({
 export const RangeCalendarTitle = ({
   value,
   timezone,
-  setCurrentCalendarView
+  setCurrentCalendarView,
+  sectionName
 }: {
   value: DateValue;
   timezone: string;
   setCurrentCalendarView: (view: keyof typeof CALENDAR_VIEW) => void;
+  sectionName: CalenderSectionNamesType;
 }) => {
   const calendarContext = useCalendarContext();
   const formatMonth = useDateFormatter({
     month: 'long'
   });
+  const { handleCalenderNavigation } = useCalenderNavigationContext();
 
   return (
     <Flex gap="$2">
@@ -114,6 +121,10 @@ export const RangeCalendarTitle = ({
         size={calendarContext.size}
         onClick={() => {
           setCurrentCalendarView(CALENDAR_VIEW.YEAR);
+          handleCalenderNavigation({
+            isEnabled: true,
+            sectionName
+          });
         }}
       >
         {value.year}
@@ -124,6 +135,10 @@ export const RangeCalendarTitle = ({
         size={calendarContext.size}
         onClick={() => {
           setCurrentCalendarView(CALENDAR_VIEW.MONTH);
+          handleCalenderNavigation({
+            isEnabled: true,
+            sectionName
+          });
         }}
       >
         {formatMonth.format(value.toDate(timezone))}
