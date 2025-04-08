@@ -54,7 +54,7 @@ export const CalendarCell = ({
         isSelected={isSelected}
         size={calendarContext.size}
         css={{
-          // Added z index so the hover state is not overlapping with the selected state
+          // Added z-index to ensure hover state doesn't overlap with selected state
           '&:focus': {
             zIndex: 2,
             position: 'relative'
