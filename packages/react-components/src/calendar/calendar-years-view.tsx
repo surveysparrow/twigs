@@ -19,6 +19,8 @@ import {
   useCalendarContext
 } from './calendar-utils';
 
+const DISPLAY_YEAR_OFFSET = 1;
+
 export const CalendarYearsView = ({
   state,
   range,
@@ -228,7 +230,7 @@ export const CalendarYearsView = ({
             size="lg"
             disabled={isPrevButtonDisabled()}
             onClick={() => {
-              setCurrentYearInView((prev) => prev - numYears);
+              setCurrentYearInView((prev) => prev - (numYears + DISPLAY_YEAR_OFFSET));
             }}
           />
           <Flex
@@ -259,7 +261,7 @@ export const CalendarYearsView = ({
             size="lg"
             disabled={isNextButtonDisabled()}
             onClick={() => {
-              setCurrentYearInView((prev) => prev + numYears);
+              setCurrentYearInView((prev) => prev + (numYears - DISPLAY_YEAR_OFFSET));
             }}
           />
         </Flex>

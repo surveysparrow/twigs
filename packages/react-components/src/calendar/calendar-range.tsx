@@ -10,13 +10,12 @@ import {
 } from '@sparrowengg/twigs-react-icons';
 import { prefixClassName } from '@src/utils';
 import {
-  ReactNode, useEffect, useMemo, useRef, useState
+  ReactNode, useCallback, useEffect, useMemo, useRef, useState
 } from 'react';
 import {
   AriaButtonProps,
   AriaRangeCalendarProps,
   DateValue,
-  useDateFormatter,
   useLocale,
   useRangeCalendar
 } from 'react-aria';
@@ -110,22 +109,33 @@ export const CalendarRange = ({
     };
   }, [size]);
 
-  const formatter = useDateFormatter({
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric'
-  });
-
-  const [calendarNavigationEnabled, setCalendarNavigationEnabled] = useState<{
+  const [navigationState, setNavigationState] = useState<{
     isEnabled: boolean;
     sectionName: CalendarSectionNameType;
   } | null>(null);
+
+  console.log(state.value);
+  const formatDateRange = useCallback(() => {
+    if (state.value?.start && state.value?.end) {
+      const dateFormatter = new Intl.DateTimeFormat('en-US', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+      });
+      const startDate = state.value.start.toDate(state.timeZone);
+      const endDate = state.value.end.toDate(state.timeZone);
+      return `${dateFormatter.format(startDate)} - ${dateFormatter.format(endDate)}`;
+    }
+    return '';
+  }, [state.value, state.timeZone]);
+
+  const calendarNavigationEnabled = useMemo(() => navigationState, [navigationState]);
 
   const handleCalendarNavigation = (values: {
     isEnabled: boolean;
     sectionName: CalendarSectionNameType;
   } | null) => {
-    setCalendarNavigationEnabled(values);
+    setNavigationState(values);
   };
 
   return (
@@ -180,14 +190,14 @@ export const CalendarRange = ({
             ) : (
               <Flex
                 alignItems="center"
-                justifyContent="space-between"
+                justifyContent={!calendarNavigationEnabled?.isEnabled ? 'space-between' : 'flex-end'}
                 css={{
                   borderTop: '1px solid',
                   borderColor: '$neutral200',
                   padding: '$6 $8'
                 }}
               >
-                {state.value?.start
+                {!calendarNavigationEnabled?.isEnabled && state.value?.start
                     && state.value?.end && (
                     <Text
                       weight="medium"
@@ -195,10 +205,7 @@ export const CalendarRange = ({
                         color: '$neutral700'
                       }}
                     >
-                      {formatter.formatRange(
-                        state.value.start.toDate(state.timeZone),
-                        state.value.end.toDate(state.timeZone)
-                      )}
+                      {formatDateRange()}
                     </Text>
                 )}
                 <Button

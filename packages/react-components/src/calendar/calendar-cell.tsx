@@ -39,13 +39,14 @@ export const CalendarCell = ({
     isSelectionEnd = isSameDay(date, state.highlightedRange.end);
     isRangeCalendar = true;
   }
-
+  const currentDate = new Date(date.toDate(state.timeZone)).toDateString() === new Date().toDateString();
+  const dataInRange = isRangeCalendar && isSelected;
   return (
     <DayContainer
       {...cellProps}
       data-selection-start={isSelectionStart && !isOutsideMonth}
       data-selection-end={isSelectionEnd && !isOutsideMonth}
-      data-in-range={isRangeCalendar && isSelected}
+      data-in-range={dataInRange}
     >
       <Day
         {...buttonProps}
@@ -54,7 +55,9 @@ export const CalendarCell = ({
         isSelected={isSelected}
         size={calendarContext.size}
         css={{
+          ...(currentDate && { backgroundColor: '$white900', border: '1px solid rgba(100, 116, 139, 0.4)', borderRadius: '50% !important' }),
           // Added z-index to ensure hover state doesn't overlap with selected state
+          ...(dataInRange && { border: 'none !important', borderRadius: '0% !important' }),
           '&:focus': {
             zIndex: 2,
             position: 'relative'
