@@ -21,7 +21,7 @@ import {
 } from '@src/dropdown';
 import { PopoverContentProps } from '@radix-ui/react-popover';
 import { prefixClassName } from '@src/utils/prefix-class-name';
-import { Tooltip, TooltipProvider } from '@src/tooltip';
+import { Tooltip, TooltipProps, TooltipProvider } from '@src/tooltip';
 import { FilterPill, FilterPillWithoutOperator } from '../index';
 
 export default {
@@ -87,6 +87,9 @@ const Template = () => {
     globalConnector: 'ALL',
     filterGroups: []
   });
+
+  const [showError, setShowError] = useState(new Set<string>());
+
   const updateFilters = (group: FilterGroupType, filterPillValue: FilterType, filterIndex: number) => {
     const newFilters = group.filters.map((loopFilter, loopFilterIndex) => {
       if (loopFilterIndex === filterIndex) return filterPillValue;
@@ -99,6 +102,10 @@ const Template = () => {
   };
 
   const replaceFilterPillData = (filterPillValue: FilterType, groupIndex: number, filterIndex: number) => {
+    setShowError((prev) => {
+      prev.delete(`${filterPillValue.property.value}-${groupIndex}-${filterIndex}`);
+      return prev;
+    });
     setConditionsData((prev) => ({
       ...prev,
       filterGroups: prev.filterGroups.map((loopGroup, loopGroupIndex) => {
@@ -109,6 +116,7 @@ const Template = () => {
   };
 
   const addCondition = (selectedProperty: CascaderDropdownItemType | null) => {
+    setShowError(new Set<string>());
     if (!selectedProperty) return;
     setConditionsData((prev) => ({
       ...prev,
@@ -127,6 +135,7 @@ const Template = () => {
   };
 
   const insertCondition = (selectedProperty: CascaderDropdownItemType, groupIndex: number, filterIndex: number) => {
+    setShowError(new Set<string>());
     setConditionsData((prev) => ({
       ...prev,
       filterGroups: [
@@ -154,6 +163,7 @@ const Template = () => {
   };
 
   const deleteCondition = (groupIndex: number, filterIndex: number) => {
+    setShowError(new Set<string>());
     setConditionsData((prev) => {
       const updatedGroup = filterConditions(prev.filterGroups[groupIndex], filterIndex);
 
@@ -176,6 +186,7 @@ const Template = () => {
   };
 
   const deleteGroup = (groupIndex: number) => {
+    setShowError(new Set<string>());
     setConditionsData((prev) => ({
       ...prev,
       filterGroups: prev.filterGroups.filter((_, loopGroupIndex) => loopGroupIndex !== groupIndex)
@@ -206,6 +217,20 @@ const Template = () => {
         };
       })
     }));
+  };
+
+  const handleSave = () => {
+    const errorSet = new Set<string>();
+
+    conditionsData.filterGroups.forEach((group, groupIndex) => {
+      group.filters.forEach((filter, filterIndex) => {
+        if (!filter.connector || !filter.value[filter.connector.dataType]) {
+          errorSet.add(`${filter.property.value}-${groupIndex}-${filterIndex}`);
+        }
+      });
+    });
+
+    setShowError(errorSet);
   };
 
   return (
@@ -274,28 +299,45 @@ const Template = () => {
                   <Group key={groupIndex}>
                     <GroupTitle onDelete={() => deleteGroup(groupIndex)}>When</GroupTitle>
                     {group.filters.map((filter, filterIndex) => {
+                      const key = `${filter.property.operators?.[0]?.value}-${groupIndex}-${filterIndex}`;
                       return (
-                        <Flex key={filter.property.value} alignItems="center" gap="$1" css={{ [`&:hover .${prefixClassName('add-condition-in-group-button')}`]: { opacity: '1' } }}>
+                        <Flex
+                          key={filter.property.value}
+                          alignItems="center"
+                          gap="$1"
+                          css={{
+                            '&:hover, &:focus, &:active': {
+                              [`.${prefixClassName('add-condition-in-group-button')}`]: {
+                                opacity: '1'
+                              }
+                            }
+                          }}
+                        >
                           {filterIndex > 0 && (
                             <ComparatorDropdown filter={filter} onComparatorChange={(value) => onComparatorChange(value, groupIndex, filterIndex)} />
                           )}
                           {filter.property.operators?.length === 1
                             ? (
                               <FilterPillWithoutOperator
-                                key={filter.property.operators[0].value}
+                                key={key}
                                 data={filter.property.operators[0]}
                                 filterPillData={conditionsData.filterGroups[groupIndex].filters[filterIndex]}
                                 setFilterPillData={(filterPillValue: FilterType) => replaceFilterPillData(filterPillValue, groupIndex, filterIndex)}
                                 icon={<SurveyIcon />}
                                 onDelete={() => deleteCondition(groupIndex, filterIndex)}
+                                variant="outline"
+                                showError={showError.has(`${filter.property.value}-${groupIndex}-${filterIndex}`)}
                               />
                             )
                             : (
                               <FilterPill
+                                key={key}
                                 cascaderDropdownData={filter.property.operators ?? []}
                                 filterPillData={conditionsData.filterGroups[groupIndex].filters[filterIndex]}
                                 setFilterPillData={(filterPillValue: FilterType) => replaceFilterPillData(filterPillValue, groupIndex, filterIndex)}
                                 onDelete={() => deleteCondition(groupIndex, filterIndex)}
+                                variant="outline"
+                                showError={showError.has(`${filter.property.value}-${groupIndex}-${filterIndex}`)}
                               />
                             )}
                           <AddConditionInGroupButton insertCondition={(selectedProperty) => insertCondition(selectedProperty, groupIndex, filterIndex)} />
@@ -305,15 +347,13 @@ const Template = () => {
                   </Group>
                 ))}
                 <Flex alignItems="center" gap="$4">
-                  <Tooltip content="Add Filter" side="right">
-                    <AddConditionButton
-                      onAdd={({ selectedProperty }: { selectedProperty: CascaderDropdownItemType | null }) => {
-                        addCondition(selectedProperty);
-                      }}
-                    >
-                      <Button leftIcon={<PlusIcon />} color="secondary" variant="ghost" css={{ height: 'auto', padding: '0' }}>Condition</Button>
-                    </AddConditionButton>
-                  </Tooltip>
+                  <AddConditionButton
+                    onAdd={({ selectedProperty }: { selectedProperty: CascaderDropdownItemType | null }) => {
+                      addCondition(selectedProperty);
+                    }}
+                  >
+                    <Button leftIcon={<PlusIcon />} color="secondary" variant="ghost" css={{ height: 'auto', padding: '0' }}>Condition</Button>
+                  </AddConditionButton>
                   <Box css={{ width: '100%', borderBottom: '2px dashed $secondary100' }} />
                 </Flex>
               </Flex>
@@ -326,7 +366,7 @@ const Template = () => {
                   </Button>
                 </DialogClose>
                 <DialogClose asChild>
-                  <Button size="lg" color="primary">
+                  <Button size="lg" color="primary" onClick={handleSave}>
                     Save
                   </Button>
                 </DialogClose>
@@ -370,15 +410,20 @@ const GroupTitle = ({ children, onDelete }: { children: React.ReactNode, onDelet
         height: '1px', width: '100%', backgroundColor: '$black100', flex: '1'
       }}
       />
-      <IconButton css={{ height: '$5', width: '$5' }} variant="ghost" color="default" icon={<DeleteIcon />} onClick={onDelete} />
+      <Tooltip content="Remove Group" css={{ zIndex: '99999' }}>
+        <IconButton css={{ height: '$5', width: '$5' }} variant="ghost" color="default" icon={<DeleteIcon />} onClick={onDelete} />
+      </Tooltip>
     </Flex>
   );
 };
 
-const AddConditionButton = ({ children, onAdd, dropdownContentProps }: {
+const AddConditionButton = ({
+  children, onAdd, dropdownContentProps, tooltipProps
+}: {
   children: React.ReactNode,
   onAdd: ({ selectedProperty }: { selectedProperty: CascaderDropdownItemType | null }) => void,
-  dropdownContentProps?: PopoverContentProps & RefAttributes<HTMLDivElement>
+  dropdownContentProps?: PopoverContentProps & RefAttributes<HTMLDivElement>,
+  tooltipProps?: TooltipProps
 }) => {
   const onChange = ({
     selectedProperty
@@ -392,7 +437,7 @@ const AddConditionButton = ({ children, onAdd, dropdownContentProps }: {
   };
 
   return (
-    <CascaderDropdown data={properties} dropdownContentProps={{ align: 'start', ...dropdownContentProps }} onChange={onChange}>
+    <CascaderDropdown data={properties} dropdownContentProps={{ align: 'start', ...dropdownContentProps }} onChange={onChange} tooltipProps={tooltipProps}>
       {children}
     </CascaderDropdown>
   );
@@ -451,7 +496,7 @@ const AddConditionInGroupButton = ({
   };
 
   return (
-    <AddConditionButton onAdd={handleAddCondition}>
+    <AddConditionButton onAdd={handleAddCondition} tooltipProps={{ content: 'Add condition', side: 'right', css: { zIndex: '99999' } }}>
       <IconButton
         className={prefixClassName('add-condition-in-group-button')}
         size="md"

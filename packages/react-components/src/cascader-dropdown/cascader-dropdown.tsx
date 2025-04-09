@@ -2,6 +2,7 @@ import {
   ReactNode, RefAttributes, useMemo, useState
 } from 'react';
 import { PopoverProps, PopoverContentProps } from '@radix-ui/react-popover';
+import { TooltipProps } from '@src/tooltip';
 import {
   CascaderDropdownItemType, CascaderDropdownDataValueType, CascaderDropdownValueSelectorType, CascaderDropdownOperatorType
 } from './helpers/cascader-dropdown-constants';
@@ -29,6 +30,7 @@ export type CascaderDropdownProps = {
   }) => void;
   dropdownProps?: PopoverProps;
   dropdownContentProps?: DropdownContentProps;
+  tooltipProps?: TooltipProps;
 } & CascaderDropdownComponentProps;
 
 export type CascaderDropdownComponentProps = {
@@ -41,7 +43,10 @@ export const CascaderDropdown = ({
   defaultValue = null,
   onChange,
   dropdownProps = {},
-  dropdownContentProps = {}
+  dropdownContentProps = {},
+  tooltipProps = {
+    content: ''
+  }
 }: CascaderDropdownProps) => {
   const [localValue, setLocalValue] = useState<CascaderDropdownDataValueType>(
     (
@@ -91,7 +96,7 @@ export const CascaderDropdown = ({
         }
       }}
     >
-      <CascaderDropdownContent {...dropdownProps} dropdownContentProps={dropdownContentProps}>
+      <CascaderDropdownContent {...dropdownProps} dropdownContentProps={dropdownContentProps} tooltipProps={tooltipProps}>
         {children}
       </CascaderDropdownContent>
     </CascaderDropdownProvider>

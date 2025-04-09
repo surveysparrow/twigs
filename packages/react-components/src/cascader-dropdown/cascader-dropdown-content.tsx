@@ -1,6 +1,6 @@
 import { Popover, PopoverProps } from '@radix-ui/react-popover';
 import { PopoverContent, PopoverTrigger } from '@src/popover';
-import { TooltipProvider } from '@src/tooltip';
+import { Tooltip, TooltipProps, TooltipProvider } from '@src/tooltip';
 import { ReactNode, useState } from 'react';
 import { prefixClassName } from '@src/utils';
 import { useCascaderDropdownContext } from './use-value';
@@ -14,7 +14,11 @@ import { DropdownContentProps } from './cascader-dropdown';
 
 export type ResultCacheType = Record<string, CascaderDropdownNode[]>;
 
-export const CascaderDropdownContent = ({ children, dropdownContentProps, ...props }: { children: ReactNode, dropdownContentProps?: DropdownContentProps } & PopoverProps) => {
+export const CascaderDropdownContent = ({
+  children, dropdownContentProps, tooltipProps, ...props
+}: {
+  children: ReactNode, dropdownContentProps?: DropdownContentProps, tooltipProps?: TooltipProps
+} & PopoverProps) => {
   const {
     popoverOpen,
     setPopoverOpen,
@@ -35,9 +39,11 @@ export const CascaderDropdownContent = ({ children, dropdownContentProps, ...pro
 
   return (
     <Popover open={popoverOpen} onOpenChange={setPopoverOpen} {...props}>
-      <PopoverTrigger asChild className={prefixClassName('cascader-dropdown__trigger')}>
-        {children}
-      </PopoverTrigger>
+      <Tooltip content="" {...tooltipProps}>
+        <PopoverTrigger asChild className={prefixClassName('cascader-dropdown__trigger')}>
+          {children}
+        </PopoverTrigger>
+      </Tooltip>
       <PopoverContent
         data-filter-popover-content={id}
         className={prefixClassName('cascader-dropdown')}

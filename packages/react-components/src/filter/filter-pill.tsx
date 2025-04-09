@@ -17,9 +17,10 @@ export type FilterPillProps = {
   icon?: React.ReactNode;
   filterPillData: FilterType;
   setFilterPillData: (value: FilterType) => void;
-  variant?: 'filled' | 'outline' | 'error';
+  variant?: 'filled' | 'outline';
   cascaderDropdownData: CascaderDropdownItemType[];
   onDelete: () => void;
+  showError?: boolean;
 };
 
 export type FilterValueOperatorType = {
@@ -52,7 +53,8 @@ export const FilterPill = ({
   setFilterPillData,
   variant = 'outline',
   cascaderDropdownData,
-  onDelete
+  onDelete,
+  showError = false
 }: FilterPillProps) => {
   const onChange = ({
     selectedProperty,
@@ -80,7 +82,7 @@ export const FilterPill = ({
 
   return (
     <TooltipProvider delayDuration={0}>
-      <StyledFilterPill variant={variant}>
+      <StyledFilterPill variant={showError ? 'error' : variant}>
         <Flex alignItems="center" gap="$2" css={{ padding: '3px $2 3px $4' }}>
           {icon && (
             <Box
@@ -112,7 +114,7 @@ export const FilterPill = ({
                   css={{
                     color: '$neutral700',
                     padding: '3px $4 3px $1',
-                    ...(variant === 'error' && {
+                    ...(showError && {
                       color: '$negative700',
                       fontWeight: '$5'
                     })
@@ -133,7 +135,7 @@ export const FilterPill = ({
                   css={{
                     color: '$neutral900',
                     padding: '3px $4 3px $2',
-                    ...(variant === 'error' && {
+                    ...(showError && {
                       color: '$negative700'
                     })
                   }}
@@ -159,9 +161,10 @@ type FilterPillWithoutOperatorProps = {
   icon?: React.ReactNode;
   filterPillData: FilterType;
   setFilterPillData: (value: FilterType) => void;
-  variant?: 'filled' | 'outline' | 'error';
+  variant?: 'filled' | 'outline';
   data: CascaderDropdownOperatorType;
   onDelete: () => void;
+  showError?: boolean;
 };
 export const FilterPillWithoutOperator = ({
   icon,
@@ -169,7 +172,8 @@ export const FilterPillWithoutOperator = ({
   setFilterPillData,
   variant = 'outline',
   data,
-  onDelete
+  onDelete,
+  showError = false
 }: FilterPillWithoutOperatorProps) => {
   const onChange = (value: string) => {
     const newFilterPillData = {
@@ -190,7 +194,7 @@ export const FilterPillWithoutOperator = ({
 
   return (
     <TooltipProvider delayDuration={0}>
-      <StyledFilterPill variant={variant}>
+      <StyledFilterPill variant={showError ? 'error' : variant}>
         <Flex alignItems="center" gap="$2" css={{ padding: '3px $2 3px $4' }}>
           {icon && (
             <Box
@@ -225,7 +229,7 @@ export const FilterPillWithoutOperator = ({
                 css={{
                   color: '$neutral900',
                   padding: '3px $4 3px $2',
-                  ...(variant === 'error' && {
+                  ...(showError && {
                     color: '$negative700'
                   })
                 }}
