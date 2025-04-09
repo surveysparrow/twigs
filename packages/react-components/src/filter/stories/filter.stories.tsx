@@ -44,6 +44,7 @@ const SurveyIcon = () => {
 };
 
 type ComparatorType = 'AND' | 'OR';
+type GlobalConnectorType = 'ALL' | 'ANY';
 
 export type FilterType = {
   comparator: ComparatorType;
@@ -57,7 +58,7 @@ type FilterGroupType = {
 }
 
 type ConditionsDataType = {
-  globalConnector: ComparatorType;
+  globalConnector: GlobalConnectorType;
   filterGroups: FilterGroupType[];
 }
 
@@ -72,8 +73,8 @@ const connectorOptions = Object.keys(connectorOptionsMap).map((key) => ({
 }));
 
 const allAnyOptionsMap = {
-  all: 'all',
-  any: 'any'
+  ALL: 'all',
+  ANY: 'any'
 };
 
 const allAnyOptions = Object.keys(allAnyOptionsMap).map((key) => ({
@@ -83,7 +84,7 @@ const allAnyOptions = Object.keys(allAnyOptionsMap).map((key) => ({
 
 const Template = () => {
   const [conditionsData, setConditionsData] = useState<ConditionsDataType>({
-    globalConnector: 'AND',
+    globalConnector: 'ALL',
     filterGroups: []
   });
   const updateFilters = (group: FilterGroupType, filterPillValue: FilterType, filterIndex: number) => {
@@ -174,6 +175,39 @@ const Template = () => {
     });
   };
 
+  const deleteGroup = (groupIndex: number) => {
+    setConditionsData((prev) => ({
+      ...prev,
+      filterGroups: prev.filterGroups.filter((_, loopGroupIndex) => loopGroupIndex !== groupIndex)
+    }));
+  };
+
+  const onGlobalConnectorChange = (value: string) => {
+    setConditionsData((prev) => ({
+      ...prev,
+      globalConnector: value as GlobalConnectorType
+    }));
+  };
+
+  const onComparatorChange = (value: string, groupIndex: number, filterIndex: number) => {
+    setConditionsData((prev) => ({
+      ...prev,
+      filterGroups: prev.filterGroups.map((group, loopGroupIndex) => {
+        if (loopGroupIndex !== groupIndex) return group;
+        return {
+          ...group,
+          filters: group.filters.map((filter, loopFilterIndex) => {
+            if (loopFilterIndex !== filterIndex) return filter;
+            return {
+              ...filter,
+              comparator: value as ComparatorType
+            };
+          })
+        };
+      })
+    }));
+  };
+
   return (
     <Flex css={{ flexWrap: 'wrap' }} gap="$2">
       <Dialog open>
@@ -208,12 +242,13 @@ const Template = () => {
                             height: '$7', paddingRight: '0', fontWeight: '$7'
                           }}
                         >
-                          {connectorOptionsMap[conditionsData.globalConnector]}
+                          {allAnyOptionsMap[conditionsData.globalConnector]}
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="start" css={{ zIndex: '1000', minWidth: '100px' }}>
                         {allAnyOptions.map((option) => (
                           <DropdownMenuItem
+                            onClick={() => onGlobalConnectorChange(option.value)}
                             key={option.value}
                             css={{
                               cursor: 'pointer',
@@ -237,31 +272,32 @@ const Template = () => {
                 {conditionsData.filterGroups.map((group, groupIndex) => (
                   // eslint-disable-next-line react/no-array-index-key
                   <Group key={groupIndex}>
-                    <GroupTitle>When</GroupTitle>
+                    <GroupTitle onDelete={() => deleteGroup(groupIndex)}>When</GroupTitle>
                     {group.filters.map((filter, filterIndex) => {
-                      if (filter.property.operators?.length === 1) {
-                        return (
-                          <FilterPillWithoutOperator
-                            key={filter.property.operators[0].value}
-                            data={filter.property.operators[0]}
-                            filterPillData={conditionsData.filterGroups[groupIndex].filters[filterIndex]}
-                            setFilterPillData={(filterPillValue: FilterType) => replaceFilterPillData(filterPillValue, groupIndex, filterIndex)}
-                            icon={<SurveyIcon />}
-                            onDelete={() => deleteCondition(groupIndex, filterIndex)}
-                          />
-                        );
-                      }
                       return (
                         <Flex key={filter.property.value} alignItems="center" gap="$1" css={{ [`&:hover .${prefixClassName('add-condition-in-group-button')}`]: { opacity: '1' } }}>
                           {filterIndex > 0 && (
-                            <ComparatorDropdown conditionsData={conditionsData} />
+                            <ComparatorDropdown filter={filter} onComparatorChange={(value) => onComparatorChange(value, groupIndex, filterIndex)} />
                           )}
-                          <FilterPill
-                            cascaderDropdownData={filter.property.operators ?? []}
-                            filterPillData={conditionsData.filterGroups[groupIndex].filters[filterIndex]}
-                            setFilterPillData={(filterPillValue: FilterType) => replaceFilterPillData(filterPillValue, groupIndex, filterIndex)}
-                            onDelete={() => deleteCondition(groupIndex, filterIndex)}
-                          />
+                          {filter.property.operators?.length === 1
+                            ? (
+                              <FilterPillWithoutOperator
+                                key={filter.property.operators[0].value}
+                                data={filter.property.operators[0]}
+                                filterPillData={conditionsData.filterGroups[groupIndex].filters[filterIndex]}
+                                setFilterPillData={(filterPillValue: FilterType) => replaceFilterPillData(filterPillValue, groupIndex, filterIndex)}
+                                icon={<SurveyIcon />}
+                                onDelete={() => deleteCondition(groupIndex, filterIndex)}
+                              />
+                            )
+                            : (
+                              <FilterPill
+                                cascaderDropdownData={filter.property.operators ?? []}
+                                filterPillData={conditionsData.filterGroups[groupIndex].filters[filterIndex]}
+                                setFilterPillData={(filterPillValue: FilterType) => replaceFilterPillData(filterPillValue, groupIndex, filterIndex)}
+                                onDelete={() => deleteCondition(groupIndex, filterIndex)}
+                              />
+                            )}
                           <AddConditionInGroupButton insertCondition={(selectedProperty) => insertCondition(selectedProperty, groupIndex, filterIndex)} />
                         </Flex>
                       );
@@ -324,7 +360,7 @@ const Group = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-const GroupTitle = ({ children }: { children: React.ReactNode }) => {
+const GroupTitle = ({ children, onDelete }: { children: React.ReactNode, onDelete: () => void }) => {
   return (
     <Flex alignItems="center" justifyContent="space-between" css={{ padding: '$1 0' }} gap="$2">
       <Text weight="bold" css={{ color: '$secondary900' }}>
@@ -334,7 +370,7 @@ const GroupTitle = ({ children }: { children: React.ReactNode }) => {
         height: '1px', width: '100%', backgroundColor: '$black100', flex: '1'
       }}
       />
-      <IconButton css={{ height: '$5', width: '$5' }} variant="ghost" color="default" icon={<DeleteIcon />} />
+      <IconButton css={{ height: '$5', width: '$5' }} variant="ghost" color="default" icon={<DeleteIcon />} onClick={onDelete} />
     </Flex>
   );
 };
@@ -362,7 +398,7 @@ const AddConditionButton = ({ children, onAdd, dropdownContentProps }: {
   );
 };
 
-const ComparatorDropdown = ({ conditionsData }: { conditionsData: ConditionsDataType }) => {
+const ComparatorDropdown = ({ filter, onComparatorChange }: { filter: FilterType, onComparatorChange: (value: string) => void }) => {
   return (
     <DropdownMenu size="sm">
       <DropdownMenuTrigger asChild>
@@ -379,16 +415,17 @@ const ComparatorDropdown = ({ conditionsData }: { conditionsData: ConditionsData
             paddingLeft: '$2'
           }}
         >
-          {connectorOptionsMap[conditionsData.globalConnector]}
+          {connectorOptionsMap[filter.comparator]}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start" css={{ zIndex: '1000', minWidth: '100px' }}>
         {connectorOptions.map((option) => (
           <DropdownMenuItem
             key={option.value}
+            onClick={() => onComparatorChange(option.value)}
             css={{
               cursor: 'pointer',
-              ...(conditionsData.globalConnector === option.value && {
+              ...(filter.comparator === option.value && {
                 '&, &:hover': {
                   backgroundColorOpacity: ['$primary200', 0.08]
                 }
