@@ -34,27 +34,76 @@ function App() {
 }
 ```
 
+### Format Segments
+
+<PlaygroundLink name="datepicker-format-segments" />
+
+```jsx
+import { parseDate } from "@internationalized/date";
+
+function App() {
+  const [value, setValue] = React.useState(parseDate("2023-07-24"));
+
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+
+  const formatSegments = (segments) => {
+    return segments.map((segment) => {
+      if (segment.type === "month") {
+        return { ...segment, text: months[segment.value - 1] };
+      }
+      if (segment.type === "literal") {
+        return { ...segment, text: "-" };
+      }
+      return segment;
+    });
+  };
+
+  return (
+    <DatePicker
+      value={value}
+      onChange={setValue}
+      label="Enter date of birth"
+      formatSegments={formatSegments}
+    />
+  );
+}
+```
+
 ### Props
 
-| Property             | Description                                                             | Type                                  | Default  |
-| -------------------- | ----------------------------------------------------------------------- | ------------------------------------- | -------- |
-| value                | selected value range                                                    | @internationalized/date Date          |          |
-| minValue             | minimum selectable date value. Dates beyond this value will be disabled | @internationalized/date Date          |          |
-| maxValue             | maximum selectable date value. Dates beyond this value will be disabled | @internationalized/date Date          |          |
-| isDisabled           | Disable the calendar component                                          | boolean                               | false    |
-| onChange             | Callback function when date is selected                                 | function                              |          |
-| isOpen               | open the calendar popover                                               | boolean                               | false    |
-| closeOnSelect        | Close datepicker on selecting a date                                    | boolean                               | false    |
-| label                |                                                                         | string                                |          |
-| enablePortal         | Calendar popover will render in body                                    | boolean                               | false    |
-| portalTarget         | Render Calendar Popover in specific element                             | Element                               | false    |
-| onDaySelect          | Callback function when day is selected                                  | `(date: DateValue) => void`           |          |
-| onMonthSelect        | Callback function when month is selected                                | `(date: DateValue) => void`           |          |
-| onYearSelect         | Callback function when year is selected                                 | `(date: DateValue) => void`           |          |
-| showFooter           | Show footer with action button                                          | boolean                               | true     |
-| footerAction         | Action to be performed on footer button click                           | `(state: CalendarState) => void`      |          |
-| footerActionText     | Text to be displayed on footer button                                   | string                                | "Select" |
-| renderFooter         | Custom footer component                                                 | `(state: CalendarState) => ReactNode` |          |
-| containerCSS         | Custom CSS for the container element                                    | `CSS`                                 |          |
-| calendarContainerCSS | Custom CSS for the calendar container element                           | `CSS`                                 |          |
-| popoverContentProps  | Additional props to be passed to the popover content component          | `PopoverContentProps`                 |          |
+| Property             | Description                                                             | Type                                         | Default  |
+| -------------------- | ----------------------------------------------------------------------- | -------------------------------------------- | -------- |
+| value                | selected value range                                                    | @internationalized/date Date                 |          |
+| minValue             | minimum selectable date value. Dates beyond this value will be disabled | @internationalized/date Date                 |          |
+| maxValue             | maximum selectable date value. Dates beyond this value will be disabled | @internationalized/date Date                 |          |
+| isDisabled           | Disable the calendar component                                          | boolean                                      | false    |
+| onChange             | Callback function when date is selected                                 | function                                     |          |
+| isOpen               | open the calendar popover                                               | boolean                                      | false    |
+| closeOnSelect        | Close datepicker on selecting a date                                    | boolean                                      | false    |
+| label                |                                                                         | string                                       |          |
+| enablePortal         | Calendar popover will render in body                                    | boolean                                      | false    |
+| portalTarget         | Render Calendar Popover in specific element                             | Element                                      | false    |
+| onDaySelect          | Callback function when day is selected                                  | `(date: DateValue) => void`                  |          |
+| onMonthSelect        | Callback function when month is selected                                | `(date: DateValue) => void`                  |          |
+| onYearSelect         | Callback function when year is selected                                 | `(date: DateValue) => void`                  |          |
+| showFooter           | Show footer with action button                                          | boolean                                      | true     |
+| footerAction         | Action to be performed on footer button click                           | `(state: CalendarState) => void`             |          |
+| footerActionText     | Text to be displayed on footer button                                   | string                                       | "Select" |
+| renderFooter         | Custom footer component                                                 | `(state: CalendarState) => ReactNode`        |          |
+| containerCSS         | Custom CSS for the container element                                    | `CSS`                                        |          |
+| calendarContainerCSS | Custom CSS for the calendar container element                           | `CSS`                                        |          |
+| popoverContentProps  | Additional props to be passed to the popover content component          | `PopoverContentProps`                        |          |
+| formatSegments       | Custom format segments for the date picker                              | `(segments: DateSegment[]) => DateSegment[]` |          |

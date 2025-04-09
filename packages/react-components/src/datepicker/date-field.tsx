@@ -1,12 +1,21 @@
 import React, { useRef } from 'react';
-import { useDateFieldState } from 'react-stately';
-import { useDateField, useLocale } from 'react-aria';
+import { DateSegment, useDateFieldState } from 'react-stately';
+import {
+  AriaDatePickerProps,
+  DateValue,
+  useDateField,
+  useLocale
+} from 'react-aria';
 import { createCalendar } from '@internationalized/date';
 import { Box } from '../box';
 import { Flex } from '../flex';
 import { DateTimeSegment } from './date-time-segment';
 
-export const DateField = (props) => {
+interface DateFieldProps extends AriaDatePickerProps<DateValue> {
+  formatSegments?: (segments: DateSegment[]) => DateSegment[];
+}
+
+export const DateField = ({ formatSegments, ...props }: DateFieldProps) => {
   const { locale } = useLocale();
   const state = useDateFieldState({
     ...props,
@@ -14,14 +23,18 @@ export const DateField = (props) => {
     createCalendar
   });
 
+  const segments = formatSegments
+    ? formatSegments(state.segments)
+    : state.segments;
+
   const ref = useRef(null);
   const { fieldProps } = useDateField(props, state, ref);
 
   return (
     <Flex {...fieldProps} ref={ref}>
-      {state.segments.map((segment, i) => (
+      {segments.map((segment, i) => (
         <DateTimeSegment
-        // eslint-disable-next-line  react/no-array-index-key
+          // eslint-disable-next-line  react/no-array-index-key
           key={`twigs-datefield-${i}`}
           segment={segment}
           state={state}

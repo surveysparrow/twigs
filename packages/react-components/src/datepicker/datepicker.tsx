@@ -5,7 +5,7 @@ import {
   ComponentProps, ReactNode, useEffect, useRef
 } from 'react';
 import { AriaDatePickerProps, DateValue, useDatePicker } from 'react-aria';
-import { CalendarState, useDatePickerState } from 'react-stately';
+import { CalendarState, DateSegment, useDatePickerState } from 'react-stately';
 import { Box } from '../box';
 import { IconButton } from '../button';
 import { Calendar } from '../calendar';
@@ -40,6 +40,7 @@ export type DatePickerProps = AriaDatePickerProps<DateValue> & {
   portalTarget?: Element | null | undefined;
   calendarContainerCSS?: CalendarControlProps['containerCSS'];
   popoverContentProps?: ComponentProps<typeof PopoverContent>;
+  formatSegments?: (segments: DateSegment[]) => DateSegment[];
 } & CalendarControlProps;
 
 export const DatePicker = ({
@@ -58,6 +59,7 @@ export const DatePicker = ({
   onDaySelect,
   onMonthSelect,
   onYearSelect,
+  formatSegments,
   ...props
 }: DatePickerProps) => {
   const dateValue = props.value;
@@ -125,7 +127,7 @@ export const DatePicker = ({
             className={prefixClassName('datepicker__field')}
             ref={ref}
           >
-            <DateField {...fieldProps} />
+            <DateField {...fieldProps} formatSegments={formatSegments} />
           </Box>
           <PopoverTrigger asChild>
             <IconButton
