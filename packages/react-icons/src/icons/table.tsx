@@ -21,6 +21,7 @@ export const TableIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M26.6666 11.3333H22C21.2927 11.3333 20.6145 11.0524 20.1144 10.5523C19.6143 10.0522 19.3333 9.37391 19.3333 8.66667V4"
@@ -28,6 +29,7 @@ export const TableIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M7.99998 16H14.6666C15.3739 16 16.0522 16.281 16.5523 16.781C17.0524 17.2811 17.3333 17.9594 17.3333 18.6667V25.3333C17.3333 26.0406 17.0524 26.7189 16.5523 27.219C16.0522 27.719 15.3739 28 14.6666 28H7.99998C7.29274 28 6.61446 27.719 6.11436 27.219C5.61426 26.7189 5.33331 26.0406 5.33331 25.3333V18.6667C5.33331 17.9594 5.61426 17.2811 6.11436 16.781C6.61446 16.281 7.29274 16 7.99998 16V16Z"
@@ -35,6 +37,7 @@ export const TableIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M17.3333 22H5.33331"
@@ -42,6 +45,7 @@ export const TableIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M11.3333 16V28"
@@ -49,6 +53,7 @@ export const TableIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
       </svg>
     );
