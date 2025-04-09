@@ -56,8 +56,8 @@ export const CalendarCell = ({
         size={calendarContext.size}
         css={{
           ...(currentDate && { backgroundColor: '$white900', border: '1px solid rgba(100, 116, 139, 0.4)', borderRadius: '50% !important' }),
-          // Added z-index to ensure hover state doesn't overlap with selected state
           ...(dataInRange && { border: 'none !important', borderRadius: '0% !important' }),
+          // Added z-index to ensure hover state doesn't overlap with selected state
           '&:focus': {
             zIndex: 2,
             position: 'relative'
