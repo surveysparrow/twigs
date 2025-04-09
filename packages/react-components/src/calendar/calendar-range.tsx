@@ -114,7 +114,6 @@ export const CalendarRange = ({
     sectionName: CalendarSectionNameType;
   } | null>(null);
 
-  console.log(state.value);
   const formatDateRange = useCallback(() => {
     if (state.value?.start && state.value?.end) {
       const dateFormatter = new Intl.DateTimeFormat('en-US', {
@@ -211,6 +210,7 @@ export const CalendarRange = ({
                 <Button
                   size="lg"
                   color="primary"
+                  disabled={calendarNavigationEnabled?.isEnabled}
                   onClick={() => {
                     if (footerAction) footerAction(state);
                   }}
