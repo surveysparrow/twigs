@@ -1,0 +1,50 @@
+---
+advancedSnippet: true
+---
+
+```jsx
+import React from "react";
+import { DatePicker } from "@sparrowengg/twigs-react";
+import { parseDate } from "@internationalized/date";
+
+const months = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+
+export default function DatePickerDemo() {
+  const [value, setValue] = React.useState(parseDate("2023-07-24"));
+
+  const formatSegments = (segments) => {
+    return segments.map((segment) => {
+      if (segment.type === "month") {
+        return { ...segment, text: months[segment.value - 1] };
+      }
+      if (segment.type === "literal") {
+        return { ...segment, text: "-" };
+      }
+      return segment;
+    });
+  };
+
+  return (
+    <DatePicker
+      value={value}
+      onChange={setValue}
+      footerAction={(_, setDropdownOpen) => setDropdownOpen(false)}
+      label="Enter date of birth"
+      formatSegments={formatSegments}
+    />
+  );
+}
+```
