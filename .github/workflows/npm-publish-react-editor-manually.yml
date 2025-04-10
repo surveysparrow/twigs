@@ -1,14 +1,11 @@
-# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created with the tag twigs-react-icons@
-
-name: Publish react icons
+# This workflow will run tests using node and then publish a package
+name: Publish react editor manually
 
 on:
-  release:
-    types: [created]
+  workflow_dispatch:
 
 jobs:
   build-test-and-publish:
-    if: ${{ startsWith(github.ref_name, 'twigs-react-icons@') }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -21,12 +18,15 @@ jobs:
         with:
           node-version: 20
       - run: yarn
-      - run: yarn build:icons
+      - name: Playwright install
+        run: npx playwright install --with-deps chromium
+      - run: yarn build:editor
+      - run: yarn test
       - name: Publish to npm
         uses: actions/setup-node@v3
         with:
           node-version: 20
           registry-url: https://registry.npmjs.org/
-      - run: cd packages/react-icons && npm publish --provenance --access public
+      - run: cd packages/react-editor && npm publish --provenance --access public
         env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token_react_icons}}
+          NODE_AUTH_TOKEN: ${{secrets.npm_token_react_components}}

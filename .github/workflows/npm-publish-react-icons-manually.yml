@@ -1,14 +1,11 @@
-# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created with the tag twigs-react-icons@
-
-name: Publish react icons
+# This workflow will run tests using node and then publish a package
+name: Publish react icons manually
 
 on:
-  release:
-    types: [created]
+  workflow_dispatch:
 
 jobs:
   build-test-and-publish:
-    if: ${{ startsWith(github.ref_name, 'twigs-react-icons@') }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
