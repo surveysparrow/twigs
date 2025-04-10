@@ -84,15 +84,7 @@ const featuresToNodeMapping = {
   }
 };
 
-export const Editor = ({
-  nodes,
-  onChange,
-  editable,
-  features,
-  children,
-  initialEditorState,
-  dataManagementRef
-}: {
+export interface EditorProps {
   initialEditorState?: InitialEditorStateType;
   onChange?: (
     newEditorState: EditorState,
@@ -104,7 +96,22 @@ export const Editor = ({
   nodes?: InitialConfigType['nodes'];
   features?: (keyof typeof featuresToNodeMapping)[];
   dataManagementRef?: RefObject<DataManagementPluginHandle>;
-}) => {
+  onChangePluginProps?: {
+    ignoreHistoryMergeTagChange?: boolean;
+    ignoreSelectionChange?: boolean;
+  };
+}
+
+export const Editor = ({
+  nodes,
+  onChange,
+  editable,
+  features,
+  children,
+  initialEditorState,
+  dataManagementRef,
+  onChangePluginProps
+}: EditorProps) => {
   const supportedFeatures = useMemo(() => {
     if (features) {
       const selectedNodes = features
@@ -146,7 +153,11 @@ export const Editor = ({
         <ClearEditorPlugin />
         <DataManagementPlugin ref={dataManagementRef} />
         <TabFocusPlugin />
-        <>{onChange && <OnChangePlugin onChange={onChange} />}</>
+        <>
+          {onChange && (
+            <OnChangePlugin onChange={onChange} {...onChangePluginProps} />
+          )}
+        </>
         <>
           {supportedFeatures.components.map((comp) => {
             const ToolComponent = comp.component;
