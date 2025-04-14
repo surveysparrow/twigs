@@ -357,11 +357,28 @@ export const SearchableList = ({
   hasArrow?: boolean;
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
+  const [needsScroll, setNeedsScroll] = useState(false);
 
   const [focusedIndex, setFocusedIndex] = useState<number>(0);
   const [searchQuery, setSearchQuery] = useState('');
 
   const filteredChoices = useMemo(() => choices.filter((choice) => choice.label?.toLowerCase().includes(searchQuery.toLowerCase())), [choices, searchQuery]);
+
+  useEffect(() => {
+    if (listRef.current) {
+      const list = listRef.current;
+      const checkScroll = () => {
+        setNeedsScroll(list.scrollHeight > list.clientHeight);
+        return undefined;
+      };
+      checkScroll();
+      const resizeObserver = new ResizeObserver(checkScroll);
+      resizeObserver.observe(list);
+      return () => resizeObserver.disconnect();
+    }
+    return undefined;
+  }, [filteredChoices]);
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'ArrowDown') {
@@ -405,7 +422,7 @@ export const SearchableList = ({
   }, [filteredChoices, searchQuery]);
 
   return (
-    <Box>
+    <Box css={{ position: 'relative' }}>
       <Input
         onChange={(e) => {
           setSearchQuery(e.target.value);
@@ -442,7 +459,13 @@ export const SearchableList = ({
       )}
       <Box
         as="ul"
-        css={{ paddingTop: '$4', paddingBottom: '$4' }}
+        ref={listRef}
+        css={{
+          paddingTop: '$4',
+          maxHeight: '240px',
+          overflowY: 'auto',
+          paddingBottom: needsScroll ? '$10' : '$4'
+        }}
         tabIndex={-1}
       >
         {filteredChoices.map((choice, index) => {
@@ -480,6 +503,19 @@ export const SearchableList = ({
           );
         })}
       </Box>
+      {needsScroll && (
+        <Box
+          css={{
+            position: 'absolute',
+            bottom: '0',
+            left: 0,
+            right: 0,
+            height: '$10',
+            pointerEvents: 'none',
+            background: 'linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 80.46%)'
+          }}
+        />
+      )}
     </Box>
   );
 };

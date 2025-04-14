@@ -347,7 +347,7 @@ const Template = () => {
 
   return (
     <Flex css={{ flexWrap: 'wrap' }} gap="$2">
-      <Dialog open>
+      <Dialog>
         <DialogTrigger asChild>
           <Button size="lg">Add Filter Conditions</Button>
         </DialogTrigger>

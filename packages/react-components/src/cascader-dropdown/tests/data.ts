@@ -329,6 +329,78 @@ export const data = [
               {
                 label: 'Spanish',
                 value: 'es'
+              },
+              {
+                label: 'German',
+                value: 'de'
+              },
+              {
+                label: 'Italian',
+                value: 'it'
+              },
+              {
+                label: 'Dutch',
+                value: 'nl'
+              },
+              {
+                label: 'Portuguese',
+                value: 'pt'
+              },
+              {
+                label: 'Russian',
+                value: 'ru'
+              },
+              {
+                label: 'Turkish',
+                value: 'tr'
+              },
+              {
+                label: 'Arabic',
+                value: 'ar'
+              },
+              {
+                label: 'Chinese',
+                value: 'zh'
+              },
+              {
+                label: 'Japanese',
+                value: 'ja'
+              },
+              {
+                label: 'Korean',
+                value: 'ko'
+              },
+              {
+                label: 'Polish',
+                value: 'pl'
+              },
+              {
+                label: 'Romanian',
+                value: 'ro'
+              },
+              {
+                label: 'Slovak',
+                value: 'sk'
+              },
+              {
+                label: 'Slovenian',
+                value: 'sl'
+              },
+              {
+                label: 'Swedish',
+                value: 'sv'
+              },
+              {
+                label: 'Ukrainian',
+                value: 'uk'
+              },
+              {
+                label: 'Vietnamese',
+                value: 'vi'
+              },
+              {
+                label: 'Other',
+                value: 'other'
               }
             ] as CascaderDropdownDataValueType[]
           } as CascaderDropdownOperatorType,
@@ -350,6 +422,78 @@ export const data = [
               {
                 label: 'Spanish',
                 value: 'es'
+              },
+              {
+                label: 'German',
+                value: 'de'
+              },
+              {
+                label: 'Italian',
+                value: 'it'
+              },
+              {
+                label: 'Dutch',
+                value: 'nl'
+              },
+              {
+                label: 'Portuguese',
+                value: 'pt'
+              },
+              {
+                label: 'Russian',
+                value: 'ru'
+              },
+              {
+                label: 'Turkish',
+                value: 'tr'
+              },
+              {
+                label: 'Arabic',
+                value: 'ar'
+              },
+              {
+                label: 'Chinese',
+                value: 'zh'
+              },
+              {
+                label: 'Japanese',
+                value: 'ja'
+              },
+              {
+                label: 'Korean',
+                value: 'ko'
+              },
+              {
+                label: 'Polish',
+                value: 'pl'
+              },
+              {
+                label: 'Romanian',
+                value: 'ro'
+              },
+              {
+                label: 'Slovak',
+                value: 'sk'
+              },
+              {
+                label: 'Slovenian',
+                value: 'sl'
+              },
+              {
+                label: 'Swedish',
+                value: 'sv'
+              },
+              {
+                label: 'Ukrainian',
+                value: 'uk'
+              },
+              {
+                label: 'Vietnamese',
+                value: 'vi'
+              },
+              {
+                label: 'Other',
+                value: 'other'
               }
             ] as CascaderDropdownDataValueType[]
           } as CascaderDropdownOperatorType
