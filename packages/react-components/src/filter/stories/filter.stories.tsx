@@ -11,7 +11,7 @@ import {
   ChevronDownIcon, CloseIcon, DeleteIcon, PlusIcon
 } from '@sparrowengg/twigs-react-icons';
 import { Text } from '@src/text';
-import { properties } from '@src/cascader-dropdown/tests/data';
+import { data } from '@src/cascader-dropdown/tests/data';
 import { CascaderDropdown } from '@src/cascader-dropdown';
 import {
   CascaderDropdownDataValueType, CascaderDropdownOperatorType, CascaderDropdownItemType, CascaderDropdownValueSelectorType, initialFilterValueSelectorValue
@@ -27,6 +27,86 @@ import { FilterPill, FilterPillWithoutOperator } from '../index';
 export default {
   component: FilterPill,
   title: 'Form/FilterPill'
+};
+
+const FilterPillTemplate = () => {
+  const filterPillData: FilterType = {
+    comparator: 'AND' as ComparatorType,
+    property: {
+      label: 'Date',
+      value: 'date',
+      operators: [
+        {
+          label: 'is',
+          value: 'is',
+          dataType: 'DATE',
+          type: 'VALUE_SELECTOR'
+        },
+        {
+          label: 'is not',
+          value: 'is-not',
+          dataType: 'DATE',
+          type: 'VALUE_SELECTOR'
+        },
+        {
+          label: 'is before',
+          value: 'is-before',
+          dataType: 'DATE',
+          type: 'VALUE_SELECTOR'
+        },
+        {
+          label: 'is after',
+          value: 'is-after',
+          dataType: 'DATE',
+          type: 'VALUE_SELECTOR'
+        },
+        {
+          label: 'is on or before',
+          value: 'is-on-or-before',
+          dataType: 'DATE',
+          type: 'VALUE_SELECTOR'
+        },
+        {
+          label: 'is on or after',
+          value: 'is-on-or-after',
+          dataType: 'DATE',
+          type: 'VALUE_SELECTOR'
+        },
+        {
+          label: 'is between',
+          value: 'is-between',
+          dataType: 'DATE_RANGE',
+          type: 'VALUE_SELECTOR'
+        }
+      ]
+    },
+    value: {
+      NUMBER: null,
+      DATE: '2025-04-14',
+      DATE_RANGE: null,
+      DATE_TIME_TIMEZONE: null,
+      SINGLE_LINE_TEXT: null,
+      MULTI_LINE_TEXT: null,
+      SINGLE_SELECT: null,
+      MULTI_SELECT: null
+    },
+    connector: {
+      dataType: 'DATE',
+      label: 'is',
+      value: 'is',
+      type: 'VALUE_SELECTOR'
+    }
+  };
+  return (
+    <FilterPill
+      cascaderDropdownData={filterPillData.property.operators ?? []}
+      filterPillData={filterPillData}
+      setFilterPillData={() => {}}
+      onDelete={() => {}}
+      variant="outline"
+      showError={false}
+    />
+  );
 };
 
 const SurveyIcon = () => {
@@ -82,7 +162,7 @@ const allAnyOptions = Object.keys(allAnyOptionsMap).map((key) => ({
   value: key
 }));
 
-export const Template = () => {
+const Template = () => {
   const [conditionsData, setConditionsData] = useState<ConditionsDataType>({
     globalConnector: 'ALL',
     filterGroups: []
@@ -200,21 +280,25 @@ export const Template = () => {
     }));
   };
 
+  const updateFilterInGroup = (group: FilterGroupType, filterIndex: number, newComparator: ComparatorType) => {
+    return {
+      ...group,
+      filters: group.filters.map((filter, loopFilterIndex) => {
+        if (loopFilterIndex !== filterIndex) return filter;
+        return {
+          ...filter,
+          comparator: newComparator
+        };
+      })
+    };
+  };
+
   const onComparatorChange = (value: string, groupIndex: number, filterIndex: number) => {
     setConditionsData((prev) => ({
       ...prev,
       filterGroups: prev.filterGroups.map((group, loopGroupIndex) => {
         if (loopGroupIndex !== groupIndex) return group;
-        return {
-          ...group,
-          filters: group.filters.map((filter, loopFilterIndex) => {
-            if (loopFilterIndex !== filterIndex) return filter;
-            return {
-              ...filter,
-              comparator: value as ComparatorType
-            };
-          })
-        };
+        return updateFilterInGroup(group, filterIndex, value as ComparatorType);
       })
     }));
   };
@@ -235,9 +319,9 @@ export const Template = () => {
 
   return (
     <Flex css={{ flexWrap: 'wrap' }} gap="$2">
-      <Dialog open>
+      <Dialog>
         <DialogTrigger asChild>
-          <Button size="lg">Edit profile</Button>
+          <Button size="lg">Add Filter Conditions</Button>
         </DialogTrigger>
         <DialogContent css={{ overflow: 'visible' }}>
           <TooltipProvider delayDuration={0}>
@@ -390,7 +474,8 @@ export const Template = () => {
   );
 };
 
-export const Default = Template.bind({});
+export const Default = FilterPillTemplate.bind({});
+export const Example = Template.bind({});
 
 const Group = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -437,7 +522,7 @@ const AddConditionButton = ({
   };
 
   return (
-    <CascaderDropdown data={properties} dropdownContentProps={{ align: 'start', ...dropdownContentProps }} onChange={onChange} tooltipProps={tooltipProps}>
+    <CascaderDropdown data={data} dropdownContentProps={{ align: 'start', ...dropdownContentProps }} onChange={onChange} tooltipProps={tooltipProps}>
       {children}
     </CascaderDropdown>
   );

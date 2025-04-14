@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import 'jest';
 import React from 'react';
 import { CascaderDropdown } from '../index';
-import { allProperties as data } from './data';
+import { data } from './data';
 import { buildTree } from '../helpers/cascader-dropdown-utils';
 
 describe('Cascader', () => {
@@ -14,9 +14,9 @@ describe('Cascader', () => {
   it('creates tree correctly', () => {
     const tree = buildTree(data);
     expect(
-      tree.getChildren()[1].nextNode
+      tree.getChildren()[1].prevNode
         ?.value
-    ).toBe('visitorsProperties');
+    ).toBe('contactProperties');
     expect(tree.findNode('firstName')?.getParent()?.value).toBe(
       'contactProperties'
     );
