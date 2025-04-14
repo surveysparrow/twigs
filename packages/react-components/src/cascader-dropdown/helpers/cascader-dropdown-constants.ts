@@ -22,6 +22,7 @@ export type CascaderDropdownItemType = {
   options?: CascaderDropdownItemType[];
   disabled?: boolean;
   shouldFetchOptions?: boolean;
+  selectionPath: CascaderDropdownDataValueType[];
 };
 
 export type CascaderDropdownOperatorType = {

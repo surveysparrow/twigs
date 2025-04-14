@@ -5,7 +5,7 @@ import {
 } from './cascader-dropdown-constants';
 
 export const recursiveFind = (
-  data: CascaderDropdownItemType[],
+  data: (CascaderDropdownItemType | CascaderDropdownOperatorType)[],
   value: CascaderDropdownDataValueType
 ): CascaderDropdownDataValueType | null => {
   for (let i = 0; i < data.length; i++) {
@@ -26,10 +26,16 @@ export const recursiveFind = (
   return null;
 };
 
-export const buildTree = (data: CascaderDropdownItemType[]): CascaderDropdownRootNode => {
+export const buildTree = (data: (CascaderDropdownItemType | CascaderDropdownOperatorType)[]): CascaderDropdownRootNode => {
   const tree = new CascaderDropdownRootNode();
 
-  const traverse = (options: CascaderDropdownItemType[] | CascaderDropdownOperatorType[], parentNode: CascaderDropdownNode, valuePath: string, labelPath: string, level: number) => {
+  const traverse = (
+    options: (CascaderDropdownItemType | CascaderDropdownOperatorType)[],
+    parentNode: CascaderDropdownNode,
+    valuePath: string,
+    labelPath: string,
+    level: number
+  ) => {
     for (let i = 0; i < options.length; i++) {
       const item = options[i];
 

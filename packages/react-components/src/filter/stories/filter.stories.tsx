@@ -12,9 +12,9 @@ import {
 } from '@sparrowengg/twigs-react-icons';
 import { Text } from '@src/text';
 import { data } from '@src/cascader-dropdown/tests/data';
-import { CascaderDropdown } from '@src/cascader-dropdown';
+import { CascaderDropdown, OnChangeReturnType } from '@src/cascader-dropdown';
 import {
-  CascaderDropdownDataValueType, CascaderDropdownOperatorType, CascaderDropdownItemType, CascaderDropdownValueSelectorType, initialFilterValueSelectorValue
+  CascaderDropdownOperatorType, CascaderDropdownItemType, CascaderDropdownValueSelectorType, initialFilterValueSelectorValue
 } from '@src/cascader-dropdown/helpers/cascader-dropdown-constants';
 import {
   DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger
@@ -78,7 +78,11 @@ const FilterPillTemplate = () => {
           dataType: 'DATE_RANGE',
           type: 'VALUE_SELECTOR'
         }
-      ]
+      ],
+      selectionPath: [{
+        label: 'Contact Property',
+        value: 'contactProperty'
+      }]
     },
     value: {
       NUMBER: null,
@@ -123,6 +127,24 @@ const SurveyIcon = () => {
   );
 };
 
+const ContactPropertyIcon = () => {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      {/* eslint-disable-next-line max-len */}
+      <path d="M12.4379 13.5662C11.9487 12.074 10.6519 10.6642 9.32857 10.6644H6.69988C5.87888 10.6643 5.08868 11.0437 4.49002 11.7256C4.14406 12.1194 3.87379 12.6009 3.69843 13.1357L3.55654 13.5662M4.66293 13.9976H11.3318C12.804 13.9976 13.9974 12.8042 13.9974 11.332V4.66311C13.9974 3.19097 12.804 1.99756 11.3318 1.99756H4.66293C3.19079 1.99756 1.99738 3.19097 1.99738 4.66311V11.332C1.99738 12.8041 3.19078 13.9976 4.66293 13.9976ZM7.99738 8.61347C7.15264 8.61347 6.46784 7.92867 6.46784 7.08393V6.82017C6.46784 5.97543 7.15264 5.29063 7.99738 5.29063C8.84212 5.29063 9.52691 5.97543 9.52691 6.82017V7.08393C9.52691 7.92867 8.84212 8.61347 7.99738 8.61347Z" stroke="#575757" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+};
+
+const VariablesIcon = () => {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      {/* eslint-disable-next-line max-len */}
+      <path d="M8 3V1.5M8 12.3633V13.8633M5.39767 11.0591C5.58659 11.3837 5.85679 11.6536 6.18171 11.8422C6.50663 12.0308 6.87508 12.1317 7.25084 12.1349H8.89487C9.40877 12.1345 9.90479 11.9464 10.2896 11.606C10.6744 11.2657 10.9214 10.7965 10.9842 10.2869C11.047 9.77721 10.9212 9.2622 10.6305 8.83876C10.3398 8.41533 9.90419 8.11266 9.40573 7.98774L6.59427 7.282C6.09581 7.15707 5.66024 6.85441 5.36952 6.43097C5.07881 6.00754 4.953 5.49253 5.01579 4.98287C5.07857 4.47322 5.32561 4.00407 5.71041 3.66372C6.09521 3.32336 6.59123 3.13528 7.10513 3.13487H8.74916C9.1242 3.13747 9.49211 3.23754 9.81672 3.42525C10.1413 3.61296 10.4115 3.88184 10.6006 4.20547" stroke="#575757" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+};
+
 type ComparatorType = 'AND' | 'OR';
 type GlobalConnectorType = 'ALL' | 'ANY';
 
@@ -161,6 +183,12 @@ const allAnyOptions = Object.keys(allAnyOptionsMap).map((key) => ({
   label: allAnyOptionsMap[key],
   value: key
 }));
+
+const PillIconMap = {
+  contactProperties: ContactPropertyIcon,
+  variables: VariablesIcon,
+  surveys: SurveyIcon
+};
 
 const Template = () => {
   const [conditionsData, setConditionsData] = useState<ConditionsDataType>({
@@ -319,7 +347,7 @@ const Template = () => {
 
   return (
     <Flex css={{ flexWrap: 'wrap' }} gap="$2">
-      <Dialog>
+      <Dialog open>
         <DialogTrigger asChild>
           <Button size="lg">Add Filter Conditions</Button>
         </DialogTrigger>
@@ -383,6 +411,8 @@ const Template = () => {
                   <Group key={groupIndex}>
                     <GroupTitle onDelete={() => deleteGroup(groupIndex)}>When</GroupTitle>
                     {group.filters.map((filter, filterIndex) => {
+                      const selectedRootProperty = filter.property.selectionPath?.[0]?.value;
+                      const Icon = PillIconMap[selectedRootProperty];
                       const key = `${filter.property.operators?.[0]?.value}-${groupIndex}-${filterIndex}`;
                       return (
                         <Flex
@@ -390,7 +420,7 @@ const Template = () => {
                           alignItems="center"
                           gap="$1"
                           css={{
-                            '&:hover, &:focus, &:active': {
+                            '&:hover, &:focus, &:active, &:focus-visible': {
                               [`.${prefixClassName('add-condition-in-group-button')}`]: {
                                 opacity: '1'
                               }
@@ -407,7 +437,7 @@ const Template = () => {
                                 data={filter.property.operators[0]}
                                 filterPillData={conditionsData.filterGroups[groupIndex].filters[filterIndex]}
                                 setFilterPillData={(filterPillValue: FilterType) => replaceFilterPillData(filterPillValue, groupIndex, filterIndex)}
-                                icon={<SurveyIcon />}
+                                icon={Icon && <Icon />}
                                 onDelete={() => deleteCondition(groupIndex, filterIndex)}
                                 variant="outline"
                                 showError={showError.has(`${filter.property.value}-${groupIndex}-${filterIndex}`)}
@@ -421,6 +451,7 @@ const Template = () => {
                                 setFilterPillData={(filterPillValue: FilterType) => replaceFilterPillData(filterPillValue, groupIndex, filterIndex)}
                                 onDelete={() => deleteCondition(groupIndex, filterIndex)}
                                 variant="outline"
+                                icon={Icon && <Icon />}
                                 showError={showError.has(`${filter.property.value}-${groupIndex}-${filterIndex}`)}
                               />
                             )}
@@ -432,7 +463,7 @@ const Template = () => {
                 ))}
                 <Flex alignItems="center" gap="$4">
                   <AddConditionButton
-                    onAdd={({ selectedProperty }: { selectedProperty: CascaderDropdownItemType | null }) => {
+                    onAdd={(selectedProperty: CascaderDropdownItemType | null) => {
                       addCondition(selectedProperty);
                     }}
                   >
@@ -506,19 +537,16 @@ const AddConditionButton = ({
   children, onAdd, dropdownContentProps, tooltipProps
 }: {
   children: React.ReactNode,
-  onAdd: ({ selectedProperty }: { selectedProperty: CascaderDropdownItemType | null }) => void,
+  onAdd: (selectedProperty: CascaderDropdownItemType | null) => void,
   dropdownContentProps?: PopoverContentProps & RefAttributes<HTMLDivElement>,
   tooltipProps?: TooltipProps
 }) => {
   const onChange = ({
-    selectedProperty
-  } : {
-    value: CascaderDropdownDataValueType | CascaderDropdownOperatorType,
-    selectionPath: CascaderDropdownDataValueType[],
-    selectedProperty: CascaderDropdownItemType | null,
-    selectorValue?: CascaderDropdownValueSelectorType
-  }) => {
-    onAdd({ selectedProperty });
+    selectedProperty,
+    selectionPath
+  } : OnChangeReturnType) => {
+    if (!selectedProperty?.label || !selectedProperty?.value) return;
+    onAdd({ ...selectedProperty, selectionPath });
   };
 
   return (
@@ -575,7 +603,7 @@ const AddConditionInGroupButton = ({
 }: {
   insertCondition: (selectedProperty: CascaderDropdownItemType) => void
 }) => {
-  const handleAddCondition = ({ selectedProperty }: { selectedProperty: CascaderDropdownItemType | null }) => {
+  const handleAddCondition = (selectedProperty: CascaderDropdownItemType | null) => {
     if (!selectedProperty) return;
     insertCondition(selectedProperty);
   };
@@ -592,7 +620,10 @@ const AddConditionInGroupButton = ({
           border: '1px dashed $black300',
           opacity: '0',
           transition: 'opacity 0.2s ease-in-out',
-          marginLeft: '$3'
+          marginLeft: '$3',
+          '&:hover, &:focus, &:active, &:focus-visible': {
+            opacity: 1
+          }
         }}
         icon={<PlusIcon />}
         color="default"

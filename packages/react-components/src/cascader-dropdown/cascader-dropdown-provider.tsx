@@ -3,31 +3,30 @@ import {
   useEffect
 } from 'react';
 import {
-  CascaderDropdownItemType, CascaderDropdownDataValueType, CascaderDropdownValueSelectorType, optionTypes
+  CascaderDropdownItemType, CascaderDropdownOperatorType, CascaderDropdownDataValueType, CascaderDropdownValueSelectorType, optionTypes
 } from './helpers/cascader-dropdown-constants';
 import { CascaderDropdownContext, CascaderDropdownContextType } from './use-value';
 import {
-  buildSelectionPath, buildTree, findNextFocusableRowNode, findPrevFocusableRowNode
+  buildSelectionPath, buildTree, findNextFocusableRowNode, findPrevFocusableRowNode,
+  recursiveFind
 } from './helpers/cascader-dropdown-utils';
 import { CascaderDropdownNode } from './cascader-dropdown-node';
+import { OnChangeReturnType } from './cascader-dropdown';
 
 export type CascaderDropdownProviderProps = {
   children: ReactNode;
-  data: CascaderDropdownItemType[];
+  data: (CascaderDropdownItemType | CascaderDropdownOperatorType)[];
   value: CascaderDropdownDataValueType;
   onChange: ({
     value,
     selectionPath,
     selectorValue
-  }: {
-    value: CascaderDropdownDataValueType,
-    selectionPath: CascaderDropdownDataValueType[],
-    selectorValue?: CascaderDropdownValueSelectorType
-  }) => void;
+  }: OnChangeReturnType) => void;
+  selectorValue?: CascaderDropdownValueSelectorType;
 };
 
 export const CascaderDropdownProvider = ({
-  children, data, value, onChange
+  children, data, value, onChange, selectorValue
 }: CascaderDropdownProviderProps) => {
   const id = useId();
 
@@ -42,8 +41,11 @@ export const CascaderDropdownProvider = ({
   }, [selectedNode]);
 
   const rootNode = useMemo(() => {
-    return buildTree(data);
-  }, [data]);
+    const root = buildTree(data);
+    const node = root.findNode(value?.value);
+    if (node) setSelectedNode(node);
+    return root;
+  }, [data, value]);
 
   const focusPreviousColumn = () => {
     if (foldersSelectionPath.length === 0 || foldersSelectionPath.length === 1) {
@@ -107,14 +109,15 @@ export const CascaderDropdownProvider = ({
     }
   };
 
-  const handleChange = (node: CascaderDropdownNode, selectorValue?: CascaderDropdownValueSelectorType) => {
+  const handleChange = (node: (CascaderDropdownNode | CascaderDropdownOperatorType), selectedSelectorValue?: CascaderDropdownValueSelectorType) => {
     setSelectedNode(null);
     setFocusedNode(null);
     setPopoverOpen(false);
     onChange({
       value: { label: node.label, value: node.value },
       selectionPath: selectionPath.map((item) => ({ label: item.label, value: item.value })),
-      selectorValue
+      selectedProperty: recursiveFind(data, { value: node.value, label: node.label }),
+      selectorValue: selectedSelectorValue
     });
   };
 
@@ -157,7 +160,8 @@ export const CascaderDropdownProvider = ({
     focusPreviousRow,
     focusPreviousColumn,
     handleChange,
-    selectFocusedNode
+    selectFocusedNode,
+    selectorValue
   }), [
     id,
     data,
@@ -178,7 +182,8 @@ export const CascaderDropdownProvider = ({
     focusPreviousRow,
     focusPreviousColumn,
     handleChange,
-    selectFocusedNode
+    selectFocusedNode,
+    selectorValue
   ]);
 
   return (

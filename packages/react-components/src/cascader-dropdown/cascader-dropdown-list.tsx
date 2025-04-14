@@ -13,7 +13,7 @@ export const CascaderDropdownList = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const {
-    rootNode, foldersSelectionPath, selectedNode, focusPreviousColumn, handleChange
+    rootNode, foldersSelectionPath, selectedNode, focusPreviousColumn, handleChange, selectorValue
   } = useCascaderDropdownContext();
 
   useEffect(() => {
@@ -35,6 +35,7 @@ export const CascaderDropdownList = () => {
         }}
         onCancel={focusPreviousColumn}
         selectedNode={selectedNode}
+        selectorValue={selectorValue}
       />
     );
   }

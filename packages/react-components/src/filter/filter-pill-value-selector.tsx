@@ -3,18 +3,22 @@ import { prefixClassName } from '@src/utils';
 import { ReactNode, useId, useState } from 'react';
 import CascaderDropdownValueSelector from '@src/cascader-dropdown/cascader-dropdown-value-selector';
 import { CascaderDropdownNode } from '@src/cascader-dropdown/cascader-dropdown-node';
-import { dataTypes, optionTypes, CascaderDropdownDataValueType } from '@src/cascader-dropdown/helpers/cascader-dropdown-constants';
+import {
+  dataTypes, optionTypes, CascaderDropdownDataValueType, CascaderDropdownValueSelectorType
+} from '@src/cascader-dropdown/helpers/cascader-dropdown-constants';
 
 const FilterPillValueSelector = ({
   children,
   dataType,
   choices,
-  onApply
+  onApply,
+  selectorValue
 }: {
   children: ReactNode;
   dataType: keyof typeof dataTypes;
   choices?: CascaderDropdownDataValueType[];
-  onApply: (value: string) => void;
+  onApply: (value: CascaderDropdownValueSelectorType[keyof CascaderDropdownValueSelectorType]) => void;
+  selectorValue: CascaderDropdownValueSelectorType;
 }) => {
   const id = useId();
 
@@ -34,13 +38,14 @@ const FilterPillValueSelector = ({
       >
         <CascaderDropdownValueSelector
           hasOperator={false}
-          onApply={(value: string) => {
+          onApply={(value: CascaderDropdownValueSelectorType[keyof CascaderDropdownValueSelectorType]) => {
             setOpen(false);
             onApply(value);
           }}
           onCancel={() => {
             setOpen(false);
           }}
+          selectorValue={selectorValue}
           selectedNode={new CascaderDropdownNode('', '', {
             dataType,
             choices

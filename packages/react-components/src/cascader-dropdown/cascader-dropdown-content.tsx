@@ -44,7 +44,22 @@ export const CascaderDropdownContent = ({
 
   return (
     <Popover open={popoverOpen} onOpenChange={setPopoverOpen} {...props}>
-      <Tooltip content="" {...tooltipProps}>
+      {tooltipProps?.content ? (
+        <Tooltip {...tooltipProps}>
+          <PopoverTrigger asChild className={prefixClassName('cascader-dropdown__trigger')} {...popoverTriggerProps}>
+            {children || (
+              <Button
+                variant="ghost"
+                color="default"
+                className="twigs-editor-tool-button"
+                {...popoverTriggerButtonProps}
+              >
+                Select
+              </Button>
+            )}
+          </PopoverTrigger>
+        </Tooltip>
+      ) : (
         <PopoverTrigger asChild className={prefixClassName('cascader-dropdown__trigger')} {...popoverTriggerProps}>
           {children || (
             <Button
@@ -57,7 +72,7 @@ export const CascaderDropdownContent = ({
             </Button>
           )}
         </PopoverTrigger>
-      </Tooltip>
+      )}
       <PopoverContent
         data-filter-popover-content={id}
         className={prefixClassName('cascader-dropdown')}

@@ -4,7 +4,8 @@ import {
 import { PopoverProps, PopoverContentProps } from '@radix-ui/react-popover';
 import { TooltipProps, TooltipProvider } from '@src/tooltip';
 import {
-  CascaderDropdownItemType, CascaderDropdownDataValueType, CascaderDropdownValueSelectorType, CascaderDropdownOperatorType
+  CascaderDropdownItemType, CascaderDropdownDataValueType, CascaderDropdownValueSelectorType, CascaderDropdownOperatorType,
+  initialFilterValueSelectorValue
 } from './helpers/cascader-dropdown-constants';
 import { CascaderDropdownProvider } from './cascader-dropdown-provider';
 import { CascaderDropdownContent } from './cascader-dropdown-content';
@@ -14,7 +15,7 @@ export type DropdownContentProps = PopoverContentProps & RefAttributes<HTMLDivEl
 
 export type CascaderDropdownProps = {
   children?: ReactNode;
-  data: CascaderDropdownItemType[];
+  data: (CascaderDropdownItemType | CascaderDropdownOperatorType)[];
   value?: CascaderDropdownDataValueType | string | null;
   defaultValue?: CascaderDropdownDataValueType | string | null;
   onChange?: ({
@@ -22,18 +23,21 @@ export type CascaderDropdownProps = {
     selectionPath,
     selectedProperty,
     selectorValue
-  } : {
-    value: CascaderDropdownDataValueType | CascaderDropdownOperatorType,
-    selectionPath: CascaderDropdownDataValueType[],
-    selectedProperty: CascaderDropdownItemType | null,
-    selectorValue?: CascaderDropdownValueSelectorType
-  }) => void;
+  } : OnChangeReturnType) => void;
   dropdownProps?: PopoverProps;
   dropdownContentProps?: DropdownContentProps;
   tooltipProps?: TooltipProps;
+  selectorValue?: CascaderDropdownValueSelectorType;
 } & CascaderDropdownComponentProps;
 
 export type CascaderDropdownComponentProps = {
+};
+
+export type OnChangeReturnType = {
+  value: CascaderDropdownDataValueType | CascaderDropdownOperatorType,
+  selectionPath: CascaderDropdownDataValueType[],
+  selectedProperty: CascaderDropdownDataValueType | null,
+  selectorValue?: CascaderDropdownValueSelectorType
 };
 
 export const CascaderDropdown = ({
@@ -44,9 +48,8 @@ export const CascaderDropdown = ({
   onChange,
   dropdownProps = {},
   dropdownContentProps = {},
-  tooltipProps = {
-    content: ''
-  }
+  tooltipProps,
+  selectorValue = initialFilterValueSelectorValue
 }: CascaderDropdownProps) => {
   const [localValue, setLocalValue] = useState<CascaderDropdownDataValueType>(
     (
@@ -77,10 +80,11 @@ export const CascaderDropdown = ({
       <CascaderDropdownProvider
         data={data}
         value={selectedValue}
+        selectorValue={selectorValue}
         onChange={({
           value: selectedDataValue,
           selectionPath,
-          selectorValue
+          selectorValue: selectedSelectorValue
         }: {
           value: CascaderDropdownDataValueType | CascaderDropdownOperatorType,
           selectionPath: CascaderDropdownDataValueType[],
@@ -92,7 +96,7 @@ export const CascaderDropdown = ({
               value: selectedDataValue,
               selectionPath,
               selectedProperty: recursiveFind(data, { value: selectedDataValue.value, label: '' }),
-              selectorValue
+              selectorValue: selectedSelectorValue
             });
           }
         }}

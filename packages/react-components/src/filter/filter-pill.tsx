@@ -1,15 +1,16 @@
 import { CloseCircleFillIcon } from '@sparrowengg/twigs-react-icons';
-import { Box } from '@src/box';
+import { Box, BoxProps } from '@src/box';
 import { Flex } from '@src/flex';
 import { Tooltip, TooltipProvider } from '@src/tooltip';
 import { styled } from '@src/stitches.config';
-import { Text } from '@src/text';
+import { Text, TextProps } from '@src/text';
 import { prefixClassName } from '@src/utils';
 import React from 'react';
-import { CascaderDropdown } from '@src/cascader-dropdown';
+import { CascaderDropdown, OnChangeReturnType } from '@src/cascader-dropdown';
 import {
-  CascaderDropdownDataValueType, CascaderDropdownItemType, CascaderDropdownOperatorType, CascaderDropdownValueSelectorType, dataTypes, initialFilterValueSelectorValue, optionTypes
+  CascaderDropdownItemType, CascaderDropdownOperatorType, CascaderDropdownValueSelectorType, dataTypes, initialFilterValueSelectorValue, optionTypes
 } from '@src/cascader-dropdown/helpers/cascader-dropdown-constants';
+import { CSS } from '@stitches/react';
 import FilterPillValueSelector from './filter-pill-value-selector';
 import { FilterType } from './stories/filter.stories';
 
@@ -18,7 +19,7 @@ export type FilterPillProps = {
   filterPillData: FilterType;
   setFilterPillData: (value: FilterType) => void;
   variant?: 'filled' | 'outline';
-  cascaderDropdownData: CascaderDropdownItemType[];
+  cascaderDropdownData: (CascaderDropdownItemType | CascaderDropdownOperatorType)[];
   onDelete: () => void;
   showError?: boolean;
 };
@@ -59,21 +60,17 @@ export const FilterPill = ({
   const onChange = ({
     selectedProperty,
     selectorValue
-  } : {
-    value: CascaderDropdownDataValueType | CascaderDropdownOperatorType,
-    selectionPath: CascaderDropdownDataValueType[],
-    selectedProperty: CascaderDropdownItemType | CascaderDropdownOperatorType | null,
-    selectorValue?: CascaderDropdownValueSelectorType
-  }) => {
+  }: OnChangeReturnType) => {
     if (selectedProperty && 'type' in selectedProperty && selectedProperty.type === optionTypes.VALUE_SELECTOR) {
+      if (!('dataType' in selectedProperty)) return;
       const newFilterPillData = {
         ...filterPillData,
         value: selectorValue ?? initialFilterValueSelectorValue,
         connector: {
-          dataType: selectedProperty.dataType,
+          dataType: selectedProperty.dataType as keyof typeof dataTypes,
           label: `${selectedProperty.label}`,
           value: `${selectedProperty.value}`,
-          type: selectedProperty.type
+          type: selectedProperty.type as 'VALUE_SELECTOR'
         }
       };
       setFilterPillData(newFilterPillData);
@@ -83,33 +80,16 @@ export const FilterPill = ({
   return (
     <TooltipProvider delayDuration={0}>
       <StyledFilterPill variant={showError ? 'error' : variant}>
-        <Flex alignItems="center" gap="$2" css={{ padding: '3px $2 3px $4' }}>
-          {icon && (
-            <Box
-              css={{
-                lineHeight: 0,
-                flexShrink: 0,
-                color: '$neutral800',
-                '&, & svg': {
-                  minWidth: '$4',
-                  minHeight: '$4',
-                  height: '$4',
-                  width: '$4'
-                }
-              }}
+        <FilterPillLabel icon={icon} label={filterPillData.property.label} labelProps={{ css: { color: '$neutral900' } }} />
+        <Flex>
+          {!filterPillData.connector?.value && (
+            <CascaderDropdown
+              data={cascaderDropdownData}
+              selectorValue={filterPillData.value}
+              onChange={onChange}
+              dropdownContentProps={{ align: 'start' }}
             >
-              {icon}
-            </Box>
-          )}
-          <Text weight="medium" css={{ color: '$neutral900', maxWidth: '$25' }} truncate>{filterPillData.property.label}</Text>
-        </Flex>
-        <CascaderDropdown
-          data={cascaderDropdownData}
-          onChange={onChange}
-        >
-          <Flex>
-            {!filterPillData.connector?.value && (
-              <StyledValueButton>
+              <StyledValueButton css={{ borderTopRightRadius: '$lg', borderBottomRightRadius: '$lg' }}>
                 <Text
                   css={{
                     color: '$neutral700',
@@ -123,13 +103,28 @@ export const FilterPill = ({
                   Choose Condition
                 </Text>
               </StyledValueButton>
-            )}
-            {filterPillData.connector?.value && (
+            </CascaderDropdown>
+          )}
+          {filterPillData.connector?.value && (
+            <CascaderDropdown
+              data={cascaderDropdownData}
+              selectorValue={filterPillData.value}
+              onChange={onChange}
+              dropdownContentProps={{ align: 'start' }}
+            >
               <StyledValueButton>
                 <Text css={{ color: '$neutral700', padding: '3px $1 3px $1' }}>{filterPillData.connector?.label}</Text>
               </StyledValueButton>
-            )}
-            {filterPillData.connector?.value && (
+            </CascaderDropdown>
+          )}
+          {filterPillData.connector?.value && (
+            <CascaderDropdown
+              data={cascaderDropdownData}
+              selectorValue={filterPillData.value}
+              value={filterPillData.connector}
+              onChange={onChange}
+              dropdownContentProps={{ align: 'start' }}
+            >
               <StyledValueButton css={{ borderTopRightRadius: '$lg', borderBottomRightRadius: '$lg' }}>
                 <Text
                   css={{
@@ -144,9 +139,9 @@ export const FilterPill = ({
                   {getDisplayValue(filterPillData) ?? 'Choose Value'}
                 </Text>
               </StyledValueButton>
-            )}
-          </Flex>
-        </CascaderDropdown>
+            </CascaderDropdown>
+          )}
+        </Flex>
         <Tooltip content="Remove">
           <StyledCloseButton className={prefixClassName('filter-pill__close-button')} onClick={() => onDelete()}>
             <CloseCircleFillIcon size={16} />
@@ -154,6 +149,42 @@ export const FilterPill = ({
         </Tooltip>
       </StyledFilterPill>
     </TooltipProvider>
+  );
+};
+
+const FilterPillLabel = ({
+  icon, label, css, labelProps, iconProps
+}: { icon?: React.ReactNode, label?: string, css?: CSS, labelProps?: TextProps, iconProps?: BoxProps }) => {
+  return (
+    <Flex alignItems="center" gap="$2" css={{ padding: '3px $2 3px $4', ...css }}>
+      {icon && (
+        <Box
+          {...iconProps}
+          css={{
+            lineHeight: 0,
+            flexShrink: 0,
+            color: '$neutral800',
+            '&, & svg': {
+              minWidth: '$4',
+              minHeight: '$4',
+              height: '$4',
+              width: '$4'
+            },
+            ...iconProps?.css
+          }}
+        >
+          {icon}
+        </Box>
+      )}
+      <Text
+        weight="medium"
+        truncate
+        {...labelProps}
+        css={{ color: '$neutral700', maxWidth: '$25', ...labelProps?.css }}
+      >
+        {label}
+      </Text>
+    </Flex>
   );
 };
 
@@ -175,7 +206,7 @@ export const FilterPillWithoutOperator = ({
   onDelete,
   showError = false
 }: FilterPillWithoutOperatorProps) => {
-  const onChange = (value: string) => {
+  const onChange = (value: CascaderDropdownValueSelectorType[keyof CascaderDropdownValueSelectorType]) => {
     const newFilterPillData = {
       ...filterPillData,
       value: {
@@ -195,34 +226,8 @@ export const FilterPillWithoutOperator = ({
   return (
     <TooltipProvider delayDuration={0}>
       <StyledFilterPill variant={showError ? 'error' : variant}>
-        <Flex alignItems="center" gap="$2" css={{ padding: '3px $2 3px $4' }}>
-          {icon && (
-            <Box
-              css={{
-                lineHeight: 0,
-                flexShrink: 0,
-                color: '$neutral800',
-                '&, & svg': {
-                  minWidth: '$4',
-                  minHeight: '$4',
-                  height: '$4',
-                  width: '$4'
-                }
-              }}
-            >
-              {icon}
-            </Box>
-          )}
-          <Text
-            weight="medium"
-            css={{ color: '$neutral700', maxWidth: '$25' }}
-            truncate
-          >
-            {filterPillData.property.label}
-            :
-          </Text>
-        </Flex>
-        <FilterPillValueSelector dataType={data.dataType} choices={data.choices} onApply={onChange}>
+        <FilterPillLabel icon={icon} label={`${filterPillData.property.label}:`} />
+        <FilterPillValueSelector selectorValue={filterPillData.value} dataType={data.dataType} choices={data.choices} onApply={onChange}>
           <Flex>
             <StyledValueButton css={{ borderTopRightRadius: '$lg', borderBottomRightRadius: '$lg' }}>
               <Text

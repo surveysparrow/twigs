@@ -10,43 +10,48 @@ import { Text } from '@src/text';
 import { Checkbox } from '@src/checkbox';
 import { Calendar, CalendarRange } from '@src/calendar';
 import {
-  DateValue, getLocalTimeZone, now, today
+  DateValue, getLocalTimeZone, now, today, parseDate
 } from '@internationalized/date';
 import { prefixClassName } from '@src/utils';
-import { ChevronRightIcon } from '@sparrowengg/twigs-react-icons';
-import { dataTypes } from './helpers/cascader-dropdown-constants';
+import { ChevronRightIcon, QuestionCircleIcon } from '@sparrowengg/twigs-react-icons';
+import { CascaderDropdownValueSelectorType, dataTypes } from './helpers/cascader-dropdown-constants';
 import { StyledItem } from './styled/StyledItem';
 import { CascaderDropdownBreadcrumb } from './cascader-dropdown-breadcrumb';
 import { CascaderDropdownNode } from './cascader-dropdown-node';
 
 type CascaderDropdownValueSelectorProps = {
-  onApply: (value: string) => void,
+  onApply: (value: CascaderDropdownValueSelectorType[keyof CascaderDropdownValueSelectorType]) => void,
   onCancel: () => void,
   hasOperator: boolean,
-  selectedNode: CascaderDropdownNode
+  selectedNode: CascaderDropdownNode,
+  selectorValue?: CascaderDropdownValueSelectorType
 }
 
 const CascaderDropdownValueSelector = ({
-  onApply, onCancel, hasOperator, selectedNode
+  onApply, onCancel, hasOperator, selectedNode, selectorValue
 }: CascaderDropdownValueSelectorProps) => {
   if (selectedNode?.options?.dataType === dataTypes.SINGLE_LINE_TEXT || selectedNode?.options?.dataType === dataTypes.NUMBER) {
-    return <SingleLineTextInput selectedNode={selectedNode} onApply={onApply} onCancel={onCancel} hasOperator={hasOperator} />;
+    return <SingleLineTextInput selectedNode={selectedNode} onApply={onApply} onCancel={onCancel} hasOperator={hasOperator} selectorValue={selectorValue} />;
   }
 
   if (selectedNode?.options?.dataType === dataTypes.MULTI_LINE_TEXT) {
-    return <MultiLineTextInput selectedNode={selectedNode} onApply={onApply} onCancel={onCancel} hasOperator={hasOperator} />;
+    return <MultiLineTextInput selectedNode={selectedNode} onApply={onApply} onCancel={onCancel} hasOperator={hasOperator} selectorValue={selectorValue} />;
   }
 
-  if (selectedNode?.options?.dataType === dataTypes.SINGLE_SELECT || selectedNode?.options?.dataType === dataTypes.MULTI_SELECT) {
-    return <SingleSelectInput selectedNode={selectedNode} onCancel={onCancel} onApply={onApply} hasOperator={hasOperator} />;
+  if (selectedNode?.options?.dataType === dataTypes.SINGLE_SELECT) {
+    return <SingleSelectInput selectedNode={selectedNode} onCancel={onCancel} onApply={onApply} hasOperator={hasOperator} selectorValue={selectorValue} />;
+  }
+
+  if (selectedNode?.options?.dataType === dataTypes.MULTI_SELECT) {
+    return <MultiSelectInput selectedNode={selectedNode} onCancel={onCancel} onApply={onApply} hasOperator={hasOperator} selectorValue={selectorValue} />;
   }
 
   if (selectedNode?.options?.dataType === dataTypes.DATE || selectedNode?.options?.dataType === dataTypes.DATE_TIME_TIMEZONE) {
-    return <DateInput selectedNode={selectedNode} onApply={onApply} onCancel={onCancel} hasOperator={hasOperator} />;
+    return <DateInput selectedNode={selectedNode} onApply={onApply} onCancel={onCancel} hasOperator={hasOperator} selectorValue={selectorValue} />;
   }
 
   if (selectedNode?.options?.dataType === dataTypes.DATE_RANGE) {
-    return <DateRangeInput selectedNode={selectedNode} onApply={onApply} onCancel={onCancel} hasOperator={hasOperator} />;
+    return <DateRangeInput selectedNode={selectedNode} onApply={onApply} onCancel={onCancel} hasOperator={hasOperator} selectorValue={selectorValue} />;
   }
 
   return (
@@ -57,15 +62,19 @@ const CascaderDropdownValueSelector = ({
 export default CascaderDropdownValueSelector;
 
 export const DateRangeInput = ({
-  selectedNode, onApply, onCancel, hasOperator
+  selectedNode, onApply, onCancel, hasOperator, selectorValue
 }: CascaderDropdownValueSelectorProps) => {
-  const [localValue, setLocalValue] = React.useState<{ start: DateValue, end: DateValue } | null>(null);
+  const [localValue, setLocalValue] = React.useState<{ start: DateValue, end: DateValue } | null>(
+    selectorValue?.DATE_RANGE?.start && selectorValue?.DATE_RANGE?.end
+      ? { start: parseDate(selectorValue.DATE_RANGE.start), end: parseDate(selectorValue.DATE_RANGE.end) }
+      : null
+  );
 
   const onApplyRange = () => {
     if (!localValue?.start || !localValue?.end) return;
     const start = localValue.start.toString();
     const end = localValue.end.toString();
-    onApply(`${start} - ${end}`);
+    onApply({ start, end });
   };
 
   return (
@@ -81,7 +90,6 @@ export const DateRangeInput = ({
         onChange={(newDateRange) => setLocalValue({ start: newDateRange.start, end: newDateRange.end })}
         value={localValue}
         compact
-        // showFooter={false}
         size="sm"
         containerCSS={{
           border: 'none'
@@ -111,9 +119,16 @@ export const DateRangeInput = ({
 };
 
 const DateInput = ({
-  selectedNode, onApply, onCancel, hasOperator
+  selectedNode, onApply, onCancel, hasOperator, selectorValue
 }: CascaderDropdownValueSelectorProps) => {
-  const [localValue, setLocalValue] = useState<DateValue>(selectedNode.options.dataType === dataTypes.DATE_TIME_TIMEZONE ? now(getLocalTimeZone()) : today(getLocalTimeZone()));
+  const [localValue, setLocalValue] = useState<DateValue>(() => {
+    if (selectorValue?.DATE) {
+      return parseDate(selectorValue.DATE);
+    }
+    return selectedNode.options.dataType === dataTypes.DATE_TIME_TIMEZONE
+      ? now(getLocalTimeZone())
+      : today(getLocalTimeZone());
+  });
 
   const onChange = (newDate: DateValue) => {
     setLocalValue(newDate);
@@ -167,9 +182,9 @@ const DateInput = ({
 };
 
 const SingleLineTextInput = ({
-  selectedNode, onApply, onCancel, hasOperator
+  selectedNode, onApply, onCancel, hasOperator, selectorValue
 }: CascaderDropdownValueSelectorProps) => {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(selectorValue?.SINGLE_LINE_TEXT ?? '');
 
   const regex = selectedNode.options.regex ? new RegExp(selectedNode.options.regex) : null;
   const isRegexValid = regex ? regex.test(value) : true;
@@ -223,9 +238,9 @@ const InputFooter = ({ disabled, onCancel, onApply }: { disabled: boolean, onCan
 };
 
 const MultiLineTextInput = ({
-  selectedNode, onApply, onCancel, hasOperator
+  selectedNode, onApply, onCancel, hasOperator, selectorValue
 }: CascaderDropdownValueSelectorProps) => {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(selectorValue?.MULTI_LINE_TEXT ?? '');
 
   const regex = selectedNode.options.regex ? new RegExp(selectedNode.options.regex) : null;
   const isRegexValid = regex ? regex.test(value) : true;
@@ -262,31 +277,19 @@ const MultiLineTextInput = ({
 };
 
 const SingleSelectInput = ({
-  selectedNode, onCancel, onApply, hasOperator
+  selectedNode, onCancel, onApply, hasOperator, selectorValue
 }: CascaderDropdownValueSelectorProps) => {
-  const [checkedSet, setCheckedSet] = useState<Set<string>>(new Set());
-
   const choices = selectedNode.options.choices ?? [];
 
-  const isMultiSelect = selectedNode.options.dataType === dataTypes.MULTI_SELECT;
-
   const onClick = (value: string) => {
-    if (isMultiSelect) {
-      setCheckedSet((prev) => {
-        const newSet = new Set(prev);
-        if (newSet.has(value)) newSet.delete(value);
-        else newSet.add(value);
-
-        return newSet;
-      });
-    } else {
-      onApply(value);
-    }
+    onApply(value);
   };
+
+  const checkedSet = new Set(selectorValue?.SINGLE_SELECT ? [selectorValue.SINGLE_SELECT] : []);
 
   return (
     <Box>
-      {!isMultiSelect && hasOperator && (
+      {hasOperator && (
         <CascaderDropdownBreadcrumb
           focusNthColumn={onCancel}
           showBackButton={false}
@@ -295,11 +298,47 @@ const SingleSelectInput = ({
       )}
       <SearchableList
         choices={choices}
-        isMultiSelect={isMultiSelect}
+        isMultiSelect={false}
         onClick={onClick}
         checkedSet={checkedSet}
       />
-      {isMultiSelect && <InputFooter disabled={!checkedSet.size} onCancel={onCancel} onApply={() => onApply(Array.from(checkedSet).join(', '))} />}
+    </Box>
+  );
+};
+
+const MultiSelectInput = ({
+  selectedNode, onCancel, hasOperator, onApply, selectorValue
+}: CascaderDropdownValueSelectorProps) => {
+  const [checkedSet, setCheckedSet] = useState<Set<string>>(new Set(selectorValue?.MULTI_SELECT ?? []));
+
+  const choices = selectedNode.options.choices ?? [];
+
+  const onClick = (value: string) => {
+    setCheckedSet((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(value)) newSet.delete(value);
+      else newSet.add(value);
+
+      return newSet;
+    });
+  };
+
+  return (
+    <Box>
+      {hasOperator && (
+        <CascaderDropdownBreadcrumb
+          focusNthColumn={onCancel}
+          showBackButton={false}
+          foldersSelectionPath={[{ value: `${selectedNode?.value}`, label: `${selectedNode?.label}` }]}
+        />
+      )}
+      <SearchableList
+        choices={choices}
+        isMultiSelect
+        onClick={onClick}
+        checkedSet={checkedSet}
+      />
+      <InputFooter disabled={!checkedSet.size} onCancel={onCancel} onApply={() => onApply(Array.from(checkedSet))} />
     </Box>
   );
 };
@@ -344,9 +383,7 @@ export const SearchableList = ({
     }
 
     if (e.key === 'Enter') {
-      if (isMultiSelect) {
-        onClick(filteredChoices[focusedIndex].value, filteredChoices[focusedIndex]);
-      }
+      onClick(filteredChoices[focusedIndex].value, filteredChoices[focusedIndex]);
       e.preventDefault();
     }
   };
@@ -397,6 +434,12 @@ export const SearchableList = ({
         size="lg"
         onKeyDown={onKeyDown}
       />
+      {filteredChoices.length === 0 && (
+        <Flex css={{ height: '112px', color: '$neutral600' }} alignItems="center" justifyContent="center" flexDirection="column" gap="$4">
+          <QuestionCircleIcon size={20} />
+          <Text css={{ color: '$neutral800', marginBottom: '0' }}>No results found!</Text>
+        </Flex>
+      )}
       <Box
         as="ul"
         css={{ paddingTop: '$4', paddingBottom: '$4' }}

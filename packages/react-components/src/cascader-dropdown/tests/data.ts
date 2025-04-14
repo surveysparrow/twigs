@@ -2,7 +2,8 @@ import {
   dataTypes,
   CascaderDropdownItemType,
   CascaderDropdownOperatorType,
-  optionTypes
+  optionTypes,
+  CascaderDropdownDataValueType
 } from '../helpers/cascader-dropdown-constants';
 
 export const data = [
@@ -315,35 +316,44 @@ export const data = [
             value: 'includes',
             dataType: dataTypes.MULTI_SELECT,
             type: optionTypes.VALUE_SELECTOR,
-            valuesKey: 'language'
-          },
+            valuesKey: 'language',
+            choices: [
+              {
+                label: 'English',
+                value: 'en'
+              },
+              {
+                label: 'French',
+                value: 'fr'
+              },
+              {
+                label: 'Spanish',
+                value: 'es'
+              }
+            ] as CascaderDropdownDataValueType[]
+          } as CascaderDropdownOperatorType,
           {
             label: 'does not include',
             value: 'does-not-include',
             dataType: dataTypes.MULTI_SELECT,
             type: optionTypes.VALUE_SELECTOR,
-            valuesKey: 'language'
-          }
-        ],
-        values: {
-          language: [
-            {
-              label: 'English',
-              id: 'en',
-              value: 'en'
-            },
-            {
-              label: 'French',
-              id: 'fr',
-              value: 'fr'
-            },
-            {
-              label: 'Spanish',
-              id: 'es',
-              value: 'es'
-            }
-          ]
-        }
+            valuesKey: 'language',
+            choices: [
+              {
+                label: 'English',
+                value: 'en'
+              },
+              {
+                label: 'French',
+                value: 'fr'
+              },
+              {
+                label: 'Spanish',
+                value: 'es'
+              }
+            ] as CascaderDropdownDataValueType[]
+          } as CascaderDropdownOperatorType
+        ]
       },
       {
         label: 'Date',
@@ -391,8 +401,8 @@ export const data = [
             dataType: dataTypes.DATE_RANGE,
             type: optionTypes.VALUE_SELECTOR
           }
-        ]
-      },
+        ] as CascaderDropdownOperatorType[]
+      } as CascaderDropdownItemType,
       {
         label: 'Created At',
         value: 'createdAt',
@@ -438,10 +448,10 @@ export const data = [
             value: 'is-between',
             dataType: dataTypes.DATE_RANGE,
             type: optionTypes.VALUE_SELECTOR
-          }
-        ]
-      }
-    ]
+          } as CascaderDropdownOperatorType
+        ] as CascaderDropdownOperatorType[]
+      } as CascaderDropdownItemType
+    ] as CascaderDropdownItemType[]
   } as CascaderDropdownItemType,
   {
     label: 'Variables',
@@ -492,10 +502,10 @@ export const data = [
             value: 'regex',
             dataType: dataTypes.SINGLE_LINE_TEXT,
             type: optionTypes.VALUE_SELECTOR
-          }
-        ]
-      }
-    ]
+          } as CascaderDropdownOperatorType
+        ] as CascaderDropdownOperatorType[]
+      } as CascaderDropdownItemType
+    ] as CascaderDropdownItemType[]
   } as CascaderDropdownItemType,
   {
     label: 'Survey 1',
@@ -519,8 +529,8 @@ export const data = [
             label: 'Not Responded',
             value: 'not-responded'
           }
-        ]
-      }
-    ]
-  }
+        ] as CascaderDropdownDataValueType[]
+      } as CascaderDropdownOperatorType
+    ] as CascaderDropdownOperatorType[]
+  } as CascaderDropdownItemType
 ] as CascaderDropdownItemType[];
