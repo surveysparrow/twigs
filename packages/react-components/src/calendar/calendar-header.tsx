@@ -1,6 +1,7 @@
 import { CalendarDate } from '@internationalized/date';
 import React from 'react';
 import { AriaButtonProps, DateValue, useDateFormatter } from 'react-aria';
+import { prefixClassName } from '@src/utils';
 import { Button, IconButton } from '../button';
 import { Flex } from '../flex';
 import { styled } from '../stitches.config';
@@ -10,7 +11,7 @@ import { useCalendarContext } from './calendar-utils';
 type ButtonType = {
   icon: React.ReactElement;
   isDisabled?: boolean;
-} & AriaButtonProps;
+} & AriaButtonProps & Omit<React.HTMLAttributes<HTMLButtonElement>, 'color'>;
 
 export const CalendarNavigationButton = ({
   icon,
@@ -46,6 +47,10 @@ export const CalendarHeader = styled(Flex, {
       },
       md: {
         padding: '$6 $8'
+      },
+      sm: {
+        padding: '$6 $6',
+        height: '$12'
       }
     }
   },
@@ -69,24 +74,26 @@ export const CalendarTitle = ({
   });
 
   return (
-    <Flex gap="$2">
+    <Flex gap="$2" className={prefixClassName('calendar__title')}>
       <Button
         color="default"
         size={calendarContext.size}
-        onClick={() => {
-          setCurrentCalendarView(CALENDAR_VIEW.YEAR);
-        }}
-      >
-        {value.year}
-      </Button>
-      <Button
-        color="default"
-        size={calendarContext.size}
+        className={prefixClassName('calendar__month-picker')}
         onClick={() => {
           setCurrentCalendarView(CALENDAR_VIEW.MONTH);
         }}
       >
         {formatMonth.format(value.toDate(timezone))}
+      </Button>
+      <Button
+        color="default"
+        size={calendarContext.size}
+        className={prefixClassName('calendar__year-picker')}
+        onClick={() => {
+          setCurrentCalendarView(CALENDAR_VIEW.YEAR);
+        }}
+      >
+        {value.year}
       </Button>
     </Flex>
   );
@@ -107,7 +114,7 @@ export const RangeCalendarTitle = ({
   });
 
   return (
-    <Flex gap="$2">
+    <Flex gap="$2" className={prefixClassName('calendar__title')}>
       <Button
         color="default"
         variant="solid"
@@ -115,6 +122,7 @@ export const RangeCalendarTitle = ({
         onClick={() => {
           setCurrentCalendarView(CALENDAR_VIEW.YEAR);
         }}
+        className={prefixClassName('calendar__year-picker')}
       >
         {value.year}
       </Button>
@@ -125,6 +133,7 @@ export const RangeCalendarTitle = ({
         onClick={() => {
           setCurrentCalendarView(CALENDAR_VIEW.MONTH);
         }}
+        className={prefixClassName('calendar__month-picker')}
       >
         {formatMonth.format(value.toDate(timezone))}
       </Button>
