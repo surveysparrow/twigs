@@ -2,7 +2,7 @@ import {
   ReactNode, RefAttributes, useMemo, useState
 } from 'react';
 import { PopoverProps, PopoverContentProps } from '@radix-ui/react-popover';
-import { TooltipProps } from '@src/tooltip';
+import { TooltipProps, TooltipProvider } from '@src/tooltip';
 import {
   CascaderDropdownItemType, CascaderDropdownDataValueType, CascaderDropdownValueSelectorType, CascaderDropdownOperatorType
 } from './helpers/cascader-dropdown-constants';
@@ -13,7 +13,7 @@ import { recursiveFind } from './helpers/cascader-dropdown-utils';
 export type DropdownContentProps = PopoverContentProps & RefAttributes<HTMLDivElement>;
 
 export type CascaderDropdownProps = {
-  children: ReactNode;
+  children?: ReactNode;
   data: CascaderDropdownItemType[];
   value?: CascaderDropdownDataValueType | string | null;
   defaultValue?: CascaderDropdownDataValueType | string | null;
@@ -73,32 +73,34 @@ export const CascaderDropdown = ({
   }, [data, localValue, value]);
 
   return (
-    <CascaderDropdownProvider
-      data={data}
-      value={selectedValue}
-      onChange={({
-        value: selectedDataValue,
-        selectionPath,
-        selectorValue
-      }: {
-        value: CascaderDropdownDataValueType | CascaderDropdownOperatorType,
-        selectionPath: CascaderDropdownDataValueType[],
-        selectorValue?: CascaderDropdownValueSelectorType
-      }) => {
-        setLocalValue(selectedDataValue);
-        if (onChange) {
-          onChange({
-            value: selectedDataValue,
-            selectionPath,
-            selectedProperty: recursiveFind(data, { value: selectedDataValue.value, label: '' }),
-            selectorValue
-          });
-        }
-      }}
-    >
-      <CascaderDropdownContent {...dropdownProps} dropdownContentProps={dropdownContentProps} tooltipProps={tooltipProps}>
-        {children}
-      </CascaderDropdownContent>
-    </CascaderDropdownProvider>
+    <TooltipProvider delayDuration={0}>
+      <CascaderDropdownProvider
+        data={data}
+        value={selectedValue}
+        onChange={({
+          value: selectedDataValue,
+          selectionPath,
+          selectorValue
+        }: {
+          value: CascaderDropdownDataValueType | CascaderDropdownOperatorType,
+          selectionPath: CascaderDropdownDataValueType[],
+          selectorValue?: CascaderDropdownValueSelectorType
+        }) => {
+          setLocalValue(selectedDataValue);
+          if (onChange) {
+            onChange({
+              value: selectedDataValue,
+              selectionPath,
+              selectedProperty: recursiveFind(data, { value: selectedDataValue.value, label: '' }),
+              selectorValue
+            });
+          }
+        }}
+      >
+        <CascaderDropdownContent {...dropdownProps} dropdownContentProps={dropdownContentProps} tooltipProps={tooltipProps}>
+          {children}
+        </CascaderDropdownContent>
+      </CascaderDropdownProvider>
+    </TooltipProvider>
   );
 };

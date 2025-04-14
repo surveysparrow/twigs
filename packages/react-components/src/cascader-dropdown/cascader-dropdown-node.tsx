@@ -81,6 +81,10 @@ export class CascaderDropdownNode {
     this.nextNode = node;
   }
 
+  getFirstChild() {
+    return this.children[0] || null;
+  }
+
   getLastChild() {
     return this.children[this.children.length - 1];
   }

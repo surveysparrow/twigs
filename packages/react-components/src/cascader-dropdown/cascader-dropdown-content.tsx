@@ -1,8 +1,9 @@
 import { Popover, PopoverProps } from '@radix-ui/react-popover';
 import { PopoverContent, PopoverTrigger } from '@src/popover';
 import { Tooltip, TooltipProps, TooltipProvider } from '@src/tooltip';
-import { ReactNode, useState } from 'react';
+import React, { ComponentProps, ReactNode, useState } from 'react';
 import { prefixClassName } from '@src/utils';
+import { Button } from '@src/button';
 import { useCascaderDropdownContext } from './use-value';
 import { CascaderDropdownNode } from './cascader-dropdown-node';
 import { CascaderDropdownList } from './cascader-dropdown-list';
@@ -15,9 +16,13 @@ import { DropdownContentProps } from './cascader-dropdown';
 export type ResultCacheType = Record<string, CascaderDropdownNode[]>;
 
 export const CascaderDropdownContent = ({
-  children, dropdownContentProps, tooltipProps, ...props
+  children, dropdownContentProps, tooltipProps, popoverTriggerButtonProps, popoverTriggerProps, ...props
 }: {
-  children: ReactNode, dropdownContentProps?: DropdownContentProps, tooltipProps?: TooltipProps
+  children: ReactNode,
+  dropdownContentProps?: DropdownContentProps,
+  tooltipProps?: TooltipProps,
+  popoverTriggerButtonProps?: Partial<ComponentProps<typeof Button>>;
+  popoverTriggerProps?: Partial<ComponentProps<typeof PopoverTrigger>>;
 } & PopoverProps) => {
   const {
     popoverOpen,
@@ -40,8 +45,17 @@ export const CascaderDropdownContent = ({
   return (
     <Popover open={popoverOpen} onOpenChange={setPopoverOpen} {...props}>
       <Tooltip content="" {...tooltipProps}>
-        <PopoverTrigger asChild className={prefixClassName('cascader-dropdown__trigger')}>
-          {children}
+        <PopoverTrigger asChild className={prefixClassName('cascader-dropdown__trigger')} {...popoverTriggerProps}>
+          {children || (
+            <Button
+              variant="ghost"
+              color="default"
+              className="twigs-editor-tool-button"
+              {...popoverTriggerButtonProps}
+            >
+              Select
+            </Button>
+          )}
         </PopoverTrigger>
       </Tooltip>
       <PopoverContent

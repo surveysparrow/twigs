@@ -82,7 +82,7 @@ const allAnyOptions = Object.keys(allAnyOptionsMap).map((key) => ({
   value: key
 }));
 
-const Template = () => {
+export const Template = () => {
   const [conditionsData, setConditionsData] = useState<ConditionsDataType>({
     globalConnector: 'ALL',
     filterGroups: []
