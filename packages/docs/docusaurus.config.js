@@ -87,6 +87,11 @@ const config = {
             label: 'Getting Started',
           },
           {
+            href: 'https://play.twigs.surveysparrow.com',
+            label: 'Playground',
+            position: 'right',
+          },
+          {
             href: 'https://github.com/surveysparrow/twigs',
             label: 'GitHub',
             position: 'right',
