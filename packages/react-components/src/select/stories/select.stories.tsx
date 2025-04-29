@@ -1,10 +1,19 @@
 import React from 'react';
 import { SearchIcon } from '@sparrowengg/twigs-react-icons';
+import { Button } from '@src/button';
 import { Select } from '../select';
 
 export default {
   component: Select,
   title: 'Form/Select',
+  parameters: {
+    docs: {
+      story: {
+        inline: false,
+        iframeHeight: 300
+      }
+    }
+  },
   args: {
     placeholder: 'Select an option',
     isClearable: true,
@@ -41,4 +50,20 @@ const options = [
 const Template = (args) => (
   <Select {...args} options={options} dropdownIndicatorIcon={<SearchIcon />} />
 );
+
 export const Default = Template.bind({});
+
+export const WithInfo = (args) => (
+  <Select
+    {...args}
+    options={options}
+    dropdownIndicatorIcon={<SearchIcon />}
+    label="Label"
+    info="Info goes here"
+    topRightElement={(
+      <Button variant="ghost" color="primary">
+        Label
+      </Button>
+    )}
+  />
+);

@@ -21,6 +21,7 @@ export const FaceFrownIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M11.3333 21.3333C11.3333 21.3333 13.084 19.584 16 19.584C18.9173 19.584 20.6667 21.3333 20.6667 21.3333"
@@ -28,6 +29,7 @@ export const FaceFrownIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M9.33334 13.3333C9.86001 12.6866 10.58 12.32 11.3333 12.32C12.0867 12.32 12.7867 12.6866 13.3333 13.3333"
@@ -35,6 +37,7 @@ export const FaceFrownIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M18.6667 13.3333C19.1933 12.6866 19.9133 12.32 20.6667 12.32C21.42 12.32 22.12 12.6866 22.6667 13.3333"
@@ -42,6 +45,7 @@ export const FaceFrownIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
       </svg>
     );

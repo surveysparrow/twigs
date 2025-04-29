@@ -1,0 +1,32 @@
+# This workflow will run tests using node and then publish a package
+name: Publish react editor manually
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-test-and-publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Build and Test
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - run: yarn
+      - name: Playwright install
+        run: npx playwright install --with-deps chromium
+      - run: yarn build:editor
+      - run: yarn test
+      - name: Publish to npm
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org/
+      - run: cd packages/react-editor && npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token_react_components}}

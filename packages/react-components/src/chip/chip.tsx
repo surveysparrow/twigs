@@ -273,7 +273,7 @@ const StyledChip = styled(Box, {
         },
         [`&.closable ${StyledCloseButton}:hover,
           &.closable ${StyledCloseButton}:focus-within`]: {
-          color: '$neutral700'
+          color: '$neutral800'
         },
 
         [`& .${CLASSNAMES.addonElementStart}`]: {
@@ -282,14 +282,14 @@ const StyledChip = styled(Box, {
       },
       primary: {
         color: '$primary700',
-        backgroundColorOpacity: ['$primary500', 0.15],
+        backgroundColor: '$primary50',
 
         [`& ${StyledCloseButton}`]: {
-          color: '$primary500'
+          color: '$primary400'
         },
         [`&.closable ${StyledCloseButton}:hover,
           &.closable ${StyledCloseButton}:focus-within`]: {
-          color: '$primary700'
+          color: '$primary500'
         },
 
         [`& .${CLASSNAMES.addonElementStart}`]: {
@@ -297,15 +297,15 @@ const StyledChip = styled(Box, {
         }
       },
       secondary: {
-        color: '$secondary700',
-        backgroundColorOpacity: ['$secondary500', 0.08],
+        color: '$white900',
+        backgroundColor: '$secondary500',
 
         [`& ${StyledCloseButton}`]: {
-          color: '$secondary400'
+          color: '$white800'
         },
         [`&.closable ${StyledCloseButton}:hover,
           &.closable ${StyledCloseButton}:focus-within`]: {
-          color: '$secondary600'
+          color: '$white900'
         },
 
         [`& .${CLASSNAMES.addonElementStart}`]: {
@@ -313,7 +313,7 @@ const StyledChip = styled(Box, {
         }
       },
       error: {
-        color: '$negative700',
+        color: '$negative800',
         backgroundColor: '$negative100',
 
         [`& ${StyledCloseButton}`]: {
@@ -321,7 +321,7 @@ const StyledChip = styled(Box, {
         },
         [`&.closable ${StyledCloseButton}:hover,
           &.closable ${StyledCloseButton}:focus-within`]: {
-          color: '$negative700'
+          color: '$negative800'
         },
 
         [`& .${CLASSNAMES.addonElementStart}`]: {
@@ -329,7 +329,7 @@ const StyledChip = styled(Box, {
         }
       },
       warning: {
-        color: '$warning700',
+        color: '$warning800',
         backgroundColor: '$warning100',
 
         [`& ${StyledCloseButton}`]: {
@@ -345,7 +345,7 @@ const StyledChip = styled(Box, {
         }
       },
       success: {
-        color: '$positive600',
+        color: '$positive800',
         backgroundColor: '$positive100',
 
         [`& ${StyledCloseButton}`]: {
@@ -353,7 +353,7 @@ const StyledChip = styled(Box, {
         },
         [`&.closable ${StyledCloseButton}:hover,
           &.closable ${StyledCloseButton}:focus-within`]: {
-          color: '$positive700'
+          color: '$positive800'
         },
 
         [`& .${CLASSNAMES.addonElementStart}`]: {
@@ -361,7 +361,7 @@ const StyledChip = styled(Box, {
         }
       },
       accent: {
-        color: '$accent500',
+        color: '$accent800',
         backgroundColor: '$accent100',
 
         [`& ${StyledCloseButton}`]: {
@@ -369,7 +369,7 @@ const StyledChip = styled(Box, {
         },
         [`&.closable ${StyledCloseButton}:hover,
           &.closable ${StyledCloseButton}:focus-within`]: {
-          color: '$accent700'
+          color: '$accent800'
         },
 
         [`& .${CLASSNAMES.addonElementStart}`]: {
@@ -465,7 +465,7 @@ const StyledChip = styled(Box, {
       variant: 'outline',
       css: {
         borderColorOpacity: ['$secondary500', 0.2],
-        backgroundColor: '$white900',
+        backgroundColor: '$secondary500',
         color: '$secondary800',
         [`& ${StyledCloseButton}`]: {
           color: '$secondary500'

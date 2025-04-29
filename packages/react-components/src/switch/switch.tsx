@@ -35,9 +35,9 @@ const StyledSwitch = styled(SwitchPrimitive.Root, {
     cursor: 'not-allowed'
   },
   '&[data-state="checked"]': {
-    backgroundColor: '$primary600',
+    backgroundColor: '$primary500',
     '&[data-disabled]': {
-      background: '$primary200',
+      background: '$primary100',
       cursor: 'not-allowed'
     }
   },

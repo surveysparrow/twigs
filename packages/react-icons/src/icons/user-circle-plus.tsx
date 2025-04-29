@@ -21,6 +21,7 @@ export const UserCirclePlusIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M26.4743 8.61111V4.38889"
@@ -28,6 +29,7 @@ export const UserCirclePlusIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M24.3644 6.50122H28.5866"
@@ -35,6 +37,7 @@ export const UserCirclePlusIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M16.9755 16C18.8164 16 20.3088 14.5076 20.3088 12.6667C20.3088 10.8257 18.8164 9.33334 16.9755 9.33334C15.1345 9.33334 13.6421 10.8257 13.6421 12.6667C13.6421 14.5076 15.1345 16 16.9755 16Z"
@@ -42,6 +45,7 @@ export const UserCirclePlusIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M10.9755 21.3333C11.2344 20.7392 11.6611 20.2335 12.2032 19.8783C12.7453 19.523 13.3793 19.3336 14.0274 19.3333H19.9235C20.5717 19.3336 21.2056 19.523 21.7477 19.8783C22.2898 20.2335 22.7165 20.7392 22.9755 21.3333"
@@ -49,6 +53,7 @@ export const UserCirclePlusIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
       </svg>
     );

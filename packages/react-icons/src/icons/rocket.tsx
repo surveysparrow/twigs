@@ -21,6 +21,7 @@ export const RocketIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M22.3088 17.3333V23.176C22.3088 23.4236 22.2399 23.6663 22.1097 23.877C21.9795 24.0876 21.7932 24.2578 21.5718 24.3686L18.3505 25.9792C18.1797 26.0647 17.9924 26.1124 17.8015 26.1192C17.6106 26.1259 17.4205 26.0916 17.244 26.0185C17.0675 25.9454 16.9088 25.8352 16.7786 25.6954C16.6484 25.5557 16.5497 25.3895 16.4893 25.2083L15.6422 22.6667"
@@ -28,6 +29,7 @@ export const RocketIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M10.3088 17.3333L7.76722 16.4861C7.586 16.4257 7.41987 16.3271 7.28009 16.1969C7.1403 16.0667 7.03013 15.908 6.95702 15.7315C6.88392 15.555 6.84959 15.3649 6.85637 15.1739C6.86314 14.983 6.91086 14.7958 6.99629 14.625L8.60696 11.4037C8.71769 11.1822 8.88789 10.996 9.09851 10.8658C9.30913 10.7356 9.55183 10.6667 9.79944 10.6667H15.6421"
@@ -35,6 +37,7 @@ export const RocketIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
         <path
           d="M8.64226 27.4491L4.97546 28L5.52633 24.3332C5.61338 23.7537 5.88394 23.2175 6.29827 22.8031C6.7126 22.3888 7.24887 22.1183 7.82832 22.0312V22.0312C8.25219 21.9675 8.68509 22.0042 9.09221 22.1382C9.49933 22.2723 9.8693 22.5 10.1724 22.8031C10.4755 23.1062 10.7032 23.4762 10.8373 23.8833C10.9713 24.2904 11.008 24.7233 10.9443 25.1472V25.1472C10.8573 25.7267 10.5867 26.2629 10.1723 26.6772C9.75799 27.0915 9.22172 27.3621 8.64226 27.4491V27.4491Z"
@@ -42,6 +45,7 @@ export const RocketIcon = React.forwardRef<SVGSVGElement, IconProps>(
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
       </svg>
     );

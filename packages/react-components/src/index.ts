@@ -38,7 +38,6 @@ export * from './toast';
 export * from './tooltip';
 export * from './hooks';
 export * from './textarea';
-export * from './editor';
 export * from './stack';
 export * from './separator';
 

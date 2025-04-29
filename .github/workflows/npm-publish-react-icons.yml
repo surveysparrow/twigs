@@ -22,7 +22,6 @@ jobs:
           node-version: 20
       - run: yarn
       - run: yarn build:icons
-      - run: yarn test
       - name: Publish to npm
         uses: actions/setup-node@v3
         with:

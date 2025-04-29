@@ -1,8 +1,8 @@
 import React from "react";
 import { twigsComponentLoader, twigsIconLoader } from "./twigs-loader";
+import { dialogs, DialogsManager } from "@sparrowengg/twigs-react";
+
 import {
-  dialogs,
-  DialogsManager,
   Editor,
   MentionNode,
   MentionsPlugin,
@@ -16,8 +16,8 @@ import {
   EditorLookupDropdownBase,
   ConvertSelectionToLinkOnPastePlugin,
   EmojiNode,
-  EmojiPlugin
-} from "@sparrowengg/twigs-react";
+  EmojiPlugin,
+} from "@sparrowengg/twigs-editor-react";
 
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { $getSelection, $isTextNode } from "lexical";
@@ -54,7 +54,7 @@ const ReactLiveScope = {
   Stack: twigsComponentLoader("Stack"),
   Separator: twigsComponentLoader("Separator"),
   VStack: twigsComponentLoader("VStack"),
-  HStack  : twigsComponentLoader("HStack"),
+  HStack: twigsComponentLoader("HStack"),
   Tabs: twigsComponentLoader("Tabs"),
   TabsList: twigsComponentLoader("TabsList"),
   TabsTrigger: twigsComponentLoader("TabsTrigger"),
@@ -68,6 +68,7 @@ const ReactLiveScope = {
   TickCircleFillIcon: twigsIconLoader("TickCircleFillIcon"),
   PencilIcon: twigsIconLoader("PencilIcon"),
   ChevronDownIcon: twigsIconLoader("ChevronDownIcon"),
+  CloseIcon: twigsIconLoader("CloseIcon"),
   Chip: twigsComponentLoader("Chip"),
   Avatar: twigsComponentLoader("Avatar"),
   AvatarBadge: twigsComponentLoader("AvatarBadge"),
@@ -111,11 +112,14 @@ const ReactLiveScope = {
   DialogsManager,
   ConvertSelectionToLinkOnPastePlugin,
   Dialog: twigsComponentLoader("Dialog"),
+  DialogHeader: twigsComponentLoader("DialogHeader"),
   DialogTitle: twigsComponentLoader("DialogTitle"),
   DialogDescription: twigsComponentLoader("DialogDescription"),
+  DialogBody: twigsComponentLoader("DialogBody"),
   DialogClose: twigsComponentLoader("DialogClose"),
   DialogTrigger: twigsComponentLoader("DialogTrigger"),
   DialogContent: twigsComponentLoader("DialogContent"),
+  DialogFooter: twigsComponentLoader("DialogFooter"),
   IconButton: twigsComponentLoader("IconButton"),
   AlertDialog: twigsComponentLoader("AlertDialog"),
   AlertDialogAction: twigsComponentLoader("AlertDialogAction"),
@@ -152,7 +156,7 @@ const ReactLiveScope = {
   EditorLookupDropdownBase,
   useLexicalComposerContext,
   $getSelection,
-  $isTextNode
+  $isTextNode,
 };
 
 export default ReactLiveScope;
