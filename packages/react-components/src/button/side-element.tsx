@@ -212,8 +212,10 @@ export const ButtonSideElement = ({
           });
         }}
         onExit={() => {
-          if (!nodeRef.current) return;
-          nodeRef.current.style.width = '0px';
+          window.requestAnimationFrame(() => {
+            if (!nodeRef.current) return;
+            nodeRef.current.style.width = '0px';
+          });
         }}
         timeout={100}
         mountOnEnter
