@@ -19,7 +19,8 @@ import {
   LexicalEditor,
   NodeSelection,
   RangeSelection,
-  SELECTION_CHANGE_COMMAND
+  SELECTION_CHANGE_COMMAND,
+  getDOMSelection
 } from 'lexical';
 import {
   useCallback, useEffect, useRef, useState
@@ -121,7 +122,7 @@ function useDialogLinkEditorToolbar(
       }
     }
 
-    const nativeSelection = window.getSelection();
+    const nativeSelection = getDOMSelection(editor._window);
     const { activeElement } = document;
 
     const rootElement = editor.getRootElement();
