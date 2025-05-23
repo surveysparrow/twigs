@@ -35,6 +35,8 @@ const config = {
 
   customFields: {
     playgroundURL: stripTrailingSlash(process.env.PLAYGROUND_URL) || 'https://play.twigs.surveysparrow.com',
+    labsAPIURL: process.env.LABS_API_URL,
+    recaptchaSiteKey: process.env.PUBLIC_RECAPTCHA_SITE_KEY,
   },
 
   presets: [
