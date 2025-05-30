@@ -180,7 +180,7 @@ export const UpgradeGuide = () => {
         <Flex
           gap="$3"
           css={{
-            wdith: "100%",
+            width: "100%",
 
             "& > div": {
               flex: 1,
