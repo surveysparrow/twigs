@@ -14,14 +14,14 @@ on:
 jobs:
   check-docs-merge:
     runs-on: ubuntu-latest
-    if: ${{ github.event.pull_request.merged == true }}
+    if: ${{ github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch' }}
     outputs:
       checkdoc: ${{ steps.set-output.outputs.checkdoc }}
     steps:
       - name: Check if documentation label exists
         id: set-output
         run: |
-          if [[ ${{ contains(github.event.pull_request.labels.*.name, 'documentation') }} == true ]]; then
+          if [[ ${{ github.event_name == 'workflow_dispatch' || contains(github.event.pull_request.labels.*.name, 'documentation') }} == true ]]; then
             echo "checkdoc=true" >> $GITHUB_OUTPUT
           else
             echo "checkdoc=false" >> $GITHUB_OUTPUT
