@@ -122,7 +122,7 @@ function useDialogLinkEditorToolbar(
       }
     }
 
-    const nativeSelection = getDOMSelection(editor._window);
+    const nativeSelection = getDOMSelection(editor._window ?? window);
     const { activeElement } = document;
 
     const rootElement = editor.getRootElement();
