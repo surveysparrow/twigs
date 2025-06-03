@@ -4,6 +4,7 @@
 name: Twigs Deployment Production
 
 on:
+  workflow_dispatch:
   pull_request:
     types:
       - closed
