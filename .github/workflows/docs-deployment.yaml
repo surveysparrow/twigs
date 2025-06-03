@@ -55,6 +55,8 @@ jobs:
         run: yarn build:docs
         env:
           PLAYGROUND_URL: ${{ vars.PLAYGROUND_URL }}
+          PUBLIC_RECAPTCHA_SITE_KEY: ${{ secrets.PUBLIC_RECAPTCHA_SITE_KEY }}
+          LABS_API_URL: ${{ secrets.LABS_API_URL }}
       
       - name: Upload Build to S3
         working-directory: ./packages/docs/
