@@ -183,8 +183,10 @@ export const ButtonSideElement = ({
             });
           }}
           onExit={() => {
-            if (!nodeRef.current) return;
-            nodeRef.current.style.width = '0px';
+            requestAnimationFrame(() => {
+              if (!nodeRef.current) return;
+              nodeRef.current.style.width = '0px';
+            });
           }}
           timeout={100}
           mountOnEnter
@@ -212,8 +214,10 @@ export const ButtonSideElement = ({
           });
         }}
         onExit={() => {
-          if (!nodeRef.current) return;
-          nodeRef.current.style.width = '0px';
+          requestAnimationFrame(() => {
+            if (!nodeRef.current) return;
+            nodeRef.current.style.width = '0px';
+          });
         }}
         timeout={100}
         mountOnEnter
