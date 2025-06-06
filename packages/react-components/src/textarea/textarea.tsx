@@ -28,8 +28,7 @@ const StyledTextarea = styled('textarea', {
     $$shadowColor: '$colors$primary300',
     outline: 'none',
     background: '$white900',
-    boxShadow:
-      'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
+    boxShadow: 'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
   },
   '&:disabled': {
     color: '$neutral700',
@@ -90,40 +89,23 @@ interface TextareaBaseProps {
   errorBorder?: boolean;
 }
 
-export type TextareaProps = TextareaBaseProps &
-  ComponentProps<typeof StyledTextarea>;
+export type TextareaProps = TextareaBaseProps & ComponentProps<typeof StyledTextarea>;
 
-export const Textarea:FunctionComponent<TextareaProps> = forwardRef(({
-  resize = 'both',
-  variant = 'default',
-  errorBorder = false,
-  label,
-  showCount,
-  error,
-  maxLength,
-  requiredIndicator,
-  css,
-  value,
-  defaultValue,
-  rows,
-  ...rest
-}: TextareaProps, ref) => {
-  const mergedValue = value || defaultValue;
-  return (
-    <Box>
-      <Flex
-        alignItems="center"
-        justifyContent="space-between"
-        css={{ marginBottom: '$2' }}
-      >
-        {
-          label
-            ? <FormLabel htmlFor={rest.id} requiredIndicator={requiredIndicator}>{label}</FormLabel>
-            : null
-        }
-        {
-          showCount
-            ? (
+export const Textarea: FunctionComponent<TextareaProps> = forwardRef(
+  ({
+    resize = 'both', variant = 'default', errorBorder = false, label, showCount, error, maxLength, requiredIndicator, css, value, defaultValue, rows, ...rest
+  }: TextareaProps, ref) => {
+    const mergedValue = value || defaultValue;
+    return (
+      <Box>
+        {label || showCount ? (
+          <Flex alignItems="center" justifyContent="space-between" css={{ marginBottom: '$2' }}>
+            {label ? (
+              <FormLabel htmlFor={rest.id} requiredIndicator={requiredIndicator}>
+                {label}
+              </FormLabel>
+            ) : null}
+            {showCount ? (
               <Text
                 css={{
                   color: '$neutral700',
@@ -132,37 +114,31 @@ export const Textarea:FunctionComponent<TextareaProps> = forwardRef(({
                 data-testid="textarea-char-count"
               >
                 {mergedValue?.toString().length || 0}
-                {
-                  maxLength ? `/${maxLength}` : null
-                }
+                {maxLength ? `/${maxLength}` : null}
               </Text>
-            )
-            : null
-        }
-      </Flex>
-      <StyledTextarea
-        value={value}
-        defaultValue={defaultValue}
-        rows={rows}
-        css={{
-          ...(errorBorder && {
-            ...errorBorderStyles
-          }),
-          ...css
-        }}
-        {...(maxLength && {
-          maxLength
-        })}
-        resize={resize}
-        ref={ref}
-        variant={variant}
-        {...rest}
-      />
-      {
-        error
-          ? <StyledError size="xs">{error}</StyledError>
-          : null
-      }
-    </Box>
-  );
-});
+            ) : null}
+          </Flex>
+        ) : null}
+        <StyledTextarea
+          value={value}
+          defaultValue={defaultValue}
+          rows={rows}
+          css={{
+            ...(errorBorder && {
+              ...errorBorderStyles
+            }),
+            ...css
+          }}
+          {...(maxLength && {
+            maxLength
+          })}
+          resize={resize}
+          ref={ref}
+          variant={variant}
+          {...rest}
+        />
+        {error ? <StyledError size="xs">{error}</StyledError> : null}
+      </Box>
+    );
+  }
+);
