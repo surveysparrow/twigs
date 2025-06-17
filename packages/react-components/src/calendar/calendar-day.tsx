@@ -38,6 +38,11 @@ export const Day = styled('button', {
         height: '$8',
         width: '$8',
         fontSize: '$sm'
+      },
+      sm: {
+        height: '$8',
+        width: '$8',
+        fontSize: '$sm'
       }
     },
     isHidden: {

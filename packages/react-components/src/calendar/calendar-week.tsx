@@ -25,6 +25,9 @@ export const WeekContainer = styled(Box, {
       },
       md: {
         height: '$8'
+      },
+      sm: {
+        height: '$8'
       }
     }
   },
