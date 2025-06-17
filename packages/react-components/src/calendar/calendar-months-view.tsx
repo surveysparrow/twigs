@@ -1,11 +1,14 @@
 import { CalendarDate } from '@internationalized/date';
 import React, {
-  useEffect, useId, useMemo, useRef
+  useEffect, useId, useMemo, useRef,
+  useState
 } from 'react';
 import { useDateFormatter } from 'react-aria';
 import { CalendarState, RangeCalendarState } from 'react-stately';
+import { ChevronLeftIcon, ChevronRightIcon } from '@sparrowengg/twigs-react-icons';
+import { Flex } from '@src/flex';
 import { Box } from '../box';
-import { Button } from '../button';
+import { Button, IconButton } from '../button';
 import { Text } from '../text';
 import { CALENDAR_VIEW } from './calendar';
 import { MonthYearGridContainer } from './calendar-commons';
@@ -14,7 +17,8 @@ import {
   CALENDAR_SIZE_TO_FONT_SIZE,
   CALENDAR_SIZE_TO_WIDTH,
   CALENDAR_SIZE_TO_YEAR_MONTH_BTN_HEIGHT,
-  useCalendarContext
+  useCalendarContext,
+  useCalendarNavigationContext
 } from './calendar-utils';
 
 export const CalendarMonthsView = ({
@@ -32,11 +36,12 @@ export const CalendarMonthsView = ({
     month: 'short',
     timeZone: state.timeZone
   });
+  const [currentYearInView, setCurrentYearInView] = useState(state.focusedDate.year);
 
   const monthsContainerId = useId();
 
   const calendarContext = useCalendarContext();
-
+  const { handleCalendarNavigation } = useCalendarNavigationContext();
   const dateValue = useMemo(() => {
     if (range && (state as RangeCalendarState).value?.[range]) {
       return (state as RangeCalendarState).value[range];
@@ -51,7 +56,7 @@ export const CalendarMonthsView = ({
       state.focusedDate
     );
     for (let i = 1; i <= numMonths; i++) {
-      const date = state.focusedDate.set({ month: i });
+      const date = state.focusedDate.set({ month: i, year: currentYearInView });
       data.push({
         date,
         label: monthFormatter.format(date.toDate(state.timeZone))
@@ -59,7 +64,7 @@ export const CalendarMonthsView = ({
     }
 
     return data;
-  }, []);
+  }, [currentYearInView, state.focusedDate.calendar]);
 
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -166,6 +171,14 @@ export const CalendarMonthsView = ({
       onMonthSelect(updatedDate);
     }
     setCurrentCalendarView(CALENDAR_VIEW.GRID);
+    handleCalendarNavigation(null);
+  };
+
+  const isPrevButtonDisabled = () => {
+    if (state.minValue) {
+      return currentYearInView <= state.minValue?.year;
+    }
+    return false;
   };
 
   return (
@@ -181,16 +194,49 @@ export const CalendarMonthsView = ({
           justifyContent: 'center'
         }}
       >
-        <Text
-          size={CALENDAR_SIZE_TO_FONT_SIZE[calendarContext.size]}
-          weight="bold"
+        <Flex
           css={{
-            color: '$neutral800',
-            padding: '0 $6'
+            width: '100%'
           }}
+          alignItems="center"
         >
-          Choose Month
-        </Text>
+          <IconButton
+            icon={<ChevronLeftIcon />}
+            color="bright"
+            size="lg"
+            disabled={isPrevButtonDisabled()}
+            onClick={() => {
+              setCurrentYearInView((prev) => prev - 1);
+            }}
+          />
+          <Flex
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+            css={{
+              flex: 1
+            }}
+          >
+            <Text
+              size={CALENDAR_SIZE_TO_FONT_SIZE[calendarContext.size]}
+              weight="bold"
+              css={{
+                color: '$neutral800',
+                padding: '0 $6'
+              }}
+            >
+              {currentYearInView}
+            </Text>
+          </Flex>
+          <IconButton
+            icon={<ChevronRightIcon />}
+            color="bright"
+            size="lg"
+            onClick={() => {
+              setCurrentYearInView((prev) => prev + 1);
+            }}
+          />
+        </Flex>
       </CalendarHeader>
       <MonthYearGridContainer
         ref={containerRef}
