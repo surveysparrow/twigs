@@ -253,14 +253,14 @@ const CalendarSingleSection = ({
               padding: '0 $8',
               width: '100%'
             }}
-            className={prefixClassName('calendar__header')}
+            className={prefixClassName('calendar-range-section__header')}
           >
             {compact ? (
               <>
                 <CalendarNavigationButton
                   {...navigationButtonProps.prev}
                   icon={<ChevronLeftIcon />}
-                  className={prefixClassName('calendar__nav-button--prev')}
+                  className={prefixClassName('calendar__range-nav-button--prev')}
                 />
                 <RangeCalendarTitle
                   timezone={state.timeZone}
@@ -270,7 +270,7 @@ const CalendarSingleSection = ({
                 <CalendarNavigationButton
                   {...navigationButtonProps.next}
                   icon={<ChevronRightIcon />}
-                  className={prefixClassName('calendar__nav-button--next')}
+                  className={prefixClassName('calendar__range-nav-button--next')}
                 />
               </>
             ) : (
@@ -280,7 +280,7 @@ const CalendarSingleSection = ({
                   <CalendarNavigationButton
                     {...navigationButtonProps}
                     icon={<ChevronLeftIcon />}
-                    className={prefixClassName('calendar__nav-button--prev')}
+                    className={prefixClassName('calendar__range-nav-button--prev')}
                   />
                 )}
                 <RangeCalendarTitle
@@ -292,7 +292,7 @@ const CalendarSingleSection = ({
                   <CalendarNavigationButton
                     {...navigationButtonProps}
                     icon={<ChevronRightIcon />}
-                    className={prefixClassName('calendar__nav-button--next')}
+                    className={prefixClassName('calendar__range-nav-button--next')}
                   />
                 )}
                 {sectionName === 'start' && <Box />}

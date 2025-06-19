@@ -148,7 +148,7 @@ export const Calendar = ({
               <CalendarNavigationButton
                 {...prevButtonProps}
                 icon={<ChevronLeftIcon />}
-                className={prefixClassName('calendar__nav-button--prev')}
+                className={prefixClassName('calendar__header-nav-button--prev')}
               />
               <CalendarTitle
                 value={state.focusedDate}
