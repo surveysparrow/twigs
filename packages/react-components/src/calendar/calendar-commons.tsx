@@ -49,6 +49,10 @@ export const TimeAndZonePickerContainer = styled(Flex, {
       md: {
         paddingTop: '$2',
         paddingBottom: '$6'
+      },
+      sm: {
+        paddingTop: '$2',
+        paddingBottom: '$4'
       }
     }
   },
@@ -66,6 +70,9 @@ export const GridContainer = styled(Box, {
       },
       md: {
         padding: '0 $8'
+      },
+      sm: {
+        padding: '0 $6'
       }
     }
   },
@@ -86,6 +93,9 @@ export const FooterContainer = styled(Flex, {
         padding: '$6 $8'
       },
       md: {
+        padding: '$6'
+      },
+      sm: {
         padding: '$6'
       }
     }
@@ -109,6 +119,10 @@ export const MonthYearGridContainer = styled(Box, {
       md: {
         gap: '$6',
         padding: '$8'
+      },
+      sm: {
+        gap: '$4',
+        padding: '$6'
       }
     }
   }
