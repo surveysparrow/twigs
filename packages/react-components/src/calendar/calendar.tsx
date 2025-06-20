@@ -158,7 +158,7 @@ export const Calendar = ({
               <CalendarNavigationButton
                 {...nextButtonProps}
                 icon={<ChevronRightIcon />}
-                className={prefixClassName('calendar__nav-button--next')}
+                className={prefixClassName('calendar__header-nav-button--next')}
               />
             </CalendarHeader>
             <CalendarGrid state={state} onDaySelect={onDaySelect} />
