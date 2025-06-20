@@ -69,19 +69,23 @@ const StyledTextarea = styled('textarea', {
     size: {
       sm: {
         padding: '$2 $4',
-        borderRadius: '$sm'
+        borderRadius: '$sm',
+        fontSize: '$xs'
       },
       md: {
         padding: '$3 $4',
-        borderRadius: '$lg'
+        borderRadius: '$lg',
+        fontSize: '$sm'
       },
       lg: {
         padding: '$4 $6',
-        borderRadius: '$lg'
+        borderRadius: '$lg',
+        fontSize: '$sm'
       },
       xl: {
         padding: '$6',
-        borderRadius: '$xl'
+        borderRadius: '$xl',
+        fontSize: '$md'
       }
     },
     variant: {
@@ -222,6 +226,7 @@ export const Textarea: FunctionComponent<TextareaProps> = forwardRef(
             maxLength
           })}
           resize={resize}
+          size={size}
           ref={ref}
           variant={variant}
           {...rest}
