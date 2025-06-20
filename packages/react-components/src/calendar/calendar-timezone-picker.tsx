@@ -30,12 +30,14 @@ export const CalendarTimezonePicker = ({
   value,
   onChange,
   size,
-  renderCustomTrigger
+  renderCustomTrigger,
+  className
 }: {
   value?: DateValue | null;
   onChange?: CalendarProps['onChange'];
   size?: CalendarSize;
   renderCustomTrigger?: (props: { timeZoneObject: TimeZoneObject }) => ReactNode;
+  className?: string;
 }) => {
   const [popoverOpen, setPopoverOpen] = useState(false);
   const [searchString, setSearchString] = useState('');
@@ -161,6 +163,7 @@ export const CalendarTimezonePicker = ({
             size={size === 'lg' ? 'md' : 'sm'}
             rightIcon={<ChevronDownIcon />}
             id={buttonId}
+            className={className}
           >
             {selectedTimezoneObject?.offset}
           </Button>
