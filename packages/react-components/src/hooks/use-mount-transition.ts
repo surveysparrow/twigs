@@ -6,7 +6,9 @@ const useMountTransition = (isMounted, unmountDelay) => {
   useEffect(() => {
     let timeoutId;
     if (isMounted && !isTransitioning) {
-      setIsTransitioning(true);
+      requestAnimationFrame(() => {
+        setIsTransitioning(true);
+      });
     } else if (!isMounted && isTransitioning) {
       timeoutId = setTimeout(() => setIsTransitioning(false), unmountDelay);
     }
