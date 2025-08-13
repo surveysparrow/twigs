@@ -29,6 +29,10 @@ const StyledContent = styled(TooltipPrimitive.Content, {
   userSelect: 'none',
   opacity: 1,
   maxWidth: '240px',
+  gap: '10px',
+  '& span': {
+    visibility: 'visible !important'
+  },
   '@media (prefers-reduced-motion: no-preference)': {
     animationDuration: '800ms',
     animationTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
@@ -40,19 +44,114 @@ const StyledContent = styled(TooltipPrimitive.Content, {
       '&[data-side="left"]': { animationName: slideRightAndFade }
     }
   },
+  
   variants: {
     size: {
       sm: {
-        padding: '$2 $4',
+        padding: '$1 $2',
         fontSize: '$xs',
+        fontWeight: '$5',
         borderRadius: '$sm',
-        lineHeight: '$xs'
+        lineHeight: '$xs',
+        maxWidth: '$30',
+        minWidth: '32px',
+        height: 'auto',
+        '&[data-align="start"]': {
+          '&[data-side="top"], &[data-side="bottom"]': {
+            '& span': {
+              left: '8px !important'
+            }
+          },
+          '&[data-side="left"], &[data-side="right"]': {
+            '& span': {
+              top: '8px !important'
+            }
+          },
+        },
+        '&[data-align="end"]': {
+          '&[data-side="top"], &[data-side="bottom"]': {
+            '& span': {
+              left: 'auto !important',
+              right: '8px !important'
+            }
+          },
+          '&[data-side="left"], &[data-side="right"]': {
+            '& span': {
+              top: 'auto !important',
+              bottom: '8px !important'
+            }
+          },
+        },
       },
       md: {
-        padding: '$6 $8',
+        padding: '6px 12px',
         fontSize: '$sm',
-        borderRadius: '$md',
-        lineHeight: '$sm'
+        fontWeight: '$4',
+        borderRadius: '$lg',
+        lineHeight: '$sm',
+        maxWidth: '240px',
+        minWidth: '50px',
+        '&[data-align="start"]': {
+          '&[data-side="top"], &[data-side="bottom"]': {
+            '& span': {
+              left: '20px !important'
+            }
+          },
+          '&[data-side="left"], &[data-side="right"]': {
+            '& span': {
+              top: '12px !important'
+            }
+          },
+        },
+        '&[data-align="end"]': {
+          '&[data-side="top"], &[data-side="bottom"]': {
+            '& span': {
+              left: 'auto !important',
+              right: '20px !important'
+            }
+          },
+          '&[data-side="left"], &[data-side="right"]': {
+            '& span': {
+              top: 'auto !important',
+              bottom: '12px !important'
+            }
+          },
+        },
+      },
+      lg: {
+        padding: '12px 16px',
+        fontSize: '$sm',
+        fontWeight: '$5',
+        borderRadius: '$lg',
+        lineHeight: '$sm',
+        maxWidth: '236px',
+        minWidth: '60px',
+        '&[data-align="start"]': {
+          '&[data-side="top"], &[data-side="bottom"]': {
+            '& span': {
+              left: '24px !important'
+            }
+          },  
+          '&[data-side="left"], &[data-side="right"]': {
+            '& span': {
+              top: '12px !important'
+            }
+          },
+        },
+        '&[data-align="end"]': {
+          '&[data-side="top"], &[data-side="bottom"]': {
+            '& span': {
+              left: 'auto !important',
+              right: '24px !important'
+            }
+          },
+          '&[data-side="left"], &[data-side="right"]': {
+            '& span': {
+              top: 'auto !important',
+              bottom: '12px !important'
+            }
+          },
+        },
       }
     }
   },
@@ -70,6 +169,10 @@ const StyledArrow = styled(TooltipPrimitive.Arrow, {
         height: '6px'
       },
       md: {
+        width: '14px',
+        height: '$2'
+      },
+      lg: {
         width: '$5',
         height: '$3'
       }
