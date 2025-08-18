@@ -29,7 +29,6 @@ const StyledContent = styled(TooltipPrimitive.Content, {
   userSelect: 'none',
   opacity: 1,
   maxWidth: '240px',
-  gap: '10px',
   '& span': {
     visibility: 'visible !important'
   },
@@ -48,23 +47,23 @@ const StyledContent = styled(TooltipPrimitive.Content, {
   variants: {
     size: {
       sm: {
-        padding: '$1 $2',
+        padding: '$sizes$1 $sizes$2',
         fontSize: '$xs',
         fontWeight: '$5',
         borderRadius: '$sm',
         lineHeight: '$xs',
         maxWidth: '$30',
-        minWidth: '32px',
+        minWidth: '$8',
         height: 'auto',
         '&[data-align="start"]': {
           '&[data-side="top"], &[data-side="bottom"]': {
             '& span': {
-              left: '8px !important'
+              left: '$sizes$2 !important'
             }
           },
           '&[data-side="left"], &[data-side="right"]': {
             '& span': {
-              top: '8px !important'
+              top: '$sizes$2 !important'
             }
           },
         },
@@ -72,34 +71,34 @@ const StyledContent = styled(TooltipPrimitive.Content, {
           '&[data-side="top"], &[data-side="bottom"]': {
             '& span': {
               left: 'auto !important',
-              right: '8px !important'
+              right: '$sizes$2 !important'
             }
           },
           '&[data-side="left"], &[data-side="right"]': {
             '& span': {
               top: 'auto !important',
-              bottom: '8px !important'
+              bottom: '$sizes$2 !important'
             }
           },
         },
       },
       md: {
-        padding: '6px 12px',
+        padding: '$sizes$2 $sizes$3',
         fontSize: '$sm',
         fontWeight: '$4',
         borderRadius: '$lg',
         lineHeight: '$sm',
         maxWidth: '240px',
-        minWidth: '50px',
+        minWidth: '$13',
         '&[data-align="start"]': {
           '&[data-side="top"], &[data-side="bottom"]': {
             '& span': {
-              left: '20px !important'
+              left: '$sizes$5 !important'
             }
           },
           '&[data-side="left"], &[data-side="right"]': {
             '& span': {
-              top: '12px !important'
+              top: '$sizes$3 !important'
             }
           },
         },
@@ -107,34 +106,34 @@ const StyledContent = styled(TooltipPrimitive.Content, {
           '&[data-side="top"], &[data-side="bottom"]': {
             '& span': {
               left: 'auto !important',
-              right: '20px !important'
+              right: '$sizes$5 !important'
             }
           },
           '&[data-side="left"], &[data-side="right"]': {
             '& span': {
               top: 'auto !important',
-              bottom: '12px !important'
+              bottom: '$sizes$3 !important'
             }
           },
         },
       },
       lg: {
-        padding: '12px 16px',
+        padding: '$sizes$3 $sizes$4',
         fontSize: '$sm',
         fontWeight: '$5',
         borderRadius: '$lg',
         lineHeight: '$sm',
         maxWidth: '236px',
-        minWidth: '60px',
+        minWidth: '$15',
         '&[data-align="start"]': {
           '&[data-side="top"], &[data-side="bottom"]': {
             '& span': {
-              left: '24px !important'
+              left: '$sizes$6 !important'
             }
           },  
           '&[data-side="left"], &[data-side="right"]': {
             '& span': {
-              top: '12px !important'
+              top: '$sizes$3 !important'
             }
           },
         },
@@ -142,13 +141,13 @@ const StyledContent = styled(TooltipPrimitive.Content, {
           '&[data-side="top"], &[data-side="bottom"]': {
             '& span': {
               left: 'auto !important',
-              right: '24px !important'
+              right: '$sizes$6 !important'
             }
           },
           '&[data-side="left"], &[data-side="right"]': {
             '& span': {
               top: 'auto !important',
-              bottom: '12px !important'
+              bottom: '$sizes$3 !important'
             }
           },
         },
