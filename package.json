@@ -17,5 +17,8 @@
   },
   "devDependencies": {
     "lerna": "^7.0.0"
+  },
+  "resolutions": {
+    "react-is": "19.1.0"
   }
 }
