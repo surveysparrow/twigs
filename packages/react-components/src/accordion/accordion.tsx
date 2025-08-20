@@ -62,7 +62,9 @@ const StyledHeader = styled(AccordionPrimitive.Header);
 
 const AccordionTrigger = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Trigger>,
-  React.ComponentPropsWithoutRef<typeof StyledTrigger>
+  React.ComponentPropsWithoutRef<typeof StyledTrigger> & {
+    children: React.ReactNode;
+  }
 >(({ children, ...props }, ref) => (
   <StyledHeader>
     <StyledTrigger {...props} ref={ref}>
@@ -102,7 +104,9 @@ const StyledContentText = styled('div', {
 
 const AccordionContent = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof StyledContent>
+  React.ComponentPropsWithoutRef<typeof StyledContent> & {
+    children: React.ReactNode;
+  }
 >(({ children, ...props }, ref) => (
   <StyledContent {...props} ref={ref}>
     <StyledContentText>{children}</StyledContentText>
