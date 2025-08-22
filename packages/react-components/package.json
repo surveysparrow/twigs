@@ -1,6 +1,6 @@
 {
   "name": "@sparrowengg/twigs-react",
-  "version": "0.36.5",
+  "version": "0.36.6",
   "description": "In house component library for SurveySparrow",
   "module": "dist/es/index.js",
   "main": "dist/cjs/index.js",
@@ -128,7 +128,7 @@
     "@radix-ui/react-switch": "^1.1.0",
     "@radix-ui/react-tabs": "^1.1.0",
     "@radix-ui/react-toast": "^1.2.1",
-    "@radix-ui/react-tooltip": "^1.1.2",
+    "@radix-ui/react-tooltip": "^1.2.8",
     "@stitches/react": "^1.2.8",
     "clsx": "^2.0.0",
     "countries-and-timezones": "^3.6.0",
