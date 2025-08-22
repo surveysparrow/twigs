@@ -43,7 +43,6 @@ const StyledContent = styled(TooltipPrimitive.Content, {
       '&[data-side="left"]': { animationName: slideRightAndFade }
     }
   },
-  
   variants: {
     size: {
       sm: {
@@ -65,7 +64,7 @@ const StyledContent = styled(TooltipPrimitive.Content, {
             '& span': {
               top: '$sizes$2 !important'
             }
-          },
+          }
         },
         '&[data-align="end"]': {
           '&[data-side="top"], &[data-side="bottom"]': {
@@ -79,8 +78,8 @@ const StyledContent = styled(TooltipPrimitive.Content, {
               top: 'auto !important',
               bottom: '$sizes$2 !important'
             }
-          },
-        },
+          }
+        }
       },
       md: {
         padding: '$sizes$2 $sizes$3',
@@ -100,7 +99,7 @@ const StyledContent = styled(TooltipPrimitive.Content, {
             '& span': {
               top: '$sizes$3 !important'
             }
-          },
+          }
         },
         '&[data-align="end"]': {
           '&[data-side="top"], &[data-side="bottom"]': {
@@ -114,8 +113,8 @@ const StyledContent = styled(TooltipPrimitive.Content, {
               top: 'auto !important',
               bottom: '$sizes$3 !important'
             }
-          },
-        },
+          }
+        }
       },
       lg: {
         padding: '$sizes$3 $sizes$4',
@@ -130,12 +129,12 @@ const StyledContent = styled(TooltipPrimitive.Content, {
             '& span': {
               left: '$sizes$6 !important'
             }
-          },  
+          },
           '&[data-side="left"], &[data-side="right"]': {
             '& span': {
               top: '$sizes$3 !important'
             }
-          },
+          }
         },
         '&[data-align="end"]': {
           '&[data-side="top"], &[data-side="bottom"]': {
@@ -149,8 +148,8 @@ const StyledContent = styled(TooltipPrimitive.Content, {
               top: 'auto !important',
               bottom: '$sizes$3 !important'
             }
-          },
-        },
+          }
+        }
       }
     }
   },
