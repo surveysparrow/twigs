@@ -25,7 +25,7 @@ const slideLeftAndFade = keyframes({
 const StyledContent = styled(TooltipPrimitive.Content, {
   lineHeight: '$sm',
   color: '$white900',
-  backgroundColor: '$black900',
+  backgroundColor: '$neutral900',
   userSelect: 'none',
   opacity: 1,
   maxWidth: '240px',
@@ -46,7 +46,7 @@ const StyledContent = styled(TooltipPrimitive.Content, {
   variants: {
     size: {
       sm: {
-        padding: '$sizes$1 $sizes$2',
+        padding: '$2 $4',
         fontSize: '$xs',
         fontWeight: '$5',
         borderRadius: '$sm',
@@ -57,12 +57,12 @@ const StyledContent = styled(TooltipPrimitive.Content, {
         '&[data-align="start"]': {
           '&[data-side="top"], &[data-side="bottom"]': {
             '& span': {
-              left: '$sizes$2 !important'
+              left: '$4 !important'
             }
           },
           '&[data-side="left"], &[data-side="right"]': {
             '& span': {
-              top: '$sizes$2 !important'
+              top: '$5 !important'
             }
           }
         },
@@ -70,34 +70,34 @@ const StyledContent = styled(TooltipPrimitive.Content, {
           '&[data-side="top"], &[data-side="bottom"]': {
             '& span': {
               left: 'auto !important',
-              right: '$sizes$2 !important'
+              right: '$4 !important'
             }
           },
           '&[data-side="left"], &[data-side="right"]': {
             '& span': {
               top: 'auto !important',
-              bottom: '$sizes$2 !important'
+              bottom: '$5 !important'
             }
           }
         }
       },
       md: {
-        padding: '$sizes$2 $sizes$3',
+        padding: '$3 $6',
         fontSize: '$sm',
         fontWeight: '$4',
         borderRadius: '$lg',
         lineHeight: '$sm',
         maxWidth: '240px',
-        minWidth: '$13',
+        minWidth: '50px',
         '&[data-align="start"]': {
           '&[data-side="top"], &[data-side="bottom"]': {
             '& span': {
-              left: '$sizes$5 !important'
+              left: '$10 !important'
             }
           },
           '&[data-side="left"], &[data-side="right"]': {
             '& span': {
-              top: '$sizes$3 !important'
+              top: '15px !important'
             }
           }
         },
@@ -105,19 +105,19 @@ const StyledContent = styled(TooltipPrimitive.Content, {
           '&[data-side="top"], &[data-side="bottom"]': {
             '& span': {
               left: 'auto !important',
-              right: '$sizes$5 !important'
+              right: '$10 !important'
             }
           },
           '&[data-side="left"], &[data-side="right"]': {
             '& span': {
               top: 'auto !important',
-              bottom: '$sizes$3 !important'
+              bottom: '15px !important'
             }
           }
         }
       },
       lg: {
-        padding: '$sizes$3 $sizes$4',
+        padding: '$6 $8',
         fontSize: '$sm',
         fontWeight: '$5',
         borderRadius: '$lg',
@@ -127,12 +127,12 @@ const StyledContent = styled(TooltipPrimitive.Content, {
         '&[data-align="start"]': {
           '&[data-side="top"], &[data-side="bottom"]': {
             '& span': {
-              left: '$sizes$6 !important'
+              left: '$12 !important'
             }
           },
           '&[data-side="left"], &[data-side="right"]': {
             '& span': {
-              top: '$sizes$3 !important'
+              top: '$8 !important'
             }
           }
         },
@@ -140,13 +140,13 @@ const StyledContent = styled(TooltipPrimitive.Content, {
           '&[data-side="top"], &[data-side="bottom"]': {
             '& span': {
               left: 'auto !important',
-              right: '$sizes$6 !important'
+              right: '$12 !important'
             }
           },
           '&[data-side="left"], &[data-side="right"]': {
             '& span': {
               top: 'auto !important',
-              bottom: '$sizes$3 !important'
+              bottom: '$8 !important'
             }
           }
         }
@@ -159,7 +159,7 @@ const StyledContent = styled(TooltipPrimitive.Content, {
 });
 
 const StyledArrow = styled(TooltipPrimitive.Arrow, {
-  fill: '$black900',
+  fill: '$neutral900',
   variants: {
     size: {
       sm: {
