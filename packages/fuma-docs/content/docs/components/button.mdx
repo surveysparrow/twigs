@@ -1,0 +1,83 @@
+---
+title: Button
+description: Interactive element that allows users to trigger actions and events
+---
+
+## Import
+
+```jsx
+import { Button } from "@sparrowengg/twigs-react";
+```
+
+## Usage
+
+```jsx
+<Button color="primary" size="md">
+  Click me
+</Button>
+```
+
+<Playground snippetName="button-basic" defaultPlayground />
+
+## Props
+
+<TypeTable
+  type={{
+    size: {
+      type: " 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' ",
+      description: "Size of the button",
+      default: "sm",
+    },
+    color: {
+      type: " 'default' | 'primary' | 'secondary' | 'bright' | 'light' | 'error' ",
+      description: "Color theme of the button",
+      default: "primary",
+    },
+    variant: {
+      type: " 'solid' | 'ghost' | 'outline' ",
+      description: "Visual style variant of the button",
+      default: "solid",
+    },
+    loading: {
+      type: "boolean",
+      description: "Shows loading state with spinner",
+      default: "false",
+    },
+    disabled: {
+      type: "boolean",
+      description: "Disables the button interaction",
+      default: "false",
+    },
+    leftIcon: {
+      type: "ReactElement",
+      description: "Icon displayed on the left side of the button text",
+    },
+    rightIcon: {
+      type: "ReactElement",
+      description: "Icon displayed on the right side of the button text",
+    },
+    icon: {
+      type: "ReactElement",
+      description: "Icon displayed alone (creates icon-only button)",
+    },
+    loader: {
+      type: "ReactElement | 'line' | 'circle'",
+      description: "Custom loader component or built-in loader type",
+      default: "'line'",
+    },
+  }}
+/>
+
+## Examples
+
+### Button variants and colors
+
+<Playground snippetName="button-variants" />
+
+### Buttons with icons
+
+<Playground snippetName="button-with-icons" />
+
+### Button states
+
+<Playground snippetName="button-states" />

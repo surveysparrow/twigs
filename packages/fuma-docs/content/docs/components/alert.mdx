@@ -1,0 +1,56 @@
+---
+title: Alert
+description: A simple popup message to convey any important information
+---
+
+## Import
+
+```jsx
+import { Alert, AlertDescription } from "@sparrowengg/twigs-react";
+```
+
+## Usage
+
+```jsx
+<Alert status="info">
+  <AlertDescription>
+    {" "}
+    Password should have a minimum length of 6.{" "}
+  </AlertDescription>
+</Alert>
+```
+
+<Playground snippetName="alert-basic" defaultPlayground />
+
+## Props
+
+<TypeTable
+  type={{
+    status: {
+      type: " 'success' 'error' 'warning' 'info' ",
+      description:
+        "the current color and the text appearance according to the place of usage",
+      default: "info",
+    },
+    size: {
+      type: " 'sm' 'md' ",
+      description: "the Size of the component",
+      default: "sm",
+    },
+    closable: {
+      type: "boolean",
+      description: "shows the close button at the end to close the alert box",
+      default: "false",
+    },
+    icon: {
+      type: "JSX Element",
+      description: "To change the default alert icon",
+    },
+  }}
+/>
+
+## Examples
+
+### Different status with variable sizes
+
+<Playground snippetName="alert-diff-status" />

@@ -75,10 +75,10 @@ export type SwitchProps = {
   required?: boolean;
 } & Omit<ComponentProps<typeof StyledSwitch>, OmitProps>;
 
-export const Switch: FunctionComponent<SwitchProps> = React.forwardRef(
+export const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
   ({
     checked, disabled, onChange, required, ...rest
-  }: SwitchProps, ref) => {
+  }, ref) => {
     return (
       <StyledSwitch
         ref={ref}

@@ -303,7 +303,7 @@ export const errorBorderStyles = {
   }
 };
 
-export const Input: FunctionComponent<InputProps> = React.forwardRef(
+export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
     {
       size = 'md',
@@ -314,7 +314,7 @@ export const Input: FunctionComponent<InputProps> = React.forwardRef(
       leftElement,
       errorBorder = false,
       ...rest
-    }: InputProps,
+    },
     ref
   ) => {
     const inputPaddingValue = getInputPadding(size);

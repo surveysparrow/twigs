@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { styled } from '../stitches.config';
 import { Box, BoxProps } from '../box';
 
@@ -18,7 +18,7 @@ export type FlexProps = {
   basis?: React.CSSProperties['flexBasis'];
 } & BoxProps;
 
-export const Flex: FunctionComponent<FlexProps> = React.forwardRef(
+export const Flex = React.forwardRef<HTMLDivElement, FlexProps>(
   (
     {
       children,
@@ -35,7 +35,7 @@ export const Flex: FunctionComponent<FlexProps> = React.forwardRef(
       flow,
       basis,
       ...rest
-    }: FlexProps,
+    },
     ref
   ) => {
     return (

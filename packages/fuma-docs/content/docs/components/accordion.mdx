@@ -6,7 +6,12 @@ description: A vertically stacked set of interactive headings that each reveal a
 ## Import
 
 ```jsx
-import {Accordion,AccordionContent,AccordionItem,AccordionTrigger} from "@sparrowengg/twigs-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@sparrowengg/twigs-react";
 ```
 
 ## Usage
@@ -18,7 +23,8 @@ const AccordionExample = () => {
       <AccordionItem value="item-1">
         <AccordionTrigger>Page settings</AccordionTrigger>
         <AccordionContent>
-          Configure your page settings including layout, theme, and display options.
+          Configure your page settings including layout, theme, and display
+          options.
         </AccordionContent>
       </AccordionItem>
 
@@ -37,24 +43,22 @@ const AccordionExample = () => {
 
 ## Props
 
+### Accordion
+
 <TypeTable
   type={{
     type: {
       type: "'single' | 'multiple'",
-      description: "Controls whether one or multiple items can be opened at the same time.",
+      description:
+        "Controls whether one or multiple items can be opened at the same time.",
       default: "'single'",
-    },
-    size: {
-      type: "'sm' | 'md'",
-      description: "Size variant of the accordion.",
-      default: "'sm'",
     },
     defaultValue: {
       type: "string | string[]",
       description: "The default value of the item to expand when uncontrolled.",
     },
     value: {
-      type: "string | string[]", 
+      type: "string | string[]",
       description: "The controlled value of the item to expand.",
     },
     onValueChange: {
@@ -63,13 +67,21 @@ const AccordionExample = () => {
     },
     collapsible: {
       type: "boolean",
-      description: "When type is single, allows closing content when clicking trigger for opened item.",
+      description:
+        "When type is single, allows closing content when clicking trigger for opened item.",
       default: "false",
     },
     disabled: {
       type: "boolean",
-      description: "When true, prevents the user from interacting with the accordion.",
+      description:
+        "When true, prevents the user from interacting with the accordion.",
       default: "false",
+    },
+    dir: {
+      type: " 'ltr' | 'rtl' ",
+      description:
+        "The reading direction of the accordion when applicable. If omitted, assumes LTR (left-to-right) reading mode.",
+      default: "ltr",
     },
   }}
 />
@@ -83,31 +95,10 @@ const AccordionExample = () => {
       description: "A unique value for the item.",
     },
     disabled: {
-      type: "boolean", 
-      description: "When true, prevents the user from interacting with the item.",
+      type: "boolean",
+      description:
+        "When true, prevents the user from interacting with the item.",
       default: "false",
-    },
-  }}
-/>
-
-### AccordionTrigger
-
-<TypeTable
-  type={{
-    children: {
-      type: "ReactNode",
-      description: "The content of the trigger.",
-    },
-  }}
-/>
-
-### AccordionContent
-
-<TypeTable
-  type={{
-    children: {
-      type: "ReactNode", 
-      description: "The content to show when the item is expanded.",
     },
   }}
 />

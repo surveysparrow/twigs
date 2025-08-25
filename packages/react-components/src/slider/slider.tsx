@@ -160,7 +160,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
     ]);
 
     const RenderLabel = useCallback(
-      (labelProps: FlexProps) => {
+      (labelProps: FlexProps ) => {
         if (!props.labels?.left && !props.labels?.right) return null;
 
         return (

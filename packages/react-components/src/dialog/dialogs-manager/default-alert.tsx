@@ -41,7 +41,8 @@ export const DefaultAlertDialog = ({
   css,
   onPrimaryAction,
   onClose
-}: DefaultAlertDialogProps) => {
+} : DefaultAlertDialogProps) => {
+
   return (
     <AlertDialog
       defaultOpen

@@ -1,0 +1,143 @@
+---
+title: CalendarRange
+description: A date range picker component that displays one or more date grids and allows users to select a contiguous range of dates
+---
+
+<Callout type="info">
+`CalendarRange` component requires additional dependency of `@internationalized/date` to be installed.
+
+We will be working on removing this additional dependency in the future.
+
+</Callout>
+
+```bash
+npm install --save @internationalized/date
+```
+
+## Import
+
+```jsx
+import { CalendarRange } from "@sparrowengg/twigs-react";
+```
+
+## Usage
+
+```jsx
+import { parseDate } from "@internationalized/date";
+
+function App() {
+  const [value, setValue] = React.useState({
+    start: parseDate("2025-08-04"),
+    end: parseDate("2025-08-15"),
+  });
+
+  return (
+    <CalendarRange
+       onChange={(value) => setValue(value as { start: CalendarDate; end: CalendarDate })}
+       value={value}
+       minValue={parseDate("2025-08-03")}
+    />
+  );
+}
+```
+
+<Playground snippetName="calendar-range-basic" defaultPlayground />
+
+## Props
+
+<TypeTable
+  type={{
+    value: {
+      type: "{ start: DateValue, end: DateValue }",
+      description: "Selected date range value",
+    },
+    defaultValue: {
+      type: "{ start: DateValue, end: DateValue }",
+      description: "Default date range value (uncontrolled)",
+    },
+    onChange: {
+      type: "(value: { start: DateValue, end: DateValue }) => void",
+      description: "Callback function when date range is selected",
+    },
+    minValue: {
+      type: "DateValue",
+      description:
+        "Minimum selectable date value. Dates beyond this value will be disabled",
+    },
+    maxValue: {
+      type: "DateValue",
+      description:
+        "Maximum selectable date value. Dates beyond this value will be disabled",
+    },
+    isDisabled: {
+      type: "boolean",
+      description: "Disable the calendar component",
+      default: "false",
+    },
+    isDateUnavailable: {
+      type: "(date: DateValue) => boolean",
+      description:
+        "Function to determine if a date is unavailable for selection",
+    },
+    size: {
+      type: "'sm' | 'md' | 'lg'",
+      description: "Size of the calendar component",
+      default: "lg",
+    },
+    compact: {
+      type: "boolean",
+      description: "Display calendar in a compact single-month view",
+      default: "false",
+    },
+    showFooter: {
+      type: "boolean",
+      description: "Show footer with action button",
+      default: "true",
+    },
+    footerActionText: {
+      type: "string",
+      description: "Text to be displayed on footer button",
+      default: "'Apply'",
+    },
+    footerAction: {
+      type: "(state: RangeCalendarState) => void",
+      description: "Action to be performed on footer button click",
+    },
+    renderFooter: {
+      type: "(state: RangeCalendarState) => ReactNode",
+      description: "Custom footer component",
+    },
+    onDaySelect: {
+      type: "(date: DateValue, range: 'start' | 'end') => void",
+      description: "Callback function when day is selected",
+    },
+    onMonthSelect: {
+      type: "(date: DateValue, range: 'start' | 'end') => void",
+      description: "Callback function when month is selected",
+    },
+    onYearSelect: {
+      type: "(date: DateValue, range: 'start' | 'end') => void",
+      description: "Callback function when year is selected",
+    },
+    showTimePicker: {
+      type: "boolean",
+      description: "Show time picker for date and time selection",
+      default: "false",
+    },
+    showTimezonePicker: {
+      type: "boolean",
+      description: "Show timezone picker for timezone-aware selection",
+      default: "false",
+    },
+    containerCSS: {
+      type: "CSS Object",
+      description: "Custom CSS for the container element",
+    },
+  }}
+/>
+
+## Examples
+
+### Compact calendar range and footer variants
+
+<Playground snippetName="calendar-range-compact" />

@@ -40,7 +40,17 @@ const StyledTrigger = styled(AccordionPrimitive.Trigger, {
 
 const Accordion = styled(AccordionPrimitive.Root, {
   fontSize: '$sm',
-  lineHeight: '$md'
+  lineHeight: '$md',
+  variants: {
+    dir: {
+      ltr: {
+        direction: 'ltr'
+      },
+      rtl: {
+        direction: 'rtl'
+      }
+    }
+  }
 });
 
 const AccordionItem = styled(AccordionPrimitive.Item, {

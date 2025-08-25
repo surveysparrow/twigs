@@ -1,4 +1,4 @@
-import React, { cloneElement, ComponentProps, FunctionComponent } from 'react';
+import React, { cloneElement, ComponentProps } from 'react';
 import {
   AlertIcon,
   CloseIcon,
@@ -118,7 +118,7 @@ export type AlertProps = {
   icon?: React.ReactElement;
 } & ComponentProps<typeof StyledAlert>;
 
-export const Alert: FunctionComponent<AlertProps> = React.forwardRef(
+export const Alert = React.forwardRef<typeof StyledAlert, AlertProps>(
   (
     {
       closable,
@@ -128,7 +128,7 @@ export const Alert: FunctionComponent<AlertProps> = React.forwardRef(
       children,
       icon,
       ...rest
-    }: AlertProps,
+    },
     ref
   ) => {
     const ValidAlertIcon = icon || STATUSES[status]?.icon;

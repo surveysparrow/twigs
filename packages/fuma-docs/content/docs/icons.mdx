@@ -12,99 +12,11 @@ npm i @sparrowengg/twigs-react-icons
 ## Usage
 
 ```jsx
-import { AddColumnIcon } from '@sparrowengg/twigs-react-icons';
+import { AddColumnIcon } from "@sparrowengg/twigs-react-icons";
 
 const App = () => {
   return <AddColumnIcon />;
 };
 ```
 
-You can import any icon individually to keep your bundle size optimized. All icons follow the same naming convention with "Icon" suffix.
-
-## Props
-
-All icons accept the following props:
-
-<TypeTable
-  type={{
-    color: {
-      type: "string",
-      description: "Color of the stroke",
-      default: "currentColor",
-    },
-    size: {
-      type: "number",
-      description: "Width and height of the icon in pixels",
-    },
-    className: {
-      type: "string", 
-      description: "Additional CSS classes to apply to the icon",
-    },
-    style: {
-      type: "React.CSSProperties",
-      description: "Inline styles to apply to the icon",
-    },
-  }}
-/>
-
-## Available Icons
-
-The icon library includes over 100+ carefully designed icons covering common use cases like:
-
-- **Navigation**: Arrow icons, chevrons, menu icons
-- **Actions**: Add, delete, edit, save, search icons  
-- **Interface**: Settings, user, notifications, dashboard icons
-- **Content**: Document, image, video, folder icons
-- **Communication**: Mail, phone, chat, share icons
-- **Data**: Chart, graph, table, filter icons
-
-### Usage Examples
-
-```jsx
-// Basic usage
-<AddColumnIcon />
-
-// With custom size
-<AddColumnIcon size={24} />
-
-// With custom color
-<AddColumnIcon color="#3B82F6" />
-
-// With CSS classes
-<AddColumnIcon className="text-blue-500 hover:text-blue-600" />
-
-// Multiple icons in a toolbar
-<div className="flex gap-2">
-  <AddColumnIcon />
-  <EditIcon />
-  <DeleteIcon />
-  <SaveIcon />
-</div>
-```
-
-## Customization
-
-All icons inherit the current text color by default (`currentColor`), making them easy to style with CSS or utility classes:
-
-```jsx
-// Using Tailwind CSS classes
-<AddColumnIcon className="text-gray-500 hover:text-gray-700" />
-
-// Using custom CSS
-<AddColumnIcon style={{ color: '#ef4444' }} />
-```
-
-## Accessibility
-
-All icons include proper accessibility attributes:
-- `aria-hidden="true"` for decorative icons
-- Proper `role` attributes when needed
-- Support for screen readers and assistive technologies
-
-For interactive icons, wrap them in a button with proper labels:
-
-```jsx
-<button aria-label="Add new column">
-  <AddColumnIcon />
-</button>
-```
+<Callout type="warn">Page incomplete</Callout>

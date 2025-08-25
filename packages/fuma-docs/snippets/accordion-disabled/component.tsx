@@ -1,36 +1,34 @@
 import React from "react";
-import { 
-    Accordion, 
-    AccordionContent, 
-    AccordionItem, 
-    AccordionTrigger 
-  } from "@sparrowengg/twigs-react";
-
-const AccordionTriggerComponent = AccordionTrigger as any;
-const AccordionContentComponent = AccordionContent as any;
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@sparrowengg/twigs-react";
 
 export default function AccordionDisabledSnippet() {
   return (
     <Accordion type="single">
       <AccordionItem value="item-1">
-        <AccordionTriggerComponent>Available Feature</AccordionTriggerComponent>
-        <AccordionContentComponent>
+        <AccordionTrigger>Available Feature</AccordionTrigger>
+        <AccordionContent>
           This feature is available and can be accessed by all users.
-        </AccordionContentComponent>
+        </AccordionContent>
       </AccordionItem>
 
       <AccordionItem value="item-2" disabled>
-        <AccordionTriggerComponent>Coming Soon</AccordionTriggerComponent>
-        <AccordionContentComponent>
-          This feature is currently under development and will be available soon.
-        </AccordionContentComponent>
+        <AccordionTrigger>Coming Soon</AccordionTrigger>
+        <AccordionContent>
+          This feature is currently under development and will be available
+          soon.
+        </AccordionContent>
       </AccordionItem>
 
       <AccordionItem value="item-3">
-        <AccordionTriggerComponent>Beta Feature</AccordionTriggerComponent>
-        <AccordionContentComponent>
+        <AccordionTrigger>Beta Feature</AccordionTrigger>
+        <AccordionContent>
           This feature is in beta testing and available for selected users.
-        </AccordionContentComponent>
+        </AccordionContent>
       </AccordionItem>
     </Accordion>
   );

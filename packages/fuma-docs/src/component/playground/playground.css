@@ -1,32 +1,43 @@
 .playground-tabs {
-    background-color: transparent;
-    border: none;
-    border-radius: 0;
-    overflow: visible;
-  }
-  
-  .playground-tabs div[role="tablist"] {
-    border-bottom: 1px solid var(--color-fd-secondary);
-  }
-  
-  .playground-tabs .playground-tab {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  
-  .code-wrapper.status-loading figure,
-  .code-wrapper.status-error figure {
-    height: 100%;
-  }
-  
-  .playground-tab--code figure {
-    padding-top: 42px;
-  }
-  
-  .playground-tab--code figure > button { /** Copy button */
-    top: 50px;
-  }
-  
-  .code-file-tab {
-    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
-  }
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  overflow: visible;
+}
+
+.playground-tabs div[role="tablist"] {
+  border-bottom: 1px solid var(--color-fd-secondary);
+}
+
+.playground-tabs .playground-tab {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.code-wrapper.status-loading figure,
+.code-wrapper.status-error figure {
+  height: 100%;
+}
+
+.playground-tab--code figure {
+  padding-top: 42px;
+}
+
+.playground-tab--code figure > button {
+  /** Copy button */
+  top: 50px;
+}
+
+.code-file-tab {
+  font-family: var(
+    --default-mono-font-family,
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    "Courier New",
+    monospace
+  );
+}

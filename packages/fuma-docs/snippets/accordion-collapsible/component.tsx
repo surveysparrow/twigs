@@ -1,36 +1,35 @@
 import React from "react";
-import { 
-    Accordion, 
-    AccordionContent, 
-    AccordionItem, 
-    AccordionTrigger 
-  } from "@sparrowengg/twigs-react";
-
-const AccordionTriggerComponent = AccordionTrigger as any;
-const AccordionContentComponent = AccordionContent as any;
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@sparrowengg/twigs-react";
 
 export default function AccordionCollapsibleSnippet() {
   return (
     <Accordion type="single" collapsible>
       <AccordionItem value="item-1">
-        <AccordionTriggerComponent>What is collapsible?</AccordionTriggerComponent>
-        <AccordionContentComponent>
-          With collapsible enabled, you can click the same trigger again to close the opened content.
-        </AccordionContentComponent>
+        <AccordionTrigger>What is collapsible?</AccordionTrigger>
+        <AccordionContent>
+          With collapsible enabled, you can click the same trigger again to
+          close the opened content.
+        </AccordionContent>
       </AccordionItem>
 
       <AccordionItem value="item-2">
-        <AccordionTriggerComponent>How to use it?</AccordionTriggerComponent>
-        <AccordionContentComponent>
+        <AccordionTrigger>How to use it?</AccordionTrigger>
+        <AccordionContent>
           Simply set the collapsible prop to true on the Accordion component.
-        </AccordionContentComponent>
+        </AccordionContent>
       </AccordionItem>
 
       <AccordionItem value="item-3">
-        <AccordionTriggerComponent>When is it useful?</AccordionTriggerComponent>
-        <AccordionContentComponent>
-          This is useful when users might want to completely collapse all sections.
-        </AccordionContentComponent>
+        <AccordionTrigger>When is it useful?</AccordionTrigger>
+        <AccordionContent>
+          This is useful when users might want to completely collapse all
+          sections.
+        </AccordionContent>
       </AccordionItem>
     </Accordion>
   );

@@ -76,15 +76,15 @@ const Code = ({ snippetName }: { snippetName: string }) => {
     const data = await response.json();
     const files = data.files;
     const meta = JSON.parse(files["meta.json"]);
-    const { ["meta.json"]: _meta, ["theme.json"]: _theme, ...rest } = files;
 
-    setFiles(rest);
+    setFiles(files);
     setActiveFile(`${meta.main}.tsx`);
     setStatus("success");
   };
 
   useEffect(() => {
     fetchCode();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [snippetName]);
 
   const code = files[activeFile ?? Object.keys(files)[0]];

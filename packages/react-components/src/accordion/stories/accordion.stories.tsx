@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Accordion,
   AccordionContent,
@@ -10,12 +9,17 @@ export default {
   component: Accordion,
   title: 'Data Display/Accordion',
   args: {
-    type: 'single'
+    type: 'single',
+    dir: 'ltr'
   },
   argTypes: {
     type: {
       control: 'radio',
       options: ['single', 'multiple']
+    },
+    dir: {
+      control: 'radio',
+      options: ['ltr', 'rtl']
     }
   }
 };

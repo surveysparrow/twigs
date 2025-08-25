@@ -38,7 +38,7 @@ export const CalendarYearsView = ({
 
   const dateValue = useMemo(() => {
     if (range && (state as RangeCalendarState).value?.[range]) {
-      return (state as RangeCalendarState).value[range];
+      return (state as RangeCalendarState)?.value?.[range];
     }
 
     return (state as CalendarState).value;
