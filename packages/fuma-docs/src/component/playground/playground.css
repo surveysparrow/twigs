@@ -6,12 +6,11 @@
 }
 
 .playground-tabs div[role="tablist"] {
-  border-bottom: 1px solid var(--color-fd-secondary);
+  margin-bottom: 10px;
 }
 
 .playground-tabs .playground-tab {
-  padding-left: 0;
-  padding-right: 0;
+  padding: 0;
 }
 
 .code-wrapper.status-loading figure,
@@ -20,12 +19,11 @@
 }
 
 .playground-tab--code figure {
-  padding-top: 42px;
+  padding-top: 50px;
 }
 
-.playground-tab--code figure > button {
-  /** Copy button */
-  top: 50px;
+.playground-tab--code figure > div > button {
+  display: none;
 }
 
 .code-file-tab {

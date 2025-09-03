@@ -1,0 +1,79 @@
+---
+title: IconButton
+description: A specialized button component designed to display icons with various sizes, colors, variants, and states. Perfect for action buttons, toolbars, and interface controls that require icon-based interactions.
+---
+
+## Import
+
+```jsx
+import { IconButton } from "@sparrowengg/twigs-react";
+```
+
+## Usage
+
+```jsx
+const IconButtonExample = () => {
+  return (
+    <IconButton
+      icon={<AttachmentIcon />}
+      aria-label="Edit"
+      size="md"
+      color="primary"
+      variant="solid"
+    />
+  );
+};
+```
+
+<Playground snippetName="icon-button-basic" defaultPlayground />
+
+## Props
+
+### IconButton
+
+<TypeTable
+  type={{
+    icon: {
+      type: "ReactElement",
+      description: "The icon element to be rendered within the button. Must be a valid React element.",
+    },
+    "aria-label": {
+      type: "string",
+      description: "Accessibility label for screen readers. Required for icon-only buttons to provide context.",
+    },
+    size: {
+      type: "'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'",
+      description: "The size of the icon button, affecting both the button dimensions and icon size.",
+      default: "'sm'",
+    },
+    color: {
+      type: "'default' | 'primary' | 'secondary' | 'bright' | 'light' | 'error'",
+      description: "The color scheme of the button, defining the visual appearance and theme.",
+      default: "'primary'",
+    },
+    variant: {
+      type: "'solid' | 'ghost' | 'outline'",
+      description: "The visual style variant of the button, affecting the background, border, and text appearance.",
+      default: "'solid'",
+    },
+    shape: {
+      type: "'round' | 'default'",
+      description: "The shape of the button. 'round' creates a circular button, 'default' maintains the standard rectangular shape.",
+      default: "'default'",
+    },
+    disabled: {
+      type: "boolean",
+      description: "When true, the button becomes non-interactive and visually indicates the disabled state.",
+      default: "false",
+    },
+    loading: {
+      type: "boolean",
+      description: "When true, displays a loading spinner and disables the button to indicate an ongoing action.",
+      default: "false",
+    },
+    css: {
+      type: "object",
+      description: "Custom CSS styles for the component.",
+    },
+  }}
+/> 

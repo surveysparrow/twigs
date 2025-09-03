@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
-import { defaultTheme as theme } from "@sparrowengg/twigs-react";
-import { Box, Button } from "@sparrowengg/twigs-react";
+import { defaultTheme as theme, Button } from "@sparrowengg/twigs-react";
 
 export const CustomizedButton = () => {
   return (
@@ -29,16 +28,11 @@ export const CustomizedButton = () => {
 
 export function DefaultThemeContainer() {
   return (
-    <Box
-      css={{
-        maxHeight: 500,
-        overflowY: "auto",
-        border: "1px solid $black100",
-        borderRadius: "$md",
-        padding: "$6",
-      }}
-    >
-      <pre>{JSON.stringify(theme, undefined, 2)}</pre>
-    </Box>
+    <div className="max-h-[500px] overflow-y-auto border border-fd-border rounded-lg p-4 bg-fd-card">
+      <pre className="text-sm text-fd-card-foreground font-mono whitespace-pre-wrap">
+        {JSON.stringify(theme, undefined, 2)}
+      </pre>
+    </div>
   );
 }
+

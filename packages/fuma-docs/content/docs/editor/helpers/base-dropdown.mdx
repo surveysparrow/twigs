@@ -1,0 +1,114 @@
+---
+title: Base Dropdown
+description: A reusable component that enables text-triggered suggestion boxes for enhanced editor functionality.
+---
+
+## Description
+
+The base dropdown is a component that can be used to create suggestion boxes inside the editor that are triggered by certain letters or phrases. The [Mentions plugin](../features/mentions) and [Hashtag plugin](../features/hashtags) are built on top of this component.
+
+## Props
+
+### triggerFunction
+
+```typescript
+triggerFunction: (text: string) => MenuTextMatch | null;
+```
+
+`MenuTextMatch` is an object with the following properties:
+
+```typescript
+type MenuTextMatch = {
+  leadOffset: number;
+  matchingString: string;
+  replaceableString: string;
+};
+```
+
+This function is used to trigger the dropdown. It receives the text that the user has typed and should return an object with the `leadOffset`, `matchingString`, and `replaceableString` properties. The `leadOffset` is the number of characters that the dropdown should be placed before the cursor. The `matchingString` is the string that the dropdown should match against. The `replaceableString` is the string that should be replaced when the user selects an item from the dropdown. If `null` is returned, the dropdown will not be triggered.
+
+### getResults
+
+```typescript
+getResults: (text: string | null) => Promise<TypeaheadMenuData[]> | TypeaheadMenuData[];
+```
+
+`TypeaheadMenuData` is an object with the following properties:
+
+```typescript
+type TypeaheadMenuData = {
+  value: string;
+  label: string;
+  [x: string]: unknown;
+};
+```
+
+This functions is called after the dropdown is opened to get the results that should be displayed. It receives the `matchingString` from the `triggerFunction` as an argument. It should return an array of objects with the `value` and `label` properties. If the results are already available, you can return them directly. If the results are fetched asynchronously, you can return a promise that resolves to the results.
+
+### $createNode
+
+```tsx
+$createNode?: (data: TypeaheadOption) => TextNode;
+```
+
+`TypeaheadOption` is an object with the following properties:
+
+```typescript
+class TypeaheadOption {
+  key: string;
+  ref?: MutableRefObject<HTMLElement | null>;
+  data: TypeaheadMenuData;
+  constructor(key: string);
+  setRefElement(element: HTMLElement | null): void;
+}
+```
+
+This function is used to create a node when an item is selected from the dropdown. It receives a `TypeaheadOption` object as an argument and should return a class that extends `TextNode` that will be inserted into the editor.
+
+
+### renderMenu
+  
+```tsx
+renderMenu?: (args: {
+  anchorElementRef: React.MutableRefObject<HTMLElement | null>;
+  selectedIndex: number | null;
+  selectOptionAndCleanUp: (option: TypeaheadOption) => void;
+  setHighlightedIndex: (index: number) => void;
+  menuOptions: TypeaheadOption[];
+}) => ReactPortal | React.JSX.Element | null;
+```
+
+Used to render a custom dropdown menu. If this prop is not provided, the default dropdown menu will be rendered. It receives an object with the following properties:
+
+- `anchorElementRef`: A ref to the element that the dropdown should be anchored to. When using React portal, you should pass this ref to the portal target.
+- `selectedIndex`: The index of the currently selected item in the dropdown.
+- `selectOptionAndCleanUp`: A function that should be called when an item is selected from the dropdown. It receives a `TypeaheadOption` object as an argument.
+- `setHighlightedIndex`: A function that should be called when an item is hovered over in the dropdown. It receives the index of the hovered item as an argument.
+- `menuOptions`: An array of `TypeaheadOption` objects that should be rendered in the dropdown.
+
+
+### renderMenuItemContent
+
+```tsx
+renderMenuItemContent?: (props: {
+  index: number;
+  isSelected: boolean;
+  option: TypeaheadOption;
+}) => ReactNode;
+```
+
+Used to render custom content for each item in the dropdown. It receives an object with the following properties:
+
+- `index`: The index of the item in the dropdown.
+- `isSelected`: A boolean indicating whether the item is currently selected.
+- `option`: The `TypeaheadOption` object that should be rendered.
+
+Note that this prop is only used when the `renderMenu` prop is not provided.
+
+### onMenuItemSelect
+
+```tsx
+onMenuItemSelect?: (option: TypeaheadOption, closeMenu?: () => void) => void | boolean;
+```
+
+A function that is called when an item is selected from the dropdown. It receives a `TypeaheadOption` object as an argument. If this function returns `true`, the default actions such as inserting the selected item into the editor and closing the dropdown will be prevented. You can use this function to implement custom behavior when an item is selected.

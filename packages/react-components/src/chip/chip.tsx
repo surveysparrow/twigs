@@ -464,7 +464,7 @@ const StyledChip = styled(Box, {
       variant: 'outline',
       css: {
         borderColorOpacity: ['$secondary500', 0.2],
-        backgroundColor: '$secondary500',
+        backgroundColor: '$white900',
         color: '$secondary800',
         [`& ${StyledCloseButton}`]: {
           color: '$secondary500'

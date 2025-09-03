@@ -1,0 +1,73 @@
+---
+title: Theming
+description: Twigs ships with maximum flexibility to customize the look and feel of your application.
+---
+
+import { DefaultThemeContainer } from "@/component/theming";
+import { TwigsColorPalette } from "@/component/theming/colors";
+import { AllFontSizes } from "@/component/theming/font-sizes";
+import { AllFontWeights } from "@/component/theming/font-weights";
+import { AllLineHeights } from "@/component/theming/line-heights";
+import { AllBordersAndRadii } from "@/component/theming/borders-and-radii";
+import { AllSpaces } from "@/component/theming/spaces";
+
+### Default Theme Object
+
+Below is the complete default theme object
+
+<DefaultThemeContainer />
+
+### Color Palette
+
+Twigs provides a comprehensive color system with semantic color tokens. Each color has multiple shades from 50 (lightest) to 900 (darkest).
+
+<TwigsColorPalette />
+
+### Font size
+
+<AllFontSizes />
+
+### Font Weight
+
+<AllFontWeights/>
+
+### Line Heights
+
+<AllLineHeights/>
+
+### Border width and Radius
+
+<AllBordersAndRadii/>
+
+
+### Using Theme variables
+
+You can consume thene variables in your components using `$` before the variable name. Below is an example on how to use theme variables in your components.
+
+```jsx
+import { Button } from "@sparrowengg/twigs-react";
+
+<Button
+  css={{
+    backgroundColor: "$primary100",
+    color: "$white900",
+    borderRadius: "$pill",
+    width: "200px",
+    padding: "$6 $10",
+    cursor: "pointer",
+    fontSize: "$md",
+    "&:hover": {
+      backgroundColor: "$primary200",
+    },
+    "&:active": {
+      backgroundColor: "$primary900",
+    },
+  }}
+>
+  Submit
+</Button>;
+```
+
+<Callout type="warn">
+  Page Incomplete
+</Callout>

@@ -1,6 +1,6 @@
 import { prefixClassName } from '@src/utils';
 import clsx from 'clsx';
-import React, { ComponentProps, FunctionComponent, ReactElement } from 'react';
+import React, { ComponentProps, ReactElement } from 'react';
 import { Box } from '../box';
 import { styled } from '../stitches.config';
 

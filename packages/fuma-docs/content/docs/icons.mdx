@@ -3,6 +3,8 @@ title: Icons
 description: A comprehensive set of SVG icons for your applications. Available as React components with consistent styling and accessibility features.
 ---
 
+import { AllIcons } from "@/component/icons";
+
 ## Installation
 
 ```bash
@@ -15,8 +17,21 @@ npm i @sparrowengg/twigs-react-icons
 import { AddColumnIcon } from "@sparrowengg/twigs-react-icons";
 
 const App = () => {
-  return <AddColumnIcon />;
+  return <AddColumnIcon size={32} color="currentColor" strokeWidth={1.5} />;
 };
 ```
+## Available Icons
 
-<Callout type="warn">Page incomplete</Callout>
+Search and browse all available icons below. Use the interactive controls to customize the icon properties in real-time
+
+<AllIcons />
+
+## Props
+
+All icons support the following props:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `size` | `number` | `32` | Icon size in pixels |
+| `color` | `string` | `"currentColor"` | Icon color |
+| `strokeWidth` | `number` | `1.5` | Stroke width for outline icons |

@@ -1,0 +1,97 @@
+---
+title: Input
+description: A versatile input component with multiple sizes, variants, and icon support. Perfect for forms, search interfaces, and data entry with comprehensive styling options and accessibility features.
+---
+
+## Import
+
+```jsx
+import { Input } from "@sparrowengg/twigs-react";
+```
+
+## Usage
+
+```jsx
+const InputExample = () => {
+  return (
+    <Input
+      placeholder="Default input"
+      size="sm"
+      variant="default"
+    />
+  );
+};
+```
+
+<Playground snippetName="input-basic" defaultPlayground />
+
+## Props
+
+### Input
+
+<TypeTable
+  type={{
+    size: {
+      type: "'sm' | 'md' | 'lg' | 'xl'",
+      description: "The size of the input field, affecting height, padding, and font size.",
+      default: "'md'",
+    },
+    variant: {
+      type: "'default' | 'filled'",
+      description: "The visual style variant of the input. 'default' has a border, 'filled' has a background color.",
+      default: "'default'",
+    },
+    leftIcon: {
+      type: "ReactElement",
+      description: "Icon element to display on the left side of the input. Automatically adjusts padding.",
+    },
+    rightIcon: {
+      type: "ReactElement",
+      description: "Icon element to display on the right side of the input. Automatically adjusts padding.",
+    },
+    leftElement: {
+      type: "ReactElement",
+      description: "Custom element to display on the left side of the input, positioned absolutely.",
+    },
+    rightElement: {
+      type: "ReactElement",
+      description: "Custom element to display on the right side of the input, positioned absolutely. Use this for interactive elements like clickable icons.",
+    },
+    errorBorder: {
+      type: "boolean",
+      description: "When true, displays an error border style to indicate validation errors.",
+      default: "false",
+    },
+    disabled: {
+      type: "boolean",
+      description: "When true, the input becomes non-interactive and visually indicates the disabled state.",
+      default: "false",
+    },
+    maxLength: {
+      type: "number",
+      description: "Maximum number of characters allowed in the input field.",
+    },
+    onChange: {
+      type: "(e: React.ChangeEvent<HTMLInputElement> | React.FormEvent<HTMLInputElement>) => void",
+      description: "Event handler called when the input value changes.",
+    },
+    css: {
+      type: "object",
+      description: "Custom CSS styles for the component.",
+    },
+    className: {
+      type: "string",
+      description: "Additional CSS class names to apply to the input element.",
+    },
+  }}
+/>
+
+The Input component also accepts all standard HTML input attributes such as `type`, `placeholder`, `value`, `defaultValue`, `name`, `id`, `required`, `readOnly`, `autoComplete`, `autoFocus`, `pattern`, `min`, `max`, `step`, and event handlers like `onFocus`, `onBlur`, `onKeyDown`, etc.
+
+## Examples
+
+### With Icons and Advanced Features
+
+Comprehensive example showing all Input features including icons, different states, and interactive elements.
+
+<Playground snippetName="input-comprehensive" />

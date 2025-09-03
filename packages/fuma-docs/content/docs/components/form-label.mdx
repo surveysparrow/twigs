@@ -1,0 +1,69 @@
+---
+title: FormLabel
+description: A component for providing accessible labels for form controls with additional features like required indicators, info tooltips, and right addons.
+---
+
+## Import
+
+```jsx
+import { FormLabel } from "@sparrowengg/twigs-react";
+```
+
+## Usage
+
+```jsx
+const FormLabelExample = () => {
+  return (
+    <Box css={{ display: "flex", flexDirection: "column", gap: "$4" }}>
+      <FormLabel size="sm">Small Label</FormLabel>
+      <FormLabel size="md">Medium Label</FormLabel>
+      <FormLabel requiredIndicator={true}>Required Field</FormLabel>
+      <FormLabel info="This is helpful information">Label with Info</FormLabel>
+      <FormLabel rightAddon={<Box css={{ color: "$neutral500" }}>Optional</Box>}>
+        Label with Right Addon
+      </FormLabel>
+    </Box>
+  );
+};
+```
+
+<Playground snippetName="form-label-basic" defaultPlayground />
+
+## Props
+
+### FormLabel
+
+<TypeTable
+  type={{
+    size: {
+      type: "'xs' | 'sm'",
+      description: "Size variant of the label. Controls font size and line height.",
+      default: "'sm'",
+    },
+    requiredIndicator: {
+      type: "ReactElement | boolean",
+      description: "Shows a required indicator (*) when true, or renders a custom element when provided.",
+      default: "false",
+    },
+    info: {
+      type: "string | ReactNode",
+      description: "Additional information displayed as a tooltip icon. String values show as info icon with tooltip, custom elements render as-is.",
+    },
+    rightAddon: {
+      type: "ReactNode",
+      description: "Additional content displayed on the right side of the label.",
+    },
+    containerRef: {
+      type: "React.Ref<HTMLDivElement>",
+      description: "Ref for the container div that wraps the label and addons.",
+    },
+    as: {
+      type: "React.ElementType",
+      description: "The element type to render the label as. Inherits from styled component.",
+    },
+    css: {
+      type: "object",
+      description: "Custom CSS styles for the component.",
+    },
+  }}
+/>

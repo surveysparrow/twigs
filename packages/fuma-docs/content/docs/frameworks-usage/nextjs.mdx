@@ -1,0 +1,62 @@
+---
+title: NextJS
+description: Learn how to integrate Twigs with NextJS applications. Configure server-side rendering, custom themes, and optimize your NextJS setup for the best performance with Twigs components.
+---
+
+## Basic Setup
+
+Configure Twigs in your NextJS application by updating your `_document.tsx` file:
+
+```tsx
+import { Html, Head, Main, NextScript } from "next/document";
+import { getCssText } from "@sparrowengg/twigs-react";
+
+export default function Document() {
+  return (
+    <Html lang="en">
+      <Head>
+        <style
+          id="stitches"
+          dangerouslySetInnerHTML={{ __html: getCssText() }}
+        />
+      </Head>
+      <body>
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  );
+}
+```
+
+## Custom Theme Configuration
+
+For customizing the theme, use the `createTheme` function:
+
+```tsx
+import { Html, Head, Main, NextScript } from "next/document";
+import { createTheme, getCssText } from "@sparrowengg/twigs-react";
+
+export default function Document() {
+  const customTheme = createTheme({
+    colors: {
+      primary: 'green',
+    }
+  });
+
+  return (
+    <Html lang="en" className={customTheme}>
+      <Head>
+        <style
+          id="stitches"
+          dangerouslySetInnerHTML={{ __html: getCssText() }}
+        />
+      </Head>
+      <body>
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  );
+}
+```

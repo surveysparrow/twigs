@@ -14,8 +14,7 @@ import { Alert, AlertDescription } from "@sparrowengg/twigs-react";
 ```jsx
 <Alert status="info">
   <AlertDescription>
-    {" "}
-    Password should have a minimum length of 6.{" "}
+    Password should have a minimum length of 6.
   </AlertDescription>
 </Alert>
 ```
@@ -45,6 +44,10 @@ import { Alert, AlertDescription } from "@sparrowengg/twigs-react";
     icon: {
       type: "JSX Element",
       description: "To change the default alert icon",
+    },
+    css: {
+      type: "object",
+      description: "Custom CSS styles for the component.",
     },
   }}
 />

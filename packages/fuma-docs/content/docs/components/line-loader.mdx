@@ -1,0 +1,56 @@
+---
+title: LineLoader
+description: An animated loading indicator that displays a sliding dot across a horizontal line. Perfect for indicating loading states with smooth animations and customizable colors and sizes.
+---
+
+## Import
+
+```jsx
+import { LineLoader } from "@sparrowengg/twigs-react";
+```
+
+## Usage
+
+```jsx
+const LineLoaderExample = () => {
+  return (
+    <Box css={{ display: "flex", flexDirection: "column", gap: "$6", alignItems: "center" }}>
+      <Flex gap="$4" alignItems="center">
+        <LineLoader size="sm" />
+        <LineLoader size="md" color="secondary" />
+        <LineLoader size="lg" color="bright" />
+        <LineLoader size="xl" color="negative" />
+      </Flex>
+    </Box>
+  );
+};
+```
+
+<Playground snippetName="line-loader-basic" defaultPlayground />
+
+## Props
+
+### LineLoader
+
+<TypeTable
+  type={{
+    size: {
+      type: "'sm' | 'md' | 'lg' | 'xl'",
+      description: "The height of the loader line. Affects the visual prominence of the loading indicator.",
+      default: "'sm'",
+    },
+    color: {
+      type: "'primary' | 'secondary' | 'bright' | 'negative'",
+      description: "The color scheme of the loader. 'primary' uses primary colors, 'secondary' uses secondary colors, 'bright' uses white colors, and 'negative' uses error colors.",
+      default: "'primary'",
+    },
+    css: {
+      type: "object",
+      description: "Custom CSS styles for the component.",
+    },
+    containerRef: {
+      type: "React.Ref<HTMLDivElement>",
+      description: "Ref to access the underlying container element.",
+    },
+  }}
+/>

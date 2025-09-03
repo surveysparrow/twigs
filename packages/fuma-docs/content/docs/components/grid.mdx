@@ -1,0 +1,78 @@
+---
+title: Grid
+description: A wrapper around HTML element div that comes with CSS Grid properties for easy layout management and responsive design.
+---
+
+## Import
+
+```jsx
+import { Grid } from "@sparrowengg/twigs-react";
+```
+
+## Usage
+
+```jsx
+const GridExample = () => {
+  return (
+    <Grid width={200} gap={[16, 16]} css={{ padding: "$4" }}>
+      <Box css={{ padding: "$4", background: "$primary200", borderRadius: "$md" }}>
+        Grid Item 1
+      </Box>
+      <Box css={{ padding: "$4", background: "$secondary200", borderRadius: "$md" }}>
+        Grid Item 2
+      </Box>
+      <Box css={{ padding: "$4", background: "$accent200", borderRadius: "$md" }}>
+        Grid Item 3
+      </Box>
+      <Box css={{ padding: "$4", background: "$neutral200", borderRadius: "$md" }}>
+        Grid Item 4
+      </Box>
+    </Grid>
+  );
+};
+```
+
+<Playground snippetName="grid-basic" defaultPlayground />
+
+## Props
+
+### Grid
+
+<TypeTable
+  type={{
+    width: {
+      type: "number",
+      description: "Width in pixels for auto-generating grid columns. When provided, creates columns using `repeat(auto-fit/fill, minmax(width, 1fr))`.",
+    },
+    templateColumns: {
+      type: "string",
+      description: "CSS grid-template-columns property value. Overrides width-based column generation when provided.",
+    },
+    templateRows: {
+      type: "string",
+      description: "CSS grid-template-rows property value for defining row sizes.",
+    },
+    templateAreas: {
+      type: "string",
+      description: "CSS grid-template-areas property value for defining named grid areas.",
+    },
+    gap: {
+      type: "Array<string | number>",
+      description: "Array containing [rowGap, columnGap] values for grid spacing. Numbers are converted to design tokens.",
+      default: "[3, 3]",
+    },
+    repeat: {
+      type: "'fit' | 'fill'",
+      description: "Controls how auto-generated columns behave when using width prop. 'fit' creates columns that fit content, 'fill' fills available space.",
+      default: "'fit'",
+    },
+    children: {
+      type: "ReactNode",
+      description: "Grid items to be rendered within the grid container.",
+    },
+    css: {
+      type: "object",
+      description: "Custom CSS styles for the component.",
+    },
+  }}
+/> 

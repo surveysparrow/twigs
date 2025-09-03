@@ -1,0 +1,77 @@
+---
+title: Setup
+description: Learn how to set up and configure the Twigs editor in your application. Built on top of Lexical, the editor provides rich text editing capabilities with comprehensive toolbar options and data management features.
+---
+
+## Installation
+
+```bash
+yarn add @sparrowengg/twigs-editor-react
+```
+
+The editor uses the following packages as peer dependencies, so you need to install them as well.
+
+```bash
+yarn add lexical @lexical/code @lexical/html @lexical/link @lexical/list @lexical/react @lexical/rich-text @lexical/selection @lexical/utils
+```
+
+## Import
+
+```jsx
+import { Editor } from "@sparrowengg/twigs-editor-react";
+```
+
+## Usage
+
+<Playground snippetName="editor-basic" defaultPlayground />
+
+## Handling Data
+
+The `onChange` property can be used to get the editor state, which can be stored in a state variable. You can also pass `initialEditorState` prop to set the initial state of the editor.
+
+The editor is not two way binded, so even if you update the `initialEditorState` after initial render, the editor will not update.
+
+Another method to get / set the editor state is by using the `dataManagementRef` prop. This prop takes a ref object, which can be used to get / set the editor state.
+
+```tsx
+import { DataManagementPluginHandle } from "@sparrowengg/twigs-editor-react";
+
+const Component = () => {
+  // DataManagementPluginHandle used for typescript
+  const dataManagementRef = useRef<DataManagementPluginHandle>(null);
+
+  return (
+    <Box>
+      <Editor dataManagementRef={dataManagementRef}>
+        <EditorToolbar />
+        <RichEditor />
+      </Editor>
+      <Flex>
+        <Button
+          onClick={() => {
+            dataManagementRef.current?.getDataAsync().then((data) => {
+              console.log(data.html, data.json);
+              saveHtmlData(data.html);
+            });
+          }}
+        >
+          Save
+        </Button>
+        <Button
+          onClick={() => {
+            const data = someFunctionToGetSavedHtml();
+
+            if (data) {
+              dataManagementRef.current?.setHtml(data);
+            }
+          }}
+        >
+          Import
+        </Button>
+      </Flex>
+    </Box>
+  );
+};
+```
+
+Currently `getDataAsync` returns the data in HTML and JSON Format, however to set the data, you can only use `setHtml` method. Other methods and helpers will be introduced soon.

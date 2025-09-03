@@ -6,17 +6,7 @@ description: can be used to warn or get users attention before destructive actio
 ## Import
 
 ```jsx
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogActions,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-  Button,
-} from "@sparrowengg/twigs-react";
+import {AlertDialog,AlertDialogAction,AlertDialogActions,AlertDialogCancel,AlertDialogContent,AlertDialogDescription,AlertDialogTitle,AlertDialogTrigger,Button} from "@sparrowengg/twigs-react";
 ```
 
 ## Usage
@@ -74,6 +64,23 @@ const AlertDialogExample = () => {
       type: "function",
       description:
         "Event handler called when the open state of the dialog changes",
+    },
+    css: {
+      type: "object",
+      description: "Custom CSS styles for the component.",
+    },
+  }}
+/>
+
+## Data Attributes
+
+These props are used for the conditional rendering of the components
+
+<TypeTable
+  type={{
+    "[data-state]": {
+      type: "'open' | 'closed'",
+      description: "Present on all these components based on the state",
     },
   }}
 />

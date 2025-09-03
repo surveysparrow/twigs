@@ -1,0 +1,58 @@
+---
+title: Link
+description: A flexible link component that renders as a styled anchor element with composition support. Perfect for navigation, external links, and custom link implementations with consistent styling and accessibility features.
+---
+
+## Import
+
+```jsx
+import { Link } from "@sparrowengg/twigs-react";
+```
+
+## Usage
+
+```jsx
+const LinkExample = () => {
+  return (
+    <Link href="https://github.com/surveysparrow/twigs" target="_blank">Link</Link>
+  );
+};
+```
+
+<Playground snippetName="link-basic" defaultPlayground />
+
+## Props
+
+### Link
+
+<TypeTable
+  type={{
+    asChild: {
+      type: "boolean",
+      description: "When true, renders the Link as a Slot component, allowing you to compose it with other elements while maintaining link behavior.",
+      default: "false",
+    },
+    href: {
+      type: "string",
+      description: "The URL that the link points to. Required for standard anchor behavior.",
+    },
+    target: {
+      type: "string",
+      description: "Specifies where to open the linked document. Common values are '_blank' for new tab, '_self' for same tab.",
+    },
+    rel: {
+      type: "string",
+      description: "Specifies the relationship between the current document and the linked document. Use 'noopener noreferrer' for external links.",
+    },
+    css: {
+      type: "object",
+      description: "Custom CSS styles for the component.",
+    },
+    className: {
+      type: "string",
+      description: "Additional CSS class names to apply to the link element.",
+    },
+  }}
+/>
+
+The Link component also accepts all standard HTML anchor attributes such as `download`, `hreflang`, `media`, `ping`, `referrerPolicy`, `type`, and event handlers like `onClick`, `onFocus`, `onBlur`, etc.

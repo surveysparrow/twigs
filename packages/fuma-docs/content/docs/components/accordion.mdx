@@ -6,12 +6,7 @@ description: A vertically stacked set of interactive headings that each reveal a
 ## Import
 
 ```jsx
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@sparrowengg/twigs-react";
+import {Accordion,AccordionContent,AccordionItem,AccordionTrigger} from "@sparrowengg/twigs-react";
 ```
 
 ## Usage
@@ -83,6 +78,10 @@ const AccordionExample = () => {
         "The reading direction of the accordion when applicable. If omitted, assumes LTR (left-to-right) reading mode.",
       default: "ltr",
     },
+    css: {
+      type: "object",
+      description: "Custom CSS styles for the component",
+    },
   }}
 />
 
@@ -103,28 +102,48 @@ const AccordionExample = () => {
   }}
 />
 
+## Data Attributes
+
+These props are used for the conditional rendering of the components
+
+<Callout>**Applicable** - Accordion</Callout>
+<TypeTable
+  type={{
+    "[data-orientation]": {
+      type: "'vertical' | 'horizontal'",
+      description: "Present on the accordion based on its orientation.",
+    },
+  }}
+/>
+
+<Callout>**Applicable** - AccordionItem/AccordionContent/AccordionTrigger</Callout>
+<TypeTable
+  type={{
+    "[data-state]": {
+      type: "'open' | 'closed'",
+      description: "Present on the item based on its current state.",
+    },
+    "[data-disabled]": {
+      type: "boolean",
+      description: "Present when the item is disabled.",
+    },
+    "[data-orientation]": {
+      type: "'vertical' | 'horizontal'",
+      description: "Present on the item based on the orientation.",
+    },
+  }}
+/>
+
 ## Examples
 
-### Multiple Selection
+### Dynamic Selection
 
-Allow multiple accordion items to be open simultaneously by setting `type="multiple"`.
+Alloew the change of the Selection type dynamically as single or multiple using the `type` prop.
 
-<Playground snippetName="accordion-multiple" />
+<Playground snippetName="accordion-multiple-selection" />
 
-### With Default Value
+### Value Variants
 
-Set a default expanded item using `defaultValue`.
+Individual accordion items can be set disabled and also as a default value
 
-<Playground snippetName="accordion-default-value" />
-
-### Disabled Items
-
-Individual accordion items can be disabled to prevent user interaction.
-
-<Playground snippetName="accordion-disabled" />
-
-### Collapsible Single
-
-When `type="single"`, you can allow the user to close the currently open item by setting `collapsible={true}`.
-
-<Playground snippetName="accordion-collapsible" />
+<Playground snippetName="accordion-value-variants" />

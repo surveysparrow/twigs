@@ -1,3 +1,4 @@
+"use client";
 import { defaultTheme } from "@sparrowengg/twigs-react";
 import { remToPix } from "@/lib/utils";
 import {
@@ -16,7 +17,7 @@ const { space } = defaultTheme;
 
 type SpaceKeys = keyof typeof space;
 
-export default function AllSpaces() {
+export function AllSpaces() {
   return (
     <Box>
       <Text css={{ marginBottom: "30px" }}>
@@ -36,9 +37,10 @@ export default function AllSpaces() {
         }}
       >
         <Thead>
-          <Th> Key </Th>
-          <Th> Value </Th>
-          <Th> px Value </Th>
+          <Th>Key</Th>
+          <Th>Value</Th>
+          <Th>px Value</Th>
+          <Th>Visual</Th>
         </Thead>
         <Tbody>
           {Object.keys(space).map((sp) => (

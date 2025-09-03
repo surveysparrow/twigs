@@ -1,0 +1,124 @@
+---
+title: Dialog
+description: A window overlaid on either the primary window or another dialog window, rendering the content underneath inert. Perfect for modal interactions, forms, and focused content presentation with accessibility features.
+---
+
+## Import
+
+```jsx
+import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogBody,DialogFooter, DialogClose } from "@sparrowengg/twigs-react";
+```
+
+## Usage
+
+```jsx
+const DialogExample = () => {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button size="lg">Edit profile</Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle size="md">Edit profile</DialogTitle>
+          <DialogDescription>
+            Make changes to your profile here. Click save when done.
+          </DialogDescription>
+        </DialogHeader>
+        <DialogBody>
+          {/* Your content here */}
+        </DialogBody>
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button size="lg" color="primary">
+              Save changes
+            </Button>
+          </DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+};
+```
+
+<Playground snippetName="dialog-basic" defaultPlayground />
+
+## Props
+
+### Dialog
+
+<TypeTable
+  type={{
+    defaultOpen: {
+      type: "boolean",
+      description:
+        "The open state of the dialog when it is initially rendered. Use when you do not need to control its open state.",
+      default: "false",
+    },
+    open: {
+      type: "boolean",
+      description:
+        "The controlled open state of the dialog. Must be used in conjunction with onOpenChange.",
+    },
+    onOpenChange: {
+      type: "(open: boolean) => void",
+      description:
+        "Event handler called when the open state of the dialog changes.",
+    },
+    size: {
+      type: "'sm' | 'md' | 'lg' | 'xl' | 'full'",
+      description: "The size of the dialog.",
+      default: "'md'",
+    },
+    scrollBehavior: {
+      type: "'auto' | 'scroll' | 'hidden'",
+      description: "Control scroll behavior of the dialog content.",
+      default: "'auto'",
+    },
+    css: {
+      type: "object",
+      description: "Custom CSS styles for the component.",
+    },
+  }}
+/>
+
+### DialogContent
+
+<TypeTable
+  type={{
+    overlayClassName: {
+      type: "string",
+      description: "Custom class name for the dialog overlay.",
+    },
+    portalContainer: {
+      type: "HTMLElement",
+      description: "Custom container element for the dialog portal.",
+    },
+  }}
+/>
+
+### DialogTitle
+
+<TypeTable
+  type={{
+    size: {
+      type: "'md' | 'lg'",
+      description: "The size of the dialog title.",
+      default: "'lg'",
+    },
+  }}
+/>
+
+## Data Attributes
+
+These props are used for the conditional rendering of the components
+
+<TypeTable
+  type={{
+    "[data-state]": {
+      type: "'open' | 'closed'",
+      description: "Present on the dialog based on its current state.",
+    },
+  }}
+/>
+

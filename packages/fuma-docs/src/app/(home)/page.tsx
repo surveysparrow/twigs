@@ -17,7 +17,7 @@ export default function HomePage() {
           to bring your own components, styles and themes.
         </p>
         <Link
-          className="bg-black text-white px-4 py-2 rounded-md dark:bg-white dark:text-black mt-3 inline-flex gap-2 items-center"
+          className="bg-fd-primary text-white px-4 py-2 rounded-md dark:bg-white dark:text-black mt-3 inline-flex gap-2 items-center"
           href="/docs"
         >
           Get Started

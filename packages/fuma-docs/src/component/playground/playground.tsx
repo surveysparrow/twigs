@@ -41,7 +41,7 @@ export const Playground = ({
         <div className="relative group playground-tab--playground">
           <iframe
             src={buildUrl(snippetName)}
-            className="rounded-md w-full h-[800px]"
+            className="rounded-md w-full h-[800px] border border-fd-border"
             loading="lazy"
           />
           <a
@@ -77,7 +77,10 @@ const Code = ({ snippetName }: { snippetName: string }) => {
     const files = data.files;
     const meta = JSON.parse(files["meta.json"]);
 
-    setFiles(files);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { "meta.json": _, ...filteredFiles } = files;
+
+    setFiles(filteredFiles);
     setActiveFile(`${meta.main}.tsx`);
     setStatus("success");
   };

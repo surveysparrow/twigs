@@ -1,7 +1,7 @@
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
 import React, {
   ComponentProps,
-  useId,
+  useId
 } from 'react';
 import { Flex } from '../flex';
 import { styled } from '../stitches.config';

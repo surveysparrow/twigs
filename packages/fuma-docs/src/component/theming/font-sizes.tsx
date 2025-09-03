@@ -1,5 +1,6 @@
+"use client";
 import React from "react";
-import { defaultTheme } from "@sparrowengg/twigs-react";
+import { defaultTheme, toast, Toastr } from "@sparrowengg/twigs-react";
 import { remToPix } from "@/lib/utils";
 import { Box, Chip, Text } from "@sparrowengg/twigs-react";
 
@@ -9,17 +10,43 @@ const { fontSizes } = defaultTheme;
 
 type FontSizeKeys = keyof typeof fontSizes;
 
-export default function AllFontSizes() {
+const handleCopy = async (fontSize: string) => {
+  try {
+    await navigator.clipboard.writeText(`$${fontSize}`);
+    toast({
+      variant: "default",
+      title: `Copied to clipboard`,
+      css: {
+        boxShadow: "none",
+      },
+    });
+  } catch (err) {
+    console.error("Failed to copy:", err);
+    toast({
+      variant: "error",
+      title: "Copy failed",
+      description: "Could not copy to clipboard",
+      css: {
+        boxShadow: "none",
+      },
+    });
+  }
+};
+
+export function AllFontSizes() {
   return (
-    <Box>
+    <Box className="max-h-[500px] overflow-y-auto border border-fd-border rounded-lg p-4 bg-fd-card">
+      <Toastr duration={3000} />
       {Object.keys(fontSizes).map((fontSize) => {
         const pxVal = remToPix(fontSizes[fontSize as FontSizeKeys]);
         return (
-          <Box
-            key={`fontSize-${fontSize}`}
-            css={{ borderBottom: "1px solid $black50", padding: "10px 0" }}
-          >
-            <Chip size="sm" color="primary">
+          <Box key={`fontSize-${fontSize}`}>
+            <Chip
+              color="accent"
+              className="cursor-pointer"
+              size="sm"
+              onClick={() => handleCopy(fontSize)}
+            >
               <Text>${fontSize}</Text>:
               <Text>{fontSizes[fontSize as FontSizeKeys]}</Text>(
               <Text>

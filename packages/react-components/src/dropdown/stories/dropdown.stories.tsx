@@ -1,4 +1,5 @@
 import React from 'react';
+import { TickIcon } from '@sparrowengg/twigs-react-icons';
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -10,6 +11,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
+  DropdownMenuItemIndicator,
   DropdownMenuSeparator,
   DropdownMenuSubContent
 } from '../dropdown';
@@ -58,11 +60,19 @@ const Template = (args) => {
         </DropdownMenuCheckboxItem>
         <DropdownMenuSeparator />
         <DropdownMenuLabel>People</DropdownMenuLabel>
-        <DropdownMenuRadioGroup value="Maneesh" onValueChange={() => {}}>
+        <DropdownMenuRadioGroup value="pedro" onValueChange={() => {}}>
           <DropdownMenuRadioItem value="pedro">
+            <DropdownMenuItemIndicator>
+              <TickIcon size={16} />
+            </DropdownMenuItemIndicator>
             Pedro Duarte
           </DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="colm">Colm Tuite</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="colm">
+            <DropdownMenuItemIndicator>
+              <TickIcon size={16} />
+            </DropdownMenuItemIndicator>
+            Colm Tuite
+          </DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>

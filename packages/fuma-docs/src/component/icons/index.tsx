@@ -1,0 +1,1 @@
+export { default as AllIcons } from './all-icons';

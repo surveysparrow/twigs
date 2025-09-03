@@ -1,0 +1,170 @@
+---
+title: Toast
+description: A succinct message that is displayed temporarily. Perfect for notifications, confirmations, and feedback with automatic dismissal, swipe gestures, and comprehensive accessibility features.
+---
+
+## Import
+
+```jsx
+import { Toastr, toast } from "@sparrowengg/twigs-react";
+```
+
+## Usage
+
+```jsx
+const ToastExample = () => {
+  return (
+    <>
+      <Toastr duration={10000} />
+      <Button
+        variant="outline"
+        onClick={() => {
+          toast({
+            variant: "success",
+            title: "Success!",
+            description: "Your action was completed successfully."
+          });
+        }}
+      >
+        Show Toast
+      </Button>
+    </>
+  );
+};
+```
+
+<Playground snippetName="toast-basic" defaultPlayground />
+
+## Props
+
+### Toastr
+
+<TypeTable
+  type={{
+    duration: {
+      type: "number",
+      description: "How long the toast should be visible in the UI, in milliseconds.",
+      default: "10000",
+    },
+    maxToasts: {
+      type: "number",
+      description: "Maximum number of toasts to display simultaneously.",
+    },
+    position: {
+      type: "'top-left' | 'top-center' | 'top-right' | 'bottom-left' | 'bottom-center' | 'bottom-right'",
+      description: "Position of the toast viewport on the screen.",
+      default: "'bottom-center'",
+    },
+    swipeDirection: {
+      type: "'up' | 'down' | 'left' | 'right'",
+      description: "Direction for swipe-to-dismiss gesture.",
+      default: "'right'",
+    },
+    swipeThreshold: {
+      type: "number",
+      description: "Distance in pixels that the swipe gesture must travel to dismiss the toast.",
+      default: "50",
+    },
+    label: {
+      type: "string",
+      description: "Accessible label for the toast viewport.",
+      default: "'Notification'",
+    },
+    css: {
+      type: "object",
+      description: "Custom CSS styles for the component.",
+    },
+  }}
+/>
+
+### toast
+
+<TypeTable
+  type={{
+    variant: {
+      type: "'default' | 'success' | 'error' | 'warning' | 'loading'",
+      description: "Visual style variant of the toast.",
+      default: "'default'",
+    },
+    title: {
+      type: "string",
+      description: "Title text displayed in the toast.",
+    },
+    description: {
+      type: "string",
+      description: "Description text displayed in the toast.",
+    },
+    action: {
+      type: "ReactNode",
+      description: "Action button or element to display in the toast.",
+    },
+    icon: {
+      type: "ReactElement",
+      description: "Custom icon to display in the toast.",
+    },
+    duration: {
+      type: "number",
+      description: "Custom duration for this specific toast in milliseconds.",
+    },
+    onOpenChange: {
+      type: "(open: boolean) => void",
+      description: "Event handler called when the toast open state changes.",
+    },
+    css: {
+      type: "object",
+      description: "Custom CSS styles for the component.",
+    },
+  }}
+/>
+
+### toast.promise
+
+<TypeTable
+  type={{
+    promise: {
+      type: "Promise<T>",
+      description: "The promise to handle with loading, success, and error states.",
+    },
+    loading: {
+      type: "ToastOptions",
+      description: "Toast configuration to show while the promise is loading.",
+    },
+    success: {
+      type: "(data: T) => ToastOptions",
+      description: "Function that returns toast configuration for successful promise resolution.",
+    },
+    error: {
+      type: "(error: any) => ToastOptions",
+      description: "Function that returns toast configuration for promise rejection.",
+    },
+  }}
+/>
+
+## Data Attributes
+
+These props are used for the conditional rendering of the components
+
+<TypeTable
+  type={{
+    "[data-state]": {
+      type: "'open' | 'closed'",
+      description: "Present on the toast based on its current state.",
+    },
+    "[data-swipe]": {
+      type: "'start' | 'move' | 'cancel' | 'end'",
+      description: "Present during swipe gestures for dismiss functionality.",
+    },
+    "[data-swipe-direction]": {
+      type: "'up' | 'down' | 'left' | 'right'",
+      description: "Present based on the configured swipe direction.",
+    },
+  }}
+/>
+
+## Examples
+
+### Variants and Advanced Features
+
+Explore different toast variants, actions, promise handling, and advanced configurations.
+
+<Playground snippetName="toast-variants" />

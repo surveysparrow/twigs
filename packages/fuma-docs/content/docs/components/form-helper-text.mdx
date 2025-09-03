@@ -1,0 +1,68 @@
+---
+title: FormHelperText
+description: A component for providing additional context, hints, or error messages to form input fields. Built on top of the Text component with specialized styling for form contexts.
+---
+
+## Import
+
+```jsx
+import { FormHelperText } from "@sparrowengg/twigs-react";
+```
+
+## Usage
+
+```jsx
+const FormHelperTextExample = () => {
+  return (
+    <Box css={{ display: "flex", flexDirection: "column", gap: "$4" }}>
+      <FormHelperText color="info">This is a helpful message for the user</FormHelperText>
+      <FormHelperText color="error">This is an error message</FormHelperText>
+      <Input placeholder="password" type="password" />
+      <FormHelperText>Password should have a minimum length of 6.</FormHelperText>
+    </Box>
+  );
+};
+```
+
+<Playground snippetName="form-helper-text-basic" defaultPlayground />
+
+## Props
+
+### FormHelperText
+
+<TypeTable
+  type={{
+    color: {
+      type: "'error' | 'info'",
+      description: "Sets the color variant of the helper text. Error variant uses negative color, info variant uses neutral color.",
+      default: "'info'",
+    },
+    size: {
+      type: "'xxs' | 'xs' | 'sm' | 'md' | 'lg'",
+      description: "Controls the font size of the helper text. Inherited from Text component.",
+      default: "'xs'",
+    },
+    weight: {
+      type: "'regular' | 'medium' | 'bold'",
+      description: "Sets the font weight of the helper text. Inherited from Text component.",
+      default: "'regular'",
+    },
+    truncate: {
+      type: "boolean",
+      description: "When true, truncates text with ellipsis if it overflows. Inherited from Text component.",
+      default: "false",
+    },
+    showLines: {
+      type: "number",
+      description: "Limits the text to a specific number of lines with ellipsis overflow. Inherited from Text component.",
+    },
+    as: {
+      type: "React.ElementType",
+      description: "Allows you to render the component as a different HTML element or custom component.",
+    },
+    css: {
+      type: "object",
+      description: "Custom CSS styles for the component.",
+    },
+  }}
+/> 

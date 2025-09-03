@@ -1,4 +1,4 @@
-import React, { ComponentProps, FunctionComponent } from 'react';
+import React, { ComponentProps } from 'react';
 import * as SwitchPrimitive from '@radix-ui/react-switch';
 import { styled } from '../stitches.config';
 

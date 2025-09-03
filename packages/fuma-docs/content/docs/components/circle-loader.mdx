@@ -1,0 +1,47 @@
+---
+title: Circle Loader
+description: Animated circular loading indicator with customizable sizes and colors. Perfect for showing loading states in buttons, forms, and other UI elements.
+---
+
+## Import
+
+```jsx
+import { CircleLoader } from "@sparrowengg/twigs-react";
+```
+
+## Usage
+
+```jsx
+const CircleLoaderExample = () => {
+  return (
+    <Box css={{ display: "flex", gap: "$4", alignItems: "center" }}>
+      <CircleLoader size="sm" />
+      <CircleLoader size="md" color="secondary" />
+      <CircleLoader size="lg" color="success" />
+    </Box>
+  );
+};
+```
+
+<Playground snippetName="circle-loader-basic" defaultPlayground />
+
+## Props
+
+<TypeTable
+  type={{
+    size: {
+      type: "'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl'",
+      description: "The size of the circle loader.",
+      default: "'md'",
+    },
+    color: {
+      type: "'primary' | 'secondary' | 'bright' | 'negative' | 'accent'",
+      description: "The color theme of the loader.",
+      default: "'primary'",
+    },
+    css: {
+      type: "object",
+      description: "Custom CSS styles for the component.",
+    },
+  }}
+/> 

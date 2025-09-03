@@ -1,0 +1,21 @@
+---
+title: Link
+description: Enable hyperlink creation and management in the editor using the default link feature and DialogLinkEditor modal.
+---
+
+## DialogLinkEditor
+
+Link feature is included by default in the editor and it allows you to add hyperlinks. However in order to get the link editor modal, you need to add the `DialogLinkEditor` plugin to the editor.
+
+## ConvertSelectionToLinkOnPastePlugin
+
+This plugin converts the selected text to a link if the pasted text is a URL.
+
+The example below demonstrates both the `DialogLinkEditor` and `ConvertSelectionToLinkOnPastePlugin` working together. You can:
+
+1. **Add links manually**: Use the link tool in the toolbar to add hyperlinks
+2. **Convert pasted URLs**: Select text and paste a URL to automatically convert it to a link
+
+## Example
+
+<Playground snippetName="editor-feature-link" defaultPlayground />

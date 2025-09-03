@@ -6,9 +6,9 @@ const { borderWidths } = defaultTheme;
 
 type BorderWidthKeys = keyof typeof borderWidths;
 
-export default function AllBorderWidths() {
+export function AllBorderWidths() {
   return (
-    <Box>
+    <Box className="max-h-[500px] overflow-y-auto border border-fd-border rounded-lg p-4 bg-fd-card">
       <Flex gap="$8" wrap="wrap">
         {Object.keys(borderWidths).map((borderWidth) => (
           <div key={`borderWidth${borderWidth}`}>

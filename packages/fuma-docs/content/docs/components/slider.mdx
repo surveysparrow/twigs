@@ -1,0 +1,162 @@
+---
+title: Slider
+description: A powerful input component for selecting values within a specified range. Perfect for volume controls, form inputs, and interactive value selection with support for single values, ranges, custom styling, and comprehensive accessibility features.
+---
+
+## Import
+
+```jsx
+import { Slider } from "@sparrowengg/twigs-react";
+```
+
+## Usage
+
+```jsx
+const SliderExample = () => {
+  const [value, setValue] = useState([50]);
+  return (
+    <Box css={{ display: "flex", flexDirection: "column", gap: "$4", width: "300px" }}>
+      <Text css={{ fontSize: "$md", fontWeight: "$6" }}>Basic Slider</Text>
+      <Slider
+        value={value}
+        onValueChange={setValue}
+        min={0}
+        max={100}
+        step={1}
+        size="md"
+        labels={{
+          left: "0",
+          right: "100"
+        }}
+      />
+      <Text css={{ fontSize: "$sm", color: "$neutral700" }}>
+        Current value: {value[0]}
+      </Text>
+    </Box>
+  );
+};
+```
+
+<Playground snippetName="slider-basic" defaultPlayground />
+
+## Props
+
+<TypeTable
+  type={{
+    value: {
+      type: "number[]",
+      description: "The controlled value of the slider. Must be used in conjunction with onValueChange.",
+    },
+    defaultValue: {
+      type: "number[]",
+      description: "The default value of the slider when initially rendered. Use when you do not need to control the value.",
+    },
+    onValueChange: {
+      type: "(value: number[]) => void",
+      description: "Event handler called when the slider value changes.",
+    },
+    onValueCommit: {
+      type: "(value: number[]) => void",
+      description: "Event handler called when the slider value is committed (e.g., when dragging ends).",
+    },
+    min: {
+      type: "number",
+      description: "The minimum value of the slider range.",
+      default: "0",
+    },
+    max: {
+      type: "number",
+      description: "The maximum value of the slider range.",
+      default: "100",
+    },
+    step: {
+      type: "number",
+      description: "The step increment for the slider value.",
+      default: "1",
+    },
+    minStepsBetweenThumbs: {
+      type: "number",
+      description: "The minimum number of steps between thumbs in a range slider.",
+      default: "0",
+    },
+    disabled: {
+      type: "boolean",
+      description: "When true, prevents the user from interacting with the slider.",
+      default: "false",
+    },
+    orientation: {
+      type: "'horizontal' | 'vertical'",
+      description: "The orientation of the slider.",
+      default: "'horizontal'",
+    },
+    dir: {
+      type: "'ltr' | 'rtl'",
+      description: "The reading direction of the slider. If omitted, assumes LTR (left-to-right) reading mode.",
+    },
+    inverted: {
+      type: "boolean",
+      description: "When true, inverts the slider direction.",
+      default: "false",
+    },
+    name: {
+      type: "string",
+      description: "The name of the slider. Submitted with its owning form as part of a name/value pair.",
+    },
+    form: {
+      type: "string",
+      description: "The form element that the slider belongs to.",
+    },
+    asChild: {
+      type: "boolean",
+      description: "Change the default rendered element for the one passed as a child, merging their props and behavior.",
+      default: "false",
+    },
+    size: {
+      type: "'sm' | 'md' | 'lg'",
+      description: "The size of the slider, affecting its height and thumb dimensions.",
+      default: "'md'",
+    },
+    labels: {
+      type: "{ left?: string | ReactNode; right?: string | ReactNode }",
+      description: "Custom labels for the left and right sides of the slider.",
+    },
+    labelPlacement: {
+      type: "'top' | 'bottom'",
+      description: "The placement of the labels relative to the slider track.",
+      default: "'top'",
+    },
+    components: {
+      type: "Record<'Track' | 'Range' | 'Thumb' | 'ThumbLeft' | 'ThumbRight', ElementType>",
+      description: "Custom component overrides for individual slider parts.",
+    },
+    css: {
+      type: "object",
+      description: "Custom CSS styles for the component.",
+    },
+  }}
+/>
+
+## Data Attributes
+
+These props are used for the conditional rendering of the components
+
+<TypeTable
+  type={{
+    "[data-disabled]": {
+      type: "boolean",
+      description: "Present when the slider is disabled.",
+    },
+    "[data-orientation]": {
+      type: "'horizontal' | 'vertical'",
+      description: "Present on the slider based on its orientation.",
+    },
+  }}
+/>
+
+## Examples
+
+### variants and customization
+
+The slider component supports a wide range of features including range selection, custom stepping, multiple sizes, label placement, and component customization.
+
+<Playground snippetName="slider-comprehensive" /> 

@@ -1,0 +1,76 @@
+---
+title: Table
+description: A structured data display component for organizing and presenting tabular information. Perfect for displaying lists, datasets, and structured content with customizable borders, hover effects, and interactive row selection.
+---
+
+## Import
+
+```jsx
+import { Table, Thead, Tbody, Tr, Th, Td } from "@sparrowengg/twigs-react";
+```
+
+## Usage
+
+```jsx
+const TableExample = () => {
+  return (
+    <Table border="horizontal">
+      <Thead>
+        <Tr>
+          <Th>Name</Th>
+          <Th>Email</Th>
+          <Th>Role</Th>
+        </Tr>
+      </Thead>
+      <Tbody>
+        <Tr>
+          <Td>John Doe</Td>
+          <Td>john@example.com</Td>
+          <Td>Admin</Td>
+        </Tr>
+        <Tr>
+          <Td>Jane Smith</Td>
+          <Td>jane@example.com</Td>
+          <Td>User</Td>
+        </Tr>
+      </Tbody>
+    </Table>
+  );
+};
+```
+
+<Playground snippetName="table-basic" defaultPlayground />
+
+## Props
+
+### Table
+
+<TypeTable
+  type={{
+    border: {
+      type: "'horizontal' | 'vertical' | 'both'",
+      description: "Determines how borders are displayed within the table. Controls the border style for all table cells. also specifically applicable for `th` and `td` ",
+      default: "'horizontal'",
+    },
+    css: {
+      type: "object",
+      description: "Custom CSS styles for the component.",
+    },
+  }}
+/>
+
+### Tr
+
+<TypeTable
+  type={{
+    active: {
+      type: "boolean",
+      description: "When true, applies active styling to the table row with primary color background.",
+      default: "false",
+    },
+    children: {
+      type: "ReactNode",
+      description: "The table row content, typically containing Th or Td elements.",
+    },
+  }}
+/>

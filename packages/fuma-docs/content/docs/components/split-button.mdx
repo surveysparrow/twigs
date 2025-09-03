@@ -1,0 +1,67 @@
+---
+title: Split Button
+description: A composite button component that combines two buttons with a shared visual style. Perfect for primary actions with secondary options, providing a clean interface for complex button interactions with consistent sizing and color coordination.
+---
+
+## Import
+
+```jsx
+import { SplitButton } from "@sparrowengg/twigs-react";
+```
+
+## Usage
+
+```jsx
+const SplitButtonExample = () => {
+  return (
+    <Box css={{ display: "flex", flexDirection: "column", gap: "$4", alignItems: "center" }}>
+      <Text css={{ fontSize: "$md", fontWeight: "$6" }}>Basic Split Button</Text>
+      
+      <SplitButton size="md" color="primary">
+        <Button leftIcon={<PencilIcon />}>Edit</Button>
+        <IconButton icon={<ChevronDownIcon />} />
+      </SplitButton>
+    </Box>
+  );
+};
+```
+
+<Playground snippetName="split-button-basic" defaultPlayground />
+
+## Props
+
+<TypeTable
+  type={{
+    size: {
+      type: "'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'",
+      description: "The size of the split button, affecting both the primary button and secondary button dimensions.",
+      default: "'md'",
+    },
+    color: {
+      type: "'primary' | 'secondary' | 'light' | 'default' | 'error'",
+      description: "The color variant of the split button, determining the visual styling and border colors.",
+      default: "'primary'",
+    },
+    disabled: {
+      type: "boolean",
+      description: "When true, prevents user interaction with both buttons in the split button.",
+      default: "false",
+    },
+    children: {
+      type: "ReactNode",
+      description: "Exactly two child elements are required - typically a Button and an IconButton for the split functionality.",
+    },
+    css: {
+      type: "object",
+      description: "Custom CSS styles for the component.",
+    },
+  }}
+/>
+
+## Examples
+
+### SplitButton with dropdown
+
+The split button component supports various sizes, colors, and can be combined with dropdown menus for advanced functionality.
+
+<Playground snippetName="split-button-dropdown" /> 
