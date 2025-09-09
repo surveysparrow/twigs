@@ -188,6 +188,35 @@ export const Drawer = ({
     return null;
   }
 
+  const handleTabKey = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    const focusableElements = portalRef.current?.querySelectorAll(
+      'button, [href], input, select, textarea, [contenteditable="true"], [tabindex]:not([tabindex="-1"])'
+    ) ?? [];
+
+    const firstElement = focusableElements[0] as HTMLElement;
+    const lastElement = focusableElements[
+      focusableElements.length - 1
+    ] as HTMLElement;
+
+    if (e.shiftKey && document.activeElement === firstElement) {
+      e.preventDefault();
+      lastElement.focus();
+    } else if (!e.shiftKey && document.activeElement === lastElement) {
+      e.preventDefault();
+      firstElement.focus();
+    }
+  };
+
+  const handleEscapeKey = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (
+      e.target instanceof HTMLElement
+      && e.target.closest('.drawer-portal') === portalRef.current
+      && e.target.getAttribute('aria-expanded') !== 'true'
+    ) {
+      handleClose();
+    }
+  };
+
   return (
     <Portal.Root
       className="drawer-portal"
@@ -195,30 +224,10 @@ export const Drawer = ({
       tabIndex={-1}
       ref={portalRef}
       onKeyDown={(e) => {
-        if (
-          e.key === 'Escape'
-          && e.target instanceof HTMLElement
-          && e.target.closest('.drawer-portal') === portalRef.current
-        ) {
-          handleClose();
-        }
-        if (e.key === 'Tab') {
-          const focusableElements = portalRef.current?.querySelectorAll(
-            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-          ) ?? [];
-
-          const firstElement = focusableElements[0] as HTMLElement;
-          const lastElement = focusableElements[
-            focusableElements.length - 1
-          ] as HTMLElement;
-
-          if (e.shiftKey && document.activeElement === firstElement) {
-            e.preventDefault();
-            lastElement.focus();
-          } else if (!e.shiftKey && document.activeElement === lastElement) {
-            e.preventDefault();
-            firstElement.focus();
-          }
+        if (e.key === 'Escape') {
+          handleEscapeKey(e);
+        } else if (e.key === 'Tab') {
+          handleTabKey(e);
         }
       }}
     >
