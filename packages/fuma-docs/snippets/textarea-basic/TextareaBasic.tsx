@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Textarea, Box } from "@sparrowengg/twigs-react";
 
-export default function Component() {
+export default function TextareaBasic() {
   const [description, setDescription] = useState("");
 
   return (

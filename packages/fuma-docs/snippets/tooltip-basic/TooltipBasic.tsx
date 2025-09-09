@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Box, Tooltip, TooltipProvider, Text } from "@sparrowengg/twigs-react";
 
-export default function Component() {
+export default function TooltipBasic() {
   return (
     <TooltipProvider delayDuration={0}>
       <Box css={{ display: "flex", flexDirection: "column", gap: "$6" }}>

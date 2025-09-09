@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Box, Toastr,Text } from "@sparrowengg/twigs-react";
 import { toast } from "@sparrowengg/twigs-react";
 
-export default function Component() {
+export default function ToastBasic() {
   return (
     <Box>
       <Toastr duration={10000} />

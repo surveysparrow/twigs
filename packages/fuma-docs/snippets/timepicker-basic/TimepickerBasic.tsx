@@ -1,7 +1,7 @@
 import React from "react";
 import { TimePicker, Box, Text } from "@sparrowengg/twigs-react";
 
-export default function Component() {
+export default function TimepickerBasic() {
   return (
     <Box css={{ display: "flex", flexDirection: "column", gap: "$4" }}>
       <Box css={{ display: "flex", gap: "$15" }}>
