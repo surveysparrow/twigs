@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, ComponentProps } from 'react';
 import * as Portal from '@radix-ui/react-portal';
 import clsx from 'clsx';
-import { styled } from '../stitches.config';
+import React, { ComponentProps, useEffect, useRef } from 'react';
 import { Box } from '../box';
 import { useMountTransition } from '../hooks';
+import { styled } from '../stitches.config';
 
 const StyledDrawerBackdrop = styled(Box, {
   position: 'fixed',
@@ -155,6 +155,7 @@ export const Drawer = ({
 }: DrawerProps) => {
   const bodyRef = useRef(document.querySelector('body'));
   const isTransitioning = useMountTransition(isOpen, 300);
+  const portalRef = useRef<HTMLDivElement>(null);
 
   const handleClose = () => {
     if (onClose) {
@@ -176,27 +177,33 @@ export const Drawer = ({
   }, [isOpen]);
 
   useEffect(() => {
-    const onKeyPress = (e) => {
-      if (e.key === 'Escape') {
-        handleClose();
-      }
-    };
-
     if (isOpen) {
-      window.addEventListener('keyup', onKeyPress);
+      requestAnimationFrame(() => {
+        portalRef.current?.focus({ preventScroll: true });
+      });
     }
-
-    return () => {
-      window.removeEventListener('keyup', onKeyPress);
-    };
-  }, [isOpen, onClose]);
+  }, [isOpen]);
 
   if (!isTransitioning && !isOpen) {
     return null;
   }
 
   return (
-    <Portal.Root className="drawer-portal" container={portalContainer}>
+    <Portal.Root
+      className="drawer-portal"
+      container={portalContainer}
+      tabIndex={-1}
+      ref={portalRef}
+      onKeyDown={(e) => {
+        if (
+          e.key === 'Escape'
+          && e.target instanceof HTMLElement
+          && e.target.closest('.drawer-portal') === portalRef.current
+        ) {
+          handleClose();
+        }
+      }}
+    >
       <StyledDrawerContainer>
         <StyledDrawerBackdrop
           className={clsx({
