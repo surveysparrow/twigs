@@ -1,6 +1,6 @@
 "use client";
 import { defaultTheme, toast, Toastr } from "@sparrowengg/twigs-react";
-import { Box, Chip, Text } from "@sparrowengg/twigs-react";
+import { Box, Text } from "@sparrowengg/twigs-react";
 import React from "react";
 const defaultText = "The quick brown fox jumps over the lazy dog";
 
@@ -39,10 +39,9 @@ export function AllFontWeights() {
         <Box
           key={`fontWeight${fontWeight}`}
         >
-          <Chip size="sm" color="accent" onClick={() => handleCopy(fontWeight)} className="cursor-pointer">
-            <Text>${fontWeight}</Text>/
-            <Text>{fontWeights[fontWeight as unknown as FontWeightKeys]}</Text>
-          </Chip>
+          <Box className="cursor-pointer text-fd-primary bg-fd-primary/10 rounded-md w-fit" size="sm" onClick={() => handleCopy(fontWeight)}>
+            <Text className="p-1">${fontWeight}: {fontWeights[fontWeight as unknown as FontWeightKeys]}</Text>
+          </Box>
           <Text
             size="lg"
             css={{

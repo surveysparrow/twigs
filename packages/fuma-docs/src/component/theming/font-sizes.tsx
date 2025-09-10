@@ -2,7 +2,7 @@
 import React from "react";
 import { defaultTheme, toast, Toastr } from "@sparrowengg/twigs-react";
 import { remToPix } from "@/lib/utils";
-import { Box, Chip, Text } from "@sparrowengg/twigs-react";
+import { Box, Text } from "@sparrowengg/twigs-react";
 
 const defaultText = "The quick brown fox jumps over the lazy dog";
 
@@ -41,20 +41,13 @@ export function AllFontSizes() {
         const pxVal = remToPix(fontSizes[fontSize as FontSizeKeys]);
         return (
           <Box key={`fontSize-${fontSize}`}>
-            <Chip
-              color="accent"
-              className="cursor-pointer"
+            <Box
+              className="cursor-pointer text-fd-primary bg-fd-primary/10 rounded-md w-fit"
               size="sm"
               onClick={() => handleCopy(fontSize)}
             >
-              <Text>${fontSize}</Text>:
-              <Text>{fontSizes[fontSize as FontSizeKeys]}</Text>(
-              <Text>
-                {pxVal}
-                px
-              </Text>
-              )
-            </Chip>
+              <Text className="p-1">${fontSize}: {fontSizes[fontSize as FontSizeKeys]}({pxVal}px)</Text>
+            </Box>
             <Text
               size="sm"
               css={{

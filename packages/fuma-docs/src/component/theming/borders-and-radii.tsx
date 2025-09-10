@@ -2,7 +2,7 @@
 import React from "react";
 import { defaultTheme, toast, Toastr } from "@sparrowengg/twigs-react";
 import { remToPix } from "@/lib/utils";
-import { Box, Chip, Text, Flex } from "@sparrowengg/twigs-react";
+import { Box, Text, Flex } from "@sparrowengg/twigs-react";
 
 const { borderWidths, radii } = defaultTheme;
 
@@ -68,33 +68,28 @@ export function AllBordersAndRadii() {
         <Flex gap="$8" wrap="wrap">
           {Object.keys(borderWidths).map((borderWidth) => (
             <div key={`borderWidth-${borderWidth}`}>
-              {/* <Chip 
-                className="cursor-pointer" 
-                color="accent" 
+              <Box 
+                className="cursor-pointer text-fd-primary bg-fd-primary/10 rounded-md w-fit" 
                 size="sm" 
                 onClick={() => handleCopyBorderWidth(borderWidth)}
               >
-                <Text>${borderWidth}</Text>
-                <Text>{borderWidths[borderWidth as BorderWidthKeys]}</Text>
-              </Chip> */}
+                <Text className="p-1">${borderWidth}: {borderWidths[borderWidth as BorderWidthKeys]}</Text>
+              </Box>
               <Box
                 css={{
-                  border: `${borderWidths[borderWidth as BorderWidthKeys]} solid #ADADF7`,
+                  border: `${borderWidths[borderWidth as BorderWidthKeys]} solid`,
                   marginTop: "$3",
                   padding: "$3",
-                  backgroundColor: "$secondary50",
                   borderRadius: "$sm",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
+                  gap: "$2",
                   height: "70px",
                   width: "90px",
                 }}
+                className="border !border-fd-input bg-fd-secondary"
               >
-                <Text weight="bold" css={{color: "$secondary700"}}>${borderWidth}</Text>
-                <Text size="xs" css={{ color: "$secondary700" }}>
-                  { "  " + borderWidths[borderWidth as BorderWidthKeys]}
-                </Text>
               </Box>
             </div>
           ))}
@@ -104,43 +99,34 @@ export function AllBordersAndRadii() {
       {/* Border Radii Section */}
       <Box>
         <Text size="sm" color="primary">
-          Border Radii
+          Border Radius
         </Text>
         <Flex gap="$10" wrap="wrap">
           {Object.keys(radii).map((rad) => {
             const pxVal = remToPix(radii[rad as RadiiKeys]);
             return (
               <div key={`radii-${rad}`}>
-                <Chip 
-                  className="cursor-pointer" 
-                  color="accent" 
+                <Box 
+                  className="cursor-pointer text-fd-primary bg-fd-primary/10 rounded-md w-fit" 
                   size="sm" 
                   onClick={() => handleCopyRadii(rad)}
                 >
-                  <Text>${rad}</Text>:
-                  <Text>{radii[rad as RadiiKeys]}</Text>
-                  {radii[rad as RadiiKeys].includes("rem") && (
-                    <Text>({pxVal}px)</Text>
-                  )}
-                </Chip>
+                  <Text className="p-1">${rad}: {radii[rad as RadiiKeys]} {radii[rad as RadiiKeys].includes("rem") && `(${pxVal}px)`}</Text>
+                </Box>
                 <Box
                   css={{
                     border: "2px solid",
                     borderRadius: radii[rad as RadiiKeys],
                     marginTop: "$3",
                     padding: "$3",
-                    backgroundColor: "$secondary50",
                     height: "80px",
                     width: "80px",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center"
                   }}
-                  className="border border-fd-border"
+                  className="border !border-fd-input bg-fd-secondary"
                 >
-                  <Text size="xs" css={{ color: "$secondary700", textAlign: "center" }}>
-                    {radii[rad as RadiiKeys]}
-                  </Text>
                 </Box>
               </div>
             );

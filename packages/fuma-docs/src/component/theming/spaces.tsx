@@ -1,16 +1,7 @@
 "use client";
 import { defaultTheme } from "@sparrowengg/twigs-react";
 import { remToPix } from "@/lib/utils";
-import {
-  Box,
-  Text,
-  Table,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
-} from "@sparrowengg/twigs-react";
+import { Box, Table, Tbody, Td, Th, Thead, Tr ,toast,Toastr} from "@sparrowengg/twigs-react";
 import React from "react";
 
 const { space } = defaultTheme;
@@ -18,16 +9,35 @@ const { space } = defaultTheme;
 type SpaceKeys = keyof typeof space;
 
 export function AllSpaces() {
+  
+  const handleCopy = async (sp: string) => {
+    try {
+      await navigator.clipboard.writeText(`$${sp}`);
+      toast({
+        variant: "default",
+        title: `Copied to clipboard`,
+        css:{
+          boxShadow: "none"
+        }
+      });
+    } catch (err) {
+      console.error('Failed to copy:', err);
+      toast({
+        variant: "error",
+        title: "Copy failed",
+        description: "Could not copy to clipboard",
+        css:{
+          boxShadow: "none"
+        }
+      });
+    }
+  };
+
   return (
     <Box>
-      <Text css={{ marginBottom: "30px" }}>
-        Space values can be used for padding, margin, gap
-      </Text>
-
+      <Toastr duration={3000} />
       <Table
         css={{
-          height: "800px",
-          overflow: "auto",
           "& th": {
             width: 200,
           },
@@ -35,21 +45,27 @@ export function AllSpaces() {
             border: "none",
           },
         }}
+        className="text-fd-primary"
       >
         <Thead>
-          <Th>Key</Th>
-          <Th>Value</Th>
-          <Th>px Value</Th>
-          <Th>Visual</Th>
+          <Tr>
+            <Th> Key </Th>
+            <Th> Value </Th>
+            <Th> px Value </Th>
+            <Th> Example </Th>
+          </Tr>
         </Thead>
         <Tbody>
           {Object.keys(space).map((sp) => (
-            <Tr key={`space-${sp}`}>
-              <Td>{sp}</Td>
-              <Td>{space[sp as unknown as SpaceKeys]}</Td>
-              <Td>
+            <Tr key={`space-${sp}`} className="cursor-pointer" onClick={() => handleCopy(sp)}>
+              <Td className="!text-fd-muted-foreground">{sp}</Td>
+              <Td className="!text-fd-muted-foreground">{space[sp as unknown as SpaceKeys]}</Td>
+              <Td className="!text-fd-muted-foreground">
                 {remToPix(space[sp as unknown as SpaceKeys])}
                 px
+              </Td>
+              <Td>
+                <Box css={{width: space[sp as unknown as SpaceKeys],height: "$5"}} className="bg-fd-primary"></Box>
               </Td>
             </Tr>
           ))}

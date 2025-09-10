@@ -1,7 +1,7 @@
 "use client";
 import { defaultTheme, toast, Toastr } from "@sparrowengg/twigs-react";
 import { remToPix } from "@/lib/utils";
-import { Box, Chip, Text } from "@sparrowengg/twigs-react";
+import { Box, Text } from "@sparrowengg/twigs-react";
 import React from "react";
 const defaultText =
   "The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog.";
@@ -42,12 +42,9 @@ export function AllLineHeights() {
         const pxVal = remToPix(lineHeights[lineHeight]);
         return (
           <Box key={`lineHeight${lineHeight}`}>
-            <Chip size="sm" color="accent" className="cursor-pointer" onClick={() => handleCopy(lineHeight)}>
-              <Text>${lineHeight}</Text>/<Text>{lineHeights[lineHeight]}</Text>
-              {lineHeights[lineHeight].includes("rem") && (
-                <Text>{`(${pxVal}px)`}</Text>
-              )}
-            </Chip>
+            <Box className="cursor-pointer text-fd-primary bg-fd-primary/10 rounded-md w-fit" size="sm" onClick={() => handleCopy(lineHeight)}>
+              <Text className="p-1">${lineHeight}: {lineHeights[lineHeight]} {lineHeights[lineHeight].includes("rem") && `(${pxVal}px)`}</Text>
+            </Box>
             <Text
               size="sm"
               css={{
