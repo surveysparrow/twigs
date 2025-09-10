@@ -189,14 +189,34 @@ export const Drawer = ({
   }
 
   const handleTabKey = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    const focusableElements = portalRef.current?.querySelectorAll(
-      'button, [href], input, select, textarea, [contenteditable="true"], [tabindex]:not([tabindex="-1"])'
+    const focusableElementsList = portalRef.current?.querySelectorAll(
+      `button:not([disabled]),
+      [href]:not([disabled]),
+      input:not([disabled]),
+      select:not([disabled]),
+      textarea:not([disabled]),
+      [contenteditable="true"]:not([disabled]),
+      [tabindex]:not([tabindex="-1"]):not([disabled])`
     ) ?? [];
+
+    const focusableElements = Array.from(focusableElementsList).filter(
+      (element) => {
+        return (
+          element.getAttribute('aria-disabled') !== 'true'
+          && element.getAttribute('tabindex') !== '-1'
+        );
+      }
+    );
 
     const firstElement = focusableElements[0] as HTMLElement;
     const lastElement = focusableElements[
       focusableElements.length - 1
     ] as HTMLElement;
+
+    if (!lastElement) {
+      e.preventDefault();
+      return;
+    }
 
     if (e.shiftKey && document.activeElement === firstElement) {
       e.preventDefault();
@@ -211,6 +231,7 @@ export const Drawer = ({
     if (
       e.target instanceof HTMLElement
       && e.target.closest('.drawer-portal') === portalRef.current
+      // Only close if other components like select, dropdown, etc. are not open
       && e.target.getAttribute('aria-expanded') !== 'true'
     ) {
       handleClose();
