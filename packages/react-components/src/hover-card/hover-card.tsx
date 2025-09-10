@@ -3,22 +3,22 @@ import { ComponentProps, ReactElement } from 'react';
 import { keyframes, styled } from '../stitches.config';
 
 const slideUpAndFade = keyframes({
-  '0%': { opacity: 0, transform: 'translateY(2px)' },
-  '100%': { opacity: 1, transform: 'translateY(0)' }
-});
-
-const slideRightAndFade = keyframes({
-  '0%': { opacity: 0, transform: 'translateX(-2px)' },
-  '100%': { opacity: 1, transform: 'translateX(0)' }
-});
-
-const slideDownAndFade = keyframes({
   '0%': { opacity: 0, transform: 'translateY(-2px)' },
   '100%': { opacity: 1, transform: 'translateY(0)' }
 });
 
-const slideLeftAndFade = keyframes({
+const slideRightAndFade = keyframes({
   '0%': { opacity: 0, transform: 'translateX(2px)' },
+  '100%': { opacity: 1, transform: 'translateX(0)' }
+});
+
+const slideDownAndFade = keyframes({
+  '0%': { opacity: 0, transform: 'translateY(2px)' },
+  '100%': { opacity: 1, transform: 'translateY(0)' }
+});
+
+const slideLeftAndFade = keyframes({
+  '0%': { opacity: 0, transform: 'translateX(-2px)' },
   '100%': { opacity: 1, transform: 'translateX(0)' }
 });
 
@@ -27,7 +27,7 @@ const StyledHoverCardContent = styled(HoverCardPrimitive.Content, {
   width: 300,
   backgroundColor: '$white900',
   boxShadow:
-            '0px 8px 12px 0px #0000000F, 0px 2px 5px 0px #0000000F, 0px 1px 1px 0px #0000000F',
+    '0px 8px 12px 0px #0000000F, 0px 2px 5px 0px #0000000F, 0px 1px 1px 0px #0000000F',
   border: '0.5px solid #00000026',
   borderRadius: '$xl',
   animationDuration: '400ms',

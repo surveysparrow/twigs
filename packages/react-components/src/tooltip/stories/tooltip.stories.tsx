@@ -6,7 +6,7 @@ export default {
   component: Tooltip,
   title: 'Overlay/Tooltip',
   args: {
-    content: 'Twigs tooltip text',
+    content: 'Tooltip message will show up here',
     side: 'top'
   },
   argTypes: {
@@ -26,7 +26,7 @@ export default {
     },
     size: {
       control: 'select',
-      options: ['sm', 'md']
+      options: ['sm', 'md', 'lg']
     }
   }
 };

@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, ComponentProps } from 'react';
 import * as Portal from '@radix-ui/react-portal';
 import clsx from 'clsx';
-import { styled } from '../stitches.config';
+import React, { ComponentProps, useEffect, useRef } from 'react';
 import { Box } from '../box';
 import { useMountTransition } from '../hooks';
+import { styled } from '../stitches.config';
 
 const StyledDrawerBackdrop = styled(Box, {
   position: 'fixed',
@@ -155,6 +155,7 @@ export const Drawer = ({
 }: DrawerProps) => {
   const bodyRef = useRef(document.querySelector('body'));
   const isTransitioning = useMountTransition(isOpen, 300);
+  const portalRef = useRef<HTMLDivElement>(null);
 
   const handleClose = () => {
     if (onClose) {
@@ -176,27 +177,81 @@ export const Drawer = ({
   }, [isOpen]);
 
   useEffect(() => {
-    const onKeyPress = (e) => {
-      if (e.key === 'Escape') {
-        handleClose();
-      }
-    };
-
     if (isOpen) {
-      window.addEventListener('keyup', onKeyPress);
+      requestAnimationFrame(() => {
+        portalRef.current?.focus({ preventScroll: true });
+      });
     }
-
-    return () => {
-      window.removeEventListener('keyup', onKeyPress);
-    };
-  }, [isOpen, onClose]);
+  }, [isOpen]);
 
   if (!isTransitioning && !isOpen) {
     return null;
   }
 
+  const handleTabKey = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    const focusableElementsList = portalRef.current?.querySelectorAll(
+      `button:not([disabled]),
+      [href]:not([disabled]),
+      input:not([disabled]),
+      select:not([disabled]),
+      textarea:not([disabled]),
+      [contenteditable="true"]:not([disabled]),
+      [tabindex]:not([tabindex="-1"]):not([disabled])`
+    ) ?? [];
+
+    const focusableElements = Array.from(focusableElementsList).filter(
+      (element) => {
+        return (
+          element.getAttribute('aria-disabled') !== 'true'
+          && element.getAttribute('tabindex') !== '-1'
+        );
+      }
+    );
+
+    const firstElement = focusableElements[0] as HTMLElement;
+    const lastElement = focusableElements[
+      focusableElements.length - 1
+    ] as HTMLElement;
+
+    if (!lastElement) {
+      e.preventDefault();
+      return;
+    }
+
+    if (e.shiftKey && document.activeElement === firstElement) {
+      e.preventDefault();
+      lastElement.focus();
+    } else if (!e.shiftKey && document.activeElement === lastElement) {
+      e.preventDefault();
+      firstElement.focus();
+    }
+  };
+
+  const handleEscapeKey = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (
+      e.target instanceof HTMLElement
+      && e.target.closest('.drawer-portal') === portalRef.current
+      // Only close if other components like select, dropdown, etc. are not open
+      && e.target.getAttribute('aria-expanded') !== 'true'
+    ) {
+      handleClose();
+    }
+  };
+
   return (
-    <Portal.Root className="drawer-portal" container={portalContainer}>
+    <Portal.Root
+      className="drawer-portal"
+      container={portalContainer}
+      tabIndex={-1}
+      ref={portalRef}
+      onKeyDown={(e) => {
+        if (e.key === 'Escape') {
+          handleEscapeKey(e);
+        } else if (e.key === 'Tab') {
+          handleTabKey(e);
+        }
+      }}
+    >
       <StyledDrawerContainer>
         <StyledDrawerBackdrop
           className={clsx({
