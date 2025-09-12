@@ -100,7 +100,7 @@ const Code = ({ snippetName }: { snippetName: string }) => {
       }}
     >
       {status === "success" && Object.keys(files).length > 0 && (
-        <div className="flex items-center absolute top-0 left-0 gap-2 z-10 overflow-hidden border-b border-gray-200 dark:border-gray-700 w-full py-2 px-4">
+        <div className="flex items-center absolute top-0 left-0 gap-2 z-2 overflow-hidden border-b border-gray-200 dark:border-gray-700 w-full py-2 px-4">
           {Object.keys(files).map((file) => (
             <button
               key={file}

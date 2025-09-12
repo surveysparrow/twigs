@@ -12,7 +12,7 @@ export default function AllIcons() {
   // Icon prop controls
   const [iconSize, setIconSize] = useState(32);
   const [iconColor, setIconColor] = useState('currentColor');
-  const [iconStrokeWidth, setIconStrokeWidth] = useState(1.5);
+  const [iconStrokeWidth, setIconStrokeWidth] = useState(2);
   const [showControls, setShowControls] = useState(false);
 
   // Convert icons object to array for easier filtering
@@ -218,7 +218,7 @@ export default function AllIcons() {
         {filteredIcons.map(({ name, component: IconComponent }) => (
           <div
             key={name}
-            className="flex flex-col items-center justify-center p-4 border border-fd-border rounded-lg hover:border-fd-accent hover:bg-fd-accent/50 transition-all duration-200 group"
+            className="flex flex-col items-center justify-center p-4 border border-fd-border rounded-lg hover:border-fd-primary/30 transition-all duration-200 hover:scale-105 hover:shadow-md"
           >
             {/* Icon */}
             <div className="mb-3 group-hover:text-fd-accent-foreground transition-colors duration-200 cursor-pointer">

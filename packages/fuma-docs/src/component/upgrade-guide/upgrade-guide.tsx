@@ -46,6 +46,11 @@ export const UpgradeGuide = () => {
   const [error, setError] = useState<string | null>(null);
   const [aiResponse, setAiResponse] = useState("");
   const [isGeneratingAiResponse, setIsGeneratingAiResponse] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const [selectedPackage, setSelectedPackage] = useState(
     packages["twigs-react"].value
@@ -175,7 +180,7 @@ export const UpgradeGuide = () => {
         src={`https://www.google.com/recaptcha/api.js?render=${PUBLIC_RECAPTCHA_SITE_KEY}`}
         strategy="afterInteractive"
       />
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="bg-fd-card p-5 rounded-lg border border-fd-border ">
         <Flex
           gap="$3"
           flexDirection="column"
@@ -183,6 +188,8 @@ export const UpgradeGuide = () => {
             width: "100%",
           }}
         >
+        {isClient && (
+          <div className="flex gap-5 flex-col">
           <Select
             size="md"
             label="Package"
@@ -207,13 +214,10 @@ export const UpgradeGuide = () => {
             isDisabled={versionsLoading}
             options={versionOptions}
           />
+          </div>
+          )}
         </Flex>
-        <Text
-          size="sm"
-          css={{
-            marginTop: "$3",
-          }}
-        >
+        <Text size="sm" className="mt-8 !text-fd-muted-foreground">
           This site is protected by reCAPTCHA and the Google{" "}
           <a href="https://policies.google.com/privacy">Privacy Policy</a> and{" "}
           <a href="https://policies.google.com/terms">Terms of Service</a>{" "}
@@ -230,9 +234,7 @@ export const UpgradeGuide = () => {
           }
           loading={isGeneratingAiResponse}
           size="md"
-          css={{
-            marginTop: "$5",
-          }}
+          className="mt-5 !bg-fd-primary/10 !text-fd-primary !border !border-fd-primary/10 !font-normal"
         >
           Get Changes
         </Button>

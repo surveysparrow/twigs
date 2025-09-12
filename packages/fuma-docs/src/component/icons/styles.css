@@ -3,13 +3,13 @@
     height: 20px;
     width: 20px;
     border-radius: 50%;
-    background: hsl(226, 55%, 45%);
+    background: #00828D;
     border: 2px solid hsl(0, 0%, 100%);
     cursor: pointer;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   }
   
   .dark .slider-primary::-webkit-slider-thumb {
-    background: hsl(234, 95%, 77%);
+    background: #8ACCD2;
   }
   

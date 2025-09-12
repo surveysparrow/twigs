@@ -1,3 +1,43 @@
 @import "tailwindcss";
 @import "fumadocs-ui/css/vitepress.css";
 @import "fumadocs-ui/css/preset.css";
+
+:root {
+  --color-fd-primary: #00828D;
+}
+
+.dark {
+    --color-fd-primary: #8ACCD2;
+}
+
+header#nd-subnav > div:last-child a {
+    border-bottom: 2px solid transparent !important;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    height: 100% !important;
+}
+
+header#nd-subnav > div:last-child a[class*="bg-fd-primary"] {
+    background-color: white !important;
+    border-bottom: 2px solid #00828D !important;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    height: 100% !important;
+}
+
+.dark header#nd-subnav > div:last-child a[class*="bg-fd-primary"] {
+    background-color: transparent !important;
+    border-bottom: 2px solid #8ACCD2 !important;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    height: 100% !important;
+}

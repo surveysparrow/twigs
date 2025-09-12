@@ -3,6 +3,13 @@ title: Tooltip
 description: A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it. Perfect for providing contextual help, additional information, and guidance with smooth animations and accessibility features.
 ---
 
+import {ExternalLinks} from "@/component/external-link";
+
+<ExternalLinks 
+  source="https://github.com/surveysparrow/twigs/tree/master/packages/react-components/src/tooltip"
+  storybook="overlay-tooltip"
+/>
+
 ## Import
 
 ```jsx
@@ -71,7 +78,7 @@ const TooltipExample = () => {
       default: "'center'",
     },
     size: {
-      type: "'sm' | 'md'",
+      type: "'sm' | 'md' | 'lg'",
       description: "Size variant of the tooltip affecting padding and font size.",
       default: "'sm'",
     },
