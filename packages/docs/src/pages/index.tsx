@@ -26,7 +26,7 @@ export default function Home(): JSX.Element {
   return (
     <Layout
       title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
+      description="Twigs is an open-source React UI component library from SurveySparrow that provides a set of accessible, extensible, and themeable components for building modern web applications.">
       <div className='homepage'>
         <div>
           <div className='linear-gradient'>

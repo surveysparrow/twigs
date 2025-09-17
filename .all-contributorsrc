@@ -130,6 +130,25 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "GauthamSrini",
+      "name": "Gautham",
+      "avatar_url": "https://avatars.githubusercontent.com/u/140779042?v=4",
+      "profile": "https://github.com/GauthamSrini",
+      "contributions": [
+        "code",
+        "doc"
+       ]
+    },
+    {
+      "login": "sridharspxrrow",
+      "name": "Sridhar",
+      "avatar_url": "https://avatars.githubusercontent.com/u/188984471?v=4",
+      "profile": "https://github.com/sridharspxrrow",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }

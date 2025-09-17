@@ -119,7 +119,6 @@ export const CalendarRange = ({
           borderRadius: '$2xl',
           border: '1px solid',
           borderColor: '$neutral300',
-          paddingTop: '$6',
           maxWidth: 'max-content',
           ...containerCSS
         }}
@@ -241,21 +240,27 @@ const CalendarSingleSection = ({
           css={{
             maxWidth: 'max-content'
           }}
+          className={prefixClassName('calendar-range-section__container')}
         >
           <Flex
             alignItems="center"
             justifyContent="space-between"
             css={{
-              marginBottom: '$12',
+              margin: '$12 0',
+              ...(calendarContext.size === 'sm' && {
+                margin: '$6 0'
+              }),
               padding: '0 $8',
               width: '100%'
             }}
+            className={prefixClassName('calendar-range-section__header')}
           >
             {compact ? (
               <>
                 <CalendarNavigationButton
                   {...navigationButtonProps.prev}
                   icon={<ChevronLeftIcon />}
+                  className={prefixClassName('calendar__range-nav-button--prev')}
                 />
                 <RangeCalendarTitle
                   timezone={state.timeZone}
@@ -265,6 +270,7 @@ const CalendarSingleSection = ({
                 <CalendarNavigationButton
                   {...navigationButtonProps.next}
                   icon={<ChevronRightIcon />}
+                  className={prefixClassName('calendar__range-nav-button--next')}
                 />
               </>
             ) : (
@@ -274,6 +280,7 @@ const CalendarSingleSection = ({
                   <CalendarNavigationButton
                     {...navigationButtonProps}
                     icon={<ChevronLeftIcon />}
+                    className={prefixClassName('calendar__range-nav-button--prev')}
                   />
                 )}
                 <RangeCalendarTitle
@@ -285,6 +292,7 @@ const CalendarSingleSection = ({
                   <CalendarNavigationButton
                     {...navigationButtonProps}
                     icon={<ChevronRightIcon />}
+                    className={prefixClassName('calendar__range-nav-button--next')}
                   />
                 )}
                 {sectionName === 'start' && <Box />}

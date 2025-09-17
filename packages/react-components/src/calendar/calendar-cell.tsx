@@ -2,6 +2,7 @@ import { CalendarDate, isSameDay, isSameMonth } from '@internationalized/date';
 import { useRef } from 'react';
 import { useCalendarCell } from 'react-aria';
 import { CalendarState, RangeCalendarState } from 'react-stately';
+import { prefixClassName } from '@src/utils';
 import { Day, DayContainer } from './calendar-day';
 import { useCalendarContext } from './calendar-utils';
 
@@ -46,6 +47,7 @@ export const CalendarCell = ({
       data-selection-start={isSelectionStart && !isOutsideMonth}
       data-selection-end={isSelectionEnd && !isOutsideMonth}
       data-in-range={isRangeCalendar && isSelected}
+      className={prefixClassName('calendar__day-container--day')}
     >
       <Day
         {...buttonProps}
