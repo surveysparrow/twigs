@@ -28,7 +28,7 @@ const StyledContent = styled(TooltipPrimitive.Content, {
   backgroundColor: '$neutral900',
   userSelect: 'none',
   opacity: 1,
-  maxWidth: '240px',
+  maxWidth: '250px',
   '& span': {
     visibility: 'visible !important'
   },
@@ -51,7 +51,6 @@ const StyledContent = styled(TooltipPrimitive.Content, {
         fontWeight: '$5',
         borderRadius: '$sm',
         lineHeight: '$xs',
-        maxWidth: '$30',
         minWidth: '$8',
         height: 'auto',
         '&[data-align="start"]': {
@@ -87,7 +86,6 @@ const StyledContent = styled(TooltipPrimitive.Content, {
         fontWeight: '$4',
         borderRadius: '$lg',
         lineHeight: '$sm',
-        maxWidth: '240px',
         minWidth: '50px',
         '&[data-align="start"]': {
           '&[data-side="top"], &[data-side="bottom"]': {
@@ -122,7 +120,6 @@ const StyledContent = styled(TooltipPrimitive.Content, {
         fontWeight: '$5',
         borderRadius: '$lg',
         lineHeight: '$sm',
-        maxWidth: '236px',
         minWidth: '$15',
         '&[data-align="start"]': {
           '&[data-side="top"], &[data-side="bottom"]': {
