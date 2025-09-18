@@ -1,0 +1,185 @@
+---
+imports: import { Cascader } from "@sparrowengg/twigs-react";
+---
+
+```jsx live play=cascader
+<Cascader
+  placeholder="Search"
+  label="Choose Region"
+  css={{
+    'ul': {
+      paddingLeft: '0',
+    }
+  }}
+  data={[
+    {
+      label: "India",
+      value: "india",
+      options: [
+        {
+          label: "North",
+          value: "india-north",
+          options: [
+            {
+              label: "Delhi",
+              value: "delhi",
+            },
+            {
+              label: "Punjab",
+              value: "punjab",
+            },
+          ],
+        },
+        {
+          label: "South",
+          value: "india-south",
+          options: [
+            {
+              label: "Karnataka",
+              value: "karnataka",
+            },
+            {
+              label: "Kerala",
+              value: "kerala",
+              options: [
+                {
+                  label: "Alappuzha",
+                  value: "alappuzha",
+                  options: [
+                    {
+                      label: "Kuttanad",
+                      value: "kuttanad",
+                    },
+                    {
+                      label: "Ambalappuzha",
+                      value: "ambalappuzha",
+                      options: [
+                        {
+                          label: "North",
+                          value: "ambalappuzha-north",
+                        },
+                        {
+                          label: "South",
+                          value: "ambalappuzha-south",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                {
+                  label: "Kochi",
+                  value: "kochi",
+                  options: [
+                    {
+                      label: "Fort Kochi",
+                      value: "fort-kochi",
+                    },
+                    {
+                      label: "Marine Drive",
+                      value: "marine-drive",
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      label: "USA",
+      value: "usa",
+      options: [
+        {
+          label: "Northeast",
+          value: "usa-northeast",
+          options: [
+            {
+              label: "New York",
+              value: "new-york",
+            },
+            {
+              label: "Massachusetts",
+              value: "massachusetts",
+            },
+          ],
+        },
+        {
+          label: "South",
+          value: "usa-south",
+          options: [
+            {
+              label: "Texas",
+              value: "texas",
+              options: [
+                {
+                  label: "Houston",
+                  value: "houston",
+                  options: [
+                    {
+                      label: "Downtown",
+                      value: "downtown-houston",
+                    },
+                    {
+                      label: "The Woodlands",
+                      value: "the-woodlands",
+                    },
+                  ],
+                },
+                {
+                  label: "Austin",
+                  value: "austin",
+                },
+              ],
+            },
+            {
+              label: "Florida",
+              value: "florida",
+            },
+          ],
+        },
+        {
+          label: "West",
+          value: "usa-west",
+        },
+        {
+          label: "Midwest",
+          value: "usa-midwest",
+          options: [
+            {
+              label: "Illinois",
+              value: "illinois",
+            },
+            {
+              label: "Ohio",
+              value: "ohio",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      label: "Canada",
+      value: "canada",
+      options: [
+        {
+          label: "Western Canada",
+          value: "western-canada",
+        },
+        {
+          label: "Central Canada",
+          value: "central-canada",
+        },
+        {
+          label: "Atlantic Canada",
+          value: "atlantic-canada",
+        },
+        {
+          label: "Northern Canada",
+          value: "northern-canada",
+        },
+      ],
+    },
+  ]}
+/>
+```
