@@ -12,6 +12,7 @@ export type CascaderOption = {
   options?: CascaderOption[];
   shouldFetchOptions?: boolean;
   disabled?: boolean;
+  isNew?: boolean;
 } & Record<string, any>;
 
 export type CascaderComponentProps = {
@@ -20,6 +21,7 @@ export type CascaderComponentProps = {
   inputAriaDescription?: string;
   popoverPortal?: HTMLElement;
   css?: ComponentProps<typeof Box>['css'];
+  creatable?: boolean;
   cancelButtonText?: string;
   chooseButtonText?: string;
   fetchOptions?: (
@@ -66,6 +68,7 @@ export const Cascader = ({
   data,
   value,
   label,
+  creatable = false,
   placeholder,
   defaultValue,
   popoverPortal,
@@ -102,6 +105,7 @@ export const Cascader = ({
     () => ({
       css,
       label,
+      creatable,
       placeholder,
       renderValue,
       fetchOptions,
@@ -118,6 +122,7 @@ export const Cascader = ({
     [
       css,
       label,
+      creatable,
       renderValue,
       placeholder,
       fetchOptions,

@@ -20,6 +20,7 @@ import {
   stringSearchFlattenedNodes
 } from './cascader-utils';
 import { useCascaderValue } from './use-value';
+import { CascaderNode } from './cascader-node';
 
 const StyledUl = styled('ul', {
   maxHeight: '320px',
@@ -28,6 +29,17 @@ const StyledUl = styled('ul', {
 });
 
 const StyledLoadingIndicator = styled('li', {
+  padding: '$3 $6',
+  height: '32px',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  color: '$neutral800',
+  fontSize: '$sm',
+  lineHeight: '$sm'
+});
+
+const StyledNoResults = styled('div', {
   padding: '$3 $6',
   height: '32px',
   display: 'flex',
@@ -63,8 +75,27 @@ export const CascaderSearchList = forwardRef<
 
   const searchResults = useMemo(() => {
     setFocusedIndex(0);
-    return stringSearchFlattenedNodes(rootNode, searchValue);
-  }, [rootNode, searchValue]);
+    const searchString = searchValue.trim();
+    const results = stringSearchFlattenedNodes(rootNode, searchString);
+
+    if (
+      componentProps.creatable
+      && !rootNode?.findNode(searchString)
+      && results.length === 0
+    ) {
+      const creatableNode = new CascaderNode(
+        searchString,
+        searchValue,
+        {
+          isNew: true
+        },
+        []
+      );
+      results.push(creatableNode);
+    }
+
+    return results;
+  }, [rootNode, searchValue, componentProps.creatable]);
 
   const fetchResults = useCallback(
     debounce(
@@ -113,10 +144,20 @@ export const CascaderSearchList = forwardRef<
 
   const handleSelect = () => {
     if (searchResults[focusedIndex].disabled) return;
+    const focusedItem = searchResults[focusedIndex];
+    if (focusedItem.isNew) {
+      rootNode?.createNode(focusedItem.value, focusedItem.label, {
+        isNew: true
+      });
+    }
     handleChange(
-      searchResults[focusedIndex].getData(),
-      buildSelectionPath(rootNode?.findNode(searchResults[focusedIndex].value))
+      focusedItem.getData(),
+      buildSelectionPath(rootNode?.findNode(focusedItem.value))
     );
+
+    if (focusedItem.isNew) {
+      rootNode?.findNode(focusedItem.value)?.setIsNew(false);
+    }
   };
 
   useImperativeHandle(
@@ -126,7 +167,7 @@ export const CascaderSearchList = forwardRef<
       focusNextItem,
       focusPreviousItem
     }),
-    [focusedIndex]
+    [focusedIndex, searchResults]
   );
 
   useEffect(() => {
@@ -171,21 +212,35 @@ export const CascaderSearchList = forwardRef<
       role="listbox"
       tabIndex={-1}
       className={prefixClassName('cascader__search-list')}
+      as={searchResults.length === 0 && !searchResultsLoading ? 'div' : 'ul'}
     >
+      {searchResults.length === 0 && !searchResultsLoading && (
+        <StyledNoResults>No results found</StyledNoResults>
+      )}
       {searchResults.map((item, i) => (
         <CascaderSearchListItem
           onClick={() => {
             if (item.disabled) return;
+            if (item.isNew) {
+              rootNode?.createNode(item.value, item.label, {
+                isNew: true
+              });
+            }
             handleChange(
               item.getData(),
               buildSelectionPath(rootNode?.findNode(item.value))
             );
+
+            if (item.isNew) {
+              rootNode?.findNode(item.value)?.setIsNew(false);
+            }
           }}
           item={item}
           searchString={searchValue}
           isFocused={i === focusedIndex}
           index={i}
           key={item.value}
+          isNew={item.isNew}
         />
       ))}
       {searchResultsLoading && (

@@ -1,6 +1,7 @@
 export interface CascaderNodeOptions {
   disabled?: boolean;
   shouldFetchOptions?: boolean;
+  isNew?: boolean;
 }
 
 export class CascaderNode {
@@ -28,6 +29,8 @@ export class CascaderNode {
 
   options: Record<string, any> = {};
 
+  isNew = false;
+
   constructor(
     value: string,
     label: string,
@@ -38,25 +41,25 @@ export class CascaderNode {
     this.label = label;
     this.children = children;
 
-    const { disabled, shouldFetchOptions, ...otherOptions } = options;
+    const {
+      disabled, shouldFetchOptions, isNew, ...otherOptions
+    } = options;
     this.disabled = disabled ?? false;
     this.shouldFetchOptions = shouldFetchOptions ?? false;
     this.options = otherOptions;
+    this.isNew = isNew ?? false;
   }
 
   getData() {
     return {
       label: this.label,
       value: this.value,
+      isNew: this.isNew,
       ...this.options
     };
   }
 
-  resetWithProperties({
-    parent
-  }: {
-    parent: CascaderNode | null;
-  }) {
+  resetWithProperties({ parent }: { parent: CascaderNode | null }) {
     this.children = [];
     if (parent) {
       this.setParent(parent);
@@ -117,5 +120,9 @@ export class CascaderNode {
 
   setLoading(loading = true) {
     this.loading = loading;
+  }
+
+  setIsNew(isNew = true) {
+    this.isNew = isNew;
   }
 }

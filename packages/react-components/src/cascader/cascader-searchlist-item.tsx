@@ -46,13 +46,15 @@ export const CascaderSearchListItem = ({
   index,
   isFocused,
   searchString,
-  onClick
+  onClick,
+  isNew
 }: {
   onClick: () => void;
   isFocused: boolean;
   item: CascaderNode;
   searchString: string;
   index: number;
+  isNew: boolean;
 }) => {
   return (
     <StyledLi
@@ -67,7 +69,15 @@ export const CascaderSearchListItem = ({
       data-index={index}
       disabled={item.disabled}
     >
-      <ItemContent item={item} searchString={searchString} />
+      {isNew ? (
+        <Text className={prefixClassName('cascader__search-list-text')}>
+          Create &quot;
+          {item.label}
+          &quot;
+        </Text>
+      ) : (
+        <ItemContent item={item} searchString={searchString} />
+      )}
     </StyledLi>
   );
 };
@@ -98,18 +108,11 @@ export const ItemContent = ({
   if (ancestors.length > 2) {
     return (
       <Text className={prefixClassName('cascader__search-list-text')}>
-        <Word>
-          {ancestors[0].label}
-        </Word>
+        <Word>{ancestors[0].label}</Word>
         <BreadCrumbSeparator />
-        <Word>
-          ...
-        </Word>
+        <Word>...</Word>
         <BreadCrumbSeparator />
-        {highLight(
-          item.label,
-          searchString
-        )}
+        {highLight(item.label, searchString)}
         {(item.shouldFetchOptions || item.getChildren().length > 0) && (
           <>
             <BreadCrumbSeparator />
@@ -128,10 +131,7 @@ export const ItemContent = ({
           <BreadCrumbSeparator />
         </Fragment>
       ))}
-      {highLight(
-        item.label,
-        searchString
-      )}
+      {highLight(item.label, searchString)}
       {(item.shouldFetchOptions || item.getChildren().length > 0) && (
         <>
           <BreadCrumbSeparator />
@@ -156,7 +156,10 @@ const Word = ({ children }: { children: ReactNode }) => (
 );
 
 const highLight = (text: string, searchValue: string) => {
-  const searchIndex = text.toLowerCase().indexOf(searchValue.toLowerCase());
+  const searchIndex = text
+    .trim()
+    .toLowerCase()
+    .indexOf(searchValue.trim().toLowerCase());
 
   let paddingRight = '0';
   let paddingLeft = '0';
