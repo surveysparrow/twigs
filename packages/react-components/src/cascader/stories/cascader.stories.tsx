@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Flex } from '@src/flex';
 import { Text } from '@src/text';
-import { Cascader } from '../cascader';
+import { Cascader, CascaderOption } from '../cascader';
 import { data } from '../tests/data';
 import { recursiveFind } from '../cascader-utils';
 
@@ -11,6 +11,33 @@ export default {
 };
 
 const Template = (args) => <Cascader {...args} data={data} />;
+
+const Creatable = (args) => {
+  const [dataState, setDataState] = useState(data);
+  const [value, setValue] = useState<CascaderOption | null>(null);
+
+  return (
+    <Cascader
+      {...args}
+      data={dataState}
+      value={value}
+      creatable
+      onChange={(val) => {
+        if (val.isNew) {
+          setDataState([
+            ...dataState,
+            {
+              label: val.label,
+              value: val.value,
+              options: []
+            }
+          ]);
+        }
+        setValue(val);
+      }}
+    />
+  );
+};
 
 const CustomValue = (args) => {
   const [value, setValue] = useState({
@@ -209,6 +236,8 @@ const DynamicSearch = (args) => {
 };
 
 export const Default = Template.bind({});
+
+export const WithCreatable = Creatable.bind({});
 
 export const WithCustomValueRenderer = CustomValue.bind({});
 
