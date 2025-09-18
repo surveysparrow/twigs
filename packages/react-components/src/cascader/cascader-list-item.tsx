@@ -18,7 +18,7 @@ const StyledItem = styled('li', {
   cursor: 'default',
 
   '&:hover': {
-    backgroundColorOpacity: ['$secondary500', 0.1]
+    backgroundColorOpacity: ['$secondary500', 0.06]
   },
 
   '&:focus-visible': {
