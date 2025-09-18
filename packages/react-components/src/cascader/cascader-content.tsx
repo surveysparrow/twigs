@@ -247,6 +247,7 @@ export const CascaderContent = () => {
                   inputRef.current?.focus();
                   requestAnimationFrame(() => {
                     handleChange({ value: '', label: '' }, []);
+                    setSelectedNode(null);
                   });
                 }}
               />
