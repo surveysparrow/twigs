@@ -1,6 +1,5 @@
 const resolve = require('@rollup/plugin-node-resolve');
 const commonjs = require('@rollup/plugin-commonjs');
-const external = require('rollup-plugin-peer-deps-external');
 const postcss = require('rollup-plugin-postcss');
 const esbuild = require('rollup-plugin-esbuild').default;
 const alias = require('@rollup/plugin-alias');
@@ -32,9 +31,17 @@ module.exports = {
       exports: 'named'
     }
   ],
-  external: [...Object.keys(packageJson.peerDependencies)],
+  external: (pkg) => {
+    return (
+      pkg.includes('node_modules')
+      || pkg.includes('packages/react-icons/')
+      || [
+        ...Object.keys(packageJson.peerDependencies),
+        ...Object.keys(packageJson.dependencies)
+      ].includes(pkg)
+    );
+  },
   plugins: [
-    external(),
     resolve(),
     commonjs(),
     alias({
@@ -93,7 +100,10 @@ module.exports = {
     postcss()
   ],
   onwarn(warning, warn) {
-    if (warning.code === 'MODULE_LEVEL_DIRECTIVE' && warning.message.includes('use client')) {
+    if (
+      warning.code === 'MODULE_LEVEL_DIRECTIVE'
+      && warning.message.includes('use client')
+    ) {
       return;
     }
     warn(warning);
