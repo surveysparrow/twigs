@@ -10,6 +10,10 @@ on:
       - closed
     branches:
       - 'master'
+      
+permissions:
+  id-token: write
+  contents: read
 
 jobs:
   check-docs-merge:
@@ -57,22 +61,21 @@ jobs:
           PLAYGROUND_URL: ${{ vars.PLAYGROUND_URL }}
           PUBLIC_RECAPTCHA_SITE_KEY: ${{ vars.PUBLIC_RECAPTCHA_SITE_KEY }}
           LABS_API_URL: ${{ vars.LABS_API_URL }}
-      
+          
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v5
+        with:
+          role-to-assume: ${{ secrets.ROLE_TO_ASSUME }}
+          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+          role-session-name: GitHubAction-AssumeRoleWithAction
+          
       - name: Upload Build to S3
         working-directory: ./packages/docs/
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_PRODUCTION }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_KEY_PRODUCTION }}
-          AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
 
         run: | 
           aws s3 cp ./build s3://${AWS_BUCKET_NAME} --region ${AWS_DEFAULT_REGION} --recursive
 
       - name: Clearing Cloudfont Cache
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_PRODUCTION }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_KEY_PRODUCTION }}
-          AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
         
         run: |
           aws cloudfront create-invalidation --region ${AWS_DEFAULT_REGION} --distribution-id ${CLOUDFRONT_DISTRIBUTION} --paths '/*'
