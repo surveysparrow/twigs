@@ -1,0 +1,209 @@
+import CascaderSnippet from "@site/static/doc-snippets/cascader.mdx";
+
+# Cascader
+
+Cascader is a dropdown menu for selecting a value from a list of options that can be nested.
+
+### Import
+
+```jsx
+import { Cascader } from "@sparrowengg/twigs-react";
+```
+
+### Usage
+
+<CascaderSnippet />
+
+### Props
+
+#### Types
+
+```tsx
+type CascaderOption = {
+  label: string;
+  value: string;
+  options?: CascaderOption[];
+  shouldFetchOptions?: boolean;
+  disabled?: boolean;
+  isNew?: boolean;
+} & Record<string, any>;
+```
+
+| Property               | Description                                                                                                                                                    | Type                                                                                                                                                                     | Default                |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -----------------------|
+| data                   | Data source for Cascader. Array of nested options that form the hierarchical structure                                                                         | `CascaderOption[]`                                                                                                                                                       |                        |
+| value                  | Controlled selected value. Can be a string (value) or object with label and value                                                                              | `string \| { label: string; value: string }`                                                                                                                             |                        |
+| defaultValue           | Default selected value for uncontrolled usage                                                                                                                  | `string \| { label: string; value: string }`                                                                                                                             |                        |
+| onChange               | Callback function triggered when selection changes                                                                                                             | `(value: CascaderOption, selectionPath: CascaderOption[]) => void`                                                                                                       |                        |
+| label                  | Label for the input field                                                                                                                                      | `string`                                                                                                                                                                 |                        |
+| placeholder            | Input placeholder text                                                                                                                                         | `string`                                                                                                                                                                 |                        |
+| css                    | Custom CSS styles for the component                                                                                                                            | `ComponentProps<typeof Box>['css']`                                                                                                                                      |                        |
+| cancelButtonText       | Text for the cancel button in the popover footer                                                                                                               | `string`                                                                                                                                                                 | `"Cancel"`             |
+| chooseButtonText       | Text for the choose button in the popover footer                                                                                                               | `string`                                                                                                                                                                 | `"Choose"`             |
+| inputAriaDescription   | Aria description for the input field to provide additional context for screen readers                                                                          | `string`                                                                                                                                                                 |                        |
+| ariaLiveContent        | Function to customize screen reader announcements during navigation                                                                                            | `(data: { breadcrumb: string; label: string; totalItems: number; itemPosition: number; hasOptions: boolean; hasParent: boolean; } \| null) => ReactNode`                 |                        |
+| creatable              | Enable creation of new options by typing values not in the existing data                                                                                       | `boolean`                                                                                                                                                                | `false`                |
+| popoverPortal          | Portal container for the popover content                                                                                                                       | `HTMLElement`                                                                                                                                                            |                        |
+| renderValue            | Custom component to replace the entire selected value display                                                                                                  | `(value: CascaderOption \| null, selectionPath: CascaderOption[]) => ReactNode`                                                                                          |                        |
+| renderValueText        | Custom component to replace just the text portion of the selected value                                                                                        | `(value: CascaderOption \| null, selectionPath: CascaderOption[]) => ReactNode`                                                                                          |                        |
+| renderBreadCrumb       | Custom component to replace the breadcrumb shown below the input                                                                                               | `(value: CascaderOption \| null, selectionPath: CascaderOption[]) => ReactNode`                                                                                          |                        |
+| fetchOptions           | Async function to load child options for a given option. Set `shouldFetchOptions: true` on options that need dynamic loading                                   | `(data: CascaderOption) => Promise<void>`                                                                                                                                |                        |
+| fetchSearchOptions     | Async function to load options based on search query. Enables dynamic search functionality                                                                     | `(searchQuery: string) => Promise<void>`                                                                                                                                 |                        |
+| searchLoadingIndicator | Loading indicator shown during search operations                                                                                                               | `ReactNode`                                                                                                                                                              | `"Loading Results..."` |
+
+### Examples
+
+#### Basic Usage with Static Data
+
+```jsx
+import { Cascader } from "@sparrowengg/twigs-react";
+
+const data = [
+  {
+    label: "India",
+    value: "india",
+    options: [
+      {
+        label: "North",
+        value: "north",
+        options: [
+          { label: "Delhi", value: "delhi" },
+          { label: "Punjab", value: "punjab" }
+        ]
+      }
+    ]
+  }
+];
+
+<Cascader 
+  data={data} 
+  placeholder="Select location"
+  label="Location"
+  onChange={(value, selectionPath) => {
+    console.log("Selected:", value);
+    console.log("Path:", selectionPath);
+  }}
+/>
+```
+
+#### Controlled Component
+
+```jsx
+const [selectedValue, setSelectedValue] = useState({
+  label: "Delhi",
+  value: "delhi"
+});
+
+<Cascader
+  data={data}
+  value={selectedValue}
+  onChange={(value) => setSelectedValue(value)}
+/>
+```
+
+#### Custom Value Rendering
+
+```jsx
+<Cascader
+  data={data}
+  renderValueText={(value, selectionPath) => (
+    <div>
+      {selectionPath.map((item, index) => (
+        <span key={item.value}>
+          {item.label}
+          {index < selectionPath.length - 1 && " > "}
+        </span>
+      ))}
+    </div>
+  )}
+  renderBreadCrumb={() => null} // Hide default breadcrumb
+/>
+```
+
+#### Dynamic Data Loading
+
+```jsx
+const [data, setData] = useState([
+  {
+    label: "Dynamic Country",
+    value: "dynamic",
+    shouldFetchOptions: true // Mark for dynamic loading
+  }
+]);
+
+<Cascader
+  data={data}
+  fetchOptions={async (option) => {
+    // Simulate API call
+    const newOptions = await fetchChildOptions(option.value);
+    
+    // Update the data state with new options
+    const updatedData = [...data];
+    const targetOption = findOptionInData(updatedData, option.value);
+    targetOption.options = newOptions;
+    setData(updatedData);
+  }}
+/>
+```
+
+#### Creatable Options
+
+```jsx
+const [data, setData] = useState(initialData);
+const [value, setValue] = useState(null);
+
+<Cascader
+  data={data}
+  value={value}
+  creatable
+  onChange={(val) => {
+    if (val.isNew) {
+      // Add new option to data
+      setData([
+        ...data,
+        {
+          label: val.label,
+          value: val.value,
+          options: []
+        }
+      ]);
+    }
+    setValue(val);
+  }}
+/>
+```
+
+#### Disabled Options
+
+```jsx
+const dataWithDisabled = [
+  {
+    label: "Available Option",
+    value: "available"
+  },
+  {
+    label: "Disabled Option",
+    value: "disabled",
+    disabled: true // This option will be unselectable
+  }
+];
+
+<Cascader data={dataWithDisabled} />
+```
+
+#### Dynamic Search
+
+```jsx
+<Cascader
+  data={data}
+  fetchSearchOptions={async (searchQuery) => {
+    // Fetch search results from API
+    const searchResults = await searchAPI(searchQuery);
+    
+    // Update data with search results
+    // Implementation depends on your data structure
+    updateDataWithSearchResults(searchResults);
+  }}
+  searchLoadingIndicator={<div>Searching...</div>}
+/>
+```
