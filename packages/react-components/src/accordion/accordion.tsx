@@ -3,11 +3,6 @@ import * as AccordionPrimitive from '@radix-ui/react-accordion';
 import { ChevronDownIcon } from '@sparrowengg/twigs-react-icons';
 import { keyframes, styled } from '../stitches.config';
 
-const StyledChevron = styled(ChevronDownIcon, {
-  color: '$neutral800',
-  transition: 'transform 300ms cubic-bezier(0.87, 0, 0.13, 1)'
-});
-
 const StyledTrigger = styled(AccordionPrimitive.Trigger, {
   border: 'none',
   width: '100%',
@@ -21,9 +16,6 @@ const StyledTrigger = styled(AccordionPrimitive.Trigger, {
   paddingInlineEnd: '$8',
   paddingTop: '$2',
   paddingBottom: '$2',
-  [`[data-state=open] > & ${StyledChevron}`]: {
-    transform: 'rotate(180deg)'
-  },
   '&:hover:not([data-disabled])': {
     backgroundColorOpacity: ['$primary500', 0.04]
   },
@@ -60,14 +52,31 @@ const AccordionItem = styled(AccordionPrimitive.Item, {
 
 const StyledHeader = styled(AccordionPrimitive.Header);
 
+type AccordionTriggerProps = React.ComponentPropsWithoutRef<
+  typeof StyledTrigger
+> & {
+  expandIcon?: React.ReactNode;
+};
+
+const IconWrapper = styled('span', {
+  display: 'inline-flex',
+  alignItems: 'center',
+  color: '$neutral800',
+  transition: 'transform 300ms cubic-bezier(0.87, 0, 0.13, 1)',
+
+  [`${StyledTrigger}[data-state="open"] &`]: {
+    transform: 'rotate(180deg)',
+  },
+});
+
 const AccordionTrigger = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Trigger>,
-  React.ComponentPropsWithoutRef<typeof StyledTrigger>
->(({ children, ...props }, ref) => (
+  AccordionTriggerProps
+>(({ children, expandIcon, ...props }, ref) => (
   <StyledHeader>
     <StyledTrigger {...props} ref={ref}>
       {children}
-      <StyledChevron aria-hidden />
+      <IconWrapper>{expandIcon ?? <ChevronDownIcon aria-hidden />}</IconWrapper>
     </StyledTrigger>
   </StyledHeader>
 ));
