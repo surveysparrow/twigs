@@ -65,8 +65,8 @@ const IconWrapper = styled('span', {
   transition: 'transform 300ms cubic-bezier(0.87, 0, 0.13, 1)',
 
   [`${StyledTrigger}[data-state="open"] &`]: {
-    transform: 'rotate(180deg)',
-  },
+    transform: 'rotate(180deg)'
+  }
 });
 
 const AccordionTrigger = React.forwardRef<
