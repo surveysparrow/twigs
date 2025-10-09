@@ -56,7 +56,7 @@ type AccordionTriggerProps = React.ComponentPropsWithoutRef<
   typeof StyledTrigger
 > & {
   expandIcon?: React.ReactNode;
-  withAnimation?: boolean
+  withAnimation?: boolean;
 };
 
 const IconWrapper = styled('span', {
@@ -94,8 +94,8 @@ const AccordionTrigger = React.forwardRef<
   <StyledHeader>
     <StyledTrigger {...props} ref={ref}>
       {children}
-      <IconWrapper withAnimation={withAnimation}>
-        {expandIcon ?? <ChevronDownIcon aria-hidden />}
+      <IconWrapper withAnimation={withAnimation} aria-hidden="true">
+        {expandIcon ?? <ChevronDownIcon />}
       </IconWrapper>
     </StyledTrigger>
   </StyledHeader>
