@@ -110,6 +110,14 @@ const StyledAlert = styled(Box, {
   }
 });
 
+const StyledAlertTitle = styled('h4', {
+  fontSize: '$md',
+  lineHeight: '$sm',
+  color: '$neutral900',
+  fontWeight: '$6',
+  marginBottom: '$2'
+});
+
 export type AlertProps = {
   children: React.ReactElement;
   closable?: boolean;
@@ -145,7 +153,7 @@ export const Alert: FunctionComponent<AlertProps> = React.forwardRef(
             <ValidAlertIcon size={size === 'sm' ? 20 : 24} aria-hidden />
           )}
         </StyledAlertIcon>
-        {children}
+        <div>{children}</div>
         {closable ? (
           <StyledCloseButton
             icon={<CloseIcon />}
@@ -160,3 +168,4 @@ export const Alert: FunctionComponent<AlertProps> = React.forwardRef(
 );
 
 export const AlertDescription = StyledAlertDescription;
+export const AlertTitle = StyledAlertTitle;
