@@ -56,7 +56,7 @@ type AccordionTriggerProps = React.ComponentPropsWithoutRef<
   typeof StyledTrigger
 > & {
   expandIcon?: React.ReactNode;
-  withAnimation?: boolean;
+  animateExpandIcon?: boolean;
 };
 
 const IconWrapper = styled('span', {
@@ -66,7 +66,7 @@ const IconWrapper = styled('span', {
   transition: 'transform 300ms cubic-bezier(0.87, 0, 0.13, 1)',
 
   variants: {
-    withAnimation: {
+    animate: {
       true: {
         [`${StyledTrigger}[data-state="open"] &`]: {
           transform: 'rotate(180deg)'
@@ -81,7 +81,7 @@ const IconWrapper = styled('span', {
   },
 
   defaultVariants: {
-    withAnimation: true
+    animate: true
   }
 });
 
@@ -89,12 +89,12 @@ const AccordionTrigger = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Trigger>,
   AccordionTriggerProps
 >(({
-  children, expandIcon, withAnimation, ...props
+  children, expandIcon, animateExpandIcon, ...props
 }, ref) => (
   <StyledHeader>
     <StyledTrigger {...props} ref={ref}>
       {children}
-      <IconWrapper withAnimation={withAnimation} aria-hidden="true">
+      <IconWrapper animate={animateExpandIcon} aria-hidden="true">
         {expandIcon ?? <ChevronDownIcon />}
       </IconWrapper>
     </StyledTrigger>
