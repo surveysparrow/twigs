@@ -46,6 +46,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v5.1.0
         with:
@@ -53,8 +54,8 @@ jobs:
           aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
           role-to-assume: ${{ secrets.ROLE_TO_ASSUME }}
           role-session-name: GitHubAction-AssumeRoleWithAction
-      
-      - name: get caller identity2
+
+      - name: Get AWS Caller Identity
         run: |
           aws sts get-caller-identity
 
@@ -63,7 +64,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
-      
+
       - name: Installing Dependencies
         run: yarn
 
@@ -73,14 +74,12 @@ jobs:
           PLAYGROUND_URL: ${{ vars.PLAYGROUND_URL }}
           PUBLIC_RECAPTCHA_SITE_KEY: ${{ vars.PUBLIC_RECAPTCHA_SITE_KEY }}
           LABS_API_URL: ${{ vars.LABS_API_URL }}
-          
+
       - name: Upload Build to S3
         working-directory: ./packages/docs/
-
         run: | 
           aws s3 cp ./build s3://${AWS_BUCKET_NAME} --region ${AWS_DEFAULT_REGION} --recursive
 
       - name: Clearing Cloudfont Cache
-        
         run: |
           aws cloudfront create-invalidation --region ${AWS_DEFAULT_REGION} --distribution-id ${CLOUDFRONT_DISTRIBUTION} --paths '/*'
