@@ -46,6 +46,18 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v5.1.0
+        with:
+          audience: sts.amazonaws.com.cn
+          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+          role-to-assume: ${{ secrets.ROLE_TO_ASSUME }}
+          role-session-name: GitHubAction-AssumeRoleWithAction
+      
+      - name: get caller identity2
+        run: |
+          aws sts get-caller-identity
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
@@ -61,13 +73,6 @@ jobs:
           PLAYGROUND_URL: ${{ vars.PLAYGROUND_URL }}
           PUBLIC_RECAPTCHA_SITE_KEY: ${{ vars.PUBLIC_RECAPTCHA_SITE_KEY }}
           LABS_API_URL: ${{ vars.LABS_API_URL }}
-          
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v5
-        with:
-          role-to-assume: ${{ secrets.ROLE_TO_ASSUME }}
-          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
-          role-session-name: GitHubAction-AssumeRoleWithAction
           
       - name: Upload Build to S3
         working-directory: ./packages/docs/
