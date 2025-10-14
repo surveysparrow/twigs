@@ -55,10 +55,6 @@ jobs:
           role-to-assume: ${{ secrets.ROLE_TO_ASSUME }}
           role-session-name: GitHubAction-AssumeRoleWithAction
 
-      - name: Get AWS Caller Identity
-        run: |
-          aws sts get-caller-identity
-
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
