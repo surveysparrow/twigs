@@ -51,6 +51,10 @@ export const RichEditor = ({
                   marginLeft: '$7',
 
                   ul: {
+                    listStyle: 'square'
+                  },
+
+                  '&.level-2': {
                     listStyle: 'circle'
                   }
                 },
@@ -61,6 +65,9 @@ export const RichEditor = ({
                   ol: {
                     listStyle: 'lower-alpha'
                   }
+                },
+                '.block-nested-listitem': {
+                  listStyle: 'none'
                 },
                 '.text-code': {
                   color: '#F97316',

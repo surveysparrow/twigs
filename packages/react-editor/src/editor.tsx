@@ -54,7 +54,13 @@ const initialConfig: InitialConfigType = {
     list: {
       ol: 'block-ol',
       ul: 'block-ul',
-      listitem: 'block-listitem'
+      listitem: 'block-listitem',
+      nested: {
+        list: 'block-nested-list',
+        listitem: 'block-nested-listitem'
+      },
+      olDepth: ['level-1', 'level-2', 'level-3', 'level-4', 'level-5', 'level-6', 'level-7', 'level-8', 'level-9', 'level-10'],
+      ulDepth: ['level-1', 'level-2', 'level-3', 'level-4', 'level-5', 'level-6', 'level-7', 'level-8', 'level-9', 'level-10']
     }
   },
   onError: (err) => {
