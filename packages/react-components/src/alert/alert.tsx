@@ -161,7 +161,7 @@ export const Alert: FunctionComponent<AlertProps> = React.forwardRef(
             <ValidAlertIcon size={size === 'sm' ? 20 : 24} aria-hidden />
           )}
         </StyledAlertIcon>
-        <Box>
+        <Box css={{ flex: 1 }}>
           {children}
         </Box>
         {closable ? (
