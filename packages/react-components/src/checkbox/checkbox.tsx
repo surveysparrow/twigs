@@ -71,10 +71,6 @@ const StyledCheckbox = styled(CheckboxPrimitive.Root, {
     boxShadow:
       'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
   },
-  '&:active, &[data-state="checked"], &[data-state="indeterminate"]': {
-    background: '$secondary500',
-    border: '$borderWidths$xs solid transparent'
-  },
   '& .check-icon': {
     display: 'none'
   },
@@ -93,10 +89,69 @@ const StyledCheckbox = styled(CheckboxPrimitive.Root, {
         width: '$5',
         height: '$5'
       }
+    },
+    color: {
+      default: {
+        '&:active, &[data-state="checked"], &[data-state="indeterminate"]': {
+          background: '$secondary500',
+          border: '$borderWidths$xs solid transparent'
+        }
+      },
+      primary: {
+        '&:active, &[data-state="checked"], &[data-state="indeterminate"]': {
+          background: '$primary500',
+          border: '$borderWidths$xs solid $primary600'
+        },
+        '&:disabled[data-state="checked"], &:disabled[data-state="indeterminate"]': {
+          background: '$secondary500',
+          border: '$borderWidths$xs solid transparent'
+        }
+      },
+      secondary: {
+        '&:active, &[data-state="checked"], &[data-state="indeterminate"]': {
+          background: '$secondary500',
+          border: '$borderWidths$xs solid $secondary600'
+        },
+        '&:disabled[data-state="checked"], &:disabled[data-state="indeterminate"]': {
+          background: '$secondary500',
+          border: '$borderWidths$xs solid transparent'
+        }
+      },
+      warning: {
+        '&:active, &[data-state="checked"], &[data-state="indeterminate"]': {
+          background: '$warning500',
+          border: '$borderWidths$xs solid $warning600'
+        },
+        '&:disabled[data-state="checked"], &:disabled[data-state="indeterminate"]': {
+          background: '$secondary500',
+          border: '$borderWidths$xs solid transparent'
+        }
+      },
+      success: {
+        '&:active, &[data-state="checked"], &[data-state="indeterminate"]': {
+          background: '$positive500',
+          border: '$borderWidths$xs solid $positive600'
+        },
+        '&:disabled[data-state="checked"], &:disabled[data-state="indeterminate"]': {
+          background: '$secondary500',
+          border: '$borderWidths$xs solid transparent'
+        }
+      },
+      error: {
+        '&:active, &[data-state="checked"], &[data-state="indeterminate"]': {
+          background: '$negative500',
+          border: '$borderWidths$xs solid $negative600'
+        },
+        '&:disabled[data-state="checked"], &:disabled[data-state="indeterminate"]': {
+          background: '$secondary500',
+          border: '$borderWidths$xs solid transparent'
+        }
+      }
     }
   },
   defaultVariants: {
-    size: 'sm'
+    size: 'sm',
+    color: 'default'
   }
 });
 
@@ -125,6 +180,7 @@ export type CheckboxBaseProps = {
   required?: boolean;
   disabled?: boolean;
   containerRef?: React.Ref<HTMLDivElement>;
+  color?: string
 };
 
 export type CheckboxProps = CheckboxBaseProps &
@@ -142,6 +198,7 @@ export const Checkbox = forwardRef<HTMLButtonElement, CheckboxProps>(({
   children,
   id,
   containerRef,
+  color,
   ...rest
 }, ref) => {
   const isIndeterminate = checked === 'indeterminate';
@@ -153,6 +210,7 @@ export const Checkbox = forwardRef<HTMLButtonElement, CheckboxProps>(({
         onCheckedChange={onChange}
         disabled={disabled}
         required={required}
+        color={color}
         id={uniqueId}
         {...(isIndeterminate && { 'data-state': 'indeterminate' })}
         {...rest}
