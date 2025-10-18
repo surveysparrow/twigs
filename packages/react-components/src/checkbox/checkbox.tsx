@@ -61,7 +61,7 @@ const StyledCheckbox = styled(CheckboxPrimitive.Root, {
 
   '&:disabled': {
     cursor: 'not-allowed',
-    opacity: 0.4,
+    opacity: 0.4
   },
   '&:hover:not(:disabled)': { border: '$borderWidths$xs solid $neutral700' },
   '&:focus-visible': {
