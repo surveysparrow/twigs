@@ -62,8 +62,6 @@ const StyledCheckbox = styled(CheckboxPrimitive.Root, {
   '&:disabled': {
     cursor: 'not-allowed',
     opacity: 0.4,
-    background: '$secondary500 !important',
-    border: '$borderWidths$xs solid transparent !important'
   },
   '&:hover:not(:disabled)': { border: '$borderWidths$xs solid $neutral700' },
   '&:focus-visible': {
@@ -104,30 +102,50 @@ const StyledCheckbox = styled(CheckboxPrimitive.Root, {
           background: '$primary500',
           border: '$borderWidths$xs solid $primary600'
         },
+        '&:disabled[data-state="checked"], &:disabled[data-state="indeterminate"]': {
+          background: '$secondary500',
+          border: '$borderWidths$xs solid transparent'
+        }
       },
       secondary: {
         '&:active, &[data-state="checked"], &[data-state="indeterminate"]': {
           background: '$secondary500',
           border: '$borderWidths$xs solid $secondary600'
         },
+        '&:disabled[data-state="checked"], &:disabled[data-state="indeterminate"]': {
+          background: '$secondary500',
+          border: '$borderWidths$xs solid transparent'
+        }
       },
       warning: {
         '&:active, &[data-state="checked"], &[data-state="indeterminate"]': {
           background: '$warning500',
           border: '$borderWidths$xs solid $warning600'
         },
+        '&:disabled[data-state="checked"], &:disabled[data-state="indeterminate"]': {
+          background: '$secondary500',
+          border: '$borderWidths$xs solid transparent'
+        }
       },
       success: {
         '&:active, &[data-state="checked"], &[data-state="indeterminate"]': {
           background: '$positive500',
           border: '$borderWidths$xs solid $positive600'
         },
+        '&:disabled[data-state="checked"], &:disabled[data-state="indeterminate"]': {
+          background: '$secondary500',
+          border: '$borderWidths$xs solid transparent'
+        }
       },
       error: {
         '&:active, &[data-state="checked"], &[data-state="indeterminate"]': {
           background: '$negative500',
           border: '$borderWidths$xs solid $negative600'
         },
+        '&:disabled[data-state="checked"], &:disabled[data-state="indeterminate"]': {
+          background: '$secondary500',
+          border: '$borderWidths$xs solid transparent'
+        }
       }
     }
   },
