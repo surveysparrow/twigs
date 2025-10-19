@@ -12,16 +12,16 @@ export const Tr = styled('tr', {
     active: {
       true: {
         backgroundColorOpacity: ['$primary500', 0.06],
-        cursor: 'pointer',
+        cursor: 'pointer'
       }
     },
     hover: {
       true: {
         '&:hover': {
           backgroundColorOpacity: ['$secondary500', 0.04],
-          cursor: 'pointer',
+          cursor: 'pointer'
         }
-      },
+      }
     }
   },
   defaultVariants: {
@@ -36,7 +36,7 @@ export const Thead = styled('thead', {
   [`& ${Tr}`]: {
     '&:hover': {
       backgroundColor: 'transparent',
-      cursor: 'auto',
+      cursor: 'auto'
     }
   },
   variants: {
