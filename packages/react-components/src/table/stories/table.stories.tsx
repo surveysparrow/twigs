@@ -16,6 +16,9 @@ export default {
     },
     sticky: {
       control: 'boolean'
+    },
+    hover: {
+      control: 'boolean'
     }
   }
 };
