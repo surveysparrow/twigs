@@ -9,13 +9,20 @@ export default {
     border: {
       control: 'select',
       options: ['horizontal', 'vertical', 'both']
-    }
+    },
+    size: {
+      control: 'select',
+      options: ['medium', 'small']
+    },
+    sticky: {
+      control: 'boolean'
+    },
   }
 };
 
 const Template = (args) => (
   <Table {...args}>
-    <Thead>
+    <Thead sticky>
       <Tr>
         <Th>Name</Th>
         <Th>Company</Th>
