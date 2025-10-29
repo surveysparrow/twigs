@@ -138,8 +138,7 @@
     "react-select": "^5.7.2",
     "react-stately": "^3.22.0",
     "react-table": "^7.8.0",
-    "react-transition-group": "^4.4.5",
-    "validator": "^13.11.0"
+    "react-transition-group": "^4.4.5"
   },
   "husky": {
     "hooks": {
