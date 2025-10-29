@@ -15,7 +15,11 @@ export default function VerticalTabs() {
       <Box css={{ display: "flex", flexDirection: "column", gap: "$4" }}>
         <Text css={{ fontSize: "$lg", fontWeight: "$6" }}>Vertical Tabs</Text>
         
-        <Tabs defaultValue="tab1" orientation="vertical">
+        <Tabs defaultValue="tab1" css={{
+          display: 'flex !important',
+          gap: '1rem !important',
+          flexDirection: 'row !important'
+        }}>
           <TabsList aria-label="Vertical tabs example" css={{ flexDirection: "column" }}>
             <TabsTrigger value="tab1">Overview</TabsTrigger>
             <TabsTrigger value="tab2">Analytics</TabsTrigger>

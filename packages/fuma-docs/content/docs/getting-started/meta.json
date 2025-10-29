@@ -3,6 +3,7 @@
     "description": "A comprehensive collection of reusable UI components",
     "root" : true,
     "pages": [
+        "---Overview---",
         "index",
         "theming",
         "---Frameworks Usage---",

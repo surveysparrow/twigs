@@ -1,14 +1,49 @@
 import React, { useState } from "react";
-import { Slider, Box, Text, SliderTrack, SliderThumb } from "@sparrowengg/twigs-react";
+import {
+  Slider,
+  Box,
+  Text,
+  SliderTrack,
+  SliderThumb,
+  SliderRange,
+} from "@sparrowengg/twigs-react";
 
 export default function SliderComprehensive() {
   const [rangeValue, setRangeValue] = useState([20, 80]);
   const [stepValue, setStepValue] = useState([50]);
+  const [customValue, setCustomValue] = useState([30]);
+
+  const RenderedThumb = () => {
+    return (
+      <SliderThumb
+        css={{ height: "10px !important", width: "10px !important" }}
+      />
+    );
+  };
+
+  const RenderedRange = () => {
+    return (
+      <SliderRange
+        css={{ background: "linear-gradient(to right, red, blue)" }}
+      />
+    );
+  };
+
+  const RenderedTrack = ({ children }: { children: React.ReactNode }) => {
+    return <SliderTrack>{children}</SliderTrack>;
+  };
 
   return (
     <Box css={{ display: "flex", flexDirection: "column", gap: "$8" }}>
-      <Box css={{ display: "flex", flexDirection: "column", gap: "$6", width: "100%", maxWidth: "400px" }}>
-
+      <Box
+        css={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "$6",
+          width: "100%",
+          maxWidth: "400px",
+        }}
+      >
         {/* Range Slider */}
         <Box css={{ display: "flex", flexDirection: "column", gap: "$3" }}>
           <Text css={{ fontSize: "$md", fontWeight: "$6" }}>Range Slider</Text>
@@ -21,7 +56,7 @@ export default function SliderComprehensive() {
             size="md"
             labels={{
               left: "0",
-              right: "100"
+              right: "100",
             }}
             labelPlacement="top"
           />
@@ -32,7 +67,9 @@ export default function SliderComprehensive() {
 
         {/* Step Slider */}
         <Box css={{ display: "flex", flexDirection: "column", gap: "$3" }}>
-          <Text css={{ fontSize: "$md", fontWeight: "$6" }}>Step Slider (Step: 10)</Text>
+          <Text css={{ fontSize: "$md", fontWeight: "$6" }}>
+            Step Slider (Step: 10)
+          </Text>
           <Slider
             value={stepValue}
             onValueChange={setStepValue}
@@ -42,7 +79,7 @@ export default function SliderComprehensive() {
             size="md"
             labels={{
               left: "0",
-              right: "100"
+              right: "100",
             }}
             labelPlacement="top"
           />
@@ -53,34 +90,25 @@ export default function SliderComprehensive() {
 
         {/* Custom Components */}
         <Box css={{ display: "flex", flexDirection: "column", gap: "$3" }}>
-          <Text css={{ fontSize: "$md", fontWeight: "$6" }}>Custom Components</Text>
+          <Text css={{ fontSize: "$md", fontWeight: "$6" }}>
+            Custom Components
+          </Text>
           <Slider
-        components={{
-          Thumb: () => (
-            <SliderThumb
-              css={{
-                backgroundColor: "$negative900",
-                borderRadius: "$round",
-              }}
-            />
-          ),
-          Track: ({ children }: { children: React.ReactNode }) => (
-            <SliderTrack>
-              <Box
-                css={{
-                  width: "100%",
-                  height: "100%",
-                  background: "linear-gradient(to right, red, blue)",
-                  position: "absolute",
-                }}
-              />
-              {children}
-            </SliderTrack>
-          ),
-        }}
-        />
+            components={{
+              Thumb: RenderedThumb,
+              Track: RenderedTrack,
+              Range: RenderedRange,
+            }}
+            value={customValue}
+            onValueChange={setCustomValue}
+            min={0}
+            max={100}
+            step={1}
+            size="md"
+            labelPlacement="top"
+          />
         </Box>
       </Box>
     </Box>
   );
-} 
+}

@@ -1,8 +1,10 @@
 "use client";
 import React from "react";
-import { Box, Grid, Text, Flex } from "@sparrowengg/twigs-react";
+import { Box, Grid, Text, Flex, Image } from "@sparrowengg/twigs-react";
 import Link from "next/link";
 import { ForwardArrowIcon } from "@sparrowengg/twigs-react-icons";
+import tabs from "@/assets/images/tabs.png";
+import { useRouter } from "next/navigation";
 
 const components = [
   // Data Display
@@ -11,7 +13,7 @@ const components = [
     description:
       "Used to display content in a collapsible section. Perfect for showing and hiding content with smooth animations.",
     href: "/docs/components/accordion",
-    category: "Data Display",
+    category: "Data Display"
   },
   {
     title: "Avatar",
@@ -340,6 +342,7 @@ const components = [
 ];
 
 export function ComponentHome() {
+  const router = useRouter();
   return (
     <Box>
       {Object.entries(
@@ -363,17 +366,18 @@ export function ComponentHome() {
             }}
           >
             {categoryComponents.map((component) => (
-              <Link
+              <Box
                 key={component.title}
-                href={component.href}
-                style={{ textDecoration: "none" }}
+                onClick={() => {
+                  router.push(component.href);
+                }}
               >
                 <Box
-                  className="border-1 border-fd-border hover:border-fd-primary/50 transition-all duration-300 rounded-lg p-1 hover:scale-105"
+                  className="border-1 border-fd-border hover:border-fd-primary/50 rounded-lg p-1 cursor-pointer"
                 >
                   <Flex flexDirection="column" gap="$1">
                     <Box className="flex justify-between items-center">
-                      <Text size="md" css={{ margin: "0", padding: "$6" }}>
+                      <Text size="md" className="!m-0 !p-2 !text-fd-primary">
                         {component.title}
                       </Text>
                       <ForwardArrowIcon
@@ -388,7 +392,7 @@ export function ComponentHome() {
                     </Box>
                   </Flex>
                 </Box>
-              </Link>
+              </Box>
             ))}
           </Grid>
         </Box>

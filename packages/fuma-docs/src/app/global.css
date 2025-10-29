@@ -1,13 +1,28 @@
-@import "tailwindcss";
+@import "tailwindcss/theme.css";
+@import "tailwindcss/preflight.css";
+@import "tailwindcss/utilities.css";
 @import "fumadocs-ui/css/vitepress.css";
 @import "fumadocs-ui/css/preset.css";
 
 :root {
   --color-fd-primary: #00828D;
+  --color-fd-loader: #5329D8
 }
 
-.dark {
-    --color-fd-primary: #8ACCD2;
+/* Levitate Animation */
+@keyframes levitate {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@media (min-width: 1024px) {
+#nd-sidebar > div:first-child {
+    display: none;
+}
 }
 
 header#nd-subnav > div:last-child a {
@@ -20,6 +35,20 @@ header#nd-subnav > div:last-child a {
     height: 100% !important;
 }
 
+header#nd-nav {
+  border-bottom: 1px solid var(--color-fd-border);
+}
+header#nd-nav > div > nav > div > button > div > kbd{
+  border: 1px solid var(--color-fd-border);
+}
+
+@media (min-width: 1024px) {
+header#nd-nav div nav {
+        padding: 0 !important;
+    }
+}
+
+
 header#nd-subnav > div:last-child a[class*="bg-fd-primary"] {
     background-color: white !important;
     border-bottom: 2px solid #00828D !important;
@@ -31,13 +60,17 @@ header#nd-subnav > div:last-child a[class*="bg-fd-primary"] {
     height: 100% !important;
 }
 
-.dark header#nd-subnav > div:last-child a[class*="bg-fd-primary"] {
-    background-color: transparent !important;
-    border-bottom: 2px solid #8ACCD2 !important;
-    border-top: none !important;
-    border-left: none !important;
-    border-right: none !important;
-    border-radius: 0 !important;
-    margin: 0 !important;
-    height: 100% !important;
+*, ::after, ::before, ::backdrop, ::file-selector-button {
+  border-color: var(--color-fd-border, currentColor);
+}
+body {
+  background-color: var(--color-fd-background);
+  color: var(--color-fd-foreground);
+}
+[data-rmiz-modal-overlay='visible'] {
+  background-color: var(--color-fd-background);
+}
+
+:root, #nd-docs-layout {
+  --fd-layout-offset: max(calc(50vw - var(--fd-layout-width) / 2), 0px);
 }

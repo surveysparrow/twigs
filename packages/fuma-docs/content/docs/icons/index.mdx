@@ -1,9 +1,7 @@
 ---
-title: Icons
+title: Overview
 description: A comprehensive set of SVG icons for your applications. Available as React components with consistent styling and accessibility features.
 ---
-
-import { AllIcons } from "@/component/icons";
 
 ## Installation
 
@@ -20,18 +18,30 @@ const App = () => {
   return <AddColumnIcon size={32} color="currentColor" strokeWidth={1.5} />;
 };
 ```
-## Available Icons
-
-Search and browse all available icons below. Use the interactive controls to customize the icon properties in real-time
-
-<AllIcons />
+<Playground snippetName="icons-basic" defaultPlayground />
 
 ## Props
 
+### Icons
+
 All icons support the following props:
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `size` | `number` | `32` | Icon size in pixels |
-| `color` | `string` | `"currentColor"` | Icon color |
-| `strokeWidth` | `number` | `1.5` | Stroke width for outline icons |
+<TypeTable
+  type={{
+    size: {
+      type: "number",
+      description: "the Size of the icon in pixels",
+      default: "32",
+    },
+    color: {
+      type: "string",
+      description: "the current color of the icon",
+      default: "currentColor",
+    },
+    strokeWidth: {
+      type: "number",
+      description: "Stroke width for outline icons",
+      default: "1.5"
+    },
+  }}
+/>

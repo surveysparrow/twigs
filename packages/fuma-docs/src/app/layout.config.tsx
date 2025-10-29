@@ -1,6 +1,9 @@
+"use client";
+
 import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
-import { Logo } from "./logo";
 import { PlayIcon } from "lucide-react";
+import { Image } from "@sparrowengg/twigs-react";
+import logo from "@/assets/images/logo-w-text-lightmode.svg";
 
 /**
  * Shared layout configurations
@@ -13,7 +16,11 @@ export const baseOptions: BaseLayoutProps = {
   nav: {
     title: (
       <>
-        <Logo />
+        <Image
+          className="h-7 w-auto ml-0 pl-0"
+          src={logo.src}
+          alt="Twigs Charts"
+        />
       </>
     ),
   },
@@ -23,12 +30,11 @@ export const baseOptions: BaseLayoutProps = {
       text: "Playground",
       url: "https://play.twigs.surveysparrow.com/",
       secondary: true,
-      icon: <PlayIcon/>,
+      icon: <PlayIcon />,
     },
   ],
   githubUrl: "https://github.com/surveysparrow/twigs",
   themeSwitch: {
-    enabled: true,
-    mode: "light-dark",
+    enabled: false,
   },
 };

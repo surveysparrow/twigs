@@ -14,7 +14,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       sidebar={{
         tabs: [
           {
-            title: 'Getting Started',
+            title: 'Get Started',
             description: 'Quick setup and installation guide',
             url: '/docs/getting-started',
             icon: <PageIcon className="flex items-center justify-center h-full" size={30}/>,
