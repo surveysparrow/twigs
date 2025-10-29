@@ -1,9 +1,7 @@
 "use client";
 import React from "react";
-import { Box, Grid, Text, Flex, Image } from "@sparrowengg/twigs-react";
-import Link from "next/link";
+import { Box, Grid, Text, Flex } from "@sparrowengg/twigs-react";
 import { ForwardArrowIcon } from "@sparrowengg/twigs-react-icons";
-import tabs from "@/assets/images/tabs.png";
 import { useRouter } from "next/navigation";
 
 const components = [

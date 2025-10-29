@@ -18,7 +18,6 @@ import {
 import {
   ColorSwatchesIcon,
   HomeIcon,
-  ChevronDownIcon,
   PageIcon,
   SaveIcon,
   SearchIcon,

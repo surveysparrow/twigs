@@ -1,8 +1,6 @@
-"use client";
-
 import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
 import { PlayIcon } from "lucide-react";
-import { Image } from "@sparrowengg/twigs-react";
+import Image from "next/image";
 import logo from "@/assets/images/logo-w-text-lightmode.svg";
 
 /**
@@ -18,7 +16,7 @@ export const baseOptions: BaseLayoutProps = {
       <>
         <Image
           className="h-7 w-auto ml-0 pl-0"
-          src={logo.src}
+          src={logo}
           alt="Twigs Charts"
         />
       </>

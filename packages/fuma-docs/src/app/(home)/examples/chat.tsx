@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Avatar,
-  Button,
   Checkbox,
   IconButton,
   Separator,
@@ -10,7 +9,6 @@ import {
   Chip,
   Flex,
   Input,
-  Textarea,
 } from "@sparrowengg/twigs-react";
 import {
   FilterIcon,
@@ -20,7 +18,6 @@ import {
   ClockIcon,
   PageIcon,
   DocumentClipIcon,
-  ChevronRightIcon,
   SearchIcon,
   ChevronDownIcon,
   InfoFillIcon,

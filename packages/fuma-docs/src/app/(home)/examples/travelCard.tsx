@@ -1,5 +1,5 @@
 import { UsersIcon, SendMessageIcon } from "@sparrowengg/twigs-react-icons";
-import { Box, HeartIcon, LocationEdit } from "lucide-react";
+import { HeartIcon, LocationEdit } from "lucide-react";
 import {
   Button,
   Text,

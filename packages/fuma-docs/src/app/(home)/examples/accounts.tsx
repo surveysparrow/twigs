@@ -25,7 +25,6 @@ import {
   ChevronDownIcon,
   AlertIcon,
 } from "@sparrowengg/twigs-react-icons";
-import { TriangleIcon } from "lucide-react";
 
 export default function Accounts() {
   const users = [
