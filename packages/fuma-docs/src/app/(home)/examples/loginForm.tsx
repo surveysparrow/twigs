@@ -154,7 +154,7 @@ export default function LoginForm() {
             </FormHelperText>
             <Input
               size="lg"
-              label="username"
+              aria-label="username"
               variant="filled"
               value="Gautham"
               onChange={() => {}}
@@ -169,7 +169,7 @@ export default function LoginForm() {
             </FormHelperText>
             <Input
               size="lg"
-              label="password"
+              aria-label="password"
               variant="filled"
               css={{
                 border: "none",
@@ -178,8 +178,8 @@ export default function LoginForm() {
           </Box>
           <Box>
             <Button
-              label="Continue"
-              variant="primary"
+              aria-label="Continue"
+              variant="solid"
               size="xl"
               css={{ 
                 backgroundColor: "$primary400 !important",

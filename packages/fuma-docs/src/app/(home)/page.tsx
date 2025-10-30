@@ -278,7 +278,7 @@ export default function HomePage() {
         <div className="w-full flex gap-10 lg:gap-5 lg:py-10 pb-5 pt-10 justify-center sm:flex-row flex-col px-4">
           <div className="flex flex-col gap-5 lg:w-100 lg:border-r lg:pr-5 border-fd-border">
             <p className="leading-6 text-justify">
-              Reshaped is the gold standard of &quot;just enough design system&quot;,
+              Twigs is the gold standard of &quot;just enough design system&quot;,
               where they have figured out the minimal viable token architecture
               and an infinitely flexible base component kit. I constantly look
               to them for inspiration.
@@ -302,7 +302,7 @@ export default function HomePage() {
           <div className="flex flex-col gap-5 lg:w-100 lg:border-r lg:pr-5 border-fd-border">
             <p className="leading-6 text-justify">
               When we are working on new features, I enjoy checking out how
-              Reshaped approached the solution to that problem. It helps in my
+              Twigs approached the solution to that problem. It helps in my
               search for the best possible approaches.
             </p>
             <div className="flex gap-2 items-center">

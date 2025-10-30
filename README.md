@@ -62,6 +62,8 @@ $ yarn storybook
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/tmbalagan"><img src="https://avatars.githubusercontent.com/u/23442723?v=4?s=100" width="100px;" alt="Balamurugan "/><br /><sub><b>Balamurugan </b></sub></a><br /><a href="#code-tmbalagan" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Prem24022000"><img src="https://avatars.githubusercontent.com/u/69319430?v=4?s=100" width="100px;" alt="Prem Prakash Sahu"/><br /><sub><b>Prem Prakash Sahu</b></sub></a><br /><a href="#doc-Prem24022000" title="Documentation">📖</a></td>
       <td align="center" valign="top" width="14.28%"><a href="http://github.com/Gokul-Nath-27"><img src="https://avatars.githubusercontent.com/u/99087032?v=4?s=100" width="100px;" alt="Gokul Nath"/><br /><sub><b>Gokul Nath</b></sub></a><br /><a href="#code-Gokul-Nath-27" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/GauthamSrini"><img src="https://avatars.githubusercontent.com/u/140779042?v=4?s=100" width="100px;" alt="Gautham"/><br /><sub><b>Gautham</b></sub></a><br /><a href="#code-GauthamSrini" title="Code">💻</a> <a href="#doc-GauthamSrini" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/sridharspxrrow"><img src="https://avatars.githubusercontent.com/u/188984471?v=4?s=100" width="100px;" alt="Sridhar"/><br /><sub><b>Sridhar</b></sub></a><br /><a href="#code-sridharspxrrow" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>

@@ -131,7 +131,6 @@ export default function Chat() {
           }}
         >
           <Box
-            variant="outline"
             css={{
               backgroundColor: "transparent",
               border: "1px solid $neutral200",
@@ -160,7 +159,6 @@ export default function Chat() {
             </Text>
           </Box>
           <Box
-            variant="outline"
             css={{
               backgroundColor: "transparent",
               border: "1px solid $neutral200",
@@ -204,7 +202,7 @@ export default function Chat() {
             borderBottom: "1px solid $neutral200",
           }}
         >
-          <Checkbox label="Show all" />
+          <Checkbox aria-label="Show all" />
           <Text
             size="xs"
             weight="medium"

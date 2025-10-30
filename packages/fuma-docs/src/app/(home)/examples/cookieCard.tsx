@@ -61,7 +61,7 @@ export default function CookieCard() {
           <Switch
             size="sm"
             checked={checked}
-            onCheckedChange={() => {
+            onChange={() => {
               setChecked(!checked);
             }}
           />
@@ -80,7 +80,7 @@ export default function CookieCard() {
           <Switch
             size="sm"
             checked={checked2}
-            onCheckedChange={() => {
+            onChange={() => {
               setChecked2(!checked2);
             }}
           />
