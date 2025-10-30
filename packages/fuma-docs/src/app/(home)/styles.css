@@ -65,21 +65,6 @@
   }
 }
 
-.login-div {
-  /* background: linear-gradient(-30.95deg, #a191f6 15.86%, rgba(88, 207, 245, 0.38471) 30.93%, rgba(113, 88, 245, 0) 34.41%); */
-  background: url("../../assets/images/Ellipse\ 27.png");
-  background-color: #F2F5F8;
-  background-repeat: no-repeat;
-  background-position: bottom left;
-}
-
-.profile-image {
-  background-image: url("../../assets/images/boxbg.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-} 
-
 .Features-tab{
   display: flex !important;
   flex-direction: row !important;

@@ -25,6 +25,7 @@ import {
   ImagePlusIcon,
 } from "@sparrowengg/twigs-react-icons";
 import icon from "@/assets/images/Icon wrapper - New.png";
+import boxbg from "@/assets/images/boxbg.png";
 
 export default function Settings() {
   return (
@@ -495,12 +496,15 @@ export default function Settings() {
           </Text>
         </Flex>
         <Box
-          className="profile-image"
           css={{
             width: "$15",
             height: "$15",
             borderRadius: "$2xl",
             position: "relative",
+            backgroundImage: `url(${boxbg.src})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
           }}
         >
           <IconButton

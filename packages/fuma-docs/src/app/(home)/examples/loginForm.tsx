@@ -11,6 +11,7 @@ import {
 } from "@sparrowengg/twigs-react";
 import Image from "next/image";
 import thriveSparrowLogo from "@/assets/images/logo.png";
+import loginbg from "@/assets/images/loginbg.png";
 import "../styles.css";
 
 export default function LoginForm() {
@@ -89,10 +90,13 @@ export default function LoginForm() {
         gap="$10"
         css={{
           width: "50%",
-          backgroundColor: "#F2F5F8",
           padding: "$4",
           borderTopRightRadius: "$2xl",
           borderBottomRightRadius: "$2xl",
+          backgroundImage: `url(${loginbg.src})`,
+          backgroundColor: "#F2F5F8",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "bottom left",
           "@media (max-width: 768px)": {
             width: "100%",
             borderRadius: "$2xl",
