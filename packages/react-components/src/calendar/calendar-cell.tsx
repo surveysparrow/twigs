@@ -1,4 +1,9 @@
-import { CalendarDate, isSameDay, isSameMonth } from '@internationalized/date';
+import {
+  CalendarDate,
+  isSameDay,
+  isSameMonth,
+  today
+} from '@internationalized/date';
 import { useRef } from 'react';
 import { useCalendarCell } from 'react-aria';
 import { CalendarState, RangeCalendarState } from 'react-stately';
@@ -31,6 +36,7 @@ export const CalendarCell = ({
   const calendarContext = useCalendarContext();
 
   const isOutsideMonth = !isSameMonth(currentMonth, date);
+  const isToday = isSameDay(date, today(state.timeZone));
 
   let isSelectionStart = false;
   let isSelectionEnd = false;
@@ -54,6 +60,7 @@ export const CalendarCell = ({
         ref={ref}
         isHidden={isOutsideMonth}
         isSelected={isSelected}
+        isToday={!isSelected && !isOutsideMonth && isToday}
         size={calendarContext.size}
         onClick={(e) => {
           buttonProps?.onClick?.(e);

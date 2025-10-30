@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ComponentProps } from 'react';
+import React, { ComponentProps } from 'react';
 import * as AvatarPrimitive from '@radix-ui/react-avatar';
 import { styled } from '../stitches.config';
 import { Box } from '../box';
@@ -209,10 +209,13 @@ export interface AvatarBaseProps {
 
 export type AvatarProps = AvatarBaseProps & ComponentProps<typeof StyledAvatar>;
 
-export const Avatar: FunctionComponent<AvatarProps> = React.forwardRef(
-  ({
-    fallbackDelay = 0, name, src, children, ...rest
-  }: AvatarProps, ref) => {
+export const Avatar = React.forwardRef<HTMLSpanElement, AvatarProps>(
+  (
+    {
+      fallbackDelay = 0, name, src, children, ...rest
+    },
+    ref
+  ) => {
     return (
       <Box
         css={{

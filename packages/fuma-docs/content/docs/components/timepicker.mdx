@@ -1,0 +1,126 @@
+---
+title: TimePicker
+description: A time input component for selecting and editing time values. Perfect for scheduling, time tracking, and any scenario requiring precise time input with comprehensive accessibility features and locale support.
+---
+
+<ExternalLinks 
+  source="https://github.com/surveysparrow/twigs/tree/master/packages/react-components/src/timepicker"
+  storybook="date-time-timepicker"
+/>
+
+## Import
+
+```jsx
+import { TimePicker } from "@sparrowengg/twigs-react";
+```
+
+## Usage
+
+```jsx
+const TimePickerExample = () => {
+  return (
+    <Box css={{ display: "flex", flexDirection: "column", gap: "$4" }}>
+      <TimePicker label="Select time" />
+      <TimePicker label="24 Hour Time" hourCycle={24} />
+      <TimePicker label="Hour and Minute" granularity="minute" />
+    </Box>
+  );
+};
+```
+
+<Playground snippetName="timepicker-basic" defaultPlayground />
+
+## Props
+
+### TimePicker
+
+<TypeTable
+  type={{
+    label: {
+      type: "string",
+      description: "The label text for the time picker.",
+    },
+    value: {
+      type: "TimeValue",
+      description: "The controlled value of the time picker.",
+    },
+    defaultValue: {
+      type: "TimeValue",
+      description: "The default value of the time picker when uncontrolled.",
+    },
+    onChange: {
+      type: "(value: TimeValue) => void",
+      description: "Event handler called when the time value changes.",
+    },
+    hourCycle: {
+      type: "12 | 24",
+      description: "The hour cycle format for displaying time.",
+      default: "24",
+    },
+    granularity: {
+      type: "'hour' | 'minute' | 'second'",
+      description: "The granularity of the time picker determining which segments are shown.",
+      default: "'minute'",
+    },
+    isDisabled: {
+      type: "boolean",
+      description: "When true, prevents the user from interacting with the time picker.",
+      default: "false",
+    },
+    isReadOnly: {
+      type: "boolean",
+      description: "When true, prevents the user from editing the time value.",
+      default: "false",
+    },
+    isRequired: {
+      type: "boolean",
+      description: "When true, indicates that the time picker is required.",
+      default: "false",
+    },
+    autoFocus: {
+      type: "boolean",
+      description: "When true, automatically focuses the time picker on mount.",
+      default: "false",
+    },
+    placeholderValue: {
+      type: "TimeValue",
+      description: "The placeholder time value to display when the field is empty.",
+    },
+    minValue: {
+      type: "TimeValue",
+      description: "The minimum time value that can be selected.",
+    },
+    maxValue: {
+      type: "TimeValue",
+      description: "The maximum time value that can be selected.",
+    },
+    step: {
+      type: "number",
+      description: "The step value for incrementing/decrementing time values.",
+    },
+    formatOptions: {
+      type: "Intl.DateTimeFormatOptions",
+      description: "Formatting options for displaying the time value.",
+    },
+    locale: {
+      type: "string",
+      description: "The locale to use for formatting the time value.",
+    },
+    description: {
+      type: "string",
+      description: "A description for the time picker to provide additional context.",
+    },
+    errorMessage: {
+      type: "string",
+      description: "An error message to display when the time picker is invalid.",
+    },
+    validationState: {
+      type: "'valid' | 'invalid'",
+      description: "The validation state of the time picker.",
+    },
+    css: {
+      type: "object",
+      description: "Custom CSS styles for the component.",
+    },
+  }}
+/>

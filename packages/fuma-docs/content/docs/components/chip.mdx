@@ -1,0 +1,109 @@
+---
+title: Chip
+description: Compact UI element used to display tags, labels, or filter options. Perfect for categorization, selection states, and interactive content organization.
+---
+
+<ExternalLinks 
+  source="https://github.com/surveysparrow/twigs/tree/master/packages/react-components/src/chip"
+  storybook="data-display-chip"
+/>
+
+## Import
+
+```jsx
+import { Chip } from "@sparrowengg/twigs-react";
+```
+
+## Usage
+
+```jsx
+const ChipExample = () => {
+  return (
+    <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+      <Chip color="primary">Primary</Chip>
+      <Chip color="success">Success</Chip>
+    </div>
+  );
+};
+```
+You can customize the chip by adding `icons`, `variant` and `color`
+
+<Playground snippetName="chip-basic" defaultPlayground />
+
+## Props
+
+<TypeTable
+  type={{
+    children: {
+      type: "ReactNode",
+      description: "The content to display inside the chip.",
+    },
+    size: {
+      type: "'2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl'",
+      description: "The size of the chip.",
+      default: "'sm'",
+    },
+    color: {
+      type: "'default' | 'primary' | 'secondary' | 'error' | 'warning' | 'success' | 'accent'",
+      description: "The color theme of the chip.",
+      default: "'default'",
+    },
+    variant: {
+      type: "'solid' | 'outline'",
+      description: "The visual style variant of the chip.",
+      default: "'solid'",
+    },
+    rounded: {
+      type: "'sm' | 'full'",
+      description: "The border radius of the chip.",
+      default: "'sm'",
+    },
+    closable: {
+      type: "boolean",
+      description: "When true, displays a close icon that can be clicked to remove the chip.",
+      default: "false",
+    },
+    onClose: {
+      type: "() => void",
+      description: "Callback function called when the close icon is clicked.",
+    },
+    leftElement: {
+      type: "ReactNode",
+      description: "React element to display on the left side of the chip content.",
+    },
+    rightElement: {
+      type: "ReactNode",
+      description: "React element to display on the right side of the chip content.",
+    },
+    selectable: {
+      type: "boolean",
+      description: "When true, makes the chip selectable with hover and active states.",
+      default: "false",
+    },
+    active: {
+      type: "boolean",
+      description: "The controlled active state of the chip when selectable.",
+    },
+    defaultActive: {
+      type: "boolean",
+      description: "The default active state when uncontrolled and selectable.",
+      default: "false",
+    },
+    onActiveStateChange: {
+      type: "(active: boolean) => void",
+      description: "Event handler called when the active state changes in selectable chips.",
+    },
+    css: {
+      type: "object",
+      description: "Custom CSS styles for the component.",
+    },
+  }}
+/>
+
+## Examples
+
+### Selectable Chip
+
+Interactive chips that can be selected and maintain an active state.
+
+<Playground snippetName="chip-selectable" />

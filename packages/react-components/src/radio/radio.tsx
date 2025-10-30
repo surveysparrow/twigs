@@ -1,6 +1,6 @@
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
 import React, {
-  ComponentProps, FunctionComponent,
+  ComponentProps,
   useId
 } from 'react';
 import { Flex } from '../flex';
@@ -88,7 +88,7 @@ type RadioRootProps = {
   children: React.ReactNode | React.ReactNode[];
 } & Omit<ComponentProps<typeof RadioGroupPrimitive.Root>, OmitProps>;
 
-export const RadioGroup: FunctionComponent<RadioRootProps> = React.forwardRef<
+export const RadioGroup = React.forwardRef<
   React.ElementRef<typeof StyledRadioGroup>,
   RadioRootProps
 >(({
@@ -118,7 +118,7 @@ export type RadioProps = {
   containerRef?: React.Ref<HTMLDivElement>;
 } & Omit<ComponentProps<typeof StyledRadio>, OmitProps>;
 
-export const Radio: FunctionComponent<RadioProps> = React.forwardRef<
+export const Radio = React.forwardRef<
   React.ElementRef<typeof StyledRadio>,
   RadioProps
 >(({
@@ -128,7 +128,7 @@ export const Radio: FunctionComponent<RadioProps> = React.forwardRef<
   const uniqueId = id || generatedId;
 
   return (
-    <Flex alignItems="center" ref={containerRef}>
+    <Flex alignItems="center" ref={containerRef as any}>
       <StyledRadio
         ref={ref}
         disabled={disabled}

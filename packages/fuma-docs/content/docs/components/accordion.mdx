@@ -1,0 +1,153 @@
+---
+title: Accordion
+description: A vertically stacked set of interactive headings that each reveal a section of content. Perfect for organizing content in collapsible sections with smooth animations and accessibility features.
+---
+
+<ExternalLinks 
+  source="https://github.com/surveysparrow/twigs/tree/master/packages/react-components/src/accordion"
+  storybook="data-display-accordion"
+/>
+
+## Import
+
+```jsx
+import {Accordion,AccordionContent,AccordionItem,AccordionTrigger} from "@sparrowengg/twigs-react";
+```
+## Usage
+
+```jsx
+const AccordionExample = () => {
+  return (
+    <Accordion type="single">
+      <AccordionItem value="item-1">
+        <AccordionTrigger>Page settings</AccordionTrigger>
+        <AccordionContent>
+          Configure your page settings including layout, theme, and display
+          options.
+        </AccordionContent>
+      </AccordionItem>
+
+      <AccordionItem value="item-2">
+        <AccordionTrigger>Profile Information</AccordionTrigger>
+        <AccordionContent>
+          Manage your profile details, avatar, and personal preferences.
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  );
+};
+```
+
+<Playground snippetName="accordion" defaultPlayground />
+
+## Props
+
+### Accordion
+
+<TypeTable
+  type={{
+    type: {
+      type: "'single' | 'multiple'",
+      description:
+        "Controls whether one or multiple items can be opened at the same time.",
+      default: "'single'",
+    },
+    defaultValue: {
+      type: "string | string[]",
+      description: "The default value of the item to expand when uncontrolled.",
+    },
+    value: {
+      type: "string | string[]",
+      description: "The controlled value of the item to expand.",
+    },
+    onValueChange: {
+      type: "(value: string | string[]) => void",
+      description: "Event handler called when the expanded state changes.",
+    },
+    collapsible: {
+      type: "boolean",
+      description:
+        "When type is single, allows closing content when clicking trigger for opened item.",
+      default: "false",
+    },
+    disabled: {
+      type: "boolean",
+      description:
+        "When true, prevents the user from interacting with the accordion.",
+      default: "false",
+    },
+    dir: {
+      type: " 'ltr' | 'rtl' ",
+      description:
+        "The reading direction of the accordion when applicable. If omitted, assumes LTR (left-to-right) reading mode.",
+      default: "ltr",
+    },
+    css: {
+      type: "object",
+      description: "Custom CSS styles for the component",
+    },
+  }}
+/>
+
+### AccordionItem
+
+<TypeTable
+  type={{
+    value: {
+      type: "string",
+      description: "A unique value for the item.",
+    },
+    disabled: {
+      type: "boolean",
+      description:
+        "When true, prevents the user from interacting with the item.",
+      default: "false",
+    },
+  }}
+/>
+
+## Data Attributes
+
+These props are used for the conditional rendering of the components
+
+<Callout>**Applicable** - Accordion</Callout>
+<TypeTable
+  type={{
+    "[data-orientation]": {
+      type: "'vertical' | 'horizontal'",
+      description: "Present on the accordion based on its orientation.",
+    },
+  }}
+/>
+
+<Callout>**Applicable** - AccordionItem/AccordionContent/AccordionTrigger</Callout>
+<TypeTable
+  type={{
+    "[data-state]": {
+      type: "'open' | 'closed'",
+      description: "Present on the item based on its current state.",
+    },
+    "[data-disabled]": {
+      type: "boolean",
+      description: "Present when the item is disabled.",
+    },
+    "[data-orientation]": {
+      type: "'vertical' | 'horizontal'",
+      description: "Present on the item based on the orientation.",
+    },
+  }}
+/>
+
+## Examples
+
+### Dynamic Selection
+
+Alloew the change of the Selection type dynamically as single or multiple using the `type` prop.
+
+<Playground snippetName="accordion-multiple-selection" />
+
+### Value Variants
+
+Individual accordion items can be set disabled and also as a default value
+
+<Playground snippetName="accordion-value-variants" />

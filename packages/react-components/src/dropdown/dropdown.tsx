@@ -78,7 +78,6 @@ const itemStyles = {
   alignItems: 'center',
   position: 'relative',
   userSelect: 'none',
-
   '&[data-disabled]': {
     background: '$white900',
     opacity: '0.4',
@@ -97,13 +96,13 @@ const StyledItem = styled(DropdownMenuPrimitive.Item, { ...itemStyles });
 const mediumItemStyles = {
   fontSize: '$md',
   lineHeight: '$md',
-  padding: '$4 $6'
+  padding: '$4 $6 $4 $12'
 };
 
 const smallItemStyles = {
   fontSize: '$sm',
   lineHeight: '$sm',
-  padding: '$3 $6'
+  padding: '$3 $6 $3 $12'
 };
 
 const StyledArrow = styled(DropdownMenuPrimitive.Arrow, {

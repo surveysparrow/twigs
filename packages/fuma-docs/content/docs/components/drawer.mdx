@@ -1,0 +1,89 @@
+---
+title: Drawer
+description: A sliding panel that overlays the main content, typically used for navigation, forms, or additional content. Supports multiple placements (top, right, bottom, left) with smooth animations and backdrop overlay.
+---
+
+<ExternalLinks 
+  source="https://github.com/surveysparrow/twigs/tree/master/packages/react-components/src/drawer"
+  storybook="overlay-drawer"
+/>
+
+## Import
+
+```jsx
+import { Drawer, DrawerHeader, DrawerFooter, DrawerBody } from "@sparrowengg/twigs-react";
+```
+
+## Usage
+
+```jsx
+const DrawerExample = () => {
+  const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
+
+  return (
+    <>
+      <Drawer
+        isOpen={isDrawerOpen}
+        onClose={() => setIsDrawerOpen(false)}
+        placement="right"
+      >
+        <DrawerHeader>
+          <Heading size="h4">Edit Profile</Heading>
+        </DrawerHeader>
+        <DrawerBody>
+          {/* Your content here */}
+        </DrawerBody>
+        <DrawerFooter>
+          {/* Footer content */}
+        </DrawerFooter>
+      </Drawer>
+      <Button onClick={() => setIsDrawerOpen(true)}>
+        Open Drawer
+      </Button>
+    </>
+  );
+};
+```
+
+<Playground snippetName="drawer-basic" defaultPlayground />
+
+## Props
+
+### Drawer
+
+You can alter the placement of the Modal by changing the prop to `top` ,`right` ,`left` and `bottom`
+
+<TypeTable
+  type={{
+    isOpen: {
+      type: "boolean",
+      description: "Controls the open/closed state of the drawer.",
+      default: "false",
+    },
+    onClose: {
+      type: "() => void",
+      description: "Callback function called when the drawer is closed.",
+    },
+    placement: {
+      type: "'top' | 'left' | 'right' | 'bottom'",
+      description: "The placement of the drawer on the screen.",
+      default: "'right'",
+    },
+    finalFocusRef: {
+      type: "React.RefObject<HTMLButtonElement>",
+      description: "Reference to the element that should receive focus when the drawer closes.",
+    },
+    portalContainer: {
+      type: "HTMLElement",
+      description: "Custom container element for the drawer portal.",
+    },
+    children: {
+      type: "ReactNode",
+      description: "The content to be rendered inside the drawer.",
+    },
+    css: {
+      type: "object",
+      description: "Custom CSS styles for the component.",
+    },
+  }}
+/> 

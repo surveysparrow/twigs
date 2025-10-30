@@ -1,0 +1,60 @@
+---
+title: Image
+description: A flexible image component that wraps the HTML img element with enhanced styling capabilities. Perfect for displaying images with consistent design tokens, responsive behavior, and customizable appearance.
+---
+
+<ExternalLinks 
+  source="https://github.com/surveysparrow/twigs/tree/master/packages/react-components/src/image"
+  storybook="data-display-image"
+/>
+
+## Import
+
+```jsx
+import { Image } from "@sparrowengg/twigs-react";
+```
+
+## Usage
+
+```jsx
+const ImageExample = () => {
+  return (
+    <Image
+      src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=200&h=200&fit=crop&crop=center"
+      alt="Mountain landscape"
+      css={{
+        width: 200,
+        height: 200,
+        borderRadius: "$md"
+      }}
+    />
+  );
+};
+```
+
+<Playground snippetName="image-basic" defaultPlayground />
+
+## Props
+
+### Image
+
+<TypeTable
+  type={{
+    src: {
+      type: "string",
+      description: "The source URL of the image to display. Required prop for the image component.",
+    },
+    alt: {
+      type: "string",
+      description: "Alternative text description for the image. Required for accessibility and SEO purposes.",
+    },
+    css: {
+      type: "object",
+      description: "Custom CSS styles for the component.",
+    },
+    className: {
+      type: "string",
+      description: "Additional CSS class names to apply to the image element.",
+    },
+  }}
+/>

@@ -1,0 +1,101 @@
+---
+title: Avatar
+description: An image element with a fallback for representing the user
+---
+
+<ExternalLinks 
+  source="https://github.com/surveysparrow/twigs/tree/master/packages/react-components/src/avatar"
+  storybook="data-display-avatar"
+/>
+
+## Import
+
+```jsx
+import { Avatar } from "@sparrowengg/twigs-react";
+```
+
+## Usage
+
+```jsx
+<Avatar
+  src="https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&w=512&h=512&dpr=2&q=80"
+  name="John Doe"
+  size="5xl"
+/>
+<Avatar
+  src="https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&w=512&h=512&dpr=2&q=80"
+  name="John Doe"
+  size="3xl"
+>
+  <AvatarBadge />
+</Avatar>
+```
+
+<Playground snippetName="avatar-basic" defaultPlayground />
+
+## Props
+
+### Avatar
+
+<TypeTable
+  type={{
+    size: {
+      type: " xs | sm | md | lg | xl | 2xl | 3xl | 4xl | 5xl ",
+      description: "size of the avatar",
+      default: "sm",
+    },
+    src: {
+      type: "string",
+      description: "Url of the Image",
+    },
+    name: {
+      type: "string",
+      description: "name of the user",
+    },
+    rounded: {
+      type: "xs | sm | md | lg | xl | 2xl | 3xl | full",
+      description: "border radius",
+      default: "full",
+    },
+    fallbackDelay: {
+      type: "number",
+      description:
+        "how long to wait before showing the fallback content when the image fails to load or is loading.",
+      default: "0",
+    },
+    css: {
+      type: "object",
+      description: "Custom CSS styles for the component.",
+    },
+  }}
+/>
+### Avatar Group
+<TypeTable
+  type={{
+    size: {
+      type: " xs | sm | md | lg | xl | 2xl | 3xl | 4xl | 5xl ",
+      description: "size of the avatar",
+      default: "sm",
+    },
+    rounded: {
+      type: "xs | sm | md | lg | xl | 2xl | 3xl | full",
+      description: "border radius",
+      default: "full",
+    },
+    limit: {
+      type: "number",
+      description: "describes how many profile should visible",
+      default: "0",
+    },
+    limitExceededLabel: {
+      type: "string",
+      description: "Custom label for limit exceeded count",
+    },
+  }}
+/>
+
+## Examples
+
+### Avatar group with different variants
+
+<Playground snippetName="avatar-group" />

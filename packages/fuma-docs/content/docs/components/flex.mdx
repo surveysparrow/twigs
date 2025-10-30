@@ -1,0 +1,103 @@
+---
+title: Flex
+description: A wrapper around HTML element div that comes with flexbox properties for easy layout management and responsive design.
+---
+
+<ExternalLinks 
+  source="https://github.com/surveysparrow/twigs/tree/master/packages/react-components/src/flex"
+  storybook="layout-flex"
+/>
+
+## Import
+
+```jsx
+import { Flex } from "@sparrowengg/twigs-react";
+```
+
+## Usage
+
+```jsx
+const FlexExample = () => {
+  return (
+    <Flex gap="$4" alignItems="center" justifyContent="space-between">
+      <Box css={{ padding: "$4", background: "$primary200", borderRadius: "$md" }}>
+        Item 1
+      </Box>
+      <Box css={{ padding: "$4", background: "$secondary200", borderRadius: "$md" }}>
+        Item 2
+      </Box>
+      <Box css={{ padding: "$4", background: "$accent200", borderRadius: "$md" }}>
+        Item 3
+      </Box>
+    </Flex>
+  );
+};
+```
+
+<Playground snippetName="flex-basic" defaultPlayground />
+
+## Props
+
+### Flex
+
+<TypeTable
+  type={{
+    flexDirection: {
+      type: "React.CSSProperties['flexDirection']",
+      description: "Sets the direction of flex items. Controls whether items are laid out horizontally or vertically.",
+      default: "row",
+    },
+    justifyContent: {
+      type: "React.CSSProperties['justifyContent']",
+      description: "Defines how flex items are distributed along the main axis. Controls alignment and spacing of items.",
+      default: "normal",
+    },
+    alignItems: {
+      type: "React.CSSProperties['alignItems']",
+      description: "Defines how flex items are aligned along the cross axis. Controls vertical alignment when flexDirection is row.",
+      default: "normal",
+    },
+    alignContent: {
+      type: "React.CSSProperties['alignContent']",
+      description: "Controls how multiple lines of flex items are aligned along the cross axis when flexWrap is enabled.",
+      default: "normal",
+    },
+    justifyItems: {
+      type: "React.CSSProperties['justifyItems']",
+      description: "Defines the default justify-self for all items in the flex container.",
+      default: "legacy",
+    },
+    wrap: {
+      type: "React.CSSProperties['flexWrap']",
+      description: "Controls whether flex items are forced onto one line or can wrap to new lines.",
+      default: "nowrap",
+    },
+    grow: {
+      type: "React.CSSProperties['flexGrow']",
+      description: "Defines the ability for a flex item to grow if necessary. Controls how much the item can expand relative to other items.",
+      default: "0",
+    },
+    gap: {
+      type: "React.CSSProperties['gap']",
+      description: "Sets the spacing between flex items. Can be a single value or separate values for row and column gaps.",
+    },
+    shrink: {
+      type: "React.CSSProperties['flexShrink']",
+      description: "Defines the ability for a flex item to shrink if necessary. Controls how much the item can contract relative to other items.",
+      default: "1",
+    },
+    flow: {
+      type: "React.CSSProperties['flexFlow']",
+      description: "Shorthand property for flexDirection and flexWrap. Combines both properties in a single declaration.",
+    },
+    basis: {
+      type: "React.CSSProperties['flexBasis']",
+      description: "Sets the initial main size of a flex item. Defines the default size before remaining space is distributed.",
+      default: "auto",
+    },
+    css: {
+      type: "object",
+      description: "Custom CSS styles for the component.",
+    },
+  }}
+/> 

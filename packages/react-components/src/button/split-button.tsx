@@ -1,6 +1,5 @@
 import React, {
   ComponentProps,
-  FunctionComponent,
   ReactNode,
   useContext,
   cloneElement,
@@ -118,9 +117,10 @@ const StyledPrimaryButton = styled(Box, {
     borderStartEndRadius: 0
   },
   [`&:has(button:not(:disabled):hover, button:active, button:focus) + ${StyledSecondaryButton} button,
-    &:has(a:not(:disabled):hover, a:active, a:focus) + ${StyledSecondaryButton} a`]: {
-    borderLeftColor: 'transparent'
-  }
+    &:has(a:not(:disabled):hover, a:active, a:focus) + ${StyledSecondaryButton} a`]:
+    {
+      borderLeftColor: 'transparent'
+    }
 });
 
 const ButtonContainer = ({ children }: { children: ReactNode }) => {
@@ -145,20 +145,18 @@ const ButtonContainer = ({ children }: { children: ReactNode }) => {
 export const SplitButtonContainer = forwardRef<
   HTMLDivElement,
   SplitButtonContainerProps
->(({ children }, ref) => (
-  <StyledSplitButtonContainer ref={ref}>{children}</StyledSplitButtonContainer>
-));
+>(({ children }, ref) => {
+  return (
+    <StyledSplitButtonContainer ref={ref}>
+      {children}
+    </StyledSplitButtonContainer>
+  );
+});
 
-export const SplitButton: FunctionComponent<SplitButtonProps> = forwardRef<HTMLDivElement>(
-  (
-    {
-      children,
-      disabled = false,
-      color = 'primary',
-      size = 'md'
-    }: SplitButtonProps,
-    ref
-  ) => {
+export const SplitButton = forwardRef<HTMLDivElement, SplitButtonProps>(
+  ({
+    children, disabled = false, color = 'primary', size = 'md'
+  }, ref) => {
     if (Children.count(children) !== 2) {
       throw new Error('SplitButton component requires exactly two children');
     }

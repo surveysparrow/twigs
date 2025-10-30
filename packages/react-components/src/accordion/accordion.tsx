@@ -32,7 +32,17 @@ const StyledTrigger = styled(AccordionPrimitive.Trigger, {
 
 const Accordion = styled(AccordionPrimitive.Root, {
   fontSize: '$sm',
-  lineHeight: '$md'
+  lineHeight: '$md',
+  variants: {
+    dir: {
+      ltr: {
+        direction: 'ltr'
+      },
+      rtl: {
+        direction: 'rtl'
+      }
+    }
+  }
 });
 
 const AccordionItem = styled(AccordionPrimitive.Item, {
@@ -131,7 +141,9 @@ const StyledContentText = styled('div', {
 
 const AccordionContent = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof StyledContent>
+  React.ComponentPropsWithoutRef<typeof StyledContent> & {
+    children: React.ReactNode;
+  }
 >(({ children, ...props }, ref) => (
   <StyledContent {...props} ref={ref}>
     <StyledContentText>{children}</StyledContentText>

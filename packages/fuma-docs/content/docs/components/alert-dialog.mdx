@@ -1,0 +1,91 @@
+---
+title: AlertDialog
+description: can be used to warn or get users attention before destructive actions.
+---
+
+<ExternalLinks 
+  source="https://github.com/surveysparrow/twigs/tree/master/packages/react-components/src/alert-dialog"
+  storybook="overlay-alertdialog"
+/>
+
+## Import
+
+```jsx
+import {AlertDialog,AlertDialogAction,AlertDialogActions,AlertDialogCancel,AlertDialogContent,AlertDialogDescription,AlertDialogTitle,AlertDialogTrigger,Button} from "@sparrowengg/twigs-react";
+```
+
+## Usage
+
+```jsx
+const AlertDialogExample = () => {
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button color="error">Delete account</Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+        <AlertDialogDescription>
+          This action cannot be undone. This will permanently delete your
+          account and remove your data from our servers.
+        </AlertDialogDescription>
+        <AlertDialogActions>
+          <AlertDialogCancel asChild>
+            <Button color="default" size="lg">
+              Cancel
+            </Button>
+          </AlertDialogCancel>
+          <AlertDialogAction asChild>
+            <Button color="error" size="lg">
+              Yes, delete account
+            </Button>
+          </AlertDialogAction>
+        </AlertDialogActions>
+      </AlertDialogContent>
+    </AlertDialog>
+  );
+};
+```
+
+<Playground snippetName="alert-dialog" defaultPlayground />
+
+## Props
+
+### AlertDialog
+
+<TypeTable
+  type={{
+    defaultOpen: {
+      type: "boolean",
+      description:
+        "The open state of the dialog when it is initially rendered. Use when you do not need to control its open state.",
+    },
+    open: {
+      type: "boolean",
+      description:
+        "The controlled open state of the dialog. Must be used in conjunction with onOpenChange.",
+    },
+    onOpenChange: {
+      type: "function",
+      description:
+        "Event handler called when the open state of the dialog changes",
+    },
+    css: {
+      type: "object",
+      description: "Custom CSS styles for the component.",
+    },
+  }}
+/>
+
+## Data Attributes
+
+These props are used for the conditional rendering of the components
+
+<TypeTable
+  type={{
+    "[data-state]": {
+      type: "'open' | 'closed'",
+      description: "Present on all these components based on the state",
+    },
+  }}
+/>

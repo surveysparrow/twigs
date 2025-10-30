@@ -1,0 +1,18 @@
+{
+    "title": "editor",
+    "description": "A comprehensive collection of reusable UI components",
+    "root" : true,
+    "pages": [
+        "index",
+        "toolbar",
+        "---Features---",
+        "link",
+        "emoji",
+        "hashtags",
+        "mentions",
+        "---Helpers---",
+        "base-dropdown",
+        "---Tutorials---",
+        "slash-command-feature"
+    ]
+}

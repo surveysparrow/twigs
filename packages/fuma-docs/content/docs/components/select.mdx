@@ -1,0 +1,162 @@
+---
+title: Select
+description: A powerful dropdown component for selecting single or multiple options from a list. Perfect for forms, filters, and data selection with search functionality, async loading, and customizable styling options.
+---
+
+<ExternalLinks 
+  source="https://github.com/surveysparrow/twigs/tree/master/packages/react-components/src/select"
+  storybook="form-select"
+/>
+
+## Import
+
+```jsx
+import { Select } from "@sparrowengg/twigs-react";
+```
+
+## Usage
+
+```jsx
+const SelectExample = () => {
+  const [selectedValue, setSelectedValue] = useState(null);
+
+  return (
+    <Select
+      placeholder="Choose an option..."
+      options={options}
+      value={selectedValue}
+      onChange={setSelectedValue}
+      size="md"
+      variant="default"
+    />
+  );
+};
+```
+
+<Playground snippetName="select-basic" defaultPlayground />
+
+## Props
+
+<TypeTable
+  type={{
+    options: {
+      type: "OptionType[]",
+      description: "Array of options to display in the select dropdown.",
+    },
+    value: {
+      type: "OptionType | OptionType[] | null",
+      description: "The current value of the select. Can be a single option or array for multi-select.",
+    },
+    onChange: {
+      type: "(value: OptionType | OptionType[] | null) => void",
+      description: "Callback function called when the selection changes.",
+    },
+    placeholder: {
+      type: "string",
+      description: "Placeholder text displayed when no option is selected.",
+    },
+    label: {
+      type: "string",
+      description: "Label text displayed above the select input.",
+    },
+    size: {
+      type: "'sm' | 'md' | 'lg' | 'xl'",
+      description: "The size of the select input, affecting its height and padding.",
+      default: "'sm'",
+    },
+    variant: {
+      type: "'default' | 'filled'",
+      description: "The visual variant of the select input.",
+      default: "'default'",
+    },
+    isMulti: {
+      type: "boolean",
+      description: "When true, allows multiple options to be selected.",
+      default: "false",
+    },
+    isClearable: {
+      type: "boolean",
+      description: "When true, displays a clear button to remove the current selection.",
+      default: "false",
+    },
+    isSearchable: {
+      type: "boolean",
+      description: "When true, allows users to search/filter options by typing.",
+      default: "true",
+    },
+    isAsync: {
+      type: "boolean",
+      description: "When true, enables async loading of options via loadOptions prop.",
+      default: "false",
+    },
+    isCreatable: {
+      type: "boolean",
+      description: "When true, allows users to create new options that don't exist in the list.",
+      default: "false",
+    },
+    loadOptions: {
+      type: "(inputValue: string) => Promise<OptionType[]>",
+      description: "Function to load options asynchronously. Used when isAsync is true.",
+    },
+    isDisabled: {
+      type: "boolean",
+      description: "When true, prevents user interaction with the select.",
+      default: "false",
+    },
+    error: {
+      type: "string",
+      description: "Error message to display below the select input.",
+    },
+    helperText: {
+      type: "string",
+      description: "Helper text to display below the select input.",
+    },
+    requiredIndicator: {
+      type: "boolean",
+      description: "When true, displays a required indicator (*) next to the label.",
+      default: "false",
+    },
+    info: {
+      type: "string | ReactNode",
+      description: "Info content to display as a tooltip next to the label.",
+    },
+    labelRightAddon: {
+      type: "ReactNode",
+      description: "Additional content to display on the right side of the label.",
+    },
+    showSeparator: {
+      type: "boolean",
+      description: "When true, shows a separator line between the value and dropdown indicator.",
+      default: "false",
+    },
+    dropdownIndicatorIcon: {
+      type: "ReactElement",
+      description: "Custom icon to use as the dropdown indicator.",
+    },
+    dropdownIndicatorPosition: {
+      type: "'left' | 'right'",
+      description: "Position of the dropdown indicator icon.",
+      default: "'right'",
+    },
+    menuPortalTarget: {
+      type: "HTMLElement | null",
+      description: "DOM element to render the dropdown menu in. Useful for z-index issues.",
+    },
+    className: {
+      type: "string",
+      description: "Additional CSS class name to apply to the select container.",
+    },
+    css: {
+      type: "object",
+      description: "Custom CSS styles for the component.",
+    },
+  }}
+/>
+
+## Examples
+
+### Comprehensive Features
+
+The select component supports a wide range of features including multi-select, async loading, grouped options, custom styling, and form integration.
+
+<Playground snippetName="select-comprehensive" />

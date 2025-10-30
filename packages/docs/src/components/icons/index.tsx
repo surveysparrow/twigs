@@ -36,7 +36,7 @@ export default function AllIcons() {
 
             <div className='row' style={{ padding: 8 }}>
               {filteredIcons.map(([key, value]) => {
-                const IconComponent = value;
+                const IconComponent = value as React.ComponentType<{ key: string }>;
                 return (
                   <div className='col col--3' style={{
                     display: 'flex',

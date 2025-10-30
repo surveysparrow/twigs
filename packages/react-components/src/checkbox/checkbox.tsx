@@ -147,7 +147,7 @@ export const Checkbox = forwardRef<HTMLButtonElement, CheckboxProps>(({
   const isIndeterminate = checked === 'indeterminate';
   const uniqueId = id || useId();
   return (
-    <Flex alignItems="center" ref={containerRef}>
+    <Flex alignItems="center" ref={containerRef as any}>
       <StyledCheckbox
         checked={checked}
         onCheckedChange={onChange}

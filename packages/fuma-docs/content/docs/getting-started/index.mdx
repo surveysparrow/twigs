@@ -1,0 +1,180 @@
+---
+title: "Getting Started"
+description: "Learn how to install and use Twigs React component library built with Radix UI and Stitches"
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Card, Cards } from 'fumadocs-ui/components/card';
+import { Steps, Step } from 'fumadocs-ui/components/steps';
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+import img from '@/assets/images/nextjs.svg';
+
+## Overview
+
+Twigs is designed to be the perfect foundation for building modern web applications. Our component library combines the power of **Radix UI's** accessibility-first approach with **Stitches'** powerful CSS-in-JS capabilities to deliver components that are both developer-friendly and user-accessible.
+
+## Architecture
+
+<Accordions type="single">
+<Accordion title="Radix UI Foundation" id="radix-ui-foundation">
+
+Twigs is built on top of **Radix UI**, a low-level UI primitive library that provides:
+
+- **Unstyled, accessible components** that work with any styling solution
+- **Keyboard navigation** and focus management
+- **Screen reader support** with proper ARIA attributes
+- **Composable APIs** for maximum flexibility
+
+</Accordion>
+
+<Accordion title="Stitches Integration" id="stitches-integration">
+
+Every component in Twigs is powered by **Stitches**, a CSS-in-JS library that provides:
+
+- **CSS Props**: Style components directly through props
+- **Design Tokens**: Consistent spacing, colors, and typography
+- **Variant System**: Easy component customization
+- **Zero Runtime**: CSS is generated at build time for optimal performance
+
+</Accordion>
+</Accordions>
+
+<Callout type="info">
+**CSS Props Support**: Every component in Twigs supports CSS props thanks to Stitches. You can style any component directly through the `css` prop, making customization effortless and intuitive.
+</Callout>
+
+## Installation
+
+<Steps>
+<Step>
+
+### Install the Package
+
+Install Twigs React components using your preferred package manager:
+
+<Tabs items={['npm', 'yarn', 'pnpm']}>
+<Tab value="npm">
+
+```bash
+npm install @sparrowengg/twigs-react @sparrowengg/twigs-react-icons
+```
+
+</Tab>
+<Tab value="yarn">
+
+```bash
+yarn add @sparrowengg/twigs-react @sparrowengg/twigs-react-icons
+```
+
+</Tab>
+<Tab value="pnpm">
+
+```bash
+pnpm add @sparrowengg/twigs-react @sparrowengg/twigs-react-icons
+```
+
+</Tab>
+</Tabs>
+
+</Step>
+
+<Step>
+
+### Install Editor (Optional)
+
+editor provides rich text editing capabilities
+
+<Tabs items={['npm', 'yarn', 'pnpm']}>
+<Tab value="npm">
+
+```bash
+npm install @sparrowengg/twigs-editor-react
+```
+
+</Tab>
+<Tab value="yarn">
+
+```bash
+yarn add @sparrowengg/twigs-editor-react
+```
+
+</Tab>
+<Tab value="pnpm">
+
+```bash
+pnpm add @sparrowengg/twigs-editor-react
+```
+
+</Tab>
+</Tabs>
+
+</Step>
+
+<Step>
+
+### ThemeProvider
+
+Setting up the theme provider:
+
+```jsx
+import { ThemeProvider } from '@sparrowengg/twigs-react';
+
+function App() {
+  return (
+    <ThemeProvider>
+      <YourApp />
+    </ThemeProvider>
+  )
+}
+```
+
+</Step>
+</Steps>
+
+## Quick Start
+
+Here's a simple example to get you started:
+
+```jsx
+import React from 'react';
+import { Button, Box, Text } from '@sparrowengg/twigs-react';
+
+function App() {
+  return (
+    <Box css={{ padding: '$4', textAlign: 'center' }}>
+      <Text size="lg" css={{ marginBottom: '$4' }}>
+        Welcome to Twigs!
+      </Text>
+      <Button 
+        color="primary" 
+        css={{ 
+          backgroundColor: '$primary500',
+          '&:hover': { backgroundColor: '$primary600' }
+        }}
+      >
+        Get Started
+      </Button>
+    </Box>
+  );
+}
+
+export default App;
+```
+
+## Framework Integration
+
+<Cards>
+<Card title="Next.js" icon={<img src={img} alt="Next.js" className="w-6 h-6" />} href="/docs/getting-started/nextjs">
+Learn how to integrate Twigs with Next.js, including SSR support, dynamic imports, and optimization techniques.
+</Card>
+</Cards>
+
+
+## Next Steps
+
+Now that you have Twigs installed, explore our components:
+
+- **[Theming](/docs/getting-started/theming)** - Learn how to customize themes and design tokens
+- **[Components](/docs/components)** - Browse our comprehensive component library
+- **[Icons](/docs/icons)** - Discover our icon library and usage patterns

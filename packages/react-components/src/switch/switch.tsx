@@ -1,4 +1,4 @@
-import React, { ComponentProps, FunctionComponent } from 'react';
+import React, { ComponentProps } from 'react';
 import * as SwitchPrimitive from '@radix-ui/react-switch';
 import { styled } from '../stitches.config';
 
@@ -75,10 +75,10 @@ export type SwitchProps = {
   required?: boolean;
 } & Omit<ComponentProps<typeof StyledSwitch>, OmitProps>;
 
-export const Switch: FunctionComponent<SwitchProps> = React.forwardRef(
+export const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
   ({
     checked, disabled, onChange, required, ...rest
-  }: SwitchProps, ref) => {
+  }, ref) => {
     return (
       <StyledSwitch
         ref={ref}

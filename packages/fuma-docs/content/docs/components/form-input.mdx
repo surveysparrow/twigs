@@ -1,0 +1,154 @@
+---
+title: FormInput
+description: A comprehensive form input component that combines Input, FormLabel, and FormHelperText components. Provides built-in support for labels, error messages, helper text, character counting, and various styling options.
+---
+
+<ExternalLinks 
+  source="https://github.com/surveysparrow/twigs/tree/master/packages/react-components/src/input"
+  storybook="form-form-input"
+/>
+
+## Import
+
+```jsx
+import { FormInput } from "@sparrowengg/twigs-react";
+```
+
+## Usage
+
+```jsx
+const FormInputExample = () => {
+  return (
+    <Box css={{ display: "flex", flexDirection: "column", gap: "$4" }}>
+      <FormInput
+        label="Email Address"
+        placeholder="Enter your email"
+        helperText="We'll never share your email with anyone else."
+      />
+      <FormInput
+        label="Password"
+        type="password"
+        placeholder="Enter your password"
+        error="Password must be at least 8 characters long"
+      />
+    </Box>
+  );
+};
+```
+
+<Playground snippetName="form-input-basic" defaultPlayground />
+
+## Props
+
+### FormInput
+
+<TypeTable
+  type={{
+    label: {
+      type: "string",
+      description: "The label text displayed above the input field.",
+    },
+    showCount: {
+      type: "boolean",
+      description: "When true, displays a character count below the input field.",
+      default: "false",
+    },
+    error: {
+      type: "string",
+      description: "Error message displayed below the input field. When provided, overrides helperText.",
+    },
+    requiredIndicator: {
+      type: "boolean | ReactElement",
+      description: "When true, shows a required indicator (asterisk) next to the label. Can also be a custom React element.",
+    },
+    helperText: {
+      type: "string",
+      description: "Helper text displayed below the input field. Only shown when no error is present.",
+    },
+    info: {
+      type: "string | ReactNode",
+      description: "Additional information displayed as a tooltip icon next to the label. Requires a label to be provided.",
+    },
+    renderCounter: {
+      type: "({ length, maxLength }: { length: number; maxLength?: number; }) => ReactNode",
+      description: "Custom function to render the character counter. Overrides the default counter when provided.",
+    },
+    size: {
+      type: "'sm' | 'md' | 'lg' | 'xl'",
+      description: "Controls the size of the input field, affecting height, padding, and font size.",
+      default: "'md'",
+    },
+    variant: {
+      type: "'default' | 'filled'",
+      description: "Controls the visual style variant of the input field.",
+      default: "'default'",
+    },
+    disabled: {
+      type: "boolean",
+      description: "When true, disables the input field and prevents user interaction.",
+      default: "false",
+    },
+    leftIcon: {
+      type: "ReactElement",
+      description: "Icon element displayed on the left side of the input field.",
+    },
+    rightIcon: {
+      type: "ReactElement",
+      description: "Icon element displayed on the right side of the input field.",
+    },
+    leftElement: {
+      type: "ReactElement",
+      description: "Custom element displayed on the left side of the input field.",
+    },
+    rightElement: {
+      type: "ReactElement",
+      description: "Custom element displayed on the right side of the input field.",
+    },
+    errorBorder: {
+      type: "boolean",
+      description: "When true, applies error border styling to the input field.",
+      default: "false",
+    },
+    maxLength: {
+      type: "number",
+      description: "Maximum number of characters allowed in the input field.",
+    },
+    onChange: {
+      type: "(e: React.ChangeEvent<HTMLInputElement> | React.FormEvent<HTMLInputElement>) => void",
+      description: "Event handler called when the input value changes.",
+    },
+    value: {
+      type: "string",
+      description: "The controlled value of the input field.",
+    },
+    defaultValue: {
+      type: "string",
+      description: "The default value of the input field when uncontrolled.",
+    },
+    placeholder: {
+      type: "string",
+      description: "Placeholder text displayed when the input field is empty.",
+    },
+    type: {
+      type: "string",
+      description: "The type of the input field (e.g., 'text', 'password', 'email').",
+      default: "'text'",
+    },
+    css: {
+      type: "object",
+      description: "Custom CSS styles for the component.",
+    },
+    as: {
+      type: "React.ElementType",
+      description: "Allows you to render the component as a different HTML element or custom component.",
+    },
+  }}
+/>
+
+## Examples
+
+### Variants and advanced features
+
+Explore all available features and varieties of the FormInput component.
+
+<Playground snippetName="form-input-advanced" /> 

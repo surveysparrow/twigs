@@ -1,0 +1,149 @@
+---
+title: Textarea
+description: A versatile multi-line text input component for longer content. Perfect for comments, descriptions, feedback, and any scenario requiring extended text input with comprehensive form integration and validation features.
+---
+
+<ExternalLinks 
+  source="https://github.com/surveysparrow/twigs/tree/master/packages/react-components/src/textarea"
+  storybook="form-textarea"
+/>
+
+## Import
+
+```jsx
+import { Textarea } from "@sparrowengg/twigs-react";
+```
+
+## Usage
+
+```jsx
+const TextareaExample = () => {
+  const [value, setValue] = useState("");
+  
+  return (
+    <Box css={{ display: "flex", flexDirection: "column", gap: "$4" }}>
+      <Textarea
+        label="Description"
+        placeholder="Enter your message here..."
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        rows={4}
+        showCount
+        maxLength={500}
+      />
+    </Box>
+  );
+};
+```
+
+<Playground snippetName="textarea-basic" defaultPlayground />
+
+## Props
+
+### Textarea
+
+<TypeTable
+  type={{
+    label: {
+      type: "string",
+      description: "The label text for the textarea.",
+    },
+    placeholder: {
+      type: "string",
+      description: "Placeholder text displayed when the textarea is empty.",
+    },
+    value: {
+      type: "string",
+      description: "The controlled value of the textarea.",
+    },
+    defaultValue: {
+      type: "string",
+      description: "The default value of the textarea when uncontrolled.",
+    },
+    onChange: {
+      type: "(event: ChangeEvent<HTMLTextAreaElement>) => void",
+      description: "Event handler called when the textarea value changes.",
+    },
+    variant: {
+      type: "'default' | 'filled'",
+      description: "The visual style variant of the textarea.",
+      default: "'default'",
+    },
+    size: {
+      type: "'sm' | 'md' | 'lg' | 'xl'",
+      description: "The size of the textarea affecting padding and font size.",
+    },
+    resize: {
+      type: "'both' | 'vertical' | 'horizontal' | 'none'",
+      description: "Controls the textarea's resize ability.",
+      default: "'both'",
+    },
+    rows: {
+      type: "number",
+      description: "The number of visible text lines for the textarea.",
+    },
+    cols: {
+      type: "number",
+      description: "The number of visible character columns for the textarea.",
+    },
+    disabled: {
+      type: "boolean",
+      description: "When true, prevents the user from interacting with the textarea.",
+      default: "false",
+    },
+    maxLength: {
+      type: "number",
+      description: "The maximum number of characters allowed in the textarea.",
+    },
+    showCount: {
+      type: "boolean",
+      description: "When true, displays the character count.",
+      default: "false",
+    },
+    renderCounter: {
+      type: "({ length: number; maxLength?: number }) => ReactNode",
+      description: "Custom function to render the character counter.",
+    },
+    error: {
+      type: "string",
+      description: "Error message to display below the textarea.",
+    },
+    errorBorder: {
+      type: "boolean",
+      description: "When true, applies error styling to the textarea border.",
+      default: "false",
+    },
+    helperText: {
+      type: "string",
+      description: "Helper text displayed below the textarea.",
+    },
+    requiredIndicator: {
+      type: "boolean | ReactElement",
+      description: "Shows a required indicator next to the label.",
+    },
+    info: {
+      type: "string | ReactNode",
+      description: "Adds an info icon with tooltip beside the label.",
+    },
+    css: {
+      type: "object",
+      description: "Custom CSS styles for the textarea.",
+    },
+    className: {
+      type: "string",
+      description: "Custom CSS class name for the textarea.",
+    },
+    id: {
+      type: "string",
+      description: "The unique identifier for the textarea.",
+    },
+  }}
+/>
+
+## Examples
+
+### Variants and Sizes
+
+Explore different visual styles and sizes for various use cases.
+
+<Playground snippetName="textarea-variants" />

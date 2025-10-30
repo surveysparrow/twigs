@@ -1,6 +1,6 @@
 import { prefixClassName } from '@src/utils';
 import clsx from 'clsx';
-import React, { ComponentProps, FunctionComponent, ReactElement } from 'react';
+import React, { ComponentProps, ReactElement } from 'react';
 import { Box } from '../box';
 import { styled } from '../stitches.config';
 
@@ -312,7 +312,7 @@ export const errorBorderStyles = {
   }
 };
 
-export const Input: FunctionComponent<InputProps> = React.forwardRef(
+export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
     {
       size = 'md',
@@ -323,7 +323,7 @@ export const Input: FunctionComponent<InputProps> = React.forwardRef(
       leftElement,
       errorBorder = false,
       ...rest
-    }: InputProps,
+    },
     ref
   ) => {
     const inputPaddingValue = getInputPadding(size);

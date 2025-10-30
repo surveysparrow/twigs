@@ -1,0 +1,94 @@
+---
+title: Switch
+description: A toggle control that allows users to switch between two states. Perfect for enabling/disabling features, toggling settings, and binary choices with smooth animations and full keyboard accessibility.
+---
+
+<ExternalLinks 
+  source="https://github.com/surveysparrow/twigs/tree/master/packages/react-components/src/switch"
+  storybook="form-switch"
+/>
+
+## Import
+
+```jsx
+import { Switch } from "@sparrowengg/twigs-react";
+```
+
+## Usage
+
+```jsx
+const SwitchExample = () => {
+  const [enabled, setEnabled] = useState(false);
+
+  return (
+    <Flex css={{ alignItems: "center", gap: "$4" }}>
+      <Switch 
+        checked={enabled} 
+        onChange={setEnabled}
+        size="md"
+      />
+      <Text>Enable notifications</Text>
+    </Flex>
+  );
+};
+```
+
+<Playground snippetName="switch-basic" defaultPlayground />
+
+## Props
+
+### Switch
+
+<TypeTable
+  type={{
+    checked: {
+      type: "boolean",
+      description: "The controlled state of the switch. Use with onChange for controlled components.",
+    },
+    defaultChecked: {
+      type: "boolean",
+      description: "The default state of the switch when uncontrolled.",
+    },
+    onChange: {
+      type: "(checked: boolean) => void",
+      description: "Event handler called when the switch state changes.",
+    },
+    disabled: {
+      type: "boolean",
+      description: "When true, prevents the user from interacting with the switch.",
+      default: "false",
+    },
+    required: {
+      type: "boolean",
+      description: "When true, indicates that the switch is required in a form context.",
+      default: "false",
+    },
+    size: {
+      type: "'sm' | 'md'",
+      description: "The size of the switch component.",
+      default: "'sm'",
+    },
+    css: {
+      type: "object",
+      description: "Custom CSS styles for the component.",
+    },
+  }}
+/>
+
+## Data Attributes
+
+These props are used for the conditional rendering of the components
+
+<Callout>**Applicable** - Switch, SwitchThumb</Callout>
+<TypeTable
+  type={{
+    "[data-state]": {
+      type: "'checked' | 'unchecked'",
+      description: "Present on the switch based on its current state.",
+    },
+    "[data-disabled]": {
+      type: "boolean",
+      description: "Present when the switch is disabled.",
+    },
+  }}
+/>

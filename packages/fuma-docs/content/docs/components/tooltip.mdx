@@ -1,0 +1,169 @@
+---
+title: Tooltip
+description: A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it. Perfect for providing contextual help, additional information, and guidance with smooth animations and accessibility features.
+---
+
+<ExternalLinks 
+  source="https://github.com/surveysparrow/twigs/tree/master/packages/react-components/src/tooltip"
+  storybook="overlay-tooltip"
+/>
+
+## Import
+
+```jsx
+import { TooltipProvider, Tooltip } from "@sparrowengg/twigs-react";
+```
+
+## Usage
+
+```jsx
+const TooltipExample = () => {
+  return (
+    <TooltipProvider delayDuration={0}>
+      <Tooltip content="This is a tooltip">
+        <Button>Hover me</Button>
+      </Tooltip>
+    </TooltipProvider>
+  );
+};
+```
+
+<Playground snippetName="tooltip-basic" defaultPlayground />
+
+## Props
+
+### TooltipProvider
+
+<TypeTable
+  type={{
+    delayDuration: {
+      type: "number",
+      description: "The duration from when the mouse enters a tooltip trigger until the tooltip opens.",
+      default: "700",
+    },
+    skipDelayDuration: {
+      type: "number",
+      description: "Time a user has to enter another trigger without incurring a delay again.",
+      default: "300",
+    },
+    disableHoverableContent: {
+      type: "boolean",
+      description: "Prevents TooltipContent from remaining open when hovering over it.",
+    },
+    css: {
+      type: "object",
+      description: "Custom CSS styles for the component.",
+    },
+  }}
+/>
+
+### Tooltip
+
+<TypeTable
+  type={{
+    content: {
+      type: "string | ReactNode",
+      description: "Content to display inside the tooltip.",
+    },
+    side: {
+      type: "'top' | 'bottom' | 'left' | 'right'",
+      description: "Position of the tooltip relative to the trigger.",
+      default: "'top'",
+    },
+    align: {
+      type: "'start' | 'center' | 'end'",
+      description: "The preferred alignment against the trigger.",
+      default: "'center'",
+    },
+    size: {
+      type: "'sm' | 'md' | 'lg'",
+      description: "Size variant of the tooltip affecting padding and font size.",
+      default: "'sm'",
+    },
+    open: {
+      type: "boolean",
+      description: "The controlled open state of the tooltip.",
+    },
+    defaultOpen: {
+      type: "boolean",
+      description: "The default open state of the tooltip when uncontrolled.",
+    },
+    onOpenChange: {
+      type: "(open: boolean) => void",
+      description: "Event handler called when the open state changes.",
+    },
+    delayDuration: {
+      type: "number",
+      description: "The duration from when the mouse enters a tooltip trigger until the tooltip opens.",
+    },
+    disableHoverableContent: {
+      type: "boolean",
+      description: "Prevents TooltipContent from remaining open when hovering over it.",
+    },
+    sideOffset: {
+      type: "number",
+      description: "The distance in pixels from the trigger.",
+      default: "0",
+    },
+    alignOffset: {
+      type: "number",
+      description: "An offset in pixels from the 'align' position.",
+      default: "0",
+    },
+    avoidCollisions: {
+      type: "boolean",
+      description: "When true, overrides the side and align preferences to prevent collisions.",
+      default: "true",
+    },
+    collisionBoundary: {
+      type: "Element | null | Array<Element | null>",
+      description: "The element used as the collision boundary.",
+      default: "[]",
+    },
+    collisionPadding: {
+      type: "number | Partial<Record<Side, number>>",
+      description: "The distance in pixels from the boundary edges where collision detection should occur.",
+      default: "0",
+    },
+    arrowPadding: {
+      type: "number",
+      description: "The padding between the arrow and the edges of the content.",
+      default: "0",
+    },
+    sticky: {
+      type: "'partial' | 'always'",
+      description: "The sticky behavior on the align axis.",
+      default: "'partial'",
+    },
+    hideWhenDetached: {
+      type: "boolean",
+      description: "Whether the tooltip should be hidden when the trigger becomes detached.",
+      default: "false",
+    },
+    css: {
+      type: "object",
+      description: "Custom CSS styles for the component.",
+    },
+  }}
+/>
+
+## Data Attributes
+
+These props are used for the conditional rendering of the components
+
+<TypeTable
+  type={{
+    "[data-state]": {
+      type: "'closed' | 'delayed-open' | 'instant-open'",
+      description: "Present on the content based on its current state.",
+    },
+    "[data-side]": {
+      type: "'top' | 'bottom' | 'left' | 'right'",
+      description: "Present on the content based on its current side position.",
+    },
+    "[data-align]": {
+      type: "'start' | 'center' | 'end'",
+      description: "Present on the content based on its current alignment.",
+    },
+  }}
+/>
