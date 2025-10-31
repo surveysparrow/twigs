@@ -365,13 +365,13 @@ export default function HomePage() {
                 <Link href="/docs/getting-started">Getting Started</Link>
               </Text>
               <Text size="md" weight="normal" css={{ color: "$neutral600" }}>
-                <Link href="/docs/getting-started">Theming</Link>
+                <Link href="/docs/getting-started/theming">Theming</Link>
               </Text>
               <Text size="md" weight="normal" css={{ color: "$neutral600" }}>
-                <Link href="/docs/getting-started">Frameworks</Link>
+                <Link href="/docs/getting-started/nextjs">Frameworks</Link>
               </Text>
               <Text size="md" weight="normal" css={{ color: "$neutral600" }}>
-                <Link href="/docs/getting-started">Icons</Link>
+                <Link href="/docs/icons">Icons</Link>
               </Text>
             </div>
             <div className="flex flex-col gap-2">
@@ -379,16 +379,16 @@ export default function HomePage() {
                 Components
               </Text>
               <Text size="md" weight="normal" css={{ color: "$neutral600" }}>
-                <Link href="/docs/getting-started">Accordion</Link>
+                <Link href="/docs/components/accordion">Accordion</Link>
               </Text>
               <Text size="md" weight="normal" css={{ color: "$neutral600" }}>
-                <Link href="/docs/getting-started">Hover Card</Link>
+                <Link href="/docs/components/hover-card">Hover Card</Link>
               </Text>
               <Text size="md" weight="normal" css={{ color: "$neutral600" }}>
-                <Link href="/docs/getting-started">Calendar</Link>
+                <Link href="/docs/components/calendar">Calendar</Link>
               </Text>
               <Text size="md" weight="normal" css={{ color: "$neutral600" }}>
-                <Link href="/docs/getting-started">Button</Link>
+                <Link href="/docs/components/button">Button</Link>
               </Text>
             </div>
             <div className="flex flex-col gap-2">
@@ -396,13 +396,13 @@ export default function HomePage() {
                 Others
               </Text>
               <Text size="md" weight="normal" css={{ color: "$neutral600" }}>
-                <Link href="/docs/getting-started">Editor</Link>
+                <Link href="/docs/editor">Editor</Link>
               </Text>
               <Text size="md" weight="normal" css={{ color: "$neutral600" }}>
-                <Link href="/docs/getting-started">Extensions</Link>
+                <Link href="/docs/tools">Extensions</Link>
               </Text>
               <Text size="md" weight="normal" css={{ color: "$neutral600" }}>
-                <Link href="/docs/getting-started">Upgrade Guide</Link>
+                <Link href="/docs/tools/upgrade-guide">Upgrade Guide</Link>
               </Text>
             </div>
           </div>

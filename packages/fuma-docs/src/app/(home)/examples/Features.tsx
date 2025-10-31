@@ -103,11 +103,8 @@ export default function Features() {
                 alt={images[currentImageIndex].alt}
                 className="rounded-lg transition-opacity duration-300"
                 css={{
-                  height: "380px",
+                  height: "auto",
                   width: "620px",
-                  "@media (max-width: 768px)": {
-                    height: "auto",
-                  },
                 }}
               />
               
@@ -165,11 +162,8 @@ export default function Features() {
               alt="Twigs Playground"
               className="rounded-lg"
               css={{
-                height: "380px",
+                height:"auto",
                 width: "620px",
-                "@media (max-width: 768px)": {
-                  height: "auto",
-                },
               }}
             />
           </TabsContent>
