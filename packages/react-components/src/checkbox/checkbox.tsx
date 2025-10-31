@@ -55,7 +55,7 @@ const StyledCheckbox = styled(CheckboxPrimitive.Root, {
   alignItems: 'center',
   flexShrink: '0',
   justifyContent: 'center',
-  border: '$borderWidths$xs solid $neutral700',
+  border: '$borderWidths$xs solid $neutral400',
   transition: 'all $transitions$2',
   cursor: 'pointer',
 
@@ -94,58 +94,63 @@ const StyledCheckbox = styled(CheckboxPrimitive.Root, {
       default: {
         '&:active, &[data-state="checked"], &[data-state="indeterminate"]': {
           background: '$secondary500',
-          border: '$borderWidths$xs solid transparent'
+          border: 'none'
         }
       },
       primary: {
         '&:active, &[data-state="checked"], &[data-state="indeterminate"]': {
           background: '$primary500',
-          border: '$borderWidths$xs solid $primary600'
+          border: 'none'
         },
-        '&:disabled[data-state="checked"], &:disabled[data-state="indeterminate"]': {
-          background: '$secondary500',
-          border: '$borderWidths$xs solid transparent'
-        }
+        '&:disabled[data-state="checked"], &:disabled[data-state="indeterminate"]':
+          {
+            background: '$secondary500',
+            border: 'none'
+          }
       },
       secondary: {
         '&:active, &[data-state="checked"], &[data-state="indeterminate"]': {
           background: '$secondary500',
-          border: '$borderWidths$xs solid $secondary600'
+          border: 'none'
         },
-        '&:disabled[data-state="checked"], &:disabled[data-state="indeterminate"]': {
-          background: '$secondary500',
-          border: '$borderWidths$xs solid transparent'
-        }
+        '&:disabled[data-state="checked"], &:disabled[data-state="indeterminate"]':
+          {
+            background: '$secondary500',
+            border: 'none'
+          }
       },
       warning: {
         '&:active, &[data-state="checked"], &[data-state="indeterminate"]': {
           background: '$warning500',
-          border: '$borderWidths$xs solid $warning600'
+          border: 'none'
         },
-        '&:disabled[data-state="checked"], &:disabled[data-state="indeterminate"]': {
-          background: '$secondary500',
-          border: '$borderWidths$xs solid transparent'
-        }
+        '&:disabled[data-state="checked"], &:disabled[data-state="indeterminate"]':
+          {
+            background: '$secondary500',
+            border: 'none'
+          }
       },
       success: {
         '&:active, &[data-state="checked"], &[data-state="indeterminate"]': {
           background: '$positive500',
-          border: '$borderWidths$xs solid $positive600'
+          border: 'none'
         },
-        '&:disabled[data-state="checked"], &:disabled[data-state="indeterminate"]': {
-          background: '$secondary500',
-          border: '$borderWidths$xs solid transparent'
-        }
+        '&:disabled[data-state="checked"], &:disabled[data-state="indeterminate"]':
+          {
+            background: '$secondary500',
+            border: 'none'
+          }
       },
       error: {
         '&:active, &[data-state="checked"], &[data-state="indeterminate"]': {
           background: '$negative500',
-          border: '$borderWidths$xs solid $negative600'
+          border: 'none'
         },
-        '&:disabled[data-state="checked"], &:disabled[data-state="indeterminate"]': {
-          background: '$secondary500',
-          border: '$borderWidths$xs solid transparent'
-        }
+        '&:disabled[data-state="checked"], &:disabled[data-state="indeterminate"]':
+          {
+            background: '$secondary500',
+            border: 'none'
+          }
       }
     }
   },

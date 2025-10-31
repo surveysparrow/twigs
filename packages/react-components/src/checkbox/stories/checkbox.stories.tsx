@@ -21,7 +21,6 @@ export default {
       options: [
         'primary',
         'default',
-        'secondary',
         'error',
         'warning',
         'success'
