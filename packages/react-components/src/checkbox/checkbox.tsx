@@ -98,7 +98,7 @@ const StyledCheckbox = styled(CheckboxPrimitive.Root, {
         },
         '&:hover:active, &[data-state="checked"]:hover, &[data-state="indeterminate"]:hover':
           {
-            border: '$borderWidths$xs solid $secondary600'
+            borderColor: '$secondary600'
           },
         '&:disabled[data-state="checked"], &:disabled[data-state="indeterminate"]':
           {
@@ -113,7 +113,7 @@ const StyledCheckbox = styled(CheckboxPrimitive.Root, {
         },
         '&:hover:active, &[data-state="checked"]:hover, &[data-state="indeterminate"]:hover':
           {
-            border: '$borderWidths$xs solid $primary600'
+            borderColor: '$primary600'
           },
         '&:disabled[data-state="checked"], &:disabled[data-state="indeterminate"]':
           {
@@ -128,7 +128,7 @@ const StyledCheckbox = styled(CheckboxPrimitive.Root, {
         },
         '&:hover:active, &[data-state="checked"]:hover, &[data-state="indeterminate"]:hover':
           {
-            border: '$borderWidths$xs solid $warning600'
+            borderColor: '$warning600'
           },
         '&:disabled[data-state="checked"], &:disabled[data-state="indeterminate"]':
           {
@@ -143,7 +143,7 @@ const StyledCheckbox = styled(CheckboxPrimitive.Root, {
         },
         '&:hover:active, &[data-state="checked"]:hover, &[data-state="indeterminate"]:hover':
           {
-            border: '$borderWidths$xs solid $positive600'
+            borderColor: '$positive600'
           },
         '&:disabled[data-state="checked"], &:disabled[data-state="indeterminate"]':
           {
@@ -158,7 +158,7 @@ const StyledCheckbox = styled(CheckboxPrimitive.Root, {
         },
         '&:hover:active, &[data-state="checked"]:hover, &[data-state="indeterminate"]:hover':
           {
-            border: '$borderWidths$xs solid $negative600'
+            borderColor: '$negative600'
           },
         '&:disabled[data-state="checked"], &:disabled[data-state="indeterminate"]':
           {
