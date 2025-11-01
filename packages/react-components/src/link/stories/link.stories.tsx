@@ -1,4 +1,3 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Link } from '../link';
 
 export default {
@@ -11,11 +10,19 @@ export default {
     },
     asChild: {
       control: 'boolean'
+    },
+    color: {
+      control: 'select',
+      options: ['primary', 'default', 'error', 'warning', 'success']
+    },
+    underline: {
+      control: 'select',
+      options: ['hover', 'none', 'always']
     }
   }
-} as ComponentMeta<typeof Link>;
+};
 
-const Template: ComponentStory<typeof Link> = (args) => (
-  <Link {...args}> Click here </Link>
+const Template = (args) => (
+  <Link {...args} href="https://github.com/surveysparrow/twigs" target="_blank"> Click here </Link>
 );
 export const Default = Template.bind({});
