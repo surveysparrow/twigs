@@ -22,6 +22,12 @@ const StyledSlot = styled(Slot, {
 const StyledAnchor = styled('a', {
   ...defaultStyle,
   transition: 'color 0.2s ease',
+  '&:focus-visible': {
+    outlineWidth: '2px',
+    outlineStyle: 'solid',
+    borderRadius: '2px',
+    outlineOffset: '2px'
+  },
   variants: {
     underline: {
       always: {
@@ -42,14 +48,14 @@ const StyledAnchor = styled('a', {
         '&:hover': {
           color: '$neutral900'
         },
-        '&:focus': {
-          color: '$neutral800'
-        },
         '&:active': {
           color: '$neutral900'
         },
         '&:visited': {
           color: '$neutral400'
+        },
+        '&:focus-visible': {
+          outlineColor: '$neutral400'
         }
       },
       primary: {
@@ -57,14 +63,14 @@ const StyledAnchor = styled('a', {
         '&:hover': {
           color: '$primary600'
         },
-        '&:focus': {
-          color: '$primary600'
-        },
         '&:active': {
           color: '$primary700'
         },
         '&:visited': {
           color: '$primary400'
+        },
+        '&:focus-visible': {
+          outlineColor: '$primary400'
         }
       },
       warning: {
@@ -72,14 +78,14 @@ const StyledAnchor = styled('a', {
         '&:hover': {
           color: '$warning600'
         },
-        '&:focus': {
-          color: '$warning600'
-        },
         '&:active': {
           color: '$warning700'
         },
         '&:visited': {
           color: '$warning400'
+        },
+        '&:focus-visible': {
+          outlineColor: '$warning400'
         }
       },
       error: {
@@ -87,14 +93,14 @@ const StyledAnchor = styled('a', {
         '&:hover': {
           color: '$negative600'
         },
-        '&:focus': {
-          color: '$negative600'
-        },
         '&:active': {
           color: '$negative700'
         },
         '&:visited': {
           color: '$negative400'
+        },
+        '&:focus-visible': {
+          outlineColor: '$negative400'
         }
       },
       success: {
@@ -102,14 +108,14 @@ const StyledAnchor = styled('a', {
         '&:hover': {
           color: '$positive600'
         },
-        '&:focus': {
-          color: '$positive600'
-        },
         '&:active': {
           color: '$positive700'
         },
         '&:visited': {
           color: '$positive400'
+        },
+        '&:focus-visible': {
+          outlineColor: '$positive400'
         }
       }
     }
