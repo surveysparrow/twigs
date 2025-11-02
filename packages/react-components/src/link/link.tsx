@@ -8,6 +8,7 @@ import { config, styled } from '../stitches.config';
 const defaultStyle: CSS<typeof config> = {
   color: '$neutral800',
   fontWeight: 'inherit',
+  textDecoration: 'none',
   display: 'inline-block',
   '&:focus, &:active': {
     outline: 'none'
@@ -37,9 +38,9 @@ const StyledAnchor = styled('a', {
     },
     color: {
       default: {
-        color: '$neutral700',
+        color: '$neutral800',
         '&:hover': {
-          color: '$neutral800'
+          color: '$neutral900'
         },
         '&:focus': {
           color: '$neutral800'
@@ -48,7 +49,7 @@ const StyledAnchor = styled('a', {
           color: '$neutral900'
         },
         '&:visited': {
-          color: '$neutral500'
+          color: '$neutral400'
         }
       },
       primary: {
@@ -57,7 +58,7 @@ const StyledAnchor = styled('a', {
           color: '$primary600'
         },
         '&:focus': {
-          color: '$primary500'
+          color: '$primary600'
         },
         '&:active': {
           color: '$primary700'
