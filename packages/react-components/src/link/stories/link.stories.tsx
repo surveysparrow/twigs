@@ -23,6 +23,6 @@ export default {
 };
 
 const Template = (args) => (
-  <Link {...args} href="https://github.com/surveysparrow/twigs" target="_blank"> Click here </Link>
+  <Link {...args} href="https://twigs.surveysparrow.com/" target="_blank"> Click here </Link>
 );
 export const Default = Template.bind({});
