@@ -28,11 +28,15 @@ export default {
     scrollBehavior: {
       control: 'select',
       options: ['auto', 'scroll', 'hidden']
-    }
+    },
+    isDismissable: { control: 'boolean', defaultValue: true },
+    isKeyboardDismissDisabled: { control: 'boolean', defaultValue: false }
   },
   args: {
     size: 'md',
-    scrollBehavior: 'auto'
+    scrollBehavior: 'auto',
+    isDismissable: true,
+    isKeyboardDismissDisabled: false
   }
 };
 

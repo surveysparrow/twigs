@@ -25,24 +25,36 @@ type ScrollType = 'auto' | 'scroll' | 'hidden';
 type DialogContextType = {
   size: SizeType;
   scrollBehavior: ScrollType;
+  isDismissable: boolean;
+  isKeyboardDismissDisabled: boolean;
 };
 
 const DialogContext = createContext<DialogContextType>({
   size: 'md',
-  scrollBehavior: 'auto'
+  scrollBehavior: 'auto',
+  isDismissable: true,
+  isKeyboardDismissDisabled: false
 });
 
 const DialogProvider = ({
   children,
   size,
-  scrollBehavior
+  scrollBehavior,
+  isDismissable,
+  isKeyboardDismissDisabled
 }: {
   children: ReactNode;
   size: SizeType;
   scrollBehavior: ScrollType;
+  isDismissable: boolean;
+  isKeyboardDismissDisabled: boolean;
 }) => {
   return (
-    <DialogContext.Provider value={{ size, scrollBehavior }}>
+    <DialogContext.Provider
+      value={{
+        size, scrollBehavior, isDismissable, isKeyboardDismissDisabled
+      }}
+    >
       {children}
     </DialogContext.Provider>
   );
@@ -123,10 +135,26 @@ const Content = ({
   children, portalContainer, overlayClassName, ...props
 }: ContentProps) => {
   const dialogContext = useContext(DialogContext);
+
+  const combinedProps = { ...dialogContext, ...props };
+  const {
+    isDismissable, isKeyboardDismissDisabled, ...restProps
+  } = combinedProps;
+
   return (
     <DialogPrimitive.Portal container={portalContainer}>
-      <StyledOverlay className={clsx(prefixClassName('dialog__overlay'), overlayClassName)} />
-      <StyledContent {...dialogContext} {...props}>
+      <StyledOverlay
+        className={clsx(prefixClassName('dialog__overlay'), overlayClassName)}
+      />
+      <StyledContent
+        {...restProps}
+        onEscapeKeyDown={(event) => {
+          if (isKeyboardDismissDisabled) event.preventDefault();
+        }}
+        onPointerDownOutside={(event) => {
+          if (!isDismissable) event.preventDefault();
+        }}
+      >
         {children}
       </StyledContent>
     </DialogPrimitive.Portal>
@@ -137,16 +165,26 @@ export type DialogRootProps = {
   children: ReactNode;
   size?: SizeType;
   scrollBehavior?: ScrollType;
+  isDismissable?: boolean;
+  isKeyboardDismissDisabled?: boolean;
 } & ComponentProps<typeof DialogPrimitive.Root>;
 
 const DialogRoot = ({
   children,
   size = 'md',
   scrollBehavior = 'auto',
+  isDismissable = true,
+  isKeyboardDismissDisabled = false,
   ...props
 }: DialogRootProps) => {
+  const dialogProps = {
+    size,
+    scrollBehavior,
+    isDismissable,
+    isKeyboardDismissDisabled
+  };
   return (
-    <DialogProvider scrollBehavior={scrollBehavior} size={size}>
+    <DialogProvider {...dialogProps}>
       <DialogPrimitive.Root {...props}>{children}</DialogPrimitive.Root>
     </DialogProvider>
   );
