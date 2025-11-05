@@ -12,7 +12,6 @@ import {
 import Image from "next/image";
 import thriveSparrowLogo from "@/assets/images/logo.png";
 import loginbg from "@/assets/images/loginbg.png";
-import "../styles.css";
 
 export default function LoginForm() {
   return (
@@ -56,15 +55,16 @@ export default function LoginForm() {
               rounded="3xl"
             />
           </Box>
-          <Heading size="h4" weight="medium" css={{ color: "$neutral900" }}>
+          <Heading size="h4" weight="regular" css={{ color: "$neutral900", fontFamily: "DM Sans, sans-serif !important",fontWeight: "500 !important" }}>
             Glad you made it!
           </Heading>
           <Heading
             size="h6"
             weight="regular"
             css={{
-              color: "$neutral900",
+              color: "$neutral900 !important",
               fontFamily: "DM Sans, sans-serif !important",
+              fontWeight: "400 !important",
             }}
           >
             Welcome Gautham Srinivasan. Yup! you aren&apos;t a stranger here 🤗.
@@ -73,7 +73,7 @@ export default function LoginForm() {
             size="sm"
             weight="regular"
             css={{
-              color: "$neutral800",
+              color: "$neutral800 !important",
               lineHeight: "$2",
               paragraphSpacing: "$2",
             }}
@@ -144,6 +144,7 @@ export default function LoginForm() {
             css={{
               color: "#2B2B2B",
               textAlign: "center",
+              fontFamily: "DM Sans, sans-serif !important",
             }}
           >
             Join your colleagues

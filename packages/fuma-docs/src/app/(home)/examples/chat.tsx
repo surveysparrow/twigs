@@ -75,6 +75,10 @@ export default function Chat() {
       css={{
         borderRadius: "$2xl",
         boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
+        height: "80vh",
+        "@media (max-width: 1024px)": {
+          height: "100%",
+        },
       }}
     >
       <Flex
@@ -426,7 +430,7 @@ export default function Chat() {
               size="xs"
               css={{
                 backgroundColor: "$secondary600",
-                color: "white",
+                color: "white !important",
                 borderRadius: "$xl",
                 borderBottomLeftRadius: "0px",
                 padding: "$4",
@@ -439,7 +443,7 @@ export default function Chat() {
               size="xs"
               css={{
                 backgroundColor: "$secondary600",
-                color: "white",
+                color: "white !important",
                 borderRadius: "$xl",
                 borderTopLeftRadius: "0px",
                 padding: "$4",
@@ -605,7 +609,7 @@ export default function Chat() {
               size="xs"
               css={{
                 backgroundColor: "$secondary600",
-                color: "white",
+                color: "white !important",
                 borderRadius: "$xl",
                 padding: "$4",
                 width: "fit-content",
@@ -630,7 +634,7 @@ export default function Chat() {
           gap="$4"
           css={{
             padding: "$4 $4",
-            marginTop: "$20",
+            marginTop: "$10",
             width: "100%",
             border: "1px solid $primary100 !important",
             borderRadius: "$xl",
@@ -652,7 +656,7 @@ export default function Chat() {
             size="sm"
             css={{
               width: "100%",
-              border: "none",
+              border: "none !important",
               boxShadow: "none",
               "&:hover": {
                 border: "none !important",
@@ -876,8 +880,7 @@ export default function Chat() {
             </Box>
           </Box>
           <Box>
-            <Text css={{ color: "$neutral700", marginBottom: "$4" }}>Notes (single line testing):</Text>
-            <Input variant="filled" placeholder="" css={{
+            <Input variant="filled" placeholder="Feedback" css={{
                 border:"none"
             }}/>
           </Box>

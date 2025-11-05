@@ -88,7 +88,7 @@ export function AllBordersAndRadii() {
                   height: "70px",
                   width: "90px",
                 }}
-                className="border !border-fd-input bg-fd-secondary"
+                className="border !border-fd-border bg-fd-secondary"
               >
               </Box>
             </div>
@@ -125,7 +125,7 @@ export function AllBordersAndRadii() {
                     alignItems: "center",
                     justifyContent: "center"
                   }}
-                  className="border !border-fd-input bg-fd-secondary"
+                  className="border !border-fd-border bg-fd-secondary"
                 >
                 </Box>
               </div>

@@ -30,6 +30,7 @@ export default function TabsComponent() {
         width: "100%",
         height: "fit-content",
         padding: "$6",
+        paddingBottom: "$2",
         borderRadius: "$2xl",
         backgroundColor: "white",
         boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",

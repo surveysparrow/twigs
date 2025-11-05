@@ -1,17 +1,17 @@
 "use client";
 import {
   Box,
-  Button,
   TabsList,
   Tabs,
   TabsTrigger,
   TabsContent,
-  ThemeProvider,
-  defaultTheme,
   Image,
   Link,
   Text,
   Avatar,
+  Flex,
+  ThemeProvider,
+  defaultTheme,
 } from "@sparrowengg/twigs-react";
 // import { Metadata } from "next";
 // export const metadata: Metadata = {
@@ -24,12 +24,11 @@ import {
   CopyIcon,
   TickIcon,
 } from "@sparrowengg/twigs-react-icons";
-import "./styles.css";
 import TravelCard from "./examples/travelCard";
 import MusicPlayer from "./examples/musicPlayer";
 import TabsComponent from "./examples/tabsComponent";
 import MiniForm from "./examples/miniForm";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import SmallCards from "./examples/smallCards";
 import MeetingCard from "./examples/meetingCard";
 import BusinessCard from "./examples/cookieCard";
@@ -46,17 +45,171 @@ import Dashboard from "./examples/dashboard";
 
 export default function HomePage() {
   const [copied, setCopied] = useState(false);
+  const [activeTab, setActiveTab] = useState("examples");
+  const [indicatorStyle, setIndicatorStyle] = useState({
+    x: 0,
+    width: 0,
+    opacity: 0,
+  });
+  const tabsListRef = useRef<HTMLDivElement>(null);
+
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(
         `npm install @sparrowengg/twigs-react`
       );
       setCopied(true);
+      setTimeout(() => {
+        setCopied(false);
+      }, 3000);
     } catch (err) {
       console.error("Failed to copy:", err);
       setCopied(false);
     }
   };
+
+  const updateIndicator = () => {
+    const list = tabsListRef.current;
+    if (!list) {
+      setIndicatorStyle({ x: 0, width: 0, opacity: 0 });
+      return;
+    }
+
+    // Find the active tab button using data-state attribute
+    const activeButton = list.querySelector(
+      `button[data-state="active"], [role="tab"][aria-selected="true"]`
+    ) as HTMLElement;
+
+    if (!activeButton) {
+      setIndicatorStyle({ x: 0, width: 0, opacity: 0 });
+      return;
+    }
+
+    // Get the TabsList element (parent of the buttons)
+    const tabsListElement = activeButton.closest(
+      '[role="tablist"]'
+    ) as HTMLElement;
+
+    if (!tabsListElement) {
+      setIndicatorStyle({ x: 0, width: 0, opacity: 0 });
+      return;
+    }
+
+    // For scrollable containers on mobile, we need position in content space
+    // offsetLeft gives position relative to offsetParent (content coordinates)
+    // This doesn't change when the container scrolls
+    const buttonOffsetLeft = activeButton.offsetLeft;
+    const tabsListOffsetLeft = tabsListElement.offsetLeft || 0;
+
+    // Position in container's content coordinate system
+    // The indicator is absolutely positioned in the container, so this works correctly
+    const x = buttonOffsetLeft + tabsListOffsetLeft;
+    const width = activeButton.offsetWidth;
+
+    setIndicatorStyle({ x, width, opacity: 1 });
+  };
+
+  useEffect(() => {
+    // Use requestAnimationFrame to ensure DOM is updated
+    const update = () => {
+      requestAnimationFrame(() => {
+        updateIndicator();
+      });
+    };
+
+    // Initial update
+    update();
+
+    // Also update after a short delay to catch DOM updates
+    const timer = setTimeout(update, 50);
+
+    const handleResize = () => {
+      update();
+    };
+
+    // On scroll, update indicator position (though offsetLeft shouldn't change)
+    const handleScroll = () => {
+      requestAnimationFrame(() => {
+        updateIndicator();
+      });
+    };
+
+    window.addEventListener("resize", handleResize);
+    const currentList = tabsListRef.current;
+    if (currentList) {
+      currentList.addEventListener("scroll", handleScroll, { passive: true });
+    }
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      if (currentList) {
+        currentList.removeEventListener("scroll", handleScroll);
+      }
+      clearTimeout(timer);
+    };
+  }, [activeTab]);
+
+  // Auto-scroll active tab into view on mobile when tab changes
+  useEffect(() => {
+    const list = tabsListRef.current;
+    if (!list) return;
+
+    // Check if container is scrollable
+    const isScrollable = list.scrollWidth > list.clientWidth;
+    if (!isScrollable) return;
+
+    // Find active button
+    const activeButton = list.querySelector(
+      `button[data-state="active"], [role="tab"][aria-selected="true"]`
+    ) as HTMLElement;
+
+    if (!activeButton) return;
+
+    const tabsListElement = activeButton.closest(
+      '[role="tablist"]'
+    ) as HTMLElement;
+    if (!tabsListElement) return;
+
+    // Calculate button position in scroll space
+    const buttonOffsetLeft = activeButton.offsetLeft;
+    const tabsListOffsetLeft = tabsListElement.offsetLeft || 0;
+    const buttonLeft = buttonOffsetLeft + tabsListOffsetLeft;
+    const buttonRight = buttonLeft + activeButton.offsetWidth;
+
+    const scrollLeft = list.scrollLeft;
+    const clientWidth = list.clientWidth;
+    const padding = 12; // Padding from edges
+
+    let targetScroll = scrollLeft;
+    const buttonVisibleLeft = buttonLeft - scrollLeft;
+    const buttonVisibleRight = buttonRight - scrollLeft;
+
+    // Scroll left if button is too far left
+    if (buttonVisibleLeft < padding) {
+      targetScroll = Math.max(0, buttonLeft - padding);
+    }
+    // Scroll right if button is too far right
+    else if (buttonVisibleRight > clientWidth - padding) {
+      targetScroll = Math.min(
+        list.scrollWidth - clientWidth,
+        buttonRight - clientWidth + padding
+      );
+    }
+
+    // Smooth scroll if needed
+    if (Math.abs(targetScroll - scrollLeft) > 1) {
+      list.scrollTo({
+        left: targetScroll,
+        behavior: "smooth",
+      });
+
+      // Update indicator after scroll animation completes
+      setTimeout(() => {
+        updateIndicator();
+      }, 400);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeTab]);
 
   return (
     <main className="w-full full-page">
@@ -76,23 +229,35 @@ export default function HomePage() {
             </p>
           </div>
           <div className="flex gap-2 flex-col sm:flex-row justify-center items-center">
-            <div>
-              <Button
+            <Flex
+              alignItems="center"
+              gap="$2"
+              css={{
+                backgroundColor: "$primary500",
+                borderRadius: "$md",
+                height: "$10",
+                padding: "$2 $4",
+                color: "$white900",
+              }}
+              aria-label="Getting Started Button"
+            >
+              <Box
                 onClick={() => {
                   window.location.href = "/docs/getting-started";
                 }}
-                size="lg"
-                className="flex items-center gap-2"
-                rightIcon={<ForwardArrowIcon size={18} color="currentColor" />}
+                css={{
+                  cursor: "pointer",
+                }}
               >
-                Getting Started{" "}
-              </Button>
-            </div>
+                Getting Started
+              </Box>
+              <ForwardArrowIcon size={18} color="currentColor" />
+            </Flex>
             <Box
               className="text-fd-muted-foreground px-4 py-2.5 rounded-md inline-flex gap-2 items-center text-sm w-fit cursor-pointer bg-fd-background shadow-sm"
               onClick={handleCopy}
             >
-              <code className="flex items-center gap-2">
+              <code className="flex items-center gap-2 text-nowrap">
                 npm install @sparrowengg/twigs-react{" "}
                 {copied ? (
                   <TickIcon size={18} color="currentColor" />
@@ -113,14 +278,24 @@ export default function HomePage() {
               },
             }}
           >
-            <Tabs defaultValue="examples">
-              <div className="w-full flex items-center justify-center">
+          <Tabs
+            defaultValue="examples"
+            value={activeTab}
+            onValueChange={setActiveTab}
+          >
+            <div className="w-full flex items-center justify-center">
+              <div
+                ref={tabsListRef}
+                className="flex overflow-scroll bg-fd-muted rounded-md w-90 md:w-fit p-0.5 tabs-list-container"
+                style={{
+                  scrollbarWidth: "none",
+                  position: "relative",
+                }}
+              >
                 <TabsList
                   aria-label="categories of examples"
-                  className="flex overflow-scroll bg-fd-background rounded-md w-95 md:w-fit shadow-sm p-0.5"
-                  style={{
-                    scrollbarWidth: "none",
-                  }}
+                  className="flex"
+                  style={{ position: "relative", width: "100%" }}
                 >
                   <TabsTrigger
                     value="examples"
@@ -160,76 +335,102 @@ export default function HomePage() {
                     <div>Authentication</div>
                   </TabsTrigger>
                 </TabsList>
+                <div
+                  className="tabs-indicator"
+                  style={{
+                    position: "absolute",
+                    left: `${indicatorStyle.x}px`,
+                    width: `${indicatorStyle.width}px`,
+                    opacity: indicatorStyle.opacity,
+                    height: "calc(100% - 4px)",
+                    top: "2px",
+                    backgroundColor: "var(--color-fd-background)",
+                    borderRadius: "6px",
+                    boxShadow:
+                      "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
+                    transition:
+                      "left 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955), width 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955), opacity 0.2s ease",
+                    pointerEvents: "none",
+                    zIndex: 0,
+                  }}
+                />
               </div>
-              <TabsContent
-                value="examples"
-                className="mt-2 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
-              >
-                <div className="lg:max-w-6xl mx-3 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 border-2 border-fd-background rounded-2xl p-4 bg-fd-muted tabs-grid">
-                  <div className="row-span-2">
-                    <TravelCard />
-                  </div>
-                  <div className="">
-                    <MusicPlayer />
-                  </div>
-                  <div className="">
-                    <MeetingCard />
-                  </div>
-                  <div className="row-span-2">
-                    <MiniForm />
-                  </div>
-                  <div className="">
-                    <SmallCards />
-                  </div>
-                  <div className="">
-                    <TabsComponent />
-                  </div>
-                  <div className="">
-                    <BusinessCard />
-                  </div>
+            </div>
+            <TabsContent
+              value="examples"
+              forceMount
+              className="mt-2 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
+            >
+              <div className="lg:max-w-6xl mx-3 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 border-2 border-fd-background rounded-2xl p-3 bg-fd-muted tabs-grid">
+                <div className="row-span-2">
+                  <TravelCard />
                 </div>
-              </TabsContent>
-              <TabsContent
-                value="authentication"
-                className="mt-2 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
-              >
-                <div className="lg:max-w-6xl mx-3 w-full border-2 border-fd-background rounded-2xl p-4 bg-fd-muted tabs-grid">
-                  <LoginForm />
+                <div className="">
+                  <MusicPlayer />
                 </div>
-              </TabsContent>
-              <TabsContent
-                value="settings"
-                className="mt-2 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
-              >
-                <div className="lg:w-6xl mx-3 w-full border-2 border-fd-background rounded-2xl p-4 bg-fd-muted tabs-grid">
-                  <Settings />
+                <div className="">
+                  <MeetingCard />
                 </div>
-              </TabsContent>
-              <TabsContent
-                value="accounts"
-                className="mt-2 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
-              >
-                <div className="lg:max-w-6xl mx-3 w-full border-2 border-fd-background rounded-2xl p-4 bg-fd-muted tabs-grid">
-                  <Accounts />
+                <div className="row-span-2">
+                  <MiniForm />
                 </div>
-              </TabsContent>
-              <TabsContent
-                value="chat"
-                className="mt-2 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
-              >
-                <div className="lg:max-w-6xl md:max-w-4xl max-w-99 w-full border-2 border-fd-background rounded-2xl p-4 bg-fd-muted tabs-grid">
-                  <Chat />
+                <div className="">
+                  <SmallCards />
                 </div>
-              </TabsContent>
-              <TabsContent
-                value="dashboard"
-                className="mt-2 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
-              >
-                <div className="lg:max-w-6xl md:max-w-4xl max-w-fit mx-3 w-full border-2 border-fd-background rounded-2xl p-4 bg-fd-muted tabs-grid">
-                  <Dashboard />
+                <div className="">
+                  <TabsComponent />
                 </div>
-              </TabsContent>
-            </Tabs>
+                <div className="">
+                  <BusinessCard />
+                </div>
+              </div>
+            </TabsContent>
+            <TabsContent
+              value="authentication"
+              forceMount
+              className="mt-2 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
+            >
+              <div className="lg:max-w-6xl mx-3 w-full border-2 border-fd-background rounded-2xl p-4 bg-fd-muted tabs-grid">
+                <LoginForm />
+              </div>
+            </TabsContent>
+            <TabsContent
+              value="settings"
+              forceMount
+              className="mt-2 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
+            >
+              <div className="lg:w-6xl mx-3 w-full border-2 border-fd-background rounded-2xl p-4 bg-fd-muted tabs-grid">
+                <Settings />
+              </div>
+            </TabsContent>
+            <TabsContent
+              value="accounts"
+              forceMount
+              className="mt-2 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
+            >
+              <div className="lg:max-w-6xl mx-3 w-full border-2 border-fd-background rounded-2xl p-4 bg-fd-muted tabs-grid">
+                <Accounts />
+              </div>
+            </TabsContent>
+            <TabsContent
+              value="chat"
+              forceMount
+              className="mt-2 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
+            >
+              <div className="lg:max-w-6xl md:max-w-4xl max-w-99 w-full border-2 border-fd-background rounded-2xl p-4 bg-fd-muted tabs-grid">
+                <Chat />
+              </div>
+            </TabsContent>
+            <TabsContent
+              value="dashboard"
+              forceMount
+              className="mt-2 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
+            >
+              <div className="lg:max-w-6xl md:max-w-4xl max-w-fit mx-3 w-full border-2 border-fd-background rounded-2xl p-4 bg-fd-muted tabs-grid">
+                <Dashboard />
+              </div>
+            </TabsContent>
+          </Tabs>
           </ThemeProvider>
         </div>
         <div className="w-full flex flex-col justify-center items-center gap-10 pt-15">
@@ -277,17 +478,18 @@ export default function HomePage() {
         </div>
         <div className="w-full flex gap-10 lg:gap-5 lg:py-10 pb-5 pt-10 justify-center sm:flex-row flex-col px-4">
           <div className="flex flex-col gap-5 lg:w-100 lg:border-r lg:pr-5 border-fd-border">
-            <p className="leading-6 text-justify">
-              Twigs is the gold standard of &quot;just enough design system&quot;,
-              where they have figured out the minimal viable token architecture
-              and an infinitely flexible base component kit. I constantly look
-              to them for inspiration.
+            <p className="leading-6 text-justify ">
+              Twigs is the gold standard of &quot;just enough design
+              system&quot;, where they have figured out the minimal viable token
+              architecture and an infinitely flexible base component kit. I
+              constantly look to them for inspiration.
             </p>
             <div className="flex gap-2 items-center">
               <Avatar
                 src="https://i.pravatar.cc/150?img=33"
                 alt="Twigs"
                 size="lg"
+                name="John Doe"
               />
               <div>
                 <Text size="md" weight="normal" css={{ color: "$neutral900" }}>
@@ -310,6 +512,7 @@ export default function HomePage() {
                 src="https://i.pravatar.cc/150?img=38"
                 alt="Twigs"
                 size="lg"
+                name="Hemant"
               />
               <div>
                 <Text size="md" weight="normal" css={{ color: "$neutral900" }}>
@@ -333,6 +536,7 @@ export default function HomePage() {
                 src="https://i.pravatar.cc/150?img=48"
                 alt="Twigs"
                 size="lg"
+                name="Harry Potter"
               />
               <div>
                 <Text size="md" weight="normal" css={{ color: "$neutral900" }}>
@@ -412,9 +616,7 @@ export default function HomePage() {
             Build with Radix and Stitches ❤️
           </Text>
           <Text size="md" weight="medium" css={{ color: "$neutral600" }}>
-            <Link href="/docs/getting-started">
-              Copyright © {new Date().getFullYear()} Surveysparrow
-            </Link>
+            Copyright © {new Date().getFullYear()} Surveysparrow
           </Text>
         </div>
       </div>

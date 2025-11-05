@@ -9,16 +9,6 @@
   --color-fd-loader: #5329D8
 }
 
-/* Levitate Animation */
-@keyframes levitate {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
-}
-
 @media (min-width: 1024px) {
 #nd-sidebar > div:first-child {
     display: none;
@@ -48,7 +38,6 @@ header#nd-nav div nav {
     }
 }
 
-
 header#nd-subnav > div:last-child a[class*="bg-fd-primary"] {
     background-color: white !important;
     border-bottom: 2px solid #00828D !important;
@@ -60,13 +49,18 @@ header#nd-subnav > div:last-child a[class*="bg-fd-primary"] {
     height: 100% !important;
 }
 
+div[role="dialog"] {
+  border-color: var(--color-fd-border) !important;
+}
+
+div[role="dialog"] > div{
+  border-bottom-color: var(--color-fd-border) !important;
+}
+
 *, ::after, ::before, ::backdrop, ::file-selector-button {
-  border-color: var(--color-fd-border, currentColor);
+  border-color: var(--color-fd-border);
 }
-body {
-  background-color: var(--color-fd-background);
-  color: var(--color-fd-foreground);
-}
+
 [data-rmiz-modal-overlay='visible'] {
   background-color: var(--color-fd-background);
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import {
   Checkbox,
   Input,
@@ -18,14 +18,9 @@ export default function MiniForm() {
     { value: "Next.js", label: "Next.js" },
     { value: "Tailwind CSS", label: "Tailwind CSS" },
   ];
-  const [isClient, setIsClient] = useState(false);
   const [selectedValue, setSelectedValue] = useState<string | undefined>(
     undefined
   );
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
 
   return (
     <Flex
@@ -71,48 +66,30 @@ export default function MiniForm() {
           value={selectedValue}
           onChange={setSelectedValue}
           defaultValue="option1"
-          style={{ display: "flex", flexDirection: "row" }}
+          style={{ display: "flex", flexDirection: "row"}}
         >
           <Radio
             value="option1"
             size="sm"
-            css={{
-              "& + label": {
-                color: "$neutral700",
-                fontSize: "13px",
-                cursor: "pointer",
-                marginRight: "10px",
-              },
-            }}
-          >
-            Apply for a job
-          </Radio>
+          />
+          <Text size="xs" css={{ color: "$neutral500", cursor: "pointer", marginRight: "$6" }}>Apply for a job</Text>
           <Radio
             value="option2"
             size="sm"
-            css={{
-              "& + label": {
-                color: "$neutral700",
-                fontSize: "13px",
-                cursor: "pointer",
-              },
-            }}
-          >
-            Upskill myself
-          </Radio>
+          />
+          <Text size="xs" css={{ color: "$neutral500", cursor: "pointer" }}>Upskill myself</Text>
         </RadioGroup>
       </Flex>
       <Flex flexDirection="row" justifyContent="space-between" gap="$10">
         <Flex flexDirection="column" gap="$4" css={{ width: "50%" }}>
           <Text>Acquired skill</Text>
-          {isClient && (
             <Select
+              instanceId="acquired-skill-select"
               placeholder="Select"
               options={options}
               size="md"
               variant="filled"
             />
-          )}
         </Flex>
         <Flex flexDirection="column" gap="$6" css={{ width: "50%" }}>
           <Text>Terms & Conditions</Text>

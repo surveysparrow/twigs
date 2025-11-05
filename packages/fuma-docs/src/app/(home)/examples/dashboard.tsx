@@ -22,7 +22,7 @@ import {
   UserCirclePlusIcon,
   HomeIcon,
   ColorSwatchesIcon,
-  CommentIcon,
+  LinkIcon,
   UserIcon,
   RocketIcon,
   SearchIcon,
@@ -32,6 +32,7 @@ import {
   ArrowDownIcon,
 } from "@sparrowengg/twigs-react-icons";
 import logo from "@/assets/images/Group 1694.png";
+
 
 export default function Dashboard() {
   const RenderedThumb = () => {
@@ -63,6 +64,11 @@ export default function Dashboard() {
         boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
         background:
           "linear-gradient(299deg,rgba(255, 255, 255, 1) 90%, rgba(240, 255, 244, 1) 100%)",
+        height: "80vh",
+        overflow: "scroll",
+        "@media (max-width: 1024px)": {
+          height: "100%",
+        },
       }}
     >
       <Flex
@@ -71,6 +77,7 @@ export default function Dashboard() {
         css={{
           padding: "$8",
           borderRight: "1px solid $neutral200",
+          height: "96vh",
           width: "260px",
           "@media (max-width: 768px)": {
             display: "none",
@@ -97,7 +104,7 @@ export default function Dashboard() {
               <Text
                 size="xs"
                 css={{
-                  color: "$neutral500",
+                  color: "$neutral600",
                 }}
               >
                 Favourites
@@ -173,7 +180,7 @@ export default function Dashboard() {
               <Text
                 size="xs"
                 css={{
-                  color: "$neutral500",
+                  color: "$neutral600",
                 }}
               >
                 Main Menu
@@ -218,7 +225,7 @@ export default function Dashboard() {
                   },
                 }}
               >
-                <CommentIcon size={20} strokeWidth={1.2} />
+                <LinkIcon size={20} strokeWidth={1.2} />
                 <Text>Chat</Text>
               </Flex>
               <Flex
@@ -284,7 +291,7 @@ export default function Dashboard() {
             <Text
               size="sm"
               css={{
-                color: "$neutral500",
+                color: "$neutral600",
               }}
             >
               Campaigns
@@ -330,7 +337,11 @@ export default function Dashboard() {
           }}
         >
           <Box>
-            <Heading size="h4" weight="bold">
+            <Heading size="h4" weight="bold" 
+            css={{
+              fontFamily: "DM Sans, sans-serif !important",
+            }}
+            >
               Your total revenue
             </Heading>
             <Heading
@@ -343,6 +354,7 @@ export default function Dashboard() {
                 backgroundClip: "text",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
+                fontFamily: "DM Sans, sans-serif !important",
               }}
             >
               $90,239.00
@@ -434,7 +446,7 @@ export default function Dashboard() {
                 <Flex>
                   <Text
                     css={{
-                      color: "$neutral500",
+                      color: "$neutral600",
                     }}
                   >
                     compared to last week
@@ -497,7 +509,7 @@ export default function Dashboard() {
                 <Flex>
                   <Text
                     css={{
-                      color: "$neutral500",
+                      color: "$neutral600",
                     }}
                   >
                     compared to last week
@@ -558,7 +570,7 @@ export default function Dashboard() {
                 <Flex>
                   <Text
                     css={{
-                      color: "$neutral500",
+                      color: "$neutral600",
                     }}
                   >
                     compared to last week
@@ -627,7 +639,7 @@ export default function Dashboard() {
                 <Text
                   size="sm"
                   css={{
-                    color: "$neutral500",
+                    color: "$neutral600",
                   }}
                 >
                   Draft
@@ -676,7 +688,7 @@ export default function Dashboard() {
                   </Box>
                   <Box>
                     <AvatarGroup limit={3} rounded="full" size="xs">
-                      <Avatar src="https://i.pravatar.cc/150?img=0" key="1" />
+                      <Avatar src="https://i.pravatar.cc/150?img=0" key="1"/>
                       <Avatar src="https://i.pravatar.cc/150?img=1" key="2" />
                       <Avatar src="https://i.pravatar.cc/150?img=2" key="3" />
                     </AvatarGroup>
@@ -690,7 +702,7 @@ export default function Dashboard() {
                   <Text
                     size="xs"
                     css={{
-                      color: "$neutral500",
+                      color: "$neutral600",
                     }}
                   >
                     Not started
@@ -708,7 +720,7 @@ export default function Dashboard() {
                   <Text
                     size="xs"
                     css={{
-                      color: "$neutral500",
+                      color: "$neutral600",
                     }}
                   >
                     Last updated :
@@ -734,7 +746,7 @@ export default function Dashboard() {
                 <Text
                   size="sm"
                   css={{
-                    color: "$neutral500",
+                    color: "$neutral600",
                   }}
                 >
                   In Progress
@@ -800,7 +812,7 @@ export default function Dashboard() {
                     <Text
                       size="xs"
                       css={{
-                        color: "$neutral500",
+                        color: "$neutral600",
                       }}
                     >
                       June 1, 2025
@@ -811,7 +823,7 @@ export default function Dashboard() {
                     <Text
                       size="xs"
                       css={{
-                        color: "$neutral500",
+                        color: "$neutral600",
                       }}
                     >
                       Oct 16, 2025
@@ -830,7 +842,7 @@ export default function Dashboard() {
                   <Text
                     size="xs"
                     css={{
-                      color: "$neutral500",
+                      color: "$neutral600",
                     }}
                   >
                     Last updated :
@@ -856,7 +868,7 @@ export default function Dashboard() {
                 <Text
                   size="sm"
                   css={{
-                    color: "$neutral500",
+                    color: "$neutral600",
                   }}
                 >
                   Archived
@@ -920,7 +932,7 @@ export default function Dashboard() {
                   <Text
                     size="xs"
                     css={{
-                      color: "$neutral500",
+                      color: "$neutral600",
                     }}
                   >
                     Jun 16, 2025
@@ -938,7 +950,7 @@ export default function Dashboard() {
                   <Text
                     size="xs"
                     css={{
-                      color: "$neutral500",
+                      color: "$neutral600",
                     }}
                   >
                     Last updated :
@@ -1007,7 +1019,7 @@ export default function Dashboard() {
                   <Text
                     size="xs"
                     css={{
-                      color: "$neutral500",
+                      color: "$neutral600",
                     }}
                   >
                     Not started
@@ -1025,7 +1037,7 @@ export default function Dashboard() {
                   <Text
                     size="xs"
                     css={{
-                      color: "$neutral500",
+                      color: "$neutral600",
                     }}
                   >
                     Last updated :
@@ -1089,7 +1101,7 @@ export default function Dashboard() {
                     <Text
                       size="xs"
                       css={{
-                        color: "$neutral500",
+                        color: "$neutral600",
                       }}
                     >
                       June 1, 2025
@@ -1100,7 +1112,7 @@ export default function Dashboard() {
                     <Text
                       size="xs"
                       css={{
-                        color: "$neutral500",
+                        color: "$neutral600",
                       }}
                     >
                       Oct 16, 2025
@@ -1119,7 +1131,7 @@ export default function Dashboard() {
                   <Text
                     size="xs"
                     css={{
-                      color: "$neutral500",
+                      color: "$neutral600",
                     }}
                   >
                     Last updated :
