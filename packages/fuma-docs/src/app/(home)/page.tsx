@@ -9,7 +9,6 @@ import {
   Link,
   Text,
   Avatar,
-  Flex,
   ThemeProvider,
   defaultTheme,
 } from "@sparrowengg/twigs-react";
@@ -229,30 +228,16 @@ export default function HomePage() {
             </p>
           </div>
           <div className="flex gap-2 flex-col sm:flex-row justify-center items-center">
-            <Flex
-              alignItems="center"
-              gap="$2"
-              css={{
-                backgroundColor: "$primary500",
-                borderRadius: "$md",
-                height: "$10",
-                padding: "$2 $4",
-                color: "$white900",
-              }}
-              aria-label="Getting Started Button"
+            <button 
+            className="!px-4 !py-2.5 rounded-md flex gap-3 items-center text-md w-fit cursor-pointer bg-fd-primary shadow-sm text-white font-medium"
+            onClick={() => {
+              window.location.href = "/docs/getting-started";
+            }}
+            aria-label="Getting Started Button"
             >
-              <Box
-                onClick={() => {
-                  window.location.href = "/docs/getting-started";
-                }}
-                css={{
-                  cursor: "pointer",
-                }}
-              >
-                Getting Started
-              </Box>
+              Getting Started
               <ForwardArrowIcon size={18} color="currentColor" />
-            </Flex>
+            </button>
             <Box
               className="text-fd-muted-foreground px-4 py-2.5 rounded-md inline-flex gap-2 items-center text-sm w-fit cursor-pointer bg-fd-background shadow-sm"
               onClick={handleCopy}

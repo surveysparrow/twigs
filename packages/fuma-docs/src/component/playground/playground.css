@@ -34,7 +34,11 @@
   display: none;
 }
 
-
+.header-file-tabs-div{
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
 
 .code-file-tab {
   font-family: var(

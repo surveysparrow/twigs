@@ -81,6 +81,7 @@
   background-color: transparent !important;
   position: relative !important;
   z-index: 1 !important;
+  justify-content: flex-start !important;
 }
 
 .Features-tab[data-state="active"]{

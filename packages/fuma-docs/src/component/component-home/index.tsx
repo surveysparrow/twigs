@@ -169,6 +169,13 @@ const components = [
     category: "Form",
   },
   {
+    title: "Cascader",
+    description:
+      "Used to select values from hierarchical nested options. Perfect for location selection, category browsing, and multi-level data selection.",
+    href: "/docs/components/cascader",
+    category: "Form",
+  },
+  {
     title: "Checkbox",
     description:
       "Used in forms when a user needs to select multiple values from several options. Supports indeterminate state.",
@@ -353,7 +360,7 @@ export function ComponentHome() {
         }, {} as Record<string, typeof components>)
       ).map(([category, categoryComponents]) => (
         <Box key={category} className="mb-5 pb-5 border-b border-fd-border">
-          <Text size="md" css={{ marginBottom: "$6" }}>
+          <Text size="md" css={{ marginBottom: "$6", marginTop: "0" }}>
             {category}
           </Text>
           <Grid

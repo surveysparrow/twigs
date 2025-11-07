@@ -100,11 +100,11 @@ const Code = ({ snippetName }: { snippetName: string }) => {
       }}
     >
       {status === "success" && Object.keys(files).length > 0 && (
-        <div className="flex items-center absolute top-0 left-0 gap-2 z-2 overflow-hidden border-b border-gray-200 dark:border-gray-700 w-full py-2 px-4">
+        <div className="flex items-center absolute top-0 left-0 gap-2 z-2 overflow-scroll border-b border-gray-200 w-full py-2 px-4 header-file-tabs-div">
           {Object.keys(files).map((file) => (
             <button
               key={file}
-              className={`flex items-center gap-1 text-sm px-2 py-1 rounded-md cursor-pointer code-file-tab ${
+              className={`flex items-center gap-1 text-sm text-nowrap px-2 py-1 rounded-md cursor-pointer code-file-tab ${
                 activeFile === file ? "bg-gray-300 dark:bg-gray-800" : ""
               }`}
               onClick={() => {

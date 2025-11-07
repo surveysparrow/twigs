@@ -6,7 +6,7 @@
 
 :root {
   --color-fd-primary: #00828D;
-  --color-fd-loader: #5329D8
+  --color-fd-loader: #5329D8;
 }
 
 @media (min-width: 1024px) {
@@ -27,7 +27,26 @@ header#nd-subnav > div:last-child a {
 
 header#nd-nav {
   border-bottom: 1px solid var(--color-fd-border);
+  min-height: 64px;
+  @media (max-width: 768px) {
+    min-height: auto;
+  }
 }
+header#nd-nav > div {
+  max-width: 100% !important;
+  margin: 0 16px !important;
+  margin-top: 4px !important;
+  @media (max-width: 768px) {
+    margin: 0 !important;
+  }
+}
+
+@media (max-width: 768px) {
+  header#nd-nav > div > nav { 
+    padding: 0 12px !important;
+  }
+}
+
 header#nd-nav > div > nav > div > button > div > kbd{
   border: 1px solid var(--color-fd-border);
 }
@@ -38,8 +57,21 @@ header#nd-nav div nav {
     }
 }
 
+/* Hide sidebar collapse button on large devices (visible on medium, hidden on small and large) */
+@media (min-width: 1024px) {
+  /* Hide the button on large screens */
+  header#nd-subnav button[aria-label="Collapse Sidebar"] {
+    display: none !important;
+  }
+  
+  /* Hide the parent container div that holds the collapse button */
+  header#nd-subnav > div:first-child > div:last-child > div:last-child {
+    display: none !important;
+  }
+}
+
 header#nd-subnav > div:last-child a[class*="bg-fd-primary"] {
-    background-color: white !important;
+    background-color: transparent;
     border-bottom: 2px solid #00828D !important;
     border-top: none !important;
     border-left: none !important;

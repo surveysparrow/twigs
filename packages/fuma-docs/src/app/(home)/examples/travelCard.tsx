@@ -18,7 +18,7 @@ export default function TravelCard() {
       css={{
         padding: "$6",
         borderRadius: "$2xl",
-        gap: "$5",
+        gap: "$4",
         height: "fit-content",
         width: "100%",
         backgroundColor: "white",
@@ -26,9 +26,6 @@ export default function TravelCard() {
       }}
     >
       <Image
-        // src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=3164&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        // src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=3274&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        // src="https://images.unsplash.com/photo-1506260408121-e353d10b87c7?q=80&w=1856&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         src="https://images.unsplash.com/photo-1566999573217-25c859ec1450?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         alt="Natural beauty"
         css={{

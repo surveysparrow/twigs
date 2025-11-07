@@ -180,7 +180,7 @@ export const UpgradeGuide = () => {
         src={`https://www.google.com/recaptcha/api.js?render=${PUBLIC_RECAPTCHA_SITE_KEY}`}
         strategy="afterInteractive"
       />
-      <form onSubmit={handleSubmit} className="bg-fd-card p-5 rounded-lg border border-fd-border ">
+      <form onSubmit={handleSubmit} className="bg-fd-card p-5 rounded-lg border border-fd-border shadow-sm">
         <Flex
           gap="$3"
           flexDirection="column"
