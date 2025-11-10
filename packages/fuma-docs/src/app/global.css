@@ -35,7 +35,7 @@ header#nd-nav {
 header#nd-nav > div {
   max-width: 100% !important;
   margin: 0 16px !important;
-  margin-top: 4px !important;
+  margin-top: 3.5px !important;
   @media (max-width: 768px) {
     margin: 0 !important;
   }
@@ -43,7 +43,7 @@ header#nd-nav > div {
 
 @media (max-width: 768px) {
   header#nd-nav > div > nav { 
-    padding: 0 12px !important;
+    padding: 0 10px !important;
   }
 }
 

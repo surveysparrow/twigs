@@ -1,6 +1,6 @@
 ---
 title: Checkbox
-description: A control that allows the user to toggle between checked and not checked states. Supports indeterminate state for partial selections and provides full keyboard navigation.
+description: A control that allows the user to toggle between checked and not checked states. Supports full keyboard navigation.
 ---
 
 <ExternalLinks 
@@ -18,19 +18,10 @@ import { Checkbox } from "@sparrowengg/twigs-react";
 
 ```jsx
 const CheckboxExample = () => {
-  const [checked, setChecked] = useState(false);
-
   return (
-    <Box css={{ display: "flex", alignItems: "center", gap: "$4" }}>
-      <Checkbox
-        checked={checked}
-        onChange={setChecked}
-        id="terms"
-      />
-      <label htmlFor="terms" style={{ cursor: "pointer" }}>
+    <Checkbox id="accept-terms" size="md">
         Accept terms and conditions
-      </label>
-    </Box>
+    </Checkbox>
   );
 };
 ```
@@ -110,3 +101,11 @@ These props are used for the conditional rendering of the components
     },
   }}
 />
+
+## Examples
+
+### Indeterminate State
+
+The checkbox supports an indeterminate state, useful for representing partial selections (e.g., "select all" scenarios). When set to `'indeterminate'`, the checkbox displays a horizontal line icon instead of a checkmark.
+
+<Playground snippetName="checkbox-indeterminate" />

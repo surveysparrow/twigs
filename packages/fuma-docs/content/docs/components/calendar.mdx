@@ -1,12 +1,14 @@
 ---
 title: Calendar
-description: A single date picker component that displays one or more date grids and allows users to select a single date
+description: A single date picker component that displays one or more date grids and allows users to select a single date.
 ---
 
 <ExternalLinks 
   source="https://github.com/surveysparrow/twigs/tree/master/packages/react-components/src/calendar"
   storybook="date-time-calendar"
 />
+
+## Prerequisite
 
 <Callout type="info">
 `Calendar` component requires additional dependency of `@internationalized/date` to be installed.
@@ -23,13 +25,12 @@ npm install --save @internationalized/date
 
 ```jsx
 import { Calendar } from "@sparrowengg/twigs-react";
+import { parseDate } from "@internationalized/date";
 ```
 
 ## Usage
 
 ```jsx
-import { parseDate } from "@internationalized/date";
-
 function App() {
   const [value, setValue] = React.useState(parseDate("2025-08-24"));
 

@@ -136,6 +136,7 @@ export default function Features() {
           defaultValue="tab1"
           value={activeTab}
           onValueChange={setActiveTab}
+          orientation="vertical"
           css={{
             flexDirection: "row",
             "@media (max-width: 1024px)": {

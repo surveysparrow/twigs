@@ -50,17 +50,17 @@ const FlexExample = () => {
     justifyContent: {
       type: "React.CSSProperties['justifyContent']",
       description: "Defines how flex items are distributed along the main axis. Controls alignment and spacing of items.",
-      default: "normal",
+      default: "flex-start",
     },
     alignItems: {
       type: "React.CSSProperties['alignItems']",
       description: "Defines how flex items are aligned along the cross axis. Controls vertical alignment when flexDirection is row.",
-      default: "normal",
+      default: "stretch",
     },
     alignContent: {
       type: "React.CSSProperties['alignContent']",
       description: "Controls how multiple lines of flex items are aligned along the cross axis when flexWrap is enabled.",
-      default: "normal",
+      default: "stretch",
     },
     justifyItems: {
       type: "React.CSSProperties['justifyItems']",
@@ -98,6 +98,15 @@ const FlexExample = () => {
     css: {
       type: "object",
       description: "Custom CSS styles for the component.",
+    },
+    children: {
+      type: "ReactNode",
+      description: "The content to be rendered inside the flex container.",
+    },
+    as: {
+      type: "React.ElementType",
+      description: "Changes the underlying HTML element (e.g., 'section', 'article', 'main'). Inherited from Box component.",
+      default: "div",
     },
   }}
 /> 

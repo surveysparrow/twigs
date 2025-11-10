@@ -14,7 +14,7 @@ export default function StepperBasic() {
       <Box css={{ display: "flex", flexDirection: "column", gap: "$4" }}>
         <Text css={{ fontSize: "$md", fontWeight: "$6" }}>Basic Stepper</Text>
         
-        <Stepper activeStep={activeStep} onChange={setActiveStep}>
+        <Stepper activeStep={activeStep} onChange={(step: number) => setActiveStep(step)}>
           <StepperItem label="Registration">Step 1</StepperItem>
           <StepperItem label="Account settings" allowClick={false}>Step 2</StepperItem>
           <StepperItem label="Confirm">Step 3</StepperItem>

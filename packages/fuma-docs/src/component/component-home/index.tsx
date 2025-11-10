@@ -37,7 +37,7 @@ const components = [
   {
     title: "Table",
     description:
-      "Used to display data in a tabular format. Supports sorting, filtering, and responsive design for complex data sets.",
+      "Used to display data in a tabular format with configurable border styles, hover states, and active row highlighting.",
     href: "/docs/components/table",
     category: "Data Display",
   },

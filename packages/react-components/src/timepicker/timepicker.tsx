@@ -35,6 +35,7 @@ export const TimePicker = (props: AriaTimeFieldProps<TimeValue>) => {
       )}
       <Flex
         {...fieldProps}
+        ref={ref}
         className="field"
         css={{
           display: 'inline-flex',
