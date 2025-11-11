@@ -8,26 +8,31 @@
   background-repeat: no-repeat;
   box-shadow: inset 0 -80px 60px -30px rgba(255, 255, 255, 1);
 }
-
 .full-page{
   background-color: white;
 }
 .tabs[data-state="active"] {
-  color: var(--color-fd-secondary) !important;
-  background-color: var(--color-fd-primary) !important;
+  background-color: transparent !important;
+  position: relative !important;
+  z-index: 1 !important;
+  color: black !important;
 }
 
 .tabs {
-  color: var(--color-fd-muted-foreground) !important;
+  background-color: transparent !important;
   display: flex !important;
   justify-content: space-between !important;
   align-items: center !important;
   gap: 6px !important;
-  /* border-bottom: 2px solid transparent !important; */
-  border:0 !important;
-  transition: all 0.3s !important;
-  transition-timing-function: ease-in !important;
-  transition-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  border: 0 !important;
+  font-weight: 500 !important;
+  position: relative !important;
+  z-index: 1 !important;
+  transition: none !important;
+}
+
+.tabs-list-container {
+  position: relative !important;
 }
 
 /* Play Button Gradient Shadow */
@@ -72,16 +77,26 @@
   border: none !important;
   border-top-left-radius: 8px !important;
   border-bottom-left-radius: 8px !important;
-  transition: all 0.1s ease-in !important;
+  transition: none !important;
+  background-color: transparent !important;
+  position: relative !important;
+  z-index: 1 !important;
+  justify-content: flex-start !important;
 }
 
 .Features-tab[data-state="active"]{
-  background-color: white;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 3px 4px;
+  background-color: transparent !important;
+  position: relative !important;
+  z-index: 1 !important;
 }
+
 .Features-tab[data-state="inactive"]{
-  background-color:#F4F5F8;
+  background-color: transparent !important;
   border: none;
+}
+
+.Features-tabs-list {
+  position: relative !important;
 }
 
 .features-background {
@@ -155,4 +170,22 @@
   background: linear-gradient(to left,white, transparent);
   pointer-events: none;
   z-index: 1;
+}
+
+/* Hide inactive TabsContent when forceMount is used */
+/* This ensures all tabs render during SSR for style generation, */
+/* but only the active tab is visible */
+[role="tabpanel"][data-state="inactive"] {
+  visibility: hidden !important;
+  position: absolute !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+[role="tabpanel"][data-state="active"] {
+  visibility: visible !important;
+  position: relative !important;
+  opacity: 1 !important;
 }

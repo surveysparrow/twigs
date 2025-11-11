@@ -88,8 +88,8 @@ export function Customization() {
   return (
     <div className="flex flex-col lg:flex-row">
       <Toastr duration={3000}/>
-      <div className="lg:!w-2/4 bg-fd-card h-fit p-2 border border-fd-border rounded-lg mb-4 lg:mr-4 sticky top-30">
-        <div className="flex justify-between items-center">
+      <div className="lg:!w-2/4 bg-fd-card h-fit p-2 border border-fd-border rounded-lg mb-4 lg:mr-4 sticky top-30 shadow-sm">
+        <div className="flex justify-between items-center mb-2">
           <Text size="md" className="!p-2 !m-0" weight="medium">
             Properties
           </Text>
@@ -124,7 +124,7 @@ export function Customization() {
                 setIconColor(e.target.value)
               }
               placeholder="Color value (hex, rgb, hsl...)"
-              className="!w-20 lg:!w-15 !bg-fd-card !text-fd-card-foreground !border-none !shadow-none !p-0"
+              className="!w-20 lg:!w-21 !bg-fd-card !text-fd-muted-foreground !border-none !shadow-none !p-0"
             />
           </div>
         </div>

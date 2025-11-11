@@ -30,6 +30,7 @@
       "button",
       "icon-button",
       "split-button",
+      "cascader",
       "checkbox",
       "form-helper-text",
       "form-label",

@@ -40,8 +40,6 @@ export default function DatePickerFormatSegments() {
         size="sm"
         onChange={(value) => setValue(value as CalendarDate)}
         formatSegments={formatSegments}
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error
         footerAction={(_, setPopoverOpen) => setPopoverOpen(false)}
       />
       {value && (

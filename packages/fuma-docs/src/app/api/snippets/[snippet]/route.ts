@@ -36,20 +36,10 @@ export async function GET(
     encoding: "utf-8",
   });
 
-  const commonFiles = await readdir(path.join(snippetsDir, "__common"), {
-    encoding: "utf-8",
-  });
-
   const fileData: Record<string, string> = {};
 
   for (const file of files) {
     const filePath = path.join(snippetsDir, targetSnippet, file);
-    const fileContent = await readFile(filePath, { encoding: "utf-8" });
-    fileData[file] = fileContent;
-  }
-
-  for (const file of commonFiles) {
-    const filePath = path.join(snippetsDir, "__common", file);
     const fileContent = await readFile(filePath, { encoding: "utf-8" });
     fileData[file] = fileContent;
   }

@@ -34,6 +34,10 @@ export default function Settings() {
         borderRadius: "$2xl",
         boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
         backgroundColor: "$neutral50",
+        height: "80vh",
+        "@media (max-width: 768px)": {
+          height: "100%",
+        },
       }}
     >
       <Flex
@@ -200,6 +204,7 @@ export default function Settings() {
               <AccordionTrigger css={{
                 backgroundColor: "$neutral50 !important",
                 cursor: "pointer",
+                textWrap: "nowrap",
               }}
               className="!py-0"
               >
@@ -512,7 +517,7 @@ export default function Settings() {
             aria-label="info"
             size="md"
             color="secondary"
-            variant="ghost"
+            variant="solid"
             shape="round"
             css={{
               backgroundColor: "$secondary600",
@@ -564,6 +569,7 @@ export default function Settings() {
             }}
           >
             <Select
+              instanceId="settings-language-select"
               placeholder=""
               options={[
                 { label: "English", value: "english" },
@@ -586,6 +592,7 @@ export default function Settings() {
             }}
           >
             <Select
+              instanceId="settings-timezone-select"
               placeholder=""
               options={[
                 { label: "India", value: "india" },
@@ -608,6 +615,7 @@ export default function Settings() {
             }}
           >
             <Select
+              instanceId="settings-currency-select"
               placeholder=""
               options={[
                 { label: "INR", value: "inr" },
@@ -630,6 +638,7 @@ export default function Settings() {
             }}
           >
             <Select
+              instanceId="settings-date-format-select"
               placeholder=""
               options={[
                 { label: "DD/MM/YYYY", value: "dd/mm/yyyy" },

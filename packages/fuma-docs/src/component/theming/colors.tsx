@@ -118,7 +118,7 @@ export function TwigsColorPalette() {
       <div className="space-y-6">
         <div className="mb-6">
           <p className="text-fd-muted-foreground text-sm">
-            Click on any color to copy its theme token. Use these tokens in your components with the $ prefix.
+            Click on any color to copy its value. Use these values in the css prop to style your components.
           </p>
         </div>
         

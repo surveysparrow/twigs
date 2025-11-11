@@ -103,6 +103,14 @@ export default function Accounts() {
 
   return (
     <Flex flexDirection="column"
+    css={{
+      height: "80vh",
+      boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
+      backgroundColor: "transparent",
+      "@media (max-width: 768px)": {
+        height: "100%",
+      },
+    }}
     >
       <Flex
         justifyContent="space-between"
@@ -112,7 +120,7 @@ export default function Accounts() {
           borderBottom: "1px solid $neutral100",
           borderTopLeftRadius: "$2xl",
           borderTopRightRadius: "$2xl",
-          padding: "$6",
+          padding: "$9",
         }}
       >
         <Flex gap="$4" alignItems="center">
@@ -203,6 +211,8 @@ export default function Accounts() {
         border="horizontal"
         css={{
           backgroundColor: "white",
+          height: "100%",
+          borderRadius: "$2xl",
         }}
       >
         <Thead>

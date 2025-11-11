@@ -17,7 +17,7 @@ export default function CookieCard() {
       flexDirection="column"
       gap="$6"
       css={{
-        padding: "$8",
+        padding: "$7",
         borderRadius: "$2xl",
         backgroundColor: "white",
         boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
@@ -34,7 +34,7 @@ export default function CookieCard() {
         >
           🍪
         </Box>
-        <Text size="md" weight="bold">
+        <Text size="md" weight="medium">
           Cookie Settings
         </Text>
       </Flex>

@@ -15,6 +15,9 @@ export default function ThemingBasic() {
         "&:hover": {
           backgroundColor: "$positive600 !important",
         },
+        "&:focus": {
+          backgroundColor: "$positive900",
+        },
       }}
     >
       Submit

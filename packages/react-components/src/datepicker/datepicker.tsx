@@ -24,24 +24,25 @@ import {
 } from '../popover';
 import { DateField } from './date-field';
 
-export type DatePickerProps = AriaDatePickerProps<DateValue> & {
-  label?: string;
-  closeOnSelect?: boolean;
-  footerAction?: (
-    state: CalendarState,
-    setPopoverOpen: (isOpen: boolean) => void
-  ) => void;
-  renderFooter?: (
-    state: CalendarState,
-    setPopoverOpen: (isOpen: boolean) => void
-  ) => ReactNode;
-  enablePortal?: boolean;
-  contentStyle?: CSS;
-  portalTarget?: Element | null | undefined;
-  calendarContainerCSS?: CalendarControlProps['containerCSS'];
-  popoverContentProps?: ComponentProps<typeof PopoverContent>;
-  formatSegments?: (segments: DateSegment[]) => DateSegment[];
-} & CalendarControlProps;
+export type DatePickerProps = AriaDatePickerProps<DateValue> &
+  Omit<CalendarControlProps, 'footerAction' | 'renderFooter'> & {
+    label?: string;
+    closeOnSelect?: boolean;
+    footerAction?: (
+      state: CalendarState,
+      setPopoverOpen: (isOpen: boolean) => void
+    ) => void;
+    renderFooter?: (
+      state: CalendarState,
+      setPopoverOpen: (isOpen: boolean) => void
+    ) => ReactNode;
+    enablePortal?: boolean;
+    contentStyle?: CSS;
+    portalTarget?: Element | null | undefined;
+    calendarContainerCSS?: CalendarControlProps['containerCSS'];
+    popoverContentProps?: ComponentProps<typeof PopoverContent>;
+    formatSegments?: (segments: DateSegment[]) => DateSegment[];
+  };
 
 export const DatePicker = ({
   showFooter,

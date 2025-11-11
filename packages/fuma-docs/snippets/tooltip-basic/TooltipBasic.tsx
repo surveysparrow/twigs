@@ -47,6 +47,10 @@ export default function TooltipBasic() {
             <Tooltip content="Medium tooltip with more content" size="md">
               <Button variant="solid">Medium</Button>
             </Tooltip>
+
+            <Tooltip content="Large tooltip with more content" size="lg">
+              <Button variant="solid">Large</Button>
+            </Tooltip>
           </Box>
         </Box>
 

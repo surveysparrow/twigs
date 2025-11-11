@@ -37,7 +37,7 @@ const components = [
   {
     title: "Table",
     description:
-      "Used to display data in a tabular format. Supports sorting, filtering, and responsive design for complex data sets.",
+      "Used to display data in a tabular format with configurable border styles, hover states, and active row highlighting.",
     href: "/docs/components/table",
     category: "Data Display",
   },
@@ -166,6 +166,13 @@ const components = [
     description:
       "A button with a dropdown menu attached. Combines primary action with secondary options in one component.",
     href: "/docs/components/split-button",
+    category: "Form",
+  },
+  {
+    title: "Cascader",
+    description:
+      "Used to select values from hierarchical nested options. Perfect for location selection, category browsing, and multi-level data selection.",
+    href: "/docs/components/cascader",
     category: "Form",
   },
   {
@@ -353,7 +360,7 @@ export function ComponentHome() {
         }, {} as Record<string, typeof components>)
       ).map(([category, categoryComponents]) => (
         <Box key={category} className="mb-5 pb-5 border-b border-fd-border">
-          <Text size="md" css={{ marginBottom: "$6" }}>
+          <Text size="md" css={{ marginBottom: "$6", marginTop: "0" }}>
             {category}
           </Text>
           <Grid

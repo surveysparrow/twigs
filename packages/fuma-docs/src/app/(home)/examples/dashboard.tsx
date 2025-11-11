@@ -22,7 +22,7 @@ import {
   UserCirclePlusIcon,
   HomeIcon,
   ColorSwatchesIcon,
-  CommentIcon,
+  LinkIcon,
   UserIcon,
   RocketIcon,
   SearchIcon,
@@ -32,6 +32,7 @@ import {
   ArrowDownIcon,
 } from "@sparrowengg/twigs-react-icons";
 import logo from "@/assets/images/Group 1694.png";
+
 
 export default function Dashboard() {
   const RenderedThumb = () => {
@@ -63,6 +64,11 @@ export default function Dashboard() {
         boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
         background:
           "linear-gradient(299deg,rgba(255, 255, 255, 1) 90%, rgba(240, 255, 244, 1) 100%)",
+        height: "80vh",
+        overflow: "scroll",
+        "@media (max-width: 1024px)": {
+          height: "100%",
+        },
       }}
     >
       <Flex
@@ -97,7 +103,7 @@ export default function Dashboard() {
               <Text
                 size="xs"
                 css={{
-                  color: "$neutral500",
+                  color: "$neutral600",
                 }}
               >
                 Favourites
@@ -173,7 +179,7 @@ export default function Dashboard() {
               <Text
                 size="xs"
                 css={{
-                  color: "$neutral500",
+                  color: "$neutral600",
                 }}
               >
                 Main Menu
@@ -218,7 +224,7 @@ export default function Dashboard() {
                   },
                 }}
               >
-                <CommentIcon size={20} strokeWidth={1.2} />
+                <LinkIcon size={20} strokeWidth={1.2} />
                 <Text>Chat</Text>
               </Flex>
               <Flex
@@ -284,7 +290,7 @@ export default function Dashboard() {
             <Text
               size="sm"
               css={{
-                color: "$neutral500",
+                color: "$neutral600",
               }}
             >
               Campaigns
@@ -322,7 +328,7 @@ export default function Dashboard() {
         <Flex
           justifyContent="space-between"
           css={{
-            paddingBottom: "$8",
+            paddingBottom: "$11",
             "@media (max-width: 768px)": {
               flexDirection: "column",
               gap: "$9",
@@ -330,7 +336,11 @@ export default function Dashboard() {
           }}
         >
           <Box>
-            <Heading size="h4" weight="bold">
+            <Heading size="h4" weight="bold" 
+            css={{
+              fontFamily: "DM Sans, sans-serif !important",
+            }}
+            >
               Your total revenue
             </Heading>
             <Heading
@@ -343,6 +353,7 @@ export default function Dashboard() {
                 backgroundClip: "text",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
+                fontFamily: "DM Sans, sans-serif !important",
               }}
             >
               $90,239.00
@@ -434,7 +445,7 @@ export default function Dashboard() {
                 <Flex>
                   <Text
                     css={{
-                      color: "$neutral500",
+                      color: "$neutral600",
                     }}
                   >
                     compared to last week
@@ -497,7 +508,7 @@ export default function Dashboard() {
                 <Flex>
                   <Text
                     css={{
-                      color: "$neutral500",
+                      color: "$neutral600",
                     }}
                   >
                     compared to last week
@@ -558,7 +569,7 @@ export default function Dashboard() {
                 <Flex>
                   <Text
                     css={{
-                      color: "$neutral500",
+                      color: "$neutral600",
                     }}
                   >
                     compared to last week
@@ -578,7 +589,7 @@ export default function Dashboard() {
           gap="$4"
           css={{
             width: "100%",
-            paddingTop: "$8",
+            paddingTop: "$10",
           }}
         >
           <Flex
@@ -627,7 +638,7 @@ export default function Dashboard() {
                 <Text
                   size="sm"
                   css={{
-                    color: "$neutral500",
+                    color: "$neutral600",
                   }}
                 >
                   Draft
@@ -676,7 +687,7 @@ export default function Dashboard() {
                   </Box>
                   <Box>
                     <AvatarGroup limit={3} rounded="full" size="xs">
-                      <Avatar src="https://i.pravatar.cc/150?img=0" key="1" />
+                      <Avatar src="https://i.pravatar.cc/150?img=0" key="1"/>
                       <Avatar src="https://i.pravatar.cc/150?img=1" key="2" />
                       <Avatar src="https://i.pravatar.cc/150?img=2" key="3" />
                     </AvatarGroup>
@@ -690,7 +701,7 @@ export default function Dashboard() {
                   <Text
                     size="xs"
                     css={{
-                      color: "$neutral500",
+                      color: "$neutral600",
                     }}
                   >
                     Not started
@@ -708,12 +719,24 @@ export default function Dashboard() {
                   <Text
                     size="xs"
                     css={{
-                      color: "$neutral500",
+                      color: "$neutral600",
                     }}
                   >
                     Last updated :
                   </Text>
                   <Text size="xs">Oct 16, 2025</Text>
+                </Flex>
+                <Flex gap="$2">
+                  <Text
+                    size="xs"
+                    css={{
+                      color: "$neutral600",
+                      textWrap: "nowrap",
+                    }}
+                  >
+                    Agenda :
+                  </Text>
+                  <Text size="xs">product features analysis</Text>
                 </Flex>
               </Flex>
             </Box>
@@ -734,7 +757,7 @@ export default function Dashboard() {
                 <Text
                   size="sm"
                   css={{
-                    color: "$neutral500",
+                    color: "$neutral600",
                   }}
                 >
                   In Progress
@@ -800,7 +823,7 @@ export default function Dashboard() {
                     <Text
                       size="xs"
                       css={{
-                        color: "$neutral500",
+                        color: "$neutral600",
                       }}
                     >
                       June 1, 2025
@@ -811,7 +834,7 @@ export default function Dashboard() {
                     <Text
                       size="xs"
                       css={{
-                        color: "$neutral500",
+                        color: "$neutral600",
                       }}
                     >
                       Oct 16, 2025
@@ -830,12 +853,24 @@ export default function Dashboard() {
                   <Text
                     size="xs"
                     css={{
-                      color: "$neutral500",
+                      color: "$neutral600",
                     }}
                   >
                     Last updated :
                   </Text>
                   <Text size="xs">Oct 16, 2025</Text>
+                </Flex>
+                <Flex gap="$2">
+                  <Text
+                    size="xs"
+                    css={{
+                      color: "$neutral600",
+                      textWrap: "nowrap",
+                    }}
+                  >
+                    Agenda :
+                  </Text>
+                  <Text size="xs">Marketing campaign analysis</Text>
                 </Flex>
               </Flex>
             </Box>
@@ -856,7 +891,7 @@ export default function Dashboard() {
                 <Text
                   size="sm"
                   css={{
-                    color: "$neutral500",
+                    color: "$neutral600",
                   }}
                 >
                   Archived
@@ -920,7 +955,7 @@ export default function Dashboard() {
                   <Text
                     size="xs"
                     css={{
-                      color: "$neutral500",
+                      color: "$neutral600",
                     }}
                   >
                     Jun 16, 2025
@@ -938,12 +973,24 @@ export default function Dashboard() {
                   <Text
                     size="xs"
                     css={{
-                      color: "$neutral500",
+                      color: "$neutral600",
                     }}
                   >
                     Last updated :
                   </Text>
                   <Text size="xs">Oct 16, 2025</Text>
+                </Flex>
+                <Flex gap="$2">
+                  <Text
+                    size="xs"
+                    css={{
+                      color: "$neutral600",
+                      textWrap: "nowrap",
+                    }}
+                  >
+                    Agenda :
+                  </Text>
+                  <Text size="xs">SaaS product features analysis and implementation planning</Text>
                 </Flex>
               </Flex>
             </Box>
@@ -957,177 +1004,6 @@ export default function Dashboard() {
               },
             }}
           >
-            <Box
-              css={{
-                width: "33%",
-                "@media (max-width: 768px)": {
-                  width: "100%",
-                },
-              }}
-            >
-              <Flex
-                flexDirection="column"
-                gap="$4"
-                css={{
-                  padding: "$6",
-                  borderRadius: "$lg",
-                  border: "1px solid $neutral200",
-                }}
-              >
-                <Flex
-                  justifyContent="space-between"
-                  alignItems="center"
-                  css={{
-                    width: "100%",
-                  }}
-                >
-                  <Box>
-                    <Image
-                      src={logo.src}
-                      alt="campaign"
-                      width={15}
-                      height={15}
-                      css={{
-                        borderRadius: "$sm",
-                      }}
-                    />
-                  </Box>
-                  <Box>
-                    <AvatarGroup limit={3} rounded="full" size="sm">
-                      <Avatar src="https://i.pravatar.cc/150?img=12" key="1" />
-                      <Avatar src="https://i.pravatar.cc/150?img=13" key="2" />
-                    </AvatarGroup>
-                  </Box>
-                </Flex>
-                <Text weight="medium">
-                  Beyond Boundaries: The Future of AI in Marketing
-                </Text>
-                <Flex alignItems="center" gap="$2">
-                  <Text size="xs">Start :</Text>
-                  <Text
-                    size="xs"
-                    css={{
-                      color: "$neutral500",
-                    }}
-                  >
-                    Not started
-                  </Text>
-                </Flex>
-                <Slider
-                  components={{
-                    Thumb: RenderedThumb,
-                    Range: RenderedRange,
-                    Track: RenderedTrack,
-                  }}
-                  value={[0]}
-                />
-                <Flex alignItems="center" gap="$2">
-                  <Text
-                    size="xs"
-                    css={{
-                      color: "$neutral500",
-                    }}
-                  >
-                    Last updated :
-                  </Text>
-                  <Text size="xs">May 3, 2025</Text>
-                </Flex>
-              </Flex>
-            </Box>
-            <Box
-              css={{
-                width: "33%",
-                "@media (max-width: 768px)": {
-                  width: "100%",
-                },
-              }}
-            >
-              <Flex
-                flexDirection="column"
-                gap="$4"
-                css={{
-                  padding: "$6",
-                  borderRadius: "$lg",
-                  border: "1px solid $neutral200",
-                }}
-              >
-                <Flex
-                  justifyContent="space-between"
-                  alignItems="center"
-                  css={{
-                    width: "100%",
-                  }}
-                >
-                  <Box>
-                    <Image
-                      src={logo.src}
-                      alt="campaign"
-                      width={15}
-                      height={15}
-                      css={{
-                        borderRadius: "$sm",
-                      }}
-                    />
-                  </Box>
-                  <Box>
-                    <AvatarGroup limit={3} rounded="full" size="sm">
-                      <Avatar src="https://i.pravatar.cc/150?img=20" key="1" />
-                      <Avatar src="https://i.pravatar.cc/150?img=23" key="2" />
-                    </AvatarGroup>
-                  </Box>
-                </Flex>
-                <Text weight="medium">
-                  Skyrocket your productivity: our product is revealed
-                </Text>
-                <Flex
-                  alignItems="center"
-                  gap="$2"
-                  justifyContent="space-between"
-                >
-                  <Flex alignItems="center" gap="$2">
-                    <Text size="xs">Start :</Text>
-                    <Text
-                      size="xs"
-                      css={{
-                        color: "$neutral500",
-                      }}
-                    >
-                      June 1, 2025
-                    </Text>
-                  </Flex>
-                  <Flex alignItems="center" gap="$2">
-                    <Text size="xs">End :</Text>
-                    <Text
-                      size="xs"
-                      css={{
-                        color: "$neutral500",
-                      }}
-                    >
-                      Oct 16, 2025
-                    </Text>
-                  </Flex>
-                </Flex>
-                <Slider
-                  components={{
-                    Thumb: RenderedThumb,
-                    Range: RenderedRange,
-                    Track: RenderedTrack,
-                  }}
-                  value={[20]}
-                />
-                <Flex alignItems="center" gap="$2">
-                  <Text
-                    size="xs"
-                    css={{
-                      color: "$neutral500",
-                    }}
-                  >
-                    Last updated :
-                  </Text>
-                  <Text size="xs">Oct 16, 2025</Text>
-                </Flex>
-              </Flex>
-            </Box>
           </Flex>
         </Flex>
       </Flex>

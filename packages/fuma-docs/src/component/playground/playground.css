@@ -9,6 +9,14 @@
   margin-bottom: 10px;
 }
 
+/* .playground-tabs div[role="tablist"] button[data-state="active"] {
+  border-bottom: 1px solid var(--color-fd-primary) !important;
+} */
+
+.playground-tabs div[role="tablist"] button {
+  cursor: pointer;
+}
+
 .playground-tabs .playground-tab {
   padding: 0;
 }
@@ -24,6 +32,12 @@
 
 .playground-tab--code figure > div > button {
   display: none;
+}
+
+.header-file-tabs-div{
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .code-file-tab {

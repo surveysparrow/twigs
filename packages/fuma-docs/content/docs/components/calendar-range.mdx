@@ -1,12 +1,14 @@
 ---
 title: CalendarRange
-description: A date range picker component that displays one or more date grids and allows users to select a contiguous range of dates
+description: A date range picker component that displays one or more date grids and allows users to select a contiguous range of dates.
 ---
 
 <ExternalLinks 
   source="https://github.com/surveysparrow/twigs/tree/master/packages/react-components/src/calendar-range"
   storybook="date-time-calendar-range"
 />
+
+## Prerequisite
 
 <Callout type="info">
 `CalendarRange` component requires additional dependency of `@internationalized/date` to be installed.
@@ -23,13 +25,12 @@ npm install --save @internationalized/date
 
 ```jsx
 import { CalendarRange } from "@sparrowengg/twigs-react";
+import { parseDate } from "@internationalized/date";
 ```
 
 ## Usage
 
 ```jsx
-import { parseDate } from "@internationalized/date";
-
 function App() {
   const [value, setValue] = React.useState({
     start: parseDate("2025-08-04"),
