@@ -11,7 +11,7 @@ import {
 export default function AccordionDisabled() {
   return (
     <Box css={{ marginBottom: "$4"}}>
-    <Text size="md" weight="regular">Accordion with disabled items</Text>
+    <Text size="sm" weight="regular" css={{ marginBottom: "$4" }}>Accordion with disabled items</Text>
     <Accordion type="single">
       <AccordionItem value="item-1">
         <AccordionTrigger>Available Feature</AccordionTrigger>

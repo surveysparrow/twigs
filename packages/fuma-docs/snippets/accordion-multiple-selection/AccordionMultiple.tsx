@@ -11,7 +11,7 @@ import {
 export default function AccordionMultiple() {
   return (
     <Box css={{ marginBottom: "$4"}}>
-    <Text size="md" weight="regular">Accordion with multiple selection</Text>
+    <Text size="sm" weight="regular" css={{ marginBottom: "$4" }}>Accordion with multiple selection</Text>
     <Accordion type="multiple">
       <AccordionItem value="item-1">
         <AccordionTrigger>Account Settings</AccordionTrigger>

@@ -24,7 +24,7 @@ export default function DrawerBasic() {
           <Heading size="h4">Edit Profile</Heading>
         </DrawerHeader>
         <DrawerBody>
-          <Box css={{ padding: "$4" }}>
+          <Box css={{ padding: "$4",lineHeight: "$md" }}>
             <p>Drawer content goes here. You can add forms, lists, or any other content.</p>
             <p>This drawer slides in from the right side and includes a backdrop overlay.</p>
           </Box>

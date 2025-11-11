@@ -16,21 +16,32 @@ export default function SliderComprehensive() {
   const RenderedThumb = () => {
     return (
       <SliderThumb
-        css={{ height: "10px !important", width: "10px !important" }}
+        css={{
+          backgroundColor: "$white900",
+          border: "1px solid $primary",
+          cursor: "pointer",
+          "&:hover": {
+            backgroundColor: "$white900 !important",
+          },
+        }}
       />
     );
   };
 
   const RenderedRange = () => {
-    return (
-      <SliderRange
-        css={{ background: "linear-gradient(to right, red, blue)" }}
-      />
-    );
+    return <SliderRange css={{ background: "$primary500" }} />;
   };
 
   const RenderedTrack = ({ children }: { children: React.ReactNode }) => {
-    return <SliderTrack>{children}</SliderTrack>;
+    return (
+      <SliderTrack
+        css={{
+          backgroundColor: "$primary50",
+        }}
+      >
+        {children}
+      </SliderTrack>
+    );
   };
 
   return (
@@ -39,7 +50,7 @@ export default function SliderComprehensive() {
         css={{
           display: "flex",
           flexDirection: "column",
-          gap: "$6",
+          gap: "$20",
           width: "100%",
           maxWidth: "400px",
         }}
@@ -53,7 +64,7 @@ export default function SliderComprehensive() {
             min={0}
             max={100}
             step={1}
-            size="md"
+            size="sm"
             labels={{
               left: "0",
               right: "100",
@@ -76,7 +87,7 @@ export default function SliderComprehensive() {
             min={0}
             max={100}
             step={10}
-            size="md"
+            size="sm"
             labels={{
               left: "0",
               right: "100",
@@ -105,7 +116,6 @@ export default function SliderComprehensive() {
             max={100}
             step={1}
             size="md"
-            labelPlacement="top"
           />
         </Box>
       </Box>

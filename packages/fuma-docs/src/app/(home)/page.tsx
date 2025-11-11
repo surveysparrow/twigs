@@ -12,12 +12,7 @@ import {
   ThemeProvider,
   defaultTheme,
 } from "@sparrowengg/twigs-react";
-// import { Metadata } from "next";
-// export const metadata: Metadata = {
-//   title: "Twigs - Component Library",
-//   description:
-//     "Beautiful and customizable React UI for your applications by surveysparrow",
-// };
+
 import {
   ForwardArrowIcon,
   CopyIcon,
@@ -38,7 +33,7 @@ import Chat from "./examples/chat";
 import Features from "./examples/Features";
 import logo from "@/assets/images/logo-w-text-lightmode.svg";
 import surveysparrow from "@/assets/images/surveysparrow.svg";
-import sparrowgenie from "@/assets/images/sparrowGenie.svg";
+import sparrowdesk from "@/assets/images/sparrowDesk.svg";
 import thrivesparrow from "@/assets/images/thrivesparrow.svg";
 import Dashboard from "./examples/dashboard";
 
@@ -242,10 +237,10 @@ export default function HomePage() {
               className="text-fd-muted-foreground px-4 py-2.5 rounded-md inline-flex gap-2 items-center text-sm w-fit cursor-pointer bg-fd-background shadow-sm"
               onClick={handleCopy}
             >
-              <code className="flex items-center gap-2 text-nowrap">
+              <code className="flex items-center gap-2 text-nowrap text-xs md:text-sm">
                 npm install @sparrowengg/twigs-react{" "}
                 {copied ? (
-                  <TickIcon size={18} color="currentColor" />
+                  <TickIcon size={18} className="text-fd-primary" />
                 ) : (
                   <CopyIcon size={18} color="currentColor" />
                 )}
@@ -428,11 +423,11 @@ export default function HomePage() {
                 <Image
                   src={surveysparrow.src}
                   alt="Twigs"
-                  className="w-7 h-7"
+                  className="w-[25px] h-[25px]"
                 />
               </div>
               <Text size="lg" weight="normal" css={{ color: "$neutral700" }}>
-                Surveysparrow
+                SurveySparrow
               </Text>
             </div>
             <div className="flex gap-3 items-center">
@@ -448,15 +443,15 @@ export default function HomePage() {
               </Text>
             </div>
             <div className="flex gap-3 items-center">
-              <div>
+              <div className="p-2 border-1 border-fd-border rounded-lg">
                 <Image
-                  src={sparrowgenie.src}
+                  src={sparrowdesk.src}
                   alt="Twigs"
-                  className="w-10 h-10 rounded-lg"
+                  className="w-[25px] h-[25px]"
                 />
               </div>
               <Text size="lg" weight="normal" css={{ color: "$neutral700" }}>
-                SparrowGenie
+                SparrowDesk
               </Text>
             </div>
           </div>
@@ -598,7 +593,7 @@ export default function HomePage() {
         </div>
         <div className="w-full lg:px-35 px-5 flex justify-between sm:flex-row flex-col pb-5">
           <Text size="md" weight="medium" css={{ color: "$neutral600" }}>
-            Build with Radix and Stitches ❤️
+            Build with love <span className="text-fd-secondary-foreground" onClick={() => window.open("https://surveysparrow.com", "_blank")} style={{ cursor: "pointer" }}>@Surveysparrow</span> ❤️
           </Text>
           <Text size="md" weight="medium" css={{ color: "$neutral600" }}>
             Copyright © {new Date().getFullYear()} Surveysparrow

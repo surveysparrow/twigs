@@ -1,15 +1,12 @@
 import React, { useState } from "react";
-import { 
-  Stepper, 
-  StepperItem, 
-  Box, 
-  Text, 
-  Flex 
+import {
+  Stepper,
+  StepperItem,
+  Box,
+  Text,
+  Flex,
 } from "@sparrowengg/twigs-react";
-import { 
-  ChevronRightIcon,
-  TickIcon,
-} from "@sparrowengg/twigs-react-icons";
+import { ChevronRightIcon, TickIcon } from "@sparrowengg/twigs-react-icons";
 
 export default function CustomStepper() {
   const [activeStep, setActiveStep] = useState(0);
@@ -21,99 +18,122 @@ export default function CustomStepper() {
     position: number;
   };
 
-  return (
-    <Box css={{ display: "flex", flexDirection: "column", gap: "$15" }}>  
+  const renderedStepper = () => {
+    return (
+      <Box
+        css={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "$8",
+          height: "$8",
+        }}
+      >
+        <ChevronRightIcon size={20} />
+      </Box>
+    );
+  };
 
+  const renderedContainer = ({ children }: { children: React.ReactNode }) => {
+    return (
+      <Flex
+        gap={4}
+        alignItems="center"
+        css={{ backgroundColor: "$white900", padding: "$6" }}
+      >
+        {children}
+      </Flex>
+    );
+  };
+
+  const renderedStep = ({
+    children,
+    active,
+    completed,
+    position,
+  }: StepperItemProps) => {
+    return (
+      <Box
+        css={{
+          display: "flex",
+          alignItems: "center",
+          gap: "$3",
+          padding: "$3 $4",
+          borderRadius: "$md",
+          backgroundColor: active
+            ? "$primary50"
+            : completed
+            ? "$positive100"
+            : "$neutral50",
+          cursor: "pointer",
+          transition: "all 0.2s ease",
+        }}
+        onClick={() => setActiveStep(position)}
+      >
+        <Box
+          css={{
+            width: "$6",
+            height: "$6",
+            borderRadius: "$round",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontSize: "$sm",
+            fontWeight: "$6",
+            backgroundColor: active
+              ? "$primary500"
+              : completed
+              ? "$positive500"
+              : "$neutral300",
+            color: "white",
+          }}
+        >
+          {completed ? <TickIcon size={12} /> : position + 1}
+        </Box>
+        <Text
+          css={{
+            fontSize: "$sm",
+            color: active
+              ? "$primary700"
+              : completed
+              ? "$positive700"
+              : "$neutral700",
+          }}
+        >
+          {children}
+        </Text>
+      </Box>
+    );
+  };
+
+  return (
+    <Box css={{ display: "flex", flexDirection: "column", gap: "$15" }}>
       {/* Advanced Custom Stepper */}
       <Box css={{ display: "flex", flexDirection: "column", gap: "$6" }}>
-        <Text css={{ fontSize: "$lg", fontWeight: "$6" }}>Advanced Custom Stepper</Text>
-        
+        <Text css={{ fontSize: "$lg", fontWeight: "$6" }}>
+          Advanced Custom Stepper
+        </Text>
+
         <Stepper
           activeStep={activeStep}
           onChange={setActiveStep}
           components={{
-            Separator: () => (
-              <Box
-                css={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  width: "$8",
-                  height: "$8"
-                }}
-              >
-                <ChevronRightIcon size={20} />
-              </Box>
-            ),
-            Container: ({ children }: { children: React.ReactNode }) => (
-              <Flex
-                gap={4}
-                alignItems="center"
-                css={{
-                  backgroundColor: "$neutral50",
-                  padding: "$6",
-                  borderRadius: "$xl",
-                  border: "1px solid $neutral200"
-                }}
-              >
-                {children}
-              </Flex>
-            ),
-            Step: ({
-              children, active, completed, position
-            }: StepperItemProps) => (
-              <Box
-                css={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "$3",
-                  padding: "$3 $4",
-                  borderRadius: "$md",
-                  backgroundColor: active ? "$primary100" : completed ? "$positive100" : "$neutral100",
-                  border: active ? "2px solid $primary500" : completed ? "2px solid $positive500" : "2px solid $neutral300",
-                  cursor: "pointer",
-                  transition: "all 0.2s ease",
-                  "&:hover": {
-                    backgroundColor: active ? "$primary200" : completed ? "$positive200" : "$neutral200"
-                  }
-                }}
-                onClick={() => setActiveStep(position)}
-              >
-                <Box
-                  css={{
-                    width: "$6",
-                    height: "$6",
-                    borderRadius: "$sm",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "$sm",
-                    fontWeight: "$6",
-                    backgroundColor: active ? "$primary500" : completed ? "$positive500" : "$neutral400",
-                    color: "white"
-                  }}
-                >
-                  {completed ? <TickIcon size={12} /> : position + 1}
-                </Box>
-                <Text
-                  css={{
-                    fontSize: "$sm",
-                    fontWeight: active ? "$6" : "$4",
-                    color: active ? "$primary700" : completed ? "$positive700" : "$neutral700"
-                  }}
-                >
-                  {children}
-                </Text>
-              </Box>
-            )
+            Separator: renderedStepper,
+            Container: renderedContainer,
+            Step: renderedStep,
           }}
         >
-          <StepperItem label="User Registration">Registration</StepperItem>
-          <StepperItem label="Account Setup">Setup</StepperItem>
-          <StepperItem label="Confirmation">Confirm</StepperItem>
+          <StepperItem label="User Registration">
+            <Text size="sm">User Registration</Text>
+          </StepperItem>
+          <StepperItem label="Account Setup">
+            <Text size="sm">Account Setup</Text>
+          </StepperItem>
+          <StepperItem label="Confirmation">
+            <Text size="sm">Confirmation</Text>
+          </StepperItem>
         </Stepper>
       </Box>
-
     </Box>
   );
-} 
+}

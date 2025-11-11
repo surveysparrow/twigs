@@ -12,13 +12,13 @@ export default function AlertDiffStatus() {
         padding: "$2",
       }}
     >
-      <Alert status="info" icon={<UserIcon />}>
-        <AlertDescription> This is an info alert. </AlertDescription>
+      <Alert status="info" icon={<UserIcon  size={20}/>}>
+        <AlertDescription> This is an info alert with different icon</AlertDescription>
       </Alert>
-      <Alert status="success" size="md">
+      <Alert status="success">
         <AlertDescription> This is a success alert. </AlertDescription>
       </Alert>
-      <Alert status="error">
+      <Alert status="error" size="md">
         <AlertDescription> This is an error alert. </AlertDescription>
       </Alert>
       <Alert status="warning" size="md" closable>

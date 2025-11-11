@@ -10,7 +10,7 @@ import { Box, Text } from "@sparrowengg/twigs-react";
 export default function AccordionCollapsible() {
   return (
     <Box css={{ marginBottom: "$4"}}>
-    <Text size="md" weight="regular">Accordion with collapsible prop</Text>
+    <Text size="sm" weight="regular" css={{ marginBottom: "$4" }}>Accordion with collapsible prop</Text>
     <Accordion type="single" collapsible>
       <AccordionItem value="item-1">
         <AccordionTrigger>What is collapsible?</AccordionTrigger>
