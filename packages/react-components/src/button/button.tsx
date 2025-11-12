@@ -642,6 +642,7 @@ export interface ButtonBaseProps {
   loading?: boolean;
   disabled?: boolean;
   loader?: ReactElement | 'line' | 'circle';
+  buttonAs?: React.ElementType;
 }
 
 export type ButtonProps = ButtonBaseProps &
@@ -662,6 +663,8 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
       loading,
       disabled,
       loader,
+      as,
+      buttonAs,
       onClick,
       ...rest
     }: ButtonProps,
@@ -693,6 +696,7 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
 
     return (
       <StyledButton
+        as={buttonAs || as}
         type="button"
         ref={ref}
         color={color}
