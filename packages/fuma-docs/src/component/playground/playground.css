@@ -30,14 +30,8 @@
   padding-top: 50px;
 }
 
-.playground-tab--code figure > div > button {
-  display: none;
-}
-
-.header-file-tabs-div{
-  &::-webkit-scrollbar {
-    display: none;
-  }
+.playground-tab--code figure > div:first-child {
+  margin-top: 46px !important;
 }
 
 .code-file-tab {

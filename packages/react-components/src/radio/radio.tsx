@@ -86,7 +86,7 @@ type RadioRootProps = {
   disabled?: boolean;
   required?: boolean;
   children: React.ReactNode | React.ReactNode[];
-} & Omit<ComponentProps<typeof RadioGroupPrimitive.Root>, OmitProps>;
+} & Omit<ComponentProps<typeof StyledRadioGroup>, OmitProps>;
 
 export const RadioGroup = React.forwardRef<
   React.ElementRef<typeof StyledRadioGroup>,

@@ -55,17 +55,13 @@ export default function LoginForm() {
               rounded="3xl"
             />
           </Box>
-          <Heading size="h4" weight="regular" css={{ color: "$neutral900", fontFamily: "DM Sans, sans-serif !important",fontWeight: "500 !important" }}>
+          <Heading size="h4" weight="medium" css={{ color: "$neutral900" }}>
             Glad you made it!
           </Heading>
           <Heading
             size="h6"
             weight="regular"
-            css={{
-              color: "$neutral900 !important",
-              fontFamily: "DM Sans, sans-serif !important",
-              fontWeight: "400 !important",
-            }}
+            css={{ color: "$neutral900" }}
           >
             Welcome Gautham Srinivasan. Yup! you aren&apos;t a stranger here 🤗.
           </Heading>
@@ -73,7 +69,7 @@ export default function LoginForm() {
             size="sm"
             weight="regular"
             css={{
-              color: "$neutral800 !important",
+              color: "$neutral800",
               lineHeight: "$2",
               paragraphSpacing: "$2",
             }}
@@ -144,7 +140,6 @@ export default function LoginForm() {
             css={{
               color: "#2B2B2B",
               textAlign: "center",
-              fontFamily: "DM Sans, sans-serif !important",
             }}
           >
             Join your colleagues
@@ -209,9 +204,9 @@ export default function LoginForm() {
               <span style={{
                 color: "var(--twigs-colors-neutral900)",
               }}>
-                ganesh.r@surveysparrow.com
+                gautham@surveysparrow.com 
               </span>
-              and the above password.
+              {" "}and the above password.
             </Text>
           </Box>
         </Box>

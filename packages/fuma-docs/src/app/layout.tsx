@@ -3,12 +3,23 @@ import "@/app/(home)/styles.css";
 import { RootProvider } from "fumadocs-ui/provider";
 import { DM_Sans } from "next/font/google";
 import type { ReactNode } from "react";
+import type { Metadata } from "next";
 import StitchesRegistry from "./stitches-registry";
 import { headers } from "next/headers";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
 });
+
+export const metadata: Metadata = {
+  title: "Twigs - Component Library",
+  description: "Beautiful and customizable React UI for your applications by Surveysparrow",
+  icons: {
+    icon: "https://static.surveysparrow.com/site/twigs/twigs-favicon.png",
+    shortcut: "https://static.surveysparrow.com/site/twigs/twigs-favicon.png",
+    apple: "https://static.surveysparrow.com/site/twigs/twigs-favicon.png",
+  },
+};
 
 export default async function Layout({ children }: { children: ReactNode }) {
   let isHomePage = false;

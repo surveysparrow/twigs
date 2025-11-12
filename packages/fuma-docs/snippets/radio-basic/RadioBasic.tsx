@@ -5,36 +5,62 @@ export default function RadioBasic() {
   const [selectedValue, setSelectedValue] = useState("option1");
 
   return (
-    <Box css={{ display: "flex", flexDirection: "column", gap: "$6", alignItems: "center" }}>
-      <Box css={{ display: "flex", flexDirection: "column", gap: "$4", alignItems: "flex-start" }}>
-        <Text css={{ fontSize: "$md", fontWeight: "$6" }}>Choose your preference:</Text>
+    <Box css={{ display: "flex", gap: "$20", alignItems: "center" }}>
+      <Box
+        css={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "$8",
+          alignItems: "flex-start",
+        }}
+      >
+        <Text css={{ fontSize: "$md", fontWeight: "$6" }}>
+          Choose your preference:
+        </Text>
         <RadioGroup
           value={selectedValue}
           onChange={setSelectedValue}
+          css={{
+            display: "flex",
+            gap: "$6",
+          }}
         >
           <Radio value="option1" size="sm">
-            Small radio option
-          </Radio>
-          <Radio value="option2" size="md">
-            Medium radio option
+            <Text size="sm">Small Radio option</Text>
           </Radio>
           <Radio value="option3" size="sm" disabled>
-            Disabled radio option
+            <Text css={{ color: "$neutral300" }}>Disabled radio option</Text>
+          </Radio>
+          <Radio value="option2" size="md">
+            <Text size="md">Medium radio option</Text>
           </Radio>
         </RadioGroup>
       </Box>
 
-      <Box css={{ display: "flex", flexDirection: "column", gap: "$4", alignItems: "flex-start" }}>
-        <Text css={{ fontSize: "$md", fontWeight: "$6" }}>Default selection:</Text>
-        <RadioGroup defaultValue="default">
+      <Box
+        css={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "$8",
+          alignItems: "flex-start",
+        }}
+      >
+        <Text css={{ fontSize: "$md", fontWeight: "$6" }}>Payment Method:</Text>
+        <RadioGroup
+          defaultValue="default"
+          css={{
+            display: "flex",
+            gap: "$6",
+          }}
+        >
           <Radio value="default" size="md">
-            Default option
+            <Text size="md">Credit card</Text>
           </Radio>
           <Radio value="comfortable" size="md">
-            Comfortable option
+            <Text size="md">Gpay</Text>
           </Radio>
           <Radio value="compact" size="md">
-            Compact option
+            <Text size="md">Cash</Text>
           </Radio>
         </RadioGroup>
       </Box>

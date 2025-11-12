@@ -27,16 +27,16 @@ export default function SplitButtonBasic() {
             <Button leftIcon={<PencilIcon />}>Medium</Button>
             <IconButton icon={<ChevronDownIcon />} />
           </SplitButton>
-          
-          <SplitButton size="lg" color="light">
-            <Button leftIcon={<PencilIcon />}>Large</Button>
-            <IconButton icon={<ChevronDownIcon />} />
-          </SplitButton>
-
           <SplitButton size="xl" color="error">
             <Button leftIcon={<PencilIcon />}>Large</Button>
             <IconButton icon={<ChevronDownIcon />} />
           </SplitButton>
+          <Box css={{ backgroundColor: "$black900", padding: "$2", borderRadius: "$sm" }}>
+          <SplitButton size="lg" color="light">
+            <Button leftIcon={<PencilIcon />}>Light clr btn</Button>
+            <IconButton icon={<ChevronDownIcon />} />
+          </SplitButton>
+          </Box>
         </Box>
       </Box>
     </Box>

@@ -1,5 +1,4 @@
 import {
-  Heading,
   Text,
   Tabs,
   TabsContent,
@@ -113,16 +112,13 @@ export default function Features() {
     <>
       <div className="flex flex-col gap-4 lg:w-1/2 mx-6">
         <div>
-          <Heading size="h1" weight="bold" className="text-center"
-          css={{
-            fontFamily: "DM Sans, sans-serif !important",
-          }}
+          <h1 className="text-center text-3xl lg:text-5xl font-bold mb-2 break-words leading-tight"
           >
             Your complete UI{" "}
             <span className="text-fd-primary border-l-2 !border-fd-primary bg-fd-primary/10 px-2 rounded-r-md">
               toolkit
             </span>
-          </Heading>
+          </h1>
         </div>
         <div>
           <Text size="lg" className="text-center">

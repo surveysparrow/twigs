@@ -11,7 +11,7 @@ import {
 export default function AccordionDefaultValue() {
   return (
     <Box css={{ marginBottom: "$4"}}>
-    <Text size="md" weight="regular">Accordion with default value</Text>
+    <Text size="sm" weight="regular" css={{ marginBottom: "$4" }}>Accordion with default value</Text>
     <Accordion type="single" defaultValue="item-2">
       <AccordionItem value="item-1">
         <AccordionTrigger>Getting Started</AccordionTrigger>
