@@ -51,9 +51,6 @@ const StyledAnchor = styled('a', {
         '&:active': {
           color: '$neutral900'
         },
-        '&:visited': {
-          color: '$neutral400'
-        },
         '&:focus-visible': {
           outlineColor: '$neutral400'
         }
@@ -65,9 +62,6 @@ const StyledAnchor = styled('a', {
         },
         '&:active': {
           color: '$primary700'
-        },
-        '&:visited': {
-          color: '$primary400'
         },
         '&:focus-visible': {
           outlineColor: '$primary400'
@@ -81,9 +75,6 @@ const StyledAnchor = styled('a', {
         '&:active': {
           color: '$warning700'
         },
-        '&:visited': {
-          color: '$warning400'
-        },
         '&:focus-visible': {
           outlineColor: '$warning400'
         }
@@ -96,9 +87,6 @@ const StyledAnchor = styled('a', {
         '&:active': {
           color: '$negative700'
         },
-        '&:visited': {
-          color: '$negative400'
-        },
         '&:focus-visible': {
           outlineColor: '$negative400'
         }
@@ -110,9 +98,6 @@ const StyledAnchor = styled('a', {
         },
         '&:active': {
           color: '$positive700'
-        },
-        '&:visited': {
-          color: '$positive400'
         },
         '&:focus-visible': {
           outlineColor: '$positive400'
