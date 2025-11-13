@@ -291,6 +291,9 @@ export default function Dashboard() {
               size="sm"
               css={{
                 color: "$neutral600",
+                "@media (max-width: 768px)": {
+                  paddingRight: "10px",
+                },
               }}
             >
               Campaigns

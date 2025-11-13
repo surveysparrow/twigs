@@ -149,6 +149,9 @@ export default function Accounts() {
             color="secondary"
             css={{
               color: "$secondary400",
+              "@media (max-width: 400px)": {
+                display: "none",
+              },
             }}
             variant="ghost"
             size="sm"
@@ -182,6 +185,9 @@ export default function Accounts() {
             color="secondary"
             css={{
               color: "$secondary400",
+              "@media (max-width: 400px)": {
+                display: "none",
+              },
             }}
             variant="ghost"
             size="sm"
@@ -200,6 +206,7 @@ export default function Accounts() {
               css={{
                 color: "$secondary400",
                 fontWeight: "$2",
+                textWrap: "nowrap",
               }}
             >
               By Relevancy
@@ -256,6 +263,9 @@ export default function Accounts() {
               <Td
                 css={{
                   width: "50%",
+                  "@media (max-width: 400px)": {
+                    paddingRight: "3px !important",
+                  },
                 }}
               >
                 <Flex alignItems="center" gap="$6">
@@ -265,7 +275,7 @@ export default function Accounts() {
                     css={{
                       color: "$neutral900",
                       "@media (max-width: 768px)": {
-                        maxWidth: "50px",
+                        maxWidth: "10vw",
                         overflow: "hidden",
                         textOverflow: "ellipsis",
                         whiteSpace: "nowrap",
