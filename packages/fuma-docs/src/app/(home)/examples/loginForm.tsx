@@ -105,6 +105,9 @@ export default function LoginForm() {
             flexDirection: "row",
             gap: "$2",
             alignItems: "center",
+            "@media (max-width: 768px)": {
+              marginTop: "20px",
+            },
           }}
         >
           <Box>
@@ -140,6 +143,9 @@ export default function LoginForm() {
             css={{
               color: "#2B2B2B",
               textAlign: "center",
+              "@media (max-width: 768px)": {
+                fontSize: "17px !important",
+              },
             }}
           >
             Join your colleagues

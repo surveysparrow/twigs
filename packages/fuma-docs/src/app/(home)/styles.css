@@ -33,6 +33,48 @@
 
 .tabs-list-container {
   position: relative !important;
+  --tab-selection-x: 0;
+  --tab-selection-width: 0;
+}
+
+.tabs-list-container::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 0;
+  height: calc(100% - 4px);
+  width: calc(var(--tab-selection-width) * 1px);
+  background-color: var(--color-fd-background);
+  border-radius: 6px;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform, width;
+  transform: translateX(calc(var(--tab-selection-x) * 1px)) translateZ(0);
+  transform-origin: 0 0;
+  contain: layout style paint;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transition: transform 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955),
+              width 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+
+@media (max-width: 450px) {
+  .chat-div {
+    width: 95vw !important;
+  }
+  .accounts-div {
+    width: 98vw;
+    margin: 0 auto !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .tabs-list-container::after {
+    transition: transform 0.25s cubic-bezier(0.455, 0.03, 0.515, 0.955),
+                width 0.25s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.1);
+  }
 }
 
 /* Play Button Gradient Shadow */

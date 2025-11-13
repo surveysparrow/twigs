@@ -40,11 +40,6 @@ import Dashboard from "./examples/dashboard";
 export default function HomePage() {
   const [copied, setCopied] = useState(false);
   const [activeTab, setActiveTab] = useState("examples");
-  const [indicatorStyle, setIndicatorStyle] = useState({
-    x: 0,
-    width: 0,
-    opacity: 0,
-  });
   const tabsListRef = useRef<HTMLDivElement>(null);
 
   const handleCopy = async () => {
@@ -63,146 +58,67 @@ export default function HomePage() {
   };
 
   const updateIndicator = () => {
-    const list = tabsListRef.current;
-    if (!list) {
-      setIndicatorStyle({ x: 0, width: 0, opacity: 0 });
-      return;
-    }
+    const container = tabsListRef.current;
+    if (!container) return;
 
-    // Find the active tab button using data-state attribute
-    const activeButton = list.querySelector(
+    const activeButton = container.querySelector(
       `button[data-state="active"], [role="tab"][aria-selected="true"]`
     ) as HTMLElement;
 
     if (!activeButton) {
-      setIndicatorStyle({ x: 0, width: 0, opacity: 0 });
+      container.style.setProperty('--tab-selection-x', '0');
+      container.style.setProperty('--tab-selection-width', '0');
       return;
     }
 
-    // Get the TabsList element (parent of the buttons)
-    const tabsListElement = activeButton.closest(
-      '[role="tablist"]'
-    ) as HTMLElement;
+    const tabsListElement = activeButton.closest('[role="tablist"]') as HTMLElement;
+    if (!tabsListElement) return;
 
-    if (!tabsListElement) {
-      setIndicatorStyle({ x: 0, width: 0, opacity: 0 });
-      return;
-    }
-
-    // For scrollable containers on mobile, we need position in content space
-    // offsetLeft gives position relative to offsetParent (content coordinates)
-    // This doesn't change when the container scrolls
-    const buttonOffsetLeft = activeButton.offsetLeft;
-    const tabsListOffsetLeft = tabsListElement.offsetLeft || 0;
-
-    // Position in container's content coordinate system
-    // The indicator is absolutely positioned in the container, so this works correctly
-    const x = buttonOffsetLeft + tabsListOffsetLeft;
+    const x = activeButton.offsetLeft + (tabsListElement.offsetLeft || 0);
     const width = activeButton.offsetWidth;
-
-    setIndicatorStyle({ x, width, opacity: 1 });
+    container.style.setProperty('--tab-selection-x', `${x}`);
+    container.style.setProperty('--tab-selection-width', `${width}`);
   };
 
   useEffect(() => {
-    // Use requestAnimationFrame to ensure DOM is updated
-    const update = () => {
-      requestAnimationFrame(() => {
-        updateIndicator();
-      });
-    };
-
-    // Initial update
-    update();
-
-    // Also update after a short delay to catch DOM updates
-    const timer = setTimeout(update, 50);
-
-    const handleResize = () => {
-      update();
-    };
-
-    // On scroll, update indicator position (though offsetLeft shouldn't change)
-    const handleScroll = () => {
-      requestAnimationFrame(() => {
-        updateIndicator();
-      });
-    };
-
-    window.addEventListener("resize", handleResize);
-    const currentList = tabsListRef.current;
-    if (currentList) {
-      currentList.addEventListener("scroll", handleScroll, { passive: true });
-    }
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      if (currentList) {
-        currentList.removeEventListener("scroll", handleScroll);
-      }
-      clearTimeout(timer);
-    };
+    const timer = setTimeout(updateIndicator, 10);
+    return () => clearTimeout(timer);
   }, [activeTab]);
 
-  // Auto-scroll active tab into view on mobile when tab changes
+  useEffect(() => {
+    const handleResize = () => {
+      setTimeout(updateIndicator, 100);
+    };
+    window.addEventListener("resize", handleResize, { passive: true });
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   useEffect(() => {
     const list = tabsListRef.current;
     if (!list) return;
 
-    // Check if container is scrollable
     const isScrollable = list.scrollWidth > list.clientWidth;
     if (!isScrollable) return;
 
-    // Find active button
     const activeButton = list.querySelector(
       `button[data-state="active"], [role="tab"][aria-selected="true"]`
     ) as HTMLElement;
-
     if (!activeButton) return;
 
-    const tabsListElement = activeButton.closest(
-      '[role="tablist"]'
-    ) as HTMLElement;
+    const tabsListElement = activeButton.closest('[role="tablist"]') as HTMLElement;
     if (!tabsListElement) return;
 
-    // Calculate button position in scroll space
-    const buttonOffsetLeft = activeButton.offsetLeft;
-    const tabsListOffsetLeft = tabsListElement.offsetLeft || 0;
-    const buttonLeft = buttonOffsetLeft + tabsListOffsetLeft;
+    const buttonLeft = activeButton.offsetLeft + (tabsListElement.offsetLeft || 0);
     const buttonRight = buttonLeft + activeButton.offsetWidth;
-
     const scrollLeft = list.scrollLeft;
     const clientWidth = list.clientWidth;
-    const padding = 12; // Padding from edges
 
-    let targetScroll = scrollLeft;
-    const buttonVisibleLeft = buttonLeft - scrollLeft;
-    const buttonVisibleRight = buttonRight - scrollLeft;
-
-    // Scroll left if button is too far left
-    if (buttonVisibleLeft < padding) {
-      targetScroll = Math.max(0, buttonLeft - padding);
-    }
-    // Scroll right if button is too far right
-    else if (buttonVisibleRight > clientWidth - padding) {
-      targetScroll = Math.min(
-        list.scrollWidth - clientWidth,
-        buttonRight - clientWidth + padding
-      );
-    }
-
-    // Smooth scroll if needed
-    if (Math.abs(targetScroll - scrollLeft) > 1) {
+    if (buttonLeft < scrollLeft || buttonRight > scrollLeft + clientWidth) {
       list.scrollTo({
-        left: targetScroll,
+        left: Math.max(0, buttonLeft - 12),
         behavior: "smooth",
       });
-
-      // Update indicator after scroll animation completes
-      setTimeout(() => {
-        updateIndicator();
-      }, 400);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTab]);
 
   return (
@@ -266,7 +182,7 @@ export default function HomePage() {
             <div className="w-full flex items-center justify-center">
               <div
                 ref={tabsListRef}
-                className="flex overflow-scroll bg-fd-muted rounded-md w-90 md:w-fit p-0.5 tabs-list-container"
+                className="flex overflow-scroll bg-fd-muted rounded-md w-[95vw] md:w-fit p-0.5 tabs-list-container"
                 style={{
                   scrollbarWidth: "none",
                   position: "relative",
@@ -315,25 +231,6 @@ export default function HomePage() {
                     <div>Authentication</div>
                   </TabsTrigger>
                 </TabsList>
-                <div
-                  className="tabs-indicator"
-                  style={{
-                    position: "absolute",
-                    left: `${indicatorStyle.x}px`,
-                    width: `${indicatorStyle.width}px`,
-                    opacity: indicatorStyle.opacity,
-                    height: "calc(100% - 4px)",
-                    top: "2px",
-                    backgroundColor: "var(--color-fd-background)",
-                    borderRadius: "6px",
-                    boxShadow:
-                      "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
-                    transition:
-                      "left 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955), width 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955), opacity 0.2s ease",
-                    pointerEvents: "none",
-                    zIndex: 0,
-                  }}
-                />
               </div>
             </div>
             <TabsContent
@@ -388,7 +285,7 @@ export default function HomePage() {
               forceMount
               className="mt-2 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
             >
-              <div className="lg:max-w-6xl mx-3 w-full border-2 border-fd-background rounded-2xl p-4 bg-fd-muted tabs-grid">
+              <div className="lg:max-w-6xl mx-3 w-full border-2 border-fd-background rounded-2xl p-4 bg-fd-muted tabs-grid accounts-div">
                 <Accounts />
               </div>
             </TabsContent>
@@ -397,7 +294,7 @@ export default function HomePage() {
               forceMount
               className="mt-2 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
             >
-              <div className="lg:max-w-6xl md:max-w-4xl max-w-99 w-full border-2 border-fd-background rounded-2xl p-4 bg-fd-muted tabs-grid">
+              <div className="lg:max-w-6xl md:max-w-4xl w-full border-2 border-fd-background rounded-2xl p-4 bg-fd-muted tabs-grid chat-div">
                 <Chat />
               </div>
             </TabsContent>
@@ -414,7 +311,7 @@ export default function HomePage() {
           </ThemeProvider>
         </div>
         <div className="w-full flex flex-col justify-center items-center gap-10 pt-15">
-          <Text size="lg" css={{ color: "$neutral900" }}>
+          <Text className="!text-lg lg:!text-xl" css={{ color: "$neutral900" }}>
             Built for teams who demand excellence
           </Text>
           <div className="flex gap-7 lg:gap-25 flex-wrap justify-center items-center px-2">
@@ -426,7 +323,7 @@ export default function HomePage() {
                   className="w-[25px] h-[25px]"
                 />
               </div>
-              <Text size="lg" weight="normal" css={{ color: "$neutral700" }}>
+              <Text size="md" weight="normal" css={{ color: "$neutral700", "@media (max-width: 768px)": { fontSize: "16px" } }}>
                 SurveySparrow
               </Text>
             </div>
@@ -438,7 +335,7 @@ export default function HomePage() {
                   className="w-10 h-10 rounded-lg"
                 />
               </div>
-              <Text size="lg" weight="normal" css={{ color: "$neutral700" }}>
+              <Text size="md" weight="normal" css={{ color: "$neutral700", "@media (max-width: 768px)": { fontSize: "16px" } }}>
                 ThriveSparrow
               </Text>
             </div>
@@ -449,8 +346,8 @@ export default function HomePage() {
                   alt="Twigs"
                   className="w-[25px] h-[25px]"
                 />
-              </div>
-              <Text size="lg" weight="normal" css={{ color: "$neutral700" }}>
+              </div>  
+              <Text size="md" weight="normal" css={{ color: "$neutral700", "@media (max-width: 768px)": { fontSize: "16px" } }}>
                 SparrowDesk
               </Text>
             </div>
