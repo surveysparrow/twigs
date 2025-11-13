@@ -45,7 +45,7 @@ export default function MeetingCard() {
             <DropdownMenuTrigger asChild className="cursor-pointer">
               <EllipsisVerticalIcon size={20} />
             </DropdownMenuTrigger>
-            <DropdownMenuContent sideOffset={5}>
+            <DropdownMenuContent sideOffset={5} align="end">
               <DropdownMenuItem>Cancel</DropdownMenuItem>
               <DropdownMenuItem>Reschedule</DropdownMenuItem>
               <DropdownMenuSub>
