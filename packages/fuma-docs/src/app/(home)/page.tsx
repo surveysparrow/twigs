@@ -490,7 +490,7 @@ export default function HomePage() {
         </div>
         <div className="w-full lg:px-35 px-5 flex justify-between sm:flex-row flex-col pb-5">
           <Text size="md" weight="medium" css={{ color: "$neutral600" }}>
-            Build with love <span className="text-fd-secondary-foreground" onClick={() => window.open("https://surveysparrow.com", "_blank")} style={{ cursor: "pointer" }}>@Surveysparrow</span> ❤️
+            Built with ❤️ at <span className="text-fd-secondary-foreground" onClick={() => window.open("https://surveysparrow.com", "_blank")} style={{ cursor: "pointer" }}>Surveysparrow</span>
           </Text>
           <Text size="md" weight="medium" css={{ color: "$neutral600" }}>
             Copyright © {new Date().getFullYear()} Surveysparrow
