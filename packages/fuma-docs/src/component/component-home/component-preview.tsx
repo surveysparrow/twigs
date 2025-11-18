@@ -94,11 +94,11 @@ const skeletonMap: Record<string, ComponentType> = {
 };
 
 export function ComponentPreview({ name, title }: { name: string; title: string }) {
-  const SkeletonComponent = skeletonMap[name] || DefaultSkeleton;
+  const SkeletonComponent = skeletonMap[name];
   
-  if (SkeletonComponent === DefaultSkeleton) {
+  if (SkeletonComponent) {
+    return <SkeletonComponent />;
+  } else {
     return <DefaultSkeleton title={title} />;
   }
-  
-  return <SkeletonComponent />;
 }
