@@ -10,6 +10,7 @@ import {
   Flex,
 } from "@sparrowengg/twigs-react";
 import React from "react";
+import travelCardImage from "@/assets/images/travel-card-img.jpg";
 
 export default function TravelCard() {
   return (
@@ -26,12 +27,13 @@ export default function TravelCard() {
       }}
     >
       <Image
-        src="https://images.unsplash.com/photo-1566999573217-25c859ec1450?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        src={travelCardImage.src}
         alt="Natural beauty"
         css={{
           borderRadius: "$2xl",
           width: "100%",
           height: "100%",
+          minHeight: "228px",
         }}
       />
       <Flex flexDirection="column" gap="$1">

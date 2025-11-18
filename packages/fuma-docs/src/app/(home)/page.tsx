@@ -66,18 +66,20 @@ export default function HomePage() {
     ) as HTMLElement;
 
     if (!activeButton) {
-      container.style.setProperty('--tab-selection-x', '0');
-      container.style.setProperty('--tab-selection-width', '0');
+      container.style.setProperty("--tab-selection-x", "0");
+      container.style.setProperty("--tab-selection-width", "0");
       return;
     }
 
-    const tabsListElement = activeButton.closest('[role="tablist"]') as HTMLElement;
+    const tabsListElement = activeButton.closest(
+      '[role="tablist"]'
+    ) as HTMLElement;
     if (!tabsListElement) return;
 
     const x = activeButton.offsetLeft + (tabsListElement.offsetLeft || 0);
     const width = activeButton.offsetWidth;
-    container.style.setProperty('--tab-selection-x', `${x}`);
-    container.style.setProperty('--tab-selection-width', `${width}`);
+    container.style.setProperty("--tab-selection-x", `${x}`);
+    container.style.setProperty("--tab-selection-width", `${width}`);
   };
 
   useEffect(() => {
@@ -105,10 +107,13 @@ export default function HomePage() {
     ) as HTMLElement;
     if (!activeButton) return;
 
-    const tabsListElement = activeButton.closest('[role="tablist"]') as HTMLElement;
+    const tabsListElement = activeButton.closest(
+      '[role="tablist"]'
+    ) as HTMLElement;
     if (!tabsListElement) return;
 
-    const buttonLeft = activeButton.offsetLeft + (tabsListElement.offsetLeft || 0);
+    const buttonLeft =
+      activeButton.offsetLeft + (tabsListElement.offsetLeft || 0);
     const buttonRight = buttonLeft + activeButton.offsetWidth;
     const scrollLeft = list.scrollLeft;
     const clientWidth = list.clientWidth;
@@ -125,32 +130,33 @@ export default function HomePage() {
     <main className="w-full full-page">
       <div className="flex flex-col items-center">
         <div className="main w-full flex flex-col gap-4 sm:gap-5 justify-center items-center h-120 px-5">
-          <div className="lg:w-6/12 w-full flex flex-col gap-2">
+          <div className="lg:w-6/12 w-full flex flex-col gap-4">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-2 break-words leading-tight text-center">
-              Every component feels{" "}
+            Twigs is a{" "}
               <span className="text-fd-primary border-l-2 !border-fd-primary bg-fd-primary/10 px-2 rounded-r-md">
-                crafted
+              composable{" "}
               </span>
-              , every experience feels seamless.
+              component system for building modern web apps faster
             </h1>
             <p className="text-base sm:text-lg text-fd-muted-foreground break-words text-center">
-              Build consistent, scalable UIs with components designed for
-              flexibility, speed, and long-term reliability.
+            Accessible, themeable, and production-tested React components for creating scalable design systems and delightful user interfaces.
             </p>
           </div>
-          <div className="flex gap-2 flex-col sm:flex-row justify-center items-center">
-            <button 
-            className="!px-4 !py-2.5 rounded-md flex gap-3 items-center text-md w-fit cursor-pointer bg-fd-primary shadow-sm text-white font-medium"
-            onClick={() => {
-              window.location.href = "/docs/getting-started";
-            }}
-            aria-label="Getting Started Button"
+          <div className="flex gap-4 flex-col sm:flex-row justify-center items-center">
+            <button
+              className="!px-4 !py-2.5 rounded-md flex gap-3 items-center text-md w-fit cursor-pointer bg-fd-primary shadow-sm text-white font-medium group transition-all duration-200 hover:shadow-md hover:bg-[#017480]"
+              onClick={() => {
+                window.location.href = "/docs/getting-started";
+              }}
+              aria-label="Getting Started Button"
             >
               Getting Started
-              <ForwardArrowIcon size={18} color="currentColor" />
+              <span className="inline-block transition-transform duration-300 ease-in-out group-hover:translate-x-0.5">
+                <ForwardArrowIcon size={18} color="currentColor" />
+              </span>
             </button>
             <Box
-              className="text-fd-muted-foreground px-4 py-2.5 rounded-md inline-flex gap-2 items-center text-sm w-fit cursor-pointer bg-fd-background shadow-sm"
+              className="text-fd-muted-foreground px-4 py-2.5 rounded-md inline-flex gap-2 items-center text-sm w-fit cursor-pointer bg-fd-background shadow-sm group transition-all duration-200"
               onClick={handleCopy}
             >
               <code className="flex items-center gap-2 text-nowrap text-xs md:text-sm">
@@ -158,7 +164,7 @@ export default function HomePage() {
                 {copied ? (
                   <TickIcon size={18} className="text-fd-primary" />
                 ) : (
-                  <CopyIcon size={18} color="currentColor" />
+                  <CopyIcon size={18} color="currentColor" className="group-hover:scale-105 transition-all duration-200" />
                 )}
               </code>
             </Box>
@@ -174,146 +180,146 @@ export default function HomePage() {
               },
             }}
           >
-          <Tabs
-            defaultValue="examples"
-            value={activeTab}
-            onValueChange={setActiveTab}
-          >
-            <div className="w-full flex items-center justify-center">
-              <div
-                ref={tabsListRef}
-                className="flex overflow-scroll bg-fd-muted rounded-md w-[95vw] md:w-fit p-0.5 tabs-list-container"
-                style={{
-                  scrollbarWidth: "none",
-                  position: "relative",
-                }}
-              >
-                <TabsList
-                  aria-label="categories of examples"
-                  className="flex"
-                  style={{ position: "relative", width: "100%" }}
+            <Tabs
+              defaultValue="examples"
+              value={activeTab}
+              onValueChange={setActiveTab}
+            >
+              <div className="w-full flex items-center justify-center">
+                <div
+                  ref={tabsListRef}
+                  className="flex overflow-scroll bg-fd-muted rounded-md w-[95vw] md:w-fit p-0.5 tabs-list-container"
+                  style={{
+                    scrollbarWidth: "none",
+                    position: "relative",
+                  }}
                 >
-                  <TabsTrigger
-                    value="examples"
-                    className="!text-sm !font-normal tabs !rounded-md"
+                  <TabsList
+                    aria-label="categories of examples"
+                    className="flex"
+                    style={{ position: "relative", width: "100%" }}
                   >
-                    {" "}
-                    <div>Examples</div>
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="chat"
-                    className="!text-sm !font-normal tabs !rounded-md"
-                  >
-                    <div>Chat</div>
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="dashboard"
-                    className="!text-sm !font-normal tabs !rounded-md"
-                  >
-                    <div>Dashboard</div>
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="accounts"
-                    className="!text-sm !font-normal tabs !rounded-md"
-                  >
-                    <div>Accounts</div>
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="settings"
-                    className="!text-sm !font-normal tabs !rounded-md"
-                  >
-                    <div>Settings</div>
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="authentication"
-                    className="!text-sm !font-normal tabs !rounded-md"
-                  >
-                    <div>Authentication</div>
-                  </TabsTrigger>
-                </TabsList>
-              </div>
-            </div>
-            <TabsContent
-              value="examples"
-              forceMount
-              className="mt-2 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
-            >
-              <div className="lg:max-w-6xl mx-3 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 border-2 border-fd-background rounded-2xl p-3 bg-fd-muted tabs-grid">
-                <div className="row-span-2">
-                  <TravelCard />
-                </div>
-                <div className="">
-                  <MusicPlayer />
-                </div>
-                <div className="">
-                  <MeetingCard />
-                </div>
-                <div className="row-span-2">
-                  <MiniForm />
-                </div>
-                <div className="">
-                  <SmallCards />
-                </div>
-                <div className="">
-                  <TabsComponent />
-                </div>
-                <div className="">
-                  <BusinessCard />
+                    <TabsTrigger
+                      value="examples"
+                      className="!text-sm !font-normal tabs !rounded-md"
+                    >
+                      {" "}
+                      <div>Examples</div>
+                    </TabsTrigger>
+                    <TabsTrigger
+                      value="chat"
+                      className="!text-sm !font-normal tabs !rounded-md"
+                    >
+                      <div>Chat</div>
+                    </TabsTrigger>
+                    <TabsTrigger
+                      value="dashboard"
+                      className="!text-sm !font-normal tabs !rounded-md"
+                    >
+                      <div>Dashboard</div>
+                    </TabsTrigger>
+                    <TabsTrigger
+                      value="accounts"
+                      className="!text-sm !font-normal tabs !rounded-md"
+                    >
+                      <div>Accounts</div>
+                    </TabsTrigger>
+                    <TabsTrigger
+                      value="settings"
+                      className="!text-sm !font-normal tabs !rounded-md"
+                    >
+                      <div>Settings</div>
+                    </TabsTrigger>
+                    <TabsTrigger
+                      value="authentication"
+                      className="!text-sm !font-normal tabs !rounded-md"
+                    >
+                      <div>Authentication</div>
+                    </TabsTrigger>
+                  </TabsList>
                 </div>
               </div>
-            </TabsContent>
-            <TabsContent
-              value="authentication"
-              forceMount
-              className="mt-2 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
-            >
-              <div className="lg:max-w-6xl mx-3 w-full border-2 border-fd-background rounded-2xl p-4 bg-fd-muted tabs-grid">
-                <LoginForm />
-              </div>
-            </TabsContent>
-            <TabsContent
-              value="settings"
-              forceMount
-              className="mt-2 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
-            >
-              <div className="lg:w-6xl mx-3 w-full border-2 border-fd-background rounded-2xl p-4 bg-fd-muted tabs-grid">
-                <Settings />
-              </div>
-            </TabsContent>
-            <TabsContent
-              value="accounts"
-              forceMount
-              className="mt-2 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
-            >
-              <div className="lg:max-w-6xl mx-3 w-full border-2 border-fd-background rounded-2xl p-4 bg-fd-muted tabs-grid accounts-div">
-                <Accounts />
-              </div>
-            </TabsContent>
-            <TabsContent
-              value="chat"
-              forceMount
-              className="mt-2 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
-            >
-              <div className="lg:max-w-6xl md:max-w-4xl w-full border-2 border-fd-background rounded-2xl p-4 bg-fd-muted tabs-grid chat-div">
-                <Chat />
-              </div>
-            </TabsContent>
-            <TabsContent
-              value="dashboard"
-              forceMount
-              className="mt-2 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
-            >
-              <div className="lg:max-w-6xl md:max-w-4xl max-w-fit mx-3 w-full border-2 border-fd-background rounded-2xl p-4 bg-fd-muted tabs-grid">
-                <Dashboard />
-              </div>
-            </TabsContent>
-          </Tabs>
+              <TabsContent
+                value="examples"
+                forceMount
+                className="mt-2 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
+              >
+                <div className="lg:max-w-6xl mx-3 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 border-2 border-fd-background rounded-2xl p-3 bg-fd-muted tabs-grid">
+                  <div className="row-span-2">
+                    <TravelCard />
+                  </div>
+                  <div className="">
+                    <MusicPlayer />
+                  </div>
+                  <div className="">
+                    <MeetingCard />
+                  </div>
+                  <div className="row-span-2">
+                    <MiniForm />
+                  </div>
+                  <div className="">
+                    <SmallCards />
+                  </div>
+                  <div className="">
+                    <TabsComponent />
+                  </div>
+                  <div className="">
+                    <BusinessCard />
+                  </div>
+                </div>
+              </TabsContent>
+              <TabsContent
+                value="authentication"
+                forceMount
+                className="mt-2 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
+              >
+                <div className="lg:max-w-6xl mx-3 w-full border-2 border-fd-background rounded-2xl p-4 bg-fd-muted tabs-grid">
+                  <LoginForm />
+                </div>
+              </TabsContent>
+              <TabsContent
+                value="settings"
+                forceMount
+                className="mt-2 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
+              >
+                <div className="lg:w-6xl mx-3 w-full border-2 border-fd-background rounded-2xl p-4 bg-fd-muted tabs-grid">
+                  <Settings />
+                </div>
+              </TabsContent>
+              <TabsContent
+                value="accounts"
+                forceMount
+                className="mt-2 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
+              >
+                <div className="lg:max-w-6xl mx-3 w-full border-2 border-fd-background rounded-2xl p-4 bg-fd-muted tabs-grid accounts-div">
+                  <Accounts />
+                </div>
+              </TabsContent>
+              <TabsContent
+                value="chat"
+                forceMount
+                className="mt-2 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
+              >
+                <div className="lg:max-w-6xl md:max-w-4xl w-full border-2 border-fd-background rounded-2xl p-4 bg-fd-muted tabs-grid chat-div">
+                  <Chat />
+                </div>
+              </TabsContent>
+              <TabsContent
+                value="dashboard"
+                forceMount
+                className="mt-2 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
+              >
+                <div className="lg:max-w-6xl md:max-w-4xl max-w-fit mx-3 w-full border-2 border-fd-background rounded-2xl p-4 bg-fd-muted tabs-grid">
+                  <Dashboard />
+                </div>
+              </TabsContent>
+            </Tabs>
           </ThemeProvider>
         </div>
-        <div className="w-full flex flex-col justify-center items-center gap-10 pt-15">
-          <Text className="!text-lg lg:!text-xl" css={{ color: "$neutral900" }}>
-            Built for teams who demand excellence
-          </Text>
+        <div className="w-full flex flex-col justify-center items-center gap-10 pt-25">
+          <h3 className="text-center text-xl lg:text-2xl font-medium mb-2 break-words leading-tight">
+              Built for teams who demand excellence
+          </h3>
           <div className="flex gap-7 lg:gap-25 flex-wrap justify-center items-center px-2">
             <div className="flex gap-3 items-center">
               <div className="p-2 border-1 border-fd-border rounded-lg">
@@ -323,7 +329,14 @@ export default function HomePage() {
                   className="w-[25px] h-[25px]"
                 />
               </div>
-              <Text size="md" weight="normal" css={{ color: "$neutral700", "@media (max-width: 768px)": { fontSize: "16px" } }}>
+              <Text
+                size="md"
+                weight="normal"
+                css={{
+                  color: "$neutral800",
+                  "@media (max-width: 768px)": { fontSize: "16px" },
+                }}
+              >
                 SurveySparrow
               </Text>
             </div>
@@ -335,7 +348,14 @@ export default function HomePage() {
                   className="w-10 h-10 rounded-lg"
                 />
               </div>
-              <Text size="md" weight="normal" css={{ color: "$neutral700", "@media (max-width: 768px)": { fontSize: "16px" } }}>
+              <Text
+                size="md"
+                weight="normal"
+                css={{
+                  color: "$neutral800",
+                  "@media (max-width: 768px)": { fontSize: "16px" },
+                }}
+              >
                 ThriveSparrow
               </Text>
             </div>
@@ -346,8 +366,15 @@ export default function HomePage() {
                   alt="Twigs"
                   className="w-[25px] h-[25px]"
                 />
-              </div>  
-              <Text size="md" weight="normal" css={{ color: "$neutral700", "@media (max-width: 768px)": { fontSize: "16px" } }}>
+              </div>
+              <Text
+                size="md"
+                weight="normal"
+                css={{
+                  color: "$neutral800",
+                  "@media (max-width: 768px)": { fontSize: "16px" },
+                }}
+              >
                 SparrowDesk
               </Text>
             </div>
@@ -373,7 +400,7 @@ export default function HomePage() {
                   John Doe
                 </Text>
                 <Text size="sm" weight="normal" css={{ color: "$neutral700" }}>
-                  CEO, Surveysparrow
+                  CEO, SurveySparrow
                 </Text>
               </div>
             </div>
@@ -420,13 +447,13 @@ export default function HomePage() {
                   Harry Potter
                 </Text>
                 <Text size="sm" weight="normal" css={{ color: "$neutral700" }}>
-                  Designer, SparrowGenie
+                  Designer, SparrowDesk
                 </Text>
               </div>
             </div>
           </div>
         </div>
-        <div className="w-full flex flex-col justify-center items-center gap-10 mt-10 pt-10 border-t !border-fd-primary/20 features-background">
+        <div className="w-full flex flex-col justify-center items-center gap-10 mt-20 pt-10 border-t !border-fd-primary/20 features-background">
           <Features />
         </div>
         <div className="w-full lg:px-35 px-5 lg:mt-25 mt-10 border-t border-fd-border py-10 flex justify-between sm:flex-row flex-col gap-5 lg:gap-0 footer">
@@ -490,10 +517,17 @@ export default function HomePage() {
         </div>
         <div className="w-full lg:px-35 px-5 flex justify-between sm:flex-row flex-col pb-5">
           <Text size="md" weight="medium" css={{ color: "$neutral600" }}>
-            Built with ❤️ at <span className="text-fd-secondary-foreground" onClick={() => window.open("https://surveysparrow.com", "_blank")} style={{ cursor: "pointer" }}>Surveysparrow</span>
+            Built with ❤️ at{" "}
+            <span
+              className="text-fd-secondary-foreground"
+              onClick={() => window.open("https://surveysparrow.com", "_blank")}
+              style={{ cursor: "pointer" }}
+            >
+              SurveySparrow
+            </span>
           </Text>
           <Text size="md" weight="medium" css={{ color: "$neutral600" }}>
-            Copyright © {new Date().getFullYear()} Surveysparrow
+            Copyright © {new Date().getFullYear()} SurveySparrow
           </Text>
         </div>
       </div>

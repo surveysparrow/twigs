@@ -3,8 +3,6 @@ import React, { useMemo, useState } from "react";
 import * as Icons from "@sparrowengg/twigs-react-icons";
 import { CopyIcon, ResetIcon } from "@sparrowengg/twigs-react-icons";
 import {
-  Box,
-  Button,
   Input,
   Slider,
   SliderRange,
@@ -153,8 +151,7 @@ export function Customization() {
               Thumb: () => <SliderThumb className="!bg-fd-primary !w-3 !h-3" />,
               Range: () => <SliderRange className="!bg-fd-primary" />,
               Track: ({ children }: { children: React.ReactNode }) => (
-                <SliderTrack>
-                  <Box className="!w-full !h-full !bg-fd-muted !absolute !rounded-full" />
+                <SliderTrack className="!w-full !bg-fd-muted !absolute !rounded-full">
                   {children}
                 </SliderTrack>
               ),
@@ -184,8 +181,7 @@ export function Customization() {
               Thumb: () => <SliderThumb className="!bg-fd-primary !w-3 !h-3" />,
               Range: () => <SliderRange className="!bg-fd-primary" />,
               Track: ({ children }: { children: React.ReactNode }) => (
-                <SliderTrack>
-                  <Box className="!w-full !h-full !bg-fd-muted !absolute !rounded-full" />
+                <SliderTrack className="!w-full !bg-fd-muted !absolute !rounded-full">
                   {children}
                 </SliderTrack>
               ),
@@ -193,14 +189,13 @@ export function Customization() {
           />
         </div>
         <div className="flex flex-row justify-between p-2">
-          <Button
-            size="md"
-            leftIcon={<CopyIcon />}
-            className="!w-full !bg-fd-primary !text-fd-primary-foreground !font-normal"
+          <button
+            className="!w-full !bg-fd-primary !text-fd-primary-foreground !font-normal flex items-center justify-center gap-2 cursor-pointer rounded-lg"
             onClick={handleCopyStyles}
           >
             Copy Styles
-          </Button>
+            <CopyIcon size={16} />
+          </button>
         </div>
       </div>
       <div className="w-full flex flex-col gap-4">

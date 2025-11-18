@@ -35,20 +35,6 @@ And now you can call `dialogs.open` or `dialogs.push` to open new dialogs.
 
 <Playground snippetName="dialogs-manager-basic" defaultPlayground />
 
-## Props
-
-### DialogsManager
-
-<TypeTable
-  type={{
-    customDialogs: {
-      type: "Record<string, (props: { onClose: () => void; [x: string]: any }) => ReactNode>",
-      description: "Custom dialogs that can be opened using dialogs methods.",
-      default: "{}",
-    },
-  }}
-/>
-
 ## Methods
 
 ### dialogs.open(dialogName, options)
@@ -93,6 +79,20 @@ Used to close a particular dialog.
 ### dialogs.closeAll()
 
 Used to close all open dialogs.
+
+## Props
+
+### DialogsManager
+
+<TypeTable
+  type={{
+    customDialogs: {
+      type: "Record<string, (props: { onClose: () => void; [x: string]: any }) => ReactNode>",
+      description: "Custom dialogs that can be opened using dialogs methods.",
+      default: "{}",
+    },
+  }}
+/>
 
 ## Default Dialogs Props
 

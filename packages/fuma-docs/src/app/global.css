@@ -25,6 +25,10 @@ header#nd-subnav > div:last-child a {
     height: 100% !important;
 }
 
+header#nd-subnav > div > div:last-child {
+  gap: 0;
+}
+
 header#nd-nav {
   border-bottom: 1px solid var(--color-fd-border);
   min-height: 64px;

@@ -44,7 +44,23 @@ const SliderExample = () => {
 
 <Playground snippetName="slider-basic" defaultPlayground />
 
+## Examples
+
+### variants and customization
+
+The slider component supports a wide range of features including range selection, custom stepping, multiple sizes, label placement, and component customization.
+
+<Callout type="info" title="Component Customization Best Practice">
+When customizing slider components using the `components` prop, it's recommended to render each component as a separate function outside the main component. This approach provides better performance, cleaner code organization, and proper state handling. 
+
+Instead of inline component definitions, create dedicated functions like `RenderedThumb`, `RenderedRange`, and `RenderedTrack` to ensure optimal re-rendering behavior and maintainability.
+</Callout>
+
+<Playground snippetName="slider-comprehensive" defaultPlayground /> 
+
 ## Props
+
+### Slider
 
 <TypeTable
   type={{
@@ -157,17 +173,3 @@ These props are used for the conditional rendering of the components
     },
   }}
 />
-
-## Examples
-
-### variants and customization
-
-The slider component supports a wide range of features including range selection, custom stepping, multiple sizes, label placement, and component customization.
-
-<Callout type="info" title="Component Customization Best Practice">
-When customizing slider components using the `components` prop, it's recommended to render each component as a separate function outside the main component. This approach provides better performance, cleaner code organization, and proper state handling. 
-
-Instead of inline component definitions, create dedicated functions like `RenderedThumb`, `RenderedRange`, and `RenderedTrack` to ensure optimal re-rendering behavior and maintainability.
-</Callout>
-
-<Playground snippetName="slider-comprehensive" defaultPlayground /> 

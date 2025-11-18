@@ -34,7 +34,7 @@ export default function Settings() {
         borderRadius: "$2xl",
         boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
         backgroundColor: "$neutral50",
-        height: "80vh",
+        height: "625px",
         "@media (max-width: 768px)": {
           height: "100%",
         },
