@@ -45,97 +45,60 @@ import {
   TimePickerSkeleton,
   DefaultSkeleton,
 } from "./skeletons";
+import type { ComponentType } from "react";
 
-// Component Preview Renderer
-export function ComponentPreview({ title }: { title: string }) {
-  switch (title) {
-    case "Accordion":
-      return <AccordionSkeleton />;
-    case "Avatar":
-      return <AvatarSkeleton />;
-    case "Chip":
-      return <ChipSkeleton />;
-    case "Image":
-      return <ImageSkeleton />;
-    case "Table":
-      return <TableSkeleton />;
-    case "Alert Dialog":
-      return <AlertDialogSkeleton />;
-    case "Dialog":
-      return <DialogSkeleton />;
-    case "Drawer":
-      return <DrawerSkeleton />;
-    case "Dropdown":
-      return <DropdownSkeleton />;
-    case "Hover Card":
-      return <HoverCardSkeleton />;
-    case "Popover":
-      return <PopoverSkeleton />;
-    case "Toast":
-      return <ToastSkeleton />;
-    case "Box":
-      return <BoxSkeleton />;
-    case "Flex":
-      return <FlexSkeleton />;
-    case "Grid":
-      return <GridSkeleton />;
-    case "Stack":
-      return <StackSkeleton />;
-    case "Button":
-      return <ButtonSkeleton />;
-    case "Icon Button":
-      return <IconButtonSkeleton />;
-    case "Split Button":
-      return <SplitButtonSkeleton />;
-    case "Checkbox":
-      return <CheckboxSkeleton />;
-    case "Form Helper Text":
-      return <FormHelperTextSkeleton />;
-    case "Form Label":
-      return <FormLabelSkeleton />;
-    case "Form Input":
-      return <FormInputSkeleton />;
-    case "Input":
-      return <InputSkeleton />;
-    case "Radio":
-      return <RadioSkeleton />;
-    case "Select":
-      return <SelectSkeleton />;
-    case "Separator":
-      return <SeparatorSkeleton />;
-    case "Switch":
-      return <SwitchSkeleton />;
-    case "Slider":
-      return <SliderSkeleton />;
-    case "Textarea":
-      return <TextareaSkeleton />;
-    case "Tooltip":
-      return <TooltipSkeleton />;
-    case "Alert":
-      return <AlertSkeleton />;
-    case "Cascader":
-      return <CascaderSkeleton />;
-    case "Circle Loader":
-      return <CircleLoaderSkeleton />;
-    case "Line Loader":
-      return <LineLoaderSkeleton />;
-    case "Tabs":
-      return <TabsSkeleton />;
-    case "Link":
-      return <LinkSkeleton />;
-    case "Pagination":
-      return <PaginationSkeleton />;
-    case "Stepper":
-      return <StepperSkeleton />;
-    case "Calendar Range":
-      return <CalendarRangeSkeleton />;
-    case "Calendar":
-      return <CalendarSkeleton />;
-    case "DatePicker":
-      return <DatePickerSkeleton />;
-    case "TimePicker":
-      return <TimePickerSkeleton />;
-    default:
-      return <DefaultSkeleton title={title} />;
+const skeletonMap: Record<string, ComponentType> = {
+  "accordion": AccordionSkeleton,
+  "avatar": AvatarSkeleton,
+  "chip": ChipSkeleton,
+  "image": ImageSkeleton,
+  "table": TableSkeleton,
+  "alert-dialog": AlertDialogSkeleton,
+  "dialog": DialogSkeleton,
+  "drawer": DrawerSkeleton,
+  "dropdown": DropdownSkeleton,
+  "hover-card": HoverCardSkeleton,
+  "popover": PopoverSkeleton,
+  "toast": ToastSkeleton,
+  "box": BoxSkeleton,
+  "flex": FlexSkeleton,
+  "grid": GridSkeleton,
+  "stack": StackSkeleton,
+  "button": ButtonSkeleton,
+  "icon-button": IconButtonSkeleton,
+  "split-button": SplitButtonSkeleton,
+  "checkbox": CheckboxSkeleton,
+  "form-helper-text": FormHelperTextSkeleton,
+  "form-label": FormLabelSkeleton,
+  "form-input": FormInputSkeleton,
+  "input": InputSkeleton,
+  "radio": RadioSkeleton,
+  "select": SelectSkeleton,
+  "separator": SeparatorSkeleton,
+  "switch": SwitchSkeleton,
+  "slider": SliderSkeleton,
+  "textarea": TextareaSkeleton,
+  "tooltip": TooltipSkeleton,
+  "alert": AlertSkeleton,
+  "cascader": CascaderSkeleton,
+  "circle-loader": CircleLoaderSkeleton,
+  "line-loader": LineLoaderSkeleton,
+  "tabs": TabsSkeleton,
+  "link": LinkSkeleton,
+  "pagination": PaginationSkeleton,
+  "stepper": StepperSkeleton,
+  "calendar-range": CalendarRangeSkeleton,
+  "calendar": CalendarSkeleton,
+  "datepicker": DatePickerSkeleton,
+  "timepicker": TimePickerSkeleton,
+};
+
+export function ComponentPreview({ name, title }: { name: string; title: string }) {
+  const SkeletonComponent = skeletonMap[name] || DefaultSkeleton;
+  
+  if (SkeletonComponent === DefaultSkeleton) {
+    return <DefaultSkeleton title={title} />;
   }
+  
+  return <SkeletonComponent />;
 }

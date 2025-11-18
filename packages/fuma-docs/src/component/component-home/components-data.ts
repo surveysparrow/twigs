@@ -1,4 +1,5 @@
 export type ComponentItem = {
+  name: string;
   title: string;
   description: string;
   href: string;
@@ -8,6 +9,7 @@ export type ComponentItem = {
 export const components: ComponentItem[] = [
   // Data Display
   {
+    name: "accordion",
     title: "Accordion",
     description:
       "Display content in a collapsible section. Perfect for showing and hiding content.",
@@ -15,6 +17,7 @@ export const components: ComponentItem[] = [
     category: "Data Display",
   },
   {
+    name: "avatar",
     title: "Avatar",
     description:
       "Represent user profile picture or initials. Supports images, fallbacks, and different sizes for user interfaces.",
@@ -22,6 +25,7 @@ export const components: ComponentItem[] = [
     category: "Data Display",
   },
   {
+    name: "chip",
     title: "Chip",
     description:
       "Categorize or label content. Perfect for tags, filters, and status indicators",
@@ -29,6 +33,7 @@ export const components: ComponentItem[] = [
     category: "Data Display",
   },
   {
+    name: "image",
     title: "Image",
     description:
       "Component for handling images wrapped around the HTML img element.",
@@ -36,6 +41,7 @@ export const components: ComponentItem[] = [
     category: "Data Display",
   },
   {
+    name: "table",
     title: "Table",
     description:
       "Display data in a tabular format with configurable border styles.",
@@ -45,6 +51,7 @@ export const components: ComponentItem[] = [
 
   // Overlay
   {
+    name: "alert-dialog",
     title: "Alert Dialog",
     description:
       "For displaying a alert dialog prompt. Perfect for displaying important information to the user.",
@@ -52,6 +59,7 @@ export const components: ComponentItem[] = [
     category: "Overlay",
   },
   {
+    name: "dialog",
     title: "Dialog",
     description:
       "Display of a modal component for confirmations, forms, and important user interactions.",
@@ -59,6 +67,7 @@ export const components: ComponentItem[] = [
     category: "Overlay",
   },
   {
+    name: "dialogs-manager",
     title: "Dialogs Manager",
     description:
       "Used for programmatically controlling multiple dialogs. Manages dialog state and provides easy API for complex workflows.",
@@ -66,6 +75,7 @@ export const components: ComponentItem[] = [
     category: "Overlay",
   },
   {
+    name: "drawer",
     title: "Drawer",
     description:
       "Render content that slides in from the side of the screen. Perfect for navigation menus and secondary content.",
@@ -73,6 +83,7 @@ export const components: ComponentItem[] = [
     category: "Overlay",
   },
   {
+    name: "dropdown",
     title: "Dropdown",
     description:
       "Create an accessible dropdown menu. Perfect for action menus, user profiles, and contextual options.",
@@ -80,6 +91,7 @@ export const components: ComponentItem[] = [
     category: "Overlay",
   },
   {
+    name: "hover-card",
     title: "Hover Card",
     description:
       "Display content when hovering over an element. Rich hover interactions with complex content and media.",
@@ -87,6 +99,7 @@ export const components: ComponentItem[] = [
     category: "Overlay",
   },
   {
+    name: "popover",
     title: "Popover",
     description:
       "Show detailed information inside a pop-up. Perfect for additional context and interactive content.",
@@ -94,6 +107,7 @@ export const components: ComponentItem[] = [
     category: "Overlay",
   },
   {
+    name: "tooltip",
     title: "Tooltip",
     description:
       "Display additional information when a user hovers over an element. Provides contextual help and descriptions.",
@@ -103,6 +117,7 @@ export const components: ComponentItem[] = [
 
   // Feedback
   {
+    name: "alert",
     title: "Alert",
     description:
       "Communicate a state that affects a system, feature or page. Provides contextual feedback to users.",
@@ -110,6 +125,7 @@ export const components: ComponentItem[] = [
     category: "Feedback",
   },
   {
+    name: "toast",
     title: "Toast",
     description:
       "Display a temporary message to the user. Perfect for notifications, confirmations, and status updates.",
@@ -119,6 +135,7 @@ export const components: ComponentItem[] = [
 
   // Layout
   {
+    name: "box",
     title: "Box",
     description:
       "The most abstract styling component on top of which all other components are built. Provides flexible layout capabilities.",
@@ -126,13 +143,15 @@ export const components: ComponentItem[] = [
     category: "Layout",
   },
   {
+    name: "flex",
     title: "Flex",
     description:
       "Manage flex layouts. Provides easy-to-use flexbox properties for responsive and flexible designs.",
     href: "/docs/components/flex",
     category: "Layout",
   },
-  {
+  { 
+    name: "grid",
     title: "Grid",
     description:
       "Manage grid layouts. CSS Grid component for complex two-dimensional layouts and responsive designs.",
@@ -140,6 +159,7 @@ export const components: ComponentItem[] = [
     category: "Layout",
   },
   {
+    name: "stack",
     title: "Stack",
     description:
       "Layout its children in a vertical or horizontal stack. Perfect for organizing content with consistent spacing.",
@@ -149,6 +169,7 @@ export const components: ComponentItem[] = [
 
   // Form
   {
+    name: "button",
     title: "Button",
     description:
       "Trigger an action or event. Supports multiple variants, sizes, and states for different use cases.",
@@ -156,6 +177,7 @@ export const components: ComponentItem[] = [
     category: "Form",
   },
   {
+    name: "icon-button",
     title: "Icon Button",
     description:
       "A button that contains only an icon. Perfect for toolbar actions, close buttons, and compact interfaces.",
@@ -163,6 +185,7 @@ export const components: ComponentItem[] = [
     category: "Form",
   },
   {
+    name: "split-button",
     title: "Split Button",
     description:
       "A button with a dropdown menu attached. Combines primary action with secondary options in one component.",
@@ -170,6 +193,7 @@ export const components: ComponentItem[] = [
     category: "Form",
   },
   {
+    name: "cascader",
     title: "Cascader",
     description:
       "Select values from hierarchical nested options. Perfect for location selection, category browsing, and multi-level data selection.",
@@ -177,6 +201,7 @@ export const components: ComponentItem[] = [
     category: "Form",
   },
   {
+    name: "checkbox",
     title: "Checkbox",
     description:
       "Select multiple values from several options. Supports indeterminate state.",
@@ -184,6 +209,7 @@ export const components: ComponentItem[] = [
     category: "Form",
   },
   {
+    name: "form-helper-text",
     title: "Form Helper Text",
     description:
       "Provide additional context and instructions for form fields. Supports error and info states.",
@@ -191,6 +217,7 @@ export const components: ComponentItem[] = [
     category: "Form",
   },
   {
+    name: "form-label",
     title: "Form Label",
     description:
       "Add labels to form fields. Supports required indicators, tooltips, and accessibility features.",
@@ -198,6 +225,7 @@ export const components: ComponentItem[] = [
     category: "Form",
   },
   {
+    name: "form-input",
     title: "Form Input",
     description:
       "Enhanced input component with label, helper text, and error states. Perfect for complex form layouts.",
@@ -205,6 +233,7 @@ export const components: ComponentItem[] = [
     category: "Form",
   },
   {
+    name: "input",
     title: "Input",
     description:
       "Get user input in a text field. Supports various types, validation, and accessibility features.",
@@ -212,6 +241,7 @@ export const components: ComponentItem[] = [
     category: "Form",
   },
   {
+    name: "radio",
     title: "Radio",
     description:
       "Select one option from several options. Perfect for single-choice selections in forms and surveys.",
@@ -219,6 +249,7 @@ export const components: ComponentItem[] = [
     category: "Form",
   },
   {
+    name: "select",
     title: "Select",
     description:
       "Pick a value from predefined options. Supports single and multi-select with search functionality.",
@@ -226,6 +257,7 @@ export const components: ComponentItem[] = [
     category: "Form",
   },
   {
+    name: "separator",
     title: "Separator",
     description:
       "Visually separate content. Horizontal or vertical divider component for organizing interface sections.",
@@ -233,6 +265,7 @@ export const components: ComponentItem[] = [
     category: "Form",
   },
   {
+    name: "slider",
     title: "Slider",
     description:
       "Allow users to make selections from a range of values. Perfect for numeric inputs and settings.",
@@ -240,13 +273,15 @@ export const components: ComponentItem[] = [
     category: "Form",
   },
   {
+    name: "switch",
     title: "Switch",
     description:
       "Capture a binary state. Toggle switch component for on/off settings and preferences.",
     href: "/docs/components/switch",
     category: "Form",
   },
-  {
+  { 
+    name: "textarea",
     title: "Textarea",
     description:
       "Enter multiple lines of text. Perfect for comments, descriptions, and long-form content input.",
@@ -256,6 +291,7 @@ export const components: ComponentItem[] = [
 
   // Date & Time
   {
+    name: "calendar-range",
     title: "Calendar Range",
     description:
       "Select a range of dates from a calendar interface. Supports date ranges, validation, and localization.",
@@ -263,6 +299,7 @@ export const components: ComponentItem[] = [
     category: "Date & Time",
   },
   {
+    name: "calendar",
     title: "Calendar",
     description:
       "Display a calendar interface. Supports date ranges, validation, and localization.",
@@ -270,6 +307,7 @@ export const components: ComponentItem[] = [
     category: "Date & Time",
   },
   {
+    name: "datepicker",
     title: "DatePicker",
     description:
       "Select dates from a calendar interface. Supports date ranges, validation, and localization.",
@@ -277,6 +315,7 @@ export const components: ComponentItem[] = [
     category: "Date & Time",
   },
   {
+    name: "timepicker",
     title: "TimePicker",
     description:
       "Select time values with hour and minute precision. Supports 12/24 hour formats and validation.",
@@ -286,6 +325,7 @@ export const components: ComponentItem[] = [
 
   // Typography
   {
+    name: "text",
     title: "Text",
     description:
       "Render text and paragraphs within an interface. Provides consistent typography with size and weight variants.",
@@ -293,6 +333,7 @@ export const components: ComponentItem[] = [
     category: "Typography",
   },
   {
+    name: "heading",
     title: "Heading",
     description:
       "Render semantic HTML heading elements. Provides consistent heading styles with proper hierarchy and accessibility.",
@@ -302,13 +343,15 @@ export const components: ComponentItem[] = [
 
   // Navigation
   {
+    name: "link",
     title: "Link",
     description:
       "Provide accessible navigation between pages. Supports internal and external links with proper styling.",
     href: "/docs/components/link",
     category: "Navigation",
   },
-  {
+  { 
+    name: "pagination",
     title: "Pagination",
     description:
       "Navigate through a series of pages. Provides numbered navigation for large datasets and content lists.",
@@ -316,6 +359,7 @@ export const components: ComponentItem[] = [
     category: "Navigation",
   },
   {
+    name: "stepper",
     title: "Stepper",
     description:
       "Indicate progress through a multi-step process. Perfect for wizards, forms, and guided workflows.",
@@ -323,6 +367,7 @@ export const components: ComponentItem[] = [
     category: "Navigation",
   },
   {
+    name: "tabs",
     title: "Tabs",
     description:
       "Display content in a tabbed interface. Organizes content into sections with easy navigation between them.",
@@ -332,6 +377,7 @@ export const components: ComponentItem[] = [
 
   // Loader
   {
+    name: "circle-loader",
     title: "Circle Loader",
     description:
       "Provide a visual cue that an action is processing. Circular progress indicator for loading states.",
@@ -339,6 +385,7 @@ export const components: ComponentItem[] = [
     category: "Loader",
   },
   {
+    name: "line-loader",
     title: "Line Loader",
     description:
       "Display progress status for a task. Linear progress indicator with customizable appearance and behavior.",

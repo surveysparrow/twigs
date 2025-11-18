@@ -26,7 +26,7 @@ export function ComponentHome() {
           >
             {categoryComponents.map((component) => (
               <div
-                key={component.title}
+                key={component.name}
                 onClick={() => {
                   router.push(component.href);
                 }}
@@ -34,7 +34,7 @@ export function ComponentHome() {
                 <div className="border border-fd-border hover:bg-fd-secondary/40 rounded-lg cursor-pointer min-h-70">
                   <div className="flex flex-col gap-1">
                     <div className="flex justify-center items-center tabs-grid-chip h-40 rounded-t-lg">
-                        <ComponentPreview title={component.title} />
+                        <ComponentPreview name={component.name} title={component.title} />
                     </div>
                     <div className="p-2 rounded-lg m-0">
                       <p className="!m-0 pl-1 text-base font-medium">

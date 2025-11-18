@@ -151,7 +151,6 @@ export default function Features() {
               }}
             >
               <TabsTrigger value="tab1" className="Features-tab">
-                {/* <Image src={sparrowgenie.src} alt="Twigs Intelligence" className="w-10 h-10 rounded-lg"/> */}
                 <div>
                   <Text size="md" weight="bold" css={{ color: "$neutral900" }}>
                     Twigs IntelliSense
@@ -167,7 +166,6 @@ export default function Features() {
                 </div>
               </TabsTrigger>
               <TabsTrigger value="tab2" className="Features-tab">
-                  {/* <Image src={sparrowgenie.src} alt="Twigs Intelligence" className="w-10 h-10 rounded-lg"/> */}
                 <div>
                   <Text size="md" weight="bold" css={{ color: "$neutral900" }}>
                     Twigs Playground
@@ -222,6 +220,7 @@ export default function Features() {
                 onClick={prevImage}
                 className="absolute left-2 top-1/2 transform -translate-y-1/2 transition-all duration-200 !border-fd-border"
                 variant="outline"
+                color="secondary"
                 css={{
                   width: "40px",
                   height: "40px",
@@ -237,6 +236,7 @@ export default function Features() {
                 onClick={nextImage}
                 className="absolute right-2 top-1/2 transform -translate-y-1/2 transition-all duration-200 !border-fd-border"
                 variant="outline"
+                color="secondary"
                 css={{
                   width: "40px",
                   height: "40px",

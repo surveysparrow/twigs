@@ -144,17 +144,19 @@ export default function HomePage() {
           </div>
           <div className="flex gap-4 flex-col sm:flex-row justify-center items-center">
             <button
-              className="!px-4 !py-2.5 rounded-md flex gap-3 items-center text-md w-fit cursor-pointer bg-fd-primary shadow-sm text-white font-medium"
+              className="!px-4 !py-2.5 rounded-md flex gap-3 items-center text-md w-fit cursor-pointer bg-fd-primary shadow-sm text-white font-medium group transition-all duration-200 hover:shadow-md hover:bg-[#017480]"
               onClick={() => {
                 window.location.href = "/docs/getting-started";
               }}
               aria-label="Getting Started Button"
             >
               Getting Started
-              <ForwardArrowIcon size={18} color="currentColor" />
+              <span className="inline-block transition-transform duration-300 ease-in-out group-hover:translate-x-0.5">
+                <ForwardArrowIcon size={18} color="currentColor" />
+              </span>
             </button>
             <Box
-              className="text-fd-muted-foreground px-4 py-2.5 rounded-md inline-flex gap-2 items-center text-sm w-fit cursor-pointer bg-fd-background shadow-sm"
+              className="text-fd-muted-foreground px-4 py-2.5 rounded-md inline-flex gap-2 items-center text-sm w-fit cursor-pointer bg-fd-background shadow-sm group transition-all duration-200"
               onClick={handleCopy}
             >
               <code className="flex items-center gap-2 text-nowrap text-xs md:text-sm">
@@ -162,7 +164,7 @@ export default function HomePage() {
                 {copied ? (
                   <TickIcon size={18} className="text-fd-primary" />
                 ) : (
-                  <CopyIcon size={18} color="currentColor" />
+                  <CopyIcon size={18} color="currentColor" className="group-hover:scale-105 transition-all duration-200" />
                 )}
               </code>
             </Box>
@@ -398,7 +400,7 @@ export default function HomePage() {
                   John Doe
                 </Text>
                 <Text size="sm" weight="normal" css={{ color: "$neutral700" }}>
-                  CEO, Surveysparrow
+                  CEO, SurveySparrow
                 </Text>
               </div>
             </div>
@@ -445,7 +447,7 @@ export default function HomePage() {
                   Harry Potter
                 </Text>
                 <Text size="sm" weight="normal" css={{ color: "$neutral700" }}>
-                  Designer, SparrowGenie
+                  Designer, SparrowDesk
                 </Text>
               </div>
             </div>
@@ -521,11 +523,11 @@ export default function HomePage() {
               onClick={() => window.open("https://surveysparrow.com", "_blank")}
               style={{ cursor: "pointer" }}
             >
-              Surveysparrow
+              SurveySparrow
             </span>
           </Text>
           <Text size="md" weight="medium" css={{ color: "$neutral600" }}>
-            Copyright © {new Date().getFullYear()} Surveysparrow
+            Copyright © {new Date().getFullYear()} SurveySparrow
           </Text>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
-import { PlayIcon } from "lucide-react";
 import Image from "next/image";
 import logo from "@/assets/images/logo-w-text-lightmode.svg";
+import { ArrowUpIcon } from "@sparrowengg/twigs-react-icons"
 
 /**
  * Shared layout configurations
@@ -25,10 +25,13 @@ export const baseOptions: BaseLayoutProps = {
   // see https://fumadocs.dev/docs/ui/navigation/links
   links: [
     {
-      text: "Playground",
-      url: "https://play.twigs.surveysparrow.com/",
+      type: 'custom',
+      children:
+       <a href="https://play.twigs.surveysparrow.com/" target="_blank" className="text-sm text-fd-muted-foreground font-medium flex items-center gap-1 cursor-pointer mr-1 hover:bg-fd-muted rounded-lg py-1.5 px-2"> 
+         Playground
+        <ArrowUpIcon size={16} className="text-fd-muted-foreground rotate-45" />
+       </a>,
       secondary: true,
-      icon: <PlayIcon />,
     },
   ],
   githubUrl: "https://github.com/surveysparrow/twigs",
