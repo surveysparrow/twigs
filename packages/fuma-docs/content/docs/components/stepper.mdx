@@ -36,6 +36,20 @@ const StepperExample = () => {
 
 <Playground snippetName="stepper-basic" defaultPlayground />
 
+## Examples
+
+### Stepper customizations
+
+The stepper component supports various customization options including custom components, different step states, and advanced styling.
+
+<Callout type="info" title="Component Customization Best Practice">
+When customizing stepper components using the `components` prop, it's recommended to render each component as a separate function outside the main component. This approach provides better performance, cleaner code organization, and proper state handling. 
+
+Instead of inline component definitions, create dedicated functions like `renderedContainer`, `renderedStepper`, and `renderedStep` to ensure optimal re-rendering behavior and maintainability.
+</Callout>
+
+<Playground snippetName="stepper-customizations" defaultPlayground /> 
+
 ## Props
 
 ### Stepper
@@ -85,17 +99,3 @@ const StepperExample = () => {
     },
   }}
 />
-
-## Examples
-
-### Stepper customizations
-
-The stepper component supports various customization options including custom components, different step states, and advanced styling.
-
-<Callout type="info" title="Component Customization Best Practice">
-When customizing stepper components using the `components` prop, it's recommended to render each component as a separate function outside the main component. This approach provides better performance, cleaner code organization, and proper state handling. 
-
-Instead of inline component definitions, create dedicated functions like `renderedContainer`, `renderedStepper`, and `renderedStep` to ensure optimal re-rendering behavior and maintainability.
-</Callout>
-
-<Playground snippetName="stepper-customizations" defaultPlayground /> 

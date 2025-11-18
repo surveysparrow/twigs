@@ -19,6 +19,19 @@ export const metadata: Metadata = {
     shortcut: "https://static.surveysparrow.com/site/twigs/twigs-favicon.png",
     apple: "https://static.surveysparrow.com/site/twigs/twigs-favicon.png",
   },
+  openGraph: {
+    title: "Twigs - Component Library",
+    description: "Beautiful and customizable React UI for your applications by Surveysparrow",
+    images: [
+      {
+        url: "https://static.surveysparrow.com/public-api/surveysparrow-developer-documenation.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Twigs - Component Library",
+      },
+    ],
+    type: "website",
+  },
 };
 
 export default async function Layout({ children }: { children: ReactNode }) {

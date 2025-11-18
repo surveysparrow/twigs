@@ -64,7 +64,7 @@ export default function Dashboard() {
         boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
         background:
           "linear-gradient(299deg,rgba(255, 255, 255, 1) 90%, rgba(240, 255, 244, 1) 100%)",
-        height: "80vh",
+        height: "625px",
         overflow: "scroll",
         "@media (max-width: 1024px)": {
           height: "100%",

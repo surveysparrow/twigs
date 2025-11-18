@@ -75,7 +75,7 @@ export default function Chat() {
       css={{
         borderRadius: "$2xl",
         boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
-        height: "80vh",
+        height: "625px",
         "@media (max-width: 1024px)": {
           height: "100%",
         },

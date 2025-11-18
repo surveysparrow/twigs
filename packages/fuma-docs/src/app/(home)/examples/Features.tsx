@@ -5,6 +5,7 @@ import {
   TabsList,
   TabsTrigger,
   IconButton,
+  Chip,
 } from "@sparrowengg/twigs-react";
 import Image from "next/image";
 import { ChevronLeftIcon, ChevronRightIcon } from "@sparrowengg/twigs-react-icons";
@@ -114,9 +115,9 @@ export default function Features() {
         <div>
           <h1 className="text-center text-3xl lg:text-5xl font-bold mb-2 break-words leading-tight"
           >
-            Your complete UI{" "}
+            Your complete{" "}
             <span className="text-fd-primary border-l-2 !border-fd-primary bg-fd-primary/10 px-2 rounded-r-md">
-              toolkit
+              UI toolkit
             </span>
           </h1>
         </div>
@@ -143,7 +144,7 @@ export default function Features() {
         >
           <div ref={tabsListRef} className="relative">
             <TabsList
-              className="flex flex-col p-1 gap-2 rounded-lg lg:w-110 h-fit tabs-list Features-tabs-list"
+              className="flex flex-col p-1 gap-2 rounded-lg lg:w-110 h-fit"
               css={{
                 backgroundColor: "#F4F5F8",
                 position: "relative",
@@ -159,6 +160,10 @@ export default function Features() {
                     This enhances the Twigs development experience for Visual
                     Studio Code users with advanced features
                   </Text>
+                  <Chip color="accent" size="lg" className="mt-2"
+                  onClick={() => window.open("https://marketplace.visualstudio.com/items?itemName=SurveySparrow.twigs-intellisense", "_blank")}
+                  rightElement={<ChevronRightIcon className="w-5 h-5" style={{ color: "var(--twigs-colors-accent600)" }} />}
+                  >Try it out</Chip>
                 </div>
               </TabsTrigger>
               <TabsTrigger value="tab2" className="Features-tab">
@@ -171,6 +176,10 @@ export default function Features() {
                     Playground designed for the Twigs development with a live
                     preview and a code editor
                   </Text>
+                  <Chip color="accent" size="lg" className="mt-2"
+                  onClick={() => window.open("https://play.twigs.surveysparrow.com/", "_blank")}
+                  rightElement={<ChevronRightIcon className="w-5 h-5" style={{ color: "var(--twigs-colors-accent600)" }} />}
+                  >Try it out</Chip>
                 </div>
               </TabsTrigger>
               <div

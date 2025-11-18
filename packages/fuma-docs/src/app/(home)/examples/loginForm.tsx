@@ -17,7 +17,7 @@ export default function LoginForm() {
   return (
     <Flex
       css={{
-        height: "80vh",
+        height: "625px",
         boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
         borderRadius: "$2xl",
         "@media (max-width: 768px)": {

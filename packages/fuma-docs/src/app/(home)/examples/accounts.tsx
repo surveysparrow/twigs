@@ -104,7 +104,7 @@ export default function Accounts() {
   return (
     <Flex flexDirection="column"
     css={{
-      height: "80vh",
+      height: "625px",
       boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
       backgroundColor: "transparent",
       "@media (max-width: 768px)": {
