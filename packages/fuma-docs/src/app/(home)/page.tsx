@@ -9,8 +9,8 @@ import {
   Link,
   Text,
   Avatar,
-  ThemeProvider,
-  defaultTheme,
+  // ThemeProvider,
+  // defaultTheme,
 } from "@sparrowengg/twigs-react";
 
 import {
@@ -171,7 +171,7 @@ export default function HomePage() {
           </div>
         </div>
         <div className="lg:w-full flex items-center justify-center w-fit">
-          <ThemeProvider
+          {/* <ThemeProvider
             theme={{
               ...defaultTheme,
               fonts: {
@@ -179,7 +179,7 @@ export default function HomePage() {
                 heading: "DM Sans, sans-serif",
               },
             }}
-          >
+          > */}
             <Tabs
               defaultValue="examples"
               value={activeTab}
@@ -314,7 +314,7 @@ export default function HomePage() {
                 </div>
               </TabsContent>
             </Tabs>
-          </ThemeProvider>
+          {/* </ThemeProvider> */}
         </div>
         <div className="w-full flex flex-col justify-center items-center gap-10 pt-25">
           <h3 className="text-center text-xl lg:text-2xl font-medium mb-2 break-words leading-tight">
