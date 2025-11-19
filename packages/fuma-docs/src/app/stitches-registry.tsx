@@ -2,7 +2,7 @@
 
 import React, { useRef } from 'react';
 import { useServerInsertedHTML } from 'next/navigation';
-import { getCssText, createTheme, defaultTheme, globalStyles } from '@sparrowengg/twigs-react';
+import { getCssText, createTheme, defaultTheme } from '@sparrowengg/twigs-react';
 import type { ReactNode } from 'react';
 
 // Merge themes function (same logic as ThemeProvider)
@@ -42,9 +42,9 @@ export default function StitchesRegistry({ children, isHomePage = false }: Stitc
     try {
       // CRITICAL: Call globalStyles() FIRST, then create theme, then getCssText()
       // This ensures globalStyles and theme CSS are included in getCssText() output
-      if (isHomePage) {
-        globalStyles();
-      }
+      // if (isHomePage) {
+      //   globalStyles();
+      // }
 
       if (!themeCreatedRef.current) {
         const themeClassName = createTheme(homePageTheme);

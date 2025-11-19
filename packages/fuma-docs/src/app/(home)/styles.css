@@ -10,9 +10,12 @@
 }
 .full-page{
   background-color: white;
+  -webkit-font-smoothing: antialiased;
+  font-weight: normal;
+  line-height: 1;
 }
 .tabs[data-state="active"] {
-  background-color: transparent !important;
+  background-color: transparent;
   position: relative !important;
   z-index: 1 !important;
   color: black !important;
@@ -25,7 +28,6 @@
   align-items: center !important;
   gap: 6px !important;
   border: 0 !important;
-  font-weight: 500 !important;
   position: relative !important;
   z-index: 1 !important;
   transition: none !important;

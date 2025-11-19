@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, Checkbox } from "@sparrowengg/twigs-react";
+import { Box, Checkbox,FormLabel } from "@sparrowengg/twigs-react";
 
 export default function CheckboxBasic() {
   const [checked, setChecked] = useState<boolean | 'indeterminate'>(false);
@@ -11,9 +11,9 @@ export default function CheckboxBasic() {
         onChange={(value: boolean | 'indeterminate') => setChecked(value)}
         id="terms"
       />
-      <label htmlFor="terms" style={{ cursor: "pointer" }}>
+      <FormLabel htmlFor="terms" css={{ cursor: "pointer" }}>
         Accept terms and conditions
-      </label>
+      </FormLabel>
     </Box>
   );
 }

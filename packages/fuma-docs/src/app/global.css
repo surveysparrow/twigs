@@ -37,6 +37,9 @@ header#nd-nav {
   }
 }
 header#nd-nav > div {
+  -webkit-font-smoothing: antialiased;
+  font-weight: normal;
+  line-height: 1;
   max-width: 100% !important;
   margin: 0 16px !important;
   margin-top: 3.5px !important;
