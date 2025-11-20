@@ -316,7 +316,7 @@ export default function HomePage() {
             </Tabs>
           {/* </ThemeProvider> */}
         </div>
-        <div className="w-full flex flex-col justify-center items-center gap-10 pt-25">
+        <div className="w-full flex flex-col justify-center items-center gap-10 pt-15 lg:pt-25">
           <h3 className="text-center text-xl lg:text-2xl font-medium mb-2 break-words leading-tight">
               Built for teams who demand excellence
           </h3>
@@ -453,7 +453,7 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-        <div className="w-full flex flex-col justify-center items-center gap-10 mt-20 pt-10 border-t !border-fd-primary/20 features-background">
+        <div className="w-full flex flex-col justify-center items-center gap-10 mt-10 lg:mt-20 pt-10 lg:pt-15  border-t !border-fd-primary/20 features-background">
           <Features />
         </div>
         <div className="w-full lg:px-35 px-5 lg:mt-25 mt-10 border-t border-fd-border py-10 flex justify-between sm:flex-row flex-col gap-5 lg:gap-0 footer">

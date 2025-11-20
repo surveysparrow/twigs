@@ -107,3 +107,25 @@ div[role="dialog"] > div{
 :root, #nd-docs-layout {
   --fd-layout-offset: max(calc(50vw - var(--fd-layout-width) / 2), 0px);
 }
+
+.slider::-webkit-slider-thumb, .slider::-moz-range-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #00828D;
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+}
+.slider::-webkit-slider-thumb:hover, .slider::-moz-range-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 130, 141, 0.4);
+}
+
+.color-input::-webkit-color-swatch, .color-input::-moz-color-swatch {
+  border: none !important;
+  border-radius: 50%;
+}
+

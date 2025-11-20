@@ -8,7 +8,10 @@ import {
   Chip,
 } from "@sparrowengg/twigs-react";
 import Image from "next/image";
-import { ChevronLeftIcon, ChevronRightIcon } from "@sparrowengg/twigs-react-icons";
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+} from "@sparrowengg/twigs-react-icons";
 import playground from "@/assets/images/Play2.png";
 import autocomplete from "@/assets/images/autocomplete-e.png";
 import colorpreview from "@/assets/images/color-swatch-e.png";
@@ -24,11 +27,11 @@ export default function Features() {
     opacity: 0,
   });
   const tabsListRef = useRef<HTMLDivElement>(null);
-  
+
   const images = [
     { src: autocomplete, alt: "Twigs Intelligence" },
     { src: colorpreview, alt: "Color Preview" },
-    { src: docsimage, alt: "Documentation" }
+    { src: docsimage, alt: "Documentation" },
   ];
 
   const nextImage = () => {
@@ -47,7 +50,9 @@ export default function Features() {
     }
 
     // Find the TabsList element
-    const tabsListElement = list.querySelector('[role="tablist"]') as HTMLElement;
+    const tabsListElement = list.querySelector(
+      '[role="tablist"]'
+    ) as HTMLElement;
     if (!tabsListElement) {
       setIndicatorStyle({ top: 0, height: 0, opacity: 0 });
       return;
@@ -99,7 +104,7 @@ export default function Features() {
     if (currentList) {
       currentList.addEventListener("scroll", handleScroll, { passive: true });
     }
-    
+
     return () => {
       window.removeEventListener("resize", handleResize);
       if (currentList) {
@@ -113,18 +118,18 @@ export default function Features() {
     <>
       <div className="flex flex-col gap-4 lg:w-1/2 mx-6">
         <div>
-          <h1 className="text-center text-3xl lg:text-5xl font-bold mb-2 break-words leading-tight"
-          >
-            Your complete{" "}
+          <h1 className="text-center text-3xl lg:text-[45px] font-bold mb-2 break-words leading-tight">
             <span className="text-fd-primary border-l-2 !border-fd-primary bg-fd-primary/10 px-2 rounded-r-md">
-              UI toolkit
+              Supercharge
             </span>
+            {" "}your Twigs workflow
           </h1>
         </div>
         <div>
           <Text size="lg" className="text-center">
-            Twigs gives you a with production-ready components, comprehensive
-            documentation, and seamless integration across your favorite tools.
+            A suite of developer tools, from IntelliSense to a live playground.
+            Designed to help you build, preview, and ship Twigs-powered
+            interfaces faster.
           </Text>
         </div>
       </div>
@@ -159,10 +164,25 @@ export default function Features() {
                     This enhances the Twigs development experience for Visual
                     Studio Code users with advanced features
                   </Text>
-                  <Chip color="accent" size="lg" className="mt-2"
-                  onClick={() => window.open("https://marketplace.visualstudio.com/items?itemName=SurveySparrow.twigs-intellisense", "_blank")}
-                  rightElement={<ChevronRightIcon className="w-5 h-5" style={{ color: "var(--twigs-colors-accent600)" }} />}
-                  >Try it out</Chip>
+                  <Chip
+                    color="accent"
+                    size="lg"
+                    className="mt-2"
+                    onClick={() =>
+                      window.open(
+                        "https://marketplace.visualstudio.com/items?itemName=SurveySparrow.twigs-intellisense",
+                        "_blank"
+                      )
+                    }
+                    rightElement={
+                      <ChevronRightIcon
+                        className="w-5 h-5"
+                        style={{ color: "var(--twigs-colors-accent600)" }}
+                      />
+                    }
+                  >
+                    Try it out
+                  </Chip>
                 </div>
               </TabsTrigger>
               <TabsTrigger value="tab2" className="Features-tab">
@@ -170,14 +190,33 @@ export default function Features() {
                   <Text size="md" weight="bold" css={{ color: "$neutral900" }}>
                     Twigs Playground
                   </Text>
-                  <Text size="sm" weight="regular" css={{ color: "$neutral600", }}>
+                  <Text
+                    size="sm"
+                    weight="regular"
+                    css={{ color: "$neutral600" }}
+                  >
                     Playground designed for the Twigs development with a live
                     preview and a code editor
                   </Text>
-                  <Chip color="accent" size="lg" className="mt-2"
-                  onClick={() => window.open("https://play.twigs.surveysparrow.com/", "_blank")}
-                  rightElement={<ChevronRightIcon className="w-5 h-5" style={{ color: "var(--twigs-colors-accent600)" }} />}
-                  >Try it out</Chip>
+                  <Chip
+                    color="accent"
+                    size="lg"
+                    className="mt-2"
+                    onClick={() =>
+                      window.open(
+                        "https://play.twigs.surveysparrow.com/",
+                        "_blank"
+                      )
+                    }
+                    rightElement={
+                      <ChevronRightIcon
+                        className="w-5 h-5"
+                        style={{ color: "var(--twigs-colors-accent600)" }}
+                      />
+                    }
+                  >
+                    Try it out
+                  </Chip>
                 </div>
               </TabsTrigger>
               <div
@@ -200,21 +239,14 @@ export default function Features() {
               />
             </TabsList>
           </div>
-          <TabsContent
-            value="tab1"
-            className="rounded-lg !p-0 relative w-fit"
-          >
+          <TabsContent value="tab1" className="rounded-lg !p-0 relative w-fit">
             <div className="relative">
               <Image
                 src={images[currentImageIndex].src}
                 alt={images[currentImageIndex].alt}
-                className="rounded-lg"
-                style={{
-                  height: "auto",
-                  width: "620px",
-                }}
+                className="rounded-lg w-full lg:w-[620px] h-auto max-h-[310px]"
               />
-              
+
               {/* Left Arrow */}
               <IconButton
                 onClick={prevImage}
@@ -230,7 +262,7 @@ export default function Features() {
               >
                 <ChevronLeftIcon className="w-5 h-5" />
               </IconButton>
-              
+
               {/* Right Arrow */}
               <IconButton
                 onClick={nextImage}
@@ -246,7 +278,7 @@ export default function Features() {
               >
                 <ChevronRightIcon className="w-5 h-5" />
               </IconButton>
-              
+
               {/* Dots Indicator */}
               <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
                 {images.map((_, index) => (
@@ -254,26 +286,18 @@ export default function Features() {
                     key={index}
                     onClick={() => setCurrentImageIndex(index)}
                     className={`w-2 h-2 rounded-full transition-all duration-200 ${
-                      index === currentImageIndex 
-                        ? "bg-white" 
-                        : "bg-white/50"
+                      index === currentImageIndex ? "bg-white" : "bg-white/50"
                     }`}
                   />
                 ))}
               </div>
             </div>
           </TabsContent>
-          <TabsContent value="tab2"
-          className="rounded-lg !p-0 w-fit"
-          >
+          <TabsContent value="tab2" className="rounded-lg !p-0 w-fit">
             <Image
               src={playground}
               alt="Twigs Playground"
-              className="rounded-lg"
-              style={{
-                height:"auto",
-                width: "620px",
-              }}
+              className="rounded-lg w-full lg:w-[620px] h-auto max-h-[310px]"
             />
           </TabsContent>
         </Tabs>
