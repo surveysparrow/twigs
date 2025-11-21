@@ -13,9 +13,443 @@ import { AllSpaces } from "@/component/theming/spaces";
 import { AllSizes } from "@/component/theming/sizes";
 import { DynamicCodeBlock } from "fumadocs-ui/components/dynamic-codeblock";
 
-## Default Theme Object
+## Theme Setup
 
-Below is the complete default theme object
+Twigs uses [Stitches](https://stitches.dev/) as its styling engine. The theme system consists of:
+
+1. **Default Theme** ([`stitches.config.ts`](https://github.com/surveysparrow/twigs/blob/master/packages/react-components/src/stitches.config.ts)) - Contains all default theme values and configuration functions for initial setup.
+2. **ThemeProvider** - Applies and merges custom themes with defaults.
+
+### ThemeProvider Architecture
+
+The `ThemeProvider` automatically:
+- **Runs global styles on mount** - Applies CSS reset and base styles (box-sizing, font-family, etc.)
+- **Merges themes** - Combines your custom theme with defaults
+- **Applies theme** - Adds merged theme as CSS class to document root
+
+```tsx
+// Simplified ThemeProvider behavior
+const mergeThemes = (outerTheme: any, theme: any) => {
+  return { ...outerTheme, ...theme };
+};
+
+useEffect(() => {
+  // [!code highlight]
+  globalStyles(); // Runs once on mount - applies CSS reset & base styles
+}, []);
+```
+
+**Key behaviors:**
+- Global styles applied automatically (CSS reset, box-sizing, font-family)
+- Custom values **override** defaults at the same key level
+- Nested objects are **merged** (not replaced)
+- Theme is applied as a CSS class to document root
+- Changes update all components automatically
+
+Custom themes merge with defaults - only specified keys override:
+
+```jsx
+// Default theme
+{ colors: { primary: "#2E666D", secondary: "#363A43" } }
+
+// Custom theme
+{ colors: { primary: "#FF5733" } }
+
+// Result: primary overridden, secondary preserved
+// [!code highlight]
+{ colors: { primary: "#FF5733", secondary: "#363A43" } }
+```
+
+
+### Basic Setup
+
+Wrap your application with `ThemeProvider`:
+
+```jsx title="src/App.jsx"
+import { ThemeProvider } from '@sparrowengg/twigs-react';
+
+function App() {
+  return (
+    <ThemeProvider>
+      <YourApp />
+    </ThemeProvider>
+  );
+}
+```
+
+## Customizing the Theme
+
+### Using `twigs.config.js` (Recommended)
+
+Create `twigs.config.js` file in your project root:
+
+```jsx title="twigs.config.js"
+export default {
+  theme: {
+    extends: {
+      // overridding the default colors
+      colors: {
+        primary500: "blue",
+        secondary500: "green",
+      },
+      // overridding the default font
+      fonts: {
+        body: "DM Sans, sans-serif",
+        heading: "DM Sans, sans-serif", 
+      },
+    }
+  }
+};
+```
+
+Import and use in `ThemeProvider`:
+
+```jsx title="src/App.jsx"
+import { ThemeProvider } from '@sparrowengg/twigs-react';
+import twigsConfig from '../twigs.config.js'; // [!code highlight]
+
+function App() {
+  return (
+    // [!code highlight]
+    <ThemeProvider theme={twigsConfig.theme.extends}>
+      <YourApp />
+    </ThemeProvider>
+  );
+}
+```
+
+**Benefits:** Better organization, [IntelliSense](https://marketplace.visualstudio.com/items?itemName=SurveySparrow.twigs-intellisense) support, version control friendly.
+
+### Direct Theme Prop
+
+Pass theme object directly:
+
+```jsx title="src/index.jsx"
+import { ThemeProvider } from '@sparrowengg/twigs-react';
+
+const customTheme = {
+  colors: {
+    primary: "#2E666D",
+  },
+  fontSizes: {
+    md: "1.125rem",
+  },
+};
+
+function App() {
+  return (
+    // [!code highlight]
+    <ThemeProvider theme={customTheme}>
+      <YourApp />
+    </ThemeProvider>
+  );
+}
+```
+
+## Dark Mode Configuration
+
+Add dark mode support using the `createTheme` function, which generates a theme class that can be applied to override specific tokens while inheriting others from your default theme.
+
+### Add Dark Theme
+
+Extend your `twigs.config.js` to include dark theme configuration:
+
+```jsx title="twigs.config.js"
+import { createTheme } from '@sparrowengg/twigs-react';
+
+const config = {
+  theme: {
+    extends: {
+      colors: {
+        primary500: "blue",
+        secondary500: "green",
+      },
+      fonts: {
+        body: "DM Sans, sans-serif",
+      },
+    },
+    // [!code highlight]
+    dark: {
+      colors: {
+        primary500: "#5CB5BD",
+        secondary500: "#A3AEBD",
+        // Override colors for dark mode
+      },
+    }
+  }
+};
+
+export default config;
+
+// [!code highlight]
+export const darkTheme = createTheme('dark-theme', config.theme.dark);
+```
+
+### Apply Theme class
+
+Use `ThemeProvider` for your default theme and apply the `darkTheme` class conditionally when needed.
+
+```jsx title="src/App.jsx"
+import { ThemeProvider } from '@sparrowengg/twigs-react';
+import config, { darkTheme } from '../twigs.config.js'; // [!code highlight]
+import { useState } from "react";
+
+function App() {
+  const [isDark,setIsDark] = useState(false);
+  return (
+    // [!code highlight]
+    <div className={isDark ? darkTheme : ''}>
+      <ThemeProvider theme={config.theme.extends}>
+        <YourApp />
+      </ThemeProvider>
+    </div>
+  );
+}
+```
+
+**How it works:**
+- `ThemeProvider` applies your custom theme via the `theme` prop.
+- Dark theme class is applied to the wrapper div when `isDark` is true.
+- Both work together: custom theme + dark mode overrides.
+- Only tokens defined in dark theme override; others use your custom/default theme.
+
+See the [Stitches Custom Theming documentation](https://stitches.dev/docs/theming) for complete details regarding the dark mode configuration.
+
+## Theme Variables
+
+Reference theme variables using the `$` prefix in the `css` prop:
+
+```jsx
+<Text
+  css={{
+    // [!code highlight]
+    fontSize:"$lg",
+    // [!code highlight]
+    lineHeight:"$lg",
+    // [!code highlight]
+    fontWeight:"$5",
+    // [!code highlight]
+    padding:"$5",
+    // [!code highlight]
+    borderWidth:"$xs",
+    // [!code highlight]
+    borderStyle:"solid",
+    // [!code highlight]
+    borderRadius:"$md"
+  }}
+>
+  Twigs 
+</Text>
+```
+
+### Reference
+
+| Category | Example | Keys |
+|----------|---------|------|
+| Colors | `$primary500`, `$white900` | Named |
+| Spacing | `$4`, `$10`, `$24` | Numeric (1-50) |
+| Font Sizes | `$sm`, `$md`, `$xl` | Named |
+| Font Weights | `$4`, `$6`, `$7` | Numeric (1-9) |
+| Border Radius | `$sm`, `$md`, `$pill` | Named |
+| Sizes | `$10`, `$20`, `$25` | Numeric (1-34) |
+
+### Breakpoints
+
+Twigs includes pre-configured breakpoints for responsive design. Use them with the `@` prefix in your `css` prop:
+
+```jsx
+<Box
+  css={{
+    padding: '$4',
+    // [!code highlight]
+    '@screen-md': {
+      padding: '$8',
+    },
+    // [!code highlight]
+    '@screen-lg': {
+      padding: '$12',
+    },
+  }}
+>
+  Responsive Content
+</Box>
+```
+
+**Available breakpoints:**
+- `@screen-xxs` - 320px
+- `@screen-xs` - 480px
+- `@screen-sm` - 640px
+- `@screen-md` - 768px
+- `@screen-lg` - 1024px
+- `@screen-xl` - 1280px
+- `@screen-2xl` - 1536px
+
+<Callout type="warn">
+Breakpoints are pre-configured in the Twigs setup and cannot be overridden through `ThemeProvider`. For custom breakpoints, use standard CSS media queries directly in your `css` prop.
+</Callout>
+
+### Scale-Prefixed Tokens
+
+By default, theme tokens are automatically mapped to their corresponding CSS properties. For example, `$primary500` works in color-related properties, and `$6` works in spacing properties.
+
+When you need to explicitly target a token from a specific scale (e.g., using a color token in a non-color property), use scale-prefixed syntax:
+
+```jsx
+<Box
+  css={{
+    // [!code highlight]
+    marginTop: '$sizes$10',        // Use size token for margin
+    // [!code highlight]
+    boxShadow: '0 0 0 2px $colors$primary500',  // Use color token in shadow
+    // [!code highlight]
+    border: '1px solid $colors$secondary500',    // Explicit color scale
+  }}
+>
+  Content
+</Box>
+```
+
+**Scale-prefixed syntax:** `$scaleName$tokenName`
+- `$colors$primary500` - Explicitly use color token
+- `$space$6` - Explicitly use spacing token
+- `$sizes$10` - Explicitly use size token
+
+For complete property mapping details, see the [Stitches Property Mapping documentation](https://stitches.dev/docs/tokens#property-mapping).
+
+### Color Opacity Utils
+
+Twigs provides utility functions to apply opacity to theme colors. These utils convert theme colors to RGBA format with your specified opacity:
+
+```jsx
+<Box
+  css={{
+    // [!code highlight]
+    backgroundColorOpacity: ['$primary500', 0.1],  // 10% opacity background
+    // [!code highlight]
+    colorOpacity: ['$primary800', 0.8],             // 80% opacity text
+    // [!code highlight]
+    borderColorOpacity: ['$secondary500', 0.5],    // 50% opacity border
+  }}
+>
+  Content with opacity
+</Box>
+```
+
+**Available utils:**
+- `backgroundColorOpacity: [colorToken, opacity]` - Apply opacity to background color
+- `colorOpacity: [colorToken, opacity]` - Apply opacity to text color
+- `borderColorOpacity: [colorToken, opacity]` - Apply opacity to border color
+
+**Opacity value:** Number between 0 (transparent) and 1 (opaque).
+
+### Advanced Styling
+
+When modifying default colors or styles of Twigs components, you may need to use `!important` to override component defaults that have higher CSS specificity:
+
+```jsx
+<Button
+  css={{
+    backgroundColor: '$primary500',
+    '&:hover': { 
+      // [!code highlight]
+      backgroundColor: '$primary600 !important',
+    },
+    '&:focus': {
+      outline: '2px solid $primary300',
+    },
+    '@screen-md': {
+      padding: '$8 $12',
+    },
+  }}
+>
+  Submit
+</Button>
+```
+<Callout>
+**Best practice:** Try without `!important` first. Only add it when the style isn't being applied due to specificity conflicts.
+</Callout>
+
+### Practical Example
+
+<Playground snippetName="theming-basic" defaultPlayground />
+
+## Server-Side Rendering
+
+Twigs supports server-side rendering (SSR) through the `getCssText` function, which extracts all CSS needed for hydration.
+
+### Basic Setup
+
+Import `getCssText` from Twigs and inject it into your document's `<head>`:
+
+```tsx title="pages/_document.tsx"
+import { Html, Head, Main, NextScript } from "next/document";
+import { getCssText } from "@sparrowengg/twigs-react"; // [!code highlight]
+
+export default function Document() {
+  return (
+    <Html lang="en">
+      <Head>
+        // [!code highlight]
+        <style
+        // [!code highlight]
+          id="stitches"
+        // [!code highlight]
+          dangerouslySetInnerHTML={{ __html: getCssText() }}
+        />
+      </Head>
+      <body>
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  );
+}
+```
+<Callout>
+**Important:** Always include `id="stitches"` on the style tag for optimal hydration.
+</Callout>
+
+**How it works:**
+- `getCssText()` returns all CSS generated by Stitches
+- Styles are injected server-side to prevent FOUC (Flash of Unstyled Content)
+
+## Complete Theme Reference
+
+### Colors
+
+Click any color swatch to copy its token name, Use these values in the css prop to style your components.
+
+<TwigsColorPalette />
+
+### Font Sizes
+
+<AllFontSizes />
+
+### Font Weights
+
+<AllFontWeights />
+
+### Line Heights
+
+<AllLineHeights />
+
+### Border Widths and Radius
+
+<AllBordersAndRadii />
+
+### Spacing
+
+Space values for padding, margin, gap (numeric keys 1-50):
+
+<AllSpaces />
+
+### Sizing
+
+Size tokens for height, width, dimensions (numeric keys 1-34):
+
+<AllSizes />
+
+### Default Theme Object
 
 <DynamicCodeBlock
   lang="json"
@@ -281,92 +715,3 @@ Below is the complete default theme object
      3: "0.3s"
   }`}
 />
-
-### Color Palette
-
-Twigs provides a comprehensive color system. Each color has multiple shades from 50 (lightest) to 900 (darkest).
-
-<TwigsColorPalette />
-
-### Font size
-
-<AllFontSizes />
-
-### Font Weight
-
-<AllFontWeights/>
-
-### Line Heights
-
-<AllLineHeights/>
-
-### Border width and Radius
-
-<AllBordersAndRadii/>
-
-### Spacing
-
-Space values can be used for padding, margin, gap
-
-<AllSpaces/>
-
-### Sizing
-
-Size can be used for height, width, top, bottom etc...
-
-<AllSizes/>
-
-## Customize theme
-
-The recommended way to customize the theme is to create a `twigs.config.js` file in the root of your project and then using that in the `ThemeProvider`. Below is an example on how you can customize the theme.
-
-```jsx title="twigs.config.js"
-export default {
-  theme: {
-    extends: {
-      colors: {
-        primary: "#2E666D",
-        secondary: "#363A43",
-      },
-      fontSizes: {
-        xxs: "0.5rem",
-        xs: "0.7rem",
-        sm: "0.85rem",
-        md: "1rem",
-        lg: "1.2rem",
-        xl: "1.44rem",
-        "2xl": "2rem",
-        "3xl": "2.5rem",
-        "4xl": "3.6rem",
-        "5xl": "5rem",
-      },
-    }
-  }
-};
-```
-
-```jsx title="src/index.js"
-import { theme } from '@root/twigs.config.js';
-
-<ThemeProvider theme={theme.extends}>
-  <App>
-</ThemeProvider>
-```
-
-You can always directly pass the theme object to the `ThemeProvider` as well, however, it is recommended to use a separate file as it will be helpful in providing better VSCode intellisense support if you are using our VSCode plugin.
-
-## Customize component style
-
-Twigs exposes an prop `css` which can be used to pass your own styles to modify the components.
-
-You can pass your theme variables in `css` attributes to css object. Below is an example on how to use that. In order to use your `primary100` as background color, use a `$` before the theme variable. Example below,
-
-```jsx
-<Button css={{ backgroundColor: '$primary100' }} >
-  Submit
-</Button>
-```
-
-Below is an example which modifies our primary button using custom css and theme variables. use the `!important` tag if it is necessary.
-
-<Playground snippetName="theming-basic" defaultPlayground />

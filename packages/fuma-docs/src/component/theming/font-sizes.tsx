@@ -2,7 +2,6 @@
 import React from "react";
 import { defaultTheme, toast, Toastr } from "@sparrowengg/twigs-react";
 import { remToPix } from "@/lib/utils";
-import { Box, Text } from "@sparrowengg/twigs-react";
 
 const defaultText = "The quick brown fox jumps over the lazy dog";
 
@@ -14,7 +13,7 @@ const handleCopy = async (fontSize: string) => {
   try {
     await navigator.clipboard.writeText(`$${fontSize}`);
     toast({
-      variant: "default",
+      variant: "success",
       title: `Copied to clipboard`,
       css: {
         boxShadow: "none",
@@ -35,33 +34,33 @@ const handleCopy = async (fontSize: string) => {
 
 export function AllFontSizes() {
   return (
-    <Box className="max-h-[500px] overflow-y-auto border border-fd-border rounded-lg p-4 bg-fd-card">
+    <div className="max-h-[500px] overflow-y-auto border border-fd-border rounded-lg p-4 bg-fd-card">
       <Toastr duration={3000} />
       {Object.keys(fontSizes).map((fontSize) => {
         const pxVal = remToPix(fontSizes[fontSize as FontSizeKeys]);
         return (
-          <Box key={`fontSize-${fontSize}`}>
-            <Box
-              className="cursor-pointer text-fd-primary bg-fd-primary/10 rounded-md w-fit"
-              size="sm"
+          <div key={`fontSize-${fontSize}`} className="mb-4 last:mb-0">
+            <button
+              type="button"
+              className="cursor-pointer text-fd-primary bg-fd-primary/10 rounded-md w-fit px-1 hover:bg-fd-primary/20 transition-colors"
               onClick={() => handleCopy(fontSize)}
             >
-              <Text className="p-1">${fontSize}: {fontSizes[fontSize as FontSizeKeys]}({pxVal}px)</Text>
-            </Box>
-            <Text
-              size="sm"
-              css={{
+              <span className="text-sm">
+                ${fontSize}: {fontSizes[fontSize as FontSizeKeys]}({pxVal}px)
+              </span>
+            </button>
+            <p
+              className="mt-2.5 font-medium"
+              style={{
                 fontSize: fontSizes[fontSize as FontSizeKeys],
-                marginTop: "10px",
-                fontWeight: "500",
                 lineHeight: "1.3",
               }}
             >
               {defaultText}
-            </Text>
-          </Box>
+            </p>
+          </div>
         );
       })}
-    </Box>
+    </div>
   );
 }
