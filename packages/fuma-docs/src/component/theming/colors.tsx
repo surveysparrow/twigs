@@ -13,7 +13,7 @@ const ColorSwatch: React.FC<ColorSwatchProps> = ({ colorName, colorValue, token 
     try {
       await navigator.clipboard.writeText(`$${token}`);
       toast({
-        variant: "default",
+        variant: "success",
         title: `Copied to clipboard`,
         css:{
           boxShadow: "none"
@@ -35,7 +35,7 @@ const ColorSwatch: React.FC<ColorSwatchProps> = ({ colorName, colorValue, token 
   return (
     <div className="relative">
       <div
-        className="h-20 w-full rounded-md border border-fd-border cursor-pointer transition-all hover:scale-105"
+        className="h-17 w-full rounded-md border border-fd-border cursor-pointer transition-all hover:scale-105"
         style={{ backgroundColor: colorValue }}
         onClick={handleCopy}
       />
@@ -107,6 +107,12 @@ export function TwigsColorPalette() {
       });
     });
     
+    Object.keys(colorGroups).forEach(groupName => {
+      if (groupName === 'primary' || groupName === 'secondary') {
+        colorGroups[groupName] = colorGroups[groupName].filter(color => color.name !== 'base');
+      }
+    });
+    
     return colorGroups;
   };
 
@@ -116,12 +122,6 @@ export function TwigsColorPalette() {
     <>
       <Toastr duration={3000} />
       <div className="space-y-6">
-        <div className="mb-6">
-          <p className="text-fd-muted-foreground text-sm">
-            Click on any color to copy its value. Use these values in the css prop to style your components.
-          </p>
-        </div>
-        
         {Object.entries(colorGroups).map(([groupName, colors]) => (
           <ColorGroup key={groupName} groupName={groupName} colors={colors} />
         ))}

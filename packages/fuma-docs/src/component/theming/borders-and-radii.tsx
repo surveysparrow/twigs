@@ -2,9 +2,8 @@
 import React from "react";
 import { defaultTheme, toast, Toastr } from "@sparrowengg/twigs-react";
 import { remToPix } from "@/lib/utils";
-import { Box, Text, Flex } from "@sparrowengg/twigs-react";
 
-const { borderWidths, radii } = defaultTheme;
+const { borderWidths, radii, space } = defaultTheme;
 
 type BorderWidthKeys = keyof typeof borderWidths;
 type RadiiKeys = keyof typeof radii;
@@ -13,21 +12,21 @@ const handleCopyBorderWidth = async (borderWidth: string) => {
   try {
     await navigator.clipboard.writeText(`$${borderWidth}`);
     toast({
-      variant: "default",
+      variant: "success",
       title: `Copied to clipboard`,
       css: {
-        boxShadow: "none"
-      }
+        boxShadow: "none",
+      },
     });
   } catch (err) {
-    console.error('Failed to copy:', err);
+    console.error("Failed to copy:", err);
     toast({
       variant: "error",
       title: "Copy failed",
       description: "Could not copy to clipboard",
       css: {
-        boxShadow: "none"
-      }
+        boxShadow: "none",
+      },
     });
   }
 };
@@ -36,103 +35,93 @@ const handleCopyRadii = async (radius: string) => {
   try {
     await navigator.clipboard.writeText(`$${radius}`);
     toast({
-      variant: "default",
+      variant: "success",
       title: `Copied to clipboard`,
       css: {
-        boxShadow: "none"
-      }
+        boxShadow: "none",
+      },
     });
   } catch (err) {
-    console.error('Failed to copy:', err);
+    console.error("Failed to copy:", err);
     toast({
       variant: "error",
       title: "Copy failed",
       description: "Could not copy to clipboard",
       css: {
-        boxShadow: "none"
-      }
+        boxShadow: "none",
+      },
     });
   }
 };
 
 export function AllBordersAndRadii() {
   return (
-    <Box className="max-h-[500px] overflow-y-auto border border-fd-border rounded-lg p-4 bg-fd-card">
+    <div className="max-h-[500px] overflow-y-auto border border-fd-border rounded-lg p-4 bg-fd-card">
       <Toastr duration={3000} />
-      
+
       {/* Border Widths Section */}
-      <Box className="mb-4 border-b border-fd-border pb-4">
-        <Text size="sm" color="primary">
-          Border Widths
-        </Text>
-        <Flex gap="$8" wrap="wrap">
+      <div className="mb-8 border-b border-fd-border pb-8">
+        <p className="text-sm mb-6">Border Widths</p>
+        <div className="flex flex-wrap" style={{ gap: space[8] }}>
           {Object.keys(borderWidths).map((borderWidth) => (
             <div key={`borderWidth-${borderWidth}`}>
-              <Box 
-                className="cursor-pointer text-fd-primary bg-fd-primary/10 rounded-md w-fit" 
-                size="sm" 
+              <button
+                type="button"
+                className="cursor-pointer text-fd-primary bg-fd-primary/10 rounded-md w-fit px-1 hover:bg-fd-primary/20 transition-colors"
                 onClick={() => handleCopyBorderWidth(borderWidth)}
               >
-                <Text className="p-1">${borderWidth}: {borderWidths[borderWidth as BorderWidthKeys]}</Text>
-              </Box>
-              <Box
-                css={{
-                  border: `${borderWidths[borderWidth as BorderWidthKeys]} solid`,
-                  marginTop: "$3",
-                  padding: "$3",
-                  borderRadius: "$sm",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  gap: "$2",
+                <span className="text-sm">
+                  ${borderWidth}: {borderWidths[borderWidth as BorderWidthKeys]}
+                </span>
+              </button>
+              <div
+                className="border !border-fd-border bg-fd-secondary flex items-center justify-center mt-3"
+                style={{
+                  borderWidth: borderWidths[borderWidth as BorderWidthKeys],
+                  padding: space[3],
+                  borderRadius: radii.sm,
                   height: "70px",
                   width: "90px",
                 }}
-                className="border !border-fd-border bg-fd-secondary"
-              >
-              </Box>
+              ></div>
             </div>
           ))}
-        </Flex>
-      </Box>
+        </div>
+      </div>
 
       {/* Border Radii Section */}
-      <Box>
-        <Text size="sm" color="primary">
-          Border Radius
-        </Text>
-        <Flex gap="$10" wrap="wrap">
+      <div>
+        <p className="text-sm mb-6">Border Radius</p>
+        <div className="flex flex-wrap" style={{ gap: space[10] }}>
           {Object.keys(radii).map((rad) => {
             const pxVal = remToPix(radii[rad as RadiiKeys]);
             return (
               <div key={`radii-${rad}`}>
-                <Box 
-                  className="cursor-pointer text-fd-primary bg-fd-primary/10 rounded-md w-fit" 
-                  size="sm" 
+                <button
+                  type="button"
+                  className="cursor-pointer text-fd-primary bg-fd-primary/10 rounded-md w-fit px-1 hover:bg-fd-primary/20 transition-colors"
                   onClick={() => handleCopyRadii(rad)}
                 >
-                  <Text className="p-1">${rad}: {radii[rad as RadiiKeys]} {radii[rad as RadiiKeys].includes("rem") && `(${pxVal}px)`}</Text>
-                </Box>
-                <Box
-                  css={{
-                    border: "2px solid",
+                  <span className="text-sm">
+                    ${rad}: {radii[rad as RadiiKeys]}{" "}
+                    {radii[rad as RadiiKeys].includes("rem") && `(${pxVal}px)`}
+                  </span>
+                </button>
+                <div
+                  className="border !border-fd-border bg-fd-secondary flex items-center justify-center mt-3"
+                  style={{
+                    borderWidth: "2px",
                     borderRadius: radii[rad as RadiiKeys],
-                    marginTop: "$3",
-                    padding: "$3",
+                    padding: space[3],
                     height: "80px",
                     width: "80px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center"
                   }}
-                  className="border !border-fd-border bg-fd-secondary"
-                >
-                </Box>
+                ></div>
               </div>
             );
           })}
-        </Flex>
-      </Box>
-    </Box>
+        </div>
+      </div>
+    </div>
   );
 }
