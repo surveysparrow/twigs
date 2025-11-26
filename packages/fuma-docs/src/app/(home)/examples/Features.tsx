@@ -126,7 +126,7 @@ export default function Features() {
 
   return (
     <>
-      <div className="flex flex-col gap-4 lg:w-1/2 mx-6">
+      <div className="flex flex-col gap-4 lg:w-1/2 md:w-2/4 mx-6">
         <div>
           <h1 className="text-center text-3xl lg:text-[45px] font-bold mb-2 break-words leading-tight">
             <span className="text-fd-primary border-l-2 !border-fd-primary bg-fd-primary/10 px-2 rounded-r-md">
@@ -159,7 +159,7 @@ export default function Features() {
         >
           <div ref={tabsListRef} className="relative">
             <TabsList
-              className="flex flex-col p-1 gap-2 rounded-lg lg:w-110 h-fit"
+              className="flex flex-col p-1 gap-2 rounded-lg lg:w-120 h-fit max-w-155"
               css={{
                 backgroundColor: "#F4F5F8",
                 position: "relative",
@@ -191,7 +191,7 @@ export default function Features() {
                       />
                     }
                   >
-                    Check out IntelliSense
+                    Explore the extension
                   </Chip>
                 </div>
               </TabsTrigger>
@@ -225,7 +225,7 @@ export default function Features() {
                       />
                     }
                   >
-                    Open Live Preview
+                    Explore Playground
                   </Chip>
                 </div>
               </TabsTrigger>

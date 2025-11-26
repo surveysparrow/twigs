@@ -38,7 +38,7 @@ import Dashboard from "./examples/dashboard";
 
 export default function HomePage() {
   const [copied, setCopied] = useState(false);
-  const [activeTab, setActiveTab] = useState("examples");
+  const [activeTab, setActiveTab] = useState("components");
   const tabsListRef = useRef<HTMLDivElement>(null);
 
   const handleCopy = async () => {
@@ -204,17 +204,17 @@ export default function HomePage() {
                   style={{ position: "relative", width: "100%" }}
                 >
                   <TabsTrigger
-                    value="examples"
+                    value="components"
                     className="!text-sm !font-normal tabs !rounded-md"
                   >
                     {" "}
-                    <div>Examples</div>
+                    <div>Components</div>
                   </TabsTrigger>
                   <TabsTrigger
-                    value="chat"
+                    value="conversation"
                     className="!text-sm !font-normal tabs !rounded-md"
                   >
-                    <div>Chat</div>
+                    <div>Conversation</div>
                   </TabsTrigger>
                   <TabsTrigger
                     value="dashboard"
@@ -223,10 +223,10 @@ export default function HomePage() {
                     <div>Dashboard</div>
                   </TabsTrigger>
                   <TabsTrigger
-                    value="accounts"
+                    value="users"
                     className="!text-sm !font-normal tabs !rounded-md"
                   >
-                    <div>Accounts</div>
+                    <div>Users</div>
                   </TabsTrigger>
                   <TabsTrigger
                     value="settings"
@@ -244,7 +244,7 @@ export default function HomePage() {
               </div>
             </div>
             <TabsContent
-              value="examples"
+              value="components"
               forceMount
               className="mt-2 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
             >
@@ -291,7 +291,7 @@ export default function HomePage() {
               </div>
             </TabsContent>
             <TabsContent
-              value="accounts"
+              value="users"
               forceMount
               className="mt-2 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
             >
@@ -300,7 +300,7 @@ export default function HomePage() {
               </div>
             </TabsContent>
             <TabsContent
-              value="chat"
+              value="conversation"
               forceMount
               className="mt-2 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
             >
