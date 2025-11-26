@@ -115,17 +115,15 @@ export default function Chat() {
           >
             All Conversations
           </Text>
-          <Box
-            css={{
-              backgroundColor: "transparent",
-              border: "1px solid $neutral200",
-              borderRadius: "$2xl",
-              padding: "$4 $2",
-              display: "flex",
-            }}
-          >
-            <CloseIcon size={23} />
-          </Box>
+          <IconButton 
+          icon={<CloseIcon />} 
+          variant="outline" 
+          color="secondary" 
+          size="md"
+          css={{
+            borderRadius: "$round",
+          }}
+          />
         </Flex>
         <Flex
           gap="$7"

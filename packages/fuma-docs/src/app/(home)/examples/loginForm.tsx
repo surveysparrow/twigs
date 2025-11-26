@@ -160,9 +160,6 @@ export default function LoginForm() {
               variant="filled"
               value="Gautham"
               onChange={() => {}}
-              css={{
-                border: "none",
-              }}
             />
           </Box>
           <Box>
@@ -173,9 +170,6 @@ export default function LoginForm() {
               size="lg"
               aria-label="password"
               variant="filled"
-              css={{
-                border: "none",
-              }}
             />
           </Box>
           <Box>
@@ -184,11 +178,9 @@ export default function LoginForm() {
               variant="solid"
               size="xl"
               css={{ 
-                backgroundColor: "$primary400 !important",
                 width: "100%",
                 fontWeight: "700",   
                 fontSize: "19.2px",
-                color: "#ffffff",
                 "@media (max-width: 768px)": {
                   fontSize: "16px",
                 },

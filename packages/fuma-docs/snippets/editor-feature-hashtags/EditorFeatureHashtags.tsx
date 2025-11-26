@@ -29,6 +29,7 @@ export default function EditorFeatureHashtags() {
     <Editor nodes={[HashTagNode]}>
       <EditorToolbar />
       <RichEditor
+        placeholder="Type hashtag (#), followed by a letter (react, javascript, typescript, html, css)"
         editorContainerProps={{
           css: {
             ".editor-container .editor": {

@@ -5,23 +5,23 @@ export default function EditorFeatureMentions() {
   const users = [
     {
       id: "1",
-      name: "John Doe",
-      username: "johndoe",
+      name: "Gautham",
+      username: "gautham",
     },
     {
       id: "2",
-      name: "Jane Doe",
-      username: "janedoe",
+      name: "Maneesh",
+      username: "maneesh",
     },
     {
       id: "3",
-      name: "John Smith",
-      username: "johnsmith",
+      name: "Akshay",
+      username: "akshay",
     },
     {
       id: "4",
-      name: "Jane Smith",
-      username: "janesmith",
+      name: "Pranav",
+      username: "pranav",
     },
   ];
 
@@ -29,6 +29,7 @@ export default function EditorFeatureMentions() {
     <Editor nodes={[MentionNode]}>
       <EditorToolbar />
       <RichEditor
+        placeholder="Type mention (@), followed by a letter (gautham, maneesh, akshay, pranav)"
         editorContainerProps={{
           css: {
             ".editor-container .editor": {

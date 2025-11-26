@@ -5,7 +5,7 @@ export default function EditorFeatureEmoji() {
   return (
     <Editor nodes={[EmojiNode]}>
       <EditorToolbar />
-      <RichEditor placeholder="Type : to trigger emoji dropdown" />
+      <RichEditor placeholder="Type colon (:), to trigger emoji dropdown" />
       <EmojiPlugin />
     </Editor>
   );

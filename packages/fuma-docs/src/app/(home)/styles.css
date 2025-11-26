@@ -1,15 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 
 .main{
-  /* background-image: url(../../assets/images/backgrounf.png); */
   background-image: linear-gradient(to bottom,rgba(230, 245, 246, 1),rgba(255, 255, 255, 1));
-  background-size: cover;
-  background-position: bottom;
-  background-repeat: no-repeat;
-  box-shadow: inset 0 -80px 60px -30px rgba(255, 255, 255, 1);
 }
 .full-page{
-  background-color: white;
   -webkit-font-smoothing: antialiased;
   font-weight: normal;
   line-height: 1;
@@ -71,21 +65,14 @@
   }
 }
 
-@media (max-width: 768px) {
-  .tabs-list-container::after {
-    transition: transform 0.25s cubic-bezier(0.455, 0.03, 0.515, 0.955),
-                width 0.25s cubic-bezier(0.455, 0.03, 0.515, 0.955);
-    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.1);
-  }
-}
 
 /* Play Button Gradient Shadow */
 .play-button-shadow {
     box-shadow: 0 0 10px rgba(0, 130, 141, 0.3), 0 0 20px rgba(0, 130, 141, 0.2), 0 0 30px rgba(0, 130, 141, 0.1) !important;
     transition: box-shadow 0.3s ease;
-    border-radius: 50% !important;
-    padding: 5px !important;
-    padding-left: 7px !important;
+    border-radius: 50%;
+    padding: 5px;
+    padding-left: 7px;
 }
 
 .tabs-grid{
@@ -97,11 +84,10 @@
 }
 
 @media (max-width: 768px) {
-  .main {
-    background-size:cover !important;
-    background-position: bottom left !important;
-    background-repeat: no-repeat !important;
-    background-attachment: fixed !important;
+  .tabs-list-container::after {
+    transition: transform 0.25s cubic-bezier(0.455, 0.03, 0.515, 0.955),
+                width 0.25s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.1);
   }
 
   .features-background::after,
@@ -143,41 +129,6 @@
   border: none;
 }
 
-.Features-tabs-list {
-  position: relative !important;
-}
-
-.features-background {
-  position: relative;
-  background-image: linear-gradient(to bottom,rgba(230, 245, 246, 0.6),rgba(255, 255, 255, 1));
-  background-size: cover;
-  background-position:bottom;
-  background-repeat: no-repeat;
-  backdrop-filter: blur(20px);
-  box-shadow: inset 0 -80px 60px -30px rgba(255, 255, 255, 1) !important;
-}
-
-.features-background::before,
-.features-background::after {
-  content: '';
-  position: absolute;
-  top: -30;
-  bottom: 0;
-  width: 5vw;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.features-background::before {
-  left: 0;
-  background: linear-gradient(to right, rgba(255, 255, 255, 1), transparent);
-}
-
-.features-background::after {
-  right: 0;
-  background: linear-gradient(to left, rgba(255, 255, 255, 1), transparent);
-}
-
 .footer{
   position: relative;
 }
@@ -203,23 +154,6 @@
   background: linear-gradient(to left, rgba(255, 255, 255, 1), transparent);
 }
 
-.tabs-list {
-  position: relative;
-  overflow: hidden;
-}
-
-.tabs-list::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 4vw;
-  background: linear-gradient(to left,white, transparent);
-  pointer-events: none;
-  z-index: 1;
-}
-
 /* Hide inactive TabsContent when forceMount is used */
 /* This ensures all tabs render during SSR for style generation, */
 /* but only the active tab is visible */
@@ -236,4 +170,47 @@
   visibility: visible !important;
   position: relative !important;
   opacity: 1 !important;
+}
+
+/* Image Gallery Animation */
+.image-slide-container {
+  will-change: opacity, transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.image-slide-right {
+  animation: slideInRight 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.image-slide-left {
+  animation: slideInLeft 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+/* Smooth transition for image changes */
+.image-slide-container img {
+  display: block;
+  transition: opacity 0.2s ease-in-out;
 }

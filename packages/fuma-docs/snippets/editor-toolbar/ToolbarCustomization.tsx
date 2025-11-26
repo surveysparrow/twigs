@@ -14,23 +14,34 @@ export default function ToolbarCustomization() {
         >
           <Flex>
             <BoldTool
-              renderButton={({ active }) => {
+              renderButton={({ active, onChange }) => {
                 return (
                   <Button
-                    onClick={() => {}}
-                    color={active ? "primary" : "default"}
+                    onClick={onChange}
+                    color={active ? "secondary" : "default"}
+                    css={{marginRight: "$4"}}
                   >
                     Custom Bold
                   </Button>
                 );
               }}
             />
-            <ItalicTool />
+            <ItalicTool
+              renderButton={({ active, onChange }) => {
+                return (
+                  <Button
+                    onClick={onChange}
+                    color={active ? "secondary" : "default"}
+                  >
+                    Custom Italic
+                  </Button>
+                );
+              }}
+            />
           </Flex>
-          <Button>Save</Button>
         </Flex>
       </EditorToolbar>
-      <RichEditor placeholder="Start typing" />
+      <RichEditor placeholder="Customized toolbar" />
     </Editor>
   );
 }

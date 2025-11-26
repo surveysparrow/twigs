@@ -54,7 +54,7 @@ export async function generateMetadata(props: {
   if (!page) notFound();
 
   return {
-    title: page.data.title,
+    title: `${page.data.title} | Twigs`,
     description: page.data.description,
   };
 }

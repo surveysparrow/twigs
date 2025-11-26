@@ -21,6 +21,9 @@ import { useState, useRef, useEffect } from "react";
 export default function Features() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [activeTab, setActiveTab] = useState("tab1");
+  const [slideDirection, setSlideDirection] = useState<"left" | "right">(
+    "right"
+  );
   const [indicatorStyle, setIndicatorStyle] = useState({
     top: 0,
     height: 0,
@@ -29,17 +32,24 @@ export default function Features() {
   const tabsListRef = useRef<HTMLDivElement>(null);
 
   const images = [
-    { src: autocomplete, alt: "Twigs Intelligence" },
-    { src: colorpreview, alt: "Color Preview" },
-    { src: docsimage, alt: "Documentation" },
+    { src: autocomplete, alt: "Autocomplete", title: "Autocomplete" },
+    { src: colorpreview, alt: "Color Preview", title: "Color Preview" },
+    { src: docsimage, alt: "Documentation", title: "Documentation" },
   ];
 
   const nextImage = () => {
+    setSlideDirection("right");
     setCurrentImageIndex((prev) => (prev + 1) % images.length);
   };
 
   const prevImage = () => {
+    setSlideDirection("left");
     setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
+
+  const goToImage = (index: number) => {
+    setSlideDirection(index > currentImageIndex ? "right" : "left");
+    setCurrentImageIndex(index);
   };
 
   const updateIndicator = () => {
@@ -121,8 +131,8 @@ export default function Features() {
           <h1 className="text-center text-3xl lg:text-[45px] font-bold mb-2 break-words leading-tight">
             <span className="text-fd-primary border-l-2 !border-fd-primary bg-fd-primary/10 px-2 rounded-r-md">
               Supercharge
-            </span>
-            {" "}your Twigs workflow
+            </span>{" "}
+            your Twigs workflow
           </h1>
         </div>
         <div>
@@ -181,7 +191,7 @@ export default function Features() {
                       />
                     }
                   >
-                    Try it out
+                    Check out IntelliSense
                   </Chip>
                 </div>
               </TabsTrigger>
@@ -215,7 +225,7 @@ export default function Features() {
                       />
                     }
                   >
-                    Try it out
+                    Open Live Preview
                   </Chip>
                 </div>
               </TabsTrigger>
@@ -240,19 +250,41 @@ export default function Features() {
             </TabsList>
           </div>
           <TabsContent value="tab1" className="rounded-lg !p-0 relative w-fit">
-            <div className="relative">
-              <Image
-                src={images[currentImageIndex].src}
-                alt={images[currentImageIndex].alt}
-                className="rounded-lg w-full lg:w-[620px] h-auto max-h-[310px]"
-              />
+            <div className="relative p-0.5 rounded-lg bg-black/90">
+              <div className="p-2 flex items-center gap-2">
+                <div className="flex items-center gap-1">
+                  <div className="size-3 rounded-full bg-red-500/80" />
+                  <div className="size-3 rounded-full bg-yellow-500/80" />
+                  <div className="size-3 rounded-full bg-green-500/80" />
+                </div>
+                <Text
+                  size="xs"
+                  className="px-3 py-0.5 rounded-lg w-50 bg-gray-700/50"
+                  css={{ color: "$neutral500" }}
+                >
+                  {images[currentImageIndex].title}
+                </Text>
+              </div>
+              <div className="relative w-full lg:w-[620px] h-auto overflow-hidden rounded-lg min-h-[181px]">
+                <div
+                  key={currentImageIndex}
+                  className={`image-slide-container image-slide-${slideDirection}`}
+                >
+                  <Image
+                    src={images[currentImageIndex].src}
+                    alt={images[currentImageIndex].alt}
+                    className="rounded-lg w-full h-auto max-h-[310px] object-cover"
+                  />
+                </div>
+              </div>
 
               {/* Left Arrow */}
               <IconButton
                 onClick={prevImage}
-                className="absolute left-2 top-1/2 transform -translate-y-1/2 transition-all duration-200 !border-fd-border"
+                className="absolute left-2 top-1/2 transform -translate-y-1/2 transition-all duration-200 border-2 !border-none"
                 variant="outline"
                 color="secondary"
+                size="lg"
                 css={{
                   width: "40px",
                   height: "40px",
@@ -266,9 +298,10 @@ export default function Features() {
               {/* Right Arrow */}
               <IconButton
                 onClick={nextImage}
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 transition-all duration-200 !border-fd-border"
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 transition-all duration-200 border-2 !border-none"
                 variant="outline"
                 color="secondary"
+                size="lg"
                 css={{
                   width: "40px",
                   height: "40px",
@@ -284,7 +317,7 @@ export default function Features() {
                 {images.map((_, index) => (
                   <button
                     key={index}
-                    onClick={() => setCurrentImageIndex(index)}
+                    onClick={() => goToImage(index)}
                     className={`w-2 h-2 rounded-full transition-all duration-200 ${
                       index === currentImageIndex ? "bg-white" : "bg-white/50"
                     }`}
@@ -294,11 +327,31 @@ export default function Features() {
             </div>
           </TabsContent>
           <TabsContent value="tab2" className="rounded-lg !p-0 w-fit">
-            <Image
-              src={playground}
-              alt="Twigs Playground"
-              className="rounded-lg w-full lg:w-[620px] h-auto max-h-[310px]"
-            />
+            <div className="p-0.5 rounded-lg bg-black/90">
+              <div className="p-2 flex items-center gap-2">
+                <div className="flex items-center gap-1">
+                  <div className="size-3 rounded-full bg-red-500/80" />
+                  <div className="size-3 rounded-full bg-yellow-500/80" />
+                  <div className="size-3 rounded-full bg-green-500/80" />
+                </div>
+                <Text
+                  size="xs"
+                  className="px-3 py-0.5 rounded-lg w-50 bg-gray-700/50"
+                  css={{ color: "$neutral600" }}
+                >
+                  Live Preview
+                </Text>
+              </div>
+              <div className="relative w-full h-auto overflow-hidden rounded-lg">
+                <div className={`image-slide-container image-slide-left`}>
+                  <Image
+                    src={playground}
+                    alt="Twigs Playground"
+                    className="rounded-lg w-full lg:w-[620px] h-auto max-h-[310px]"
+                  />
+                </div>
+              </div>
+            </div>
           </TabsContent>
         </Tabs>
       </div>
