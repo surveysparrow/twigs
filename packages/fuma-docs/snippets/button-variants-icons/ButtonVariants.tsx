@@ -12,12 +12,14 @@ export default function ButtonVariants() {
     >
       <Box>
         <Text css={{ marginBottom: "$5", color: "$secondary900" }}>Colors</Text>
-        <Box css={{ display: "flex", gap: "$5", flexWrap: "wrap" }}>
+        <Box css={{ display: "flex", gap: "$5", flexWrap: "wrap", alignItems:"center" }}>
           <Button color="primary">Primary</Button>
           <Button color="secondary">Secondary</Button>
           <Button color="default">Default</Button>
           <Button color="bright">Bright</Button>
-          <Button color="light">Light</Button>
+          <Box css={{padding:"$2",backgroundColor:"$black700", borderRadius:"$md"}}>
+            <Button color="light">Light</Button>
+          </Box>
           <Button color="error">Error</Button>
         </Box>
       </Box>

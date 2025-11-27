@@ -79,7 +79,7 @@ function App() {
 
 ## Customizing the Theme
 
-### Using `twigs.config.js` (Recommended)
+### Using Custom File (Recommended)
 
 Create `twigs.config.js` file in your project root:
 
@@ -379,7 +379,7 @@ Twigs supports server-side rendering (SSR) through the `getCssText` function, wh
 
 ### Basic Setup
 
-Import `getCssText` from Twigs and inject it into your document's `<head>`:
+Here's an example of `SSR` with Next.js
 
 ```tsx title="pages/_document.tsx"
 import { Html, Head, Main, NextScript } from "next/document";
