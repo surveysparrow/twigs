@@ -94,12 +94,11 @@ const StyledCheckbox = styled(CheckboxPrimitive.Root, {
       default: {
         '&:active, &[data-state="checked"], &[data-state="indeterminate"]': {
           background: '$secondary500',
-          border: 'none'
-        },
-        '&:hover:active, &[data-state="checked"]:hover, &[data-state="indeterminate"]:hover':
-          {
+          border: 'none',
+          '&:hover': {
             borderColor: '$secondary600'
-          },
+          }
+        },
         '&:disabled[data-state="checked"], &:disabled[data-state="indeterminate"]':
           {
             background: '$secondary500',
