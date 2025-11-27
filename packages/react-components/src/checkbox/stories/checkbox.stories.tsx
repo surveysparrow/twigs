@@ -15,6 +15,16 @@ export default {
     },
     disabled: {
       control: 'boolean'
+    },
+    color: {
+      control: 'select',
+      options: [
+        'primary',
+        'default',
+        'error',
+        'warning',
+        'success'
+      ]
     }
   }
 };
