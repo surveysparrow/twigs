@@ -38,7 +38,7 @@ export type IconButtonProps = IconButtonBaseProps &
 export const IconButton: FunctionComponent<IconButtonProps> = React.forwardRef(
   (
     {
-      children, icon, 'aria-label': ariaLabel, ...rest
+      children, icon, 'aria-label': ariaLabel, as, ...rest
     }: IconButtonProps,
     ref
   ) => {
@@ -47,6 +47,7 @@ export const IconButton: FunctionComponent<IconButtonProps> = React.forwardRef(
     return (
       <StyledIconButton
         ref={ref}
+        buttonAs={as}
         aria-label={ariaLabel}
         icon={validElement as ReactElement}
         {...rest}
