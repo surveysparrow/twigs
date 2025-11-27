@@ -109,12 +109,11 @@ const StyledCheckbox = styled(CheckboxPrimitive.Root, {
       primary: {
         '&:active, &[data-state="checked"], &[data-state="indeterminate"]': {
           background: '$primary500',
-          border: 'none'
-        },
-        '&:hover:active, &[data-state="checked"]:hover, &[data-state="indeterminate"]:hover':
-          {
+          border: 'none',
+          '&:hover': {
             borderColor: '$primary600'
-          },
+          }
+        },
         '&:disabled[data-state="checked"], &:disabled[data-state="indeterminate"]':
           {
             background: '$secondary500',
@@ -124,12 +123,11 @@ const StyledCheckbox = styled(CheckboxPrimitive.Root, {
       warning: {
         '&:active, &[data-state="checked"], &[data-state="indeterminate"]': {
           background: '$warning500',
-          border: 'none'
-        },
-        '&:hover:active, &[data-state="checked"]:hover, &[data-state="indeterminate"]:hover':
-          {
+          border: 'none',
+          '&:hover': {
             borderColor: '$warning600'
-          },
+          }
+        },
         '&:disabled[data-state="checked"], &:disabled[data-state="indeterminate"]':
           {
             background: '$secondary500',
@@ -139,12 +137,11 @@ const StyledCheckbox = styled(CheckboxPrimitive.Root, {
       success: {
         '&:active, &[data-state="checked"], &[data-state="indeterminate"]': {
           background: '$positive500',
-          border: 'none'
-        },
-        '&:hover:active, &[data-state="checked"]:hover, &[data-state="indeterminate"]:hover':
-          {
+          border: 'none',
+          '&:hover': {
             borderColor: '$positive600'
-          },
+          }
+        },
         '&:disabled[data-state="checked"], &:disabled[data-state="indeterminate"]':
           {
             background: '$secondary500',
@@ -154,12 +151,11 @@ const StyledCheckbox = styled(CheckboxPrimitive.Root, {
       error: {
         '&:active, &[data-state="checked"], &[data-state="indeterminate"]': {
           background: '$negative500',
-          border: 'none'
-        },
-        '&:hover:active, &[data-state="checked"]:hover, &[data-state="indeterminate"]:hover':
-          {
+          border: 'none',
+          '&:hover': {
             borderColor: '$negative600'
-          },
+          }
+        },
         '&:disabled[data-state="checked"], &:disabled[data-state="indeterminate"]':
           {
             background: '$secondary500',
