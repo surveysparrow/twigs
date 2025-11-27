@@ -19,7 +19,97 @@ const StyledSlot = styled(Slot, {
   ...defaultStyle
 });
 
-const StyledAnchor = styled('a', defaultStyle);
+const StyledAnchor = styled('a', {
+  ...defaultStyle,
+  transition: 'color 0.2s ease',
+  '&:focus-visible': {
+    outlineWidth: '2px',
+    outlineStyle: 'solid',
+    borderRadius: '2px',
+    outlineOffset: '2px'
+  },
+  variants: {
+    underline: {
+      always: {
+        textDecoration: 'underline'
+      },
+      never: {
+        textDecoration: 'none'
+      },
+      hover: {
+        '&:hover': {
+          textDecoration: 'underline'
+        }
+      }
+    },
+    color: {
+      default: {
+        color: '$neutral800',
+        '&:hover': {
+          color: '$neutral900'
+        },
+        '&:active': {
+          color: '$neutral900'
+        },
+        '&:focus-visible': {
+          outlineColor: '$neutral400'
+        }
+      },
+      primary: {
+        color: '$primary500',
+        '&:hover': {
+          color: '$primary600'
+        },
+        '&:active': {
+          color: '$primary700'
+        },
+        '&:focus-visible': {
+          outlineColor: '$primary400'
+        }
+      },
+      warning: {
+        color: '$warning500',
+        '&:hover': {
+          color: '$warning600'
+        },
+        '&:active': {
+          color: '$warning700'
+        },
+        '&:focus-visible': {
+          outlineColor: '$warning400'
+        }
+      },
+      error: {
+        color: '$negative500',
+        '&:hover': {
+          color: '$negative600'
+        },
+        '&:active': {
+          color: '$negative700'
+        },
+        '&:focus-visible': {
+          outlineColor: '$negative400'
+        }
+      },
+      success: {
+        color: '$positive500',
+        '&:hover': {
+          color: '$positive600'
+        },
+        '&:active': {
+          color: '$positive700'
+        },
+        '&:focus-visible': {
+          outlineColor: '$positive400'
+        }
+      }
+    }
+  },
+  defaultVariants: {
+    underline: 'never',
+    color: 'default'
+  }
+});
 
 type BaseLinkProps = ComponentProps<typeof StyledAnchor>;
 
@@ -38,7 +128,8 @@ const LinkComponent = <TProps extends LinkProps, TRef extends HTMLElement>(
   ref: ForwardedRef<TRef>
 ) => {
   const { asChild, children, ...rest } = props;
-  const RootComp = asChild ? StyledSlot : StyledAnchor;
+  const RootComp: React.ElementType = asChild ? StyledSlot : StyledAnchor;
+
   return (
     <RootComp ref={ref} data-testid="link" {...rest}>
       {children}
