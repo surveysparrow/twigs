@@ -42,12 +42,10 @@ export const Thead = styled('thead', {
   variants: {
     sticky: {
       true: {
-        '& th': {
-          position: 'sticky',
-          top: 0,
-          background: '$white900',
-          zIndex: 2
-        }
+        position: 'sticky',
+        top: 0,
+        background: '$white900',
+        zIndex: 2
       }
     }
   },
