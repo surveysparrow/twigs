@@ -33,7 +33,7 @@ const StyledAnchor = styled('a', {
       always: {
         textDecoration: 'underline'
       },
-      none: {
+      never: {
         textDecoration: 'none'
       },
       hover: {
@@ -106,7 +106,7 @@ const StyledAnchor = styled('a', {
     }
   },
   defaultVariants: {
-    underline: 'none',
+    underline: 'never',
     color: 'default'
   }
 });

@@ -17,7 +17,7 @@ export default {
     },
     underline: {
       control: 'select',
-      options: ['hover', 'none', 'always']
+      options: ['hover', 'never', 'always']
     }
   }
 };
