@@ -94,7 +94,7 @@ const StyledCheckbox = styled(CheckboxPrimitive.Root, {
       default: {
         '&:active, &[data-state="checked"], &[data-state="indeterminate"]': {
           background: '$secondary500',
-          border: 'none',
+          borderColor: 'transparent',
           '&:hover': {
             borderColor: '$secondary600'
           }
@@ -102,13 +102,13 @@ const StyledCheckbox = styled(CheckboxPrimitive.Root, {
         '&:disabled[data-state="checked"], &:disabled[data-state="indeterminate"]':
           {
             background: '$secondary500',
-            border: 'none'
+            borderColor: 'transparent'
           }
       },
       primary: {
         '&:active, &[data-state="checked"], &[data-state="indeterminate"]': {
           background: '$primary500',
-          border: 'none',
+          borderColor: 'transparent',
           '&:hover': {
             borderColor: '$primary600'
           }
@@ -116,13 +116,13 @@ const StyledCheckbox = styled(CheckboxPrimitive.Root, {
         '&:disabled[data-state="checked"], &:disabled[data-state="indeterminate"]':
           {
             background: '$secondary500',
-            border: 'none'
+            borderColor: 'transparent'
           }
       },
       warning: {
         '&:active, &[data-state="checked"], &[data-state="indeterminate"]': {
           background: '$warning500',
-          border: 'none',
+          borderColor: 'transparent',
           '&:hover': {
             borderColor: '$warning600'
           }
@@ -130,13 +130,13 @@ const StyledCheckbox = styled(CheckboxPrimitive.Root, {
         '&:disabled[data-state="checked"], &:disabled[data-state="indeterminate"]':
           {
             background: '$secondary500',
-            border: 'none'
+            borderColor: 'transparent'
           }
       },
       success: {
         '&:active, &[data-state="checked"], &[data-state="indeterminate"]': {
           background: '$positive500',
-          border: 'none',
+          borderColor: 'transparent',
           '&:hover': {
             borderColor: '$positive600'
           }
@@ -144,13 +144,13 @@ const StyledCheckbox = styled(CheckboxPrimitive.Root, {
         '&:disabled[data-state="checked"], &:disabled[data-state="indeterminate"]':
           {
             background: '$secondary500',
-            border: 'none'
+            borderColor: 'transparent'
           }
       },
       error: {
         '&:active, &[data-state="checked"], &[data-state="indeterminate"]': {
           background: '$negative500',
-          border: 'none',
+          borderColor: 'transparent',
           '&:hover': {
             borderColor: '$negative600'
           }
@@ -158,7 +158,7 @@ const StyledCheckbox = styled(CheckboxPrimitive.Root, {
         '&:disabled[data-state="checked"], &:disabled[data-state="indeterminate"]':
           {
             background: '$secondary500',
-            border: 'none'
+            borderColor: 'transparent'
           }
       }
     }
