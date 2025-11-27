@@ -642,6 +642,9 @@ export interface ButtonBaseProps {
   loading?: boolean;
   disabled?: boolean;
   loader?: ReactElement | 'line' | 'circle';
+  /**
+   * @internal buttonAs – An internal prop used to forward the `as` value to the parent-level Button component.
+   */
   buttonAs?: React.ElementType;
 }
 
