@@ -198,7 +198,7 @@ export const CascaderSearchList = forwardRef<
 
   const focusedItemBreadcrumb = useMemo(() => {
     const item = searchResults[focusedIndex];
-    const path = buildBreadcrumbFromValue(item.value, rootNode!);
+    const path = buildBreadcrumbFromValue(item?.value, rootNode!);
 
     return {
       breadcrumb: path.map(({ label }) => label).join(' > '),
