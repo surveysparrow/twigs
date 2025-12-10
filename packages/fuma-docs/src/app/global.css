@@ -5,24 +5,24 @@
 @import "fumadocs-ui/css/preset.css";
 
 :root {
-  --color-fd-primary: #00828D;
-  --color-fd-loader: #5329D8;
+  --color-fd-primary: #00828d;
+  --color-fd-loader: #5329d8;
 }
 
 @media (min-width: 1024px) {
-#nd-sidebar > div:first-child {
+  #nd-sidebar > div:first-child {
     display: none;
-}
+  }
 }
 
 header#nd-subnav > div:last-child a {
-    border-bottom: 2px solid transparent !important;
-    border-top: none !important;
-    border-left: none !important;
-    border-right: none !important;
-    border-radius: 0 !important;
-    margin: 0 !important;
-    height: 100% !important;
+  border-bottom: 2px solid transparent !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+  height: 100% !important;
 }
 
 header#nd-subnav > div > div:last-child {
@@ -49,19 +49,19 @@ header#nd-nav > div {
 }
 
 @media (max-width: 768px) {
-  header#nd-nav > div > nav { 
+  header#nd-nav > div > nav {
     padding: 0 10px !important;
   }
 }
 
-header#nd-nav > div > nav > div > button > div > kbd{
+header#nd-nav > div > nav > div > button > div > kbd {
   border: 1px solid var(--color-fd-border);
 }
 
 @media (min-width: 1024px) {
-header#nd-nav div nav {
-        padding: 0 !important;
-    }
+  header#nd-nav div nav {
+    padding: 0 !important;
+  }
 }
 
 /* Hide sidebar collapse button on large devices (visible on medium, hidden on small and large) */
@@ -70,7 +70,7 @@ header#nd-nav div nav {
   header#nd-subnav button[aria-label="Collapse Sidebar"] {
     display: none !important;
   }
-  
+
   /* Hide the parent container div that holds the collapse button */
   header#nd-subnav > div:first-child > div:last-child > div:last-child {
     display: none !important;
@@ -78,54 +78,61 @@ header#nd-nav div nav {
 }
 
 header#nd-subnav > div:last-child a[class*="bg-fd-primary"] {
-    background-color: transparent;
-    border-bottom: 2px solid #00828D !important;
-    border-top: none !important;
-    border-left: none !important;
-    border-right: none !important;
-    border-radius: 0 !important;
-    margin: 0 !important;
-    height: 100% !important;
+  background-color: transparent;
+  border-bottom: 2px solid #00828d !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+  height: 100% !important;
 }
 
 div[role="dialog"] {
   border-color: var(--color-fd-border) !important;
 }
 
-div[role="dialog"] > div{
+div[role="dialog"] > div {
   border-bottom-color: var(--color-fd-border) !important;
 }
 
-*, ::after, ::before, ::backdrop, ::file-selector-button {
+*,
+::after,
+::before,
+::backdrop,
+::file-selector-button {
   border-color: var(--color-fd-border);
 }
 
-[data-rmiz-modal-overlay='visible'] {
+[data-rmiz-modal-overlay="visible"] {
   background-color: var(--color-fd-background);
 }
 
-:root, #nd-docs-layout {
+:root,
+#nd-docs-layout {
   --fd-layout-offset: max(calc(50vw - var(--fd-layout-width) / 2), 0px);
 }
 
-.slider::-webkit-slider-thumb, .slider::-moz-range-thumb {
+.slider::-webkit-slider-thumb,
+.slider::-moz-range-thumb {
   appearance: none;
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: #00828D;
+  background: #00828d;
   cursor: pointer;
   border: 2px solid white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   transition: all 0.2s ease;
 }
-.slider::-webkit-slider-thumb:hover, .slider::-moz-range-thumb:hover {
+.slider::-webkit-slider-thumb:hover,
+.slider::-moz-range-thumb:hover {
   transform: scale(1.1);
   box-shadow: 0 4px 8px rgba(0, 130, 141, 0.4);
 }
 
-.color-input::-webkit-color-swatch, .color-input::-moz-color-swatch {
+.color-input::-webkit-color-swatch,
+.color-input::-moz-color-swatch {
   border: none !important;
   border-radius: 50%;
 }
-

@@ -122,16 +122,18 @@ export const UpgradeGuide = () => {
   const handleSubmit = useCallback(
     async (e: React.FormEvent) => {
       e.preventDefault();
-      
+
       // Check if environment variables are available
       if (!API_ENDPOINT || !PUBLIC_RECAPTCHA_SITE_KEY) {
         setError("API endpoint or reCAPTCHA key not configured");
         return;
       }
-      
+
       setIsGeneratingAiResponse(true);
       try {
-        const token = await getRecaptchaToken(PUBLIC_RECAPTCHA_SITE_KEY as string);
+        const token = await getRecaptchaToken(
+          PUBLIC_RECAPTCHA_SITE_KEY as string
+        );
         const headers = new Headers();
         headers.set("x-recaptcha-token", token as string);
 
@@ -156,7 +158,13 @@ export const UpgradeGuide = () => {
         setIsGeneratingAiResponse(false);
       }
     },
-    [selectedPackage, sourceVersion, targetVersion, API_ENDPOINT, PUBLIC_RECAPTCHA_SITE_KEY]
+    [
+      selectedPackage,
+      sourceVersion,
+      targetVersion,
+      API_ENDPOINT,
+      PUBLIC_RECAPTCHA_SITE_KEY,
+    ]
   );
 
   useEffect(() => {
@@ -180,7 +188,10 @@ export const UpgradeGuide = () => {
         src={`https://www.google.com/recaptcha/api.js?render=${PUBLIC_RECAPTCHA_SITE_KEY}`}
         strategy="afterInteractive"
       />
-      <form onSubmit={handleSubmit} className="bg-fd-card p-5 rounded-lg border border-fd-border shadow-sm">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-fd-card p-5 rounded-lg border border-fd-border shadow-sm"
+      >
         <Flex
           gap="$3"
           flexDirection="column"
@@ -188,33 +199,43 @@ export const UpgradeGuide = () => {
             width: "100%",
           }}
         >
-        {isClient && (
-          <div className="flex gap-5 flex-col">
-          <Select
-            size="md"
-            label="Package"
-            value={packageOptions.find((opt) => opt.value === selectedPackage)}
-            onChange={handlePackageChange}
-            isDisabled={versionsLoading}
-            options={packageOptions}
-          />
-          <Select
-            size="md"
-            label="Source Version"
-            value={versionOptions.find((opt) => opt.value === sourceVersion)}
-            onChange={(option: { value: string; label: string } | null) => option && setSourceVersion(option.value)}
-            isDisabled={versionsLoading}
-            options={versionOptions}
-          />
-          <Select            
-            size="md"
-            label="Target Version"
-            value={versionOptions.find((opt) => opt.value === targetVersion)}
-            onChange={(option: { value: string; label: string } | null) => option && setTargetVersion(option.value)}
-            isDisabled={versionsLoading}
-            options={versionOptions}
-          />
-          </div>
+          {isClient && (
+            <div className="flex gap-5 flex-col">
+              <Select
+                size="md"
+                label="Package"
+                value={packageOptions.find(
+                  (opt) => opt.value === selectedPackage
+                )}
+                onChange={handlePackageChange}
+                isDisabled={versionsLoading}
+                options={packageOptions}
+              />
+              <Select
+                size="md"
+                label="Source Version"
+                value={versionOptions.find(
+                  (opt) => opt.value === sourceVersion
+                )}
+                onChange={(option: { value: string; label: string } | null) =>
+                  option && setSourceVersion(option.value)
+                }
+                isDisabled={versionsLoading}
+                options={versionOptions}
+              />
+              <Select
+                size="md"
+                label="Target Version"
+                value={versionOptions.find(
+                  (opt) => opt.value === targetVersion
+                )}
+                onChange={(option: { value: string; label: string } | null) =>
+                  option && setTargetVersion(option.value)
+                }
+                isDisabled={versionsLoading}
+                options={versionOptions}
+              />
+            </div>
           )}
         </Flex>
         <Text size="sm" className="mt-8 !text-fd-muted-foreground">

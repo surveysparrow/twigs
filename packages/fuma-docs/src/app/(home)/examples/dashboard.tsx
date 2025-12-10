@@ -33,7 +33,6 @@ import {
 } from "@sparrowengg/twigs-react-icons";
 import logo from "@/assets/images/Group 1694.png";
 
-
 export default function Dashboard() {
   const RenderedThumb = () => {
     return <SliderThumb css={{ display: "none" }} />;
@@ -256,17 +255,20 @@ export default function Dashboard() {
             }}
           >
             <Box>
-              <RocketIcon size={30} 
-              color="#00828D"
-              />
+              <RocketIcon size={30} color="#00828D" />
             </Box>
             <Flex flexDirection="column" gap="$2">
               <Text size="sm" weight="medium">
                 Get the Extension
               </Text>
-              <Text size="xs" css={{
-                color: "$neutral700",
-              }}>Install Now</Text>
+              <Text
+                size="xs"
+                css={{
+                  color: "$neutral700",
+                }}
+              >
+                Install Now
+              </Text>
             </Flex>
           </Flex>
         </Flex>
@@ -298,11 +300,15 @@ export default function Dashboard() {
             >
               Campaigns
             </Text>
-            <Text size="sm" weight="medium" css={{
-              "@media (max-width: 768px)": {
-                display: "none",
-              },
-            }}>
+            <Text
+              size="sm"
+              weight="medium"
+              css={{
+                "@media (max-width: 768px)": {
+                  display: "none",
+                },
+              }}
+            >
               / Analytics
             </Text>
           </Flex>
@@ -339,10 +345,12 @@ export default function Dashboard() {
           }}
         >
           <Box>
-            <Heading size="h4" weight="bold" 
-            css={{
-              fontFamily: "DM Sans, sans-serif !important",
-            }}
+            <Heading
+              size="h4"
+              weight="bold"
+              css={{
+                fontFamily: "tenon, sans-serif",
+              }}
             >
               Your total revenue
             </Heading>
@@ -356,7 +364,7 @@ export default function Dashboard() {
                 backgroundClip: "text",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
-                fontFamily: "DM Sans, sans-serif !important",
+                fontFamily: "tenon, sans-serif",
               }}
             >
               $90,239.00
@@ -690,7 +698,7 @@ export default function Dashboard() {
                   </Box>
                   <Box>
                     <AvatarGroup limit={3} rounded="full" size="xs">
-                      <Avatar src="https://i.pravatar.cc/150?img=0" key="1"/>
+                      <Avatar src="https://i.pravatar.cc/150?img=0" key="1" />
                       <Avatar src="https://i.pravatar.cc/150?img=1" key="2" />
                       <Avatar src="https://i.pravatar.cc/150?img=2" key="3" />
                     </AvatarGroup>
@@ -993,7 +1001,9 @@ export default function Dashboard() {
                   >
                     Agenda :
                   </Text>
-                  <Text size="xs">SaaS product features analysis and implementation planning</Text>
+                  <Text size="xs">
+                    SaaS product features analysis and implementation planning
+                  </Text>
                 </Flex>
               </Flex>
             </Box>
@@ -1006,8 +1016,7 @@ export default function Dashboard() {
                 flexWrap: "wrap",
               },
             }}
-          >
-          </Flex>
+          ></Flex>
         </Flex>
       </Flex>
     </Flex>

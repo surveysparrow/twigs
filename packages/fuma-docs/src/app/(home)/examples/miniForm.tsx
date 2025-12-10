@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import React, { useState } from "react";
 import {
   Checkbox,
   Input,
@@ -66,30 +66,31 @@ export default function MiniForm() {
           value={selectedValue}
           onChange={setSelectedValue}
           defaultValue="option1"
-          style={{ display: "flex", flexDirection: "row"}}
+          style={{ display: "flex", flexDirection: "row" }}
         >
-          <Radio
-            value="option1"
-            size="sm"
-          />
-          <Text size="xs" css={{ color: "$neutral500", cursor: "pointer", marginRight: "$6" }}>Apply for a job</Text>
-          <Radio
-            value="option2"
-            size="sm"
-          />
-          <Text size="xs" css={{ color: "$neutral500", cursor: "pointer" }}>Upskill myself</Text>
+          <Radio value="option1" size="sm" />
+          <Text
+            size="xs"
+            css={{ color: "$neutral500", cursor: "pointer", marginRight: "$6" }}
+          >
+            Apply for a job
+          </Text>
+          <Radio value="option2" size="sm" />
+          <Text size="xs" css={{ color: "$neutral500", cursor: "pointer" }}>
+            Upskill myself
+          </Text>
         </RadioGroup>
       </Flex>
       <Flex flexDirection="row" justifyContent="space-between" gap="$10">
         <Flex flexDirection="column" gap="$4" css={{ width: "50%" }}>
           <Text>Acquired skill</Text>
-            <Select
-              instanceId="acquired-skill-select"
-              placeholder="Select"
-              options={options}
-              size="md"
-              variant="filled"
-            />
+          <Select
+            instanceId="acquired-skill-select"
+            placeholder="Select"
+            options={options}
+            size="md"
+            variant="filled"
+          />
         </Flex>
         <Flex flexDirection="column" gap="$6" css={{ width: "50%" }}>
           <Text>Terms & Conditions</Text>

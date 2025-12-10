@@ -43,7 +43,8 @@ export function AllFontWeights() {
             onClick={() => handleCopy(fontWeight)}
           >
             <span className="text-sm">
-              ${fontWeight}: {fontWeights[fontWeight as unknown as FontWeightKeys]}
+              ${fontWeight}:{" "}
+              {fontWeights[fontWeight as unknown as FontWeightKeys]}
             </span>
           </button>
           <p

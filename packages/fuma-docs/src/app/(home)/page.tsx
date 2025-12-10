@@ -1,6 +1,5 @@
 "use client";
 import {
-  Box,
   TabsList,
   Tabs,
   TabsTrigger,
@@ -8,6 +7,7 @@ import {
   Image,
   Link,
   Text,
+  Button,
   // ThemeProvider,
   // defaultTheme,
 } from "@sparrowengg/twigs-react";
@@ -29,7 +29,8 @@ import LoginForm from "./examples/loginForm";
 import Settings from "./examples/settings";
 import Accounts from "./examples/accounts";
 import Chat from "./examples/chat";
-import Features from "./examples/Features";
+import DevTools from "./examples/devTools";
+import Features from "./examples/features";
 import logo from "@/assets/images/logo-w-text-lightmode.svg";
 import surveysparrow from "@/assets/images/surveysparrow.svg";
 import sparrowdesk from "@/assets/images/sparrowDesk.svg";
@@ -125,65 +126,108 @@ export default function HomePage() {
     }
   }, [activeTab]);
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+          }
+        });
+      },
+      {
+        threshold: 0.05,
+        rootMargin: "0px 0px -60px 0px",
+      }
+    );
+
+    const elements = document.querySelectorAll(".scroll-animate");
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <main className="w-full full-page">
       <div className="flex flex-col items-center">
-        <div className="main w-full flex flex-col gap-4 sm:gap-5 justify-center items-center h-120 px-5">
-          <div className="lg:w-6/12 w-full flex flex-col gap-4">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-2 break-words leading-tight text-center">
+        <div className="main w-full flex flex-col gap-10 justify-center items-center py-15 md:py-35 px-5 slider_container">
+          <div className="lg:w-7/12 w-full flex flex-col gap-2 items-center">
+            <h1 className="scroll-animate text-3xl sm:text-4xl lg:text-6xl/[68px] font-bold mb-2 break-words leading-tight text-center text-neutral-900">
               Twigs is a{" "}
               <span className="text-fd-primary border-l-2 !border-fd-primary bg-fd-primary/10 px-2 rounded-r-md">
-                composable{" "}
-              </span>
+                composable
+              </span>{" "}
               component system for building modern web apps faster
             </h1>
-            <p className="text-base sm:text-lg text-fd-muted-foreground break-words text-center">
+            <p className="scroll-animate scroll-animate-delay-1 w-full lg:w-10/12 text-base md:text-[20px] text-neutral-600 break-words text-center">
               Accessible, themeable, and production-tested React components for
               creating scalable design systems and delightful user interfaces.
             </p>
           </div>
-          <div className="flex gap-4 flex-col sm:flex-row justify-center items-center">
+          <div className="scroll-animate scroll-animate-delay-2 flex gap-2 lg:gap-6 justify-center items-center">
             <button
-              className="!px-4 !py-2.5 rounded-md flex gap-3 items-center text-md w-fit cursor-pointer bg-fd-primary shadow-sm text-white font-medium group transition-all duration-200 hover:shadow-md hover:bg-[#017480]"
+              className="!px-4 !py-2.5 rounded-xl flex gap-4 items-center text-sm lg:text-base w-fit cursor-pointer bg-fd-primary shadow-sm text-white font-medium group transition-all duration-200 hover:shadow-md hover:bg-[#017480] text-nowrap"
               onClick={() => {
                 window.location.href = "/docs/getting-started";
               }}
               aria-label="Getting Started Button"
             >
-              Getting Started
+              Get Started
               <span className="inline-block transition-transform duration-300 ease-in-out group-hover:translate-x-0.5">
                 <ForwardArrowIcon size={18} color="currentColor" />
               </span>
             </button>
-            <Box
-              className="text-fd-muted-foreground px-4 py-2.5 rounded-md inline-flex gap-2 items-center text-sm w-fit cursor-pointer bg-fd-background shadow-sm group transition-all duration-200"
-              onClick={handleCopy}
+            <button
+              className="text-fd-secondary-foreground font-medium px-4 py-2.5 rounded-xl inline-flex gap-4 items-center text-sm lg:text-base w-fit cursor-pointer bg-fd-background group transition-all duration-200 hover:bg-gray-100 text-nowrap border"
+              onClick={() => {
+                window.location.href = "/docs/components";
+              }}
             >
-              <code className="flex items-center gap-2 text-nowrap text-xs md:text-sm">
-                npm install @sparrowengg/twigs-react{" "}
-                {copied ? (
-                  <TickIcon size={18} className="text-fd-primary" />
-                ) : (
-                  <CopyIcon
-                    size={18}
-                    color="currentColor"
-                    className="group-hover:scale-105 transition-all duration-200"
-                  />
-                )}
-              </code>
-            </Box>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="lucide lucide-book-open-icon lucide-book-open"
+              >
+                <path d="M12 7v14" />
+                <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" />
+              </svg>
+              Browse Components
+            </button>
+          </div>
+          <div className="scroll-animate scroll-animate-delay-3 flex justify-center">
+            <div className="relative group">
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-teal-500 rounded-xl blur opacity-30 group-hover:opacity-50 transition duration-200"></div>
+              <div className="relative bg-slate-900 rounded-xl px-3 py-3 flex items-center gap-3 shadow-xl border border-slate-800">
+                <span className="text-white font-mono text-sm select-none">
+                  $
+                </span>
+                <code className="text-slate-100 font-mono text-xs md:text-sm text-nowrap">
+                  npm install @sparrowengg/twigs-react
+                </code>
+                <Button
+                  variant="ghost"
+                  className="size-8 hover:bg-slate-800 text-slate-400 hover:text-slate-100"
+                  onClick={handleCopy}
+                >
+                  {copied ? (
+                    <TickIcon className="size-4 text-emerald-400" />
+                  ) : (
+                    <CopyIcon className="size-4" />
+                  )}
+                  <span className="sr-only">Copy to clipboard</span>
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="lg:w-full flex items-center justify-center w-fit">
-          {/* <ThemeProvider
-            theme={{
-              ...defaultTheme,
-              fonts: {
-                body: "DM Sans, sans-serif",
-                heading: "DM Sans, sans-serif",
-              },
-            }}
-          > */}
+        <div className="lg:w-full flex items-center justify-center w-fit scroll-animate">
           <Tabs
             defaultValue="examples"
             value={activeTab}
@@ -235,10 +279,10 @@ export default function HomePage() {
                     <div>Settings</div>
                   </TabsTrigger>
                   <TabsTrigger
-                    value="authentication"
+                    value="onboarding"
                     className="!text-sm !font-normal tabs !rounded-md"
                   >
-                    <div>Authentication</div>
+                    <div>Onboarding</div>
                   </TabsTrigger>
                 </TabsList>
               </div>
@@ -273,8 +317,7 @@ export default function HomePage() {
               </div>
             </TabsContent>
             <TabsContent
-              value="authentication"
-              forceMount
+              value="onboarding"
               className="mt-2 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
             >
               <div className="lg:max-w-6xl mx-3 w-full border-2 border-fd-background rounded-2xl p-4 bg-fd-muted tabs-grid">
@@ -283,7 +326,6 @@ export default function HomePage() {
             </TabsContent>
             <TabsContent
               value="settings"
-              forceMount
               className="mt-2 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
             >
               <div className="lg:w-6xl mx-3 w-full border-2 border-fd-background rounded-2xl p-4 bg-fd-muted tabs-grid">
@@ -292,7 +334,6 @@ export default function HomePage() {
             </TabsContent>
             <TabsContent
               value="users"
-              forceMount
               className="mt-2 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
             >
               <div className="lg:max-w-6xl mx-3 w-full border-2 border-fd-background rounded-2xl p-4 bg-fd-muted tabs-grid accounts-div">
@@ -301,7 +342,6 @@ export default function HomePage() {
             </TabsContent>
             <TabsContent
               value="conversation"
-              forceMount
               className="mt-2 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
             >
               <div className="lg:max-w-6xl md:max-w-4xl w-full border-2 border-fd-background rounded-2xl p-4 bg-fd-muted tabs-grid chat-div">
@@ -310,7 +350,6 @@ export default function HomePage() {
             </TabsContent>
             <TabsContent
               value="dashboard"
-              forceMount
               className="mt-2 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
             >
               <div className="lg:max-w-6xl md:max-w-4xl max-w-fit mx-3 w-full border-2 border-fd-background rounded-2xl p-4 bg-fd-muted tabs-grid">
@@ -318,20 +357,26 @@ export default function HomePage() {
               </div>
             </TabsContent>
           </Tabs>
-          {/* </ThemeProvider> */}
+        </div>
+        {/* Features Section */}
+        <div className="relative w-full pt-10 lg:pt-15  overflow-hidden mt-15 md:mt-25">
+          <div className="absolute inset-0 -z-10">
+            <div className="absolute top-[-100px] left-1/2 -translate-x-1/2 w-[1400px] h-[300px] bg-[#00828D]/11 rounded-full blur-3xl"></div>
+          </div>
+          <div className="scroll-animate flex flex-col justify-center items-center gap-20">
+            <Features />
+          </div>
         </div>
         {/* Testimonials Section */}
-        <section className="relative lg:py-24 lg:pb-34 py-10 px-6 overflow-hidden w-full">
-          {/* Gradient Background with Blur */}
+        <section className="relative lg:py-25 py-15 px-6 w-full overflow-hidden">
           <div className="absolute inset-0 -z-10">
             <div className="absolute top-20 left-10 w-96 h-96 bg-[#00828D]/10 rounded-full blur-3xl"></div>
             <div className="absolute bottom-15 right-10 w-96 h-96 bg-[#00828D]/10 rounded-full blur-3xl"></div>
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#00828D]/5 rounded-full blur-3xl"></div>
           </div>
-
           <div className="max-w-7xl mx-auto relative z-10">
             {/* Header */}
-            <div className="text-center lg:mb-16 mb-10">
+            <div className="text-center lg:mb-16 mb-10 scroll-animate">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#00828D]/10 border border-[#00828D]/20 mb-6">
                 <svg
                   className="w-4 h-4 text-[#00828D]"
@@ -342,7 +387,7 @@ export default function HomePage() {
                 </svg>
                 <span className="text-[#00828D]">Testimonials</span>
               </div>
-              <h2 className="text-3xl md:text-4xl mb-4 text-gray-900">
+              <h2 className="text-3xl md:text-4xl mb-6 text-neutral-900 font-medium">
                 Built for teams who demand excellence
               </h2>
               <p className="text-gray-600 max-w-2xl mx-auto">
@@ -353,8 +398,7 @@ export default function HomePage() {
             {/* Testimonials Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {/* Testimonial 1 - SurveySparrow */}
-              <div className="group relative bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm transition-all duration-300 border border-gray-100 hover:border-[#00828D]/30 hover:-translate-y-0.5">
-                {/* Quote decoration */}
+              <div className="group relative bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm transition-all duration-300 border border-gray-100 hover:border-[#00828D]/30 hover:-translate-y-0.5 scroll-animate">
                 <div className="absolute top-4 right-6 opacity-10 group-hover:opacity-20 transition-opacity">
                   <svg
                     className="w-13 h-13 text-[#00828D]"
@@ -364,8 +408,6 @@ export default function HomePage() {
                     <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 9.983-10.609l.996 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 10-10.609l.996 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-10z" />
                   </svg>
                 </div>
-
-                {/* Company Badge */}
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#00828D]/20 to-[#00828D]/10 flex items-center justify-center shadow-sm p-2">
                     <Image
@@ -378,16 +420,12 @@ export default function HomePage() {
                     <h3 className="text-gray-900 font-medium">SurveySparrow</h3>
                   </div>
                 </div>
-
-                {/* Testimonial Text */}
                 <p className="text-gray-600 leading-relaxed mb-8 relative z-10">
                   &quot;Twigs eliminates repetition, speeds up development, and
                   ensures consistent, accessible UI across all our SurveySparrow
                   products. It’s a game-changer for multi-product
                   engineering.&quot;
                 </p>
-
-                {/* Author Info */}
                 <div className="flex items-center gap-4 pt-6 border-t border-gray-100">
                   <div className="w-12 h-12 rounded-full overflow-hidden ring-2 ring-[#00828D]/20">
                     <Image
@@ -413,14 +451,11 @@ export default function HomePage() {
                     </Text>
                   </div>
                 </div>
-
-                {/* Accent gradient line */}
                 <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#00828D]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-b-2xl"></div>
               </div>
 
               {/* Testimonial 2 - ThriveSparrow */}
-              <div className="group relative bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm transition-all duration-300 border border-gray-100 hover:border-[#00828D]/30 hover:-translate-y-0.5">
-                {/* Quote decoration */}
+              <div className="group relative bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm transition-all duration-300 border border-gray-100 hover:border-[#00828D]/30 hover:-translate-y-0.5 scroll-animate scroll-animate-delay-1">
                 <div className="absolute top-4 right-6 opacity-10 group-hover:opacity-20 transition-opacity">
                   <svg
                     className="w-13 h-13 text-[#00828D]"
@@ -430,8 +465,6 @@ export default function HomePage() {
                     <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 9.983-10.609l.996 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 10-10.609l.996 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-10z" />
                   </svg>
                 </div>
-
-                {/* Company Badge */}
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#00828D]/20 to-[#00828D]/10 flex items-center justify-center shadow-sm">
                     <Image
@@ -444,16 +477,13 @@ export default function HomePage() {
                     <h3 className="text-gray-900 font-medium">ThriveSparrow</h3>
                   </div>
                 </div>
-
-                {/* Testimonial Text */}
                 <p className="text-gray-600 leading-relaxed mb-8 relative z-10">
-                  &quot;When we are working on new features, I enjoy checking
-                  out how Twigs approached the solution to that problem. It
-                  helps in my search for the best possible approaches.&quot;
+                  &quot;Adopting Twigs has been a game changer for our frontend
+                  team. It enabled us to build and iterate on UI components
+                  faster than ever, while maintaining a clean and scalable code
+                  structure.&quot;
                 </p>
-
-                {/* Author Info */}
-                <div className="flex items-center gap-4 pt-6 border-t border-gray-100">
+                <div className="flex items-center gap-4 pt-6 border-t border-gray-100 align-self-end">
                   <div className="w-12 h-12 rounded-full overflow-hidden ring-2 ring-[#00828D]/20">
                     <Image
                       src="https://ca.slack-edge.com/T3RDEGA00-US379KADC-6328985145bb-512"
@@ -478,14 +508,11 @@ export default function HomePage() {
                     </Text>
                   </div>
                 </div>
-
-                {/* Accent gradient line */}
                 <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#00828D]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-b-2xl"></div>
               </div>
 
               {/* Testimonial 3 - SparrowDesk */}
-              <div className="group relative bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm transition-all duration-300 border border-gray-100 hover:border-[#00828D]/30 hover:-translate-y-0.5">
-                {/* Quote decoration */}
+              <div className="group relative bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-sm transition-all duration-300 border border-gray-100 hover:border-[#00828D]/30 hover:-translate-y-0.5 scroll-animate scroll-animate-delay-2">
                 <div className="absolute top-4 right-6 opacity-10 group-hover:opacity-20 transition-opacity">
                   <svg
                     className="w-13 h-13 text-[#00828D]"
@@ -495,8 +522,6 @@ export default function HomePage() {
                     <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 9.983-10.609l.996 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 10-10.609l.996 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-10z" />
                   </svg>
                 </div>
-
-                {/* Company Badge */}
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#00828D]/20 to-[#00828D]/10 flex items-center justify-center shadow-sm p-2">
                     <Image
@@ -509,15 +534,11 @@ export default function HomePage() {
                     <h3 className="text-gray-900 font-medium">SparrowDesk</h3>
                   </div>
                 </div>
-
-                {/* Testimonial Text */}
                 <p className="text-gray-600 leading-relaxed mb-8 relative z-10">
                   &quot;Twigs is a fantastic React component library that helped
                   us build SparrowDesk real fast. Very well documented and works
                   great out of the box.&quot;
                 </p>
-
-                {/* Author Info */}
                 <div className="flex items-center gap-4 pt-6 border-t border-gray-100">
                   <div className="w-12 h-12 rounded-full overflow-hidden ring-2 ring-[#00828D]/20">
                     <Image
@@ -543,27 +564,25 @@ export default function HomePage() {
                     </Text>
                   </div>
                 </div>
-
-                {/* Accent gradient line */}
                 <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#00828D]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-b-2xl"></div>
               </div>
             </div>
           </div>
         </section>
-        <div className="relative w-full flex flex-col justify-center items-center gap-20 pt-10 lg:pt-15  overflow-hidden features-background">
-          {/* Single blur background - top center, below title */}
+        <div className="relative w-full pt-10 lg:pt-15  overflow-hidden features-background">
           <div className="absolute inset-0 -z-10">
-            {/* Large wide blur at top center creating subtle gradient effect */}
             <div className="absolute top-[-100px] left-1/2 -translate-x-1/2 w-[1400px] h-[300px] bg-[#00828D]/11 rounded-full blur-3xl"></div>
           </div>
-          <Features />
+          <div className="scroll-animate flex flex-col justify-center items-center gap-20">
+            <DevTools />
+          </div>
         </div>
-        <div className="w-full lg:px-35 md:px-10 px-5 lg:mt-25 mt-10 border-t border-fd-muted py-10 flex justify-between lg:flex-row flex-col gap-5 lg:gap-0 footer">
+        <div className="max-w-7xl lg:px-20 md:px-10 px-5 lg:mt-25 mt-10 border-t border-fd-muted py-10 flex justify-between lg:flex-row flex-col gap-5 lg:gap-0 footer">
           <div className="flex flex-col gap-2 lg:w-1/3 w-full">
             <Image src={logo.src} alt="Twigs" className="w-20 h-fit" />
             <Text size="md" weight="normal" css={{ color: "$neutral600" }}>
-              Build consistent, scalable UIs with components designed for
-              flexibility, speed, and long-term reliability.
+              Accessible, themeable, and production-tested React components for
+              creating scalable design systems and delightful user interfaces.
             </Text>
           </div>
           <div className="flex gap-10 md:gap-5 lg:gap-20 flex-wrap">
@@ -694,7 +713,7 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-        <div className="w-full lg:px-35 md:px-10 px-5 flex justify-between sm:flex-row flex-col pb-5">
+        <div className="w-full lg:max-w-7xl lg:px-20 md:px-10 px-5 flex justify-between sm:flex-row flex-col pb-5">
           <Text size="md" weight="medium" css={{ color: "$neutral600" }}>
             Built with ❤️ at{" "}
             <span

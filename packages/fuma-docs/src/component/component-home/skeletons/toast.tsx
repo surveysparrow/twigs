@@ -15,4 +15,3 @@ export function ToastSkeleton() {
     </div>
   );
 }
-

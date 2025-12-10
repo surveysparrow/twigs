@@ -193,20 +193,20 @@ export default function Settings() {
           </Box>
         </Flex>
         <Flex flexDirection="column" gap="$2">
-          <Accordion
-            type="single"
-            collapsible
-            defaultValue="item-1"
-          >
-            <AccordionItem value="item-1" css={{
+          <Accordion type="single" collapsible defaultValue="item-1">
+            <AccordionItem
+              value="item-1"
+              css={{
                 borderBottom: "0 !important",
-              }}>
-              <AccordionTrigger css={{
-                backgroundColor: "$neutral50 !important",
-                cursor: "pointer",
-                textWrap: "nowrap",
               }}
-              className="!py-0"
+            >
+              <AccordionTrigger
+                css={{
+                  backgroundColor: "$neutral50 !important",
+                  cursor: "pointer",
+                  textWrap: "nowrap",
+                }}
+                className="!py-0"
               >
                 <Text
                   size="xs"
@@ -218,12 +218,13 @@ export default function Settings() {
                   YOUR PREFERENCE{" "}
                 </Text>
               </AccordionTrigger>
-              <AccordionContent css={{
-                backgroundColor: "$neutral50 !important",
-                "&>div": {
-                  padding: "0 !important",
-                },
-              }}
+              <AccordionContent
+                css={{
+                  backgroundColor: "$neutral50 !important",
+                  "&>div": {
+                    padding: "0 !important",
+                  },
+                }}
               >
                 <Text
                   css={{
@@ -255,14 +256,18 @@ export default function Settings() {
             </AccordionItem>
           </Accordion>
           <Accordion type="single" collapsible defaultValue="item-2">
-            <AccordionItem value="item-2" css={{
+            <AccordionItem
+              value="item-2"
+              css={{
                 borderBottom: "0 !important",
-              }}>
-              <AccordionTrigger css={{
-                backgroundColor: "$neutral50 !important",
-                cursor: "pointer",
               }}
-              className="!py-0"
+            >
+              <AccordionTrigger
+                css={{
+                  backgroundColor: "$neutral50 !important",
+                  cursor: "pointer",
+                }}
+                className="!py-0"
               >
                 <Text
                   size="xs"
@@ -274,12 +279,13 @@ export default function Settings() {
                   ACCOUNT MANAGEMENT{" "}
                 </Text>
               </AccordionTrigger>
-              <AccordionContent css={{
-                backgroundColor: "$neutral50 !important",
-                "&>div": {
-                  padding: "0 !important",
-                },
-              }}
+              <AccordionContent
+                css={{
+                  backgroundColor: "$neutral50 !important",
+                  "&>div": {
+                    padding: "0 !important",
+                  },
+                }}
               >
                 <Text
                   css={{
@@ -348,14 +354,18 @@ export default function Settings() {
             </AccordionItem>
           </Accordion>
           <Accordion type="single" collapsible defaultValue="item-3">
-            <AccordionItem value="item-3" css={{
+            <AccordionItem
+              value="item-3"
+              css={{
                 borderBottom: "0 !important",
-              }}>
-              <AccordionTrigger css={{
-                backgroundColor: "$neutral50 !important",
-                cursor: "pointer",
               }}
-              className="!py-0"
+            >
+              <AccordionTrigger
+                css={{
+                  backgroundColor: "$neutral50 !important",
+                  cursor: "pointer",
+                }}
+                className="!py-0"
               >
                 <Text
                   size="xs"
@@ -367,12 +377,13 @@ export default function Settings() {
                   MODULES{" "}
                 </Text>
               </AccordionTrigger>
-              <AccordionContent css={{
-                backgroundColor: "$neutral50 !important",
-                "&>div": {
-                  padding: "0 !important",
-                },
-              }}
+              <AccordionContent
+                css={{
+                  backgroundColor: "$neutral50 !important",
+                  "&>div": {
+                    padding: "0 !important",
+                  },
+                }}
               >
                 <Text
                   css={{
@@ -403,18 +414,19 @@ export default function Settings() {
               </AccordionContent>
             </AccordionItem>
           </Accordion>
-          <Accordion type="single" collapsible defaultValue="item-4"
-          >
-            <AccordionItem value="item-4" 
-            css={{
+          <Accordion type="single" collapsible defaultValue="item-4">
+            <AccordionItem
+              value="item-4"
+              css={{
                 borderBottom: "0 !important",
               }}
             >
-              <AccordionTrigger css={{
-                backgroundColor: "$neutral50 !important",
-                cursor: "pointer",
-              }}
-              className="!py-0"
+              <AccordionTrigger
+                css={{
+                  backgroundColor: "$neutral50 !important",
+                  cursor: "pointer",
+                }}
+                className="!py-0"
               >
                 <Text
                   size="xs"
@@ -426,12 +438,13 @@ export default function Settings() {
                   LOGS{" "}
                 </Text>
               </AccordionTrigger>
-              <AccordionContent css={{
-                backgroundColor: "$neutral50 !important",
-                "&>div": {
-                  padding: "0 !important",
-                },
-              }}
+              <AccordionContent
+                css={{
+                  backgroundColor: "$neutral50 !important",
+                  "&>div": {
+                    padding: "0 !important",
+                  },
+                }}
               >
                 <Text
                   css={{

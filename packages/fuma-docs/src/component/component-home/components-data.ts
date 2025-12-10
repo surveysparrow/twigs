@@ -150,7 +150,7 @@ export const components: ComponentItem[] = [
     href: "/docs/components/flex",
     category: "Layout",
   },
-  { 
+  {
     name: "grid",
     title: "Grid",
     description:
@@ -280,7 +280,7 @@ export const components: ComponentItem[] = [
     href: "/docs/components/switch",
     category: "Form",
   },
-  { 
+  {
     name: "textarea",
     title: "Textarea",
     description:
@@ -350,7 +350,7 @@ export const components: ComponentItem[] = [
     href: "/docs/components/link",
     category: "Navigation",
   },
-  { 
+  {
     name: "pagination",
     title: "Pagination",
     description:
@@ -393,4 +393,3 @@ export const components: ComponentItem[] = [
     category: "Loader",
   },
 ];
-

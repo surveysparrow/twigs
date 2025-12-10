@@ -11,4 +11,3 @@ export function FormHelperTextSkeleton() {
     </div>
   );
 }
-

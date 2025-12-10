@@ -10,4 +10,3 @@ export function DefaultSkeleton({ title }: { title: string }) {
     </div>
   );
 }
-

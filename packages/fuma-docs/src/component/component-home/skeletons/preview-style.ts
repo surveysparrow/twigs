@@ -10,4 +10,3 @@ export const previewStyle = {
   backgroundColor: "rgba(180, 180, 180, 0.2)",
   backdropFilter: "blur(1px)",
 };
-

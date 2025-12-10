@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Image,
   Text,
@@ -20,6 +20,16 @@ import {
 import musicPlayerImage from "@/assets/images/music-play-avatar.jpg";
 
 export default function MusicPlayer() {
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [value, setValue] = useState([30]);
+
+  const handlePlay = () => {
+    setIsPlaying(true);
+  };
+
+  const handlePause = () => {
+    setIsPlaying(false);
+  };
   const RenderedThumb = () => {
     return <SliderThumb css={{ display: "none" }} />;
   };
@@ -75,6 +85,11 @@ export default function MusicPlayer() {
               width: "$12",
               height: "$12",
               borderRadius: "$md",
+              transition: "all 0.3s ease-in-out",
+              "&:hover": {
+                transform: "scale(1.05)",
+                rotate: "-5deg",
+              },
             }}
           />
           <Flex flexDirection="column" gap="$1">
@@ -130,7 +145,8 @@ export default function MusicPlayer() {
             Range: RenderedRange,
             Track: RenderedTrack,
           }}
-          value={[30]}
+          value={value}
+          onValueChange={setValue}
         />
         <Flex justifyContent="space-between">
           <Text
@@ -173,19 +189,38 @@ export default function MusicPlayer() {
             color="secondary"
             variant="ghost"
           />
-          <svg
-            className="play-button-shadow"
-            xmlns="http://www.w3.org/2000/svg"
-            width="40"
-            height="40"
-            viewBox="0 0 24 24"
-            style={{
-              fill: "var(--twigs-colors-primary500)",
-              cursor: "pointer",
-            }}
-          >
-            <path d="M7 6v12l10-6z"></path>
-          </svg>
+          {isPlaying ? (
+            <svg
+              className="play-button-shadow"
+              xmlns="http://www.w3.org/2000/svg"
+              width="40"
+              height="40"
+              viewBox="0 0 24 24"
+              style={{
+                fill: "var(--twigs-colors-primary500)",
+                cursor: "pointer",
+              }}
+              onClick={handlePause}
+            >
+              <path d="M7 6v12l10-6z"></path>
+            </svg>
+          ) : (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="40"
+              height="40"
+              viewBox="0 0 24 24"
+              fill="var(--twigs-colors-primary500)"
+              strokeWidth="1"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="lucide lucide-pause-icon lucide-pause play-button-shadow cursor-pointer"
+              onClick={handlePlay}
+            >
+              <rect x="13" y="6" width="3" height="12" rx="1" />
+              <rect x="6" y="6" width="3" height="12" rx="1" />
+            </svg>
+          )}
           <IconButton
             icon={<ChevronRightIcon />}
             aria-label="Edit"

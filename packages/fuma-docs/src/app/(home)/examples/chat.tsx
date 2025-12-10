@@ -115,14 +115,14 @@ export default function Chat() {
           >
             All Conversations
           </Text>
-          <IconButton 
-          icon={<CloseIcon />} 
-          variant="outline" 
-          color="secondary" 
-          size="md"
-          css={{
-            borderRadius: "$round",
-          }}
+          <IconButton
+            icon={<CloseIcon />}
+            variant="outline"
+            color="secondary"
+            size="md"
+            css={{
+              borderRadius: "$round",
+            }}
           />
         </Flex>
         <Flex
@@ -834,53 +834,84 @@ export default function Chat() {
           </Flex>
           <Flex justifyContent="space-between">
             <Text css={{ color: "$neutral600" }}>Priority:</Text>
-            <Box css={{ width: "55%",display: "flex", alignItems: "center", gap: "$2" }}>
-              <ClockIcon size={16}/>
+            <Box
+              css={{
+                width: "55%",
+                display: "flex",
+                alignItems: "center",
+                gap: "$2",
+              }}
+            >
+              <ClockIcon size={16} />
               <Text css={{ color: "$secondary700" }} weight="medium">
                 Urgent
-              </Text> 
+              </Text>
             </Box>
           </Flex>
           <Flex justifyContent="space-between">
             <Text css={{ color: "$neutral600" }}>Assigned To:</Text>
-            <Box css={{ width: "55%",display: "flex", alignItems: "center", gap: "$2" }}>
-              <Avatar name="Gabriel" size="sm" 
-              src="https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&w=512&h=512&dpr=2&q=80"
+            <Box
+              css={{
+                width: "55%",
+                display: "flex",
+                alignItems: "center",
+                gap: "$2",
+              }}
+            >
+              <Avatar
+                name="Gabriel"
+                size="sm"
+                src="https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&w=512&h=512&dpr=2&q=80"
               />
               <Text size="xs" css={{ color: "$secondary700" }} weight="medium">
-              Maren Siphron
-              </Text> 
-              <InfoFillIcon size={16} style={{color: "var(--twigs-colors-neutral400) !important"}}/>
+                Maren Siphron
+              </Text>
+              <InfoFillIcon
+                size={16}
+                style={{ color: "var(--twigs-colors-neutral400) !important" }}
+              />
             </Box>
           </Flex>
           <Flex justifyContent="space-between">
             <Text css={{ color: "$neutral600" }}>Tags:</Text>
-            <Box css={{ width: "55%",display: "flex", alignItems: "center", gap: "$2" }}>
-              <Chip size="sm">
-                Solids
-              </Chip>
-              <Chip size="sm">
-                3D Printing
-              </Chip>
+            <Box
+              css={{
+                width: "55%",
+                display: "flex",
+                alignItems: "center",
+                gap: "$2",
+              }}
+            >
+              <Chip size="sm">Solids</Chip>
+              <Chip size="sm">3D Printing</Chip>
             </Box>
           </Flex>
           <Box>
-            <Text css={{ color: "$neutral700", marginBottom: "$4" }}>Notes:</Text>
-            <Box css={{
-              padding: "$4",
-              borderRadius: "$md",
-              width: "100%",
-              border: "1px solid $neutral400 !important",
-            }}>
-              <Text size="xs" css={{ color: "$neutral700"}}>
-              https://app.zipy.ai/ae4da115/136?isasdfa error=false&id=7321fdba-b691-4f3bdf-aff3-31dd0d66b9ae-1680592227&euid
-              </Text> 
+            <Text css={{ color: "$neutral700", marginBottom: "$4" }}>
+              Notes:
+            </Text>
+            <Box
+              css={{
+                padding: "$4",
+                borderRadius: "$md",
+                width: "100%",
+                border: "1px solid $neutral400 !important",
+              }}
+            >
+              <Text size="xs" css={{ color: "$neutral700" }}>
+                https://app.zipy.ai/ae4da115/136?isasdfa
+                error=false&id=7321fdba-b691-4f3bdf-aff3-31dd0d66b9ae-1680592227&euid
+              </Text>
             </Box>
           </Box>
           <Box>
-            <Input variant="filled" placeholder="Feedback" css={{
-                border:"none"
-            }}/>
+            <Input
+              variant="filled"
+              placeholder="Feedback"
+              css={{
+                border: "none",
+              }}
+            />
           </Box>
         </Flex>
       </Flex>

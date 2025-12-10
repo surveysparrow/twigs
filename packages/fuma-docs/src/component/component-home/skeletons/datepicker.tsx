@@ -16,4 +16,3 @@ export function DatePickerSkeleton() {
     </div>
   );
 }
-

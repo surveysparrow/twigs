@@ -37,10 +37,30 @@ export function AllSpaces() {
       <table className="w-full">
         <thead>
           <tr>
-            <th className="text-left" style={{ width: "200px", border: "none" }}>Key</th>
-            <th className="text-left" style={{ width: "200px", border: "none" }}>Value</th>
-            <th className="text-left" style={{ width: "200px", border: "none" }}>px Value</th>
-            <th className="text-left" style={{ width: "200px", border: "none" }}>Example</th>
+            <th
+              className="text-left"
+              style={{ width: "200px", border: "none" }}
+            >
+              Key
+            </th>
+            <th
+              className="text-left"
+              style={{ width: "200px", border: "none" }}
+            >
+              Value
+            </th>
+            <th
+              className="text-left"
+              style={{ width: "200px", border: "none" }}
+            >
+              px Value
+            </th>
+            <th
+              className="text-left"
+              style={{ width: "200px", border: "none" }}
+            >
+              Example
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -51,11 +71,22 @@ export function AllSpaces() {
               onClick={() => handleCopy(sp)}
               style={{ border: "none" }}
             >
-              <td className="!text-fd-muted-foreground" style={{ border: "none" }}>{sp}</td>
-              <td className="!text-fd-muted-foreground" style={{ border: "none" }}>
+              <td
+                className="!text-fd-muted-foreground"
+                style={{ border: "none" }}
+              >
+                {sp}
+              </td>
+              <td
+                className="!text-fd-muted-foreground"
+                style={{ border: "none" }}
+              >
                 {space[sp as unknown as SpaceKeys]}
               </td>
-              <td className="!text-fd-muted-foreground" style={{ border: "none" }}>
+              <td
+                className="!text-fd-muted-foreground"
+                style={{ border: "none" }}
+              >
                 {remToPix(space[sp as unknown as SpaceKeys])}px
               </td>
               <td style={{ border: "none" }}>

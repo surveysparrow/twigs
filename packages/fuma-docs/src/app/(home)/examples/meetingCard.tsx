@@ -72,22 +72,43 @@ export default function MeetingCard() {
           </Text>
         </Flex>
         <Flex gap="$5" wrap="wrap">
-          <Chip color="primary" size="lg">
+          <Chip
+            color="primary"
+            size="lg"
+            css={{
+              transition: "all 0.3s ease-in-out",
+              "&:hover": { transform: "scale(1.05)" },
+            }}
+          >
             Analytics
           </Chip>
-          <Chip color="secondary" size="lg">
+          <Chip
+            color="secondary"
+            size="lg"
+            css={{
+              transition: "all 0.3s ease-in-out",
+              "&:hover": { transform: "scale(1.05)" },
+            }}
+          >
             Research
           </Chip>
-          <Chip color="success" size="lg">
+          <Chip
+            color="success"
+            size="lg"
+            css={{
+              transition: "all 0.3s ease-in-out",
+              "&:hover": { transform: "scale(1.05)" },
+            }}
+          >
             Roadmap
           </Chip>
         </Flex>
         <Flex gap="$2" alignItems="center">
           <AvatarGroup rounded="full" size="md">
-            <Avatar src="https://i.pravatar.cc/150?img=0" key="0" />
-            <Avatar src="https://i.pravatar.cc/150?img=1" key="1" />
-            <Avatar src="https://i.pravatar.cc/150?img=2" key="2" />
-            <Avatar src="https://i.pravatar.cc/150?img=3" key="3" />
+            <Avatar src="https://i.pravatar.cc/150?img=30" key="0" />
+            <Avatar src="https://i.pravatar.cc/150?img=43" key="1" />
+            <Avatar src="https://i.pravatar.cc/150?img=14" key="2" />
+            <Avatar src="https://i.pravatar.cc/150?img=10" key="3" />
           </AvatarGroup>
           <Text size="sm" css={{ color: "$neutral700" }}>
             4 participants
@@ -103,6 +124,14 @@ export default function MeetingCard() {
             fontWeight: "normal",
             border: "1px solid $accent100 !important",
             color: "$accent500 !important",
+            transition: "all 0.3s ease-in-out",
+            "&:hover": {
+              boxShadow:
+                "0 0 5px rgba(98, 12, 189, 0.3), 0 0 5px rgba(0, 130, 141, 0.2), 0 0 5px rgba(0, 130, 141, 0.1)",
+              backgroundColor: "$accent500 !important",
+              color: "$white900 !important",
+              borderColor: "$accent500 !important",
+            },
           }}
         >
           Join Meeting

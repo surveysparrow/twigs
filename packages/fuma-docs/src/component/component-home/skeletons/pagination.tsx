@@ -1,5 +1,8 @@
 import React from "react";
-import { ChevronLeftIcon, ChevronRightIcon } from "@sparrowengg/twigs-react-icons";
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+} from "@sparrowengg/twigs-react-icons";
 import { previewStyle } from "./preview-style";
 
 export function PaginationSkeleton() {
@@ -25,4 +28,3 @@ export function PaginationSkeleton() {
     </div>
   );
 }
-

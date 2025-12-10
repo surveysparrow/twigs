@@ -29,4 +29,3 @@ export function TableSkeleton() {
     </div>
   );
 }
-

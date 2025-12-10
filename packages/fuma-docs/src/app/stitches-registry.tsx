@@ -1,20 +1,27 @@
-'use client';
+"use client";
 
-import React, { useRef } from 'react';
-import { useServerInsertedHTML } from 'next/navigation';
-import { getCssText, createTheme, defaultTheme } from '@sparrowengg/twigs-react';
-import type { ReactNode } from 'react';
+import React, { useRef } from "react";
+import { useServerInsertedHTML } from "next/navigation";
+import {
+  getCssText,
+  createTheme,
+  defaultTheme,
+} from "@sparrowengg/twigs-react";
+import type { ReactNode } from "react";
 
 // Merge themes function (same logic as ThemeProvider)
-const mergeThemes = (outerTheme: typeof defaultTheme, theme: Partial<typeof defaultTheme>) => {
+const mergeThemes = (
+  outerTheme: typeof defaultTheme,
+  theme: Partial<typeof defaultTheme>
+) => {
   return { ...outerTheme, ...theme };
 };
 
 // Home page theme with DM Sans fonts
 const homePageTheme = mergeThemes(defaultTheme, {
   fonts: {
-    body: "DM Sans, sans-serif",
-    heading: "DM Sans, sans-serif",
+    body: "tenon, sans-serif",
+    heading: "tenon, sans-serif",
   },
 });
 
@@ -23,7 +30,10 @@ interface StitchesRegistryProps {
   isHomePage?: boolean;
 }
 
-export default function StitchesRegistry({ children, isHomePage = false }: StitchesRegistryProps) {
+export default function StitchesRegistry({
+  children,
+  isHomePage = false,
+}: StitchesRegistryProps) {
   const styleInsertedRef = useRef<boolean>(false);
   const themeCreatedRef = useRef<boolean>(false);
   const themeClassNameRef = useRef<string | null>(null);
@@ -89,7 +99,7 @@ export default function StitchesRegistry({ children, isHomePage = false }: Stitc
         </>
       );
     } catch (error) {
-      console.error('Failed to inject Stitches styles:', error);
+      console.error("Failed to inject Stitches styles:", error);
       // Reset refs on error to allow retry
       styleInsertedRef.current = false;
       return null;
@@ -102,7 +112,7 @@ export default function StitchesRegistry({ children, isHomePage = false }: Stitc
       return;
     }
 
-    if (typeof window !== 'undefined' && themeClassNameRef.current) {
+    if (typeof window !== "undefined" && themeClassNameRef.current) {
       const html = document.documentElement;
       const themeClassName = themeClassNameRef.current;
       if (!html.classList.contains(themeClassName)) {
@@ -117,4 +127,3 @@ export default function StitchesRegistry({ children, isHomePage = false }: Stitc
 
   return <>{children}</>;
 }
-
