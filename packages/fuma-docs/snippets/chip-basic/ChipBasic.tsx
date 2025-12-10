@@ -8,22 +8,14 @@ export default function ChipBasic() {
   return (
     <Box css={{ display: "flex", gap: "$4", flexWrap: "wrap" }}>
       <Toastr duration={3000} />
-      <Chip size="xs" variant="outline" leftElement={<TickCircleFillIcon />}>
+      <Chip size="2xs" variant="outline" leftElement={<TickCircleFillIcon />}>
         Default
       </Chip>
-      <Chip size="sm" color="primary" rightElement={<ChevronDownIcon />}>
-        Primary
+      <Chip size="xs" color="primary" rightElement={<ChevronDownIcon />}>
+        Active
       </Chip>
       <Chip
-        size="md"
-        color="success"
-        leftElement={<TickCircleFillIcon />}
-        rightElement={<ChevronDownIcon />}
-      >
-        Success
-      </Chip>
-      <Chip
-        size="lg"
+        size="sm"
         closable
         onClose={() =>
           toast({
@@ -33,7 +25,21 @@ export default function ChipBasic() {
         }
         color="error"
       >
-        Error
+        Urgent
+      </Chip>
+      <Chip size="md" color="accent" variant="outline">
+        Beta
+      </Chip>
+      <Chip size="lg" color="warning">
+        Pending
+      </Chip>
+      <Chip
+        size="xl"
+        color="success"
+        rounded="full"
+        leftElement={<TickCircleFillIcon />}
+      >
+        Verified
       </Chip>
     </Box>
   );

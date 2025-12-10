@@ -55,13 +55,17 @@ export default function LoginForm() {
               rounded="3xl"
             />
           </Box>
-          <Heading size="h4" weight="medium" css={{ color: "$neutral900" }}>
+          <Heading
+            size="h4"
+            weight="medium"
+            css={{ color: "$neutral900", fontFamily: "tenon, sans-serif" }}
+          >
             Glad you made it!
           </Heading>
           <Heading
             size="h6"
             weight="regular"
-            css={{ color: "$neutral900" }}
+            css={{ color: "$neutral900", fontFamily: "tenon, sans-serif" }}
           >
             Welcome Gautham Srinivasan. Yup! you aren&apos;t a stranger here 🤗.
           </Heading>
@@ -143,6 +147,7 @@ export default function LoginForm() {
             css={{
               color: "#2B2B2B",
               textAlign: "center",
+              fontFamily: "tenon, sans-serif",
               "@media (max-width: 768px)": {
                 fontSize: "17px !important",
               },
@@ -166,20 +171,16 @@ export default function LoginForm() {
             <FormHelperText css={{ marginBottom: "$2" }}>
               Create your login password
             </FormHelperText>
-            <Input
-              size="lg"
-              aria-label="password"
-              variant="filled"
-            />
+            <Input size="lg" aria-label="password" variant="filled" />
           </Box>
           <Box>
             <Button
               aria-label="Continue"
               variant="solid"
               size="xl"
-              css={{ 
+              css={{
                 width: "100%",
-                fontWeight: "700",   
+                fontWeight: "700",
                 fontSize: "19.2px",
                 "@media (max-width: 768px)": {
                   fontSize: "16px",
@@ -199,12 +200,14 @@ export default function LoginForm() {
               }}
             >
               In future, you can login to acmecorp.thrivesparrow.com using{" "}
-              <span style={{
-                color: "var(--twigs-colors-neutral900)",
-              }}>
-                gautham@surveysparrow.com 
-              </span>
-              {" "}and the above password.
+              <span
+                style={{
+                  color: "var(--twigs-colors-neutral900)",
+                }}
+              >
+                gautham@surveysparrow.com
+              </span>{" "}
+              and the above password.
             </Text>
           </Box>
         </Box>

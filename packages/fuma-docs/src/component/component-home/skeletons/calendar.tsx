@@ -24,4 +24,3 @@ export function CalendarSkeleton() {
     </div>
   );
 }
-

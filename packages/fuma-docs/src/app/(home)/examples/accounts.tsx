@@ -102,15 +102,16 @@ export default function Accounts() {
   };
 
   return (
-    <Flex flexDirection="column"
-    css={{
-      height: "625px",
-      boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
-      backgroundColor: "transparent",
-      "@media (max-width: 768px)": {
-        height: "100%",
-      },
-    }}
+    <Flex
+      flexDirection="column"
+      css={{
+        height: "625px",
+        boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
+        backgroundColor: "transparent",
+        "@media (max-width: 768px)": {
+          height: "100%",
+        },
+      }}
     >
       <Flex
         justifyContent="space-between"
@@ -138,6 +139,7 @@ export default function Accounts() {
             weight="semibold"
             css={{
               color: "$neutral900",
+              fontFamily: "tenon, sans-serif",
             }}
           >
             Mentions

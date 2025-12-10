@@ -127,21 +127,31 @@ export default function TravelCard() {
         </Flex>
       </Flex>
       <Flex gap="$2" justifyContent="space-between">
-        <Alert status="info" size="sm" css={{
-          width: "fit-content",
-          border: "1px solid $accent100 !important",
-        }}>
+        <Alert
+          status="info"
+          size="sm"
+          css={{
+            width: "fit-content",
+            border: "1px solid $accent100 !important",
+          }}
+        >
           <AlertDescription>Filling Fast 30/42</AlertDescription>
         </Alert>
         <Button
-            variant="outline"
-            size="md"
-            css={{
-              border: "2px solid $primary300 !important",
-            }}
-          >
-            Join camp
-          </Button>
+          variant="outline"
+          size="md"
+          css={{
+            border: "2px solid $primary300 !important",
+            transition: "all 0.3s ease-in-out",
+            "&:hover": {
+              backgroundColor: "$primary500 !important",
+              color: "$white900 !important",
+              borderColor: "$primary500 !important",
+            },
+          }}
+        >
+          Join camp
+        </Button>
       </Flex>
     </Flex>
   );

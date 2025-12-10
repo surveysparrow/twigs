@@ -1,19 +1,15 @@
 import "@/app/global.css";
 import "@/app/(home)/styles.css";
 import { RootProvider } from "fumadocs-ui/provider";
-import { DM_Sans } from "next/font/google";
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
 import StitchesRegistry from "./stitches-registry";
 import { headers } from "next/headers";
 
-const dmSans = DM_Sans({
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
   title: "Twigs - Component Library",
-  description: "Beautiful and customizable React UI for your applications by Surveysparrow",
+  description:
+    "Beautiful and customizable React UI for your applications by Surveysparrow",
   icons: {
     icon: "https://static.surveysparrow.com/site/twigs/twigs-favicon.png",
     shortcut: "https://static.surveysparrow.com/site/twigs/twigs-favicon.png",
@@ -21,7 +17,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Twigs - Component Library",
-    description: "Beautiful and customizable React UI for your applications by Surveysparrow",
+    description:
+      "Beautiful and customizable React UI for your applications by Surveysparrow",
     images: [
       {
         url: "https://static.surveysparrow.com/public-api/surveysparrow-developer-documenation.jpg",
@@ -36,7 +33,7 @@ export const metadata: Metadata = {
 
 export default async function Layout({ children }: { children: ReactNode }) {
   let isHomePage = false;
-  
+
   try {
     const headersList = await headers();
     const pathname = headersList.get("x-current-path") || "/";
@@ -47,17 +44,23 @@ export default async function Layout({ children }: { children: ReactNode }) {
     console.error("Failed to read headers:", error);
     isHomePage = false;
   }
-  
+
   return (
-    <html lang="en" className={`${dmSans.className} light`} suppressHydrationWarning>
-      <body className="flex flex-col min-h-screen">
+    <html lang="en" className="light" suppressHydrationWarning>
+      <head>
+        <link rel="stylesheet" href="https://use.typekit.net/qrc4pii.css" />
+      </head>
+      <body
+        className="flex flex-col min-h-screen"
+        style={{ fontFamily: "tenon, sans-serif" }}
+      >
         <StitchesRegistry isHomePage={isHomePage}>
           <RootProvider
             theme={{
               enabled: false,
             }}
           >
-              {children}
+            {children}
           </RootProvider>
         </StitchesRegistry>
       </body>

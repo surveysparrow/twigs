@@ -11,7 +11,7 @@ export default function CalendarBasic() {
         onChange={(value) => setValue(value as CalendarDate)}
         value={value}
         minValue={parseDate("2025-08-20")}
-        maxValue={parseDate("2025-09-15")}
+        maxValue={parseDate("2030-09-15")}
         size="md"
       />
     </Box>

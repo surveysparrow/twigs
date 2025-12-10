@@ -18,4 +18,3 @@ export function CheckboxSkeleton() {
     </div>
   );
 }
-
