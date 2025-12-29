@@ -63,7 +63,7 @@ export default function Dashboard() {
         boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
         background:
           "linear-gradient(299deg,rgba(255, 255, 255, 1) 90%, rgba(240, 255, 244, 1) 100%)",
-        height: "625px",
+        height: "655px",
         overflow: "scroll",
         "@media (max-width: 1024px)": {
           height: "100%",
@@ -688,7 +688,7 @@ export default function Dashboard() {
                   <Box>
                     <Image
                       src={logo.src}
-                      alt="campaign"
+                      alt="logo"
                       width={15}
                       height={15}
                       css={{
@@ -807,7 +807,7 @@ export default function Dashboard() {
                   <Box>
                     <Image
                       src={logo.src}
-                      alt="campaign"
+                      alt="logo"
                       width={15}
                       height={15}
                       css={{
@@ -941,7 +941,7 @@ export default function Dashboard() {
                   <Box>
                     <Image
                       src={logo.src}
-                      alt="campaign"
+                      alt="logo"
                       width={15}
                       height={15}
                       css={{

@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import {
-  Alert,
-  AlertDescription,
   Box,
   Flex,
   Switch,
@@ -11,52 +9,37 @@ import {
 export default function CookieCard() {
   const [checked, setChecked] = useState(false);
   const [checked2, setChecked2] = useState(true);
+  const [checked3, setChecked3] = useState(false);
 
   return (
     <Flex
       flexDirection="column"
-      gap="$6"
+      gap="$7"
       css={{
         padding: "$7",
+        paddingBottom: "$14",
         borderRadius: "$2xl",
         backgroundColor: "white",
         boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
       }}
     >
       <Flex alignItems="center" gap="$4">
-        <Box
-          css={{
-            backgroundColor: "$primary50",
-            border: "1px solid $primary100 !important",
-            borderRadius: "$round",
-            padding: "$3 $3",
-          }}
-        >
+        <Box>
           🍪
         </Box>
         <Text size="md" weight="medium">
           Cookie Settings
         </Text>
       </Flex>
-      <Flex flexDirection="row" justifyContent="space-between" gap="$2">
-        <Flex flexDirection="column" gap="$2">
+      <Flex flexDirection="row" justifyContent="space-between" gap="$2" css={{ "@media (max-width: 768px)": { gap: "0" } }}>
+        <Box>
           <Text size="md" weight="medium">
-            Strictly Necessary
+          Strictly necessary
           </Text>
-          <Text size="sm" css={{ color: "$neutral700" }}>
-            These cookies are essential for the website.
+          <Text size="xs" css={{ color: "$neutral500", "@media (max-width: 768px)": { width: "90%" } }}>
+          These cookies are required for the website to function properly, enabling core features.
           </Text>
-          <Alert
-            status="warning"
-            size="sm"
-            css={{
-              width: "fit-content",
-              border: "1px solid $warning200 !important",
-            }}
-          >
-            <AlertDescription>Turn on for better experience.</AlertDescription>
-          </Alert>
-        </Flex>
+        </Box>
         <Box>
           <Switch
             size="sm"
@@ -67,13 +50,13 @@ export default function CookieCard() {
           />
         </Box>
       </Flex>
-      <Flex flexDirection="row" justifyContent="space-between" gap="$2">
+      <Flex flexDirection="row" justifyContent="space-between" gap="$2" css={{ "@media (max-width: 768px)": { gap: "0" } }}>
         <Box>
           <Text size="md" weight="medium">
             Performance
           </Text>
-          <Text size="sm" css={{ color: "$neutral700" }}>
-            These cookies allow us to count traffic.
+          <Text size="xs" css={{ color: "$neutral500", "@media (max-width: 768px)": { width: "90%" } }}>
+          These cookies help us measure and analyze how users interact with the site, allowing us to improve speed.
           </Text>
         </Box>
         <Box>
@@ -82,6 +65,25 @@ export default function CookieCard() {
             checked={checked2}
             onChange={() => {
               setChecked2(!checked2);
+            }}
+          />
+        </Box>
+      </Flex>
+      <Flex flexDirection="row" justifyContent="space-between" gap="$2" css={{ "@media (max-width: 768px)": { gap: "0" } }}>
+        <Box>
+          <Text size="md" weight="medium">
+            Functional
+          </Text>
+          <Text size="xs" css={{ color: "$neutral500", "@media (max-width: 768px)": { width: "90%" } }}>
+          These cookies enable enhanced features like remembering your preferences, saved settings.
+          </Text>
+        </Box>
+        <Box>
+          <Switch
+            size="sm"
+            checked={checked3}
+            onChange={() => {
+              setChecked3(!checked3);
             }}
           />
         </Box>

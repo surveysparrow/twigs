@@ -16,6 +16,7 @@
     "fumadocs-core": "15.6.12",
     "fumadocs-mdx": "11.7.5",
     "fumadocs-ui": "15.6.12",
+    "gsap": "^3.14.2",
     "lucide-react": "^0.540.0",
     "next": "15.4.6",
     "react": "18.2.0",

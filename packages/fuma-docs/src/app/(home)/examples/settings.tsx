@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "@/assets/images/Frame 2.png";
+import logo from "@/assets/images/settings-logo.svg";
 import Image from "next/image";
 import {
   Avatar,
@@ -33,8 +33,8 @@ export default function Settings() {
       css={{
         borderRadius: "$2xl",
         boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
-        backgroundColor: "$neutral50",
-        height: "625px",
+        backgroundColor: "#F6F6F6",
+        height: "655px",
         "@media (max-width: 768px)": {
           height: "100%",
         },
@@ -46,8 +46,8 @@ export default function Settings() {
         alignItems="center"
         gap="$5"
         css={{
-          backgroundColor: "#F8F8F8",
-          padding: "$10 $6",
+          backgroundColor: "#F6F6F6",
+          padding: "$8 $6",
           borderRight: "1px solid $neutral100",
           borderTopLeftRadius: "$2xl",
           borderBottomLeftRadius: "$2xl",
@@ -157,7 +157,7 @@ export default function Settings() {
         flexDirection="column"
         gap="$7"
         css={{
-          backgroundColor: "$neutral50",
+          backgroundColor: "#F6F6F6",
           width: "20%",
           "@media (max-width: 768px)": {
             display: "none",
@@ -202,7 +202,7 @@ export default function Settings() {
             >
               <AccordionTrigger
                 css={{
-                  backgroundColor: "$neutral50 !important",
+                  backgroundColor: "#F6F6F6 !important",
                   cursor: "pointer",
                   textWrap: "nowrap",
                 }}
@@ -220,7 +220,7 @@ export default function Settings() {
               </AccordionTrigger>
               <AccordionContent
                 css={{
-                  backgroundColor: "$neutral50 !important",
+                  backgroundColor: "#F6F6F6 !important",
                   "&>div": {
                     padding: "0 !important",
                   },
@@ -264,7 +264,7 @@ export default function Settings() {
             >
               <AccordionTrigger
                 css={{
-                  backgroundColor: "$neutral50 !important",
+                  backgroundColor: "#F6F6F6 !important",
                   cursor: "pointer",
                 }}
                 className="!py-0"
@@ -281,7 +281,7 @@ export default function Settings() {
               </AccordionTrigger>
               <AccordionContent
                 css={{
-                  backgroundColor: "$neutral50 !important",
+                  backgroundColor: "#F6F6F6 !important",
                   "&>div": {
                     padding: "0 !important",
                   },
@@ -310,6 +310,19 @@ export default function Settings() {
                   }}
                 >
                   Branding
+                </Text>
+                <Text
+                  css={{
+                    padding: "$3 $4",
+                    color: "$neutral800",
+                    "&:hover": {
+                      backgroundColor: "$neutral100",
+                      cursor: "pointer",
+                      borderRadius: "$lg",
+                    },
+                  }}
+                >
+                  Marketing
                 </Text>
                 <Text
                   css={{
@@ -362,7 +375,7 @@ export default function Settings() {
             >
               <AccordionTrigger
                 css={{
-                  backgroundColor: "$neutral50 !important",
+                  backgroundColor: "#F6F6F6 !important",
                   cursor: "pointer",
                 }}
                 className="!py-0"
@@ -379,7 +392,7 @@ export default function Settings() {
               </AccordionTrigger>
               <AccordionContent
                 css={{
-                  backgroundColor: "$neutral50 !important",
+                  backgroundColor: "#F6F6F6 !important",
                   "&>div": {
                     padding: "0 !important",
                   },
@@ -423,7 +436,7 @@ export default function Settings() {
             >
               <AccordionTrigger
                 css={{
-                  backgroundColor: "$neutral50 !important",
+                  backgroundColor: "#F6F6F6 !important",
                   cursor: "pointer",
                 }}
                 className="!py-0"
@@ -440,7 +453,7 @@ export default function Settings() {
               </AccordionTrigger>
               <AccordionContent
                 css={{
-                  backgroundColor: "$neutral50 !important",
+                  backgroundColor: "#F6F6F6 !important",
                   "&>div": {
                     padding: "0 !important",
                   },
