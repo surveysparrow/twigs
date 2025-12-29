@@ -29,6 +29,7 @@
   position: relative !important;
   z-index: 1 !important;
   transition: none !important;
+  padding: 10px 20px !important;
 }
 
 .tabs-list-container {
@@ -45,7 +46,8 @@
   height: calc(100% - 4px);
   width: calc(var(--tab-selection-width) * 1px);
   background-color: var(--color-fd-background);
-  border-radius: 6px;
+  border-radius: 999px;
+  border: 1px solid #64748B26;
   box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   pointer-events: none;
   z-index: 0;
@@ -57,16 +59,6 @@
   -webkit-backface-visibility: hidden;
   transition: transform 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955),
     width 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955);
-}
-
-@media (max-width: 450px) {
-  .chat-div {
-    width: 95vw !important;
-  }
-  .accounts-div {
-    width: 98vw;
-    margin: 0 auto !important;
-  }
 }
 
 /* Play Button Gradient Shadow */
@@ -104,24 +96,18 @@
   .tabs-list::after {
     display: none;
   }
-
-  .Features-tab {
-    border-radius: 8px !important;
-  }
 }
 
 .Features-tab {
   display: flex !important;
-  flex-direction: row !important;
-  gap: 1rem !important;
-  border: none !important;
-  border-top-left-radius: 8px !important;
-  border-bottom-left-radius: 8px !important;
-  transition: none !important;
+  transition: all 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955);
   background-color: transparent !important;
   position: relative !important;
+  padding: 0px !important;
   z-index: 1 !important;
   justify-content: flex-start !important;
+  overflow-x: hidden !important;
+  border-bottom: none !important;
 }
 
 .Features-tab[data-state="active"] {
@@ -132,7 +118,6 @@
 
 .Features-tab[data-state="inactive"] {
   background-color: transparent !important;
-  border: none;
 }
 
 .footer {
@@ -177,6 +162,29 @@
   position: relative !important;
   opacity: 1 !important;
 }
+
+/* Features Tab Content - Smooth slide animation */
+[role="tabpanel"].Features-tab-content[data-state="inactive"] {
+  visibility: hidden !important;
+  position: absolute !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: auto !important;
+  height: auto !important;
+  transform: translateX(-20px) !important;
+}
+
+[role="tabpanel"].Features-tab-content[data-state="active"] {
+  visibility: visible !important;
+  position: relative !important;
+  opacity: 1 !important;
+  width: auto !important;
+  height: auto !important;
+  transform: translateX(0) !important;
+  animation: featureSlideIn 0.35s ease-out forwards;
+}
+
+
 
 /* Image Gallery Animation */
 .image-slide-container {
@@ -226,4 +234,113 @@
 .image-slide-container img {
   display: block;
   transition: opacity 0.2s ease-in-out;
+}
+
+.fancy-border{
+  height: 50px;
+  width: 100%;
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='76' height='42' viewBox='0 0 76 42'><defs><filter id='softShadow' x='-8%' y='-15%' width='116%' height='130%'><feDropShadow dx='0' dy='0.1' stdDeviation='0.45' floodColor='%23CBD5E1' floodOpacity='0.025'/></filter></defs><g><path d='M0 0 A34 34 0 0 0 76 0 L68 0 L0 0 Z' fill='%23F1F5F9' filter='url(%23softShadow)'/></g></svg>");
+
+  background-repeat: repeat-x;
+}
+
+.intellisense-tab{
+  background-color: transparent !important;
+  border-bottom: none !important;
+  font-weight: 400 !important;
+}
+.intellisense-tab[data-state="active"]{
+  border-bottom: none !important;
+  font-weight: 600 !important;
+  color: black !important;
+}
+
+.image-container-features {
+  background-color: #F1F5F9;
+  padding: 20px;
+  border:1px solid #E2E8F0;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+
+.intellisense-tabs-list-container {
+  position: relative !important;
+  --tab-selection-x: 0;
+  --tab-selection-width: 0;
+}
+
+.intellisense-tabs-list-container::after {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 0;
+  height: calc(100% - 9px);
+  width: calc(var(--tab-selection-width) * 1px);
+  background-color: var(--color-fd-background);
+  border-radius: 999px;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform, width;
+  transform: translateX(calc(var(--tab-selection-x) * 1px)) translateZ(0);
+  transform-origin: 0 0;
+  contain: layout style paint;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transition: transform 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955),
+    width 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+
+.intellisense-tabs {
+  background-color: transparent !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 6px !important;
+  border: 0 !important;
+  position: relative !important;
+  z-index: 1 !important;
+  transition: none !important;
+  padding: 10px 20px !important;
+  font-size: 18px !important;
+}
+
+@media (max-width: 768px) {
+  .intellisense-tabs {
+    font-size: 14px !important;
+  }
+}
+
+.intellisense-tabs[data-state="active"] {
+  background-color: transparent;
+  position: relative !important;
+  z-index: 1 !important;
+  color: black !important;
+  font-weight: 500 !important;
+}
+.intellisense-tabs[data-state="inactive"] {
+  font-weight: 400 !important;
+}
+
+.reveal-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.reveal-curtain {
+  position: absolute;
+  width: 100%;
+  inset: 0;
+  z-index: 2;
+  will-change: transform;
+}
+
+.reveal-content {
+  padding-top: 30px;
+  position: relative;
+  z-index: 1;
+  width: 100%;
 }

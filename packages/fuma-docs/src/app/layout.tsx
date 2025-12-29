@@ -5,6 +5,22 @@ import type { ReactNode } from "react";
 import type { Metadata } from "next";
 import StitchesRegistry from "./stitches-registry";
 import { headers } from "next/headers";
+import { DM_Sans, Libre_Baskerville } from "next/font/google";
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  style: ["normal", "italic"],
+  display: "swap",
+  variable: "--font-dm-sans",
+});
+const libreBaskerville = Libre_Baskerville({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+  display: "swap",
+  variable: "--font-libre-baskerville",
+});
 
 export const metadata: Metadata = {
   title: "Twigs - Component Library",
@@ -46,7 +62,11 @@ export default async function Layout({ children }: { children: ReactNode }) {
   }
 
   return (
-    <html lang="en" className="light" suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`light ${libreBaskerville.variable} ${dmSans.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         <link rel="stylesheet" href="https://use.typekit.net/qrc4pii.css" />
       </head>

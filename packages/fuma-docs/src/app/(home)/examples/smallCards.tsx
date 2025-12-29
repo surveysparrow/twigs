@@ -1,106 +1,83 @@
 import React from "react";
-import { Box, Flex, Text } from "@sparrowengg/twigs-react";
-import { ClapIcon } from "@sparrowengg/twigs-react-icons";
-
+import { Box, Flex, Text ,Image} from "@sparrowengg/twigs-react";
+import { ChevronUpFillIcon } from "@sparrowengg/twigs-react-icons";
+import movielogo from "@/assets/images/mv-logo.svg";
+import moviebg from "@/assets/images/mv-bg.svg";
 export default function SmallCards() {
   return (
     <Flex gap="$8" flexDirection="row">
       <Flex
         flexDirection="column"
-        justifyContent="between"
-        gap="$10"
+        gap="$16"
         css={{
           width: "50%",
           height: "100%",
-          padding: "$6",
+          padding: "$8",
           borderRadius: "$2xl",
-          boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
           backgroundColor: "white",
+          boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
+          "@media (max-width: 768px)": {
+            padding: "$5",
+          },
         }}
       >
+        <Text size="sm" weight="medium" css={{ color: "$neutral700" }}>INDIRECT SPEND</Text>
+        <Text size="sm" weight="medium" css={{ color: "$neutral900", fontSize: "$3xl" }}>$ 8740</Text>
         <Flex
-          flexDirection="row"
-          gap="$4"
-          justifyContent="between"
           alignItems="center"
+          gap="$4"
         >
-          <Text size="md" weight="medium">
-            Calories Burnt
-          </Text>
-          <Box
-            css={{
-              backgroundColor: "$primary50",
-              borderRadius: "$round",
-              padding: "$3 $3",
-              border: "1px solid $primary100 !important",
-            }}
+          <Text
+            size="xs"
+            css={{ color: "$primary500", paddingLeft: "$2", paddingRight: "$2", backgroundColor: "$primary50", borderRadius: "$sm", display: "flex", alignItems: "center", gap: "$1" }}
           >
-            🔥
-          </Box>
-        </Flex>
-        <Flex flexDirection="column" gap="$6">
-          <Text size="sm" css={{ color: "$neutral700" }}>
-            Processed: 12:00 PM
+            <ChevronUpFillIcon size={12} strokeWidth={1.2} />
+            23.4%
           </Text>
-          <Box>
-            <Text size="sm" css={{ color: "$neutral700" }}>
-              {" "}
-              <span style={{ color: "var(--twigs-colors-primary500)" }}>
-                1.4K
-              </span>{" "}
-              Calories
-            </Text>
-          </Box>
+          <Text
+            size="xs"
+            css={{ color: "$neutral700", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}
+          >
+            vs last quarter
+          </Text>
         </Flex>
       </Flex>
       <Flex
         flexDirection="column"
-        justifyContent="between"
-        gap="$7"
+        gap="$4"
+        alignItems="center"
         css={{
           width: "50%",
           height: "100%",
-          padding: "$6",
           borderRadius: "$2xl",
-          boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
           backgroundColor: "white",
+          boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
+          "@media (max-width: 768px)": {
+            gap: "$2",
+          },
         }}
       >
-        <Flex
-          flexDirection="row"
-          gap="$4"
-          justifyContent="between"
-          alignItems="center"
+        <Box    
+        css={{
+          height:"100%",
+          width:"100%",
+          position: "relative",
+        }}
         >
-          <Text size="md" weight="medium">
-            Distance Travelled
-          </Text>
-          <Box
-            css={{
-              backgroundColor: "$primary50",
-              borderRadius: "$round",
-              padding: "$3 $3",
-              border: "1px solid $primary100 !important",
-            }}
-          >
-            🏃
-          </Box>
-        </Flex>
-        <Flex flexDirection="row" gap="$4" alignItems="center">
-          <ClapIcon size={20} />
-          <Text size="sm" css={{ color: "$neutral700" }}>
-            Hurray!
-          </Text>
-        </Flex>
-        <Flex>
-          <Text size="sm" css={{ color: "$neutral700" }}>
-            {" "}
-            <span style={{ color: "var(--twigs-colors-primary500)" }}>
-              20
-            </span>{" "}
-            Kilometers
-          </Text>
-        </Flex>
+          <Image src={moviebg.src} alt="movie bg" css={{ borderTopLeftRadius: "$2xl", borderTopRightRadius: "$2xl" }} />
+          <Box css={{ padding: "$2 0", borderRadius: "$md", position: "absolute", bottom: -15, left: "35%", backgroundColor: "white",boxShadow: "0px 4px 6px 0px rgba(0, 0, 0, 0.1)" }}>
+          <Image src={movielogo.src} alt="movie logo" width={50} height={50} />
+        </Box>
+        </Box>
+        <Text size="sm" weight="medium" css={{ color: "$neutral900", marginTop: "$6"}}>BookMyShow</Text>
+        <Text size="xs" css={{ 
+          color: "$neutral700", textAlign: "center", paddingLeft: "$4", paddingRight: "$4", paddingBottom: "$3",
+          "@media (max-width: 768px)": {
+            paddingLeft: "$3",
+            paddingRight: "$3",
+            paddingBottom: "$2",
+          },
+        }}>Coupon for 2 free tickets along with snacks combo.</Text>
       </Flex>
     </Flex>
   );

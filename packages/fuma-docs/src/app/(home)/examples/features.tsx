@@ -5,58 +5,73 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger,
-  Flex,
-  Box,
+  Slider,
+  SliderTrack,
+  SliderRange,
+  SliderThumb,
 } from "@sparrowengg/twigs-react";
 import Image from "next/image";
-import { useState, useRef, useEffect } from "react";
-import accessibleImage from "@/assets/images/sample.png";
-import extensibleImage from "@/assets/images/sample2.png";
-import themableImage from "@/assets/images/sample3.png";
-import accessibleIcon from "@/assets/images/acess-violet.png";
-import extensibleIcon from "@/assets/images/extensible-violet.png";
-import themableIcon from "@/assets/images/theme-violet.png";
+import { useState, useRef, useEffect, useCallback } from "react";
+import accessibleImage from "@/assets/images/access-n.svg";
+import extensibleImage from "@/assets/images/extend-n.svg";
+import themableImage from "@/assets/images/theme-n.svg";
+
+// Configuration constants
+const CYCLE_DURATION = 9000; // 9 seconds per tab
+const UPDATE_INTERVAL = 30; // Update every 30ms for smooth animation
+
+// Tab configuration
+const FEATURES = [
+  { id: "accessible" },
+  { id: "extensible" },
+  { id: "themeable" },
+] as const;
 
 export default function Features() {
   const [activeTab, setActiveTab] = useState("accessible");
+  const [sliderProgress, setSliderProgress] = useState(0);
   const [indicatorStyle, setIndicatorStyle] = useState({
     top: 0,
-    height: 0,
-    opacity: 0,
+    height: 177,
+    opacity: 1,
+    borderTopLeftRadius: "8px",
+    borderBottomLeftRadius: "0px",
+    borderTopRightRadius: "0px",
   });
   const tabsListRef = useRef<HTMLDivElement>(null);
 
-  const features = [
-    {
-      id: "accessible",
-      title: "Accessible",
-      description:
-        "Embrace inclusivity – Twigs' components ensure every user can navigate seamlessly, better user experiences.",
-      image: accessibleImage,
-      icon: accessibleIcon,
-    },
-    {
-      id: "extensible",
-      title: "Extensible",
-      description:
-        "Unleash creativity – We empower you with unparalleled customization, enabling tailored designs and layouts.",
-      image: extensibleImage,
-      icon: extensibleIcon,
-    },
-    {
-      id: "themeable",
-      title: "Themeable",
-      description:
-        "Elevate aesthetics – Twigs' themeability empowers you to create visually stunning and consistent interfaces.",
-      image: themableImage,
-      icon: themableIcon,
-    },
-  ];
+  // Auto-cycle functionality
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSliderProgress((prev) => {
+        const increment = (100 / CYCLE_DURATION) * UPDATE_INTERVAL;
+        const newValue = prev + increment;
+
+        if (newValue >= 100) {
+          // Move to next tab
+          const currentIndex = FEATURES.findIndex((f) => f.id === activeTab);
+          const nextIndex = (currentIndex + 1) % FEATURES.length;
+          setActiveTab(FEATURES[nextIndex].id);
+          return 0; // Reset progress
+        }
+
+        return newValue;
+      });
+    }, UPDATE_INTERVAL);
+
+    return () => clearInterval(interval);
+  }, [activeTab]);
+
+  // Handle manual tab change - resets progress
+  const handleTabChange = useCallback((value: string) => {
+    setActiveTab(value);
+    setSliderProgress(0);
+  }, []);
 
   const updateIndicator = () => {
     const list = tabsListRef.current;
     if (!list) {
-      setIndicatorStyle({ top: 0, height: 0, opacity: 0 });
+      setIndicatorStyle({ top: 0, height: 0, opacity: 0, borderTopLeftRadius: "0px", borderBottomLeftRadius: "0px", borderTopRightRadius: "0px" });
       return;
     }
 
@@ -64,7 +79,7 @@ export default function Features() {
       '[role="tablist"]'
     ) as HTMLElement;
     if (!tabsListElement) {
-      setIndicatorStyle({ top: 0, height: 0, opacity: 0 });
+      setIndicatorStyle({ top: 0, height: 0, opacity: 0, borderTopLeftRadius: "0px", borderBottomLeftRadius: "0px", borderTopRightRadius: "0px" });
       return;
     }
 
@@ -73,14 +88,26 @@ export default function Features() {
     ) as HTMLElement;
 
     if (!activeButton) {
-      setIndicatorStyle({ top: 0, height: 0, opacity: 0 });
+      setIndicatorStyle({ top: 0, height: 0, opacity: 0, borderTopLeftRadius: "0px", borderBottomLeftRadius: "0px", borderTopRightRadius: "0px" });
       return;
     }
 
-    const top = activeButton.offsetTop;
+    const top = activeButton.offsetTop - 1;
     const height = activeButton.offsetHeight;
 
-    setIndicatorStyle({ top, height, opacity: 1 });
+    // Set border radius based on active tab position
+    const isFirstTab = activeTab === "accessible";
+    const isThirdTab = activeTab === "themeable";
+    const isMobile = window.innerWidth < 768;
+
+    setIndicatorStyle({ 
+      top, 
+      height, 
+      opacity: 1,
+      borderTopLeftRadius: isFirstTab ? "8px" : "0px",
+      borderBottomLeftRadius: isThirdTab ? "8px" : "0px",
+      borderTopRightRadius: isMobile && isFirstTab ? "8px" : "0px",
+    });
   };
 
   useEffect(() => {
@@ -103,92 +130,196 @@ export default function Features() {
       window.removeEventListener("resize", handleResize);
       clearTimeout(timer);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTab]);
+  
+
+  const RenderedThumb = () => {
+    return <SliderThumb css={{ display: "none" }} />;
+  };
+
+  const RenderedRange = () => {
+    return <SliderRange css={{ backgroundColor: "#818CF8",borderTopLeftRadius: "0px",borderBottomLeftRadius: "0px", height: "4px !important" }} />;
+  };
+
+  const RenderedTrack = ({ children }: { children: React.ReactNode }) => {
+    return (
+      <SliderTrack
+        css={{
+          width: "100%",
+          backgroundColor: "transparent",
+          position: "absolute",
+          borderRadius: "0px",
+          height: "4px",
+
+        }}
+      >
+        {children}
+      </SliderTrack>
+    );
+  };
 
   return (
+    
     <>
-      <div className="flex flex-col gap-4 lg:w-1/2 md:w-2/4 mx-6">
-        <h2 className="text-3xl md:text-4xl mb-4 text-neutral-900 font-medium text-center">
-          Designed with{" "}
-          <span className="text-fd-primary border-l-2 !border-fd-primary bg-fd-primary/10 px-2 rounded-r-md">
-            Purpose
-          </span>
-          , built for scale
+      <div className="mx-6">
+      <h2 className="text-slate-900 text-[30px] lg:text-[48px]/[56px] font-bold text-center mb-4 mt-10 lg:mt-25">Designed with purpose, 
+        <span className="text-slate-900 text-[30px] lg:text-[46px] italic font-normal" style={{
+          fontFamily: "libre baskerville",
+        }}>{" "}built for scale</span>
         </h2>
-        <p className="text-gray-600 leading-relaxed text-center">
-          Every component is built with accessibility-first principles and
-          complete customization in mind. Adapt styles, extend functionality,
-          and scale your product effortlessly.
+        <p className="text-slate-500 text-[16px] lg:text-[20px]/[28px] w-full lg:w-[806px] mx-auto text-center font-[300] tracking-[-0.08px] mb-14">
+        Every component is built with accessibility-first principles and complete customization in mind. Adapt styles, extend functionality, and scale your product effortlessly.
         </p>
       </div>
 
-      <div className="mx-6">
-        <Tabs
+      <div className="w-full lg:w-[1044px] mx-auto px-6">
+      <Tabs
           defaultValue="accessible"
           value={activeTab}
-          onValueChange={(value: string) => {
-            setActiveTab(value);
-          }}
+          onValueChange={handleTabChange}
           orientation="vertical"
           css={{
             flexDirection: "row",
             "@media (max-width: 1024px)": {
               flexDirection: "column",
+              height: "800px !important",
+            },
+            "@media (max-width: 768px)": {
+              height: "700px !important",
             },
           }}
-          className="gap-7"
         >
           <div ref={tabsListRef} className="relative">
             <TabsList
-              className="flex flex-col p-1 gap-1 rounded-lg h-fit max-w-155 lg:w-125"
+              className="flex flex-col rounded-lg lg:w-120 h-fit"
               css={{
-                backgroundColor: "#F4F5F8",
                 position: "relative",
               }}
             >
-              {features.map((feature) => (
-                <TabsTrigger
-                  key={feature.id}
-                  value={feature.id}
-                  className="Features-tab flex-col !p-4"
-                  css={{
-                    alignItems: "start",
-                  }}
-                >
-                  <Flex gap="$3" css={{ marginBottom: "$2" }}>
-                    <Box
-                      css={{
-                        width: "$13",
-                        height: "$13",
-                        borderRadius: "$lg",
-                        padding: "$4",
-                        // backgroundColor: "$accent100"
-                      }}
-                    >
-                      <Image
-                        src={feature.icon.src}
-                        alt={feature.title}
-                        width={64}
-                        height={64}
-                        unoptimized
-                        className="w-full h-full object-contain"
-                      />
-                    </Box>
-                  </Flex>
-                  <Flex flexDirection="column" gap="$1">
-                    <Text
-                      size="md"
-                      weight="bold"
-                      css={{ color: "$neutral900" }}
-                    >
-                      {feature.title}
-                    </Text>
-                    <Text size="sm" css={{ color: "$neutral700" }}>
-                      {feature.description}
-                    </Text>
-                  </Flex>
-                </TabsTrigger>
-              ))}
+              <TabsTrigger value="accessible" className="Features-tab flex !flex-col gap-2"
+              css={{
+                alignItems: "flex-start !important",
+                  borderTop: "1px solid #E2E8F0",
+                  borderLeft: "1px solid #E2E8F0",
+                  borderBottom: "1px solid #E2E8F0 !important",
+                  borderTopLeftRadius: "8px !important",
+                  "&[data-state='active']": {
+                    borderColor: "transparent !important",
+                  },
+                  transition: "border-color 0.3s ease-in-out",
+                  "@media (max-width: 768px)": {
+                    borderRight: "1px solid #E2E8F0",
+                    borderTopRightRadius: "8px !important",
+                  },
+              }}
+              >
+                <div className="flex flex-col gap-1 px-[16px] py-[20px] lg:px-[24px] lg:py-[20px]">
+                  <Text size="lg" weight="bold" className="!text-slate-900 !text-[24px]/[32px]">
+                    Accessible
+                  </Text>
+                  <Text size="sm" 
+                  className="!text-slate-500 !text-[14px] lg:!text-[18px]/[28px] !font-normal">
+                  Embrace inclusivity – Twigs&apos; components ensure every user can navigate seamlessly, better user experiences.
+                  </Text>
+                </div>
+                  {activeTab === "accessible" ? (
+                    <Slider
+                    components={{
+                      Thumb: RenderedThumb,
+                      Track: RenderedTrack,
+                      Range: RenderedRange,
+                    }}
+                    className="!h-[4px]"
+                    value={[sliderProgress]}
+                    max={100}
+                    step={1}
+                    size="md"
+                  />
+                  ): <div className="!h-[4px]"></div>}
+              </TabsTrigger>
+              <TabsTrigger value="extensible" className="Features-tab flex !flex-col gap-2"
+              css={{
+                alignItems: "flex-start !important",
+                  borderLeft: "1px solid #E2E8F0",
+                  borderBottom: "1px solid #E2E8F0 !important",
+                  "&[data-state='active']": {
+                    borderColor: "transparent !important",
+                  },
+                  transition: "border-color 0.3s ease-in-out",
+                  "@media (max-width: 768px)": {
+                    borderRight: "1px solid #E2E8F0",
+                  },
+              }}
+              >
+                <div className="flex flex-col gap-1 px-[16px] py-[20px] lg:px-[24px] lg:py-[20px]">
+                  <Text size="lg" weight="bold" className="!text-slate-900 !text-[24px]/[32px]">
+                    Extensible
+                  </Text>
+                  <Text
+                    size="sm"
+                    className="!text-slate-500 !text-[14px] lg:!text-[18px]/[28px] !font-normal"
+                  >
+                    Unleash creativity – We empower you with unparalleled customization, enabling tailored designs and layouts.
+                  </Text>
+                  </div>
+                  {activeTab === "extensible" ? (
+                    <Slider
+                    components={{
+                      Thumb: RenderedThumb,
+                      Track: RenderedTrack,
+                      Range: RenderedRange,
+                    }}
+                    className="!h-[4px]"
+                    value={[sliderProgress]}
+                    max={100}
+                    step={1}
+                    size="md"
+                    />
+                    ): <div className="!h-[4px]"></div>}
+              </TabsTrigger>
+              <TabsTrigger value="themeable" className="Features-tab flex !flex-col gap-2"
+              css={{
+                  alignItems: "flex-start !important",
+                  borderLeft: "1px solid #E2E8F0",
+                  borderBottom: "1px solid #E2E8F0 !important",
+                  borderBottomLeftRadius: "8px !important",
+                  "&[data-state='active']": {
+                    borderColor: "transparent !important",
+                  },
+                  transition: "border-color 0.3s ease-in-out",
+                  "@media (max-width: 768px)": {
+                    borderRight: "1px solid #E2E8F0",
+                    borderBottomLeftRadius: "0px !important",
+                  },
+              }}
+              >
+                <div className="flex flex-col gap-1 px-[16px] py-[20px] lg:px-[24px] lg:py-[20px]">
+                  <Text size="lg" weight="bold" className="!text-slate-900 !text-[24px]/[32px]">
+                    Themeable
+                  </Text>
+                  <Text
+                    size="sm"
+                    className="!text-slate-500 !text-[14px] lg:!text-[18px]/[28px] !font-normal"
+                  >
+                    Elevate aesthetics – Twigs&apos; themeability empowers you to create visually stunning and consistent interfaces.
+                  </Text>
+                  </div>
+                  {activeTab === "themeable" ? (
+                    <Slider
+                    components={{
+                      Thumb: RenderedThumb,
+                      Track: RenderedTrack,
+                      Range: RenderedRange,
+                    }}
+                    className="!h-[4px]"
+                    value={[sliderProgress]}
+                    max={100}
+                    step={1}
+                    size="md"
+                  />
+                  ): <div className="!h-[4px]"></div>}
+              </TabsTrigger>
               <div
                 className="Features-tabs-indicator"
                 style={{
@@ -196,61 +327,60 @@ export default function Features() {
                   top: `${indicatorStyle.top}px`,
                   height: `${indicatorStyle.height}px`,
                   opacity: indicatorStyle.opacity,
-                  left: "4px",
-                  right: "4px",
-                  // background: "linear-gradient(137deg, rgba(255, 255, 255, 1) 58%, rgb(242, 239, 255))",
+                  borderTopLeftRadius: indicatorStyle.borderTopLeftRadius,
+                  borderBottomLeftRadius: indicatorStyle.borderBottomLeftRadius,
+                  borderTopRightRadius: indicatorStyle.borderTopRightRadius,
+                  left: "0.5px",
+                  right: "0px",
                   backgroundColor: "white",
-                  borderRadius: "8px",
-                  boxShadow: "rgba(149, 157, 165, 0.2) 0px 2px 2px",
+                  boxShadow: "rgba(149, 157, 165, 0.2) 0px 3px 4px",
                   transition:
                     "top 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955), height 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955), opacity 0.2s ease",
                   pointerEvents: "none",
                   zIndex: 0,
-                  // borderRight: "2px solid var(--twigs-colors-accent300)",
                 }}
               />
             </TabsList>
           </div>
-
-          {features.map((feature) => (
-            <TabsContent
-              key={feature.id}
-              value={feature.id}
-              className="rounded-lg !p-0 relative w-fit"
-            >
-              <div className="relative p-0.5 rounded-lg bg-black/90 min-w-[342px]">
-                <div className="p-2 flex items-center gap-2">
-                  <div className="flex items-center gap-1">
-                    <div className="size-2.5 rounded-full bg-red-500" />
-                    <div className="size-2.5 rounded-full bg-yellow-500" />
-                    <div className="size-2.5 rounded-full bg-green-500" />
-                  </div>
-                  <Text
-                    size="xs"
-                    className="px-3 py-0.5 rounded-lg w-50"
-                    css={{
-                      color: "$neutral500",
-                      backgroundColor: "$secondary900",
-                    }}
-                  >
-                    {feature.title}
-                  </Text>
-                </div>
-                <div className="relative w-full lg:w-[620px] h-auto overflow-hidden rounded-lg min-h-[161px]">
-                  <div key={feature.id} className="image-slide-container">
-                    <Image
-                      src={feature.image.src}
-                      alt={feature.title}
-                      width={620}
-                      height={310}
-                      unoptimized
-                      className="rounded-lg w-full h-auto max-h-[310px]"
-                    />
-                  </div>
+          <TabsContent value="accessible" className="Features-tab-content rounded-lg !p-0 relative w-fit">
+          <div className="p-5 lg:p-10 rounded-tr-none lg:rounded-tr-lg rounded-b-lg lg:rounded-bl-none rounded-r-lg bg-linear-to-r from-[#86BFF5] to-[#27579B] w-full h-full">
+              <div className="relative w-full h-full overflow-hidden rounded-lg flex items-center justify-center">
+                <div className="image-slide-container">
+                  <Image
+                    src={accessibleImage}
+                    alt="Accessible"
+                    className="rounded-lg w-full lg:w-[620px] h-full "
+                  />
                 </div>
               </div>
-            </TabsContent>
-          ))}
+            </div>
+          </TabsContent>
+          <TabsContent value="extensible" className="Features-tab-content rounded-lg !p-0 w-fit">
+            <div className="p-5 lg:p-10 rounded-tr-none lg:rounded-tr-lg rounded-b-lg lg:rounded-bl-none rounded-r-lg bg-linear-to-r from-[#E9CFAE] to-[#AC8859] w-full h-full">
+              <div className="relative w-full h-full overflow-hidden rounded-lg flex items-center justify-center">
+                <div className="image-slide-container">
+                  <Image
+                    src={extensibleImage}
+                    alt="Extensible"
+                    className="rounded-lg w-full lg:w-[620px] h-full"
+                  />
+                </div>
+              </div>
+            </div>
+          </TabsContent>
+          <TabsContent value="themeable" className="Features-tab-content rounded-lg !p-0 w-fit">
+            <div className="p-5 lg:p-10 rounded-tr-none lg:rounded-tr-lg rounded-b-lg lg:rounded-bl-none rounded-r-lg bg-linear-to-r from-[#FFCB70] to-[#FB7D32] w-full h-full">
+              <div className="relative w-full h-full overflow-hidden rounded-lg flex items-center justify-center">
+                <div className="image-slide-container"> 
+                  <Image
+                    src={themableImage}
+                    alt="Themeable"
+                    className="rounded-lg w-full lg:w-[620px] h-full"
+                  />
+                </div>
+              </div>
+            </div>
+          </TabsContent>
         </Tabs>
       </div>
     </>

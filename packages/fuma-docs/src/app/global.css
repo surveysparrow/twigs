@@ -29,13 +29,28 @@ header#nd-subnav > div > div:last-child {
   gap: 0;
 }
 
+main#nd-home-layout {
+  padding-top: 0;
+}
+
 header#nd-nav {
-  border-bottom: 1px solid var(--color-fd-border);
+  border-bottom: none !important;
+  background-color: transparent;
+  backdrop-filter: none;
   min-height: 64px;
+  position: absolute !important;
   @media (max-width: 768px) {
     min-height: auto;
   }
 }
+@media (max-width: 768px) {
+  header#nd-nav {
+    background-color: #F1F5F9 !important;
+    backdrop-filter: blur(30px) !important;
+    border-bottom: 1px solid #E2E8F0 !important;
+  }
+}
+
 header#nd-nav > div {
   -webkit-font-smoothing: antialiased;
   font-weight: normal;
@@ -56,7 +71,25 @@ header#nd-nav > div {
 
 header#nd-nav > div > nav > div > button > div > kbd {
   border: 1px solid var(--color-fd-border);
+  background-color: transparent;
 }
+
+header#nd-nav > div > nav > div > button {
+  background-color: transparent;
+  cursor: pointer;
+}
+
+header#nd-nav > div > nav > div > button:hover {
+  background-color: oklch(92.9% 0.013 255.508) !important;
+  border-color: oklch(86.9% 0.022 252.894) !important;
+}
+
+
+
+header#nd-nav > div > nav > div > div > li > a:hover {
+  background-color: oklch(92.9% 0.013 255.508) !important;
+}
+
 
 @media (min-width: 1024px) {
   header#nd-nav div nav {
