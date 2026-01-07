@@ -24,7 +24,7 @@ const HoverImage = ({ src, alt }: HoverImageProps) => {
         alt={alt}
         className="rounded-b-2xl md:rounded-b-none rounded-t-2xl h-full transition-transform duration-300 p-3 md:p-0 bg-[#FFF6D3] object-cover"
       />
-      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center rounded-t-2xl">
+      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-all duration-300 flex items-center justify-center rounded-t-2xl">
         <div className="flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <span className="text-white text-xl font-semibold tracking-tight">
             Go to Playground
@@ -40,7 +40,7 @@ const HoverImage = ({ src, alt }: HoverImageProps) => {
 
 export default function Playground() {
     return (
-      <div className="bg-[#FFF6D3] mx-6 lg:mx-20 rounded-2xl  pt-10">
+      <div className="bg-[#FFF6D3] mx-6 lg:mx-20 2xl:mx-0 rounded-2xl  pt-10">
         <div className="flex flex-col gap-4 max-w-[550px] md:mx-auto mx-6 mb-5 lg:mb-10">
           <h2 className="text-[30px] lg:text-[48px]/[56px] font-[800] text-center text-neutral-900 tracking-[-1.2px]">
             Twigs Playground

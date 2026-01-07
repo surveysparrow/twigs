@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   Image,
   Text,
-  Chip,
   Flex,
   Box,
   TabsList,
@@ -10,10 +9,12 @@ import {
   TabsContent,
   TabsTrigger,
   Switch,
+  Chip,
 } from "@sparrowengg/twigs-react";
 import {InfoIcon} from "@sparrowengg/twigs-react-icons";
 import cardlogo from "@/assets/images/card-logo.svg";
 import cardbg from "@/assets/images/Union.svg"
+import pointsIcon from "@/assets/images/points.png";
 
 export default function ProductCard() {
   const [checked, setChecked] = useState(false);
@@ -42,11 +43,11 @@ export default function ProductCard() {
           position: "relative",
         }}
       >
-        <Box css={{ position: "absolute", bottom: -25, left: 18 }}>
+        <Box css={{ position: "absolute", bottom: -45, left: 18 }}>
           <Image
             src={cardlogo.src}
             alt="card logo"
-            width={100}
+            width={177}
             height={100}
           />
         </Box>
@@ -54,23 +55,23 @@ export default function ProductCard() {
           <Image
             src={cardbg.src}
             alt="card background"
-            width={170}
-            height={90}
+            width={155}
+            height={100}
           />
         </Box>
       </Box>
       <Flex
         gap="$4"
         alignItems="center"
-        css={{ paddingLeft: "$8", paddingRight: "$8", marginTop: "$15" }}
+        css={{ paddingLeft: "$8", paddingRight: "$8", marginTop: "$30" }}
       >
-        <Text size="md" weight="medium" css={{ color: "$neutral900" }}>
+        <Text size="lg" weight="medium" css={{ color: "$neutral900" }}>
           Airbnb Credits
         </Text>
-        <Chip>500 pts</Chip>
+        <Chip size="sm" color="default" css={{ borderRadius: "100px", backgroundColor: "$black800", color: "$white900", fontSize: "$xs" }}> <Image src={pointsIcon.src} alt="points" width={16} height={16} style={{ marginRight: "4px", color: "white" }} /> 500 pts</Chip>
       </Flex>
       <Text
-        css={{ color: "$neutral700", paddingLeft: "$8", paddingRight: "$8" }}
+        css={{ color: "$neutral800", paddingLeft: "$8", paddingRight: "$8", paddingBottom: "$5" }}
       >
         Give Airbnb—amazing places to stay and things to do, all around the
         world. Give the perfect getaway.
@@ -84,12 +85,12 @@ export default function ProductCard() {
             paddingRight: "$8",
           }}
         >
-          <TabsTrigger value="denominations">Denominations</TabsTrigger>
-          <TabsTrigger value="steps-to-redeem">Redeem</TabsTrigger>
+          <TabsTrigger value="denominations" css={{ fontSize: "$sm", fontWeight: "$5", fontFamily: "var(--font-dm-sans) !important" }}>Denominations</TabsTrigger>
+          <TabsTrigger value="steps-to-redeem" css={{ fontSize: "$sm", fontWeight: "$5", fontFamily: "var(--font-dm-sans) !important", textWrap: "nowrap" }}>Steps to Redeem</TabsTrigger>
         </TabsList>
 
         <TabsContent value="denominations" css={{ padding: "0 !important" }}>
-          <Flex justifyContent="space-between" alignItems="center" css={{borderBottom: "1px solid $neutral200", padding: "$4 $8" }} >
+          <Flex justifyContent="space-between" alignItems="center" css={{borderBottom: "1px solid $neutral200", padding: "$6 $8" }} >
             <Flex alignItems="center" gap="$6">
               <Switch
                 size="sm"
@@ -98,7 +99,7 @@ export default function ProductCard() {
                   setChecked(!checked);
                 }}
               />
-              <Text size="md" weight="medium" css={{ color: "$neutral800" }}>$5000</Text>
+              <Text size="md" weight="bold" css={{ color: "#6A6A6A", lineHeight: "24px" }}>$5000</Text>
             </Flex>
             <Flex alignItems="center" gap="$2" justifyContent="space-between"
             css={{
@@ -108,11 +109,11 @@ export default function ProductCard() {
               width: "50%",
             }}
             >
-              <Text css={{ color: "$neutral900" }}>10000</Text>
+              <Text css={{ color: "$neutral900" }}>1000</Text>
               <Text css={{ color: "$neutral500" }}>Points</Text>
             </Flex>
           </Flex>
-          <Flex justifyContent="space-between" alignItems="center" css={{borderBottom: "1px solid $neutral200", padding: "$4 $8" }} >
+          <Flex justifyContent="space-between" alignItems="center" css={{borderBottom: "1px solid $neutral200", padding: "$6 $8" }} >
             <Flex alignItems="center" gap="$6">
               <Switch
                 size="sm"
@@ -121,7 +122,7 @@ export default function ProductCard() {
                   setChecked2(!checked2);
                 }}
               />
-              <Text size="md" weight="medium" css={{ color: "$neutral800" }}>$5000</Text>
+              <Text size="md" weight="bold" css={{ color: "#6A6A6A", lineHeight: "24px" }}>$2000</Text>
             </Flex>
             <Flex alignItems="center" gap="$2" justifyContent="space-between"
             css={{
@@ -131,18 +132,18 @@ export default function ProductCard() {
               width: "50%",
             }}
             >
-              <Text css={{ color: "$neutral900" }}>10000</Text>
+              <Text css={{ color: "$neutral900" }}>1000</Text>
               <Text css={{ color: "$neutral500" }}>Points</Text>
             </Flex>
           </Flex>
-          <Flex gap="$2" css={{ padding: "$8" }}>
+          <Flex gap="$2" css={{ padding: "$12 $8" }}>
             <InfoIcon size={26} style={{ width: "86px" }}/>
             <Text css={{ color: "$neutral500" }}>Disclaimer: Company name is not a sponsor of the rewards or otherwise affiliated with the reward program. Please visit amazon.com/gc-legal for more terms and conditions. </Text>
           </Flex>
         </TabsContent>
 
         <TabsContent value="steps-to-redeem" css={{ padding: "0 !important" }}>
-          <Flex flexDirection="column" gap="$7" css={{ padding: "$8", paddingTop: "$9" }}>
+          <Flex flexDirection="column" gap="$5" css={{ padding: "$8", paddingTop: "$11", "@media (min-width: 1600px)": { paddingBottom: "$12", gap: "$7" } }}>
             <Flex gap="$6">
               <Text css={{ color: "$neutral900", padding: "$1 $4", border:"1px solid $neutral200", borderRadius: "$round", height:"fit-content" }}>1</Text>
               <Text>Add your Amazon.com account to your Amazon Rewards account.</Text>
@@ -154,6 +155,10 @@ export default function ProductCard() {
             <Flex gap="$6">
               <Text css={{ color: "$neutral900", padding: "$1 $4", border:"1px solid $neutral200", borderRadius: "$round", height:"fit-content" }}>3</Text>
               <Text>Click the “Redeem” button. You will receive an email with your gift card code.</Text>
+            </Flex>
+            <Flex gap="$6">
+              <Text css={{ color: "$neutral900", padding: "$1 $4", border:"1px solid $neutral200", borderRadius: "$round", height:"fit-content" }}>4</Text>
+              <Text>You will receive an email with your gift card</Text>
             </Flex>
           </Flex>
         </TabsContent>

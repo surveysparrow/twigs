@@ -5,20 +5,22 @@ import {
   RadioGroup,
   Radio,
   Select,
+  Chip,
 } from "@sparrowengg/twigs-react";
 import React, { useState } from "react";
 import Image from "next/image";
 import emailIcon from "@/assets/images/email.svg";
 import userIcon from "@/assets/images/user-heart-health.svg";
+import { EMAIL_AGENT_OPTIONS } from "../constants";
 
 export default function EmailAgent() {
   const [selectedValue, setSelectedValue] = useState<string | undefined>(
     undefined
   );
-  const options = [
-    { value: "SurveySparrow Support Squad", label: "SurveySparrow Support Squad" },
-    { value: "SurveySparrow Marketing Squad", label: "SurveySparrow Marketing Squad" },
-  ];
+  const [selectedTone, setSelectedTone] = useState<string | undefined>(
+    "1"
+  );
+
   return (
     <Flex
       flexDirection="column"
@@ -31,55 +33,74 @@ export default function EmailAgent() {
         borderRadius: "$2xl",
         boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
       }}>
-        <Flex gap="$4" css={{ paddingBottom: "$12" }}>
+        <Flex gap="$4" alignItems="center" css={{ paddingBottom: "$12" }}>
             <Image src={emailIcon.src} alt="email icon" width={40} height={40} />
           <Flex flexDirection="column">
-            <Text size="md" weight="medium">Email Agent</Text>
-            <Text size="sm" css={{ color: "$neutral700" }}>Escalation: SurveySparrow Support Squad</Text>
+            <Text size="sm" weight="medium">Email Agent</Text>
+            <Text size="xs" css={{ color: "$neutral700" }}>Escalation: SurveySparrow Support Squad</Text>
           </Flex>
         </Flex>
         <Flex flexDirection="column" gap="$2" css={{ paddingBottom: "$16" }}>
-            <Text size="md" weight="medium" css={{ color: "$neutral800" }}>Tone of voice</Text>
+            <Text size="xs" weight="medium" css={{ color: "$neutral800" }}>Tone of voice</Text>
           <Flex justifyContent="space-between" gap="$2"
           css={{
             "@media (max-width: 768px)": {
               justifyContent: "start",
             },
+            overflowX: "scroll",
+            scrollbarWidth: "none",
           }}
           >
-            <Button variant="ghost" color="default"
+            <Chip color="secondary"
+            variant="outline"
+            selectable
+            size="lg"
+            active={selectedTone === "1"}
+            onActiveStateChange={(active: boolean) => setSelectedTone(active ? "1" : undefined)}
             css={{
-              padding: "$7 $8",
-              borderRadius: "$2xl",
-              border: "1px solid $secondary400",
-              backgroundColor: "$neutral50",
-              textWrap: "nowrap",
+              borderRadius: "99px",
+              backgroundColor: selectedTone === "1" ? "$neutral50 !important" : null,
+              borderColor: selectedTone === "1" ? "$secondary400 !important" : null,
             }}
-            >😎 Casual</Button>
-            <Button variant="ghost" color="default"
+            > <Text css={{ padding: "6px", "@media (min-width: 1600px)": {
+              padding: "12px",
+            }, }}>😎Casual</Text>  </Chip>
+            <Chip color="secondary"
+            variant="outline"
+            selectable
+            size="lg"
+            active={selectedTone === "2"}
+            onActiveStateChange={(active: boolean) => setSelectedTone(active ? "2" : undefined)}
             css={{
-              padding: "$7 $8",
-              borderRadius: "$2xl",
-              border: "1px solid $secondary100",
-              textWrap: "nowrap",
+              borderRadius: "99px",
+              backgroundColor: selectedTone === "2" ? "$neutral50 !important" : null,
+              borderColor: selectedTone === "2" ? "$secondary400 !important" : null,
             }}
-            >👔 Professional </Button>
-            <Button variant="ghost" color="default"
+            > <Text css={{ padding: "6px", "@media (min-width: 1600px)": {
+              padding: "12px",
+            }, }}>👔 Professional</Text>  </Chip>
+            <Chip color="secondary"
+            variant="outline"
+            selectable
+            size="lg"
+            active={selectedTone === "3"}
+            onActiveStateChange={(active: boolean) => setSelectedTone(active ? "3" : undefined)}
             css={{
-              padding: "$7 $8",
-              borderRadius: "$2xl",
-              border: "1px solid $secondary100",
-              textWrap: "nowrap",
+              borderRadius: "99px",
+              backgroundColor: selectedTone === "3" ? "$neutral50 !important" : null,
+              borderColor: selectedTone === "3" ? "$secondary400 !important" : null,
               "@media (max-width: 768px)": {
                 display: "none",
               },
             }}
-            >😊 Friendly </Button>
+            > <Text css={{ padding: "6px", "@media (min-width: 1600px)": {
+              padding: "12px",
+            }, }}>😊 Friendly</Text>  </Chip>
           </Flex>
         </Flex>
         <Flex gap="$4">
             <Image src={userIcon.src} alt="phone icon" width={20} height={20} />
-            <Text size="md"  css={{ color: "$neutral900" }}>When agent can&apos;t resolve a question</Text>
+            <Text size="md"  css={{ color: "$neutral900", fontWeight: "$5" }}>When agent can&apos;t resolve a question</Text>
         </Flex>
         <RadioGroup
           value={selectedValue}
@@ -91,7 +112,7 @@ export default function EmailAgent() {
           <Radio value="option1" size="sm">
           <Text
             size="sm"
-            css={{ color: "$neutral700" }}
+            css={{ color: "$neutral900" }}
           >
             Move chat to unassigned
           </Text>
@@ -99,7 +120,7 @@ export default function EmailAgent() {
           </Flex>
           <Flex gap="$4" css={{ paddingBottom: "$4",}}>
           <Radio value="option2" size="sm">
-          <Text size="sm" css={{ color: "$neutral700" }}>
+          <Text size="sm" css={{ color: "$neutral900" }}>
           Hand over chat to an agent or team in the Inbox
           </Text>
           </Radio>
@@ -108,9 +129,9 @@ export default function EmailAgent() {
         <Select
             instanceId="agent-select"
             placeholder="Select"
-            options={options}
-            size="lg"
-            defaultValue={options[0]}
+            options={EMAIL_AGENT_OPTIONS}
+            size="md"
+            defaultValue={EMAIL_AGENT_OPTIONS[0]}
           />
         <Flex gap="$4" css={{ paddingTop: "$10" }}>
         <Button variant="default" size="md">

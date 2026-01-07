@@ -24,12 +24,11 @@ export default function Testimonials() {
           Trusted by industry leaders who value quality and innovation
         </p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-6 lg:mx-20 pb-15 lg:pb-25">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-6 lg:mx-20 2xl:mx-0 pb-15 lg:pb-25">
         {/* Testimonial 1 - SurveySparrow */}
-        <div className="group relative bg-white/80 backdrop-blur-sm rounded-3xl p-5 lg:p-10 shadow-sm transition-all duration-300 border border-gray-100 hover:border-[#00828D]/30 hover:-translate-y-0.5 cursor-pointer"
+        <div className="group relative bg-white/80 backdrop-blur-sm rounded-3xl p-5 lg:p-8 shadow-sm transition-all duration-300 border border-gray-100 hover:border-[#00828D]/30 hover:-translate-y-0.5 cursor-pointer"
         onClick={() => {
-          window.location.href = "https://surveysparrow.com";
-
+          window.open("https://surveysparrow.com", "_blank");
         }}
         >
           <div className="absolute top-5 lg:top-8 right-5 lg:right-10 opacity-10 group-hover:opacity-20 transition-opacity">
@@ -79,9 +78,9 @@ export default function Testimonials() {
         </div>
 
         {/* Testimonial 2 - ThriveSparrow */}
-        <div className="group cursor-pointer relative bg-white/80 backdrop-blur-sm rounded-3xl p-5 lg:p-10 shadow-sm transition-all duration-300 border border-gray-100 hover:border-[#00828D]/30 hover:-translate-y-0.5"
+        <div className="group cursor-pointer relative bg-white/80 backdrop-blur-sm rounded-3xl p-5 lg:p-8 shadow-sm transition-all duration-300 border border-gray-100 hover:border-[#00828D]/30 hover:-translate-y-0.5"
         onClick={() => {
-          window.location.href = "https://thrivesparrow.com";
+          window.open("https://thrivesparrow.com", "_blank");
         }}
         >
           <div className="absolute top-5 lg:top-8 right-5 lg:right-10 opacity-10 group-hover:opacity-20 transition-opacity">
@@ -131,9 +130,9 @@ export default function Testimonials() {
         </div>
 
         {/* Testimonial 3 - SparrowDesk */}
-        <div className="group cursor-pointer relative bg-white/80 backdrop-blur-sm rounded-3xl p-5 lg:p-10 shadow-sm transition-all duration-300 border border-gray-100 hover:border-[#00828D]/30 hover:-translate-y-0.5"
+        <div className="group cursor-pointer relative bg-white/80 backdrop-blur-sm rounded-3xl p-5 lg:p-8 shadow-sm transition-all duration-300 border border-gray-100 hover:border-[#00828D]/30 hover:-translate-y-0.5"
         onClick={() => {
-          window.location.href = "https://sparrowdesk.com";
+          window.open("https://sparrowdesk.com", "_blank");
         }}
         >
           <div className="absolute top-5 lg:top-8 right-5 lg:right-10 opacity-10 group-hover:opacity-20 transition-opacity">
