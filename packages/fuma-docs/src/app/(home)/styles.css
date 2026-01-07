@@ -1,12 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
-
-.main {
-  background-image: linear-gradient(
-    to bottom,
-    rgba(230, 245, 246, 1),
-    rgba(255, 255, 255, 1)
-  );
-}
 .full-page {
   -webkit-font-smoothing: antialiased;
   font-weight: normal;
@@ -14,26 +5,24 @@
 }
 .tabs[data-state="active"] {
   background-color: transparent;
-  position: relative !important;
-  z-index: 1 !important;
+  position: relative ;
+  z-index: 1 ;
   color: black !important;
 }
 
 .tabs {
   background-color: transparent !important;
-  display: flex !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-  gap: 6px !important;
+  gap: 6px ;
   border: 0 !important;
-  position: relative !important;
+  position: relative;
   z-index: 1 !important;
-  transition: none !important;
+  transition: none ;
   padding: 10px 20px !important;
+  cursor: pointer;
 }
 
 .tabs-list-container {
-  position: relative !important;
+  position: relative ;
   --tab-selection-x: 0;
   --tab-selection-width: 0;
 }
@@ -61,19 +50,8 @@
     width 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955);
 }
 
-/* Play Button Gradient Shadow */
-.play-button-shadow {
-  box-shadow: 0 0 10px rgba(0, 130, 141, 0.3), 0 0 20px rgba(0, 130, 141, 0.2),
-    0 0 30px rgba(0, 130, 141, 0.1) !important;
-  transition: box-shadow 0.3s ease;
-  border-radius: 50%;
-  padding: 5px;
-  padding-left: 7px;
-}
-
 .tabs-grid {
-  background-image: url("data:image/svg+xml,%3Csvg width='100' height='9' viewBox='0 0 100 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1.5' cy='1.5' r='1.5' fill='%2364748B' fill-opacity='0.08'/%3E%3Ccircle cx='10.5' cy='1.5' r='1.5' fill='%2364748B' fill-opacity='0.08'/%3E%3Ccircle cx='19.5' cy='1.5' r='1.5' fill='%2364748B' fill-opacity='0.08'/%3E%3Ccircle cx='28.5' cy='1.5' r='1.5' fill='%2364748B' fill-opacity='0.08'/%3E%3Ccircle cx='37.5' cy='1.5' r='1.5' fill='%2364748B' fill-opacity='0.08'/%3E%3Ccircle cx='46.5' cy='1.5' r='1.5' fill='%2364748B' fill-opacity='0.08'/%3E%3Ccircle cx='55.5' cy='1.5' r='1.5' fill='%2364748B' fill-opacity='0.08'/%3E%3Ccircle cx='64.5' cy='1.5' r='1.5' fill='%2364748B' fill-opacity='0.08'/%3E%3Ccircle cx='73.5' cy='1.5' r='1.5' fill='%2364748B' fill-opacity='0.08'/%3E%3Ccircle cx='82.5' cy='1.5' r='1.5' fill='%2364748B' fill-opacity='0.08'/%3E%3Ccircle cx='91.5' cy='1.5' r='1.5' fill='%2364748B' fill-opacity='0.08'/%3E%3C/svg%3E"),
-    linear-gradient(#f5f5f5, #f2f5fa);
+  background-color: #F6F6F6;
 }
 
 .tabs-grid-chip {
@@ -87,19 +65,10 @@
       width 0.25s cubic-bezier(0.455, 0.03, 0.515, 0.955);
     box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.1);
   }
-
-  .features-background::after,
-  .features-background::before {
-    display: none;
-  }
-
-  .tabs-list::after {
-    display: none;
-  }
 }
 
 .Features-tab {
-  display: flex !important;
+  display: flex ;
   transition: all 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955);
   background-color: transparent !important;
   position: relative !important;
@@ -120,48 +89,6 @@
   background-color: transparent !important;
 }
 
-.footer {
-  position: relative;
-}
-
-.footer::before,
-.footer::after {
-  content: "";
-  position: absolute;
-  top: -30;
-  bottom: 0;
-  width: 5vw;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.footer::before {
-  left: 0;
-  background: linear-gradient(to right, rgba(255, 255, 255, 1), transparent);
-}
-
-.footer::after {
-  right: 0;
-  background: linear-gradient(to left, rgba(255, 255, 255, 1), transparent);
-}
-
-/* Hide inactive TabsContent when forceMount is used */
-/* This ensures all tabs render during SSR for style generation, */
-/* but only the active tab is visible */
-[role="tabpanel"][data-state="inactive"] {
-  visibility: hidden !important;
-  position: absolute !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-  width: 0 !important;
-  height: 0 !important;
-}
-
-[role="tabpanel"][data-state="active"] {
-  visibility: visible !important;
-  position: relative !important;
-  opacity: 1 !important;
-}
 
 /* Features Tab Content - Smooth slide animation */
 [role="tabpanel"].Features-tab-content[data-state="inactive"] {
@@ -171,7 +98,6 @@
   pointer-events: none !important;
   width: auto !important;
   height: auto !important;
-  transform: translateX(-20px) !important;
 }
 
 [role="tabpanel"].Features-tab-content[data-state="active"] {
@@ -180,15 +106,11 @@
   opacity: 1 !important;
   width: auto !important;
   height: auto !important;
-  transform: translateX(0) !important;
-  animation: featureSlideIn 0.35s ease-out forwards;
 }
-
-
 
 /* Image Gallery Animation */
 .image-slide-container {
-  will-change: opacity, transform;
+  will-change: transform;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   animation: scaleIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -196,51 +118,17 @@
 
 @keyframes scaleIn {
   from {
-    opacity: 0;
     transform: scale(0.98);
   }
   to {
-    opacity: 1;
     transform: scale(1);
   }
-}
-
-/* Scroll-triggered animations */
-.scroll-animate {
-  opacity: 0;
-  transform: translateY(32px);
-  transition: opacity 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  will-change: opacity, transform;
-}
-
-.scroll-animate.in-view {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Staggered delays for children */
-.scroll-animate-delay-1 {
-  transition-delay: 0.15s;
-}
-.scroll-animate-delay-2 {
-  transition-delay: 0.3s;
-}
-.scroll-animate-delay-3 {
-  transition-delay: 0.45s;
-}
-
-/* Smooth transition for image changes */
-.image-slide-container img {
-  display: block;
-  transition: opacity 0.2s ease-in-out;
 }
 
 .fancy-border{
   height: 50px;
   width: 100%;
   background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='76' height='42' viewBox='0 0 76 42'><defs><filter id='softShadow' x='-8%' y='-15%' width='116%' height='130%'><feDropShadow dx='0' dy='0.1' stdDeviation='0.45' floodColor='%23CBD5E1' floodOpacity='0.025'/></filter></defs><g><path d='M0 0 A34 34 0 0 0 76 0 L68 0 L0 0 Z' fill='%23F1F5F9' filter='url(%23softShadow)'/></g></svg>");
-
   background-repeat: repeat-x;
 }
 
@@ -263,7 +151,6 @@
   border-bottom-right-radius: 8px;
 }
 
-
 .intellisense-tabs-list-container {
   position: relative !important;
   --tab-selection-x: 0;
@@ -275,7 +162,7 @@
   position: absolute;
   top: 5px;
   left: 0;
-  height: calc(100% - 9px);
+  height: calc(100% - 10px);
   width: calc(var(--tab-selection-width) * 1px);
   background-color: var(--color-fd-background);
   border-radius: 999px;
@@ -294,14 +181,10 @@
 
 .intellisense-tabs {
   background-color: transparent !important;
-  display: flex !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-  gap: 6px !important;
+  gap: 6px;
   border: 0 !important;
-  position: relative !important;
+  position: relative ;
   z-index: 1 !important;
-  transition: none !important;
   padding: 10px 20px !important;
   font-size: 18px !important;
 }
@@ -339,7 +222,8 @@
 }
 
 .reveal-content {
-  padding-top: 30px;
+  padding-top: 55px;
+  padding-bottom: 100px;
   position: relative;
   z-index: 1;
   width: 100%;

@@ -11,6 +11,7 @@ import Image, { StaticImageData } from "next/image";
 import autocomplete from "@/assets/images/autocomplete-new.png";
 import docs from "@/assets/images/docs-new.png";
 import color from "@/assets/images/color-swatch-new.png";
+import { useTabIndicator } from "../hooks";
 
 const INTELLISENSE_URL = "https://marketplace.visualstudio.com/items?itemName=SurveySparrow.twigs-intellisense";
 
@@ -32,7 +33,7 @@ const HoverImage = ({ src, alt }: HoverImageProps) => {
         alt={alt}
         className="rounded-b-2xl md:rounded-b-none rounded-t-2xl h-[250px] lg:h-[455px] transition-transform duration-300 object-cover p-3 md:p-0 bg-[#D6F2FF]" 
       />
-      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center rounded-t-2xl">
+      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-all duration-300 flex items-center justify-center md:rounded-t-2xl">
         <div className="flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <span className="text-white text-xl font-semibold tracking-tight">
             Go to Intellisense
@@ -53,43 +54,12 @@ const Intellisense = () => {
   const tabsListRef = useRef<HTMLDivElement>(null);
   const prevTabRef = useRef<string>("autocomplete");
 
-  const updateIndicator = () => {
-    const container = tabsListRef.current;
-    if (!container) return;
-
-    const activeButton = container.querySelector(
-      `button[data-state="active"], [role="tab"][aria-selected="true"]`
-    ) as HTMLElement;
-
-    if (!activeButton) {
-      container.style.setProperty("--tab-selection-x", "0");
-      container.style.setProperty("--tab-selection-width", "0");
-      return;
-    }
-
-    const tabsListElement = activeButton.closest(
-      '[role="tablist"]'
-    ) as HTMLElement;
-    if (!tabsListElement) return;
-
-    const x = activeButton.offsetLeft + (tabsListElement.offsetLeft || 0);
-    const width = activeButton.offsetWidth;
-    container.style.setProperty("--tab-selection-x", `${x}`);
-    container.style.setProperty("--tab-selection-width", `${width}`);
-  };
-
-  useEffect(() => {
-    const timer = setTimeout(updateIndicator, 10);
-    return () => clearTimeout(timer);
-  }, [activeTab]);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setTimeout(updateIndicator, 100);
-    };
-    window.addEventListener("resize", handleResize, { passive: true });
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  // Use the shared hook with mobile width adjustment of 5px
+  useTabIndicator({
+    containerRef: tabsListRef,
+    activeTab,
+    mobileWidthAdjustment: 5,
+  });
 
   // Smart auto-scroll: hints at adjacent tabs based on navigation direction
   useEffect(() => {
@@ -166,7 +136,7 @@ const Intellisense = () => {
   }, [activeTab]);
 
   return (
-    <div className="bg-[#D6F2FF] mx-6 lg:mx-20 rounded-2xl pt-10">
+    <div className="bg-[#D6F2FF] mx-6 lg:mx-20 2xl:mx-0 rounded-2xl pt-10">
       <div className="flex flex-col gap-4 max-w-[550px] md:mx-auto mx-6 mb-10">
         <h2 className="text-[30px] lg:text-[48px]/[56px] font-[800] text-center text-neutral-900 tracking-[-1.2px]">
           Twigs IntelliSense
@@ -187,7 +157,7 @@ const Intellisense = () => {
         <div className="w-full flex items-center justify-center">
             <div
               ref={tabsListRef}
-              className="flex overflow-scroll rounded-full w-[80vw] md:w-fit px-2 py-1 intellisense-tabs-list-container border border-slate-300"
+              className="flex overflow-scroll rounded-[999px] w-[80vw] md:w-fit !px-1.5 py-1 intellisense-tabs-list-container border border-slate-300"
               style={{
                 scrollbarWidth: "none",
                 position: "relative",
@@ -203,7 +173,7 @@ const Intellisense = () => {
                   className="!text-sm intellisense-tabs !rounded-lg"
                 >
                   {" "}
-                  <div>Autocomplete</div>
+                  <div className="mr-1 md:mr-0">Autocomplete</div>
                 </TabsTrigger>
                 <TabsTrigger
                   value="docs"

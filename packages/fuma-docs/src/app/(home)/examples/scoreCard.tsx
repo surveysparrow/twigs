@@ -1,13 +1,13 @@
 import React from "react";
 import { Flex, Box, Text, Image } from "@sparrowengg/twigs-react";
-import meetingCard from "@/assets/images/Vector 96.svg";
+import scoreCard from "@/assets/images/Vector 96.svg";
 import { ChevronUpFillIcon } from "@sparrowengg/twigs-react-icons";
 
 // Segment data for the multi-color progress bar
 const segments = [
-  { value: 40, color: "#7DBFC4" }, // Teal
-  { value: 35, color: "#F4C86C" }, // Yellow/Amber
-  { value: 25, color: "#E88D7D" }, // Coral/Salmon
+  { value: 50, color: "#56B0BB", hoverColor: "#459AA4" }, 
+  { value: 25, color: "#FCBD4F", hoverColor: "#E5A838" }, 
+  { value: 25, color: "#FA7659", hoverColor: "#E55F42" }, 
 ];
 
 export default function ScoreCard() {
@@ -26,8 +26,8 @@ export default function ScoreCard() {
       }}
     >
       <Image
-        src={meetingCard.src}
-        alt="meeting card"
+        src={scoreCard.src}
+        alt="score card"
         width={100}
         height={100}
         css={{
@@ -36,16 +36,17 @@ export default function ScoreCard() {
           right: 0,
           width: "150px",
           height: "100px",
+          borderTopRightRadius: "$2xl",
         }}
       />
       <Flex flexDirection="column" css={{ padding: "$4" }}>
-        <Text weight="medium" css={{ color: "$neutral700" }}>
-          NPS Score
+        <Text weight="medium" size="xs" css={{ color: "$neutral700" }}>
+          NPS SCORE
         </Text>
         <Flex
           alignItems="center"
           gap="$4"
-          css={{ paddingTop: "$8", paddingBottom: "$8" }}
+          css={{ paddingTop: "$8", paddingBottom: "$15" }}
         >
           <Text weight="bold" css={{ color: "$neutral900", fontSize: "$4xl" }}>
             37
@@ -68,7 +69,7 @@ export default function ScoreCard() {
           gap="$1"
           css={{
             width: "100%",
-            height: "12px",
+            height: "20px",
             borderRadius: "999px",
             overflow: "hidden",
             marginBottom: "$27",
@@ -87,6 +88,9 @@ export default function ScoreCard() {
                   index === segments.length - 1 ? "999px" : "0",
                 borderBottomRightRadius:
                   index === segments.length - 1 ? "999px" : "0",
+                "&:hover": {
+                  backgroundColor: segment.hoverColor,
+                },
               }}
             />
           ))}

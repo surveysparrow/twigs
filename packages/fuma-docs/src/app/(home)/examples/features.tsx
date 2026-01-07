@@ -6,26 +6,37 @@ import {
   TabsList,
   TabsTrigger,
   Slider,
-  SliderTrack,
-  SliderRange,
-  SliderThumb,
 } from "@sparrowengg/twigs-react";
 import Image from "next/image";
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback, memo } from "react";
 import accessibleImage from "@/assets/images/access-n.svg";
 import extensibleImage from "@/assets/images/extend-n.svg";
 import themableImage from "@/assets/images/theme-n.svg";
+import { FeaturesSliderComponents } from "../shared";
+import { FEATURES_CONFIG } from "../constants";
 
-// Configuration constants
-const CYCLE_DURATION = 9000; // 9 seconds per tab
-const UPDATE_INTERVAL = 30; // Update every 30ms for smooth animation
+// Use constants from centralized config
+const { CYCLE_DURATION, UPDATE_INTERVAL, FEATURES } = FEATURES_CONFIG;
 
-// Tab configuration
-const FEATURES = [
-  { id: "accessible" },
-  { id: "extensible" },
-  { id: "themeable" },
-] as const;
+// Memoized slider component to prevent unnecessary re-renders
+const ProgressSlider = memo(function ProgressSlider({ progress }: { progress: number }) {
+  return (
+    <Slider
+      components={FeaturesSliderComponents}
+      className="!h-[4px]"
+      value={[progress]}
+      max={100}
+      step={1}
+      size="md"
+    />
+  );
+});
+
+// Empty spacer for inactive tabs
+const SliderSpacer = memo(function SliderSpacer() {
+  return <div className="!h-[4px]" />;
+});
+
 
 export default function Features() {
   const [activeTab, setActiveTab] = useState("accessible");
@@ -68,7 +79,7 @@ export default function Features() {
     setSliderProgress(0);
   }, []);
 
-  const updateIndicator = () => {
+  const updateIndicator = useCallback(() => {
     const list = tabsListRef.current;
     if (!list) {
       setIndicatorStyle({ top: 0, height: 0, opacity: 0, borderTopLeftRadius: "0px", borderBottomLeftRadius: "0px", borderTopRightRadius: "0px" });
@@ -108,7 +119,7 @@ export default function Features() {
       borderBottomLeftRadius: isThirdTab ? "8px" : "0px",
       borderTopRightRadius: isMobile && isFirstTab ? "8px" : "0px",
     });
-  };
+  }, [activeTab]);
 
   useEffect(() => {
     const update = () => {
@@ -130,34 +141,7 @@ export default function Features() {
       window.removeEventListener("resize", handleResize);
       clearTimeout(timer);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeTab]);
-  
-
-  const RenderedThumb = () => {
-    return <SliderThumb css={{ display: "none" }} />;
-  };
-
-  const RenderedRange = () => {
-    return <SliderRange css={{ backgroundColor: "#818CF8",borderTopLeftRadius: "0px",borderBottomLeftRadius: "0px", height: "4px !important" }} />;
-  };
-
-  const RenderedTrack = ({ children }: { children: React.ReactNode }) => {
-    return (
-      <SliderTrack
-        css={{
-          width: "100%",
-          backgroundColor: "transparent",
-          position: "absolute",
-          borderRadius: "0px",
-          height: "4px",
-
-        }}
-      >
-        {children}
-      </SliderTrack>
-    );
-  };
+  }, [activeTab, updateIndicator]);
 
   return (
     
@@ -183,9 +167,12 @@ export default function Features() {
             flexDirection: "row",
             "@media (max-width: 1024px)": {
               flexDirection: "column",
-              height: "800px !important",
+              height: "900px !important",
             },
             "@media (max-width: 768px)": {
+              height: "800px !important",
+            },
+            "@media (max-width: 480px)": {
               height: "700px !important",
             },
           }}
@@ -208,7 +195,7 @@ export default function Features() {
                     borderColor: "transparent !important",
                   },
                   transition: "border-color 0.3s ease-in-out",
-                  "@media (max-width: 768px)": {
+                  "@media (max-width: 1024px)": {
                     borderRight: "1px solid #E2E8F0",
                     borderTopRightRadius: "8px !important",
                   },
@@ -223,20 +210,9 @@ export default function Features() {
                   Embrace inclusivity – Twigs&apos; components ensure every user can navigate seamlessly, better user experiences.
                   </Text>
                 </div>
-                  {activeTab === "accessible" ? (
-                    <Slider
-                    components={{
-                      Thumb: RenderedThumb,
-                      Track: RenderedTrack,
-                      Range: RenderedRange,
-                    }}
-                    className="!h-[4px]"
-                    value={[sliderProgress]}
-                    max={100}
-                    step={1}
-                    size="md"
-                  />
-                  ): <div className="!h-[4px]"></div>}
+                {activeTab === "accessible" ? (
+                    <ProgressSlider progress={sliderProgress} />
+                  ): <SliderSpacer />}
               </TabsTrigger>
               <TabsTrigger value="extensible" className="Features-tab flex !flex-col gap-2"
               css={{
@@ -247,7 +223,7 @@ export default function Features() {
                     borderColor: "transparent !important",
                   },
                   transition: "border-color 0.3s ease-in-out",
-                  "@media (max-width: 768px)": {
+                  "@media (max-width: 1024px)": {
                     borderRight: "1px solid #E2E8F0",
                   },
               }}
@@ -264,19 +240,8 @@ export default function Features() {
                   </Text>
                   </div>
                   {activeTab === "extensible" ? (
-                    <Slider
-                    components={{
-                      Thumb: RenderedThumb,
-                      Track: RenderedTrack,
-                      Range: RenderedRange,
-                    }}
-                    className="!h-[4px]"
-                    value={[sliderProgress]}
-                    max={100}
-                    step={1}
-                    size="md"
-                    />
-                    ): <div className="!h-[4px]"></div>}
+                    <ProgressSlider progress={sliderProgress} />
+                  ): <SliderSpacer />}
               </TabsTrigger>
               <TabsTrigger value="themeable" className="Features-tab flex !flex-col gap-2"
               css={{
@@ -288,7 +253,7 @@ export default function Features() {
                     borderColor: "transparent !important",
                   },
                   transition: "border-color 0.3s ease-in-out",
-                  "@media (max-width: 768px)": {
+                  "@media (max-width: 1024px)": {
                     borderRight: "1px solid #E2E8F0",
                     borderBottomLeftRadius: "0px !important",
                   },
@@ -306,19 +271,8 @@ export default function Features() {
                   </Text>
                   </div>
                   {activeTab === "themeable" ? (
-                    <Slider
-                    components={{
-                      Thumb: RenderedThumb,
-                      Track: RenderedTrack,
-                      Range: RenderedRange,
-                    }}
-                    className="!h-[4px]"
-                    value={[sliderProgress]}
-                    max={100}
-                    step={1}
-                    size="md"
-                  />
-                  ): <div className="!h-[4px]"></div>}
+                    <ProgressSlider progress={sliderProgress} />
+                  ): <SliderSpacer />}
               </TabsTrigger>
               <div
                 className="Features-tabs-indicator"

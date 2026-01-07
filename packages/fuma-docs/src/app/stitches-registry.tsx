@@ -17,7 +17,6 @@ const mergeThemes = (
   return { ...outerTheme, ...theme };
 };
 
-// Home page theme with DM Sans fonts
 const homePageTheme = mergeThemes(defaultTheme, {
   fonts: {
     body: "tenon, sans-serif",

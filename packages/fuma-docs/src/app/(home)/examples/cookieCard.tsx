@@ -14,13 +14,16 @@ export default function CookieCard() {
   return (
     <Flex
       flexDirection="column"
-      gap="$7"
+      gap="18px"
       css={{
         padding: "$7",
         paddingBottom: "$14",
         borderRadius: "$2xl",
         backgroundColor: "white",
         boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
+        "@media (min-width: 1600px)": {
+          gap: "22.5px",
+        },
       }}
     >
       <Flex alignItems="center" gap="$4">
@@ -36,7 +39,7 @@ export default function CookieCard() {
           <Text size="md" weight="medium">
           Strictly necessary
           </Text>
-          <Text size="xs" css={{ color: "$neutral500", "@media (max-width: 768px)": { width: "90%" } }}>
+          <Text size="sm" css={{ color: "$neutral500", "@media (max-width: 768px)": { width: "90%" } }}>
           These cookies are required for the website to function properly, enabling core features.
           </Text>
         </Box>
@@ -55,7 +58,7 @@ export default function CookieCard() {
           <Text size="md" weight="medium">
             Performance
           </Text>
-          <Text size="xs" css={{ color: "$neutral500", "@media (max-width: 768px)": { width: "90%" } }}>
+          <Text size="sm" css={{ color: "$neutral500", "@media (max-width: 768px)": { width: "90%" } }}>
           These cookies help us measure and analyze how users interact with the site, allowing us to improve speed.
           </Text>
         </Box>
@@ -74,7 +77,7 @@ export default function CookieCard() {
           <Text size="md" weight="medium">
             Functional
           </Text>
-          <Text size="xs" css={{ color: "$neutral500", "@media (max-width: 768px)": { width: "90%" } }}>
+          <Text size="sm" css={{ color: "$neutral500", "@media (max-width: 768px)": { width: "90%" } }}>
           These cookies enable enhanced features like remembering your preferences, saved settings.
           </Text>
         </Box>

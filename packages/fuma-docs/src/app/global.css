@@ -29,6 +29,10 @@ header#nd-subnav > div > div:last-child {
   gap: 0;
 }
 
+header#nd-subnav > div > div:last-child > a:hover {
+  background-color: oklch(92.9% 0.013 255.508) ;
+}
+
 main#nd-home-layout {
   padding-top: 0;
 }
@@ -41,6 +45,10 @@ header#nd-nav {
   position: absolute !important;
   @media (max-width: 768px) {
     min-height: auto;
+  }
+  @media (min-width: 1600px) {
+    max-width: 1280px;
+    margin: 0 auto;
   }
 }
 @media (max-width: 768px) {
@@ -75,7 +83,7 @@ header#nd-nav > div > nav > div > button > div > kbd {
 }
 
 header#nd-nav > div > nav > div > button {
-  background-color: transparent;
+  background-color: #F1F5F9;
   cursor: pointer;
 }
 
@@ -107,6 +115,21 @@ header#nd-nav > div > nav > div > div > li > a:hover {
   /* Hide the parent container div that holds the collapse button */
   header#nd-subnav > div:first-child > div:last-child > div:last-child {
     display: none !important;
+  }
+}
+
+@media (min-width: 1600px) {
+  header#nd-subnav {
+    max-width: 1280px;
+    margin: 0 auto ;
+  }
+  main#nd-docs-layout {
+    max-width: 1328px;
+    margin: 0 auto;
+  }
+  aside#nd-sidebar {
+    left: max(0px, calc((100vw - 1280px) / 2));
+    background-color: transparent;
   }
 }
 

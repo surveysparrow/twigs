@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef, useEffect, useLayoutEffect } from "react";
+import React, { useState, useRef, useEffect, useLayoutEffect, useCallback } from "react";
 import logo from "@/assets/images/bg.svg";
 import Image from "next/image";
 import { CopyIcon, ForwardArrowIcon, TickIcon } from "@sparrowengg/twigs-react-icons";
@@ -16,7 +16,6 @@ import EmployeeCard from "./examples/employeeCard";
 import SmallCards from "./examples/smallCards";
 import Redeemers from "./examples/redeemers";
 import BusinessCard from "./examples/cookieCard";
-import LoginForm from "./examples/loginForm";
 import Settings from "./examples/settings";
 import Accounts from "./examples/accounts";
 import Dashboard from "./examples/dashboard";
@@ -28,37 +27,67 @@ import Conversation from "./examples/conversation";
 import Intellisense from "./examples/intellisense";
 import Playground from "./examples/playground";
 import Footer from "./examples/footer";
+import OnBoarding from "./examples/onBoarding";
+import { useTabIndicator } from "./hooks";
 
 
+// Constants moved outside component to prevent recreation
+const CURTAIN_HEIGHT_OFFSET = 50;
+const COPY_TIMEOUT_MS = 3000;
+const PIN_SPACER_UPDATE_DELAY = 150;
+const DESKTOP_BREAKPOINT = 1024;
+const NPM_INSTALL_COMMAND = "npm install @sparrowengg/twigs-react";
 
 export default function SamplePage() {
   const [activeTab, setActiveTab] = useState("components");
   const tabsListRef = useRef<HTMLDivElement>(null);
   const [copied, setCopied] = useState(false);
-  const [curtainHeight, setCurtainHeight] = useState<number | null>(null);  
-  const handleCopy = async () => {
+  const [curtainHeight, setCurtainHeight] = useState<number | null>(null);
+  const copyTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Use shared tab indicator hook
+  useTabIndicator({
+    containerRef: tabsListRef,
+    activeTab,
+    cssVarPrefix: "tab-selection",
+  });
+
+  // Handle copy with proper cleanup
+  const handleCopy = useCallback(async () => {
     try {
-      await navigator.clipboard.writeText(
-        `npm install @sparrowengg/twigs-react`
-      );
+      await navigator.clipboard.writeText(NPM_INSTALL_COMMAND);
       setCopied(true);
-      setTimeout(() => {
+      
+      // Clear any existing timeout to prevent memory leaks
+      if (copyTimeoutRef.current) {
+        clearTimeout(copyTimeoutRef.current);
+      }
+      
+      copyTimeoutRef.current = setTimeout(() => {
         setCopied(false);
-      }, 3000);
+        copyTimeoutRef.current = null;
+      }, COPY_TIMEOUT_MS);
     } catch (err) {
       console.error("Failed to copy:", err);
       setCopied(false);
     }
-  };
+  }, []);
+
+  // Cleanup copy timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (copyTimeoutRef.current) {
+        clearTimeout(copyTimeoutRef.current);
+      }
+    };
+  }, []);
 
   // Temporarily disable scroll restoration, scroll to top, then immediately restore
   useLayoutEffect(() => {
     const originalScrollRestoration = history.scrollRestoration;
-    
-    // Temporarily disable scroll restoration
+
     history.scrollRestoration = "manual";
     window.scrollTo(0, 0);
-    
     // Restore immediately after scroll is applied (within next frame)
     // This ensures other pages aren't affected by our temporary change
     requestAnimationFrame(() => {
@@ -66,53 +95,15 @@ export default function SamplePage() {
     });
   }, []);
 
+  // Measure curtain title height once on mount
   useEffect(() => {
     const curtainTitle = document.querySelector(".curtain-title");
     if (curtainTitle instanceof HTMLElement) {
-      setCurtainHeight(curtainTitle.offsetHeight + 50);
+      setCurtainHeight(curtainTitle.offsetHeight + CURTAIN_HEIGHT_OFFSET);
     }
   }, []);
 
-  // Update the indicator when the tab changes
-  const updateIndicator = () => {
-    const container = tabsListRef.current;
-    if (!container) return;
-
-    const activeButton = container.querySelector(
-      `button[data-state="active"], [role="tab"][aria-selected="true"]`
-    ) as HTMLElement;
-
-    if (!activeButton) {
-      container.style.setProperty("--tab-selection-x", "0");
-      container.style.setProperty("--tab-selection-width", "0");
-      return;
-    }
-
-    const tabsListElement = activeButton.closest(
-      '[role="tablist"]'
-    ) as HTMLElement;
-    if (!tabsListElement) return;
-
-    const x = activeButton.offsetLeft + (tabsListElement.offsetLeft || 0);
-    const width = activeButton.offsetWidth;
-    container.style.setProperty("--tab-selection-x", `${x}`);
-    container.style.setProperty("--tab-selection-width", `${width}`);
-  };
-
-  useEffect(() => {
-    const timer = setTimeout(updateIndicator, 10);
-    return () => clearTimeout(timer);
-  }, [activeTab]);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setTimeout(updateIndicator, 100);
-    };
-    window.addEventListener("resize", handleResize, { passive: true });
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  // Scroll to the active tab when the tab changes
+  // Scroll to the active tab when the tab changes (mobile)
   useEffect(() => {
     const list = tabsListRef.current;
     if (!list) return;
@@ -146,25 +137,27 @@ export default function SamplePage() {
 
   // Manually update pin-spacer height when tab content changes (mobile only)
   useEffect(() => {
+    if (typeof window === 'undefined' || window.innerWidth >= DESKTOP_BREAKPOINT) return;
+  
     const timer = setTimeout(() => {
-      if (window.innerWidth >= 1024) return;
-
       const wrapper = document.querySelector('.reveal-wrapper') as HTMLElement;
-      if (!wrapper) return;
-
-      const pinSpacer = wrapper.parentElement;
-      if (!pinSpacer?.classList.contains('pin-spacer')) return;
-
       const content = document.querySelector('.reveal-content') as HTMLElement;
       const curtain = document.querySelector('.reveal-curtain') as HTMLElement;
+      
+      if (!wrapper || !content || !curtain) return;
+      
+      const pinSpacer = wrapper.parentElement;
+      if (!pinSpacer?.classList.contains('pin-spacer')) return;
+  
       const newHeight = content.offsetHeight;
       pinSpacer.style.height = `${newHeight + curtain.offsetHeight}px`;
       wrapper.style.height = `${newHeight}px`;
-    }, 150);
-
+    }, PIN_SPACER_UPDATE_DELAY);
+  
     return () => clearTimeout(timer);
   }, [activeTab]);
   
+  // GSAP ScrollTrigger setup
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
   
@@ -193,15 +186,16 @@ export default function SamplePage() {
       });
 
       gsap.to(".reveal-curtain", {
-        y: -(curtainTitleHeight + 50),
+        y: -(curtainTitleHeight + CURTAIN_HEIGHT_OFFSET),
         scrollTrigger: {
           trigger: ".reveal-wrapper",
           start: "top top",
-          end: () => `${curtainTitleHeight + 50}px`,
+          end: () => `${curtainTitleHeight + CURTAIN_HEIGHT_OFFSET}px`,
           scrub: true,
           pin: true,
           pinSpacing: true,
           anticipatePin: 1,
+          invalidateOnRefresh: true,
         },
       });
     });
@@ -221,7 +215,7 @@ export default function SamplePage() {
       <div className="bg-[#F1F5F9] w-full flex-col justify-center items-center curtain-title"
       >
         <div className="flex justify-center items-center">
-          <Image src={logo} alt="background image" className="w-full lg:w-[710px] h-auto lg:h-[480px] mt-14 md:mt-0" />
+          <Image src={logo} alt="background image" priority className="w-full lg:w-[710px] h-auto lg:h-[480px] mt-14 md:mt-0" />
         </div>
         <div className="w-fit lg:w-[1044px] lg:mx-auto mx-6 my-5 lg:my-0">
           <h1 className="text-3xl sm:text-4xl lg:text-[48px]/[56px] font-[800] mb-4 break-words text-center text-neutral-900 tracking-[-1.2px]">
@@ -245,7 +239,7 @@ export default function SamplePage() {
         </div>
         <div className="flex flex-wrap gap-2 lg:gap-4 justify-center items-center">
           <button
-            className="!px-4 !py-2.5 font-['DM Sans'] rounded-xl flex gap-4 items-center text-sm lg:text-[19.2px]/[28px] w-fit cursor-pointer bg-fd-primary shadow-sm text-white font-medium group transition-all duration-200 hover:shadow-md hover:bg-[#017480] text-nowrap"
+            className="!px-4 !py-2.5 rounded-xl flex gap-4 items-center text-sm lg:text-[19.2px]/[28px] w-fit cursor-pointer bg-fd-primary shadow-sm text-white font-medium group transition-all duration-200 hover:shadow-md hover:bg-[#017480] text-nowrap"
             onClick={() => {
               window.location.href = "/docs/getting-started";
             }}
@@ -258,7 +252,8 @@ export default function SamplePage() {
           </button>
           <button
             className="px-4 py-3 rounded-xl inline-flex gap-4 items-center text-sm lg:text-[16px]/[24px] w-fit cursor-pointer bg-fd-background group transition-all duration-200 hover:bg-gray-50 text-nowrap border"
-            onClick={() => handleCopy()}
+            onClick={handleCopy}
+            aria-label="Copy to clipboard button"
           >
             npm install @sparrowengg/twigs-react
             <span className="inline-block transition-transform duration-300 ease-in-out group-hover:translate-x-0.5">
@@ -304,6 +299,7 @@ export default function SamplePage() {
           defaultValue="examples"
           value={activeTab}
           onValueChange={setActiveTab}
+          css={{fontFamily: "var(--font-dm-sans)"}}
         >
           <div className="w-full flex items-center justify-center">
             <div
@@ -361,21 +357,21 @@ export default function SamplePage() {
           </div>
           <TabsContent
             value="components"
-            className="mt-2 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
+            className="mt-4 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
           >
-            <div className="lg:max-w-6xl mx-3 w-full flex flex-col md:flex-row gap-3 border-2 border-fd-background rounded-2xl p-3 bg-fd-muted tabs-grid flex-wrap">
+            <div className="lg:max-w-6xl 2xl:max-w-7xl mx-3 w-full flex flex-col md:flex-row gap-2 border-2 border-fd-background rounded-3xl p-2 bg-fd-muted tabs-grid flex-wrap">
               {/* Column 1 */}
-              <div className="flex flex-col gap-3 flex-1">
+              <div className="flex flex-col gap-2 flex-1">
                 <EmailAgent />
                 <Redeemers />
               </div>
               {/* Column 2 */}
-              <div className="flex flex-col gap-3 flex-1">
+              <div className="flex flex-col gap-2 flex-1">
                 <ProductCard />
                 <EmployeeCard />
               </div>
               {/* Column 3 */}
-              <div className="flex flex-col gap-3 flex-1">
+              <div className="flex flex-col gap-2 flex-1">
                 <ScoreCard />
                 <SmallCards />
                 <BusinessCard />
@@ -384,41 +380,41 @@ export default function SamplePage() {
           </TabsContent>
           <TabsContent
             value="onboarding"
-            className="mt-2 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
+            className="mt-4 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
           >
-            <div className="lg:max-w-6xl mx-3 w-full border-2 border-fd-background rounded-2xl p-4 bg-fd-muted tabs-grid">
-              <LoginForm />
+            <div className="lg:max-w-6xl 2xl:max-w-7xl mx-3 w-full border-2 border-fd-background rounded-3xl p-2 bg-fd-muted tabs-grid">
+              <OnBoarding />
             </div>
           </TabsContent>
           <TabsContent
             value="settings"
-            className="mt-2 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
+            className="mt-4 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
           >
-            <div className="lg:w-6xl mx-3 w-full border-2 border-fd-background rounded-2xl p-4 bg-fd-muted tabs-grid">
+            <div className="lg:w-6xl 2xl:w-7xl mx-3 w-full border-2 border-fd-background rounded-3xl p-2 bg-fd-muted tabs-grid">
               <Settings />
             </div>
           </TabsContent>
           <TabsContent
             value="users"
-            className="mt-2 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
+            className="mt-4 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
           >
-            <div className="lg:max-w-6xl mx-3 w-full border-2 border-fd-background rounded-2xl p-4 bg-fd-muted tabs-grid accounts-div">
+            <div className="lg:max-w-6xl 2xl:max-w-7xl mx-3 w-full border-2 border-fd-background rounded-3xl p-2 bg-fd-muted tabs-grid accounts-div">
               <Accounts />
             </div>
           </TabsContent>
           <TabsContent
             value="conversation"
-            className="mt-2 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
+            className="mt-4 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
           >
-            <div className="lg:max-w-6xl md:max-w-4xl mx-3 w-full border-2 border-fd-background rounded-2xl p-4 bg-fd-muted tabs-grid chat-div">
+            <div className="lg:max-w-6xl 2xl:max-w-7xl md:max-w-4xl mx-3 w-full border-2 border-fd-background rounded-3xl p-2 bg-fd-muted tabs-grid chat-div">
               <Conversation />
             </div>
           </TabsContent>
           <TabsContent
             value="dashboard"
-            className="mt-2 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
+            className="mt-4 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
           >
-            <div className="lg:max-w-6xl md:max-w-4xl max-w-fit mx-3 w-full border-2 border-fd-background rounded-2xl p-4 bg-fd-muted tabs-grid">
+            <div className="lg:max-w-6xl 2xl:max-w-7xl md:max-w-4xl max-w-fit mx-3 w-full border-2 border-fd-background rounded-3xl p-2 bg-fd-muted tabs-grid">
               <Dashboard />
             </div>
           </TabsContent>
@@ -427,19 +423,19 @@ export default function SamplePage() {
       </div>
 
 
-      <div className="bg-[#F1F5F9] w-full h-full pb-15 lg:pb-35 flex-col justify-center items-center mt-25 feature-section">
+      <div className="bg-[#F1F5F9] w-full 2xl:max-w-7xl mx-auto rounded-none 2xl:rounded-2xl h-full pb-15 lg:pb-35 flex-col justify-center items-center feature-section">
         <Features />
       </div>
-      <div className="bg-white w-full h-full pb-0 lg:pb-15 flex-col justify-center items-center">
+      <div className="bg-white w-full 2xl:max-w-7xl mx-auto h-full pb-0 lg:pb-15 flex-col justify-center items-center">
         <Testimonials />
       </div>
-      <div className="bg-white w-full h-full pb-15 lg:pb-20">
+      <div className="bg-white w-full 2xl:max-w-7xl mx-auto h-full pb-15 lg:pb-20">
         <Intellisense />
       </div>
-      <div className="bg-white w-full h-full pb-3 lg:pb-15">
+      <div className="bg-white w-full 2xl:max-w-7xl mx-auto h-full pb-3 lg:pb-15">
         <Playground />
       </div>
-      <div className="bg-white w-full h-full">
+      <div className="bg-white w-full 2xl:max-w-7xl mx-auto h-full">
         <Footer />
       </div>
     </>

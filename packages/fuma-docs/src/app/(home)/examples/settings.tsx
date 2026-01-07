@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import logo from "@/assets/images/settings-logo.svg";
 import Image from "next/image";
 import {
@@ -14,6 +14,7 @@ import {
   AccordionTrigger,
   Accordion,
   AccordionItem,
+  Button,
 } from "@sparrowengg/twigs-react";
 import {
   ColorSwatchesIcon,
@@ -26,6 +27,109 @@ import {
 } from "@sparrowengg/twigs-react-icons";
 import icon from "@/assets/images/Icon wrapper - New.png";
 import boxbg from "@/assets/images/boxbg.png";
+import { MenuItem } from "../shared";
+import {
+  SETTINGS_LANGUAGE_OPTIONS,
+  SETTINGS_TIMEZONE_OPTIONS,
+  SETTINGS_CURRENCY_OPTIONS,
+  SETTINGS_DATE_FORMAT_OPTIONS,
+} from "../constants";
+
+// Shared styles
+const accordionItemStyles = { borderBottom: "0 !important" };
+const accordionTriggerStyles = {
+  backgroundColor: "#F6F6F6 !important",
+  cursor: "pointer",
+};
+const accordionContentStyles = {
+  backgroundColor: "#F6F6F6 !important",
+  "&>div": { padding: "0 !important" },
+};
+const sidebarIconStyles = { color: "$secondary400" };
+const formFieldContainerStyles = {
+  width: "48%",
+  "@media (max-width: 768px)": { width: "100%" },
+};
+
+// Menu section data
+const PREFERENCE_ITEMS = ["Personal", "Notifications", "Messages"] as const;
+const ACCOUNT_ITEMS = ["Branding", "Marketing", "Billing", "Integrations", "Users & Teams"] as const;
+const MODULE_ITEMS = ["Projects", "Library", "Templates"] as const;
+const LOG_ITEMS = ["Member Logs", "Audit Logs"] as const;
+
+// Memoized sidebar icon button component
+const SidebarIconButton = memo(function SidebarIconButton({ 
+  icon: IconComponent, 
+  label 
+}: { 
+  icon: React.ReactNode; 
+  label: string;
+}) {
+  return (
+    <IconButton
+      icon={IconComponent}
+      aria-label={label}
+      size="md"
+      css={sidebarIconStyles}
+      color="secondary"
+      variant="ghost"
+    />
+  );
+});
+
+// Memoized accordion section component
+interface AccordionSectionProps {
+  title: string;
+  value: string;
+  items: readonly string[];
+  activeItem?: string;
+}
+
+const AccordionSection = memo(function AccordionSection({
+  title,
+  value,
+  items,
+  activeItem,
+}: AccordionSectionProps) {
+  return (
+    <Accordion type="single" collapsible defaultValue={value}>
+      <AccordionItem value={value} css={accordionItemStyles}>
+        <AccordionTrigger css={accordionTriggerStyles} className="!py-0">
+          <Text size="xs" weight="bold" css={{ color: "$neutral900" }}>
+            {title}{" "}
+          </Text>
+        </AccordionTrigger>
+        <AccordionContent css={accordionContentStyles}>
+          {activeItem && (
+            <Text
+              css={{
+                backgroundColor: "$primary50",
+                borderRadius: "$lg",
+                color: "$primary600",
+                padding: "$3 $4",
+                cursor: "pointer",
+              }}
+            >
+              {activeItem}
+            </Text>
+          )}
+          {items.map((item) => (
+            <MenuItem key={item}>{item}</MenuItem>
+          ))}
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  );
+});
+
+// Memoized form field wrapper
+const FormFieldWrapper = memo(function FormFieldWrapper({ 
+  children 
+}: { 
+  children: React.ReactNode;
+}) {
+  return <Box css={formFieldContainerStyles}>{children}</Box>;
+});
 
 export default function Settings() {
   return (
@@ -34,12 +138,13 @@ export default function Settings() {
         borderRadius: "$2xl",
         boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
         backgroundColor: "#F6F6F6",
-        height: "655px",
+        height: "734px",
         "@media (max-width: 768px)": {
           height: "100%",
         },
       }}
     >
+      {/* Left sidebar - Icon navigation */}
       <Flex
         flexDirection="column"
         justifyContent="space-between"
@@ -58,63 +163,17 @@ export default function Settings() {
         }}
       >
         <Flex flexDirection="column" gap="$5" alignItems="center">
-          <Box
-            css={{
-              marginBottom: "$3",
-            }}
-          >
+          <Box css={{ marginBottom: "$3" }}>
             <Image src={logo} alt="ThriveSparrow" width={25} height={25} />
           </Box>
           <Flex flexDirection="column" gap="$3">
-            <IconButton
-              icon={<HomeIcon />}
-              aria-label="Edit"
-              size="md"
-              css={{
-                color: "$secondary400",
-              }}
-              color="secondary"
-              variant="ghost"
-            />
-            <IconButton
-              icon={<SaveIcon />}
-              aria-label="save"
-              size="md"
-              color="secondary"
-              css={{
-                color: "$secondary400",
-              }}
-              variant="ghost"
-            />
-            <IconButton
-              icon={<ColorSwatchesIcon />}
-              aria-label="color"
-              size="md"
-              color="secondary"
-              css={{
-                color: "$secondary400",
-              }}
-              variant="ghost"
-            />
-            <IconButton
-              icon={<PageIcon />}
-              aria-label="page"
-              size="md"
-              color="secondary"
-              css={{
-                color: "$secondary400",
-              }}
-              variant="ghost"
-            />
-            <IconButton
-              icon={<Image src={icon} alt="icon" width={30} height={30} />}
-              aria-label="Ai"
-              size="md"
-              color="secondary"
-              css={{
-                color: "$secondary400",
-              }}
-              variant="ghost"
+            <SidebarIconButton icon={<HomeIcon />} label="Home" />
+            <SidebarIconButton icon={<SaveIcon />} label="Save" />
+            <SidebarIconButton icon={<ColorSwatchesIcon />} label="Colors" />
+            <SidebarIconButton icon={<PageIcon />} label="Pages" />
+            <SidebarIconButton 
+              icon={<Image src={icon} alt="icon" width={30} height={30} />} 
+              label="AI" 
             />
           </Flex>
         </Flex>
@@ -122,9 +181,7 @@ export default function Settings() {
           flexDirection="column"
           gap="$7"
           alignItems="center"
-          css={{
-            position: "relative",
-          }}
+          css={{ position: "relative" }}
         >
           <IconButton
             icon={<SettingsIcon />}
@@ -153,6 +210,8 @@ export default function Settings() {
           />
         </Flex>
       </Flex>
+
+      {/* Middle sidebar - Settings navigation */}
       <Flex
         flexDirection="column"
         gap="$7"
@@ -173,323 +232,43 @@ export default function Settings() {
             padding: "$8 $8",
           }}
         >
-          <Text
-            css={{
-              color: "$neutral800",
-            }}
-          >
-            Settings
-          </Text>
+          <Text css={{ color: "$neutral800" }}>Settings</Text>
           <Box>
             <IconButton
               icon={<SearchIcon />}
               aria-label="search"
               color="secondary"
               variant="ghost"
-              css={{
-                color: "$secondary500",
-              }}
+              css={{ color: "$secondary500" }}
             />
           </Box>
         </Flex>
         <Flex flexDirection="column" gap="$2">
-          <Accordion type="single" collapsible defaultValue="item-1">
-            <AccordionItem
-              value="item-1"
-              css={{
-                borderBottom: "0 !important",
-              }}
-            >
-              <AccordionTrigger
-                css={{
-                  backgroundColor: "#F6F6F6 !important",
-                  cursor: "pointer",
-                  textWrap: "nowrap",
-                }}
-                className="!py-0"
-              >
-                <Text
-                  size="xs"
-                  weight="bold"
-                  css={{
-                    color: "$neutral900 !important",
-                  }}
-                >
-                  YOUR PREFERENCE{" "}
-                </Text>
-              </AccordionTrigger>
-              <AccordionContent
-                css={{
-                  backgroundColor: "#F6F6F6 !important",
-                  "&>div": {
-                    padding: "0 !important",
-                  },
-                }}
-              >
-                <Text
-                  css={{
-                    padding: "$3 $4",
-                    color: "$neutral800",
-                    "&:hover": {
-                      backgroundColor: "$neutral100",
-                      cursor: "pointer",
-                      borderRadius: "$lg",
-                    },
-                  }}
-                >
-                  Personal
-                </Text>
-                <Text
-                  css={{
-                    padding: "$3 $4",
-                    color: "$neutral800",
-                    "&:hover": {
-                      backgroundColor: "$neutral100",
-                      cursor: "pointer",
-                      borderRadius: "$lg",
-                    },
-                  }}
-                >
-                  Notifications
-                </Text>
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
-          <Accordion type="single" collapsible defaultValue="item-2">
-            <AccordionItem
-              value="item-2"
-              css={{
-                borderBottom: "0 !important",
-              }}
-            >
-              <AccordionTrigger
-                css={{
-                  backgroundColor: "#F6F6F6 !important",
-                  cursor: "pointer",
-                }}
-                className="!py-0"
-              >
-                <Text
-                  size="xs"
-                  weight="bold"
-                  css={{
-                    color: "$neutral900",
-                  }}
-                >
-                  ACCOUNT MANAGEMENT{" "}
-                </Text>
-              </AccordionTrigger>
-              <AccordionContent
-                css={{
-                  backgroundColor: "#F6F6F6 !important",
-                  "&>div": {
-                    padding: "0 !important",
-                  },
-                }}
-              >
-                <Text
-                  css={{
-                    backgroundColor: "$primary50",
-                    borderRadius: "$lg",
-                    color: "$primary600",
-                    padding: "$3 $4",
-                    cursor: "pointer",
-                  }}
-                >
-                  General
-                </Text>
-                <Text
-                  css={{
-                    padding: "$3 $4",
-                    color: "$neutral800",
-                    "&:hover": {
-                      backgroundColor: "$neutral100",
-                      cursor: "pointer",
-                      borderRadius: "$lg",
-                    },
-                  }}
-                >
-                  Branding
-                </Text>
-                <Text
-                  css={{
-                    padding: "$3 $4",
-                    color: "$neutral800",
-                    "&:hover": {
-                      backgroundColor: "$neutral100",
-                      cursor: "pointer",
-                      borderRadius: "$lg",
-                    },
-                  }}
-                >
-                  Marketing
-                </Text>
-                <Text
-                  css={{
-                    padding: "$3 $4",
-                    color: "$neutral800",
-                    "&:hover": {
-                      backgroundColor: "$neutral100",
-                      cursor: "pointer",
-                      borderRadius: "$lg",
-                    },
-                  }}
-                >
-                  Billing
-                </Text>
-                <Text
-                  css={{
-                    padding: "$3 $4",
-                    color: "$neutral800",
-                    "&:hover": {
-                      backgroundColor: "$neutral100",
-                      cursor: "pointer",
-                      borderRadius: "$lg",
-                    },
-                  }}
-                >
-                  Integrations
-                </Text>
-                <Text
-                  css={{
-                    padding: "$3 $4",
-                    color: "$neutral800",
-                    "&:hover": {
-                      backgroundColor: "$neutral100",
-                      cursor: "pointer",
-                      borderRadius: "$lg",
-                    },
-                  }}
-                >
-                  Users & Teams
-                </Text>
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
-          <Accordion type="single" collapsible defaultValue="item-3">
-            <AccordionItem
-              value="item-3"
-              css={{
-                borderBottom: "0 !important",
-              }}
-            >
-              <AccordionTrigger
-                css={{
-                  backgroundColor: "#F6F6F6 !important",
-                  cursor: "pointer",
-                }}
-                className="!py-0"
-              >
-                <Text
-                  size="xs"
-                  weight="bold"
-                  css={{
-                    color: "$neutral900",
-                  }}
-                >
-                  MODULES{" "}
-                </Text>
-              </AccordionTrigger>
-              <AccordionContent
-                css={{
-                  backgroundColor: "#F6F6F6 !important",
-                  "&>div": {
-                    padding: "0 !important",
-                  },
-                }}
-              >
-                <Text
-                  css={{
-                    padding: "$3 $4",
-                    color: "$neutral800",
-                    "&:hover": {
-                      backgroundColor: "$neutral100",
-                      cursor: "pointer",
-                      borderRadius: "$lg",
-                    },
-                  }}
-                >
-                  Projects
-                </Text>
-                <Text
-                  css={{
-                    padding: "$3 $4",
-                    color: "$neutral800",
-                    "&:hover": {
-                      backgroundColor: "$neutral100",
-                      cursor: "pointer",
-                      borderRadius: "$lg",
-                    },
-                  }}
-                >
-                  Library
-                </Text>
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
-          <Accordion type="single" collapsible defaultValue="item-4">
-            <AccordionItem
-              value="item-4"
-              css={{
-                borderBottom: "0 !important",
-              }}
-            >
-              <AccordionTrigger
-                css={{
-                  backgroundColor: "#F6F6F6 !important",
-                  cursor: "pointer",
-                }}
-                className="!py-0"
-              >
-                <Text
-                  size="xs"
-                  weight="bold"
-                  css={{
-                    color: "$neutral900",
-                  }}
-                >
-                  LOGS{" "}
-                </Text>
-              </AccordionTrigger>
-              <AccordionContent
-                css={{
-                  backgroundColor: "#F6F6F6 !important",
-                  "&>div": {
-                    padding: "0 !important",
-                  },
-                }}
-              >
-                <Text
-                  css={{
-                    padding: "$3 $4",
-                    color: "$neutral800",
-                    "&:hover": {
-                      backgroundColor: "$neutral100",
-                      cursor: "pointer",
-                      borderRadius: "$lg",
-                    },
-                  }}
-                >
-                  Member Logs
-                </Text>
-                <Text
-                  css={{
-                    padding: "$3 $4",
-                    color: "$neutral800",
-                    "&:hover": {
-                      backgroundColor: "$neutral100",
-                      cursor: "pointer",
-                      borderRadius: "$lg",
-                    },
-                  }}
-                >
-                  Audit Logs
-                </Text>
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
+          <AccordionSection
+            title="YOUR PREFERENCE"
+            value="item-1"
+            items={PREFERENCE_ITEMS}
+          />
+          <AccordionSection
+            title="ACCOUNT MANAGEMENT"
+            value="item-2"
+            items={ACCOUNT_ITEMS}
+            activeItem="General"
+          />
+          <AccordionSection
+            title="MODULES"
+            value="item-3"
+            items={MODULE_ITEMS}
+          />
+          <AccordionSection
+            title="LOGS"
+            value="item-4"
+            items={LOG_ITEMS}
+          />
         </Flex>
       </Flex>
+
+      {/* Main content area */}
       <Flex
         flexDirection="column"
         gap="$8"
@@ -510,19 +289,10 @@ export default function Settings() {
         }}
       >
         <Flex flexDirection="column" gap="$2">
-          <Text
-            weight="bold"
-            css={{
-              color: "$neutral900",
-            }}
-          >
+          <Text weight="bold" css={{ color: "$neutral900" }}>
             General Settings
           </Text>
-          <Text
-            css={{
-              color: "$neutral600",
-            }}
-          >
+          <Text css={{ color: "$neutral600" }}>
             These defaults will be applied to the entire account.
           </Text>
         </Flex>
@@ -562,22 +332,8 @@ export default function Settings() {
             }}
           />
         </Box>
-        <Flex
-          flexDirection="row"
-          wrap="wrap"
-          gap="$5"
-          css={{
-            marginTop: "$3",
-          }}
-        >
-          <Box
-            css={{
-              width: "48%",
-              "@media (max-width: 768px)": {
-                width: "100%",
-              },
-            }}
-          >
+        <Flex flexDirection="row" wrap="wrap" gap="$10" css={{ marginTop: "$3" }}>
+          <FormFieldWrapper>
             <FormInput
               label="Account Name"
               size="md"
@@ -585,151 +341,72 @@ export default function Settings() {
               value="Thrive Sparrow"
               onChange={() => {}}
             />
-          </Box>
-          <Box
-            css={{
-              width: "48%",
-              "@media (max-width: 768px)": {
-                width: "100%",
-              },
-            }}
-          >
+          </FormFieldWrapper>
+          <FormFieldWrapper>
             <Select
               instanceId="settings-language-select"
               placeholder=""
-              options={[
-                { label: "English", value: "english" },
-                { label: "Hindi", value: "hindi" },
-                { label: "Marathi", value: "marathi" },
-              ]}
+              options={[...SETTINGS_LANGUAGE_OPTIONS]}
               size="md"
               variant="default"
               label="Language"
               defaultValue={[{ label: "English", value: "english" }]}
               info="Select your language"
             />
-          </Box>
-          <Box
-            css={{
-              width: "48%",
-              "@media (max-width: 768px)": {
-                width: "100%",
-              },
-            }}
-          >
+          </FormFieldWrapper>
+          <FormFieldWrapper>
             <Select
               instanceId="settings-timezone-select"
               placeholder=""
-              options={[
-                { label: "India", value: "india" },
-                { label: "USA", value: "usa" },
-                { label: "UK", value: "uk" },
-              ]}
+              options={[...SETTINGS_TIMEZONE_OPTIONS]}
               size="md"
               variant="default"
               label="Timezone"
               info="Select your timezone"
               defaultValue={[{ label: "India", value: "india" }]}
             />
-          </Box>
-          <Box
-            css={{
-              width: "48%",
-              "@media (max-width: 768px)": {
-                width: "100%",
-              },
-            }}
-          >
+          </FormFieldWrapper>
+          <FormFieldWrapper>
             <Select
               instanceId="settings-currency-select"
               placeholder=""
-              options={[
-                { label: "INR", value: "inr" },
-                { label: "USD", value: "usd" },
-                { label: "GBP", value: "gbp" },
-              ]}
+              options={[...SETTINGS_CURRENCY_OPTIONS]}
               size="md"
               variant="default"
               label="Currency"
               info="Select your currency"
               defaultValue={[{ label: "INR", value: "inr" }]}
             />
-          </Box>
-          <Box
-            css={{
-              width: "48%",
-              "@media (max-width: 768px)": {
-                width: "100%",
-              },
-            }}
-          >
+          </FormFieldWrapper>
+          <FormFieldWrapper>
             <Select
               instanceId="settings-date-format-select"
               placeholder=""
-              options={[
-                { label: "DD/MM/YYYY", value: "dd/mm/yyyy" },
-                { label: "MM/DD/YYYY", value: "mm/dd/yyyy" },
-                { label: "YYYY/MM/DD", value: "yyyy/mm/dd" },
-              ]}
+              options={[...SETTINGS_DATE_FORMAT_OPTIONS]}
               size="md"
               variant="default"
               label="Date & Number Format"
               info="Select your date & number format"
             />
-          </Box>
+          </FormFieldWrapper>
         </Flex>
-        <Flex
-          flexDirection="column"
-          gap="$2"
-          css={{
-            marginTop: "$2",
-          }}
-        >
-          <Text
-            weight="bold"
-            css={{
-              color: "$neutral900",
-            }}
-          >
+        <Flex flexDirection="column" gap="$2" css={{ marginTop: "$8" }}>
+          <Text weight="bold" css={{ color: "$neutral900" }}>
             Company Information
           </Text>
-          <Text
-            css={{
-              color: "$neutral600",
-            }}
-          >
+          <Text css={{ color: "$neutral600" }}>
             This information will be used as a default where needed.
           </Text>
         </Flex>
-        <Flex
-          wrap="wrap"
-          gap="$5"
-          css={{
-            marginTop: "$3",
-          }}
-        >
-          <Box
-            css={{
-              width: "48%",
-              "@media (max-width: 768px)": {
-                width: "100%",
-              },
-            }}
-          >
+        <Flex wrap="wrap" gap="$10" css={{ marginTop: "$3" }}>
+          <FormFieldWrapper>
             <FormInput
               label="Company Name"
               size="md"
               info="Enter your company name"
             />
-          </Box>
-          <Box
-            css={{
-              width: "48%",
-              "@media (max-width: 768px)": {
-                width: "100%",
-              },
-            }}
-          >
+          </FormFieldWrapper>
+          <FormFieldWrapper>
             <FormInput
               label="Company Domain"
               size="md"
@@ -737,31 +414,33 @@ export default function Settings() {
               disabled
               value="thrivesparrow.com"
             />
-          </Box>
-          <Box
-            css={{
-              width: "48%",
-              "@media (max-width: 768px)": {
-                width: "100%",
-              },
-            }}
-          >
+          </FormFieldWrapper>
+          <FormFieldWrapper>
             <FormInput
               label="Company Address"
               size="md"
               info="company address"
             />
-          </Box>
-          <Box
-            css={{
-              width: "48%",
-              "@media (max-width: 768px)": {
-                width: "100%",
-              },
-            }}
-          >
+          </FormFieldWrapper>
+          <FormFieldWrapper>
             <FormInput label="Company Phone" size="md" info="company phone" />
-          </Box>
+          </FormFieldWrapper>
+          <Button
+            size="md"
+            color="secondary"
+            variant="solid"
+            css={{ width: "fit-content", marginTop: "$5" }}
+          >
+            Save Changes
+          </Button>
+          <Button
+            size="md"
+            color="secondary"
+            variant="outline"
+            css={{ width: "fit-content", marginTop: "$5" }}
+          >
+            Discard
+          </Button>
         </Flex>
       </Flex>
     </Flex>
