@@ -229,13 +229,3 @@ aside#nd-sidebar {
 .fd-step > div > div[role="tablist"] {
   overflow: visible;
 }
-
-div#nd-toc > div > div > div:nth-child(2) a:focus-visible {
-  box-shadow: none;
-  border: 2px solid #8ACCD2;
-  background-color: white;
-}
-
-div#nd-toc > div > div > div:nth-child(2) a{
-  border: 2px solid transparent;
-}

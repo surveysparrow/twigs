@@ -12,6 +12,7 @@ import autocomplete from "@/assets/images/autocomplete-new.png";
 import docs from "@/assets/images/docs-new.png";
 import color from "@/assets/images/color-swatch-new.png";
 import { useTabIndicator } from "../hooks";
+import externalLink from "@/assets/images/arrow-icon.png";
 
 const INTELLISENSE_URL = "https://marketplace.visualstudio.com/items?itemName=SurveySparrow.twigs-intellisense";
 
@@ -144,7 +145,7 @@ const Intellisense = () => {
         <p className="text-center text-base md:text-[20px]/[28px] text-slate-500 break-words tracking-[-0.08px] font-[300]">
           Twigs IntelliSense boosts VS Code productivity with autocomplete, docs
           access, and color swatches.
-          <span className="cursor-pointer underline block lg:hidden" onClick={() => window.open(INTELLISENSE_URL, "_blank")}>{" "}Explore the Extension</span>
+          <span className="cursor-pointer underline block lg:hidden flex items-center justify-center" onClick={() => window.open(INTELLISENSE_URL, "_blank")}>{" "}Explore the Extension<Image src={externalLink} alt="external link" width={18} height={16} /> </span>
         </p>
       </div>
       <div className="flex flex-col gap-4 items-center justify-center">
