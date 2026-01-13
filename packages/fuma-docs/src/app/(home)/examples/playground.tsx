@@ -3,6 +3,7 @@ import React from "react";
 import { ForwardArrowIcon } from "@sparrowengg/twigs-react-icons";
 import Image, { StaticImageData } from "next/image";
 import playground from "@/assets/images/play-new.svg";
+import externalLink from "@/assets/images/arrow-icon.png";
 
 const PLAYGROUND_URL = "https://play.twigs.surveysparrow.com/"; 
 
@@ -47,7 +48,7 @@ export default function Playground() {
           </h2>
           <p className="text-center text-[16px] md:text-[20px]/[28px] text-slate-500 break-words tracking-[-0.08px] font-[300]">
             Playground designed for the twigs development with a live preview and code editor
-            <span className="cursor-pointer underline block lg:hidden" onClick={() => window.open(PLAYGROUND_URL, "_blank")}>{" "}Explore the Playground</span>
+            <span className="cursor-pointer underline block lg:hidden flex items-center justify-center" onClick={() => window.open(PLAYGROUND_URL, "_blank")}>{" "}Explore the Playground<Image src={externalLink} alt="external link" width={18} height={16} /> </span>
           </p>
         </div>
         <div className="max-w-[870px] mx-auto">
