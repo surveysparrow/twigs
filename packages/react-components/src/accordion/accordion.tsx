@@ -19,6 +19,9 @@ const StyledTrigger = styled(AccordionPrimitive.Trigger, {
   '&:hover:not([data-disabled])': {
     backgroundColorOpacity: ['$primary500', 0.04]
   },
+  '&:focus-visible': {
+    outline: 'none'
+  },
   '&[data-disabled]': {
     cursor: 'not-allowed'
   }
@@ -45,7 +48,7 @@ const AccordionItem = styled(AccordionPrimitive.Item, {
   '&:first-child': {
     marginTop: 0
   },
-  '&:focus-within': {
+  '&:has(button:focus-visible)': {
     position: 'relative',
     zIndex: 1,
     $$shadowColor: '$colors$primary300',

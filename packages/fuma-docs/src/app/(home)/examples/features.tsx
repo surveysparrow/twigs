@@ -199,6 +199,9 @@ export default function Features() {
                     borderRight: "1px solid #E2E8F0",
                     borderTopRightRadius: "8px !important",
                   },
+                  '&:focus-visible': {
+                    boxShadow: ' #8ACCD2 0px 0px 0px 2px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px',
+                  },
               }}
               >
                 <div className="flex flex-col gap-1 px-[16px] py-[20px] lg:px-[24px] lg:py-[20px]">
@@ -225,6 +228,9 @@ export default function Features() {
                   transition: "border-color 0.3s ease-in-out",
                   "@media (max-width: 1024px)": {
                     borderRight: "1px solid #E2E8F0",
+                  },
+                  '&:focus-visible': {
+                    boxShadow: ' #8ACCD2 0px 0px 0px 2px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
                   },
               }}
               >
@@ -256,6 +262,9 @@ export default function Features() {
                   "@media (max-width: 1024px)": {
                     borderRight: "1px solid #E2E8F0",
                     borderBottomLeftRadius: "0px !important",
+                  },
+                  '&:focus-visible': {
+                    boxShadow: ' #8ACCD2 0px 0px 0px 2px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
                   },
               }}
               >
