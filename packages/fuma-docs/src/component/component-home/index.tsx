@@ -1,11 +1,9 @@
 "use client";
 import React from "react";
-import { useRouter } from "next/navigation";
 import { ComponentPreview } from "./component-preview";
 import { components } from "./components-data";
 
 export function ComponentHome() {
-  const router = useRouter();
   return (
     <div>
       {Object.entries(
@@ -23,11 +21,10 @@ export function ComponentHome() {
           </h3>
           <div className="mb-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {categoryComponents.map((component) => (
-              <div
+              <a
                 key={component.name}
-                onClick={() => {
-                  router.push(component.href);
-                }}
+                href={`/docs/components/${component.name}`}
+                className="block text-current no-underline not-prose rounded-lg"
               >
                 <div className="border border-fd-border hover:bg-fd-secondary/40 rounded-lg cursor-pointer min-h-70">
                   <div className="flex flex-col gap-1">
@@ -47,7 +44,7 @@ export function ComponentHome() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
         </div>

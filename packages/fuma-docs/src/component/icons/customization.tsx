@@ -96,7 +96,7 @@ export function Customization() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search icons..."
-            className="w-full pl-10 pr-4 py-3 text-sm border rounded-lg bg-white focus:outline-none focus:ring-1 focus:ring-fd-muted-foreground/50 focus:border-transparent transition-all"
+            className="w-full pl-10 pr-4 py-3 text-sm border rounded-lg bg-white transition-all"
           />
         </div>
         <button
@@ -242,8 +242,15 @@ export function Customization() {
         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-2">
           {filteredIcons.map(({ name, component: IconComponent }) => (
             <div
+              role="button"
+              tabIndex={0}
               key={name}
               onClick={() => handleCopyIcon(name)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  handleCopyIcon(name);
+                }
+              }}
               className="bg-gradient-to-br from-gray-50 to-white border rounded-2xl p-4 hover:cursor-pointer group hover:shadow-md transition-all duration-200"
             >
               <div className="flex items-center justify-center mb-2">

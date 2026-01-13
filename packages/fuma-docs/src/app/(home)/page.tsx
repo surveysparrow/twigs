@@ -50,6 +50,7 @@ export default function SamplePage() {
     containerRef: tabsListRef,
     activeTab,
     cssVarPrefix: "tab-selection",
+    mobileWidthAdjustment: 3,
   });
 
   // Handle copy with proper cleanup
@@ -121,15 +122,45 @@ export default function SamplePage() {
     ) as HTMLElement;
     if (!tabsListElement) return;
 
-    const buttonLeft =
-      activeButton.offsetLeft + (tabsListElement.offsetLeft || 0);
+    const buttonLeft = activeButton.offsetLeft + (tabsListElement.offsetLeft || 0);
     const buttonRight = buttonLeft + activeButton.offsetWidth;
+    
     const scrollLeft = list.scrollLeft;
     const clientWidth = list.clientWidth;
-
-    if (buttonLeft < scrollLeft || buttonRight > scrollLeft + clientWidth) {
+    const scrollWidth = list.scrollWidth;
+    const visibleRight = scrollLeft + clientWidth;
+    const maxScroll = scrollWidth - clientWidth;
+    
+    const rightSpace = visibleRight - buttonRight;
+    const leftSpace = buttonLeft - scrollLeft;
+    
+    // Threshold: if button is within this many pixels of edge, peek at more tabs
+    const EDGE_THRESHOLD = 50;
+    const SCROLL_PADDING = 4;
+    // Case 1: Button is completely out of view - bring it into view
+    if (buttonLeft < scrollLeft || buttonRight > visibleRight) {
       list.scrollTo({
-        left: Math.max(0, buttonLeft - 12),
+        left: Math.max(0, buttonLeft - SCROLL_PADDING),
+        behavior: "smooth",
+      });
+      return;
+    }
+    // Case 2: Button is near RIGHT edge and there are more tabs to the right
+    // Scroll to position button at left side, revealing more tabs on right
+    if (rightSpace < EDGE_THRESHOLD && scrollLeft < maxScroll) {
+      const targetScroll = buttonLeft - SCROLL_PADDING;
+      list.scrollTo({
+        left: Math.min(maxScroll, Math.max(0, targetScroll)),
+        behavior: "smooth",
+      });
+      return;
+    }
+    // Case 3: Button is near LEFT edge and there are more tabs to the left
+    // Scroll to position button at right side, revealing more tabs on left
+    if (leftSpace < EDGE_THRESHOLD && scrollLeft > 0) {
+      const targetScroll = buttonRight - clientWidth + SCROLL_PADDING;
+      list.scrollTo({
+        left: Math.max(0, targetScroll + 10),
         behavior: "smooth",
       });
     }
@@ -201,6 +232,37 @@ export default function SamplePage() {
     });
 
     return () => ctx.revert();
+  }, []);
+
+  // Handle keyboard focus on elements behind the curtain
+  useEffect(() => {
+    const revealContent = document.querySelector(".reveal-content");
+    if (!revealContent) return;
+
+    const handleFocusIn = (event: FocusEvent) => {
+      const focusedElement = event.target as HTMLElement;
+      
+      if (!revealContent.contains(focusedElement)) return;
+
+      const curtainTitle = document.querySelector(".curtain-title");
+      const curtainTitleHeight = (curtainTitle instanceof HTMLElement) ? curtainTitle.offsetHeight : 0;
+      const scrollThreshold = curtainTitleHeight + CURTAIN_HEIGHT_OFFSET;
+
+      // If we haven't scrolled past the curtain yet, scroll to reveal the content
+      if (window.scrollY < scrollThreshold) {
+        window.scrollTo({
+          top: scrollThreshold,
+          behavior: "smooth",
+        });
+      }
+    };
+
+    // Use focusin event which bubbles (unlike focus)
+    revealContent.addEventListener("focusin", handleFocusIn as EventListener);
+
+    return () => {
+      revealContent.removeEventListener("focusin", handleFocusIn as EventListener);
+    };
   }, []);
   
 
@@ -304,7 +366,7 @@ export default function SamplePage() {
           <div className="w-full flex items-center justify-center">
             <div
               ref={tabsListRef}
-              className="flex overflow-scroll bg-[#64748B0F] rounded-full w-[95vw] md:w-fit p-0.5 tabs-list-container"
+              className="flex overflow-scroll md:overflow-visible bg-[#64748B0F] rounded-full w-[95vw] md:w-fit p-0.5 tabs-list-container px-0.5"
               style={{
                 scrollbarWidth: "none",
                 position: "relative",
@@ -357,6 +419,7 @@ export default function SamplePage() {
           </div>
           <TabsContent
             value="components"
+            tabIndex={-1}
             className="mt-4 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
           >
             <div className="lg:max-w-6xl 2xl:max-w-7xl mx-3 w-full flex flex-col md:flex-row gap-2 border-2 border-fd-background rounded-3xl p-2 bg-fd-muted tabs-grid flex-wrap">
@@ -380,6 +443,7 @@ export default function SamplePage() {
           </TabsContent>
           <TabsContent
             value="onboarding"
+            tabIndex={-1}
             className="mt-4 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
           >
             <div className="lg:max-w-6xl 2xl:max-w-7xl mx-3 w-full border-2 border-fd-background rounded-3xl p-2 bg-fd-muted tabs-grid">
@@ -387,6 +451,7 @@ export default function SamplePage() {
             </div>
           </TabsContent>
           <TabsContent
+            tabIndex={-1}
             value="settings"
             className="mt-4 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
           >
@@ -395,6 +460,7 @@ export default function SamplePage() {
             </div>
           </TabsContent>
           <TabsContent
+            tabIndex={-1}
             value="users"
             className="mt-4 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
           >
@@ -403,6 +469,7 @@ export default function SamplePage() {
             </div>
           </TabsContent>
           <TabsContent
+            tabIndex={-1}
             value="conversation"
             className="mt-4 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
           >
@@ -411,6 +478,7 @@ export default function SamplePage() {
             </div>
           </TabsContent>
           <TabsContent
+            tabIndex={-1}
             value="dashboard"
             className="mt-4 components-tab w-full flex justify-center items-center !bg-transparent !p-0"
           >

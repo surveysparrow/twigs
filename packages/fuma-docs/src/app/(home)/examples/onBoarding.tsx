@@ -199,7 +199,7 @@ export default function OnBoarding() {
               <Image src={googleIcon} alt="google" width={20} height={20} />
             }
           >
-            <span style={{ marginLeft: "20px" }}>Sign up with Google</span>
+            <span style={{ marginLeft: "20px", textWrap: "nowrap" }}>Sign up with Google</span>
           </Button>
           <Text
             size="sm"

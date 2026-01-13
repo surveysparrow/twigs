@@ -218,6 +218,7 @@ export default function Settings() {
         css={{
           backgroundColor: "#F6F6F6",
           width: "20%",
+          marginRight: '5px',
           "@media (max-width: 768px)": {
             display: "none",
           },
@@ -345,6 +346,7 @@ export default function Settings() {
           <FormFieldWrapper>
             <Select
               instanceId="settings-language-select"
+              isSearchable={false}
               placeholder=""
               options={[...SETTINGS_LANGUAGE_OPTIONS]}
               size="md"
@@ -352,11 +354,20 @@ export default function Settings() {
               label="Language"
               defaultValue={[{ label: "English", value: "english" }]}
               info="Select your language"
+              css={{
+                '&:focus-within': {
+                  $$shadowColor: '$colors$primary200',
+                  borderRadius: '$lg',
+                  boxShadow:
+                    'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px !important',
+                },
+              }}
             />
           </FormFieldWrapper>
           <FormFieldWrapper>
             <Select
               instanceId="settings-timezone-select"
+              isSearchable={false}
               placeholder=""
               options={[...SETTINGS_TIMEZONE_OPTIONS]}
               size="md"
@@ -364,11 +375,20 @@ export default function Settings() {
               label="Timezone"
               info="Select your timezone"
               defaultValue={[{ label: "India", value: "india" }]}
+              css={{
+                '&:focus-within': {
+                  $$shadowColor: '$colors$primary200',
+                  borderRadius: '$lg',
+                  boxShadow:
+                    'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px !important',
+                },
+              }}
             />
           </FormFieldWrapper>
           <FormFieldWrapper>
             <Select
               instanceId="settings-currency-select"
+              isSearchable={false}
               placeholder=""
               options={[...SETTINGS_CURRENCY_OPTIONS]}
               size="md"
@@ -376,17 +396,34 @@ export default function Settings() {
               label="Currency"
               info="Select your currency"
               defaultValue={[{ label: "INR", value: "inr" }]}
+              css={{
+                '&:focus-within': {
+                  $$shadowColor: '$colors$primary200',
+                  borderRadius: '$lg',
+                  boxShadow:
+                    'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px !important',
+                },
+              }}
             />
           </FormFieldWrapper>
           <FormFieldWrapper>
             <Select
               instanceId="settings-date-format-select"
+              isSearchable={false}
               placeholder=""
               options={[...SETTINGS_DATE_FORMAT_OPTIONS]}
               size="md"
               variant="default"
               label="Date & Number Format"
               info="Select your date & number format"
+              css={{
+                '&:focus-within': {
+                  $$shadowColor: '$colors$primary200',
+                  borderRadius: '$lg',
+                  boxShadow:
+                    'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px !important',
+                },
+              }}
             />
           </FormFieldWrapper>
         </Flex>

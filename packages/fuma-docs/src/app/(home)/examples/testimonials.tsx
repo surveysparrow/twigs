@@ -174,7 +174,7 @@ export default function Testimonials() {
                 Justin
               </Text>
               <Text size="sm" weight="normal" css={{ color: "$neutral500" }}>
-                Product Owner, SparrowDesk
+                Business Unit Head, SparrowDesk
               </Text>
             </div>
           </div>
