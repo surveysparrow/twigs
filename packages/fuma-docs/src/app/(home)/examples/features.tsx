@@ -296,7 +296,7 @@ export default function Features() {
               />
             </TabsList>
           </div>
-          <TabsContent value="accessible" className="Features-tab-content rounded-lg !p-0 relative w-fit">
+          <TabsContent value="accessible" className="Features-tab-content rounded-lg !p-0 relative w-fit" tabIndex={-1}>
           <div className="p-5 lg:p-10 rounded-tr-none lg:rounded-tr-lg rounded-b-lg lg:rounded-bl-none rounded-r-lg bg-linear-to-r from-[#86BFF5] to-[#27579B] w-full h-full">
               <div className="relative w-full h-full overflow-hidden rounded-lg flex items-center justify-center">
                 <div className="image-slide-container">
@@ -309,7 +309,7 @@ export default function Features() {
               </div>
             </div>
           </TabsContent>
-          <TabsContent value="extensible" className="Features-tab-content rounded-lg !p-0 w-fit">
+          <TabsContent value="extensible" className="Features-tab-content rounded-lg !p-0 w-fit" tabIndex={-1}>
             <div className="p-5 lg:p-10 rounded-tr-none lg:rounded-tr-lg rounded-b-lg lg:rounded-bl-none rounded-r-lg bg-linear-to-r from-[#E9CFAE] to-[#AC8859] w-full h-full">
               <div className="relative w-full h-full overflow-hidden rounded-lg flex items-center justify-center">
                 <div className="image-slide-container">
@@ -322,7 +322,7 @@ export default function Features() {
               </div>
             </div>
           </TabsContent>
-          <TabsContent value="themeable" className="Features-tab-content rounded-lg !p-0 w-fit">
+          <TabsContent value="themeable" className="Features-tab-content rounded-lg !p-0 w-fit" tabIndex={-1}>
             <div className="p-5 lg:p-10 rounded-tr-none lg:rounded-tr-lg rounded-b-lg lg:rounded-bl-none rounded-r-lg bg-linear-to-r from-[#FFCB70] to-[#FB7D32] w-full h-full">
               <div className="relative w-full h-full overflow-hidden rounded-lg flex items-center justify-center">
                 <div className="image-slide-container"> 

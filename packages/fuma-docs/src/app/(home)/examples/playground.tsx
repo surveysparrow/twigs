@@ -24,8 +24,8 @@ const HoverImage = ({ src, alt }: HoverImageProps) => {
         alt={alt}
         className="rounded-b-2xl md:rounded-b-none rounded-t-2xl h-full transition-transform duration-300 p-3 md:p-0 bg-[#FFF6D3] object-cover"
       />
-      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-all duration-300 flex items-center justify-center rounded-t-2xl">
-        <div className="flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 group-focus-visible:bg-black/50 transition-all duration-300 flex items-center justify-center rounded-t-2xl">
+        <div className="flex items-center gap-3 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-300">
           <span className="text-white text-xl font-semibold tracking-tight">
             Go to Playground
           </span>

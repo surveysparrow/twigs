@@ -9,6 +9,12 @@
   --color-fd-loader: #5329d8;
 }
 
+/* Override browser default focus ring color */
+:focus-visible {
+  outline: none !important;
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 2px, #8ACCD2 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+} 
+
 @media (min-width: 1024px) {
   #nd-sidebar > div:first-child {
     display: none;
@@ -29,8 +35,17 @@ header#nd-subnav > div > div:last-child {
   gap: 0;
 }
 
+header#nd-subnav > div:nth-child(2) {
+  overflow: visible;
+}
+
 header#nd-subnav > div > div:last-child > a:hover {
   background-color: oklch(92.9% 0.013 255.508) ;
+}
+
+header#nd-subnav > div > div:last-child > a:focus-visible {
+  outline: none !important;
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 2px, #8ACCD2 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
 }
 
 main#nd-home-layout {
@@ -98,6 +113,11 @@ header#nd-nav > div > nav > div > div > li > a:hover {
   background-color: oklch(92.9% 0.013 255.508) !important;
 }
 
+header#nd-nav > div > nav > div > div > li > a:focus-visible {
+  outline: none !important;
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 2px, #8ACCD2 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+}
+
 
 @media (min-width: 1024px) {
   header#nd-nav div nav {
@@ -124,7 +144,7 @@ header#nd-nav > div > nav > div > div > li > a:hover {
     margin: 0 auto ;
   }
   main#nd-docs-layout {
-    max-width: 1328px;
+    max-width: 1366px;
     margin: 0 auto;
   }
   aside#nd-sidebar {
@@ -191,4 +211,31 @@ div[role="dialog"] > div {
 .color-input::-moz-color-swatch {
   border: none !important;
   border-radius: 50%;
+}
+
+div[role="dialog"] > div > input:focus-visible {
+  box-shadow: none !important;
+}
+
+aside#nd-sidebar {
+  z-index: 5;
+}
+
+.fd-step > div > div[role="tablist"] >button:focus-visible {
+  overflow: visible !important;
+  box-shadow:#8ACCD2 0px 0px 0px 2px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+}
+
+.fd-step > div > div[role="tablist"] {
+  overflow: visible;
+}
+
+div#nd-toc > div > div > div:nth-child(2) a:focus-visible {
+  box-shadow: none;
+  border: 2px solid #8ACCD2;
+  background-color: white;
+}
+
+div#nd-toc > div > div > div:nth-child(2) a{
+  border: 2px solid transparent;
 }

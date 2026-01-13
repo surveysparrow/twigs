@@ -42,13 +42,11 @@ export default function EmailAgent() {
         </Flex>
         <Flex flexDirection="column" gap="$2" css={{ paddingBottom: "$16" }}>
             <Text size="xs" weight="medium" css={{ color: "$neutral800" }}>Tone of voice</Text>
-          <Flex justifyContent="space-between" gap="$2"
+          <Flex gap="$2"
           css={{
-            "@media (max-width: 768px)": {
-              justifyContent: "start",
+            "@media (max-width: 1024px)": {
+              overflow: "hidden",
             },
-            overflowX: "scroll",
-            scrollbarWidth: "none",
           }}
           >
             <Chip color="secondary"
@@ -63,8 +61,9 @@ export default function EmailAgent() {
               borderColor: selectedTone === "1" ? "$secondary400 !important" : null,
             }}
             > <Text css={{ padding: "6px", "@media (min-width: 1600px)": {
-              padding: "12px",
-            }, }}>😎Casual</Text>  </Chip>
+              paddingLeft: "12px",
+              paddingRight: "12px",
+            }, }}>😎 Casual</Text>  </Chip>
             <Chip color="secondary"
             variant="outline"
             selectable
@@ -77,7 +76,8 @@ export default function EmailAgent() {
               borderColor: selectedTone === "2" ? "$secondary400 !important" : null,
             }}
             > <Text css={{ padding: "6px", "@media (min-width: 1600px)": {
-              padding: "12px",
+              paddingLeft: "12px",
+              paddingRight: "12px",
             }, }}>👔 Professional</Text>  </Chip>
             <Chip color="secondary"
             variant="outline"
@@ -89,12 +89,13 @@ export default function EmailAgent() {
               borderRadius: "99px",
               backgroundColor: selectedTone === "3" ? "$neutral50 !important" : null,
               borderColor: selectedTone === "3" ? "$secondary400 !important" : null,
-              "@media (max-width: 768px)": {
+              "@media (max-width: 1024px)": {
                 display: "none",
               },
             }}
             > <Text css={{ padding: "6px", "@media (min-width: 1600px)": {
-              padding: "12px",
+              paddingLeft: "12px",
+              paddingRight: "12px",
             }, }}>😊 Friendly</Text>  </Chip>
           </Flex>
         </Flex>
@@ -132,9 +133,18 @@ export default function EmailAgent() {
             options={EMAIL_AGENT_OPTIONS}
             size="md"
             defaultValue={EMAIL_AGENT_OPTIONS[0]}
+            isSearchable={false}
+            css={{
+              '&:focus-within': {
+                $$shadowColor: '$colors$primary200',
+                borderRadius: '$lg',
+                boxShadow:
+                  'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px !important',
+              },
+            }}
           />
         <Flex gap="$4" css={{ paddingTop: "$10" }}>
-        <Button variant="default" size="md">
+        <Button variant="default" size="md" css={{textWrap: "nowrap"}}>
           Save Changes
         </Button>
         <Button variant="filled" color="default" size="md">

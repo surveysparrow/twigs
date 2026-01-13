@@ -210,6 +210,15 @@ export const UpgradeGuide = () => {
                 onChange={handlePackageChange}
                 isDisabled={versionsLoading}
                 options={packageOptions}
+                isSearchable={false}
+                css={{
+                  '&:focus-within': {
+                    $$shadowColor: '$colors$primary200',
+                    borderRadius: '$lg',
+                    boxShadow:
+                      'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px !important',
+                  },
+                }}
               />
               <Select
                 size="md"
@@ -222,6 +231,15 @@ export const UpgradeGuide = () => {
                 }
                 isDisabled={versionsLoading}
                 options={versionOptions}
+                                isSearchable={false}
+                css={{
+                  '&:focus-within': {
+                    $$shadowColor: '$colors$primary200',
+                    borderRadius: '$lg',
+                    boxShadow:
+                      'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px !important',
+                  },
+                }}
               />
               <Select
                 size="md"
@@ -234,6 +252,15 @@ export const UpgradeGuide = () => {
                 }
                 isDisabled={versionsLoading}
                 options={versionOptions}
+                                isSearchable={false}
+                css={{
+                  '&:focus-within': {
+                    $$shadowColor: '$colors$primary200',
+                    borderRadius: '$lg',
+                    boxShadow:
+                      'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px !important',
+                  },
+                }}
               />
             </div>
           )}

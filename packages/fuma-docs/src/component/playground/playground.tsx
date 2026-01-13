@@ -41,12 +41,12 @@ export const Playground = ({
         <div className="relative group playground-tab--playground">
           <iframe
             src={buildUrl(snippetName)}
-            className="rounded-md w-full h-[800px] border border-fd-border"
+            className="rounded-xl w-full h-[800px] border border-fd-border"
             loading="lazy"
           />
           <a
             href={buildUrl(snippetName, true)}
-            className="absolute w-8 h-8 flex items-center justify-center top-[-32px] right-0 lg:top-0 lg:right-[-32px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg bg-fd-accent"
+            className="absolute w-8 h-8 flex items-center justify-center top-[-32px] right-0 lg:top-0 lg:right-[-32px] opacity-0 group-hover:opacity-100 focus-visible:opacity-100 transition-opacity duration-300 rounded-lg bg-fd-accent"
             aria-label="Open Playground in New Tab"
             title="Open Playground in New Tab"
             target="_blank"

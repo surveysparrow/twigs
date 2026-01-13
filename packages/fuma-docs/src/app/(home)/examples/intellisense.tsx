@@ -33,8 +33,8 @@ const HoverImage = ({ src, alt }: HoverImageProps) => {
         alt={alt}
         className="rounded-b-2xl md:rounded-b-none rounded-t-2xl h-[250px] lg:h-[455px] transition-transform duration-300 object-cover p-3 md:p-0 bg-[#D6F2FF]" 
       />
-      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-all duration-300 flex items-center justify-center md:rounded-t-2xl">
-        <div className="flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 group-focus-visible:bg-black/50 transition-all duration-300 flex items-center justify-center md:rounded-t-2xl">
+        <div className="flex items-center gap-3 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-300">
           <span className="text-white text-xl font-semibold tracking-tight">
             Go to Intellisense
           </span>
@@ -193,18 +193,21 @@ const Intellisense = () => {
           <TabsContent
             value="autocomplete"
             className="!p-0 rounded-t-2xl max-w-[733px]"
+            tabIndex={-1}
           >
             <HoverImage src={autocomplete} alt="autocomplete" />
           </TabsContent>
           <TabsContent
             value="docs"
             className="!p-0 rounded-t-2xl max-w-[733px]"
+            tabIndex={-1}
           >
             <HoverImage src={docs} alt="docs" />
           </TabsContent>
           <TabsContent
             value="color"
             className="!p-0 rounded-t-2xl max-w-[733px]"
+            tabIndex={-1}
           >
             <HoverImage src={color} alt="color" />
           </TabsContent>

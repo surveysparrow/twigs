@@ -89,7 +89,7 @@ export default function ProductCard() {
           <TabsTrigger value="steps-to-redeem" css={{ fontSize: "$sm", fontWeight: "$5", fontFamily: "var(--font-dm-sans) !important", textWrap: "nowrap" }}>Steps to Redeem</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="denominations" css={{ padding: "0 !important" }}>
+        <TabsContent value="denominations" css={{ padding: "0 !important" }} tabIndex={-1}>
           <Flex justifyContent="space-between" alignItems="center" css={{borderBottom: "1px solid $neutral200", padding: "$6 $8" }} >
             <Flex alignItems="center" gap="$6">
               <Switch
@@ -142,7 +142,7 @@ export default function ProductCard() {
           </Flex>
         </TabsContent>
 
-        <TabsContent value="steps-to-redeem" css={{ padding: "0 !important" }}>
+        <TabsContent value="steps-to-redeem" css={{ padding: "0 !important" }} tabIndex={-1}>
           <Flex flexDirection="column" gap="$5" css={{ padding: "$8", paddingTop: "$11", "@media (min-width: 1600px)": { paddingBottom: "$12", gap: "$7" } }}>
             <Flex gap="$6">
               <Text css={{ color: "$neutral900", padding: "$1 $4", border:"1px solid $neutral200", borderRadius: "$round", height:"fit-content" }}>1</Text>
