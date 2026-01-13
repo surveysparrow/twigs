@@ -157,7 +157,7 @@ const Intellisense = () => {
         <div className="w-full flex items-center justify-center">
             <div
               ref={tabsListRef}
-              className="flex overflow-scroll rounded-[999px] w-[80vw] md:w-fit !px-1.5 py-1 intellisense-tabs-list-container border border-slate-300"
+              className="flex overflow-scroll md:overflow-visible rounded-[999px] w-[80vw] md:w-fit !px-1.5 py-1 intellisense-tabs-list-container border border-slate-300"
               style={{
                 scrollbarWidth: "none",
                 position: "relative",
@@ -171,6 +171,11 @@ const Intellisense = () => {
                 <TabsTrigger
                   value="autocomplete"
                   className="!text-sm intellisense-tabs !rounded-lg"
+                  css={{
+                    '&:focus-visible': {
+                      borderRadius: '999px !important',
+                    },
+                  }}
                 >
                   {" "}
                   <div className="mr-1 md:mr-0">Autocomplete</div>
@@ -178,12 +183,22 @@ const Intellisense = () => {
                 <TabsTrigger
                   value="docs"
                   className="!text-sm intellisense-tabs !rounded-md"
+                  css={{
+                    '&:focus-visible': {
+                      borderRadius: '999px !important',
+                    },
+                  }}
                 >
                   <div className="text-nowrap">Access Twigs Docs</div>
                 </TabsTrigger>
                 <TabsTrigger
                   value="color"
                   className="!text-sm intellisense-tabs !rounded-md"
+                  css={{
+                    '&:focus-visible': {
+                      borderRadius: '999px !important',
+                    },
+                  }}
                 >
                   <div className="text-nowrap">Color Preview</div>
                 </TabsTrigger>

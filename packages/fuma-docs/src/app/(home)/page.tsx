@@ -380,6 +380,11 @@ export default function SamplePage() {
                 <TabsTrigger
                   value="components"
                   className="!text-sm !font-normal tabs !rounded-lg"
+                  css={{
+                    '&:focus-visible': {
+                      borderRadius: '999px !important',
+                    }
+                  }}
                 >
                   {" "}
                   <div>Components</div>
@@ -387,30 +392,55 @@ export default function SamplePage() {
                 <TabsTrigger
                   value="conversation"
                   className="!text-sm !font-normal tabs !rounded-md"
+                  css={{
+                    '&:focus-visible': {
+                      borderRadius: '999px !important',
+                    }
+                  }}
                 >
                   <div>Conversation</div>
                 </TabsTrigger>
                 <TabsTrigger
                   value="dashboard"
                   className="!text-sm !font-normal tabs !rounded-md"
+                  css={{
+                    '&:focus-visible': {
+                      borderRadius: '999px !important',
+                    }
+                  }}
                 >
                   <div>Dashboard</div>
                 </TabsTrigger>
                 <TabsTrigger
                   value="users"
                   className="!text-sm !font-normal tabs !rounded-md"
+                  css={{
+                    '&:focus-visible': {
+                      borderRadius: '999px !important',
+                    }
+                  }}
                 >
                   <div>Users</div>
                 </TabsTrigger>
                 <TabsTrigger
                   value="settings"
                   className="!text-sm !font-normal tabs !rounded-md"
+                  css={{
+                    '&:focus-visible': {
+                      borderRadius: '999px !important',
+                    }
+                  }}
                 >
                   <div>Settings</div>
                 </TabsTrigger>
                 <TabsTrigger
                   value="onboarding"
                   className="!text-sm !font-normal tabs !rounded-md"
+                  css={{
+                    '&:focus-visible': {
+                      borderRadius: '999px !important',
+                    }
+                  }}
                 >
                   <div>Onboarding</div>
                 </TabsTrigger>
