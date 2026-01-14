@@ -210,7 +210,7 @@ export const defaultTheme = {
     '5xl': '2.986rem'
   },
   fonts: {
-    body: 'sytem-ui',
+    body: 'sans-serif',
     heading: 'sans-serif'
   },
   fontWeights: {

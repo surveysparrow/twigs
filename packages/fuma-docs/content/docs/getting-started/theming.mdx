@@ -65,25 +65,31 @@ Custom themes merge with defaults - only specified keys override:
 
 Wrap your application with `ThemeProvider`:
 
-```jsx title="src/App.jsx"
-import { ThemeProvider } from '@sparrowengg/twigs-react';
+```jsx
+// [!code highlight]
+import { ThemeProvider, defaultTheme } from '@sparrowengg/twigs-react'
 
 function App() {
   return (
-    <ThemeProvider>
+// [!code highlight]
+    <ThemeProvider theme={defaultTheme}>
       <YourApp />
     </ThemeProvider>
-  );
+  )
 }
 ```
+
+<Callout type="info">
+For the best experience, wrap `ThemeProvider` in your `main.jsx` or `main.tsx` file at the root of your application. This ensures all components have access to the theme.
+</Callout>
 
 ## Customizing the Theme
 
 ### Using Custom File (Recommended)
 
-Create `twigs.config.js` file in your project root:
+Create a `twigs.config.js` or `twigs.config.ts` file in your project root:
 
-```jsx title="twigs.config.js"
+```jsx
 export default {
   theme: {
     extends: {
@@ -102,9 +108,13 @@ export default {
 };
 ```
 
+<Callout type="warn">
+Make sure to import your custom fonts (e.g., `DM Sans`) in your project via Google Fonts, a CDN, or local files. The font will not apply unless it's properly loaded in your application.
+</Callout>
+
 Import and use in `ThemeProvider`:
 
-```jsx title="src/App.jsx"
+```jsx
 import { ThemeProvider } from '@sparrowengg/twigs-react';
 import twigsConfig from '../twigs.config.js'; // [!code highlight]
 
@@ -124,7 +134,7 @@ function App() {
 
 Pass theme object directly:
 
-```jsx title="src/index.jsx"
+```jsx
 import { ThemeProvider } from '@sparrowengg/twigs-react';
 
 const customTheme = {
@@ -152,9 +162,10 @@ Add dark mode support using the `createTheme` function, which generates a theme 
 
 ### Add Dark Theme
 
-Extend your `twigs.config.js` to include dark theme configuration:
+Extend your `twigs.config` by altering the default export to include dark theme configuration
 
-```jsx title="twigs.config.js"
+```jsx
+// [!code highlight]
 import { createTheme } from '@sparrowengg/twigs-react';
 
 const config = {
@@ -189,8 +200,7 @@ export const darkTheme = createTheme('dark-theme', config.theme.dark);
 
 Use `ThemeProvider` for your default theme and apply the `darkTheme` class conditionally when needed.
 
-```jsx title="src/App.jsx"
-import { ThemeProvider } from '@sparrowengg/twigs-react';
+```jsx
 import config, { darkTheme } from '../twigs.config.js'; // [!code highlight]
 import { useState } from "react";
 
@@ -199,13 +209,15 @@ function App() {
   return (
     // [!code highlight]
     <div className={isDark ? darkTheme : ''}>
-      <ThemeProvider theme={config.theme.extends}>
-        <YourApp />
-      </ThemeProvider>
+      <yourComponents />
     </div>
   );
 }
 ```
+
+<Callout type="info">
+Apply the dark theme class in your `App.tsx` or `App.jsx` file to ensure consistent theming across your entire application.
+</Callout>
 
 **How it works:**
 - `ThemeProvider` applies your custom theme via the `theme` prop.
