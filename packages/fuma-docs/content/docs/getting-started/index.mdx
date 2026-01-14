@@ -21,7 +21,7 @@ Twigs is designed to be the perfect foundation for building modern web applicati
 
 ### Install the Package
 
-Install Twigs React components using your preferred package manager:
+Install Twigs React components using your preferred package manager
 
 <Tabs items={['npm', 'yarn', 'pnpm']} style={{overflow:'visible'}}>
 <Tab value="npm" tabIndex={-1}>
@@ -53,7 +53,7 @@ pnpm add @sparrowengg/twigs-react @sparrowengg/twigs-react-icons
 
 ### Install Editor (Optional)
 
-editor provides rich text editing capabilities
+Editor provides rich text editing capabilities
 
 <Tabs items={['npm', 'yarn', 'pnpm']} style={{overflow:'visible'}}>
 <Tab value="npm" tabIndex={-1}>
@@ -85,19 +85,25 @@ pnpm add @sparrowengg/twigs-editor-react
 
 ### ThemeProvider
 
-Setting up the theme provider:
+Setting up the `ThemeProvider` in your root file
 
 ```jsx
-import { ThemeProvider } from '@sparrowengg/twigs-react';
+// [!code highlight]
+import { ThemeProvider, defaultTheme } from '@sparrowengg/twigs-react'
 
 function App() {
   return (
-    <ThemeProvider>
+// [!code highlight]
+    <ThemeProvider theme={defaultTheme}>
       <YourApp />
     </ThemeProvider>
   )
 }
 ```
+
+<Callout type="info">
+For the best experience, wrap `ThemeProvider` in your `main.jsx` or `main.tsx` file at the root of your application. This ensures all components have access to the theme.
+</Callout>
 
 </Step>
 </Steps>
@@ -106,31 +112,7 @@ function App() {
 
 Here's a simple example to get you started:
 
-```jsx
-import React from 'react';
-import { Button, Box, Text } from '@sparrowengg/twigs-react';
-
-function App() {
-  return (
-    <Box css={{ padding: '$4', textAlign: 'center' }}>
-      <Text size="lg" css={{ marginBottom: '$4' }}>
-        Welcome to Twigs!
-      </Text>
-      <Button 
-        color="primary" 
-        css={{ 
-          backgroundColor: '$primary500',
-          '&:hover': { backgroundColor: '$primary600' }
-        }}
-      >
-        Get Started
-      </Button>
-    </Box>
-  );
-}
-
-export default App;
-```
+<Playground snippetName="getting-started" defaultPlayground />
 
 ## Framework Integration
 

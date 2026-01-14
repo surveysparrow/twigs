@@ -3,17 +3,59 @@ title: Setup
 description: Learn how to set up and configure the Twigs editor in your application. Built on top of Lexical, the editor provides rich text editing capabilities with comprehensive toolbar options and data management features.
 ---
 
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+
 ## Installation
+
+<Tabs items={['npm', 'yarn', 'pnpm']} style={{overflow:'visible'}}>
+<Tab value="npm" tabIndex={-1}>
+
+```bash
+npm install @sparrowengg/twigs-editor-react
+```
+
+</Tab>
+<Tab value="yarn" tabIndex={-1}>
 
 ```bash
 yarn add @sparrowengg/twigs-editor-react
 ```
 
+</Tab>
+<Tab value="pnpm" tabIndex={-1}>
+
+```bash
+pnpm add @sparrowengg/twigs-editor-react
+```
+
+</Tab>
+</Tabs>
+
 The editor uses the following packages as peer dependencies, so you need to install them as well.
+
+<Tabs items={['npm', 'yarn', 'pnpm']} style={{overflow:'visible'}}>
+<Tab value="npm" tabIndex={-1}>
+
+```bash
+npm install lexical @lexical/code @lexical/html @lexical/link @lexical/list @lexical/react @lexical/rich-text @lexical/selection @lexical/utils
+```
+
+</Tab>
+<Tab value="yarn" tabIndex={-1}>
 
 ```bash
 yarn add lexical @lexical/code @lexical/html @lexical/link @lexical/list @lexical/react @lexical/rich-text @lexical/selection @lexical/utils
 ```
+
+</Tab>
+<Tab value="pnpm" tabIndex={-1}>
+
+```bash
+pnpm add lexical @lexical/code @lexical/html @lexical/link @lexical/list @lexical/react @lexical/rich-text @lexical/selection @lexical/utils
+```
+
+</Tab>
+</Tabs>
 
 ## Import
 
