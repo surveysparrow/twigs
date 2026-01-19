@@ -211,7 +211,7 @@ div[role="dialog"] > div {
 .color-input::-moz-color-swatch {
   border: none !important;
   border-radius: 50%;
-}
+} 
 
 div[role="dialog"] > div > input:focus-visible {
   box-shadow: none !important;
@@ -228,4 +228,8 @@ aside#nd-sidebar {
 
 .fd-step > div > div[role="tablist"] {
   overflow: visible;
+}
+
+body > div:nth-of-type(2)[data-state="open"] {
+  backdrop-filter: blur(4px);
 }
