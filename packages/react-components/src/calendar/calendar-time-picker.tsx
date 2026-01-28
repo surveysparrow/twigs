@@ -32,6 +32,11 @@ export type CalendarTimePickerProps = {
   size?: CalendarSize,
   renderCustomTrigger?: (props: { timeValue: TimeValueState }) => ReactNode;
   className?: string;
+  /**
+   * When true, displays 24-hour military time format. When false, displays 12-hour format with AM/PM.
+   * @default false
+   */
+  isMilitaryTime?: boolean;
 };
 
 export const CalendarTimePicker = ({
@@ -39,7 +44,8 @@ export const CalendarTimePicker = ({
   onChange,
   size,
   renderCustomTrigger,
-  className
+  className,
+  isMilitaryTime = false
 }: CalendarTimePickerProps) => {
   const [localDateValue, setLocalDateValue] = useState<DateValue>(today(getLocalTimeZone()));
 
@@ -61,7 +67,9 @@ export const CalendarTimePicker = ({
   }, [dateValue]);
 
   const hoursInTwelveHourFormat = timeState.hour % 12 || 12;
-  const initialHours = hoursInTwelveHourFormat.toString().padStart(2, '0');
+  const initialHours = isMilitaryTime
+    ? timeState.hour.toString().padStart(2, '0')
+    : hoursInTwelveHourFormat.toString().padStart(2, '0');
   const initialMinutes = timeState.minute.toString().padStart(2, '0');
 
   const [timeValue, setTimeValue] = useState<TimeValueState>({
@@ -151,10 +159,17 @@ export const CalendarTimePicker = ({
   };
 
   const handleApply = () => {
-    const updatedTime = timeState.set({
-      hour: timeValue.pm
+    let hour: number;
+    if (isMilitaryTime) {
+      hour = parseInt(timeValue.hour, 10);
+    } else {
+      hour = timeValue.pm
         ? 12 + (parseInt(timeValue.hour, 10) % 12)
-        : parseInt(timeValue.hour, 10) % 12,
+        : parseInt(timeValue.hour, 10) % 12;
+    }
+
+    const updatedTime = timeState.set({
+      hour,
       minute: parseInt(timeValue.minute, 10)
     });
     if (onChange) {
@@ -177,8 +192,12 @@ export const CalendarTimePicker = ({
             {initialHours}
             :
             {initialMinutes}
-            {' '}
-            {timeState.hour >= 12 ? 'PM' : 'AM'}
+            {!isMilitaryTime && (
+              <>
+                {' '}
+                {timeState.hour >= 12 ? 'PM' : 'AM'}
+              </>
+            )}
           </Button>
         )}
       </PopoverTrigger>
@@ -207,8 +226,12 @@ export const CalendarTimePicker = ({
             {timeValue.hour}
             :
             {timeValue.minute}
-            {' '}
-            {timeValue.pm ? 'PM' : 'AM'}
+            {!isMilitaryTime && (
+              <>
+                {' '}
+                {timeValue.pm ? 'PM' : 'AM'}
+              </>
+            )}
           </Text>
         </Flex>
         <Flex
@@ -224,17 +247,21 @@ export const CalendarTimePicker = ({
             handleArrowKeys={handleArrowKeys}
             timeValue={timeValue}
             updateTimeValue={updateTimeValue}
+            isMilitaryTime={isMilitaryTime}
           />
           <ListMinutes
             handleArrowKeys={handleArrowKeys}
             timeValue={timeValue}
             updateTimeValue={updateTimeValue}
+            hasBorderRight={!isMilitaryTime}
           />
-          <ListAmPm
-            handleArrowKeys={handleArrowKeys}
-            timeValue={timeValue}
-            updateTimeValue={updateTimeValue}
-          />
+          {!isMilitaryTime && (
+            <ListAmPm
+              handleArrowKeys={handleArrowKeys}
+              timeValue={timeValue}
+              updateTimeValue={updateTimeValue}
+            />
+          )}
         </Flex>
         <Flex
           css={{
@@ -260,19 +287,31 @@ export const CalendarTimePicker = ({
   );
 };
 
-interface ListingColumnProps {
+interface BaseListingColumnProps {
   timeValue: TimeValueState;
   updateTimeValue: (values: Partial<TimeValueState>) => void;
   handleArrowKeys: (e: React.KeyboardEvent<HTMLButtonElement>) => void;
 }
 
+interface ListHoursProps extends BaseListingColumnProps {
+  isMilitaryTime?: boolean;
+}
+
+interface ListMinutesProps extends BaseListingColumnProps {
+  hasBorderRight?: boolean;
+}
+
 const ListHours = ({
   timeValue,
   updateTimeValue,
-  handleArrowKeys
-}: ListingColumnProps) => {
+  handleArrowKeys,
+  isMilitaryTime = false
+}: ListHoursProps) => {
   const columnRef = useRef<HTMLDivElement>(null);
-  const hours = Array.from({ length: 12 }).map((_, index) => `${index + 1}`.padStart(2, '0'));
+
+  const hours = isMilitaryTime
+    ? Array.from({ length: 24 }).map((_, index) => `${index}`.padStart(2, '0'))
+    : Array.from({ length: 12 }).map((_, index) => `${index + 1}`.padStart(2, '0'));
 
   useEffect(() => {
     const selectedHourButton = columnRef.current?.querySelector(
@@ -292,9 +331,7 @@ const ListHours = ({
 
   return (
     <Column gap="0" hasBorderRight ref={columnRef} data-time-column>
-      {hours.map((_, index) => {
-        const hour = `${index + 1}`.padStart(2, '0');
-
+      {hours.map((hour) => {
         return (
           <FieldButton
             key={hour}
@@ -322,8 +359,9 @@ const ListHours = ({
 const ListMinutes = ({
   handleArrowKeys,
   timeValue,
-  updateTimeValue
-}: ListingColumnProps) => {
+  updateTimeValue,
+  hasBorderRight = true
+}: ListMinutesProps) => {
   const columnRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -337,7 +375,7 @@ const ListMinutes = ({
   }, []);
 
   return (
-    <Column gap="0" hasBorderRight ref={columnRef} data-time-column>
+    <Column gap="0" hasBorderRight={hasBorderRight} ref={columnRef} data-time-column>
       {Array.from({ length: 60 }).map((_, index) => {
         const minute = `${index}`.padStart(2, '0');
 
@@ -369,7 +407,7 @@ const ListAmPm = ({
   handleArrowKeys,
   timeValue,
   updateTimeValue
-}: ListingColumnProps) => {
+}: BaseListingColumnProps) => {
   return (
     <Column gap="0" data-time-column>
       <FieldButton
