@@ -47,7 +47,7 @@ export const DatePicker = ({
   showFooter,
   showTimePicker,
   showTimezonePicker,
-  isMilitaryTime,
+  hourCycle,
   renderFooter,
   footerAction,
   footerActionText,
@@ -166,7 +166,7 @@ export const DatePicker = ({
               showFooter={showFooter}
               showTimePicker={showTimePicker}
               showTimezonePicker={showTimezonePicker}
-              isMilitaryTime={isMilitaryTime}
+              hourCycle={hourCycle}
               renderFooter={
                 renderFooter
                   ? (calendarState) => renderFooter(calendarState, state.setOpen)

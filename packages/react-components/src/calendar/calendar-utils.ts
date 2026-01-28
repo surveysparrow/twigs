@@ -11,10 +11,10 @@ export type CalendarControlProps = {
   showTimezonePicker?: boolean;
   showTimePicker?: boolean;
   /**
-   * When true, displays 24-hour military time format. When false, displays 12-hour format with AM/PM.
-   * @default false
+   * Hour cycle - 12 for 12-hour format with AM/PM, 24 for 24-hour format.
+   * @default 12
    */
-  isMilitaryTime?: boolean;
+  hourCycle?: 12 | 24;
   size?: CalendarSize;
   showFooter?: boolean;
   footerActionText?: string;

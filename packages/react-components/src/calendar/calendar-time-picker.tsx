@@ -20,10 +20,12 @@ import { CalendarProps } from './calendar';
 import { FieldButton } from './calendar-commons';
 import { CalendarSize } from './calendar-utils';
 
+export type HourCycle = 12 | 24;
+
 interface TimeValueState {
   hour: string;
   minute: string;
-  pm: boolean;
+  pm?: boolean;
 }
 
 export type CalendarTimePickerProps = {
@@ -33,10 +35,10 @@ export type CalendarTimePickerProps = {
   renderCustomTrigger?: (props: { timeValue: TimeValueState }) => ReactNode;
   className?: string;
   /**
-   * When true, displays 24-hour military time format. When false, displays 12-hour format with AM/PM.
-   * @default false
+   * Hour cycle - 12 for 12-hour format with AM/PM, 24 for 24-hour format.
+   * @default 12
    */
-  isMilitaryTime?: boolean;
+  hourCycle?: HourCycle;
 };
 
 export const CalendarTimePicker = ({
@@ -45,7 +47,7 @@ export const CalendarTimePicker = ({
   size,
   renderCustomTrigger,
   className,
-  isMilitaryTime = false
+  hourCycle = 12
 }: CalendarTimePickerProps) => {
   const [localDateValue, setLocalDateValue] = useState<DateValue>(today(getLocalTimeZone()));
 
@@ -66,8 +68,9 @@ export const CalendarTimePicker = ({
     return toCalendarDateTime(dateValue);
   }, [dateValue]);
 
+  const is24HourCycle = hourCycle === 24;
   const hoursInTwelveHourFormat = timeState.hour % 12 || 12;
-  const initialHours = isMilitaryTime
+  const initialHours = is24HourCycle
     ? timeState.hour.toString().padStart(2, '0')
     : hoursInTwelveHourFormat.toString().padStart(2, '0');
   const initialMinutes = timeState.minute.toString().padStart(2, '0');
@@ -75,7 +78,7 @@ export const CalendarTimePicker = ({
   const [timeValue, setTimeValue] = useState<TimeValueState>({
     hour: initialHours,
     minute: initialMinutes,
-    pm: timeState.hour >= 12
+    ...(is24HourCycle ? {} : { pm: timeState.hour >= 12 })
   });
 
   const columnsContainerRef = useRef<HTMLDivElement>(null);
@@ -160,7 +163,7 @@ export const CalendarTimePicker = ({
 
   const handleApply = () => {
     let hour: number;
-    if (isMilitaryTime) {
+    if (is24HourCycle) {
       hour = parseInt(timeValue.hour, 10);
     } else {
       hour = timeValue.pm
@@ -192,7 +195,7 @@ export const CalendarTimePicker = ({
             {initialHours}
             :
             {initialMinutes}
-            {!isMilitaryTime && (
+            {!is24HourCycle && (
               <>
                 {' '}
                 {timeState.hour >= 12 ? 'PM' : 'AM'}
@@ -226,7 +229,7 @@ export const CalendarTimePicker = ({
             {timeValue.hour}
             :
             {timeValue.minute}
-            {!isMilitaryTime && (
+            {!is24HourCycle && (
               <>
                 {' '}
                 {timeValue.pm ? 'PM' : 'AM'}
@@ -247,15 +250,15 @@ export const CalendarTimePicker = ({
             handleArrowKeys={handleArrowKeys}
             timeValue={timeValue}
             updateTimeValue={updateTimeValue}
-            isMilitaryTime={isMilitaryTime}
+            hourCycle={hourCycle}
           />
           <ListMinutes
             handleArrowKeys={handleArrowKeys}
             timeValue={timeValue}
             updateTimeValue={updateTimeValue}
-            hasBorderRight={!isMilitaryTime}
+            hasBorderRight={!is24HourCycle}
           />
-          {!isMilitaryTime && (
+          {!is24HourCycle && (
             <ListAmPm
               handleArrowKeys={handleArrowKeys}
               timeValue={timeValue}
@@ -294,7 +297,7 @@ interface BaseListingColumnProps {
 }
 
 interface ListHoursProps extends BaseListingColumnProps {
-  isMilitaryTime?: boolean;
+  hourCycle?: HourCycle;
 }
 
 interface ListMinutesProps extends BaseListingColumnProps {
@@ -305,11 +308,12 @@ const ListHours = ({
   timeValue,
   updateTimeValue,
   handleArrowKeys,
-  isMilitaryTime = false
+  hourCycle = 12
 }: ListHoursProps) => {
   const columnRef = useRef<HTMLDivElement>(null);
+  const is24HourCycle = hourCycle === 24;
 
-  const hours = isMilitaryTime
+  const hours = is24HourCycle
     ? Array.from({ length: 24 }).map((_, index) => `${index}`.padStart(2, '0'))
     : Array.from({ length: 12 }).map((_, index) => `${index + 1}`.padStart(2, '0'));
 

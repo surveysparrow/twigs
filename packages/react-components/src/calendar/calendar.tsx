@@ -169,7 +169,7 @@ export const Calendar = ({
                     value={dateValue}
                     onChange={handleChange}
                     size={size}
-                    isMilitaryTime={props.isMilitaryTime}
+                    hourCycle={props.hourCycle}
                     className={prefixClassName('calendar__time-picker')}
                   />
                 )}
