@@ -81,6 +81,22 @@ export const CalendarTimePicker = ({
     ...(is24HourCycle ? {} : { pm: timeState.hour >= 12 })
   });
 
+  // Update timeValue when hourCycle or timeState changes
+  useEffect(() => {
+    const is24Hour = hourCycle === 24;
+    const hoursInTwelveHourFormat = timeState.hour % 12 || 12;
+    const formattedHour = is24Hour
+      ? timeState.hour.toString().padStart(2, '0')
+      : hoursInTwelveHourFormat.toString().padStart(2, '0');
+    const formattedMinute = timeState.minute.toString().padStart(2, '0');
+
+    setTimeValue({
+      hour: formattedHour,
+      minute: formattedMinute,
+      ...(is24Hour ? {} : { pm: timeState.hour >= 12 })
+    });
+  }, [hourCycle, timeState]);
+
   const columnsContainerRef = useRef<HTMLDivElement>(null);
 
   const updateTimeValue = (values: Partial<TimeValueState>) => {
@@ -331,7 +347,7 @@ const ListHours = ({
         selectedHourButton.focus();
       });
     }
-  }, []);
+  }, [timeValue.hour, hourCycle]);
 
   return (
     <Column gap="0" hasBorderRight ref={columnRef} data-time-column>
