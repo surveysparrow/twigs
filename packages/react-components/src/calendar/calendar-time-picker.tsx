@@ -84,10 +84,10 @@ export const CalendarTimePicker = ({
   // Update timeValue when hourCycle or timeState changes
   useEffect(() => {
     const is24Hour = hourCycle === 24;
-    const hoursInTwelveHourFormat = timeState.hour % 12 || 12;
+    const hour12 = timeState.hour % 12 || 12;
     const formattedHour = is24Hour
       ? timeState.hour.toString().padStart(2, '0')
-      : hoursInTwelveHourFormat.toString().padStart(2, '0');
+      : hour12.toString().padStart(2, '0');
     const formattedMinute = timeState.minute.toString().padStart(2, '0');
 
     setTimeValue({
