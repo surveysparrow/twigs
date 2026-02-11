@@ -10,6 +10,11 @@ export type CalendarSize = 'lg' | 'md' | 'sm';
 export type CalendarControlProps = {
   showTimezonePicker?: boolean;
   showTimePicker?: boolean;
+  /**
+   * Hour cycle - 12 for 12-hour format with AM/PM, 24 for 24-hour format.
+   * @default 12
+   */
+  hourCycle?: 12 | 24;
   size?: CalendarSize;
   showFooter?: boolean;
   footerActionText?: string;
