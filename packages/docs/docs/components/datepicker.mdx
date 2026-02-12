@@ -93,9 +93,13 @@ function App() {
 | onChange             | Callback function when date is selected                                 | function                                     |          |
 | isOpen               | open the calendar popover                                               | boolean                                      | false    |
 | closeOnSelect        | Close datepicker on selecting a date                                    | boolean                                      | false    |
-| label                |                                                                         | string                                       |          |
+| label                | Label for the date picker                                               | string                                       |          |
+| size                 | Size of the calendar                                                    | `'lg' \| 'md' \| 'sm'`                      | "lg"     |
 | enablePortal         | Calendar popover will render in body                                    | boolean                                      | false    |
-| portalTarget         | Render Calendar Popover in specific element                             | Element                                      | false    |
+| portalTarget         | Render Calendar Popover in specific element                             | Element                                      |          |
+| showTimePicker       | Show the time picker                                                    | boolean                                      | false    |
+| showTimezonePicker   | Show the timezone picker                                                | boolean                                      | false    |
+| hourCycle            | Hour cycle - 12 for 12-hour format with AM/PM, 24 for 24-hour format   | `12 \| 24`                                   | 12       |
 | onDaySelect          | Callback function when day is selected                                  | `(date: DateValue) => void`                  |          |
 | onMonthSelect        | Callback function when month is selected                                | `(date: DateValue) => void`                  |          |
 | onYearSelect         | Callback function when year is selected                                 | `(date: DateValue) => void`                  |          |
