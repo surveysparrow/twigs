@@ -157,6 +157,11 @@ function App() {
       description: "Show timezone picker for timezone-aware selection",
       default: "false",
     },
+    hourCycle: {
+      type: "12 | 24",
+      description: "Hour cycle - 12 for 12-hour format with AM/PM, 24 for 24-hour format",
+      default: "12",
+    },
     containerCSS: {
       type: "CSS Object",
       description: "Custom CSS for the container element",
