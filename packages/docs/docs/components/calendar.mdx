@@ -54,4 +54,8 @@ function App() {
 | footerAction     | Action to be performed on footer button click                           | `(state: CalendarState) => void`      |          |
 | footerActionText | Text to be displayed on footer button                                   | string                                | "Select" |
 | renderFooter     | Custom footer component                                                 | `(state: CalendarState) => ReactNode` |          |
+| size             | Size of the calendar                                                    | `'lg' \| 'md' \| 'sm'`               | "lg"     |
+| showTimePicker   | Show the time picker                                                    | boolean                               | false    |
+| showTimezonePicker | Show the timezone picker                                              | boolean                               | false    |
+| hourCycle        | Hour cycle - 12 for 12-hour format with AM/PM, 24 for 24-hour format   | `12 \| 24`                            | 12       |
 | containerCSS     | Custom CSS for the container element                                    | `CSS`                                 |          |

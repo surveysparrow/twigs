@@ -20,10 +20,12 @@ import { CalendarProps } from './calendar';
 import { FieldButton } from './calendar-commons';
 import { CalendarSize } from './calendar-utils';
 
+export type HourCycle = 12 | 24;
+
 interface TimeValueState {
   hour: string;
   minute: string;
-  pm: boolean;
+  pm?: boolean;
 }
 
 export type CalendarTimePickerProps = {
@@ -32,6 +34,11 @@ export type CalendarTimePickerProps = {
   size?: CalendarSize,
   renderCustomTrigger?: (props: { timeValue: TimeValueState }) => ReactNode;
   className?: string;
+  /**
+   * Hour cycle - 12 for 12-hour format with AM/PM, 24 for 24-hour format.
+   * @default 12
+   */
+  hourCycle?: HourCycle;
 };
 
 export const CalendarTimePicker = ({
@@ -39,7 +46,8 @@ export const CalendarTimePicker = ({
   onChange,
   size,
   renderCustomTrigger,
-  className
+  className,
+  hourCycle = 12
 }: CalendarTimePickerProps) => {
   const [localDateValue, setLocalDateValue] = useState<DateValue>(today(getLocalTimeZone()));
 
@@ -60,15 +68,34 @@ export const CalendarTimePicker = ({
     return toCalendarDateTime(dateValue);
   }, [dateValue]);
 
+  const is24HourCycle = hourCycle === 24;
   const hoursInTwelveHourFormat = timeState.hour % 12 || 12;
-  const initialHours = hoursInTwelveHourFormat.toString().padStart(2, '0');
+  const initialHours = is24HourCycle
+    ? timeState.hour.toString().padStart(2, '0')
+    : hoursInTwelveHourFormat.toString().padStart(2, '0');
   const initialMinutes = timeState.minute.toString().padStart(2, '0');
 
   const [timeValue, setTimeValue] = useState<TimeValueState>({
     hour: initialHours,
     minute: initialMinutes,
-    pm: timeState.hour >= 12
+    ...(is24HourCycle ? {} : { pm: timeState.hour >= 12 })
   });
+
+  // Update timeValue when hourCycle or timeState changes
+  useEffect(() => {
+    const is24Hour = hourCycle === 24;
+    const hour12 = timeState.hour % 12 || 12;
+    const formattedHour = is24Hour
+      ? timeState.hour.toString().padStart(2, '0')
+      : hour12.toString().padStart(2, '0');
+    const formattedMinute = timeState.minute.toString().padStart(2, '0');
+
+    setTimeValue({
+      hour: formattedHour,
+      minute: formattedMinute,
+      ...(is24Hour ? {} : { pm: timeState.hour >= 12 })
+    });
+  }, [hourCycle, timeState]);
 
   const columnsContainerRef = useRef<HTMLDivElement>(null);
 
@@ -151,10 +178,17 @@ export const CalendarTimePicker = ({
   };
 
   const handleApply = () => {
-    const updatedTime = timeState.set({
-      hour: timeValue.pm
+    let hour: number;
+    if (is24HourCycle) {
+      hour = parseInt(timeValue.hour, 10);
+    } else {
+      hour = timeValue.pm
         ? 12 + (parseInt(timeValue.hour, 10) % 12)
-        : parseInt(timeValue.hour, 10) % 12,
+        : parseInt(timeValue.hour, 10) % 12;
+    }
+
+    const updatedTime = timeState.set({
+      hour,
       minute: parseInt(timeValue.minute, 10)
     });
     if (onChange) {
@@ -177,8 +211,12 @@ export const CalendarTimePicker = ({
             {initialHours}
             :
             {initialMinutes}
-            {' '}
-            {timeState.hour >= 12 ? 'PM' : 'AM'}
+            {!is24HourCycle && (
+              <>
+                {' '}
+                {timeState.hour >= 12 ? 'PM' : 'AM'}
+              </>
+            )}
           </Button>
         )}
       </PopoverTrigger>
@@ -207,8 +245,12 @@ export const CalendarTimePicker = ({
             {timeValue.hour}
             :
             {timeValue.minute}
-            {' '}
-            {timeValue.pm ? 'PM' : 'AM'}
+            {!is24HourCycle && (
+              <>
+                {' '}
+                {timeValue.pm ? 'PM' : 'AM'}
+              </>
+            )}
           </Text>
         </Flex>
         <Flex
@@ -224,17 +266,21 @@ export const CalendarTimePicker = ({
             handleArrowKeys={handleArrowKeys}
             timeValue={timeValue}
             updateTimeValue={updateTimeValue}
+            hourCycle={hourCycle}
           />
           <ListMinutes
             handleArrowKeys={handleArrowKeys}
             timeValue={timeValue}
             updateTimeValue={updateTimeValue}
+            hasBorderRight={!is24HourCycle}
           />
-          <ListAmPm
-            handleArrowKeys={handleArrowKeys}
-            timeValue={timeValue}
-            updateTimeValue={updateTimeValue}
-          />
+          {!is24HourCycle && (
+            <ListAmPm
+              handleArrowKeys={handleArrowKeys}
+              timeValue={timeValue}
+              updateTimeValue={updateTimeValue}
+            />
+          )}
         </Flex>
         <Flex
           css={{
@@ -260,19 +306,32 @@ export const CalendarTimePicker = ({
   );
 };
 
-interface ListingColumnProps {
+interface BaseListingColumnProps {
   timeValue: TimeValueState;
   updateTimeValue: (values: Partial<TimeValueState>) => void;
   handleArrowKeys: (e: React.KeyboardEvent<HTMLButtonElement>) => void;
 }
 
+interface ListHoursProps extends BaseListingColumnProps {
+  hourCycle?: HourCycle;
+}
+
+interface ListMinutesProps extends BaseListingColumnProps {
+  hasBorderRight?: boolean;
+}
+
 const ListHours = ({
   timeValue,
   updateTimeValue,
-  handleArrowKeys
-}: ListingColumnProps) => {
+  handleArrowKeys,
+  hourCycle = 12
+}: ListHoursProps) => {
   const columnRef = useRef<HTMLDivElement>(null);
-  const hours = Array.from({ length: 12 }).map((_, index) => `${index + 1}`.padStart(2, '0'));
+  const is24HourCycle = hourCycle === 24;
+
+  const hours = is24HourCycle
+    ? Array.from({ length: 24 }).map((_, index) => `${index}`.padStart(2, '0'))
+    : Array.from({ length: 12 }).map((_, index) => `${index + 1}`.padStart(2, '0'));
 
   useEffect(() => {
     const selectedHourButton = columnRef.current?.querySelector(
@@ -288,13 +347,11 @@ const ListHours = ({
         selectedHourButton.focus();
       });
     }
-  }, []);
+  }, [timeValue.hour, hourCycle]);
 
   return (
     <Column gap="0" hasBorderRight ref={columnRef} data-time-column>
-      {hours.map((_, index) => {
-        const hour = `${index + 1}`.padStart(2, '0');
-
+      {hours.map((hour) => {
         return (
           <FieldButton
             key={hour}
@@ -322,8 +379,9 @@ const ListHours = ({
 const ListMinutes = ({
   handleArrowKeys,
   timeValue,
-  updateTimeValue
-}: ListingColumnProps) => {
+  updateTimeValue,
+  hasBorderRight = true
+}: ListMinutesProps) => {
   const columnRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -337,7 +395,7 @@ const ListMinutes = ({
   }, []);
 
   return (
-    <Column gap="0" hasBorderRight ref={columnRef} data-time-column>
+    <Column gap="0" hasBorderRight={hasBorderRight} ref={columnRef} data-time-column>
       {Array.from({ length: 60 }).map((_, index) => {
         const minute = `${index}`.padStart(2, '0');
 
@@ -369,7 +427,7 @@ const ListAmPm = ({
   handleArrowKeys,
   timeValue,
   updateTimeValue
-}: ListingColumnProps) => {
+}: BaseListingColumnProps) => {
   return (
     <Column gap="0" data-time-column>
       <FieldButton
