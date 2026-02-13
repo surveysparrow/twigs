@@ -9,6 +9,11 @@
   --color-fd-loader: #5329d8;
 }
 
+/* Reduce margin below doc description (fumadocs DocsDescription uses mb-8 by default) */
+article > p.text-lg.text-fd-muted-foreground {
+  margin-bottom: 0;
+}
+
 /* Override browser default focus ring color */
 :focus-visible {
   outline: none !important;
