@@ -21,6 +21,7 @@ export function ExternalLinks({ source, storybook }: ExternalLinksProps) {
   const {
     markdownUrl,
     copied,
+    copying,
     open,
     setOpen,
     dropdownRef,
@@ -33,7 +34,8 @@ export function ExternalLinks({ source, storybook }: ExternalLinksProps) {
         <button
           type="button"
           onClick={handleCopyMarkdown}
-          className={`${BUTTON_BASE_CLASS} min-w-[120px] justify-center`}
+          disabled={copying}
+          className={`${BUTTON_BASE_CLASS} min-w-[120px] justify-center disabled:opacity-70 disabled:pointer-events-none`}
           aria-label={copied ? "Copied" : "Copy Markdown"}
         >
           {copied ? (

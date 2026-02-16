@@ -16,6 +16,7 @@ const COPY_RESET_MS = 2000;
 export function useExternalLinks() {
   const [mounted, setMounted] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [copying, setCopying] = useState(false);
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -45,6 +46,7 @@ export function useExternalLinks() {
 
   const handleCopyMarkdown = useCallback(async () => {
     if (!markdownPath || !origin) return;
+    setCopying(true);
     try {
       const res = await fetch(origin + markdownPath);
       const text = await res.text();
@@ -53,6 +55,8 @@ export function useExternalLinks() {
       setTimeout(() => setCopied(false), COPY_RESET_MS);
     } catch {
       setCopied(false);
+    } finally {
+      setCopying(false);
     }
   }, [markdownPath, origin]);
 
@@ -86,6 +90,7 @@ export function useExternalLinks() {
     markdownPath,
     markdownUrl,
     copied,
+    copying,
     open,
     setOpen,
     dropdownRef,

@@ -102,6 +102,10 @@ header#nd-nav > div > nav > div > button > div > kbd {
   background-color: transparent;
 }
 
+header#nd-nav > div > nav > div > button:hover > div > kbd {
+  border-color: oklch(86.9% 0.022 252.894) !important;
+}
+
 header#nd-nav > div > nav > div > button {
   background-color: #F1F5F9;
   cursor: pointer;
@@ -237,4 +241,18 @@ aside#nd-sidebar {
 
 body > div:nth-of-type(2)[data-state="open"] {
   backdrop-filter: blur(4px);
+}
+
+
+header#nd-subnav > div > button:hover{  
+  background-color: oklch(96.8% 0.007 247.896);
+  border-color: #cad5e2;
+}
+
+header#nd-subnav > div > button > div > kbd{
+  background-color: transparent !important
+}
+
+header#nd-subnav > div > button:hover > div > kbd{
+  border-color: #cad5e2;
 }

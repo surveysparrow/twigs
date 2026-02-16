@@ -31,4 +31,4 @@ export const MENU_ITEM_CLASS =
   "flex flex-row items-center px-3 py-2 gap-3 text-sm font-normal text-neutral-700 hover:bg-neutral-100 no-underline transition-colors";
 
 export const BUTTON_BASE_CLASS =
-  "flex flex-row gap-2 items-center h-9 px-2 rounded-md border border-neutral-200 bg-fd-secondary text-neutral-700 text-sm hover:bg-neutral-100 hover:border-neutral-200 transition-colors cursor-pointer";
+  "flex flex-row gap-2 items-center h-9 px-2 rounded-md border border-neutral-200 bg-fd-secondary text-neutral-700 text-sm hover:bg-neutral-200/50 hover:border-neutral-300/50 transition-colors cursor-pointer";
