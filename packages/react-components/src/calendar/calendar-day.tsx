@@ -50,6 +50,11 @@ export const Day = styled('button', {
         visibility: 'hidden'
       }
     },
+    isToday: {
+      true: {
+        border: '1px solid $secondary100'
+      }
+    },
     isSelected: {
       true: {
         backgroundColor: '$secondary500',

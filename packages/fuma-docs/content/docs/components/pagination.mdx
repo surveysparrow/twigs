@@ -1,0 +1,85 @@
+---
+title: Pagination
+description: A comprehensive pagination component with navigation controls, page numbers, and ellipsis indicators. Perfect for navigating through large datasets.
+---
+
+<ExternalLinks 
+  source="https://github.com/surveysparrow/twigs/tree/master/packages/react-components/src/pagination"
+  storybook="navigation-pagination"
+/>
+
+## Import
+
+```jsx
+import { Pagination } from "@sparrowengg/twigs-react";
+```
+
+## Usage
+
+```jsx
+const PaginationExample = () => {
+  const [activePage, setActivePage] = useState(1);
+
+  return (
+    <Box css={{ display: "flex", flexDirection: "column", gap: "$6", alignItems: "center" }}>
+      <Flex gap="$4" alignItems="center">
+        <Pagination
+          activePage={activePage}
+          itemsPerPage={10}
+          total={100}
+          onChange={(event, page) => setActivePage(page)}
+        />
+      </Flex>
+    </Box>
+  );
+};
+```
+
+<Playground snippetName="pagination-basic" defaultPlayground />
+
+## Examples
+
+### Advanced Pagination
+
+Comprehensive example showing different pagination configurations with various sizes, sibling counts, and page ranges.
+
+<Playground snippetName="pagination-advanced" />
+
+## Props
+
+### Pagination
+
+<TypeTable
+  type={{
+    total: {
+      type: "number",
+      description: "The total number of items to paginate through. This determines the total number of pages.",
+    },
+    itemsPerPage: {
+      type: "number",
+      description: "The number of items to display per page. Used to calculate the total number of pages.",
+    },
+    activePage: {
+      type: "number",
+      description: "The currently active page number. This page will be highlighted and selected.",
+    },
+    siblingCount: {
+      type: "number",
+      description: "The number of page buttons to show on each side of the active page button. Controls how many pages are visible around the current page.",
+      default: "1",
+    },
+    onChange: {
+      type: "(event: SyntheticEvent, page: number) => void",
+      description: "Event handler called when the page changes. Receives the click event and the new page number.",
+    },
+    size: {
+      type: "'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'",
+      description: "The size of the pagination buttons. Affects the overall size and spacing of the pagination component.",
+      default: "'sm'",
+    },
+    css: {
+      type: "object",
+      description: "Custom CSS styles for the component.",
+    },
+  }}
+/>

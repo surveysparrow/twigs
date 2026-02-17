@@ -1,0 +1,111 @@
+---
+title: Checkbox
+description: A control that allows the user to toggle between checked and not checked states. Supports full keyboard navigation.
+---
+
+<ExternalLinks 
+  source="https://github.com/surveysparrow/twigs/tree/master/packages/react-components/src/checkbox"
+  storybook="form-checkbox"
+/>
+
+## Import
+
+```jsx
+import { Checkbox } from "@sparrowengg/twigs-react";
+```
+
+## Usage
+
+```jsx
+const CheckboxExample = () => {
+  return (
+    <Checkbox id="accept-terms" size="md">
+        Accept terms and conditions
+    </Checkbox>
+  );
+};
+```
+
+<Playground snippetName="checkbox-basic" defaultPlayground />
+
+## Examples
+
+### Indeterminate State
+
+The checkbox supports an indeterminate state, useful for representing partial selections (e.g., "select all" scenarios). When set to `'indeterminate'`, the checkbox displays a horizontal line icon instead of a checkmark.
+
+<Playground snippetName="checkbox-indeterminate" />
+
+## Props
+
+### Checkbox
+
+<TypeTable
+  type={{
+    checked: {
+      type: "boolean | 'indeterminate'",
+      description: "The controlled checked state of the checkbox.",
+    },
+    onChange: {
+      type: "(checked: boolean | 'indeterminate') => void",
+      description: "Event handler called when the checked state changes.",
+    },
+    children: {
+      type: "ReactNode",
+      description: "The content to display as the checkbox label.",
+    },
+    disabled: {
+      type: "boolean",
+      description: "When true, prevents the user from interacting with the checkbox.",
+      default: "false",
+    },
+    required: {
+      type: "boolean",
+      description: "When true, indicates that the user must check the checkbox before submitting the form.",
+      default: "false",
+    },
+    id: {
+      type: "string",
+      description: "The id of the checkbox element. Auto-generated if not provided.",
+    },
+    name: {
+      type: "string",
+      description: "The name of the checkbox. Useful for form submission.",
+    },
+    value: {
+      type: "string",
+      description: "The value given as data when submitted with a name.",
+      default: "on",
+    },
+    size: {
+      type: "'sm' | 'md'",
+      description: "The size of the checkbox.",
+      default: "'sm'",
+    },
+    containerRef: {
+      type: "React.Ref<HTMLDivElement>",
+      description: "Ref to the container div element wrapping the checkbox.",
+    },
+    css: {
+      type: "object",
+      description: "Custom CSS styles for the component.",
+    },
+  }}
+/>
+
+## Data Attributes
+
+These props are used for the conditional rendering of the components
+
+<TypeTable
+  type={{
+    "[data-state]": {
+      type: "'checked' | 'unchecked' | 'indeterminate'",
+      description: "Present on the checkbox based on its current state.",
+    },
+    "[data-disabled]": {
+      type: "boolean",
+      description: "Present when the checkbox is disabled.",
+    },
+  }}
+/>

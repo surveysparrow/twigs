@@ -1,0 +1,187 @@
+---
+title: Radio
+description: A set of checkable buttons where only one can be selected at a time. Perfect for single-choice selections with keyboard navigation, accessibility features, and customizable sizing options.
+---
+
+<ExternalLinks 
+  source="https://github.com/surveysparrow/twigs/tree/master/packages/react-components/src/radio"
+  storybook="form-radio"
+/>
+
+## Import
+
+```jsx
+import { RadioGroup, Radio } from "@sparrowengg/twigs-react";
+```
+
+## Usage
+
+```jsx
+const RadioExample = () => {
+  const [selectedValue, setSelectedValue] = useState("option1");
+
+  return (
+    <Box css={{ display: "flex", flexDirection: "column", gap: "$6", alignItems: "center" }}>
+      <Box css={{ display: "flex", flexDirection: "column", gap: "$4", alignItems: "flex-start" }}>
+        <Text css={{ fontSize: "$md", fontWeight: "$6" }}>Choose your preference:</Text>
+        
+        <RadioGroup
+          value={selectedValue}
+          onChange={setSelectedValue}
+          css={{ display: "flex", flexDirection: "column", gap: "$3" }}
+        >
+          <Radio value="option1" size="sm">
+            Small radio option
+          </Radio>
+          <Radio value="option2" size="md">
+            Medium radio option
+          </Radio>
+          <Radio value="option3" size="sm" disabled>
+            Disabled radio option
+          </Radio>
+        </RadioGroup>
+      </Box>
+
+      <Box css={{ display: "flex", flexDirection: "column", gap: "$4", alignItems: "flex-start" }}>
+        <Text css={{ fontSize: "$md", fontWeight: "$6" }}>Default selection:</Text>
+        
+        <RadioGroup
+          defaultValue="default"
+          css={{ display: "flex", flexDirection: "column", gap: "$3" }}
+        >
+          <Radio value="default" size="md">
+            Default option
+          </Radio>
+          <Radio value="comfortable" size="md">
+            Comfortable option
+          </Radio>
+          <Radio value="compact" size="md">
+            Compact option
+          </Radio>
+        </RadioGroup>
+      </Box>
+    </Box>
+  );
+};
+```
+
+<Playground snippetName="radio-basic" defaultPlayground />
+
+## Props
+
+### RadioGroup
+
+<TypeTable
+  type={{
+    value: {
+      type: "string",
+      description: "The controlled value of the radio group. Must be used in conjunction with onChange.",
+    },
+    defaultValue: {
+      type: "string",
+      description: "The default value of the radio group when initially rendered. Use when you do not need to control the value.",
+    },
+    onChange: {
+      type: "(value: string) => void",
+      description: "Event handler called when the value changes.",
+    },
+    disabled: {
+      type: "boolean",
+      description: "When true, prevents the user from interacting with the radio group.",
+      default: "false",
+    },
+    required: {
+      type: "boolean",
+      description: "When true, indicates that the user must fill in a value before submitting a form.",
+      default: "false",
+    },
+    name: {
+      type: "string",
+      description: "The name of the group. Submitted with its owning form as part of a name/value pair.",
+    },
+    orientation: {
+      type: "'horizontal' | 'vertical'",
+      description: "The orientation of the radio group.",
+    },
+    dir: {
+      type: "'ltr' | 'rtl'",
+      description: "The reading direction of the radio group. If omitted, assumes LTR (left-to-right) reading mode.",
+    },
+    loop: {
+      type: "boolean",
+      description: "Whether focus should loop around when the end/start is reached.",
+      default: "true",
+    },
+    asChild: {
+      type: "boolean",
+      description: "Change the default rendered element for the one passed as a child, merging their props and behavior.",
+      default: "false",
+    },
+  }}
+/>
+
+### Radio
+
+<TypeTable
+  type={{
+    value: {
+      type: "string",
+      description: "The value of the radio item. Must be unique within the radio group.",
+    },
+    size: {
+      type: "'sm' | 'md'",
+      description: "The size of the radio button, affecting its dimensions and visual appearance.",
+      default: "'sm'",
+    },
+    disabled: {
+      type: "boolean",
+      description: "When true, prevents the user from interacting with the radio item.",
+      default: "false",
+    },
+    required: {
+      type: "boolean",
+      description: "When true, indicates that the user must select this radio item before submitting a form.",
+      default: "false",
+    },
+    id: {
+      type: "string",
+      description: "The unique identifier of the radio item. If not provided, one will be generated automatically.",
+    },
+    containerRef: {
+      type: "React.Ref<HTMLDivElement>",
+      description: "Ref to access the container element wrapping the radio and label.",
+    },
+    css: {
+      type: "object",
+      description: "Custom CSS styles for the component.",
+    },
+  }}
+/>
+
+## Data Attributes
+
+These props are used for the conditional rendering of the components
+
+<Callout>**Applicable** - RadioGroup</Callout>
+<TypeTable
+  type={{
+    "[data-disabled]": {
+      type: "boolean",
+      description: "Present when the radio group is disabled.",
+    },
+  }}
+/>
+
+<Callout>**Applicable** - Radio</Callout>
+<TypeTable
+  type={{
+    "[data-state]": {
+      type: "'checked' | 'unchecked'",
+      description: "Present on the radio item based on its current state.",
+    },
+    "[data-disabled]": {
+      type: "boolean",
+      description: "Present when the radio item is disabled.",
+    },
+  }}
+/>

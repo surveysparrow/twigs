@@ -39,8 +39,11 @@ const StyledTrigger = styled(TabsPrimitive.Trigger, {
     color: '$neutral700',
     cursor: 'not-allowed'
   },
-  '&:focus': {
-    position: 'relative'
+  '&:focus-visible': {
+    position: 'relative',
+    $$shadowColor: '$colors$primary300',
+    boxShadow:
+      'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
   }
 });
 

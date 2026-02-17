@@ -76,7 +76,7 @@ const StyledContainer = styled(Box, {
   },
   defaultVariants: {
     size: 'sm',
-    color: 'ghost'
+    color: 'primary'
   }
 });
 

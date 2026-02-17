@@ -1,0 +1,215 @@
+---
+title: HoverCard
+description: A component that displays additional content when hovering over a trigger element, with smooth animations and positioning control.
+---
+
+<ExternalLinks 
+  source="https://github.com/surveysparrow/twigs/tree/master/packages/react-components/src/hover-card"
+  storybook="overlay-hover-card"
+/>
+
+## Import
+
+```jsx
+import {HoverCard,HoverCardTrigger,HoverCardContent,HoverCardPortal,HoverCardArrow} from "@sparrowengg/twigs-react";
+```
+
+## Usage
+
+```jsx
+const HoverCardExample = () => {
+  return (
+    <Box css={{ display: "flex", flexDirection: "column", gap: "$6", alignItems: "center" }}>
+      <HoverCard openDelay={700} closeDelay={300}>
+        <HoverCardTrigger asChild>
+          <Button>
+            Hover over me
+          </Button>
+        </HoverCardTrigger>
+        <HoverCardContent side="bottom" align="center" sideOffset={8}>
+          <Box css={{ display: "flex", flexDirection: "column", gap: "$3" }}>
+            <Text css={{ fontWeight: "$6", fontSize: "$md" }}>Hover Card Title</Text>
+            <Text css={{ fontSize: "$sm", color: "$neutral600", lineHeight: "$md" }}>
+              This is a detailed description that appears when you hover over the trigger element.
+            </Text>
+            <Flex gap="$2" css={{ marginTop: "$2" }}>
+              <Button color={"default"} >
+                Feature 1
+              </Button>
+              <Button color={"default"}>
+                Feature 2
+              </Button>
+            </Flex>
+          </Box>
+        </HoverCardContent>
+      </HoverCard>
+    </Box>
+  );
+};
+```
+
+<Playground snippetName="hover-card-basic" defaultPlayground />
+
+## Props
+
+### HoverCard
+
+<TypeTable
+  type={{
+    defaultOpen: {
+      type: "boolean",
+      description: "The default open state when initially rendered. Use when you do not need to control the open state.",
+    },
+    open: {
+      type: "boolean",
+      description: "Controlled open state of the hover card. Must be used in conjunction with onOpenChange.",
+    },
+    onOpenChange: {
+      type: "(open: boolean) => void",
+      description: "Event handler called when the open state changes.",
+    },
+    openDelay: {
+      type: "number",
+      description: "The duration in milliseconds from when the mouse enters the trigger until the hover card opens.",
+      default: "700",
+    },
+    closeDelay: {
+      type: "number",
+      description: "The duration in milliseconds from when the mouse leaves the trigger until the hover card closes.",
+      default: "300",
+    },
+    css: {
+      type: "object",
+      description: "Custom CSS styles for the component.",
+    },
+  }}
+/>
+
+### HoverCardTrigger
+
+<TypeTable
+  type={{
+    asChild: {
+      type: "boolean",
+      description: "Change the default rendered element for the one passed as a child, merging their props and behavior.",
+      default: "false",
+    },
+  }}
+/>
+
+### HoverCardContent
+
+<TypeTable
+  type={{
+    arrow: {
+      type: "boolean",
+      description: "Show arrow at the top of the hover card content.",
+      default: "true",
+    },
+    side: {
+      type: "'top' | 'right' | 'bottom' | 'left'",
+      description: "The preferred side of the trigger to render against when open.",
+      default: "'bottom'",
+    },
+    sideOffset: {
+      type: "number",
+      description: "The distance in pixels from the trigger.",
+      default: "0",
+    },
+    align: {
+      type: "'start' | 'center' | 'end'",
+      description: "The preferred alignment against the trigger.",
+      default: "'center'",
+    },
+    alignOffset: {
+      type: "number",
+      description: "An offset in pixels from the start or end alignment.",
+      default: "0",
+    },
+    avoidCollisions: {
+      type: "boolean",
+      description: "When true, overrides the side and align preferences to prevent the content from overflowing the viewport.",
+      default: "true",
+    },
+    collisionBoundary: {
+      type: "Boundary",
+      description: "The element or elements that the hover card should avoid overlapping.",
+      default: "[]",
+    },
+    collisionPadding: {
+      type: "number | Padding",
+      description: "The distance in pixels from the boundary.",
+      default: "0",
+    },
+    arrowPadding: {
+      type: "number",
+      description: "The padding between the arrow and the edges of the content.",
+      default: "0",
+    },
+    sticky: {
+      type: "'partial' | 'always'",
+      description: "The sticky behavior on the align axis.",
+      default: "'partial'",
+    },
+    hideWhenDetached: {
+      type: "boolean",
+      description: "Whether to hide the content when the trigger is outside of the viewport.",
+      default: "false",
+    },
+    forceMount: {
+      type: "boolean",
+      description: "Used to force mounting when more control is needed. Useful when controlling animation with React animation libraries.",
+    },
+    asChild: {
+      type: "boolean",
+      description: "Change the default rendered element for the one passed as a child, merging their props and behavior.",
+      default: "false",
+    },
+  }}
+/>
+
+### HoverCardPortal
+
+<TypeTable
+  type={{
+    forceMount: {
+      type: "boolean",
+      description: "Used to force mounting when more control is needed. Useful when controlling animation with React animation libraries.",
+    },
+    container: {
+      type: "HTMLElement",
+      description: "The container to render the content into.",
+      default: "document.body",
+    },
+  }}
+/>
+
+## Data Attributes
+
+<Callout>**Applicable** - HoverCardTrigger</Callout>
+<TypeTable
+  type={{
+    "[data-state]": {
+      type: "'open' | 'closed'",
+      description: "Present on the trigger based on its current state.",
+    },
+  }}
+/>
+
+<Callout>**Applicable** - HoverCardContent</Callout>
+<TypeTable
+  type={{
+    "[data-state]": {
+      type: "'open' | 'closed'",
+      description: "Present on the content based on its current state.",
+    },
+    "[data-side]": {
+      type: "'top' | 'right' | 'bottom' | 'left'",
+      description: "Present on the content based on the side it is rendered on.",
+    },
+    "[data-align]": {
+      type: "'start' | 'center' | 'end'",
+      description: "Present on the content based on the alignment it is rendered with.",
+    },
+  }}
+/> 

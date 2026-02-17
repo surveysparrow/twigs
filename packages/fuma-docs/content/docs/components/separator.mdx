@@ -1,0 +1,78 @@
+---
+title: Separator
+description: A visual divider that separates content sections both horizontally and vertically. Perfect for organizing layouts, navigation menus, and content sections with clean visual separation.
+---
+
+<ExternalLinks 
+  source="https://github.com/surveysparrow/twigs/tree/master/packages/react-components/src/separator"
+  storybook="form-separator"
+/>
+
+## Import
+
+```jsx
+import { Separator } from "@sparrowengg/twigs-react";
+```
+
+## Usage
+
+```jsx
+const SeparatorExample = () => {
+  return (
+    <Flex css={{ alignItems: "center", height: "40px", gap: "$4" }}>
+        <Text css={{ fontSize: "$sm" }}>Home</Text>
+        <Separator orientation="vertical" />
+        <Text css={{ fontSize: "$sm" }}>About</Text>
+        <Separator orientation="vertical" />
+        <Text css={{ fontSize: "$sm" }}>Contact</Text>
+    </Flex>
+  );
+};
+```
+
+<Playground snippetName="separator-basic" defaultPlayground />
+
+## Props
+
+### Separator
+
+<TypeTable
+  type={{
+    orientation: {
+      type: "'horizontal' | 'vertical'",
+      description:
+        "The orientation of the separator, determining its direction and layout behavior.",
+      default: "'horizontal'",
+    },
+    decorative: {
+      type: "boolean",
+      description:
+        "When true, the separator is treated as decorative and removed from the accessibility tree. Use for purely visual separations.",
+      default: "false",
+    },
+    asChild: {
+      type: "boolean",
+      description:
+        "Change the default rendered element for the one passed as a child, merging their props and behavior.",
+      default: "false",
+    },
+    css: {
+      type: "object",
+      description: "Custom CSS styles for the component.",
+    },
+  }}
+/>
+
+## Data Attributes
+
+These props are used for the conditional rendering of the components
+
+<TypeTable
+  type={{
+    "[data-orientation]": {
+      type: "'horizontal' | 'vertical'",
+      description:
+        "Present on the separator based on its orientation, used for styling different layouts.",
+    },
+  }}
+/>

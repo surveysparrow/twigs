@@ -1,4 +1,4 @@
-import React, { ReactElement, FunctionComponent, ComponentProps } from 'react';
+import React, { ReactElement, ComponentProps } from 'react';
 import clsx from 'clsx';
 import { ScaleValue } from '@stitches/react';
 import { config, keyframes, styled } from '../stitches.config';
@@ -650,7 +650,7 @@ export type ButtonProps = ButtonBaseProps &
     as?: React.ElementType;
   };
 
-export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
       children,
@@ -664,7 +664,7 @@ export const Button: FunctionComponent<ButtonProps> = React.forwardRef(
       loader,
       onClick,
       ...rest
-    }: ButtonProps,
+    },
     ref
   ) => {
     const hasNoIcon = !(leftIcon || rightIcon || icon);

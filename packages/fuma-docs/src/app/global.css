@@ -1,0 +1,258 @@
+@import "tailwindcss/theme.css";
+@import "tailwindcss/preflight.css";
+@import "tailwindcss/utilities.css";
+@import "fumadocs-ui/css/vitepress.css";
+@import "fumadocs-ui/css/preset.css";
+
+:root {
+  --color-fd-primary: #00828d;
+  --color-fd-loader: #5329d8;
+}
+
+/* Reduce margin below doc description (fumadocs DocsDescription uses mb-8 by default) */
+article > p.text-lg.text-fd-muted-foreground {
+  margin-bottom: 0;
+}
+
+/* Override browser default focus ring color */
+:focus-visible {
+  outline: none !important;
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 2px, #8ACCD2 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+} 
+
+@media (min-width: 1024px) {
+  #nd-sidebar > div:first-child {
+    display: none;
+  }
+}
+
+header#nd-subnav > div:last-child a {
+  border-bottom: 2px solid transparent !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+  height: 100% !important;
+}
+
+header#nd-subnav > div > div:last-child {
+  gap: 0;
+}
+
+header#nd-subnav > div:nth-child(2) {
+  overflow: visible;
+}
+
+header#nd-subnav > div > div:last-child > a:hover {
+  background-color: oklch(92.9% 0.013 255.508) ;
+}
+
+header#nd-subnav > div > div:last-child > a:focus-visible {
+  outline: none !important;
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 2px, #8ACCD2 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+}
+
+main#nd-home-layout {
+  padding-top: 0;
+}
+
+header#nd-nav {
+  border-bottom: none !important;
+  background-color: transparent;
+  backdrop-filter: none;
+  min-height: 64px;
+  position: absolute !important;
+  @media (max-width: 768px) {
+    min-height: auto;
+  }
+  @media (min-width: 1600px) {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+}
+@media (max-width: 768px) {
+  header#nd-nav {
+    background-color: #F1F5F9 !important;
+    backdrop-filter: blur(30px) !important;
+    border-bottom: 1px solid #E2E8F0 !important;
+  }
+}
+
+header#nd-nav > div {
+  -webkit-font-smoothing: antialiased;
+  font-weight: normal;
+  line-height: 1;
+  max-width: 100% !important;
+  margin: 0 16px !important;
+  margin-top: 3.5px !important;
+  @media (max-width: 768px) {
+    margin: 0 !important;
+  }
+}
+
+@media (max-width: 768px) {
+  header#nd-nav > div > nav {
+    padding: 0 10px !important;
+  }
+}
+
+header#nd-nav > div > nav > div > button > div > kbd {
+  border: 1px solid var(--color-fd-border);
+  background-color: transparent;
+}
+
+header#nd-nav > div > nav > div > button:hover > div > kbd {
+  border-color: oklch(86.9% 0.022 252.894) !important;
+}
+
+header#nd-nav > div > nav > div > button {
+  background-color: #F1F5F9;
+  cursor: pointer;
+}
+
+header#nd-nav > div > nav > div > button:hover {
+  background-color: oklch(92.9% 0.013 255.508) !important;
+  border-color: oklch(86.9% 0.022 252.894) !important;
+}
+
+
+
+header#nd-nav > div > nav > div > div > li > a:hover {
+  background-color: oklch(92.9% 0.013 255.508) !important;
+}
+
+header#nd-nav > div > nav > div > div > li > a:focus-visible {
+  outline: none !important;
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 2px, #8ACCD2 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+}
+
+
+@media (min-width: 1024px) {
+  header#nd-nav div nav {
+    padding: 0 !important;
+  }
+}
+
+/* Hide sidebar collapse button on large devices (visible on medium, hidden on small and large) */
+@media (min-width: 1024px) {
+  /* Hide the button on large screens */
+  header#nd-subnav button[aria-label="Collapse Sidebar"] {
+    display: none !important;
+  }
+
+  /* Hide the parent container div that holds the collapse button */
+  header#nd-subnav > div:first-child > div:last-child > div:last-child {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1600px) {
+  header#nd-subnav {
+    max-width: 1280px;
+    margin: 0 auto ;
+  }
+  main#nd-docs-layout {
+    max-width: 1366px;
+    margin: 0 auto;
+  }
+  aside#nd-sidebar {
+    left: max(0px, calc((100vw - 1280px) / 2));
+    background-color: transparent;
+  }
+}
+
+header#nd-subnav > div:last-child a[class*="bg-fd-primary"] {
+  background-color: transparent;
+  border-bottom: 2px solid #00828d !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+  height: 100% !important;
+}
+
+div[role="dialog"] {
+  border-color: var(--color-fd-border) !important;
+}
+
+div[role="dialog"] > div {
+  border-bottom-color: var(--color-fd-border) !important;
+}
+
+*,
+::after,
+::before,
+::backdrop,
+::file-selector-button {
+  border-color: var(--color-fd-border);
+}
+
+[data-rmiz-modal-overlay="visible"] {
+  background-color: var(--color-fd-background);
+}
+
+:root,
+#nd-docs-layout {
+  --fd-layout-offset: max(calc(50vw - var(--fd-layout-width) / 2), 0px);
+}
+
+.slider::-webkit-slider-thumb,
+.slider::-moz-range-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #00828d;
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+}
+.slider::-webkit-slider-thumb:hover,
+.slider::-moz-range-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 130, 141, 0.4);
+}
+
+.color-input::-webkit-color-swatch,
+.color-input::-moz-color-swatch {
+  border: none !important;
+  border-radius: 50%;
+} 
+
+div[role="dialog"] > div > input:focus-visible {
+  box-shadow: none !important;
+}
+
+aside#nd-sidebar {
+  z-index: 5;
+}
+
+.fd-step > div > div[role="tablist"] >button:focus-visible {
+  overflow: visible !important;
+  box-shadow:#8ACCD2 0px 0px 0px 2px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+}
+
+.fd-step > div > div[role="tablist"] {
+  overflow: visible;
+}
+
+body > div:nth-of-type(2)[data-state="open"] {
+  backdrop-filter: blur(4px);
+}
+
+
+header#nd-subnav > div > button:hover{  
+  background-color: oklch(96.8% 0.007 247.896);
+  border-color: #cad5e2;
+}
+
+header#nd-subnav > div > button > div > kbd{
+  background-color: transparent !important
+}
+
+header#nd-subnav > div > button:hover > div > kbd{
+  border-color: #cad5e2;
+}

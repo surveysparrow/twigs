@@ -1,0 +1,46 @@
+.playground-tabs {
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  overflow: visible;
+}
+
+.playground-tabs div[role="tablist"] {
+  margin-bottom: 10px;
+  overflow: visible;
+}
+
+.playground-tabs div[role="tablist"] button {
+  cursor: pointer;
+}
+
+.playground-tabs .playground-tab {
+  padding: 0;
+}
+
+.code-wrapper.status-loading figure,
+.code-wrapper.status-error figure {
+  height: 100%;
+}
+
+.playground-tab--code figure {
+  padding-top: 50px;
+}
+
+.playground-tab--code figure > div:first-child {
+  margin-top: 46px !important;
+}
+
+.code-file-tab {
+  font-family: var(
+    --default-mono-font-family,
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    "Courier New",
+    monospace
+  );
+}

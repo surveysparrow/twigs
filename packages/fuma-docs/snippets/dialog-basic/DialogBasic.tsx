@@ -1,0 +1,74 @@
+import React from "react";
+import {
+  Dialog,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogBody,
+  DialogFooter,
+  DialogClose,
+  DialogTrigger,
+  DialogContent,
+  FormLabel,
+  Input,
+  IconButton,
+  Box,
+  Button,
+  Flex,
+} from "@sparrowengg/twigs-react";
+import { CloseIcon } from "@sparrowengg/twigs-react-icons";
+
+export default function DialogBasic() {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button css={{width: "$30"}} size="lg">Edit profile</Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader
+          css={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-start",
+            justifyContent: "center",
+          }}
+        >
+          <DialogTitle size="md">Edit profile</DialogTitle>
+          <DialogDescription>
+            Make changes to your profile here. Click save when done.
+          </DialogDescription>
+        </DialogHeader>
+        <DialogBody>
+          <Flex flexDirection="column" gap="$2" css={{ marginBottom: "$8" }}>
+            <FormLabel>Name</FormLabel>
+            <Input size="md" id="name" defaultValue="Pedro Duarte" />
+          </Flex>
+          <Flex flexDirection="column" gap="$2">
+            <FormLabel>Username</FormLabel>
+            <Input size="md" id="username" defaultValue="@peduarte" />
+          </Flex>
+        </DialogBody>
+        <DialogFooter>
+          <Flex justifyContent="flex-end">
+            <DialogClose asChild>
+              <Button size="lg" color="primary">
+                Save changes
+              </Button>
+            </DialogClose>
+          </Flex>
+        </DialogFooter>
+        <Box css={{ position: "absolute", top: "$8", right: "$8" }}>
+          <DialogClose asChild>
+            <IconButton
+              size="lg"
+              icon={<CloseIcon />}
+              variant="ghost"
+              aria-label="Close"
+              color="default"
+            />
+          </DialogClose>
+        </Box>
+      </DialogContent>
+    </Dialog>
+  );
+}

@@ -1,6 +1,5 @@
 import React, {
   ComponentProps,
-  FunctionComponent,
   isValidElement,
   ReactElement
 } from 'react';
@@ -35,11 +34,11 @@ export type IconButtonProps = IconButtonBaseProps &
   Omit<ComponentProps<typeof StyledIconButton>, OmitProps> &
   React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-export const IconButton: FunctionComponent<IconButtonProps> = React.forwardRef(
+export const IconButton = React.forwardRef<typeof StyledIconButton, IconButtonProps>(
   (
     {
       children, icon, 'aria-label': ariaLabel, ...rest
-    }: IconButtonProps,
+    },
     ref
   ) => {
     const element = icon || children;

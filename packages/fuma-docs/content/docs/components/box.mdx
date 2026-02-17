@@ -1,0 +1,53 @@
+---
+title: Box
+description: A flexible layout component that serves as a div element with design system stylings.
+---
+
+<ExternalLinks 
+  source="https://github.com/surveysparrow/twigs/tree/master/packages/react-components/src/box"
+  storybook="layout-box"
+/>
+
+## Import
+
+```jsx
+import { Box } from "@sparrowengg/twigs-react";
+```
+
+## Usage
+
+```jsx
+<Box>The quick brown fox jumps over the lazy dog.</Box>
+```
+
+<Playground snippetName="box-basic" defaultPlayground />
+
+## Examples
+
+### Box with styling options
+
+<Playground snippetName="box-styled" />
+
+## Props
+
+### Box
+
+<TypeTable
+  type={{
+    as: {
+      type: "React.ElementType",
+      description:
+        "Changes the underlying HTML element (e.g., 'section', 'article', 'main')",
+      default: "div",
+    },
+    css: {
+      type: "CSS Object",
+      description:
+        "Custom CSS styles using design system tokens and standard CSS properties",
+    },
+    children: {
+      type: "ReactNode",
+      description: "Content to be rendered inside the box",
+    },
+  }}
+/>
