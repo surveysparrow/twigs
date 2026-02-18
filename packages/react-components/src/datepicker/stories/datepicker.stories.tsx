@@ -5,7 +5,33 @@ import { DatePicker } from '../datepicker';
 export default {
   component: DatePicker,
   title: 'Date & Time/DatePicker',
-  argTypes: {}
+  argTypes: {
+    showTimePicker: {
+      control: 'boolean',
+      description: 'Show time picker'
+    },
+    hourCycle: {
+      control: 'select',
+      options: [12, 24],
+      description: 'Hour cycle - 12 for 12-hour format with AM/PM, 24 for 24-hour format.'
+    },
+    showTimezonePicker: {
+      control: 'boolean',
+      description: 'Show timezone picker'
+    },
+    showFooter: {
+      control: 'boolean',
+      description: 'Show footer'
+    },
+    footerActionText: {
+      control: 'text',
+      description: 'Footer action button text'
+    },
+    size: {
+      control: 'select',
+      options: ['sm', 'md', 'lg']
+    }
+  }
 };
 
 const WithPopOverTemplate = (args) => {
