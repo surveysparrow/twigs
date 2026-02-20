@@ -1,0 +1,110 @@
+import React from "react";
+import {
+  AccordionSkeleton,
+  AvatarSkeleton,
+  ChipSkeleton,
+  ImageSkeleton,
+  TableSkeleton,
+  AlertDialogSkeleton,
+  DialogSkeleton,
+  DrawerSkeleton,
+  DropdownSkeleton,
+  HoverCardSkeleton,
+  PopoverSkeleton,
+  ToastSkeleton,
+  BoxSkeleton,
+  FlexSkeleton,
+  GridSkeleton,
+  StackSkeleton,
+  ButtonSkeleton,
+  IconButtonSkeleton,
+  SplitButtonSkeleton,
+  CheckboxSkeleton,
+  FormHelperTextSkeleton,
+  FormLabelSkeleton,
+  FormInputSkeleton,
+  InputSkeleton,
+  RadioSkeleton,
+  SelectSkeleton,
+  SeparatorSkeleton,
+  SwitchSkeleton,
+  SliderSkeleton,
+  TextareaSkeleton,
+  TooltipSkeleton,
+  AlertSkeleton,
+  CascaderSkeleton,
+  CircleLoaderSkeleton,
+  LineLoaderSkeleton,
+  TabsSkeleton,
+  LinkSkeleton,
+  PaginationSkeleton,
+  StepperSkeleton,
+  CalendarRangeSkeleton,
+  CalendarSkeleton,
+  DatePickerSkeleton,
+  TimePickerSkeleton,
+  DefaultSkeleton,
+} from "./skeletons";
+import type { ComponentType } from "react";
+
+const skeletonMap: Record<string, ComponentType> = {
+  accordion: AccordionSkeleton,
+  avatar: AvatarSkeleton,
+  chip: ChipSkeleton,
+  image: ImageSkeleton,
+  table: TableSkeleton,
+  "alert-dialog": AlertDialogSkeleton,
+  dialog: DialogSkeleton,
+  drawer: DrawerSkeleton,
+  dropdown: DropdownSkeleton,
+  "hover-card": HoverCardSkeleton,
+  popover: PopoverSkeleton,
+  toast: ToastSkeleton,
+  box: BoxSkeleton,
+  flex: FlexSkeleton,
+  grid: GridSkeleton,
+  stack: StackSkeleton,
+  button: ButtonSkeleton,
+  "icon-button": IconButtonSkeleton,
+  "split-button": SplitButtonSkeleton,
+  checkbox: CheckboxSkeleton,
+  "form-helper-text": FormHelperTextSkeleton,
+  "form-label": FormLabelSkeleton,
+  "form-input": FormInputSkeleton,
+  input: InputSkeleton,
+  radio: RadioSkeleton,
+  select: SelectSkeleton,
+  separator: SeparatorSkeleton,
+  switch: SwitchSkeleton,
+  slider: SliderSkeleton,
+  textarea: TextareaSkeleton,
+  tooltip: TooltipSkeleton,
+  alert: AlertSkeleton,
+  cascader: CascaderSkeleton,
+  "circle-loader": CircleLoaderSkeleton,
+  "line-loader": LineLoaderSkeleton,
+  tabs: TabsSkeleton,
+  link: LinkSkeleton,
+  pagination: PaginationSkeleton,
+  stepper: StepperSkeleton,
+  "calendar-range": CalendarRangeSkeleton,
+  calendar: CalendarSkeleton,
+  datepicker: DatePickerSkeleton,
+  timepicker: TimePickerSkeleton,
+};
+
+export function ComponentPreview({
+  name,
+  title,
+}: {
+  name: string;
+  title: string;
+}) {
+  const SkeletonComponent = skeletonMap[name];
+
+  if (SkeletonComponent) {
+    return <SkeletonComponent />;
+  } else {
+    return <DefaultSkeleton title={title} />;
+  }
+}

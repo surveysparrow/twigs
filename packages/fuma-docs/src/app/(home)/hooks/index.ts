@@ -1,0 +1,2 @@
+export { useTabIndicator } from "./useTabIndicator";
+

@@ -20,10 +20,7 @@ const StyledTrigger = styled(AccordionPrimitive.Trigger, {
     backgroundColorOpacity: ['$primary500', 0.04]
   },
   '&:focus-visible': {
-    outline: 'none',
-    $$shadowColor: '$colors$primary300',
-    outlineColor:
-      'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
+    outline: 'none'
   },
   '&[data-disabled]': {
     cursor: 'not-allowed'
@@ -32,7 +29,17 @@ const StyledTrigger = styled(AccordionPrimitive.Trigger, {
 
 const Accordion = styled(AccordionPrimitive.Root, {
   fontSize: '$sm',
-  lineHeight: '$md'
+  lineHeight: '$md',
+  variants: {
+    dir: {
+      ltr: {
+        direction: 'ltr'
+      },
+      rtl: {
+        direction: 'rtl'
+      }
+    }
+  }
 });
 
 const AccordionItem = styled(AccordionPrimitive.Item, {
@@ -41,9 +48,12 @@ const AccordionItem = styled(AccordionPrimitive.Item, {
   '&:first-child': {
     marginTop: 0
   },
-  '&:focus-within': {
+  '&:has(button:focus-visible)': {
     position: 'relative',
-    zIndex: 1
+    zIndex: 1,
+    $$shadowColor: '$colors$primary300',
+    boxShadow:
+      'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
   },
   '&[data-disabled]': {
     opacity: '0.4'
@@ -131,7 +141,9 @@ const StyledContentText = styled('div', {
 
 const AccordionContent = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof StyledContent>
+  React.ComponentPropsWithoutRef<typeof StyledContent> & {
+    children: React.ReactNode;
+  }
 >(({ children, ...props }, ref) => (
   <StyledContent {...props} ref={ref}>
     <StyledContentText>{children}</StyledContentText>

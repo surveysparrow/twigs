@@ -1,6 +1,6 @@
-import React, { FunctionComponent, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import type * as Stitches from '@stitches/react';
-import { config } from '../stitches.config';
+import { config, styled } from '../stitches.config';
 import { Box, BoxProps } from '../box';
 
 export interface GridBaseProps extends BoxProps {
@@ -13,11 +13,13 @@ export interface GridBaseProps extends BoxProps {
   children?: ReactNode;
 }
 
+const StyledBox = styled(Box, {});
+
 type GridProps = GridBaseProps & { css?: Stitches.CSS<typeof config> };
 
 const widthToColumns = (width: GridProps['width'], repeat: 'fit' | 'fill') => `repeat(auto-${repeat}, minmax(${width}px, 1fr))`;
 
-export const Grid: FunctionComponent<GridProps> = React.forwardRef(
+export const Grid = React.forwardRef<typeof StyledBox, GridProps>(
   (
     {
       children,
@@ -29,7 +31,7 @@ export const Grid: FunctionComponent<GridProps> = React.forwardRef(
       repeat = 'fit',
       css,
       ...rest
-    }: GridProps,
+    },
     ref
   ) => {
     const [columnGap, rowGap] = gap;
@@ -38,7 +40,7 @@ export const Grid: FunctionComponent<GridProps> = React.forwardRef(
       : templateColumns;
 
     return (
-      <Box
+      <StyledBox
         ref={ref}
         data-testid="grid"
         css={{
@@ -53,7 +55,7 @@ export const Grid: FunctionComponent<GridProps> = React.forwardRef(
         {...rest}
       >
         {children}
-      </Box>
+      </StyledBox>
     );
   }
 );

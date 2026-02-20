@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ComponentProps } from 'react';
+import React, { ComponentProps } from 'react';
 import { styled } from '../stitches.config';
 import { Avatar } from './avatar';
 
@@ -178,7 +178,7 @@ const StyledAvatarGroup = styled('div', {
   }
 });
 
-export const AvatarGroup: FunctionComponent<AvatarGroupProps> = React.forwardRef(
+export const AvatarGroup = React.forwardRef<typeof StyledAvatarGroup, AvatarGroupProps>(
   (
     {
       limit = 0,
@@ -187,7 +187,7 @@ export const AvatarGroup: FunctionComponent<AvatarGroupProps> = React.forwardRef
       children,
       rounded,
       ...rest
-    }: AvatarGroupProps,
+    },
     ref
   ) => {
     let avatars = children || [];

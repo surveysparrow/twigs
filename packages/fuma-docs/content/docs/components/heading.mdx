@@ -1,0 +1,63 @@
+---
+title: Heading
+description: A component for rendering headings with consistent typography and styling. Supports different sizes and weights while maintaining semantic HTML structure.
+---
+
+<ExternalLinks 
+  source="https://github.com/surveysparrow/twigs/tree/master/packages/react-components/src/heading"
+  storybook="typography-heading"
+/>
+
+## Import
+
+```jsx
+import { Heading } from "@sparrowengg/twigs-react";
+```
+
+## Usage
+
+```jsx
+const HeadingExample = () => {
+  return (
+    <Box css={{ display: "flex", flexDirection: "column", gap: "$4" }}>
+      <Heading size="h1" weight="bold">Heading 1 - Bold</Heading>
+      <Heading size="h2" weight="semibold">Heading 2 - Semibold</Heading>
+      <Heading size="h3" weight="medium">Heading 3 - Medium</Heading>
+      <Heading size="h4" weight="regular">Heading 4 - Regular</Heading>
+      <Heading size="h5" as="h1">Heading 5 as H1</Heading>
+      <Heading size="h6" as="h2">Heading 6 as H2</Heading>
+    </Box>
+  );
+};
+```
+
+Changing the `size` of the heading does not change its html element type. It only changes the font size of the heading. If you want to change the html element type, you can use the `as` prop.
+
+<Playground snippetName="heading-basic" defaultPlayground />
+
+## Props
+
+### Heading
+
+<TypeTable
+  type={{
+    size: {
+      type: "'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'",
+      description: "Controls the font size and line height of the heading. Does not change the HTML element type.",
+      default: "'h1'",
+    },
+    weight: {
+      type: "'regular' | 'medium' | 'semibold' | 'bold'",
+      description: "Controls the font weight of the heading text.",
+      default: "'bold'",
+    },
+    as: {
+      type: "React.ElementType",
+      description: "The HTML element type to render. Useful for semantic HTML while maintaining visual styling.",
+    },
+    css: {
+      type: "object",
+      description: "Custom CSS styles for the component.",
+    },
+  }}
+/> 

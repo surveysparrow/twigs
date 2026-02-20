@@ -11,15 +11,15 @@ export default {
 
 const Template = (args) => {
   const [value, setValue] = React.useState({
-    start: parseDate('2023-07-12'),
-    end: parseDate('2023-07-20')
+    start: parseDate('2025-08-02'),
+    end: parseDate('2025-08-10')
   });
   return (
     <CalendarRange
       {...args}
       onChange={setValue}
       value={value}
-      minValue={parseDate('2023-07-10')}
+      minValue={parseDate('2025-08-01')}
     />
   );
 };

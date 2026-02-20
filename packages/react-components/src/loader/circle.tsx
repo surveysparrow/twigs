@@ -120,7 +120,7 @@ const StyledContainer = styled(Box, {
   },
   defaultVariants: {
     size: 'md',
-    color: 'ghost'
+    color: 'primary'
   }
 });
 

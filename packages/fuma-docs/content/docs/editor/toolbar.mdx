@@ -1,0 +1,59 @@
+---
+title: Toolbar
+description: Learn how to customize and configure the editor toolbar. The toolbar provides various text formatting tools including bold, italic, lists, links, and more.
+---
+
+<ExternalLinks/>
+
+## Import
+
+It can be added by importing `EditorToolbar` component from `@sparrowengg/twigs-react` and adding it to the editor. By default the toolbar contains the following tools:
+
+- Format tool (headings / paragraph)
+- Bold
+- Italic
+- Underline
+- Unordered List
+- Ordered List
+- Link (Requires `<DialogLinkEditor />` to be added)
+- Codeblock
+- Inline code
+- Text align tool
+
+```tsx
+<Editor>
+  <EditorToolbar />
+</Editor>
+```
+
+## Customizing
+
+### Using `tools` prop
+
+The tools shown in the toolbar can be customized by passing the `tools` prop. The prop is an array that can contain the following values: `format`, `bold`, `italic`, `underline`, `unordered-list`, `ordered-list`, `link`, `codeblock`, `code`, `text-align`; it also supports an object in the following format for custom components:
+
+```tsx
+{
+  renderComponent: (props: { editor: LexicalEditor }) => ReactNode;
+}
+```
+
+This can be used to change the order of tools or to add custom tools to the toolbar. The `editor` prop is the instance of the editor, and it can be used to interact with the editor.
+
+### Using child components
+
+Components can be directly added as children to the `EditorToolbar` component. You can use the default tools by importing them from `@sparrowengg/twigs-react`.
+
+```tsx
+import {
+  Editor,
+  EditorToolbar,
+  BoldTool,
+  ItalicTool,
+} from "@sparrowengg/twigs-editor-react";
+import { Button, Flex } from "@sparrowengg/twigs-react";
+```
+
+You can also add custom components to the default tools by passing a `renderButton` prop.
+
+<Playground snippetName="editor-toolbar" defaultPlayground/>

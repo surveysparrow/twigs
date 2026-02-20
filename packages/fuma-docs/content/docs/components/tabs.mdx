@@ -1,0 +1,184 @@
+---
+title: Tabs
+description: A set of layered sections of content that are displayed one at a time. Perfect for organizing related content into separate views.
+---
+
+<ExternalLinks 
+  source="https://github.com/surveysparrow/twigs/tree/master/packages/react-components/src/tabs"
+  storybook="navigation-tabs"
+/>
+
+## Import
+
+```jsx
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@sparrowengg/twigs-react";
+```
+
+## Usage
+
+```jsx
+const TabsExample = () => {
+  return (
+    <Tabs defaultValue="account">
+      <TabsList aria-label="Account settings">
+        <TabsTrigger value="account">Account</TabsTrigger>
+        <TabsTrigger value="password">Password</TabsTrigger>
+      </TabsList>
+      
+      <TabsContent value="account">
+        <Box css={{ padding: "$6" }}>
+          <Text>Make changes to your account here.</Text>
+        </Box>
+      </TabsContent>
+      
+      <TabsContent value="password">
+        <Box css={{ padding: "$6" }}>
+          <Text>Change your password here.</Text>
+        </Box>
+      </TabsContent>
+    </Tabs>
+  );
+};
+```
+
+<Playground snippetName="tabs-basic" defaultPlayground />
+
+## Props
+
+### Tabs
+
+<TypeTable
+  type={{
+    defaultValue: {
+      type: "string",
+      description: "The default value of the tab to activate when uncontrolled.",
+    },
+    value: {
+      type: "string",
+      description: "The controlled value of the tab to activate.",
+    },
+    onValueChange: {
+      type: "(value: string) => void",
+      description: "Event handler called when the active tab changes.",
+    },
+    orientation: {
+      type: "'horizontal' | 'vertical'",
+      description: "The orientation of the tabs.",
+      default: "'horizontal'",
+    },
+    dir: {
+      type: "'ltr' | 'rtl'",
+      description: "The reading direction of the tabs when applicable.",
+    },
+    activationMode: {
+      type: "'automatic' | 'manual'",
+      description: "Controls whether tabs are activated automatically or manually.",
+      default: "'automatic'",
+    },
+    css: {
+      type: "object",
+      description: "Custom CSS styles for the component.",
+    },
+  }}
+/>
+
+### TabsList
+
+<TypeTable
+  type={{
+    loop: {
+      type: "boolean",
+      description: "When true, enables looping navigation between tabs.",
+      default: "true",
+    },
+    children: {
+      type: "ReactNode",
+      description: "The tab triggers, typically containing TabsTrigger elements.",
+    },
+  }}
+/>
+
+### TabsTrigger
+
+<TypeTable
+  type={{
+    value: {
+      type: "string",
+      description: "A unique value for the tab trigger.",
+    },
+    disabled: {
+      type: "boolean",
+      description: "When true, prevents the user from interacting with the tab trigger.",
+      default: "false",
+    },
+    children: {
+      type: "ReactNode",
+      description: "The content of the tab trigger.",
+    },
+  }}
+/>
+
+### TabsContent
+
+<TypeTable
+  type={{
+    value: {
+      type: "string",
+      description: "A unique value for the tab content that corresponds to a trigger.",
+    },
+    forceMount: {
+      type: "boolean",
+      description: "When true, forces the content to be mounted even when inactive.",
+    },
+    children: {
+      type: "ReactNode",
+      description: "The content to be displayed when the tab is active.",
+    },
+  }}
+/>
+
+## Data Attributes
+
+These props are used for the conditional rendering of the components
+
+<Callout>**Applicable** - Tabs, TabsList</Callout>
+<TypeTable
+  type={{
+    "[data-orientation]": {
+      type: "'vertical' | 'horizontal'",
+      description: "Present on the tabs based on its orientation.",
+    },
+  }}
+/>
+
+<Callout>**Applicable** - TabsTrigger</Callout>
+<TypeTable
+  type={{
+    "[data-state]": {
+      type: "'active' | 'inactive'",
+      description: "Present on the trigger based on its current state.",
+    },
+    "[data-disabled]": {
+      type: "boolean",
+      description: "Present when the trigger is disabled.",
+    },
+    "[data-orientation]": {
+      type: "'vertical' | 'horizontal'",
+      description: "Present on the trigger based on the orientation.",
+    },
+  }}
+/>
+
+<Callout>**Applicable** - TabsContent</Callout>
+<TypeTable
+  type={{
+    "[data-state]": {
+      type: "'active' | 'inactive'",
+      description: "Present on the content based on its current state.",
+    },
+    "[data-orientation]": {
+      type: "'vertical' | 'horizontal'",
+      description: "Present on the content based on the orientation.",
+    },
+  }}
+/>
