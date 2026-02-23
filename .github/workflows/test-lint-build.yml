@@ -38,6 +38,13 @@ jobs:
           cache: "npm"
       - name: Yarn install
         run: yarn
+      - name: Debug playground env (safe)
+        run: |
+          if [ -n "${NEXT_PUBLIC_PLAYGROUND_URL:-}" ]; then
+            echo "NEXT_PUBLIC_PLAYGROUND_URL is set"
+          else
+            echo "NEXT_PUBLIC_PLAYGROUND_URL is NOT set"
+          fi
       - name: Build all
         if: steps.changed-docs-files.outputs.any_changed == 'true'
         run: yarn build
