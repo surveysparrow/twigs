@@ -1,6 +1,5 @@
 import React, {
   ComponentProps,
-  FunctionComponent,
   ReactNode,
   useState
 } from 'react';
@@ -465,7 +464,7 @@ const StyledChip = styled(Box, {
       variant: 'outline',
       css: {
         borderColorOpacity: ['$secondary500', 0.2],
-        backgroundColor: '$secondary500',
+        backgroundColor: '$white900',
         color: '$secondary800',
         [`& ${StyledCloseButton}`]: {
           color: '$secondary500'
@@ -750,7 +749,7 @@ export type ChipProps = ChipBaseProps &
   ComponentProps<typeof StyledChip> &
   BoxProps;
 
-export const Chip: FunctionComponent<ChipProps> = React.forwardRef(
+export const Chip = React.forwardRef<typeof StyledChip, ChipProps>(
   (
     {
       color,
@@ -763,7 +762,7 @@ export const Chip: FunctionComponent<ChipProps> = React.forwardRef(
       active,
       onActiveStateChange,
       ...props
-    }: ChipProps,
+    },
     ref
   ) => {
     const [isActive, setIsActive] = useState(defaultActive ?? false);

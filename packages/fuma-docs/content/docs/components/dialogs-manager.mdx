@@ -1,0 +1,298 @@
+---
+title: DialogsManager
+description: A comprehensive dialog management system that provides programmatic access to open, close, and manage multiple dialogs.
+---
+
+<ExternalLinks 
+  source="https://github.com/surveysparrow/twigs/tree/master/packages/react-components/src/dialog"
+  storybook="overlay-dialogs-manager"
+/>
+
+## Import
+
+```jsx
+import { DialogsManager, dialogs } from "@sparrowengg/twigs-react";
+```
+
+## Usage
+
+Add `DialogsManager` to a top level component like `App` as shown below:
+
+```jsx
+import { DialogsManager } from "@sparrowengg/twigs-react";
+
+function App() {
+  return (
+    <Main>
+      <YourApp />
+      <DialogsManager />
+    </Main>
+  );
+}
+```
+
+And now you can call `dialogs.open` or `dialogs.push` to open new dialogs.
+
+<Playground snippetName="dialogs-manager-basic" defaultPlayground />
+
+## Methods
+
+### dialogs.open(dialogName, options)
+
+<TypeTable
+  type={{
+    dialogName: {
+      type: "string",
+      description: "The dialog that should be opened. Three dialogs are included by default - alert, confirm and modal. You can replace these dialogs or add new ones by using the customDialogs property in the DialogsManager component.",
+    },
+    options: {
+      type: "object",
+      description: "Options supported by the dialog that you wish to trigger, these options might be different for different dialogs.",
+      default: "{}",
+    },
+  }}
+/>
+
+**Returns object with two properties:**
+
+<TypeTable
+  type={{
+    close: {
+      type: "Function",
+      description: "Can be called to close the dialog manually.",
+    },
+    dialogId: {
+      type: "number",
+      description: "Can be used to close the dialog using dialogs.close.",
+    },
+  }}
+/>
+
+### dialogs.push(dialogName, options)
+
+The parameters and return types are same as that of `dialogs.open`, the only difference is that `push` doesn't close existing modals.
+
+### dialogs.close(dialogId)
+
+Used to close a particular dialog.
+
+### dialogs.closeAll()
+
+Used to close all open dialogs.
+
+## Props
+
+### DialogsManager
+
+<TypeTable
+  type={{
+    customDialogs: {
+      type: "Record<string, (props: { onClose: () => void; [x: string]: any }) => ReactNode>",
+      description: "Custom dialogs that can be opened using dialogs methods.",
+      default: "{}",
+    },
+  }}
+/>
+
+## Default Dialogs Props
+
+### Alert
+
+<TypeTable
+  type={{
+    title: {
+      type: "ReactNode",
+      description: "Title of the dialog.",
+      default: "null",
+    },
+    content: {
+      type: "ReactNode",
+      description: "Content shown inside the dialog.",
+      default: "null",
+    },
+    labels: {
+      type: "{ action: string }",
+      description: "Labels for the buttons.",
+      default: "{ action: 'Close' }",
+    },
+    actionButtonProps: {
+      type: "ButtonProps",
+      description: "Props for the action button.",
+      default: "{}",
+    },
+    closeButton: {
+      type: "ReactNode",
+      description: "Close button shown on the top right corner.",
+      default: "ReactNode",
+    },
+    css: {
+      type: "CSS",
+      description: "Custom styles to be applied on the content.",
+      default: "{}",
+    },
+    closeOnPrimaryAction: {
+      type: "boolean",
+      description: "Close the dialog when action button is clicked.",
+      default: "true",
+    },
+    onPrimaryAction: {
+      type: "(e: React.MouseEvent<HTMLButtonElement>) => void",
+      description: "Callback when action button is clicked.",
+      default: "undefined",
+    },
+    onClose: {
+      type: "() => void",
+      description: "Callback when dialog is closed.",
+      default: "undefined",
+    },
+  }}
+/>
+
+### Confirm
+
+<TypeTable
+  type={{
+    title: {
+      type: "ReactNode",
+      description: "Title of the dialog.",
+      default: "null",
+    },
+    content: {
+      type: "ReactNode",
+      description: "Content shown inside the dialog.",
+      default: "null",
+    },
+    labels: {
+      type: "{ confirm: string; cancel: string }",
+      description: "Labels for the buttons.",
+      default: "{ confirm: 'Confirm', cancel: 'Cancel' }",
+    },
+    confirmButtonProps: {
+      type: "ButtonProps",
+      description: "Props for the confirm button.",
+      default: "{}",
+    },
+    cancelButtonProps: {
+      type: "ButtonProps",
+      description: "Props for the cancel button.",
+      default: "{}",
+    },
+    closeButton: {
+      type: "ReactNode",
+      description: "Close button shown on the top right corner.",
+      default: "ReactNode",
+    },
+    closeOnConfirm: {
+      type: "boolean",
+      description: "Close the dialog when confirm button is clicked.",
+      default: "true",
+    },
+    closeOnCancel: {
+      type: "boolean",
+      description: "Close the dialog when cancel button is clicked.",
+      default: "true",
+    },
+    onConfirm: {
+      type: "(e: React.MouseEvent<HTMLButtonElement>) => void",
+      description: "Callback when confirm button is clicked.",
+      default: "undefined",
+    },
+    onCancel: {
+      type: "(e: React.MouseEvent<HTMLButtonElement>) => void",
+      description: "Callback when cancel button is clicked.",
+      default: "undefined",
+    },
+    onClose: {
+      type: "() => void",
+      description: "Callback when dialog is closed.",
+      default: "undefined",
+    },
+    css: {
+      type: "CSS",
+      description: "Custom styles to be applied on the content.",
+      default: "{}",
+    },
+  }}
+/>
+
+### Modal
+
+<TypeTable
+  type={{
+    title: {
+      type: "ReactNode",
+      description: "Title of the dialog.",
+      default: "null",
+    },
+    content: {
+      type: "ReactNode",
+      description: "Content shown inside the dialog.",
+      default: "null",
+    },
+    footer: {
+      type: "ReactNode",
+      description: "Dialog footer.",
+      default: "ReactNode",
+    },
+    children: {
+      type: "ReactNode",
+      description: "If provided, completely override the content of the dialog, ignoring all the other props like title, content and footer.",
+      default: "ReactNode",
+    },
+    labels: {
+      type: "{ action: string }",
+      description: "Labels for the buttons.",
+      default: "{ action: 'Close' }",
+    },
+    actionButtonProps: {
+      type: "ButtonProps",
+      description: "Props for the action button.",
+      default: "{}",
+    },
+    closeButton: {
+      type: "ReactNode",
+      description: "Close button shown on the top right corner.",
+      default: "ReactNode",
+    },
+    css: {
+      type: "CSS",
+      description: "Custom styles to be applied on the content.",
+      default: "{}",
+    },
+    closeOnPrimaryAction: {
+      type: "boolean",
+      description: "Close the dialog when action button is clicked.",
+      default: "true",
+    },
+    onPrimaryAction: {
+      type: "(e: React.MouseEvent<HTMLButtonElement>) => void",
+      description: "Callback when action button is clicked.",
+      default: "undefined",
+    },
+    onClose: {
+      type: "() => void",
+      description: "Callback when dialog is closed.",
+      default: "undefined",
+    },
+    size: {
+      type: "'sm' | 'md' | 'lg' | 'xl' | 'full'",
+      description: "The size of the modal dialog.",
+      default: "'md'",
+    },
+  }}
+/>
+
+## Typesafe Options
+
+When creating custom dialogs, you can ensure type safety to `dialogs.open` and `dialogs.push` by overriding the `DialogOptionsOverride` interface as shown below:
+
+```tsx
+declare module "@sparrowengg/twigs-react" {
+  export interface DialogOptionsOverride {
+    deleteModal: {
+      title: string;
+      onDelete: () => void;
+    };
+  }
+}
+``` 

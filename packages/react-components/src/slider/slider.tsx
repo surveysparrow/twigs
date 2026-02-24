@@ -1,15 +1,15 @@
 import * as RadixSlider from '@radix-ui/react-slider';
-import { ComponentProps } from '@stitches/react';
 import {
+  ComponentProps,
   ElementType,
   ReactNode,
   forwardRef,
   isValidElement,
   useCallback
 } from 'react';
-import { styled } from '../stitches.config';
 import { Box } from '../box';
 import { Flex, FlexProps } from '../flex';
+import { styled } from '../stitches.config';
 import { Text } from '../text';
 
 const StyledThumb = styled(RadixSlider.Thumb, {

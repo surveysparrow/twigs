@@ -1,0 +1,31 @@
+---
+title: Emoji
+description: Add emoji selector dropdown to the editor that opens when typing colon. Filter and select from a comprehensive list of emojis with customizable results.
+---
+
+<ExternalLinks/>
+
+## Description
+
+Emoji plugin can be used to add emoji selector dropdown to the editor. The dropdown will be opened when the user types `:`. The dropdown will filter and show the emojis that contain the letters that the user typed.
+
+By default all emojis in this [list](https://github.com/github/gemoji/blob/master/db/emoji.json) are available. You can customize the list of emojis by using a custom `getResults` function.
+
+<Playground snippetName="editor-feature-emoji" defaultPlayground />
+
+## Custom Results
+
+You can use custom results by passing a `getResults` function to the `Emoji` plugin. The `getResults` function should return a list of emojis that match the search query.
+
+```jsx
+<EmojiPlugin
+  getResults={(text, defaultEmojis) => {
+    const data = someFunctionToGetEmojis(text);
+
+    return data.map(item => ({
+      label: item.label, // Will be shown in the dropdown list
+      value: item.value, // Will be inserted in the editor
+    }))
+  }}
+/>
+```

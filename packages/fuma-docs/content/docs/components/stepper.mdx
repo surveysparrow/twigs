@@ -1,0 +1,101 @@
+---
+title: Stepper
+description: A multi-step navigation component that guides users through a sequence of related actions. Perfect for forms, wizards and complex workflows.
+---
+
+<ExternalLinks 
+  source="https://github.com/surveysparrow/twigs/tree/master/packages/react-components/src/stepper"
+  storybook="navigation-stepper"
+/>
+
+## Import
+
+```jsx
+import { Stepper, StepperItem } from "@sparrowengg/twigs-react";
+```
+
+## Usage
+
+```jsx
+const StepperExample = () => {
+  const [activeStep, setActiveStep] = useState(0);
+
+  return (
+    <Box css={{ display: "flex", flexDirection: "column", gap: "$4" }}>
+      <Text css={{ fontSize: "$md", fontWeight: "$6" }}>Basic Stepper</Text>
+      
+      <Stepper activeStep={activeStep} onChange={setActiveStep}>
+        <StepperItem label="Registration">Step 1</StepperItem>
+        <StepperItem label="Account settings">Step 2</StepperItem>
+        <StepperItem label="Confirm">Step 3</StepperItem>
+      </Stepper>
+    </Box>
+  );
+};
+```
+
+<Playground snippetName="stepper-basic" defaultPlayground />
+
+## Examples
+
+### Stepper customizations
+
+The stepper component supports various customization options including custom components, different step states, and advanced styling.
+
+<Callout type="info" title="Component Customization Best Practice">
+When customizing stepper components using the `components` prop, it's recommended to render each component as a separate function outside the main component. This approach provides better performance, cleaner code organization, and proper state handling. 
+
+Instead of inline component definitions, create dedicated functions like `renderedContainer`, `renderedStepper`, and `renderedStep` to ensure optimal re-rendering behavior and maintainability.
+</Callout>
+
+<Playground snippetName="stepper-customizations" /> 
+
+## Props
+
+### Stepper
+
+<TypeTable
+  type={{
+    activeStep: {
+      type: "number",
+      description: "The currently active step index. Controls which step is displayed and highlighted.",
+      default: "0",
+    },
+    onChange: {
+      type: "(step: number) => void",
+      description: "Callback function called when the active step changes, either through navigation or direct step clicks.",
+    },
+    children: {
+      type: "ReactElement[]",
+      description: "Array of StepperItem components that define the steps in the stepper.",
+    },
+    components: {
+      type: "Object",
+      description: "Custom component overrides for Container, Step, and Separator elements.",
+    },
+    css: {
+      type: "object",
+      description: "Custom CSS styles for the component.",
+    },
+  }}
+/>
+
+### StepperItem
+
+<TypeTable
+  type={{
+    label: {
+      type: "string",
+      description: "The text label displayed for the step in the stepper navigation.",
+    },
+    allowClick: {
+      type: "boolean",
+      description: "Whether the step can be clicked to navigate directly to it. When false, the step is not focusable or clickable.",
+      default: "true",
+    },
+    children: {
+      type: "ReactNode",
+      description: "The content to be displayed when this step is active.",
+    },
+  }}
+/>

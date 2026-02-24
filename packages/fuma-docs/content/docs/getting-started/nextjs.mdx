@@ -1,0 +1,134 @@
+---
+title: NextJS
+description: Learn how to integrate Twigs with NextJS applications. Configure ThemeProvider for both App Router and Pages Router setups.
+---
+
+<ExternalLinks/>
+
+Next.js supports two routing architectures: **App Router** (Next.js 13+) and **Pages Router** (Next.js 12 and below). Choose the setup that matches your Next.js version.
+
+## App Router
+
+App Router uses the `app` directory with server components by default. Create a client component provider to wrap your app with ThemeProvider.
+
+### Create Theme Provider
+
+Create a client component to wrap your app with ThemeProvider:
+
+```tsx title="app/providers.tsx"
+'use client';
+
+import { ThemeProvider } from '@sparrowengg/twigs-react';
+import type { ReactNode } from 'react';
+
+export default function Providers({ 
+  children,
+  theme 
+}: { 
+  children: ReactNode;
+  theme?: any;
+}) {
+  return (
+    // [!code highlight]
+    <ThemeProvider theme={theme}>
+      {children}
+    </ThemeProvider>
+  );
+}
+```
+
+### Wrap Layout
+
+Wrap your root layout with the provider:
+
+```tsx title="app/layout.tsx"
+import Providers from './providers';
+import type { ReactNode } from 'react';
+
+export default function RootLayout({ children }: { children: ReactNode }) {
+  return (
+    <html lang="en">
+      <body>
+        // [!code highlight]
+        <Providers>
+          {children}
+        </Providers>
+      </body>
+    </html>
+  );
+}
+```
+<Callout>
+**Why use a provider?** App Router's `layout.tsx` is a server component by default and cannot use client components like `ThemeProvider` directly. Creating a separate `'use client'` provider component allows you to use `ThemeProvider` while keeping your layout as a server component.
+</Callout>
+
+### With Custom Theme
+
+Use `twigs.config.js` or pass theme directly:
+
+```tsx title="app/layout.tsx"
+import Providers from './providers';
+import twigsConfig from '../twigs.config.js'; // [!code highlight]
+import type { ReactNode } from 'react';
+
+export default function RootLayout({ children }: { children: ReactNode }) {
+  return (
+    <html lang="en">
+      <body>
+        // [!code highlight]
+        <Providers theme={twigsConfig.theme.extends}>
+          {children}
+        </Providers>
+      </body>
+    </html>
+  );
+}
+```
+
+## Pages Router
+
+Pages Router uses `pages` directory. Wrap your app with ThemeProvider in `_app.tsx`.
+
+### Basic Setup
+
+Wrap your app in `_app.tsx`:
+
+```tsx title="pages/_app.tsx"
+import { ThemeProvider } from '@sparrowengg/twigs-react'; // [!code highlight]
+import type { AppProps } from 'next/app';
+
+export default function App({ Component, pageProps }: AppProps) {
+  return (
+    // [!code highlight]
+    <ThemeProvider>
+      <Component {...pageProps} />
+    </ThemeProvider>
+  );
+}
+```
+<Callout>
+**Why wrap directly?** Pages Router supports both server and client components, `_app.tsx` handles client-side routing and state. So you can use `ThemeProvider` directly without needing a separate provider wrapper.
+</Callout>
+
+### With Custom Theme
+
+Use `twigs.config.js` or pass theme directly:
+
+```tsx title="pages/_app.tsx"
+import { ThemeProvider } from '@sparrowengg/twigs-react';
+import twigsConfig from '../twigs.config.js'; // [!code highlight]
+import type { AppProps } from 'next/app';
+
+export default function App({ Component, pageProps }: AppProps) {
+  return (
+    // [!code highlight]
+    <ThemeProvider theme={twigsConfig.theme.extends}>
+      <Component {...pageProps} />
+    </ThemeProvider>
+  );
+}
+```
+
+<Callout>
+**Server-Side Rendering:** For information about server-side rendering with Twigs, including how to handle styling and theme configuration in SSR environments, see the [Server-Side Rendering](/docs/getting-started/theming#server-side-rendering) section in the Theming guide.
+</Callout>

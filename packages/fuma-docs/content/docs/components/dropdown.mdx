@@ -1,0 +1,483 @@
+---
+title: Dropdown
+description: A dropdown menu that displays a list of actions or functions triggered by a button. Supports items, checkboxes, radio groups, submenus, and separators with full keyboard navigation and accessibility features.
+---
+
+<ExternalLinks 
+  source="https://github.com/surveysparrow/twigs/tree/master/packages/react-components/src/dropdown"
+  storybook="overlay-dropdown"
+/>
+
+## Import
+
+```jsx
+import {DropdownMenu,DropdownMenuTrigger,DropdownMenuContent,DropdownMenuItem,DropdownMenuCheckboxItem,DropdownMenuRadioGroup,DropdownMenuRadioItem,DropdownMenuItemIndicator,DropdownMenuLabel,DropdownMenuSeparator,DropdownMenuSub,DropdownMenuSubTrigger,DropdownMenuSubContent} from "@sparrowengg/twigs-react";
+```
+
+## Usage
+
+```jsx
+const DropdownExample = () => {
+  const [bookmarksChecked, setBookmarksChecked] = React.useState(true);
+  const [urlsChecked, setUrlsChecked] = React.useState(false);
+  const [person, setPerson] = React.useState("pedro");
+
+  return (
+    <DropdownMenu size="sm">
+      <DropdownMenuTrigger asChild>
+        <Button variant="solid" size="sm">
+          <Box css={{ marginLeft: "$2" }}>Menu</Box>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent sideOffset={5}>
+        <DropdownMenuItem>New Tab</DropdownMenuItem>
+        <DropdownMenuItem>New Window</DropdownMenuItem>
+        <DropdownMenuSub>
+          <DropdownMenuSubTrigger>More Tools</DropdownMenuSubTrigger>
+          <DropdownMenuSubContent sideOffset={2} alignOffset={-5}>
+            <DropdownMenuItem>Save Page As…</DropdownMenuItem>
+          </DropdownMenuSubContent>
+        </DropdownMenuSub>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+};
+```
+
+<Playground snippetName="dropdown-basic" defaultPlayground />
+
+## Examples
+
+### Advanced customization
+
+The dropdown component supports a wide range of features you can customize the component based on your own needs.
+
+<Playground snippetName="dropdown-advanced" /> 
+
+## Props
+
+### DropdownMenu
+
+<TypeTable
+  type={{
+    defaultOpen: {
+      type: "boolean",
+      description: "The default open state of the dropdown menu when it is initially rendered.",
+    },
+    open: {
+      type: "boolean",
+      description: "The controlled open state of the dropdown menu. Must be used in conjunction with onOpenChange.",
+    },
+    onOpenChange: {
+      type: "(open: boolean) => void",
+      description: "Event handler called when the open state of the dropdown menu changes.",
+    },
+    modal: {
+      type: "boolean",
+      description: "When true, prevents the dropdown menu from closing when clicking outside of it.",
+      default: "true",
+    },
+    dir: {
+      type: "'ltr' | 'rtl'",
+      description: "The reading direction of the dropdown menu when applicable.",
+    },
+    size: {
+      type: "'sm' | 'md'",
+      description: "The size of the dropdown menu items and content.",
+      default: "'md'",
+    },
+  }}
+/>
+
+### DropdownMenuTrigger
+
+<TypeTable
+  type={{
+    asChild: {
+      type: "boolean",
+      description: "Change the default rendered element for the one passed as a child, merging their props and behavior.",
+      default: "false",
+    },
+  }}
+/>
+
+### DropdownMenuContent
+
+<TypeTable
+  type={{
+    asChild: {
+      type: "boolean",
+      description: "Change the default rendered element for the one passed as a child, merging their props and behavior.",
+      default: "false",
+    },
+    side: {
+      type: "'top' | 'right' | 'bottom' | 'left'",
+      description: "The preferred side of the trigger to render against when open.",
+      default: "'bottom'",
+    },
+    sideOffset: {
+      type: "number",
+      description: "The distance in pixels from the trigger.",
+      default: "0",
+    },
+    align: {
+      type: "'start' | 'center' | 'end'",
+      description: "The preferred alignment against the trigger.",
+      default: "'center'",
+    },
+    alignOffset: {
+      type: "number",
+      description: "An offset in pixels from the start or end alignment.",
+      default: "0",
+    },
+    avoidCollisions: {
+      type: "boolean",
+      description: "When true, overrides the side and align preferences to prevent the content from overflowing the viewport.",
+      default: "true",
+    },
+    collisionBoundary: {
+      type: "Boundary",
+      description: "The element or elements that overflow detection is relative to.",
+    },
+    collisionPadding: {
+      type: "number | Partial<Record<Side, number>>",
+      description: "The distance in pixels from the boundary.",
+      default: "0",
+    },
+    arrowPadding: {
+      type: "number",
+      description: "The padding between the arrow and the edges of the content.",
+      default: "0",
+    },
+    sticky: {
+      type: "'partial' | 'always'",
+      description: "The sticky behavior on the align axis.",
+      default: "'partial'",
+    },
+    hideWhenDetached: {
+      type: "boolean",
+      description: "Whether to hide the content when the trigger becomes occluded.",
+      default: "false",
+    },
+    loop: {
+      type: "boolean",
+      description: "Whether focus should loop inside the content.",
+      default: "false",
+    },
+    onCloseAutoFocus: {
+      type: "(event: Event) => void",
+      description: "Event handler called when focus moves to the trigger after closing.",
+    },
+    onEscapeKeyDown: {
+      type: "(event: KeyboardEvent) => void",
+      description: "Event handler called when the escape key is pressed.",
+    },
+    onPointerDownOutside: {
+      type: "(event: PointerDownOutsideEvent) => void",
+      description: "Event handler called when a pointer event occurs outside the content.",
+    },
+    onFocusOutside: {
+      type: "(event: FocusOutsideEvent) => void",
+      description: "Event handler called when focus moves outside the content.",
+    },
+    onInteractOutside: {
+      type: "(event: PointerDownOutsideEvent | FocusOutsideEvent) => void",
+      description: "Event handler called when an interaction outside the content occurs.",
+    },
+    forceMount: {
+      type: "boolean",
+      description: "Used to force mounting when more control is needed.",
+    },
+    container: {
+      type: "HTMLElement",
+      description: "The container inside which to render the content.",
+    },
+    showArrow: {
+      type: "boolean",
+      description: "Whether to show an arrow pointing to the trigger.",
+      default: "false",
+    },
+  }}
+/>
+
+### DropdownMenuItem
+
+<TypeTable
+  type={{
+    disabled: {
+      type: "boolean",
+      description: "When true, prevents the user from interacting with the item.",
+      default: "false",
+    },
+    onSelect: {
+      type: "(event: Event) => void",
+      description: "Event handler called when the item is selected.",
+    },
+    textValue: {
+      type: "string",
+      description: "Optional text used for typeahead purposes.",
+    },
+  }}
+/>
+
+### DropdownMenuCheckboxItem
+
+<TypeTable
+  type={{
+    checked: {
+      type: "boolean | 'indeterminate'",
+      description: "The controlled checked state of the item.",
+    },
+    onCheckedChange: {
+      type: "(checked: boolean) => void",
+      description: "Event handler called when the checked state changes.",
+    },
+    disabled: {
+      type: "boolean",
+      description: "When true, prevents the user from interacting with the item.",
+      default: "false",
+    },
+    textValue: {
+      type: "string",
+      description: "Optional text used for typeahead purposes.",
+    },
+  }}
+/>
+
+### DropdownMenuRadioGroup
+
+<TypeTable
+  type={{
+    value: {
+      type: "string",
+      description: "The value of the selected item in the group.",
+    },
+    onValueChange: {
+      type: "(value: string) => void",
+      description: "Event handler called when the value changes.",
+    },
+    disabled: {
+      type: "boolean",
+      description: "When true, prevents the user from interacting with the group.",
+      default: "false",
+    },
+  }}
+/>
+
+### DropdownMenuRadioItem
+
+<TypeTable
+  type={{
+    value: {
+      type: "string",
+      description: "The value of the item.",
+    },
+    disabled: {
+      type: "boolean",
+      description: "When true, prevents the user from interacting with the item.",
+      default: "false",
+    },
+    textValue: {
+      type: "string",
+      description: "Optional text used for typeahead purposes.",
+    },
+  }}
+/>
+
+### DropdownMenuSub
+
+<TypeTable
+  type={{
+    defaultOpen: {
+      type: "boolean",
+      description: "The default open state of the submenu when it is initially rendered.",
+    },
+    open: {
+      type: "boolean",
+      description: "The controlled open state of the submenu. Must be used in conjunction with onOpenChange.",
+    },
+    onOpenChange: {
+      type: "(open: boolean) => void",
+      description: "Event handler called when the open state of the submenu changes.",
+    },
+  }}
+/>
+
+### DropdownMenuSubTrigger
+
+<TypeTable
+  type={{
+    disabled: {
+      type: "boolean",
+      description: "When true, prevents the user from interacting with the item.",
+      default: "false",
+    },
+    textValue: {
+      type: "string",
+      description: "Optional text used for typeahead purposes.",
+    },
+  }}
+/>
+
+### DropdownMenuSubContent
+
+<TypeTable
+  type={{
+    side: {
+      type: "'top' | 'right' | 'bottom' | 'left'",
+      description: "The preferred side of the trigger to render against when open.",
+      default: "'right'",
+    },
+    sideOffset: {
+      type: "number",
+      description: "The distance in pixels from the trigger.",
+      default: "0",
+    },
+    align: {
+      type: "'start' | 'center' | 'end'",
+      description: "The preferred alignment against the trigger.",
+      default: "'start'",
+    },
+    alignOffset: {
+      type: "number",
+      description: "An offset in pixels from the start or end alignment.",
+      default: "0",
+    },
+    avoidCollisions: {
+      type: "boolean",
+      description: "When true, overrides the side and align preferences to prevent the content from overflowing the viewport.",
+      default: "true",
+    },
+    collisionBoundary: {
+      type: "Boundary",
+      description: "The element or elements that overflow detection is relative to.",
+    },
+    collisionPadding: {
+      type: "number | Partial<Record<Side, number>>",
+      description: "The distance in pixels from the boundary.",
+      default: "0",
+    },
+    arrowPadding: {
+      type: "number",
+      description: "The padding between the arrow and the edges of the content.",
+      default: "0",
+    },
+    sticky: {
+      type: "'partial' | 'always'",
+      description: "The sticky behavior on the align axis.",
+      default: "'partial'",
+    },
+    hideWhenDetached: {
+      type: "boolean",
+      description: "Whether to hide the content when the trigger becomes occluded.",
+      default: "false",
+    },
+    loop: {
+      type: "boolean",
+      description: "Whether focus should loop inside the content.",
+      default: "false",
+    },
+    onCloseAutoFocus: {
+      type: "(event: Event) => void",
+      description: "Event handler called when focus moves to the trigger after closing.",
+    },
+    onEscapeKeyDown: {
+      type: "(event: KeyboardEvent) => void",
+      description: "Event handler called when the escape key is pressed.",
+    },
+    onPointerDownOutside: {
+      type: "(event: PointerDownOutsideEvent) => void",
+      description: "Event handler called when a pointer event occurs outside the content.",
+    },
+    onFocusOutside: {
+      type: "(event: FocusOutsideEvent) => void",
+      description: "Event handler called when focus moves outside the content.",
+    },
+    onInteractOutside: {
+      type: "(event: PointerDownOutsideEvent | FocusOutsideEvent) => void",
+      description: "Event handler called when an interaction outside the content occurs.",
+    },
+    forceMount: {
+      type: "boolean",
+      description: "Used to force mounting when more control is needed.",
+    },
+    container: {
+      type: "HTMLElement",
+      description: "The container inside which to render the content.",
+    },
+  }}
+/>
+
+## Data Attributes
+
+These props are used for the conditional rendering of the components
+
+<Callout>**Applicable** - DropdownMenu</Callout>
+<TypeTable
+  type={{
+    "[data-state]": {
+      type: "'open' | 'closed'",
+      description: "Present on the dropdown menu based on its current state.",
+    },
+  }}
+/>
+
+<Callout>**Applicable** - DropdownMenuTrigger</Callout>
+<TypeTable
+  type={{
+    "[data-state]": {
+      type: "'open' | 'closed'",
+      description: "Present on the trigger based on the dropdown menu state.",
+    },
+    "[data-disabled]": {
+      type: "boolean",
+      description: "Present when the trigger is disabled.",
+    },
+  }}
+/>
+
+<Callout>**Applicable** - DropdownMenuContent/ DropdownMenuSubContent</Callout>
+<TypeTable
+  type={{
+    "[data-state]": {
+      type: "'open' | 'closed'",
+      description: "Present on the content based on its current state.",
+    },
+    "[data-side]": {
+      type: "'top' | 'right' | 'bottom' | 'left'",
+      description: "Present on the content based on its current side placement.",
+    },
+    "[data-align]": {
+      type: "'start' | 'center' | 'end'",
+      description: "Present on the content based on its current alignment.",
+    },
+  }}
+/>
+
+<Callout>**Applicable** - DropdownMenuItem/ DropdownMenuCheckboxItem/ DropdownMenuRadioItem/ DropdownMenuSubTrigger</Callout>
+<TypeTable
+  type={{
+    "[data-disabled]": {
+      type: "boolean",
+      description: "Present when the item is disabled.",
+    },
+    "[data-highlighted]": {
+      type: "boolean",
+      description: "Present when the item is highlighted via keyboard navigation.",
+    },
+    "[data-state]": {
+      type: "'checked' | 'unchecked' | 'indeterminate'",
+      description: "Present on checkbox and radio items based on their current state.",
+    },
+  }}
+/>
+
+<Callout> **Applicable** - DropdownMenuSubTrigger</Callout>
+<TypeTable
+  type={{
+    "[data-state]": {
+      type: "'open' | 'closed'",
+      description: "Present on the sub-trigger based on its current state.",
+    },
+  }}
+/>

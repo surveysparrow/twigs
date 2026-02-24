@@ -1,0 +1,129 @@
+---
+title: Cascader
+description: A hierarchical dropdown component that enables users to navigate through nested option structures and select values from multi-level menus. Perfect for complex data selection scenarios.
+---
+
+<ExternalLinks 
+  source="https://github.com/surveysparrow/twigs/tree/master/packages/react-components/src/cascader"
+  storybook="form-cascader"
+/>
+
+## Import
+
+```jsx
+import { Cascader } from "@sparrowengg/twigs-react";
+```
+
+## Usage
+
+```jsx
+ <Cascader
+    data={data}
+    placeholder="Select location"
+    value={value}
+    onChange={(val) => setValue(val)}
+ />
+```
+
+<Playground snippetName="cascader-basic" defaultPlayground />
+
+<Callout type="info" title="Data Handling">
+We have stored the `test-data` seperately for the easy accessibility, all the example will use the same data.
+</Callout>
+
+## Examples
+
+### Cascader features
+
+<Playground snippetName="cascader-features" />
+
+## Props
+
+### Cascader
+
+<TypeTable
+  type={{
+    data: {
+      type: "CascaderOption[]",
+      description: "Array of hierarchical options to display",
+      required: true,
+    },
+    value: {
+      type: "string | { label: string; value: string }",
+      description: "Controlled value of the cascader",
+    },
+    defaultValue: {
+      type: "string | { label: string; value: string }",
+      description: "Default value of the cascader",
+    },
+    onChange: {
+      type: "(value: CascaderOption, selectionPath: CascaderItem[]) => void",
+      description: "Callback fired when the value changes",
+    },
+    label: {
+      type: "string",
+      description: "Label text for the cascader input",
+    },
+    placeholder: {
+      type: "string",
+      description: "Placeholder text displayed when no value is selected",
+    },
+    creatable: {
+      type: "boolean",
+      description: "Allows users to create new options",
+      default: "false",
+    },
+    cancelButtonText: {
+      type: "string",
+      description: "Text for the cancel button",
+      default: "'Cancel'",
+    },
+    chooseButtonText: {
+      type: "string",
+      description: "Text for the choose button",
+      default: "'Choose'",
+    },
+    fetchOptions: {
+      type: "(data: { value: string; label: string } & Record<string, any>) => Promise<void | any>",
+      description: "Function to fetch options dynamically for a node",
+    },
+    fetchSearchOptions: {
+      type: "(searchString: string) => Promise<void | any>",
+      description: "Function to fetch search results dynamically",
+    },
+    renderValue: {
+      type: "(value: CascaderItem | null, selectionPath: CascaderItem[]) => ReactNode",
+      description: "Custom renderer for the selected value display",
+    },
+    renderValueText: {
+      type: "(value: CascaderItem | null, selectionPath: CascaderItem[]) => ReactNode",
+      description: "Custom renderer for the value text",
+    },
+    renderBreadCrumb: {
+      type: "(data: CascaderItem | null, selectionPath: CascaderItem[]) => ReactNode",
+      description: "Custom renderer for the breadcrumb display",
+    },
+    inputAriaDescription: {
+      type: "string",
+      description: "ARIA description for the input field",
+    },
+    ariaLiveContent: {
+      type: "(data: { breadcrumb: string; label: string; totalItems: any; itemPosition: number; hasOptions: boolean; hasParent: boolean; } | null) => ReactNode",
+      description: "Custom ARIA live region content for accessibility",
+    },
+    searchLoadingIndicator: {
+      type: "ReactNode",
+      description: "Loading indicator shown during search",
+      default: "'Loading Results...'",
+    },
+    popoverPortal: {
+      type: "HTMLElement",
+      description: "Portal element for the popover",
+    },
+    css: {
+      type: "object",
+      description: "Custom CSS styles for the component",
+    },
+  }}
+/>
+

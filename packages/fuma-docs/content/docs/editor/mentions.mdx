@@ -1,0 +1,38 @@
+---
+title: Mentions
+description: Add user mentions dropdown to the editor where you can filter and select users with custom styling and flexible search functionality.
+---
+
+<ExternalLinks/>
+
+## Description
+
+Mentions plugin can be used to add mentions dropdown to the editor. The dropdown will be opened when the user types `@` followed by a letter in the editor. The dropdown will show the list of users that can be mentioned based on a custom filter logic.
+
+<Playground snippetName="editor-feature-mentions" defaultPlayground />
+
+## Props
+
+### getResults
+
+Type: `(searchString: string) => Promise<{label: string; value: string; [x: string]: any }[]> | {label: string; value: string; [x: string]: any }[]`
+
+This function is called when the user types `@` followed by a letter in the editor. The function should return a list of users that can be mentioned based on the search string. The function should return an array of objects with `label` and `value` keys. The `label` key is used to display the user name in the dropdown and the `value` key is used to replace the mention in the editor.
+
+### triggerFunction
+
+Type: `(searchString: string) => MenuTextMatch | null`
+
+`MenuTextMatch` has the following type:
+
+```ts
+interface MenuTextMatch {
+  leadOffset: number;
+  matchingString: string;
+  replaceableString: string;
+}
+```
+
+This function can be used to override the default trigger function.
+
+Refer [base dropdown](../helpers/base-dropdown.mdx) for more details about the props of the dropdown.

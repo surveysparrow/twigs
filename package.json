@@ -12,10 +12,18 @@
     "build:icons": "lerna run build --scope=@sparrowengg/twigs-react-icons",
     "build:components": "lerna run build --scope=@sparrowengg/twigs-react",
     "build:editor": "lerna run build --scope=@sparrowengg/twigs-editor-react",
-    "build:modules": "lerna run build --ignore=@sparrowengg/twigs-docs",
-    "build:docs": "lerna run build --scope=@sparrowengg/twigs-docs --verbose"
+    "build:modules": "lerna run build --ignore=@sparrowengg/twigs-fuma-docs",
+    "build:docs": "lerna run build --scope=@sparrowengg/twigs-docs --verbose",
+    "build:fuma-docs": "lerna run build --scope=@sparrowengg/twigs-fuma-docs --verbose"
   },
   "devDependencies": {
     "lerna": "^7.0.0"
+  },
+  "resolutions": {
+    "react": "18.2.0",
+    "react-dom": "18.2.0", 
+    "@types/react": "18.2.21",
+    "@types/react-dom": "18.2.7",
+    "typescript": "5.3.3"
   }
 }
