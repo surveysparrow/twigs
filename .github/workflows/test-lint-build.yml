@@ -12,6 +12,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_PLAYGROUND_URL: ${{ vars.NEXT_PUBLIC_PLAYGROUND_URL }}
 
     strategy:
       matrix:
@@ -28,7 +30,7 @@ jobs:
         with:
           # Avoid using single or double quotes for multiline patterns
           files: |
-            packages/docs/**
+            packages/fuma-docs/**
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
