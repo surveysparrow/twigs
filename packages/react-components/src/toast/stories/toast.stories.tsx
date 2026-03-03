@@ -158,5 +158,67 @@ const ToastrPromise = ({ variant: storyVariant }: { variant: string }) => {
   );
 };
 
+const ToastVariants = ({
+  variant,
+  maxToasts
+}: ToastProps & ToastProviderProps & { maxToasts: number }) => {
+  const [maxToastsState, setMaxToastsState] = useState<number>(maxToasts);
+
+  useEffect(() => {
+    setMaxToastsState(maxToasts);
+  }, [maxToasts]);
+
+  return (
+    <>
+      <Toastr duration={Infinity} maxToasts={maxToastsState} />
+      <Flex gap="$3">
+        <Button
+          variant="outline"
+          onClick={() => {
+            toast({
+              variant: 'success',
+              title: 'Success message',
+              showCloseButton: true
+            });
+          }}
+        >
+          Toast with Success variant
+        </Button>
+        <Button
+          variant="outline"
+          onClick={() => {
+            toast({
+              variant: 'warning',
+              title: 'Warning message',
+              showCloseButton: true
+            });
+          }}
+        >
+          Toast with Warning variant
+        </Button>
+        <Button
+          variant="outline"
+          onClick={() => {
+            toast({
+              variant: variant || ('default' as any),
+              title: messages[variant!] || 'Default message',
+              description: 'Here is the description',
+              showCloseButton: true,
+              action: (
+                <ToastAction altText="Undo action" asChild>
+                  <Button color="primary">Undo</Button>
+                </ToastAction>
+              )
+            });
+          }}
+        >
+          Toast with Action
+        </Button>
+      </Flex>
+    </>
+  );
+};
+
 export const Default = Template.bind({});
 export const ToastWithPromise = ToastrPromise.bind({});
+export const variants = ToastVariants.bind({});
