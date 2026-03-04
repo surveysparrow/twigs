@@ -22,7 +22,6 @@ export default function ToastWithActions() {
 
   return (
     <Box css={{ display: "flex", flexDirection: "column", gap: "$8" }}>
-      <Toastr duration={10000}/>
       {/* With Actions */}
       <Box css={{ display: "flex", flexDirection: "column", gap: "$4" }}>
         <Text weight="bold">With Actions</Text>

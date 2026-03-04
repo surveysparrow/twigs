@@ -5,7 +5,6 @@ import { toast } from "@sparrowengg/twigs-react";
 export default function ToastBasic() {
   return (
     <Box>
-      <Toastr duration={10000} />
       <Text weight="bold" >Basic Toast</Text>
         <Button
           variant="solid"

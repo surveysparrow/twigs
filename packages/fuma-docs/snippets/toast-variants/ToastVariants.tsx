@@ -6,7 +6,6 @@ export default function ToastVariants() {
 
   return (
     <Box css={{ display: "flex", flexDirection: "column", gap: "$8" }}>
-      <Toastr duration={10000}/>  
       {/* All Variants */}
       <Box css={{ display: "flex", flexDirection: "column", gap: "$4" }}>
         <Text weight="bold">All Variants</Text>
