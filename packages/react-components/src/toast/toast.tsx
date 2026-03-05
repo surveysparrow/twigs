@@ -490,37 +490,37 @@ const StyledClose = styled(ToastPrimitive.Close, {
     variant: {
       default: {
         color: '$secondary500',
-        backgroundColorOpacity: ['$secondary', 0.08],
+        backgroundColorOpacity: ['$secondary500', 0.08],
         '&:hover': {
-          backgroundColorOpacity: ['$secondary', 0.15]
+          backgroundColorOpacity: ['$secondary500', 0.15]
         }
       },
       success: {
         color: '$white900',
-        backgroundColorOpacity: ['$white200', 0.08],
+        backgroundColorOpacity: ['$white200', 0.1],
         '&:hover': {
           backgroundColorOpacity: ['$white200', 0.15]
         }
       },
       error: {
         color: '$white900',
-        backgroundColorOpacity: ['$white200', 0.08],
+        backgroundColorOpacity: ['$white200', 0.1],
         '&:hover': {
           backgroundColorOpacity: ['$white200', 0.15]
         }
       },
       warning: {
         color: '$secondary600',
-        backgroundColorOpacity: ['$secondary', 0.08],
+        backgroundColorOpacity: ['$secondary500', 0.08],
         '&:hover': {
-          backgroundColorOpacity: ['$secondary', 0.15]
+          backgroundColorOpacity: ['$secondary500', 0.15]
         }
       },
       loading: {
         color: '$secondary500',
-        backgroundColorOpacity: ['$secondary', 0.08],
+        backgroundColorOpacity: ['$secondary500', 0.08],
         '&:hover': {
-          backgroundColorOpacity: ['$secondary', 0.15]
+          backgroundColorOpacity: ['$secondary500', 0.15]
         }
       }
     }
