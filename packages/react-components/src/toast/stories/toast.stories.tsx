@@ -176,6 +176,18 @@ const ToastVariants = ({
           variant="outline"
           onClick={() => {
             toast({
+              variant: 'default',
+              title: 'Default message',
+              showCloseButton: true
+            });
+          }}
+        >
+          Toast with Default variant
+        </Button>
+        <Button
+          variant="outline"
+          onClick={() => {
+            toast({
               variant: 'success',
               title: 'Success message',
               showCloseButton: true
@@ -195,6 +207,18 @@ const ToastVariants = ({
           }}
         >
           Toast with Warning variant
+        </Button>
+        <Button
+          variant="outline"
+          onClick={() => {
+            toast({
+              variant: 'error',
+              title: 'Error message',
+              showCloseButton: true
+            });
+          }}
+        >
+          Toast with Error variant
         </Button>
         <Button
           variant="outline"

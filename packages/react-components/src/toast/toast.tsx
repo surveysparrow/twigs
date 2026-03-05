@@ -393,7 +393,7 @@ const ToastWrapper: FunctionComponent<ToastProps> = ({
           <TooltipProvider>
             <Tooltip content="Close" css={{ zIndex: 100000000 }}>
               <StyledClose aria-label="Close" variant={variant}>
-                <CloseIcon size={16} />
+                <CloseIcon size={20} />
               </StyledClose>
             </Tooltip>
           </TooltipProvider>
@@ -474,10 +474,10 @@ const Action = ({ children, ...props }: ActionProps) => {
 const StyledClose = styled(ToastPrimitive.Close, {
   gridArea: 'action',
   display: 'flex',
-  padding: '$2',
+  padding: '$1',
   border: 'none',
   cursor: 'pointer',
-  borderRadius: '$md',
+  borderRadius: '$sm',
   '&:focus, &:active': {
     outline: 'none'
   },
