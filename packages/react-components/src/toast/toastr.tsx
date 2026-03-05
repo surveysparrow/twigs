@@ -26,10 +26,10 @@ export const Toastr: FunctionComponent<
       {...rest}
     >
       {toasts.map(({
-        id, title, description, action, ...props
+        id, title, description, action, showCloseButton, ...props
       }) => {
         return (
-          <Toast key={id} {...props}>
+          <Toast key={id} {...props} showCloseButton={action ? false : showCloseButton}>
             <>
               <ToastContent>
                 {title && <ToastTitle>{title}</ToastTitle>}

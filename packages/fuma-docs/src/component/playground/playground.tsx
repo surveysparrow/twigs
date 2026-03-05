@@ -46,12 +46,12 @@ export const Playground = ({
           />
           <a
             href={buildUrl(snippetName, true)}
-            className="absolute w-8 h-8 flex items-center justify-center top-[-32px] right-0 lg:top-0 lg:right-[-32px] opacity-0 group-hover:opacity-100 focus-visible:opacity-100 transition-opacity duration-300 rounded-lg bg-fd-accent"
+            className="absolute h-8 flex items-center justify-center top-[-40px] right-[-2px] duration-300 no-underline hover:text-[#00555C] transition-colors px-2"
             aria-label="Open Playground in New Tab"
             title="Open Playground in New Tab"
             target="_blank"
           >
-            <SquareArrowOutUpRightIcon size={16} />
+            <SquareArrowOutUpRightIcon size={16} className="mr-2 h-fit" />{" "}Open Playground
           </a>
         </div>
       </Tab>
