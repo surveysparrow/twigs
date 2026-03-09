@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Box, Toastr, ToastAction, Text } from "@sparrowengg/twigs-react";
+import { Button, Box, ToastAction, Text } from "@sparrowengg/twigs-react";
 import { toast } from "@sparrowengg/twigs-react";
 
 export default function ToastWithActions() {
