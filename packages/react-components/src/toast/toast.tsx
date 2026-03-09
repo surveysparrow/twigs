@@ -391,7 +391,12 @@ const ToastWrapper: FunctionComponent<ToastProps> = ({
         {children}
         {showCloseButton && (
           <TooltipProvider>
-            <Tooltip content="Close" css={{ zIndex: 100000000 }}>
+            <Tooltip
+              content="Close"
+              css={{ zIndex: 100000000 }}
+              sideOffset={4}
+              delayDuration={0}
+            >
               <StyledClose aria-label="Close" variant={variant}>
                 <CloseIcon size={20} />
               </StyledClose>
