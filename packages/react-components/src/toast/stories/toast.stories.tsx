@@ -101,20 +101,12 @@ const ToastrPromise = ({ variant: storyVariant }: { variant: string }) => {
                 title: `${p.title}`,
                 variant: storyVariant || ('default' as any),
                 description: `${p.description}`,
-                action: (
-                  <ToastAction altText="Try again" asChild>
-                    <Button color="light"> Close </Button>
-                  </ToastAction>
-                )
+                showCloseButton: true
               }),
               error: (p) => ({
                 title: `Error while creating record: ${p.title}`,
                 variant: storyVariant || ('error' as any),
-                action: (
-                  <ToastAction altText="Try again" asChild>
-                    <Button color="light"> Close </Button>
-                  </ToastAction>
-                )
+                showCloseButton: true
               })
             });
           }}
@@ -132,11 +124,7 @@ const ToastrPromise = ({ variant: storyVariant }: { variant: string }) => {
               success: (p) => ({
                 title: `${p.data} saved successfully`,
                 variant: 'success',
-                action: (
-                  <ToastAction altText="Try again" asChild>
-                    <Button color="light"> Close </Button>
-                  </ToastAction>
-                )
+                showCloseButton: true
               }),
               error: ({ data }) => ({
                 title: `Error while creating record: ${data}`,
