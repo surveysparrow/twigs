@@ -205,7 +205,8 @@ toast.promise = <T>(
         css: successProps.css,
         action: successProps.action,
         title: successProps.title,
-        description: successProps.description
+        description: successProps.description,
+        showCloseButton: successProps.showCloseButton
       });
       return p;
     })
@@ -219,7 +220,8 @@ toast.promise = <T>(
         css: errorProps.css,
         action: errorProps.action,
         title: errorProps.title,
-        description: errorProps.description
+        description: errorProps.description,
+        showCloseButton: errorProps.showCloseButton
       });
       return e;
     });

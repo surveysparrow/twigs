@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Box, Toastr, ToastAction, Text } from "@sparrowengg/twigs-react";
+import { Button, Box, ToastAction, Text } from "@sparrowengg/twigs-react";
 import { toast } from "@sparrowengg/twigs-react";
 
 export default function ToastWithActions() {
@@ -22,7 +22,6 @@ export default function ToastWithActions() {
 
   return (
     <Box css={{ display: "flex", flexDirection: "column", gap: "$8" }}>
-      <Toastr duration={10000}/>
       {/* With Actions */}
       <Box css={{ display: "flex", flexDirection: "column", gap: "$4" }}>
         <Text weight="bold">With Actions</Text>

@@ -1,11 +1,10 @@
 import React from "react";
-import { Button, Box, Toastr,Text } from "@sparrowengg/twigs-react";
+import { Button, Box,Text } from "@sparrowengg/twigs-react";
 import { toast } from "@sparrowengg/twigs-react";
 
 export default function ToastBasic() {
   return (
     <Box>
-      <Toastr duration={10000} />
       <Text weight="bold" >Basic Toast</Text>
         <Button
           variant="solid"

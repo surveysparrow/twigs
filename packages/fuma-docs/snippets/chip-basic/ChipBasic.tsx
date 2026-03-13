@@ -1,4 +1,4 @@
-import { Box, Chip, toast, Toastr } from "@sparrowengg/twigs-react";
+import { Box, Chip, toast } from "@sparrowengg/twigs-react";
 import {
   ChevronDownIcon,
   TickCircleFillIcon,
@@ -7,7 +7,6 @@ import {
 export default function ChipBasic() {
   return (
     <Box css={{ display: "flex", gap: "$4", flexWrap: "wrap" }}>
-      <Toastr duration={3000} />
       <Chip size="2xs" variant="outline" leftElement={<TickCircleFillIcon />}>
         Default
       </Chip>

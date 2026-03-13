@@ -2,12 +2,13 @@ import React, { FunctionComponent, ReactElement } from 'react';
 import * as ToastPrimitive from '@radix-ui/react-toast';
 import {
   AlertFillIcon, TickCircleFillIcon,
-  InfoFillIcon
+  InfoFillIcon, CloseIcon
 } from '@sparrowengg/twigs-react-icons';
 import { CircleLoader } from '../loader/circle';
 import { styled, keyframes, hexToRgba } from '../stitches.config';
 import { Flex } from '../flex';
 import { Box } from '../box';
+import { Tooltip, TooltipProvider } from '../tooltip';
 
 const StyledTickIcon = styled(TickCircleFillIcon);
 const StyledErrorIcon = styled(AlertFillIcon);
@@ -370,6 +371,7 @@ interface ToastBaseProps {
   children?: React.ReactNode;
   variant?: string;
   icon?: ReactElement;
+  showCloseButton?: boolean;
 }
 
 export type ToastProps = ToastBaseProps &
@@ -379,6 +381,7 @@ const ToastWrapper: FunctionComponent<ToastProps> = ({
   children,
   icon,
   variant = 'default',
+  showCloseButton,
   ...props
 }) => {
   return (
@@ -386,6 +389,20 @@ const ToastWrapper: FunctionComponent<ToastProps> = ({
       <StyledToastWrapper>
         <Icon variant={variant}>{icon && React.cloneElement(icon)}</Icon>
         {children}
+        {showCloseButton && (
+          <TooltipProvider>
+            <Tooltip
+              content="Close"
+              css={{ zIndex: 100000000 }}
+              sideOffset={4}
+              delayDuration={0}
+            >
+              <StyledClose aria-label="Close" variant={variant}>
+                <CloseIcon size={20} />
+              </StyledClose>
+            </Tooltip>
+          </TooltipProvider>
+        )}
       </StyledToastWrapper>
     </StyledToast>
   );
@@ -441,8 +458,7 @@ const StyledAction = styled(ToastPrimitive.Action, {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  position: 'relative',
-  gap: '$2'
+  position: 'relative'
 });
 
 type ActionBaseProps = {
@@ -459,6 +475,65 @@ const Action = ({ children, ...props }: ActionProps) => {
   );
 };
 
+const StyledClose = styled(ToastPrimitive.Close, {
+  gridArea: 'action',
+  display: 'flex',
+  padding: '$1',
+  border: 'none',
+  cursor: 'pointer',
+  borderRadius: '$sm',
+  '&:focus, &:active': {
+    outline: 'none'
+  },
+  '&:focus-visible': {
+    $$shadowColor: '$colors$primary300',
+    boxShadow:
+      'rgb(255, 255, 255) 0px 0px 0px 2px, $$shadowColor 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px'
+  },
+  variants: {
+    variant: {
+      default: {
+        color: '$secondary500',
+        backgroundColorOpacity: ['$secondary500', 0.08],
+        '&:hover': {
+          backgroundColorOpacity: ['$secondary500', 0.15]
+        }
+      },
+      success: {
+        color: '$white900',
+        backgroundColorOpacity: ['$white200', 0.1],
+        '&:hover': {
+          backgroundColorOpacity: ['$white200', 0.15]
+        }
+      },
+      error: {
+        color: '$white900',
+        backgroundColorOpacity: ['$white200', 0.1],
+        '&:hover': {
+          backgroundColorOpacity: ['$white200', 0.15]
+        }
+      },
+      warning: {
+        color: '$secondary600',
+        backgroundColorOpacity: ['$secondary500', 0.08],
+        '&:hover': {
+          backgroundColorOpacity: ['$secondary500', 0.15]
+        }
+      },
+      loading: {
+        color: '$secondary500',
+        backgroundColorOpacity: ['$secondary500', 0.08],
+        '&:hover': {
+          backgroundColorOpacity: ['$secondary500', 0.15]
+        }
+      }
+    }
+  },
+  defaultVariants: {
+    variant: 'default'
+  }
+});
+
 export const ToastProvider = Provider;
 export const ToastViewport = StyledViewport;
 export const Toast = ToastWrapper;
@@ -466,4 +541,4 @@ export const ToastContent = Content;
 export const ToastTitle = StyledTitle;
 export const ToastDescription = StyledDescription;
 export const ToastAction = Action;
-export const ToastClose = ToastPrimitive.Close;
+export const ToastClose = StyledClose;
