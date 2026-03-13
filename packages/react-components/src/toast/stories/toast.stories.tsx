@@ -101,20 +101,12 @@ const ToastrPromise = ({ variant: storyVariant }: { variant: string }) => {
                 title: `${p.title}`,
                 variant: storyVariant || ('default' as any),
                 description: `${p.description}`,
-                action: (
-                  <ToastAction altText="Try again" asChild>
-                    <Button color="light"> Close </Button>
-                  </ToastAction>
-                )
+                showCloseButton: true
               }),
               error: (p) => ({
                 title: `Error while creating record: ${p.title}`,
                 variant: storyVariant || ('error' as any),
-                action: (
-                  <ToastAction altText="Try again" asChild>
-                    <Button color="light"> Close </Button>
-                  </ToastAction>
-                )
+                showCloseButton: true
               })
             });
           }}
@@ -132,11 +124,7 @@ const ToastrPromise = ({ variant: storyVariant }: { variant: string }) => {
               success: (p) => ({
                 title: `${p.data} saved successfully`,
                 variant: 'success',
-                action: (
-                  <ToastAction altText="Try again" asChild>
-                    <Button color="light"> Close </Button>
-                  </ToastAction>
-                )
+                showCloseButton: true
               }),
               error: ({ data }) => ({
                 title: `Error while creating record: ${data}`,
@@ -158,5 +146,91 @@ const ToastrPromise = ({ variant: storyVariant }: { variant: string }) => {
   );
 };
 
+const ToastVariants = ({
+  variant,
+  maxToasts
+}: ToastProps & ToastProviderProps & { maxToasts: number }) => {
+  const [maxToastsState, setMaxToastsState] = useState<number>(maxToasts);
+
+  useEffect(() => {
+    setMaxToastsState(maxToasts);
+  }, [maxToasts]);
+
+  return (
+    <>
+      <Toastr duration={Infinity} maxToasts={maxToastsState} />
+      <Flex gap="$3">
+        <Button
+          variant="outline"
+          onClick={() => {
+            toast({
+              variant: 'default',
+              title: 'Default message',
+              showCloseButton: true
+            });
+          }}
+        >
+          Toast with Default variant
+        </Button>
+        <Button
+          variant="outline"
+          onClick={() => {
+            toast({
+              variant: 'success',
+              title: 'Success message',
+              showCloseButton: true
+            });
+          }}
+        >
+          Toast with Success variant
+        </Button>
+        <Button
+          variant="outline"
+          onClick={() => {
+            toast({
+              variant: 'warning',
+              title: 'Warning message',
+              showCloseButton: true
+            });
+          }}
+        >
+          Toast with Warning variant
+        </Button>
+        <Button
+          variant="outline"
+          onClick={() => {
+            toast({
+              variant: 'error',
+              title: 'Error message',
+              showCloseButton: true
+            });
+          }}
+        >
+          Toast with Error variant
+        </Button>
+        <Button
+          variant="outline"
+          onClick={() => {
+            toast({
+              variant: variant || ('default' as any),
+              title: messages[variant!] || 'Default message',
+              description: 'Here is the description',
+              showCloseButton: true,
+              action: (
+                <ToastAction altText="Undo action" asChild>
+                  <Button color="primary">Undo</Button>
+                </ToastAction>
+              )
+            });
+          }}
+        >
+          Toast with Action
+        </Button>
+      </Flex>
+    </>
+  );
+};
+
 export const Default = Template.bind({});
 export const ToastWithPromise = ToastrPromise.bind({});
+export const variants = ToastVariants.bind({});
