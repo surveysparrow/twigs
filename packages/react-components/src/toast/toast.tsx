@@ -458,7 +458,7 @@ const StyledAction = styled(ToastPrimitive.Action, {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  position: 'relative',
+  position: 'relative'
 });
 
 type ActionBaseProps = {
