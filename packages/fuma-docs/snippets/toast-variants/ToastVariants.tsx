@@ -17,12 +17,13 @@ export default function ToastVariants() {
               toast({
                 variant: "default",
                 title: "Default message",
-                description: "This is a default toast notification."
+                description: "This is a default toast notification.",
+                showCloseButton: true
               });
             }}
             css={{ marginBottom: "$4" }}
           >
-            Default Toast
+            Default Toast (closable)
           </Button>
           
           <Button
@@ -45,12 +46,13 @@ export default function ToastVariants() {
               toast({
                 variant: "error",
                 title: "Error occurred",
-                description: "Something went wrong. Please try again."
+                description: "Something went wrong. Please try again.",
+                showCloseButton: true
               });
             }}
             css={{ marginBottom: "$4" }}
           >
-            Error Toast
+            Error Toast (closable)
           </Button>
           
           <Button
