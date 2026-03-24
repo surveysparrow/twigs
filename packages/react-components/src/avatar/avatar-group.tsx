@@ -7,6 +7,7 @@ type OmitAvatarProps = 'isAnonymous' | 'src' | 'name';
 export type AvatarGroupProps = {
   limit?: number | null;
   limitExceededLabel?: string;
+  limitExceededFormatter?: (extraAvatarsCount: number) => React.ReactNode;
   children: React.ReactElement | React.ReactElement[];
 } & Omit<ComponentProps<typeof Avatar>, OmitAvatarProps> &
   React.HTMLAttributes<HTMLDivElement> & {
@@ -183,6 +184,7 @@ export const AvatarGroup = React.forwardRef<typeof StyledAvatarGroup, AvatarGrou
     {
       limit = 0,
       limitExceededLabel,
+      limitExceededFormatter,
       size,
       children,
       rounded,
@@ -197,6 +199,9 @@ export const AvatarGroup = React.forwardRef<typeof StyledAvatarGroup, AvatarGrou
     const avatarCount = avatars.length || 0;
     const avatarLimit = limit || avatarCount;
     const extraAvatarsCount = avatarCount - avatarLimit;
+    const limitExceededText = limitExceededFormatter
+      ? limitExceededFormatter(extraAvatarsCount)
+      : limitExceededLabel || `+${Math.min(extraAvatarsCount, 99)}`;
 
     const renderAvatars = avatars
       .slice(0, avatarLimit)
@@ -231,9 +236,7 @@ export const AvatarGroup = React.forwardRef<typeof StyledAvatarGroup, AvatarGrou
               rounded={rounded}
             >
               <AvatarOverlay />
-              <AvatarOverlayText size={size}>
-                {limitExceededLabel || `+${extraAvatarsCount}`}
-              </AvatarOverlayText>
+              <AvatarOverlayText size={size}>{limitExceededText}</AvatarOverlayText>
             </Avatar>
           </AvatarNestedItem>
         ) : null}

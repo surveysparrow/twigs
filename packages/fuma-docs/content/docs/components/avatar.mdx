@@ -97,6 +97,10 @@ import { Avatar } from "@sparrowengg/twigs-react";
       type: "string",
       description: "Custom label for limit exceeded count",
     },
+    limitExceededFormatter: {
+      type: "(extraAvatarsCount: number) => React.ReactNode",
+      description:
+        "Formats the overflow label using the hidden avatar count. By default, overflow text is capped at +99.",
+    },
   }}
 />
-
