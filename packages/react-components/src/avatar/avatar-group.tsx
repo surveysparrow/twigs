@@ -199,13 +199,12 @@ export const AvatarGroup = React.forwardRef<typeof StyledAvatarGroup, AvatarGrou
     const avatarCount = avatars.length || 0;
     const avatarLimit = limit || avatarCount;
     const extraAvatarsCount = avatarCount - avatarLimit;
-    const limitExceededText = extraAvatarsCount > 0
-      ? (
-        limitExceededFormatter
-          ? limitExceededFormatter(extraAvatarsCount)
-          : limitExceededLabel || `+${Math.min(extraAvatarsCount, 99)}`
-      )
-      : null;
+    let limitExceededText: React.ReactNode = null;
+    if (extraAvatarsCount > 0) {
+      limitExceededText = limitExceededFormatter
+        ? limitExceededFormatter(extraAvatarsCount)
+        : limitExceededLabel || `+${Math.min(extraAvatarsCount, 99)}`;
+    }
 
     const renderAvatars = avatars
       .slice(0, avatarLimit)
