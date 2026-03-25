@@ -98,7 +98,7 @@ const selectStyles = {
     overflow: 'hidden',
     margin: '$3 0',
     boxShadow: '0px 1px 1px 0px rgba(0, 0, 0, 0.06), 0px 2px 5px 0px rgba(0, 0, 0, 0.06), 0px 8px 12px 0px rgba(0, 0, 0, 0.06)',
-    border: '0.5px solid $colors$black300',
+    border: '0.5px solid $colors$black300'
   },
   '& .twigs-select__single-value': {
     color: '$neutral900',
