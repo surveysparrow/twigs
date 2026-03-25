@@ -512,8 +512,8 @@ const StyledButton = styled('button', {
         width: '$5',
         height: '$5',
         [`& .${BUTTON_CLASSNAMES.iconBox}`]: {
-          width: '$3',
-          height: '$3'
+          width: '$4',
+          height: '$4'
         }
       }
     },
