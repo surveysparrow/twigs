@@ -16,8 +16,8 @@ const StyledFallback = styled(AvatarPrimitive.Fallback, {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  backgroundColor: '$neutral100',
-  color: '$neutral600',
+  backgroundColor: 'inherit',
+  color: 'inherit',
   lineHeight: '$xs',
   fontWeight: '$7'
 });
@@ -30,6 +30,8 @@ const StyledAvatar = styled(AvatarPrimitive.Root, {
   overflow: 'hidden',
   userSelect: 'none',
   position: 'relative',
+  backgroundColor: '$neutral100',
+  color: '$neutral600',
   variants: {
     size: {
       '5xl': {
