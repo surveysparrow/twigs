@@ -39,6 +39,10 @@ import { Avatar } from "@sparrowengg/twigs-react";
 
 <Playground snippetName="avatar-group" />
 
+<Callout type="info">
+By default, the overflow label is shown as `+N` based on the extra avatar count. Once the count exceeds 99, it is capped at `+99`. If you need a different format or cap behavior, use `limitExceededFormatter` to customize it.
+</Callout>
+
 ## Props
 
 ### Avatar
@@ -100,7 +104,7 @@ import { Avatar } from "@sparrowengg/twigs-react";
     limitExceededFormatter: {
       type: "(extraAvatarsCount: number) => React.ReactNode",
       description:
-        "Formats the overflow label using the hidden avatar count. By default, overflow text is capped at +99.",
+        "Provides a custom formatter for the overflow label using the extra avatar count.",
     },
   }}
 />
