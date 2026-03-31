@@ -40,31 +40,40 @@ const AvatarOverlayText = styled('span', {
   variants: {
     size: {
       '5xl': {
-        fontSize: '$3xl'
+        fontSize: '$3xl',
+        fontWeight: '$7'
       },
       '4xl': {
-        fontSize: '$3xl'
+        fontSize: '$xl',
+        fontWeight: '$7'
       },
       '3xl': {
-        fontSize: '$3xl'
+        fontSize: '$xl',
+        fontWeight: '$7'
       },
       '2xl': {
-        fontSize: '$2xl'
+        fontSize: '$lg',
+        fontWeight: '$7'
       },
       xl: {
-        fontSize: '$md'
+        fontSize: '$md',
+        fontWeight: '$7'
       },
       lg: {
-        fontSize: '$md'
+        fontSize: '$md',
+        fontWeight: '$7'
       },
       md: {
-        fontSize: '$xs'
+        fontSize: '$xs',
+        fontWeight: '$7'
       },
       sm: {
-        fontSize: '$xxs'
+        fontSize: '$xxs',
+        fontWeight: '$7'
       },
       xs: {
-        fontSize: '$xxs'
+        fontSize: '$xxs',
+        fontWeight: '$7'
       }
     }
   }
