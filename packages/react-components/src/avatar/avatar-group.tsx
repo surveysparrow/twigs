@@ -89,23 +89,23 @@ const AvatarNestedItem = styled('div', {
   variants: {
     size: {
       '5xl': {
-        borderWidth: '2px',
+        borderWidth: '5px',
         marginLeft: '-$sizes$6'
       },
       '4xl': {
-        borderWidth: '2px',
+        borderWidth: '4px',
         marginLeft: '-$sizes$6'
       },
       '3xl': {
-        borderWidth: '2px',
+        borderWidth: '3px',
         marginLeft: '-$sizes$6'
       },
       '2xl': {
-        borderWidth: '2px',
+        borderWidth: '3px',
         marginLeft: '-$sizes$6'
       },
       xl: {
-        borderWidth: '2px',
+        borderWidth: '3px',
         marginLeft: '-$sizes$6'
       },
       lg: {
