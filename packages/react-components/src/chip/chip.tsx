@@ -308,7 +308,7 @@ const StyledChip = styled(Box, {
         },
 
         [`& .${CLASSNAMES.addonElementStart}`]: {
-          color: '$secondary500'
+          color: '$white900'
         }
       },
       error: {

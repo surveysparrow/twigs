@@ -15,6 +15,15 @@ export default function AvatarBasic() {
       >
         <AvatarBadge />
       </Avatar>
+      <Avatar
+        name="Maneesh"
+        size="3xl"
+        css={{ backgroundColor: "$primary100", color: "$primary600" }}
+      />
+      <Avatar
+        name="Gautham"
+        size="3xl"
+      />
     </Box>
   );
 }
