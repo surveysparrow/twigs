@@ -37,31 +37,32 @@ const AvatarOverlayText = styled('span', {
   left: 0,
   top: 0,
   letterSpacing: '.1px',
+  fontWeight: '$7',
   variants: {
     size: {
       '5xl': {
-        fontSize: '$3xl'
+        fontSize: '$4xl'
       },
       '4xl': {
-        fontSize: '$3xl'
+        fontSize: '$xl'
       },
       '3xl': {
-        fontSize: '$3xl'
+        fontSize: '$lg'
       },
       '2xl': {
-        fontSize: '$2xl'
+        fontSize: '$lg'
       },
       xl: {
-        fontSize: '$md'
+        fontSize: '$lg'
       },
       lg: {
         fontSize: '$md'
       },
       md: {
-        fontSize: '$xs'
+        fontSize: '$sm'
       },
       sm: {
-        fontSize: '$xxs'
+        fontSize: '$xs'
       },
       xs: {
         fontSize: '$xxs'
@@ -80,23 +81,23 @@ const AvatarNestedItem = styled('div', {
   variants: {
     size: {
       '5xl': {
-        borderWidth: '2px',
+        borderWidth: '5px',
         marginLeft: '-$sizes$6'
       },
       '4xl': {
-        borderWidth: '2px',
+        borderWidth: '4px',
         marginLeft: '-$sizes$6'
       },
       '3xl': {
-        borderWidth: '2px',
+        borderWidth: '3px',
         marginLeft: '-$sizes$6'
       },
       '2xl': {
-        borderWidth: '2px',
+        borderWidth: '3px',
         marginLeft: '-$sizes$6'
       },
       xl: {
-        borderWidth: '2px',
+        borderWidth: '3px',
         marginLeft: '-$sizes$6'
       },
       lg: {

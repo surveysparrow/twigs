@@ -202,12 +202,12 @@ export const defaultTheme = {
     xs: '0.75rem',
     sm: '0.875rem',
     md: '1rem',
-    lg: '1.2rem',
-    xl: '1.44rem',
-    '2xl': '1.728rem',
-    '3xl': '2.074rem',
-    '4xl': '2.488rem',
-    '5xl': '2.986rem'
+    lg: '1.1875rem',
+    xl: '1.4375rem',
+    '2xl': '1.75rem',
+    '3xl': '2.0625rem',
+    '4xl': '2.5rem',
+    '5xl': '3rem'
   },
   fonts: {
     body: 'sans-serif',
