@@ -7,7 +7,7 @@ export const getRecaptchaToken = async (
 ): Promise<string> => {
   const getToken = async (retryCount = 0): Promise<string> => {
     return new Promise((resolve, reject) => {
-      if (!window.grecaptcha) {
+      if (!window.grecaptcha?.enterprise) {
         if (retryCount >= MAX_RETRIES) {
           reject(new Error("Failed to load reCAPTCHA after maximum retries"));
           return;
@@ -17,9 +17,9 @@ export const getRecaptchaToken = async (
         }, 1000);
         return;
       }
-      grecaptcha.ready(function () {
+      grecaptcha.enterprise.ready(function () {
         grecaptcha
-          .execute(recaptchaSiteKey, {
+          .enterprise.execute(recaptchaSiteKey, {
             action: "submit",
           })
           .then(

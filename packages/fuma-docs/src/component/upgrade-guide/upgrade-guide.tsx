@@ -185,7 +185,7 @@ export const UpgradeGuide = () => {
   return (
     <Box>
       <Script
-        src={`https://www.google.com/recaptcha/api.js?render=${PUBLIC_RECAPTCHA_SITE_KEY}`}
+        src={`https://www.google.com/recaptcha/enterprise.js?render=${PUBLIC_RECAPTCHA_SITE_KEY}`}
         strategy="afterInteractive"
       />
       <form
