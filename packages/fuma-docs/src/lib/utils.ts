@@ -17,9 +17,9 @@ export const getRecaptchaToken = async (
         }, 1000);
         return;
       }
-      grecaptcha.ready(function () {
+      grecaptcha.enterprise.ready(function () {
         grecaptcha
-          .execute(recaptchaSiteKey, {
+          .enterprise.execute(recaptchaSiteKey, {
             action: "submit",
           })
           .then(
