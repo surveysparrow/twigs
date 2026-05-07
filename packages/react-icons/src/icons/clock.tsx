@@ -15,46 +15,29 @@ export const ClockIcon = React.forwardRef<SVGSVGElement, IconProps>(
         height={size}
         ref={ref}
       >
-        <path
-          d="M6.22668 22.9453C7.00535 24.0386 7.96135 24.9946 9.05468 25.7733"
-          stroke={color}
-          strokeWidth={strokeWidth}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
-        />
-        <path
-          d="M4.18001 14C4.07067 14.652 4.00001 15.3173 4.00001 16C4.00001 16.6827 4.07067 17.348 4.18001 18"
-          stroke={color}
-          strokeWidth={strokeWidth}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
-        />
-        <path
-          d="M6.22668 9.05467C7.00535 7.96001 7.96002 7.00534 9.05468 6.22534"
-          stroke={color}
-          strokeWidth={strokeWidth}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
-        />
-        <path
-          d="M14 27.82C14.652 27.9293 15.3173 28 16 28C22.628 28 28 22.628 28 16C28 9.372 22.628 4 16 4C15.3173 4 14.652 4.07067 14 4.18"
-          stroke={color}
-          strokeWidth={strokeWidth}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
-        />
-        <path
-          d="M15.6237 10.6484V16.8498L20.4984 19.8218"
-          stroke={color}
-          strokeWidth={strokeWidth}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
-        />
+        <g clipPath="url(#clip0_22_463)">
+          <path
+            d="M20.4999 19.5L15.6253 17.4187V10"
+            stroke={color}
+            strokeWidth={strokeWidth}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            vectorEffect="non-scaling-stroke"
+          />
+          <path
+            d="M24.4853 7.51472C29.1715 12.201 29.1715 19.799 24.4853 24.4853C19.799 29.1715 12.201 29.1715 7.51472 24.4853C2.82843 19.799 2.82843 12.201 7.51472 7.51472C12.201 2.82843 19.799 2.82843 24.4853 7.51472Z"
+            stroke={color}
+            strokeWidth={strokeWidth}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            vectorEffect="non-scaling-stroke"
+          />
+        </g>
+        <defs>
+          <clipPath id="clip0_22_463">
+            <rect width="32" height="32" fill="white" />
+          </clipPath>
+        </defs>
       </svg>
     );
   }

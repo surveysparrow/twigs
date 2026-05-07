@@ -10,10 +10,10 @@ export const UserIcon = React.forwardRef<SVGSVGElement, IconProps>(
         viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        {...rest}
         width={size}
         height={size}
         ref={ref}
-        {...rest}
       >
         <g clipPath="url(#clip0_11624_24128)">
           <rect
