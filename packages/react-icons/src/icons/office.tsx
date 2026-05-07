@@ -3,7 +3,7 @@ import { IconProps } from '../types';
 
 export const OfficeIcon = React.forwardRef<SVGSVGElement, IconProps>(
   ({
-    color = 'currentColor', size = 32, strokeWidth = 1.5, ...rest
+    color = 'currentColor', size = 32, ...rest
   }, ref) => {
     return (
       <svg
