@@ -7,7 +7,7 @@ export const AiCognivueIcon = React.forwardRef<SVGSVGElement, IconProps>(
   }, ref) => {
     return (
       <svg
-        viewBox="0 0 32 32"
+        viewBox="0 0 35 35"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         {...rest}
@@ -115,7 +115,7 @@ export const AiCognivueIcon = React.forwardRef<SVGSVGElement, IconProps>(
         </g>
         <defs>
           <clipPath id="clip0_1402_607">
-            <rect width="32" height="32" fill="white" />
+            <rect width="35" height="35" fill="white" />
           </clipPath>
         </defs>
       </svg>
