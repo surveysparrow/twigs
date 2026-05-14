@@ -7,13 +7,13 @@ export const CopyIcon = React.forwardRef<SVGSVGElement, IconProps>(
   }, ref) => {
     return (
       <svg
-        width={size}
-        height={size}
-        ref={ref}
-        {...rest}
         viewBox="0 0 20 20"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        {...rest}
+        width={size}
+        height={size}
+        ref={ref}
       >
         <g clipPath="url(#clip0_7662_120821)">
           <path

@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { ForwardArrowIcon } from "@sparrowengg/twigs-react-icons";
+import { ArrowRightIcon } from "@sparrowengg/twigs-react-icons";
 import Image, { StaticImageData } from "next/image";
 import playground from "@/assets/images/play-new.svg";
 import externalLink from "@/assets/images/arrow-icon.png";
@@ -31,7 +31,7 @@ const HoverImage = ({ src, alt }: HoverImageProps) => {
             Go to Playground
           </span>
           <span className="text-white transition-transform duration-300 rotate-[-45deg]">
-            <ForwardArrowIcon size={28} color="currentColor" />
+            <ArrowRightIcon size={28} color="currentColor" />
           </span>
         </div>
       </div>

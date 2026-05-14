@@ -15,22 +15,33 @@ export const FilterIcon = React.forwardRef<SVGSVGElement, IconProps>(
         height={size}
         ref={ref}
       >
-        <path
-          d="M19.6667 20V25.3333C19.6667 26.0406 19.3857 26.7189 18.8856 27.219C18.3855 27.719 17.7072 28 17 28H15C14.2928 28 13.6145 27.719 13.1144 27.219C12.6143 26.7189 12.3333 26.0406 12.3333 25.3333V20L4.67752 11.4255C4.24118 10.9368 4 10.3046 4 9.64941V8C4 5.79085 9.37259 4 16 4C22.6274 4 28 5.79085 28 8V9.64941C28 10.3045 27.7588 10.9367 27.3225 11.4254L19.6667 20Z"
-          stroke={color}
-          strokeWidth={strokeWidth}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
-        />
-        <path
-          d="M28 8C28 10.2091 22.6274 12 16 12C9.37259 12 4 10.2091 4 8"
-          stroke={color}
-          strokeWidth={strokeWidth}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
-        />
+        <g clipPath="url(#clip0_546_544)">
+          <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M19.2353 17.2942L25.9738 10.5557C26.2171 10.3124 26.353 9.98369 26.353 9.64075V6.29413C26.353 5.57977 25.7732 5 25.0589 5H6.94104C6.22668 5 5.64691 5.57977 5.64691 6.29413V9.64075C5.64691 9.98369 5.7828 10.3137 6.02609 10.5557L12.7646 17.2942"
+            stroke={color}
+            strokeWidth={strokeWidth}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            vectorEffect="non-scaling-stroke"
+          />
+          <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M12.7646 17.2942V25.3812C12.7646 26.4334 13.7533 27.206 14.7744 26.951L18.0097 26.1422C18.7293 25.9623 19.2353 25.3152 19.2353 24.5724V17.2942"
+            stroke={color}
+            strokeWidth={strokeWidth}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            vectorEffect="non-scaling-stroke"
+          />
+        </g>
+        <defs>
+          <clipPath id="clip0_546_544">
+            <rect width="32" height="32" fill="white" />
+          </clipPath>
+        </defs>
       </svg>
     );
   }

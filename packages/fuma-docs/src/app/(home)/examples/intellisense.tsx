@@ -6,7 +6,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "@sparrowengg/twigs-react";
-import { ForwardArrowIcon } from "@sparrowengg/twigs-react-icons";
+import { ArrowRightIcon } from "@sparrowengg/twigs-react-icons";
 import Image, { StaticImageData } from "next/image";
 import autocomplete from "@/assets/images/autocomplete-new.png";
 import docs from "@/assets/images/docs-new.png";
@@ -40,7 +40,7 @@ const HoverImage = ({ src, alt }: HoverImageProps) => {
             Go to Intellisense
           </span>
           <span className="text-white transition-transform duration-300 rotate-[-45deg]">
-            <ForwardArrowIcon size={28} color="currentColor" />
+            <ArrowRightIcon size={28} color="currentColor" />
           </span>
         </div>
       </div>
