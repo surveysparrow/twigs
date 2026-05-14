@@ -1,7 +1,7 @@
 import React from 'react';
 import { IconProps } from '../types';
 
-export const CommentAddIcon = React.forwardRef<SVGSVGElement, IconProps>(
+export const TickCirclePartialIcon = React.forwardRef<SVGSVGElement, IconProps>(
   ({
     color = 'currentColor', size = 32, strokeWidth = 1.5, ...rest
   }, ref) => {
@@ -15,9 +15,9 @@ export const CommentAddIcon = React.forwardRef<SVGSVGElement, IconProps>(
         height={size}
         ref={ref}
       >
-        <g clipPath="url(#clip0_622_4114)">
+        <g clipPath="url(#clip0_945_562)">
           <path
-            d="M13.3333 14H18.6667"
+            d="M6.22015 22.9451C6.99664 24.0385 7.94963 24.9942 9.03984 25.773"
             stroke={color}
             strokeWidth={strokeWidth}
             strokeLinecap="round"
@@ -25,7 +25,7 @@ export const CommentAddIcon = React.forwardRef<SVGSVGElement, IconProps>(
             vectorEffect="non-scaling-stroke"
           />
           <path
-            d="M16 16.6667V11.3333"
+            d="M4.17949 14.0001C3.94017 15.3226 3.94017 16.6774 4.17949 17.9999"
             stroke={color}
             strokeWidth={strokeWidth}
             strokeLinecap="round"
@@ -33,9 +33,23 @@ export const CommentAddIcon = React.forwardRef<SVGSVGElement, IconProps>(
             vectorEffect="non-scaling-stroke"
           />
           <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M18 24L13.0778 27.8569C12.8771 28.0142 12.6042 28.0431 12.3748 27.9315C12.1455 27.8199 12 27.5872 12 27.3321V24H10.6667C6.98477 24 4 21.0152 4 17.3333V10.6667C4 6.98477 6.98477 4 10.6667 4H21.3333C25.0152 4 28 6.98477 28 10.6667V17.3333C28 21.0152 25.0152 24 21.3333 24H18Z"
+            d="M6.22015 9.05493C6.99624 7.96083 7.94928 7.00457 9.03984 6.2257"
+            stroke={color}
+            strokeWidth={strokeWidth}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            vectorEffect="non-scaling-stroke"
+          />
+          <path
+            d="M13.9707 27.8196C18.6719 28.6455 23.4129 26.5903 26.0341 22.5901C28.6553 18.59 28.6553 13.41 26.0341 9.40985C23.4129 5.40967 18.6719 3.35449 13.9707 4.18045"
+            stroke={color}
+            strokeWidth={strokeWidth}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            vectorEffect="non-scaling-stroke"
+          />
+          <path
+            d="M19.3043 14.2761L15.1312 18.4612L12.6226 15.9533"
             stroke={color}
             strokeWidth={strokeWidth}
             strokeLinecap="round"
@@ -44,7 +58,7 @@ export const CommentAddIcon = React.forwardRef<SVGSVGElement, IconProps>(
           />
         </g>
         <defs>
-          <clipPath id="clip0_622_4114">
+          <clipPath id="clip0_945_562">
             <rect width="32" height="32" fill="white" />
           </clipPath>
         </defs>

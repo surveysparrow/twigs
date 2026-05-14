@@ -1,7 +1,7 @@
 import React from 'react';
 import { IconProps } from '../types';
 
-export const CommentAddIcon = React.forwardRef<SVGSVGElement, IconProps>(
+export const FilterAddIcon = React.forwardRef<SVGSVGElement, IconProps>(
   ({
     color = 'currentColor', size = 32, strokeWidth = 1.5, ...rest
   }, ref) => {
@@ -15,9 +15,9 @@ export const CommentAddIcon = React.forwardRef<SVGSVGElement, IconProps>(
         height={size}
         ref={ref}
       >
-        <g clipPath="url(#clip0_622_4114)">
+        <g clipPath="url(#clip0_1688_20320)">
           <path
-            d="M13.3333 14H18.6667"
+            d="M19.0025 20.9413V25.3517C19.0025 26.162 18.4453 26.8679 17.6494 27.0642L14.0774 27.9465C12.9501 28.2246 11.8585 27.3832 11.8585 26.234V17.4119L4.41864 10.0607C4.15003 9.79533 4 9.43674 4 9.06262V5.41177C4 4.63247 4.64011 4 5.42881 4H25.4322C26.2209 4 26.861 4.63247 26.861 5.41177V6.82355"
             stroke={color}
             strokeWidth={strokeWidth}
             strokeLinecap="round"
@@ -25,7 +25,7 @@ export const CommentAddIcon = React.forwardRef<SVGSVGElement, IconProps>(
             vectorEffect="non-scaling-stroke"
           />
           <path
-            d="M16 16.6667V11.3333"
+            d="M19.9174 14.7994H28"
             stroke={color}
             strokeWidth={strokeWidth}
             strokeLinecap="round"
@@ -33,9 +33,7 @@ export const CommentAddIcon = React.forwardRef<SVGSVGElement, IconProps>(
             vectorEffect="non-scaling-stroke"
           />
           <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M18 24L13.0778 27.8569C12.8771 28.0142 12.6042 28.0431 12.3748 27.9315C12.1455 27.8199 12 27.5872 12 27.3321V24H10.6667C6.98477 24 4 21.0152 4 17.3333V10.6667C4 6.98477 6.98477 4 10.6667 4H21.3333C25.0152 4 28 6.98477 28 10.6667V17.3333C28 21.0152 25.0152 24 21.3333 24H18Z"
+            d="M23.9587 18.7925V10.8063"
             stroke={color}
             strokeWidth={strokeWidth}
             strokeLinecap="round"
@@ -44,7 +42,7 @@ export const CommentAddIcon = React.forwardRef<SVGSVGElement, IconProps>(
           />
         </g>
         <defs>
-          <clipPath id="clip0_622_4114">
+          <clipPath id="clip0_1688_20320">
             <rect width="32" height="32" fill="white" />
           </clipPath>
         </defs>
