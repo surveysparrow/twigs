@@ -62,7 +62,7 @@ function useDialogLinkEditorToolbar(
         const autoLinkParent = $findMatchingParent(node, $isAutoLinkNode);
         if (linkParent !== null && autoLinkParent === null) {
           setIsLink(true);
-        } else {
+        } else if (!isNewLink.current) {
           setIsLink(false);
         }
       }
@@ -152,8 +152,10 @@ function useDialogLinkEditorToolbar(
           setFloatingElemPositionForLinkEditor(null, containerElem, anchorElem);
         }
       }, 10);
-      setLastSelection(null);
-      setLinkUrl('');
+      if (!isNewLink.current) {
+        setLastSelection(null);
+        setLinkUrl('');
+      }
     }
 
     // eslint-disable-next-line consistent-return
