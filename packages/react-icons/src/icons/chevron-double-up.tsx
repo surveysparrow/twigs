@@ -17,7 +17,7 @@ export const ChevronDoubleUpIcon = React.forwardRef<SVGSVGElement, IconProps>(
       >
         <g clipPath="url(#clip0_22_258)">
           <path
-            d="M24.0001 14L16 6L8.00003 14"
+            d="M24 14.7992L16 6.79922L8 14.7992"
             stroke={color}
             strokeWidth={strokeWidth}
             strokeLinecap="round"
@@ -25,7 +25,7 @@ export const ChevronDoubleUpIcon = React.forwardRef<SVGSVGElement, IconProps>(
             vectorEffect="non-scaling-stroke"
           />
           <path
-            d="M26 26L16 16L6 26"
+            d="M24 25.1992L16 17.1992L8 25.1992"
             stroke={color}
             strokeWidth={strokeWidth}
             strokeLinecap="round"
