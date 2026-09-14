@@ -15,7 +15,6 @@ const StyledDrawerBackdrop = styled(Box, {
   visibility: 'hidden',
   opacity: 0,
   background: '$black600',
-  // Same curve and duration as the panel it belongs to.
   transition:
     'opacity 0.3s cubic-bezier(0.32, 0.72, 0, 1), visibility 0.3s',
   '&.transitioning.open': {
@@ -44,39 +43,27 @@ const StyledDrawer = styled(Box, {
   height: '100%',
   background: '$white900',
   zIndex: '10000',
-  // iOS drawer curve (Ionic): fast out, long settle.
-  //
-  // max-width / max-height are transitioned despite being layout properties:
-  // a drawer returning to the front resizes back to its own width, and
-  // snapping that is more jarring than the cost of animating it.
-  //
-  // One duration for everything, deliberately. An exit-faster-than-enter
-  // asymmetry would key off `.transitioning.open`, which also matches the
-  // drawers merely reacting to a neighbour opening or closing — so closing a
-  // drawer would leave the stack behind it still re-settling after it had
-  // gone. Everything that moves together moves for the same length of time.
+  // One duration for every drawer: `.transitioning.open` also matches drawers
+  // merely reacting to a neighbour, so an enter/exit asymmetry would leave the
+  // stack re-settling after the drawer that triggered it had gone.
   transition:
     'transform 0.3s cubic-bezier(0.32, 0.72, 0, 1), filter 0.3s ease, max-width 0.3s cubic-bezier(0.32, 0.72, 0, 1), max-height 0.3s cubic-bezier(0.32, 0.72, 0, 1)',
-  // Stacking geometry (Base UI's model). Each parent shrinks by one step,
-  // then translates far enough to cancel the shrink at its anchored edge and
-  // peek past the drawer in front of it, so every layer steps by one constant
-  // peek no matter how wide it is.
+  // Stacking geometry (Base UI's model): shrink by one step, then translate far
+  // enough to cancel the shrink at the anchored edge and clear the drawer in
+  // front by one peek.
   '--stack-step': '0.05',
   '--stack-peek': '16px',
   '--stack-scale': 'max(0, calc(1 - var(--nested-drawers, 0) * var(--stack-step)))',
   '--stack-shrink': 'calc(1 - var(--stack-scale))',
-  // --stack-size is the frontmost drawer's size in px, published by the panel
-  // below. Resolving against it rather than `100%` keeps the transform
-  // independent of this panel's own size, which is itself animating as it
-  // adopts the frontmost's — otherwise the two chase each other and stutter.
+  // Resolves against --stack-size (the frontmost drawer's size, set inline)
+  // rather than `100%`, so the transform does not depend on this panel's own
+  // size while that is animating.
   '--stack-offset':
     'calc(var(--stack-shrink) * var(--stack-size, 100%) + var(--nested-drawers, 0) * var(--stack-peek))',
-  // Parents darken themselves instead of stacking backdrops.
   '&[data-nested-drawer-open]': {
     filter: 'brightness(0.95)'
   },
-  // Gentler, not zero: the drawer still fades and still steps back when
-  // nested, it just does not slide or animate the scale.
+  // Gentler, not zero: still fades and still steps back, just does not slide.
   '@media (prefers-reduced-motion: reduce)': {
     opacity: 0,
     transition: 'opacity 0.2s ease',
@@ -99,7 +86,6 @@ const StyledDrawer = styled(Box, {
         '&.transitioning.open': {
           transform: 'translateX(0%)'
         },
-        // Peek out from behind the drawers stacked on top.
         '&.transitioning.open[data-nested-drawer-open]': {
           transform: 'translateX(calc(-1 * var(--stack-offset))) scale(var(--stack-scale))'
         }
@@ -112,7 +98,6 @@ const StyledDrawer = styled(Box, {
         '&.transitioning.open': {
           transform: 'translateX(0%)'
         },
-        // Peek out from behind the drawers stacked on top.
         '&.transitioning.open[data-nested-drawer-open]': {
           transform: 'translateX(var(--stack-offset)) scale(var(--stack-scale))'
         }
@@ -128,7 +113,6 @@ const StyledDrawer = styled(Box, {
         '&.transitioning.open': {
           transform: 'translateY(0%)'
         },
-        // Peek out from behind the drawers stacked on top.
         '&.transitioning.open[data-nested-drawer-open]': {
           transform: 'translateY(var(--stack-offset)) scale(var(--stack-scale))'
         }
@@ -144,7 +128,6 @@ const StyledDrawer = styled(Box, {
         '&.transitioning.open': {
           transform: 'translateY(0%)'
         },
-        // Peek out from behind the drawers stacked on top.
         '&.transitioning.open[data-nested-drawer-open]': {
           transform: 'translateY(calc(-1 * var(--stack-offset))) scale(var(--stack-scale))'
         }
@@ -228,9 +211,8 @@ export const Drawer = ({
   } = useDrawerStack(isOpen, handleClose);
   const portalRef = useRef<HTMLDivElement>(null);
   const isVertical = placement === 'top' || placement === 'bottom';
-  // While nested, a drawer adopts the frontmost drawer's size so the stack
-  // steps evenly, and publishes it as --stack-size so the offset resolves
-  // against that rather than this panel's own (animating) size.
+  // A nested drawer adopts the frontmost drawer's size so the stack steps
+  // evenly whatever the drawers measure.
   const stackStyle: Record<string, string | number> = {
     '--nested-drawers': nested
   };
@@ -307,8 +289,8 @@ export const Drawer = ({
       className="drawer-portal"
       container={portalContainer}
       tabIndex={-1}
-      // Own stacking context per drawer, so a nested drawer layers cleanly
-      // above its parent instead of fighting the parent panel's z-index.
+      // Own stacking context, so a nested drawer's backdrop is not outranked
+      // by its parent's panel z-index.
       style={{ position: 'relative', zIndex: 9999 + depth }}
       ref={portalRef}
       onKeyDown={(e) => {
@@ -320,9 +302,8 @@ export const Drawer = ({
       }}
     >
       <StyledDrawerContainer>
-        {/* One backdrop for the whole stack. Crossfading a backdrop per
-            drawer dips the composited dim mid-transition, which reads as a
-            flicker, so nesting must not touch this element at all. */}
+        {/* One backdrop for the whole stack: crossfading one per drawer dips
+            the composited dim mid-transition and reads as a flicker. */}
         {depth === 0 && (
           <StyledDrawerBackdrop
             className={clsx({

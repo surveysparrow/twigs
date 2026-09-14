@@ -16,13 +16,9 @@ const listeners = new Set<() => void>();
 const notify = () => listeners.forEach((listener) => listener());
 
 /**
- * Re-measures the drawers whose size can be trusted, and reports whether
- * anything changed.
- *
- * Only the frontmost drawer is unconstrained — every drawer behind it has
- * adopted the frontmost's size, so measuring one would record the shrunken
- * value as its natural size and it would stay wrong once it returned to the
- * front. Those are latched at their last reading instead.
+ * Re-measures the drawers whose size can be trusted and reports whether
+ * anything changed. Only the frontmost drawer is unconstrained; the rest have
+ * adopted its size, so they stay latched at their last reading.
  */
 const syncSizes = () => {
   let changed = false;
@@ -55,18 +51,19 @@ export const closeTopDrawer = () => {
 };
 
 /**
- * Tracks a drawer's position in the open-drawer stack and owns the body
- * scroll lock. `depth` is how many drawers are below it, `nested` how many
- * are open on top of it, and `frontmost` is the size of the drawer currently
- * in front — parents adopt it so a stack of differently sized drawers still
- * lines up into an even ladder. Scroll is only restored once the stack
- * empties. Spread `setPanel` onto the drawer panel so it can be measured.
+ * Tracks a drawer's position in the open-drawer stack and owns the body scroll
+ * lock, which is only released once the stack empties.
+ *
+ * `depth` is how many drawers sit below it, `nested` how many are open on top,
+ * and `frontmost` the size of the drawer in front — which the others adopt so
+ * differently sized drawers still form an even ladder. Put `setPanel` on the
+ * drawer panel so it can be measured.
  */
 export const useDrawerStack = (isOpen: boolean, onClose: () => void) => {
   const id = useRef<symbol>();
   if (!id.current) id.current = Symbol('drawer');
 
-  // Kept in a ref so the stack entry never calls a stale onClose.
+  // Ref, so the stack entry never calls a stale onClose.
   const closeRef = useRef(onClose);
   closeRef.current = onClose;
 
@@ -79,9 +76,9 @@ export const useDrawerStack = (isOpen: boolean, onClose: () => void) => {
     frontmost: DrawerSize | null;
   }>({ depth: 0, nested: 0, frontmost: null });
 
-  // Stable identity, so React runs it only when the element itself attaches or
-  // detaches. Radix's Portal renders its children a commit after it mounts, so
-  // this is also the first moment the panel can be measured at all.
+  // Stable identity, so it runs only when the element attaches or detaches.
+  // Radix's Portal renders children a commit after it mounts, so this is the
+  // first point the panel can be measured.
   const setPanel = useCallback((el: HTMLElement | null) => {
     panelRef.current = el;
     observerRef.current?.disconnect();
@@ -90,8 +87,8 @@ export const useDrawerStack = (isOpen: boolean, onClose: () => void) => {
     if (!el) return;
 
     if (typeof ResizeObserver === 'function') {
-      // The panel's natural size is viewport-dependent (`width: 100%` under a
-      // max-width), so it has to be re-read on reflow, not just once.
+      // Natural size is viewport-dependent (`width: 100%` under a max-width),
+      // so it has to be re-read on reflow.
       observerRef.current = new ResizeObserver(() => {
         if (syncSizes()) notify();
       });
@@ -108,8 +105,7 @@ export const useDrawerStack = (isOpen: boolean, onClose: () => void) => {
     stack.push({
       id: self,
       close: () => closeRef.current(),
-      // offsetWidth/Height are layout sizes, so the stacking transform does
-      // not skew them.
+      // offsetWidth/Height are layout sizes, unskewed by the transform.
       measure: () => {
         const el = panelRef.current;
         if (!el) return null;
@@ -118,13 +114,9 @@ export const useDrawerStack = (isOpen: boolean, onClose: () => void) => {
         // Measuring in between would record the shrunken size as the natural
         // one; the ResizeObserver picks it up once the constraint is gone.
         if (el.style.maxWidth || el.style.maxHeight) return null;
-        // While the panel animates back to its own size, offsetWidth reports
-        // an intermediate value. Publishing that would retarget every
-        // follower's size transition on each frame, so they converge
-        // asymptotically instead of in one duration — the stack appears to
-        // take far longer to settle than the drawer that triggered it.
-        // The settled size is already cached from when this drawer opened
-        // unconstrained; the observer re-reads it once the animation ends.
+        // Mid-animation widths would retarget every follower's transition
+        // each frame, so they would converge asymptotically rather than in one
+        // duration. The observer re-reads once the animation ends.
         if (typeof el.getAnimations === 'function') {
           const resizing = el.getAnimations().some((animation) => {
             const property = (animation as unknown as {
