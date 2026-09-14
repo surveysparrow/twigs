@@ -47,6 +47,80 @@ const DrawerExample = () => {
 
 <Playground snippetName="drawer-basic" defaultPlayground />
 
+## Nested drawers
+
+Render a `Drawer` inside another one to stack them. There is nothing to
+configure — a nested drawer is detected automatically.
+
+Drawers behind the frontmost one step back and shrink slightly, so a peek of
+each stays visible and the depth of the stack is readable at a glance. Drawers of different sizes still step evenly: while
+nested, a drawer adopts the size of the drawer in front of it, and returns to
+its own size when it comes back to the front.
+
+```jsx
+const NestedDrawerExample = () => {
+  const [isSettingsOpen, setIsSettingsOpen] = React.useState(false);
+  const [isBillingOpen, setIsBillingOpen] = React.useState(false);
+
+  return (
+    <>
+      <Drawer isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)}>
+        <DrawerHeader>
+          <Heading size="h4">Settings</Heading>
+        </DrawerHeader>
+        <DrawerBody>
+          <Button onClick={() => setIsBillingOpen(true)}>Open billing</Button>
+
+          {/* The nested drawer lives inside its parent, which stays mounted. */}
+          <Drawer isOpen={isBillingOpen} onClose={() => setIsBillingOpen(false)}>
+            <DrawerHeader>
+              <Heading size="h4">Billing</Heading>
+            </DrawerHeader>
+            <DrawerBody>{/* Your content here */}</DrawerBody>
+          </Drawer>
+        </DrawerBody>
+      </Drawer>
+      <Button onClick={() => setIsSettingsOpen(true)}>Open Drawer</Button>
+    </>
+  );
+};
+```
+
+The parent must stay mounted for the stack to hold, so keep the nested
+`Drawer` rendered inside it rather than as a sibling.
+
+Within a stack:
+
+- One backdrop is shared by the whole stack, so the page behind does not get
+  progressively darker as drawers open.
+- Clicking the backdrop or pressing <kbd>Escape</kbd> closes only the
+  frontmost drawer.
+- Page scroll stays locked until every drawer in the stack has closed.
+
+### Styling a stacked drawer
+
+Each drawer exposes what it knows about its position, so you can style the
+ones behind:
+
+| Hook | Description |
+| ---- | ----------- |
+| `data-nested-drawer-open` | Present while at least one drawer is stacked on top of this one. |
+| `--nested-drawers` | How many drawers are currently stacked on top of this one. `0` for the frontmost. |
+
+```jsx
+<Drawer
+  isOpen={isOpen}
+  onClose={onClose}
+  css={{
+    '&[data-nested-drawer-open]': {
+      opacity: 0.6
+    }
+  }}
+>
+  <DrawerBody>{/* Your content here */}</DrawerBody>
+</Drawer>
+```
+
 ## Props
 
 ### Drawer
