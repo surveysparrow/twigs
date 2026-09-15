@@ -99,13 +99,17 @@ Within a stack:
 
 ### Styling a stacked drawer
 
-Each drawer exposes what it knows about its position, so you can style the
-ones behind:
+A drawer knows where it sits in the stack and exposes that, so you can style
+the ones behind through the `css` prop:
 
 | Hook | Description |
 | ---- | ----------- |
-| `data-nested-drawer-open` | Present while at least one drawer is stacked on top of this one. |
-| `--nested-drawers` | How many drawers are currently stacked on top of this one. `0` for the frontmost. |
+| `data-nested-drawer-open` | Present while at least one drawer is stacked on top of this one. Absent on the frontmost drawer. |
+| `--nested-drawers` | How many drawers are stacked on top of this one. `0` for the frontmost. |
+
+Because the attribute comes and goes as drawers open and close, styles applied
+through it appear while the drawer is behind another and are dropped the
+moment it returns to the front — no bookkeeping of your own.
 
 ```jsx
 <Drawer
@@ -119,6 +123,38 @@ ones behind:
 >
   <DrawerBody>{/* Your content here */}</DrawerBody>
 </Drawer>
+```
+
+Rounding the stacked drawers makes each visible edge read as its own card.
+Round only the edge facing into the screen — the opposite edge sits flush
+against the viewport, so rounding it would show a sliver of backdrop through
+the corners. Which edge that is depends on `placement`; for the default
+`right` placement it is the left one:
+
+```jsx
+<Drawer
+  isOpen={isOpen}
+  onClose={onClose}
+  css={{
+    '&[data-nested-drawer-open]': {
+      borderTopLeftRadius: '$2xl',
+      borderBottomLeftRadius: '$2xl'
+    }
+  }}
+>
+  <DrawerBody>{/* Your content here */}</DrawerBody>
+</Drawer>
+```
+
+To scale a style with how deep the stack is, use `--nested-drawers` in a
+`calc()` rather than writing a rule per level:
+
+```jsx
+css={{
+  '&[data-nested-drawer-open]': {
+    opacity: 'calc(1 - var(--nested-drawers) * 0.15)'
+  }
+}}
 ```
 
 ## Props
