@@ -82,5 +82,8 @@ describe('Drawer', () => {
     // The parent is flagged; the frontmost drawer never is.
     expect(panels[0]).toHaveAttribute('data-nested-drawer-open');
     expect(panels[1]).not.toHaveAttribute('data-nested-drawer-open');
+    // The parent adopted a size, so measurement ran here — jsdom has no
+    // getAnimations, which the measure guard has to tolerate.
+    expect(panels[0].getAttribute('style')).toContain('--stack-size');
   });
 });
