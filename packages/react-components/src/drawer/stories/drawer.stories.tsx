@@ -101,8 +101,7 @@ const EQUAL_WIDTH_LEVELS: NestedLevelConfig[] = [
   { title: 'Confirm' }
 ];
 
-// Same stack, except the third drawer is wider — the case where closing it
-// makes the drawers behind it resize as well as re-position.
+// Third drawer is wider, so closing it makes the stack resize as well as move.
 const MIXED_WIDTH_LEVELS: NestedLevelConfig[] = [
   { title: 'Settings' },
   { title: 'Billing' },
@@ -158,7 +157,6 @@ const NestedLevel = ({
           )}
         </Flex>
 
-        {/* Child lives inside the parent, which stays mounted behind it. */}
         {!isLast && (
           <NestedLevel
             levels={levels}

@@ -4,7 +4,6 @@ import {
 
 type DrawerSize = { width: number; height: number };
 type DrawerEntry = {
-  id: symbol;
   close: () => void;
   measure: () => DrawerSize | null;
   size: DrawerSize | null;
@@ -60,9 +59,6 @@ export const closeTopDrawer = () => {
  * drawer panel so it can be measured.
  */
 export const useDrawerStack = (isOpen: boolean, onClose: () => void) => {
-  const id = useRef<symbol>();
-  if (!id.current) id.current = Symbol('drawer');
-
   // Ref, so the stack entry never calls a stale onClose.
   const closeRef = useRef(onClose);
   closeRef.current = onClose;
@@ -101,9 +97,7 @@ export const useDrawerStack = (isOpen: boolean, onClose: () => void) => {
   useEffect(() => {
     if (!isOpen) return undefined;
 
-    const self = id.current!;
-    stack.push({
-      id: self,
+    const self: DrawerEntry = {
       close: () => closeRef.current(),
       // offsetWidth/Height are layout sizes, unskewed by the transform.
       measure: () => {
@@ -117,26 +111,25 @@ export const useDrawerStack = (isOpen: boolean, onClose: () => void) => {
         // Mid-animation widths would retarget every follower's transition
         // each frame, so they would converge asymptotically rather than in one
         // duration. The observer re-reads once the animation ends.
-        if (typeof el.getAnimations === 'function') {
-          const resizing = el.getAnimations().some((animation) => {
-            const property = (animation as unknown as {
-              transitionProperty?: string;
-            }).transitionProperty;
-            return (
-              (property === 'max-width' || property === 'max-height')
-              && animation.playState === 'running'
-            );
-          });
-          if (resizing) return null;
-        }
+        const resizing = el.getAnimations?.().some((animation) => {
+          const { transitionProperty: property } = animation as unknown as {
+            transitionProperty?: string;
+          };
+          return (
+            (property === 'max-width' || property === 'max-height')
+            && animation.playState === 'running'
+          );
+        });
+        if (resizing) return null;
         return { width: el.offsetWidth, height: el.offsetHeight };
       },
       size: null
-    });
+    };
+    stack.push(self);
     document.body.style.overflow = 'hidden';
 
     const sync = () => {
-      const index = stack.findIndex((entry) => entry.id === self);
+      const index = stack.indexOf(self);
       // Keep the last known position while the drawer animates out.
       if (index === -1) return;
       const next = {
@@ -157,7 +150,7 @@ export const useDrawerStack = (isOpen: boolean, onClose: () => void) => {
 
     return () => {
       listeners.delete(sync);
-      const index = stack.findIndex((entry) => entry.id === self);
+      const index = stack.indexOf(self);
       // splice(-1, 1) would evict an unrelated drawer.
       if (index !== -1) stack.splice(index, 1);
       if (!stack.length) {

@@ -15,6 +15,7 @@ const StyledDrawerBackdrop = styled(Box, {
   visibility: 'hidden',
   opacity: 0,
   background: '$black600',
+  pointerEvents: 'auto',
   transition:
     'opacity 0.3s cubic-bezier(0.32, 0.72, 0, 1), visibility 0.3s',
   '&.transitioning.open': {
@@ -31,7 +32,10 @@ const StyledDrawerContainer = styled(Box, {
   left: '0',
   top: '0',
   zIndex: '9999',
-  justifyContent: 'center'
+  justifyContent: 'center',
+  // Spans the viewport, so a nested drawer's container would otherwise sit
+  // over the shared backdrop and swallow every click meant for it.
+  pointerEvents: 'none'
 });
 
 const StyledDrawer = styled(Box, {
@@ -43,27 +47,25 @@ const StyledDrawer = styled(Box, {
   height: '100%',
   background: '$white900',
   zIndex: '10000',
+  pointerEvents: 'auto',
   // One duration for every drawer: `.transitioning.open` also matches drawers
   // merely reacting to a neighbour, so an enter/exit asymmetry would leave the
   // stack re-settling after the drawer that triggered it had gone.
   transition:
     'transform 0.3s cubic-bezier(0.32, 0.72, 0, 1), filter 0.3s ease, max-width 0.3s cubic-bezier(0.32, 0.72, 0, 1), max-height 0.3s cubic-bezier(0.32, 0.72, 0, 1)',
-  // Stacking geometry (Base UI's model): shrink by one step, then translate far
-  // enough to cancel the shrink at the anchored edge and clear the drawer in
-  // front by one peek.
+  // Shrink by one step, then translate far enough to cancel the shrink at the
+  // anchored edge and clear the drawer in front by one peek. --stack-size is
+  // the frontmost drawer's size, set inline; resolving against it rather than
+  // `100%` keeps the transform independent of this panel's own size, which is
+  // itself animating.
   '--stack-step': '0.05',
   '--stack-peek': '16px',
   '--stack-scale': 'max(0, calc(1 - var(--nested-drawers, 0) * var(--stack-step)))',
-  '--stack-shrink': 'calc(1 - var(--stack-scale))',
-  // Resolves against --stack-size (the frontmost drawer's size, set inline)
-  // rather than `100%`, so the transform does not depend on this panel's own
-  // size while that is animating.
   '--stack-offset':
-    'calc(var(--stack-shrink) * var(--stack-size, 100%) + var(--nested-drawers, 0) * var(--stack-peek))',
+    'calc((1 - var(--stack-scale)) * var(--stack-size, 100%) + var(--nested-drawers, 0) * var(--stack-peek))',
   '&[data-nested-drawer-open]': {
     filter: 'brightness(0.95)'
   },
-  // Gentler, not zero: still fades and still steps back, just does not slide.
   '@media (prefers-reduced-motion: reduce)': {
     opacity: 0,
     transition: 'opacity 0.2s ease',
@@ -222,13 +224,15 @@ export const Drawer = ({
     stackStyle['--stack-size'] = `${length}px`;
   }
 
+  // Also runs when a nested drawer closes and this one returns to the front,
+  // so focus follows the stack instead of falling back to the document.
   useEffect(() => {
-    if (isOpen) {
+    if (isOpen && nested === 0) {
       requestAnimationFrame(() => {
         portalRef.current?.focus({ preventScroll: true });
       });
     }
-  }, [isOpen]);
+  }, [isOpen, nested]);
 
   if (!isTransitioning && !isOpen) {
     return null;
