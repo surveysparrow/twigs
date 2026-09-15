@@ -76,6 +76,22 @@ export const Default = ({ placement, size }: StoryArgs) => {
   );
 };
 
+// Only the edge facing into the screen — the anchored edge sits flush against
+// the viewport, so rounding it would show a sliver of backdrop.
+const leadingEdgeRadius = (placement: DrawerProps['placement']) => {
+  const radius = '$2xl';
+  switch (placement) {
+    case 'left':
+      return { borderTopRightRadius: radius, borderBottomRightRadius: radius };
+    case 'top':
+      return { borderBottomLeftRadius: radius, borderBottomRightRadius: radius };
+    case 'bottom':
+      return { borderTopLeftRadius: radius, borderTopRightRadius: radius };
+    default:
+      return { borderTopLeftRadius: radius, borderBottomLeftRadius: radius };
+  }
+};
+
 type NestedLevelConfig = { title: string; maxWidth?: string };
 
 const EQUAL_WIDTH_LEVELS: NestedLevelConfig[] = [
@@ -117,7 +133,12 @@ const NestedLevel = ({
       onClose={onClose}
       placement={placement}
       size={size}
-      css={{ maxWidth }}
+      css={{
+        maxWidth,
+        // Rounded only once stacked behind another drawer, so each layer
+        // reads as its own card. The frontmost one stays flush.
+        '&[data-nested-drawer-open]': leadingEdgeRadius(placement)
+      }}
     >
       <DrawerHeader>
         <Heading size="h4">{title}</Heading>
