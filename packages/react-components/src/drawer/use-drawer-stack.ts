@@ -111,7 +111,7 @@ export const useDrawerStack = (isOpen: boolean, onClose: () => void) => {
         // Mid-animation widths would retarget every follower's transition
         // each frame, so they would converge asymptotically rather than in one
         // duration. The observer re-reads once the animation ends.
-        const resizing = el.getAnimations?.().some((animation) => {
+        const resizing = el.getAnimations?.()?.some((animation) => {
           const { transitionProperty: property } = animation as unknown as {
             transitionProperty?: string;
           };
