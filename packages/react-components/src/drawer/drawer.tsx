@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import React, { ComponentProps, useEffect, useRef } from 'react';
 import { Box } from '../box';
 import { useMountTransition } from '../hooks';
+import { closeTopDrawer, useDrawerStack } from './use-drawer-stack';
 import { styled } from '../stitches.config';
 
 const StyledDrawerBackdrop = styled(Box, {
@@ -14,7 +15,9 @@ const StyledDrawerBackdrop = styled(Box, {
   visibility: 'hidden',
   opacity: 0,
   background: '$black600',
-  transition: 'opacity 0.3s ease ,visibility 0.3s ease',
+  pointerEvents: 'auto',
+  transition:
+    'opacity 0.3s cubic-bezier(0.32, 0.72, 0, 1), visibility 0.3s',
   '&.transitioning.open': {
     visibility: 'visible',
     opacity: 1
@@ -29,7 +32,10 @@ const StyledDrawerContainer = styled(Box, {
   left: '0',
   top: '0',
   zIndex: '9999',
-  justifyContent: 'center'
+  justifyContent: 'center',
+  // Spans the viewport, so a nested drawer's container would otherwise sit
+  // over the shared backdrop and swallow every click meant for it.
+  pointerEvents: 'none'
 });
 
 const StyledDrawer = styled(Box, {
@@ -41,7 +47,32 @@ const StyledDrawer = styled(Box, {
   height: '100%',
   background: '$white900',
   zIndex: '10000',
-  transition: 'transform 0.3s ease',
+  pointerEvents: 'auto',
+  // One duration for every drawer: `.transitioning.open` also matches drawers
+  // merely reacting to a neighbour, so an enter/exit asymmetry would leave the
+  // stack re-settling after the drawer that triggered it had gone.
+  transition:
+    'transform 0.3s cubic-bezier(0.32, 0.72, 0, 1), filter 0.3s ease, max-width 0.3s cubic-bezier(0.32, 0.72, 0, 1), max-height 0.3s cubic-bezier(0.32, 0.72, 0, 1)',
+  // Shrink by one step, then translate far enough to cancel the shrink at the
+  // anchored edge and clear the drawer in front by one peek. --stack-size is
+  // the frontmost drawer's size, set inline; resolving against it rather than
+  // `100%` keeps the transform independent of this panel's own size, which is
+  // itself animating.
+  '--stack-step': '0.05',
+  '--stack-peek': '16px',
+  '--stack-scale': 'max(0, calc(1 - var(--nested-drawers, 0) * var(--stack-step)))',
+  '--stack-offset':
+    'calc((1 - var(--stack-scale)) * var(--stack-size, 100%) + var(--nested-drawers, 0) * var(--stack-peek))',
+  '&[data-nested-drawer-open]': {
+    filter: 'brightness(0.95)'
+  },
+  '@media (prefers-reduced-motion: reduce)': {
+    opacity: 0,
+    transition: 'opacity 0.2s ease',
+    '&.transitioning.open': {
+      opacity: 1
+    }
+  },
   variants: {
     size: {
       sm: {
@@ -52,17 +83,25 @@ const StyledDrawer = styled(Box, {
       right: {
         right: '0',
         top: '0',
+        transformOrigin: 'right center',
         transform: 'translateX(100%)',
         '&.transitioning.open': {
           transform: 'translateX(0%)'
+        },
+        '&.transitioning.open[data-nested-drawer-open]': {
+          transform: 'translateX(calc(-1 * var(--stack-offset))) scale(var(--stack-scale))'
         }
       },
       left: {
         left: '0',
         top: '0',
+        transformOrigin: 'left center',
         transform: 'translateX(-100%)',
         '&.transitioning.open': {
           transform: 'translateX(0%)'
+        },
+        '&.transitioning.open[data-nested-drawer-open]': {
+          transform: 'translateX(var(--stack-offset)) scale(var(--stack-scale))'
         }
       },
       top: {
@@ -71,9 +110,13 @@ const StyledDrawer = styled(Box, {
         width: '100%',
         maxWidth: '100vw',
         maxHeight: '300px',
+        transformOrigin: 'center top',
         transform: 'translateY(-100%)',
         '&.transitioning.open': {
-          transform: 'translateX(0%)'
+          transform: 'translateY(0%)'
+        },
+        '&.transitioning.open[data-nested-drawer-open]': {
+          transform: 'translateY(var(--stack-offset)) scale(var(--stack-scale))'
         }
       },
       bottom: {
@@ -82,9 +125,13 @@ const StyledDrawer = styled(Box, {
         width: '100%',
         maxWidth: '100vw',
         maxHeight: '300px',
+        transformOrigin: 'center bottom',
         transform: 'translateY(100%)',
         '&.transitioning.open': {
-          transform: 'translateX(0%)'
+          transform: 'translateY(0%)'
+        },
+        '&.transitioning.open[data-nested-drawer-open]': {
+          transform: 'translateY(calc(-1 * var(--stack-offset))) scale(var(--stack-scale))'
         }
       }
     },
@@ -153,10 +200,6 @@ export const Drawer = ({
   portalContainer,
   ...props
 }: DrawerProps) => {
-  const bodyRef = useRef(document.querySelector('body'));
-  const isTransitioning = useMountTransition(isOpen, 300);
-  const portalRef = useRef<HTMLDivElement>(null);
-
   const handleClose = () => {
     if (onClose) {
       onClose();
@@ -164,25 +207,32 @@ export const Drawer = ({
     }
   };
 
-  useEffect(() => {
-    const updatePageScroll = () => {
-      if (isOpen && bodyRef && bodyRef.current) {
-        bodyRef.current.style.overflow = 'hidden';
-      } else if (bodyRef && bodyRef.current) {
-        bodyRef.current.style.overflow = '';
-      }
-    };
+  const isTransitioning = useMountTransition(isOpen, 300);
+  const {
+    depth, nested, frontmost, setPanel
+  } = useDrawerStack(isOpen, handleClose);
+  const portalRef = useRef<HTMLDivElement>(null);
+  const isVertical = placement === 'top' || placement === 'bottom';
+  // A nested drawer adopts the frontmost drawer's size so the stack steps
+  // evenly whatever the drawers measure.
+  const stackStyle: Record<string, string | number> = {
+    '--nested-drawers': nested
+  };
+  if (nested > 0 && frontmost) {
+    const length = isVertical ? frontmost.height : frontmost.width;
+    stackStyle[isVertical ? 'maxHeight' : 'maxWidth'] = length;
+    stackStyle['--stack-size'] = `${length}px`;
+  }
 
-    updatePageScroll();
-  }, [isOpen]);
-
+  // Also runs when a nested drawer closes and this one returns to the front,
+  // so focus follows the stack instead of falling back to the document.
   useEffect(() => {
-    if (isOpen) {
+    if (isOpen && nested === 0) {
       requestAnimationFrame(() => {
         portalRef.current?.focus({ preventScroll: true });
       });
     }
-  }, [isOpen]);
+  }, [isOpen, nested]);
 
   if (!isTransitioning && !isOpen) {
     return null;
@@ -243,6 +293,9 @@ export const Drawer = ({
       className="drawer-portal"
       container={portalContainer}
       tabIndex={-1}
+      // Own stacking context, so a nested drawer's backdrop is not outranked
+      // by its parent's panel z-index.
+      style={{ position: 'relative', zIndex: 9999 + depth }}
       ref={portalRef}
       onKeyDown={(e) => {
         if (e.key === 'Escape') {
@@ -253,19 +306,26 @@ export const Drawer = ({
       }}
     >
       <StyledDrawerContainer>
-        <StyledDrawerBackdrop
-          className={clsx({
-            open: isOpen,
-            transitioning: isTransitioning
-          })}
-          onClick={handleClose}
-        />
+        {/* One backdrop for the whole stack: crossfading one per drawer dips
+            the composited dim mid-transition and reads as a flicker. */}
+        {depth === 0 && (
+          <StyledDrawerBackdrop
+            className={clsx({
+              open: isOpen,
+              transitioning: isTransitioning
+            })}
+            onClick={closeTopDrawer}
+          />
+        )}
         <StyledDrawer
           placement={placement}
           size={size}
           isOpen={isOpen}
           data-testid="drawer"
+          ref={setPanel}
+          data-nested-drawer-open={nested > 0 ? '' : undefined}
           {...props}
+          style={{ ...props.style, ...stackStyle } as React.CSSProperties}
           className={clsx(props.className, {
             open: isOpen,
             transitioning: isTransitioning
