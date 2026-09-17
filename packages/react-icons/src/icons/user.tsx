@@ -7,7 +7,7 @@ export const UserIcon = React.forwardRef<SVGSVGElement, IconProps>(
   }, ref) => {
     return (
       <svg
-        viewBox="0 0 24 24"
+        viewBox="0 0 32 32"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         width={size}
@@ -15,34 +15,22 @@ export const UserIcon = React.forwardRef<SVGSVGElement, IconProps>(
         ref={ref}
         {...rest}
       >
-        <g clipPath="url(#clip0_11624_24128)">
-          <rect
-            x="8.55469"
-            y="4"
-            width="7.11116"
-            height="7.11116"
-            rx="3.55558"
-            stroke={color}
-            strokeWidth={strokeWidth}
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M8.55558 14.2852H15.6667C17.6304 14.2852 19.2223 15.877 19.2223 17.8407V19.1106C19.2223 19.6015 18.8244 19.9995 18.3334 19.9995H5.8889C5.39797 19.9995 5 19.6015 5 19.1106V17.8407C5 15.877 6.59189 14.2852 8.55558 14.2852Z"
-            stroke={color}
-            strokeWidth={strokeWidth}
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            vectorEffect="non-scaling-stroke"
-          />
-        </g>
-        <defs>
-          <clipPath id="clip0_11624_24128">
-            <rect width="24" height="24" fill="white" />
-          </clipPath>
-        </defs>
+        <circle
+          cx="16.1482"
+          cy="10.0748"
+          r="4.7408"
+          stroke={color}
+          strokeWidth={strokeWidth}
+        />
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M11.4074 19.047H20.889C23.5072 19.047 25.6297 21.1696 25.6297 23.7878V25.481C25.6297 26.1355 25.0991 26.6662 24.4445 26.6662H7.85182C7.19726 26.6662 6.66663 26.1355 6.66663 25.481V23.7878C6.66663 21.1696 8.78914 19.047 11.4074 19.047Z"
+          stroke={color}
+          strokeWidth={strokeWidth}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
       </svg>
     );
   }

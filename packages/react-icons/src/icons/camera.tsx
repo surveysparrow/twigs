@@ -15,54 +15,33 @@ export const CameraIcon = React.forwardRef<SVGSVGElement, IconProps>(
         height={size}
         ref={ref}
       >
-        <path
-          d="M10 4H6.66667C5.19333 4 4 5.19333 4 6.66667V10"
-          stroke={color}
-          strokeWidth={strokeWidth}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
-        />
-        <path
-          d="M4 22V25.3333C4 26.8067 5.19333 28 6.66667 28H10"
-          stroke={color}
-          strokeWidth={strokeWidth}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
-        />
-        <path
-          d="M22 28H25.3333C26.8067 28 28 26.8067 28 25.3333V22"
-          stroke={color}
-          strokeWidth={strokeWidth}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
-        />
-        <path
-          d="M28 10V6.66667C28 5.19333 26.8067 4 25.3333 4H22"
-          stroke={color}
-          strokeWidth={strokeWidth}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
-        />
-        <path
-          d="M17.7827 15.0907C18.7392 16.0472 18.7392 17.598 17.7827 18.5545C16.8261 19.5111 15.2753 19.5111 14.3188 18.5545C13.3622 17.598 13.3622 16.0472 14.3188 15.0907C15.2753 14.1341 16.8261 14.1341 17.7827 15.0907Z"
-          stroke={color}
-          strokeWidth={strokeWidth}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
-        />
-        <path
-          d="M23.5 13.5V21C23.5 21.92 22.7533 22.6667 21.8333 22.6667H10.1667C9.24667 22.6667 8.5 21.92 8.5 21V13.5C8.5 12.58 9.24667 11.8333 10.1667 11.8333H11.8333L13.052 9.74667C13.2013 9.49067 13.4747 9.33334 13.772 9.33334H18.192C18.484 9.33334 18.7547 9.48667 18.9067 9.73734L20.168 11.8333H21.8347C22.7533 11.8333 23.5 12.58 23.5 13.5V13.5Z"
-          stroke={color}
-          strokeWidth={strokeWidth}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
-        />
+        <g clipPath="url(#clip0_33_759)">
+          <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M19.8389 13.5577C21.915 15.6337 21.915 18.9997 19.8389 21.0757C17.7629 23.1517 14.397 23.1517 12.321 21.0757C10.2449 18.9997 10.2449 15.6337 12.321 13.5577C14.397 11.4817 17.7629 11.4817 19.8389 13.5577Z"
+            stroke={color}
+            strokeWidth={strokeWidth}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            vectorEffect="non-scaling-stroke"
+          />
+          <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M28 12.0007V24.0007C28 25.474 26.8067 26.6673 25.3333 26.6673H6.66667C5.19333 26.6673 4 25.474 4 24.0007V12.0007C4 10.5273 5.19333 9.33398 6.66667 9.33398H9.33333L11.2827 5.99532C11.5213 5.58598 11.96 5.33398 12.4347 5.33398H19.5067C19.9747 5.33398 20.408 5.57932 20.6493 5.97932L22.6667 9.33398H25.3333C26.8067 9.33398 28 10.5273 28 12.0007Z"
+            stroke={color}
+            strokeWidth={strokeWidth}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            vectorEffect="non-scaling-stroke"
+          />
+        </g>
+        <defs>
+          <clipPath id="clip0_33_759">
+            <rect width="32" height="32" fill="white" />
+          </clipPath>
+        </defs>
       </svg>
     );
   }

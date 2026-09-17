@@ -1,4 +1,4 @@
-<p align="center"><img src="https://twigs.surveysparrow.com/img/logo-with-text.svg" width="200" alt="Twigs" /></p>
+<p align="center"><img src="./packages/fuma-docs/src/assets/images/logo-w-text-lightmode.svg" width="200" alt="Twigs" /></p>
 
 # Welcome to Twigs monorepo
 

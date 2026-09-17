@@ -1,5 +1,5 @@
 import React from 'react';
-import { AddColumnIcon, AdjustHorizontalIcon,ClapIcon,CodeBlockIcon, CopyIcon, DeleteIcon, EmailIcon, GiftWithHeartIcon } from "@sparrowengg/twigs-react-icons";
+import { ColumnAddIcon, AdjustHorizontalIcon,ClapIcon,CodeBlockIcon, CopyIcon, DeleteIcon, EmailIcon, GiftWithHeartIcon } from "@sparrowengg/twigs-react-icons";
 import { Box, Text } from '@sparrowengg/twigs-react';
 
 export default function IconsBasic() {
@@ -7,7 +7,7 @@ export default function IconsBasic() {
     <Box css={{ display: "flex", flexDirection: "column", gap: "$6" }}>
       <Text size="lg">colored icons</Text>
       <Box css={{ display: "flex", flexDirection: "row", gap: "$6" }}>
-      <AddColumnIcon color="green" />
+      <ColumnAddIcon color="green" />
       <AdjustHorizontalIcon color="red" />
       <ClapIcon color="violet" />
       <CodeBlockIcon color="blue" />
@@ -18,7 +18,7 @@ export default function IconsBasic() {
       </Box>
       <Text size="lg">different stroke widths</Text>
       <Box css={{ display: "flex", flexDirection: "row", gap: "$6" }}>
-        <AddColumnIcon strokeWidth={1} />
+        <ColumnAddIcon strokeWidth={1} />
         <AdjustHorizontalIcon strokeWidth={1.5} />
         <ClapIcon strokeWidth={2} />
         <CodeBlockIcon strokeWidth={2.2} />
@@ -29,7 +29,7 @@ export default function IconsBasic() {
       </Box>
       <Text size="lg">different sizes</Text>
       <Box css={{ display: "flex", flexDirection: "row", gap: "$6", alignItems: "center" }}>
-        <AddColumnIcon size={32} />
+        <ColumnAddIcon size={32} />
         <AdjustHorizontalIcon size={34} />
         <ClapIcon size={36} />
         <CodeBlockIcon size={38} />

@@ -20,7 +20,7 @@ export const InfoFillIcon = React.forwardRef<SVGSVGElement, IconProps>(
         />
         <path
           d="M10.5 16.25H13.5M12.159 16.125V11.25H10.875"
-          stroke="#FDD28A"
+          stroke="white"
           strokeWidth="1.35"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -30,8 +30,8 @@ export const InfoFillIcon = React.forwardRef<SVGSVGElement, IconProps>(
           cx="11.8125"
           cy="8.4375"
           r="0.5625"
-          fill="#FDD28A"
-          stroke="#FDD28A"
+          fill="white"
+          stroke="white"
           strokeWidth="0.75"
         />
       </svg>

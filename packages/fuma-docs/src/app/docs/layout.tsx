@@ -7,7 +7,7 @@ import {
   PencilIcon,
   CodeBlockIcon,
   AttachmentIcon,
-  WrenchIcon,
+  WrenchScaleIcon,
 } from "@sparrowengg/twigs-react-icons";
 
 export default function Layout({ children }: { children: ReactNode }) {
@@ -68,7 +68,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             description: "Tools and guides for building with Twigs",
             url: "/docs/tools",
             icon: (
-              <WrenchIcon
+              <WrenchScaleIcon
                 className="flex items-center justify-center h-full"
                 size={30}
               />
