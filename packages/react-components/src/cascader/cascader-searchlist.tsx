@@ -198,13 +198,18 @@ export const CascaderSearchList = forwardRef<
 
   const focusedItemBreadcrumb = useMemo(() => {
     const item = searchResults[focusedIndex];
+
+    // No valid item -> return empty breadcrumb
+    if (!item?.value) {
+      return { breadcrumb: '', length: 0 };
+    }
     const path = buildBreadcrumbFromValue(item.value, rootNode!);
 
     return {
       breadcrumb: path.map(({ label }) => label).join(' > '),
       length: path.length
     };
-  }, [focusedIndex, data]);
+  }, [focusedIndex, data, searchResults]);
 
   return (
     <StyledUl
