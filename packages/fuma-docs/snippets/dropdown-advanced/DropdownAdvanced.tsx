@@ -33,21 +33,21 @@ export default function DropdownAdvanced() {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent sideOffset={5}>
-        <DropdownMenuItem inset>
+        <DropdownMenuItem>
           <Box css={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%" }}>
             New Tab
             <Box css={{ marginLeft: "auto", color: "$neutral600", fontSize: "$xs" }}>⌘+T</Box>
           </Box>
         </DropdownMenuItem>
         
-        <DropdownMenuItem inset>
+        <DropdownMenuItem>
           <Box css={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%" }}>
             New Window
             <Box css={{ marginLeft: "auto", color: "$neutral600", fontSize: "$xs" }}>⌘+N</Box>
           </Box>
         </DropdownMenuItem>
         
-        <DropdownMenuItem inset disabled>
+        <DropdownMenuItem disabled>
           <Box css={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%" }}>
             New Private Window
             <Box css={{ marginLeft: "auto", color: "$neutral600", fontSize: "$xs" }}>⇧+⌘+N</Box>
@@ -55,7 +55,7 @@ export default function DropdownAdvanced() {
         </DropdownMenuItem>
 
         <DropdownMenuSub>
-          <DropdownMenuSubTrigger inset>
+          <DropdownMenuSubTrigger>
             <Box css={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%" }}>
               More Tools
               <Box css={{ marginLeft: "auto" }}>
@@ -89,10 +89,7 @@ export default function DropdownAdvanced() {
           <DropdownMenuItemIndicator>
             <TickIcon size={16} />
           </DropdownMenuItemIndicator>
-          <Box css={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%" }}>
-            Show Bookmarks
-            <Box css={{ marginLeft: "auto", color: "$neutral600", fontSize: "$xs" }}>⌘+B</Box>
-          </Box>
+          Show Bookmarks
         </DropdownMenuCheckboxItem>
         
         <DropdownMenuCheckboxItem
@@ -107,7 +104,7 @@ export default function DropdownAdvanced() {
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuLabel inset>People</DropdownMenuLabel>
+        <DropdownMenuLabel>People</DropdownMenuLabel>
         
         <DropdownMenuRadioGroup value={person} onValueChange={setPerson}>
           <DropdownMenuRadioItem value="pedro">

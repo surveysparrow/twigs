@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { TickIcon } from '@sparrowengg/twigs-react-icons';
 import {
   DropdownMenu,
@@ -29,9 +29,6 @@ export default {
 };
 
 const Template = (args) => {
-  const [bookmarks, setBookmarks] = useState(true);
-  const [urls, setUrls] = useState(false);
-  const [person, setPerson] = useState('pedro');
   return (
     <DropdownMenu {...args}>
       <DropdownMenuTrigger asChild>
@@ -41,13 +38,11 @@ const Template = (args) => {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent showArrow={false} align="end" sideOffset={5}>
-        <DropdownMenuItem inset>New Tab</DropdownMenuItem>
-        <DropdownMenuItem inset>New Window</DropdownMenuItem>
-        <DropdownMenuItem inset disabled>
-          New Private Window
-        </DropdownMenuItem>
+        <DropdownMenuItem>New Tab</DropdownMenuItem>
+        <DropdownMenuItem>New Window</DropdownMenuItem>
+        <DropdownMenuItem disabled>New Private Window</DropdownMenuItem>
         <DropdownMenuSub>
-          <DropdownMenuSubTrigger inset>More Tools</DropdownMenuSubTrigger>
+          <DropdownMenuSubTrigger>More Tools</DropdownMenuSubTrigger>
           <DropdownMenuSubContent sideOffset={2} alignOffset={-5}>
             <DropdownMenuItem>Save Page As…</DropdownMenuItem>
             <DropdownMenuItem>Create Shortcut…</DropdownMenuItem>
@@ -57,24 +52,15 @@ const Template = (args) => {
           </DropdownMenuSubContent>
         </DropdownMenuSub>
         <DropdownMenuSeparator />
-        <DropdownMenuCheckboxItem
-          checked={bookmarks}
-          onCheckedChange={setBookmarks}
-        >
-          <DropdownMenuItemIndicator>
-            <TickIcon size={16} />
-          </DropdownMenuItemIndicator>
+        <DropdownMenuCheckboxItem checked onCheckedChange={() => {}}>
           Show Bookmarks
         </DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem checked={urls} onCheckedChange={setUrls}>
-          <DropdownMenuItemIndicator>
-            <TickIcon size={16} />
-          </DropdownMenuItemIndicator>
+        <DropdownMenuCheckboxItem checked onCheckedChange={() => {}}>
           Show Full URLs
         </DropdownMenuCheckboxItem>
         <DropdownMenuSeparator />
-        <DropdownMenuLabel inset>People</DropdownMenuLabel>
-        <DropdownMenuRadioGroup value={person} onValueChange={setPerson}>
+        <DropdownMenuLabel>People</DropdownMenuLabel>
+        <DropdownMenuRadioGroup value="pedro" onValueChange={() => {}}>
           <DropdownMenuRadioItem value="pedro">
             <DropdownMenuItemIndicator>
               <TickIcon size={16} />

@@ -88,14 +88,6 @@ const itemStyles = {
   '&[data-highlighted]': {
     backgroundColorOpacity: ['$secondary500', 0.06],
     color: '$neutral900'
-  },
-
-  variants: {
-    inset: {
-      true: {
-        '--twigs-dropdown-item-inset': '$space$18'
-      }
-    }
   }
 };
 
@@ -104,15 +96,13 @@ const StyledItem = styled(DropdownMenuPrimitive.Item, { ...itemStyles });
 const mediumItemStyles = {
   fontSize: '$md',
   lineHeight: '$md',
-  padding: '$4 $6',
-  paddingInlineStart: 'var(--twigs-dropdown-item-inset, $space$6)'
+  padding: '$4 $6'
 };
 
 const smallItemStyles = {
   fontSize: '$sm',
   lineHeight: '$sm',
-  padding: '$3 $6',
-  paddingInlineStart: 'var(--twigs-dropdown-item-inset, $space$6)'
+  padding: '$3 $6'
 };
 
 const StyledArrow = styled(DropdownMenuPrimitive.Arrow, {
@@ -163,14 +153,7 @@ const StyledLabel = styled(DropdownMenuPrimitive.Label, {
   fontWeight: '$7',
   lineHeight: '$xs',
   color: '$accent700',
-  textTransform: 'uppercase',
-  variants: {
-    inset: {
-      true: {
-        paddingInlineStart: '$18'
-      }
-    }
-  }
+  textTransform: 'uppercase'
 });
 
 const StyledSeparator = styled(DropdownMenuPrimitive.Separator, {
@@ -184,8 +167,9 @@ const StyledItemIndicator = styled(DropdownMenuPrimitive.ItemIndicator, {
   alignItems: 'center',
   justifyContent: 'center',
   flexShrink: 0,
-  minWidth: '$4',
-  marginInlineEnd: '$4',
+  order: 1,
+  marginLeft: 'auto',
+  paddingLeft: '$4',
   '&[data-state="unchecked"]': {
     visibility: 'hidden'
   }
