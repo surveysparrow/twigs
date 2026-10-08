@@ -163,23 +163,12 @@ const StyledSeparator = styled(DropdownMenuPrimitive.Separator, {
 });
 
 const StyledItemIndicator = styled(DropdownMenuPrimitive.ItemIndicator, {
+  position: 'absolute',
+  right: '$6',
   display: 'inline-flex',
   alignItems: 'center',
-  justifyContent: 'center',
-  flexShrink: 0,
-  order: 1,
-  marginLeft: 'auto',
-  paddingLeft: '$4',
-  '&[data-state="unchecked"]': {
-    visibility: 'hidden'
-  }
+  justifyContent: 'center'
 });
-
-const ItemIndicator = React.forwardRef<
-  HTMLSpanElement,
-  ComponentProps<typeof StyledItemIndicator>
->((props, ref) => <StyledItemIndicator forceMount ref={ref} {...props} />);
-ItemIndicator.displayName = 'DropdownMenuItemIndicator';
 
 const contentStyles = {
   minWidth: 234,
@@ -277,7 +266,7 @@ export const DropdownMenuItem = StyledItem;
 export const DropdownMenuCheckboxItem = StyledCheckboxItem;
 export const DropdownMenuRadioGroup = DropdownMenuPrimitive.RadioGroup;
 export const DropdownMenuRadioItem = StyledRadioItem;
-export const DropdownMenuItemIndicator = ItemIndicator;
+export const DropdownMenuItemIndicator = StyledItemIndicator;
 export const DropdownMenuLabel = StyledLabel;
 export const DropdownMenuSeparator = StyledSeparator;
 export const DropdownMenuSub = DropdownMenuPrimitive.Sub;
