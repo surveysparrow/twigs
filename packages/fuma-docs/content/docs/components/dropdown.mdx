@@ -204,6 +204,11 @@ The dropdown component supports a wide range of features you can customize the c
 
 <TypeTable
   type={{
+    inset: {
+      type: "boolean",
+      description: "Adds left padding so the item lines up with items that have a DropdownMenuItemIndicator.",
+      default: "false",
+    },
     disabled: {
       type: "boolean",
       description: "When true, prevents the user from interacting with the item.",
@@ -284,6 +289,33 @@ The dropdown component supports a wide range of features you can customize the c
   }}
 />
 
+### DropdownMenuItemIndicator
+
+Renders inside a `DropdownMenuCheckboxItem` or `DropdownMenuRadioItem`, before the item text. It always reserves its space, so the item text stays in the same place when the item is checked or unchecked. The icon is only visible when the item is checked.
+
+<Callout>Use `inset` on plain items and labels to line them up with items that have an indicator. Don't add `inset` to an item that already has an indicator, or it gets indented twice.</Callout>
+
+<TypeTable
+  type={{
+    children: {
+      type: "ReactNode",
+      description: "The icon shown when the item is checked, for example a TickIcon.",
+    },
+  }}
+/>
+
+### DropdownMenuLabel
+
+<TypeTable
+  type={{
+    inset: {
+      type: "boolean",
+      description: "Adds left padding so the label lines up with items that have a DropdownMenuItemIndicator.",
+      default: "false",
+    },
+  }}
+/>
+
 ### DropdownMenuSub
 
 <TypeTable
@@ -307,6 +339,11 @@ The dropdown component supports a wide range of features you can customize the c
 
 <TypeTable
   type={{
+    inset: {
+      type: "boolean",
+      description: "Adds left padding so the item lines up with items that have a DropdownMenuItemIndicator.",
+      default: "false",
+    },
     disabled: {
       type: "boolean",
       description: "When true, prevents the user from interacting with the item.",

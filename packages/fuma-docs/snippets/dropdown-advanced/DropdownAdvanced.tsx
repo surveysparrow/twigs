@@ -33,21 +33,21 @@ export default function DropdownAdvanced() {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent sideOffset={5}>
-        <DropdownMenuItem>
+        <DropdownMenuItem inset>
           <Box css={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%" }}>
             New Tab
             <Box css={{ marginLeft: "auto", color: "$neutral600", fontSize: "$xs" }}>⌘+T</Box>
           </Box>
         </DropdownMenuItem>
         
-        <DropdownMenuItem>
+        <DropdownMenuItem inset>
           <Box css={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%" }}>
             New Window
             <Box css={{ marginLeft: "auto", color: "$neutral600", fontSize: "$xs" }}>⌘+N</Box>
           </Box>
         </DropdownMenuItem>
         
-        <DropdownMenuItem disabled>
+        <DropdownMenuItem inset disabled>
           <Box css={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%" }}>
             New Private Window
             <Box css={{ marginLeft: "auto", color: "$neutral600", fontSize: "$xs" }}>⇧+⌘+N</Box>
@@ -55,7 +55,7 @@ export default function DropdownAdvanced() {
         </DropdownMenuItem>
 
         <DropdownMenuSub>
-          <DropdownMenuSubTrigger>
+          <DropdownMenuSubTrigger inset>
             <Box css={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%" }}>
               More Tools
               <Box css={{ marginLeft: "auto" }}>
@@ -107,7 +107,7 @@ export default function DropdownAdvanced() {
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuLabel>People</DropdownMenuLabel>
+        <DropdownMenuLabel inset>People</DropdownMenuLabel>
         
         <DropdownMenuRadioGroup value={person} onValueChange={setPerson}>
           <DropdownMenuRadioItem value="pedro">

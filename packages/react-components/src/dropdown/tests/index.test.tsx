@@ -123,3 +123,74 @@ describe('Dropdown', () => {
     );
   });
 });
+
+describe('DropdownMenuItemIndicator', () => {
+  const renderMenu = () => render(
+    <DropdownMenu open>
+      <DropdownMenuTrigger>Open</DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuCheckboxItem checked onCheckedChange={() => {}}>
+          <DropdownMenuItemIndicator data-testid="checked-indicator">
+            <TickIcon />
+          </DropdownMenuItemIndicator>
+          Checked
+        </DropdownMenuCheckboxItem>
+        <DropdownMenuCheckboxItem checked={false} onCheckedChange={() => {}}>
+          <DropdownMenuItemIndicator data-testid="unchecked-indicator">
+            <TickIcon />
+          </DropdownMenuItemIndicator>
+          Unchecked
+        </DropdownMenuCheckboxItem>
+        <DropdownMenuRadioGroup value="pedro">
+          <DropdownMenuRadioItem value="pedro">
+            <DropdownMenuItemIndicator data-testid="selected-radio-indicator">
+              <TickIcon />
+            </DropdownMenuItemIndicator>
+            Pedro
+          </DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="colm">
+            <DropdownMenuItemIndicator data-testid="unselected-radio-indicator">
+              <TickIcon />
+            </DropdownMenuItemIndicator>
+            Colm
+          </DropdownMenuRadioItem>
+        </DropdownMenuRadioGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+
+  it('keeps the indicator mounted for unchecked items so the text does not shift', () => {
+    const { getByTestId } = renderMenu();
+    expect(getByTestId('checked-indicator')).toHaveAttribute('data-state', 'checked');
+    expect(getByTestId('unchecked-indicator')).toHaveAttribute('data-state', 'unchecked');
+    expect(getByTestId('selected-radio-indicator')).toHaveAttribute('data-state', 'checked');
+    expect(getByTestId('unselected-radio-indicator')).toHaveAttribute('data-state', 'unchecked');
+  });
+
+  it('renders the indicator before the item text', () => {
+    const { getByTestId } = renderMenu();
+    const indicator = getByTestId('checked-indicator');
+    expect(indicator.parentElement?.firstElementChild).toBe(indicator);
+    expect(indicator.parentElement).toHaveTextContent('Checked');
+  });
+});
+
+describe('Dropdown inset', () => {
+  it('accepts the inset prop on items, sub triggers and labels', () => {
+    const { getByText } = render(
+      <DropdownMenu open>
+        <DropdownMenuTrigger>Open</DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuLabel inset>Label</DropdownMenuLabel>
+          <DropdownMenuItem inset>Item</DropdownMenuItem>
+          <DropdownMenuSub>
+            <DropdownMenuSubTrigger inset>Sub</DropdownMenuSubTrigger>
+          </DropdownMenuSub>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    );
+    expect(getByText('Label').className).toMatch(/inset-true/);
+    expect(getByText('Item').className).toMatch(/inset-true/);
+    expect(getByText('Sub').className).toMatch(/inset-true/);
+  });
+});

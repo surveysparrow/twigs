@@ -88,6 +88,14 @@ const itemStyles = {
   '&[data-highlighted]': {
     backgroundColorOpacity: ['$secondary500', 0.06],
     color: '$neutral900'
+  },
+
+  variants: {
+    inset: {
+      true: {
+        '--twigs-dropdown-item-inset': '$space$18'
+      }
+    }
   }
 };
 
@@ -96,13 +104,15 @@ const StyledItem = styled(DropdownMenuPrimitive.Item, { ...itemStyles });
 const mediumItemStyles = {
   fontSize: '$md',
   lineHeight: '$md',
-  padding: '$4 $6 $4 $12'
+  padding: '$4 $6',
+  paddingInlineStart: 'var(--twigs-dropdown-item-inset, $space$6)'
 };
 
 const smallItemStyles = {
   fontSize: '$sm',
   lineHeight: '$sm',
-  padding: '$3 $6 $3 $12'
+  padding: '$3 $6',
+  paddingInlineStart: 'var(--twigs-dropdown-item-inset, $space$6)'
 };
 
 const StyledArrow = styled(DropdownMenuPrimitive.Arrow, {
@@ -153,7 +163,14 @@ const StyledLabel = styled(DropdownMenuPrimitive.Label, {
   fontWeight: '$7',
   lineHeight: '$xs',
   color: '$accent700',
-  textTransform: 'uppercase'
+  textTransform: 'uppercase',
+  variants: {
+    inset: {
+      true: {
+        paddingInlineStart: '$18'
+      }
+    }
+  }
 });
 
 const StyledSeparator = styled(DropdownMenuPrimitive.Separator, {
@@ -163,13 +180,22 @@ const StyledSeparator = styled(DropdownMenuPrimitive.Separator, {
 });
 
 const StyledItemIndicator = styled(DropdownMenuPrimitive.ItemIndicator, {
-  position: 'absolute',
-  left: 0,
-  width: 25,
   display: 'inline-flex',
   alignItems: 'center',
-  justifyContent: 'center'
+  justifyContent: 'center',
+  flexShrink: 0,
+  minWidth: '$4',
+  marginInlineEnd: '$4',
+  '&[data-state="unchecked"]': {
+    visibility: 'hidden'
+  }
 });
+
+const ItemIndicator = React.forwardRef<
+  HTMLSpanElement,
+  ComponentProps<typeof StyledItemIndicator>
+>((props, ref) => <StyledItemIndicator forceMount ref={ref} {...props} />);
+ItemIndicator.displayName = 'DropdownMenuItemIndicator';
 
 const contentStyles = {
   minWidth: 234,
@@ -267,7 +293,7 @@ export const DropdownMenuItem = StyledItem;
 export const DropdownMenuCheckboxItem = StyledCheckboxItem;
 export const DropdownMenuRadioGroup = DropdownMenuPrimitive.RadioGroup;
 export const DropdownMenuRadioItem = StyledRadioItem;
-export const DropdownMenuItemIndicator = StyledItemIndicator;
+export const DropdownMenuItemIndicator = ItemIndicator;
 export const DropdownMenuLabel = StyledLabel;
 export const DropdownMenuSeparator = StyledSeparator;
 export const DropdownMenuSub = DropdownMenuPrimitive.Sub;
