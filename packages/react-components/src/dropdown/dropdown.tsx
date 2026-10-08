@@ -96,13 +96,13 @@ const StyledItem = styled(DropdownMenuPrimitive.Item, { ...itemStyles });
 const mediumItemStyles = {
   fontSize: '$md',
   lineHeight: '$md',
-  padding: '$4 $6 $4 $12'
+  padding: '$4 $6'
 };
 
 const smallItemStyles = {
   fontSize: '$sm',
   lineHeight: '$sm',
-  padding: '$3 $6 $3 $12'
+  padding: '$3 $6'
 };
 
 const StyledArrow = styled(DropdownMenuPrimitive.Arrow, {
@@ -164,8 +164,7 @@ const StyledSeparator = styled(DropdownMenuPrimitive.Separator, {
 
 const StyledItemIndicator = styled(DropdownMenuPrimitive.ItemIndicator, {
   position: 'absolute',
-  left: 0,
-  width: 25,
+  right: '$6',
   display: 'inline-flex',
   alignItems: 'center',
   justifyContent: 'center'

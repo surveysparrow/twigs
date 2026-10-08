@@ -89,10 +89,7 @@ export default function DropdownAdvanced() {
           <DropdownMenuItemIndicator>
             <TickIcon size={16} />
           </DropdownMenuItemIndicator>
-          <Box css={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%" }}>
-            Show Bookmarks
-            <Box css={{ marginLeft: "auto", color: "$neutral600", fontSize: "$xs" }}>⌘+B</Box>
-          </Box>
+          Show Bookmarks
         </DropdownMenuCheckboxItem>
         
         <DropdownMenuCheckboxItem
