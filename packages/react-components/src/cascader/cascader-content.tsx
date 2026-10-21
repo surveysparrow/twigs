@@ -241,13 +241,15 @@ export const CascaderContent = () => {
             ) : undefined
           }
           rightElement={
-            popoverOpen && value?.value ? (
+            // Clear selected value and search text
+            popoverOpen && (!!value?.value || !!searchValue) ? (
               <CascaderClearButton
                 onClick={() => {
                   inputRef.current?.focus();
                   requestAnimationFrame(() => {
                     handleChange({ value: '', label: '' }, []);
                     setSelectedNode(null);
+                    setSearchValue('');
                   });
                 }}
               />
