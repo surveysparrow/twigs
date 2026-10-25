@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect, useLayoutEffect, useCallback } from "react";
 import logo from "@/assets/images/bg.svg";
 import Image from "next/image";
-import { CopyIcon, ForwardArrowIcon, TickIcon } from "@sparrowengg/twigs-react-icons";
+import { CopyIcon, ArrowRightIcon, TickIcon } from "@sparrowengg/twigs-react-icons";
 import {
   Tabs,
   TabsList,
@@ -309,7 +309,7 @@ export default function SamplePage() {
           >
             Start Building
             <span className="inline-block transition-transform duration-300 ease-in-out group-hover:translate-x-0.5">
-              <ForwardArrowIcon size={18} color="currentColor" />
+              <ArrowRightIcon size={18} color="currentColor" />
             </span>
           </button>
           <button

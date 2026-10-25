@@ -15,9 +15,9 @@ export const UsersIcon = React.forwardRef<SVGSVGElement, IconProps>(
         height={size}
         ref={ref}
       >
-        <g clipPath="url(#clip0_1510_4565)">
+        <g clipPath="url(#clip0_22_632)">
           <path
-            d="M18.3571 14.6429C19.6588 15.9447 19.6588 18.0552 18.3571 19.357C17.0554 20.6587 14.9448 20.6587 13.6431 19.357C12.3413 18.0552 12.3413 15.9447 13.6431 14.6429C14.9448 13.3412 17.0554 13.3412 18.3571 14.6429Z"
+            d="M20 25.334V24.6673C20 22.09 17.9107 20.0007 15.3333 20.0007H8.66667C6.08934 20.0007 4 22.09 4 24.6673V25.334"
             stroke={color}
             strokeWidth={strokeWidth}
             strokeLinecap="round"
@@ -25,7 +25,7 @@ export const UsersIcon = React.forwardRef<SVGSVGElement, IconProps>(
             vectorEffect="non-scaling-stroke"
           />
           <path
-            d="M25.6717 6.64297C26.9735 7.94472 26.9735 10.0553 25.6717 11.357C24.37 12.6588 22.2594 12.6588 20.9577 11.357C19.6559 10.0553 19.6559 7.94471 20.9577 6.64297C22.2594 5.34122 24.37 5.34122 25.6717 6.64297"
+            d="M29.3333 25.334V24.6673C29.3333 22.09 27.244 20.0007 24.6667 20.0007H24"
             stroke={color}
             strokeWidth={strokeWidth}
             strokeLinecap="round"
@@ -33,7 +33,7 @@ export const UsersIcon = React.forwardRef<SVGSVGElement, IconProps>(
             vectorEffect="non-scaling-stroke"
           />
           <path
-            d="M24 16.3333C26.044 16.3333 28 17.044 29.3333 18.1106"
+            d="M21.3333 5.33398C23.9107 5.33398 26 7.42332 26 10.0007C26 12.578 23.9107 14.6673 21.3333 14.6673"
             stroke={color}
             strokeWidth={strokeWidth}
             strokeLinecap="round"
@@ -41,23 +41,7 @@ export const UsersIcon = React.forwardRef<SVGSVGElement, IconProps>(
             vectorEffect="non-scaling-stroke"
           />
           <path
-            d="M11.0424 6.64297C12.3441 7.94472 12.3441 10.0553 11.0424 11.357C9.74065 12.6588 7.63011 12.6588 6.32836 11.357C5.02661 10.0553 5.02661 7.94471 6.32836 6.64297C7.63011 5.34122 9.74065 5.34122 11.0424 6.64297"
-            stroke={color}
-            strokeWidth={strokeWidth}
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            vectorEffect="non-scaling-stroke"
-          />
-          <path
-            d="M2.66669 18.1106C4.00002 17.044 5.95602 16.3333 8.00002 16.3333"
-            stroke={color}
-            strokeWidth={strokeWidth}
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            vectorEffect="non-scaling-stroke"
-          />
-          <path
-            d="M22.1213 26.3333C20.568 25.132 18.336 24.3333 16 24.3333C13.664 24.3333 11.432 25.132 9.87866 26.3333"
+            d="M16.6667 10.0007C16.6667 12.578 14.5773 14.6673 12 14.6673C9.42267 14.6673 7.33333 12.578 7.33333 10.0007C7.33333 7.42334 9.42267 5.334 12 5.334C14.5773 5.334 16.6667 7.42334 16.6667 10.0007Z"
             stroke={color}
             strokeWidth={strokeWidth}
             strokeLinecap="round"
@@ -66,7 +50,7 @@ export const UsersIcon = React.forwardRef<SVGSVGElement, IconProps>(
           />
         </g>
         <defs>
-          <clipPath id="clip0_1510_4565">
+          <clipPath id="clip0_22_632">
             <rect width="32" height="32" fill="white" />
           </clipPath>
         </defs>

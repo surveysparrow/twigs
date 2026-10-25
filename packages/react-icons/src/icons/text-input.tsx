@@ -7,10 +7,10 @@ export const TextInputIcon = React.forwardRef<SVGSVGElement, IconProps>(
   }, ref) => {
     return (
       <svg
+        {...rest}
         width={size}
         height={size}
         ref={ref}
-        {...rest}
         viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
