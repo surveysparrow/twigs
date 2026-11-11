@@ -11,6 +11,8 @@ metadata:
   namespace: surveysparrow
   description: Themeable, Customisable and Fully Accessible React Component Library from SurveySparrow
   annotations:
+    # No API definition, dependency graph or TechDocs for this repo yet: hide those tabs.
+    sparrow.io/hide: api,dependencies,docs
     github.com/project-slug: surveysparrow/twigs
     backstage.io/source-location: url:https://github.com/surveysparrow/twigs/tree/master/
   tags:
